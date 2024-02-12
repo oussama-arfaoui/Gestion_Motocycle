@@ -17,7 +17,9 @@
 
 
 <body class="antialiased">
-
+    @include('backend.layouts.menu')
+    @include('backend.layouts.topbar')
+    <h1 class="">saad is awesome</h1>
 </body>
 
 </html>
