@@ -1,5 +1,5 @@
-<section class="section">
-    <!--<div class="container font-md">-->
-    <div class="">
+<div class="container">        
+    <div>
+        {!! processShortcodes($page->content) !!}
     </div>
-</section>
+</div>
