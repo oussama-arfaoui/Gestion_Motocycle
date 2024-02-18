@@ -6,8 +6,8 @@
 
 {{-- Render the corresponding view --}}
 @includeIf($viewName, [
-    'title' => isset($title) ? $title : '',
-    'subtitle' => isset($subtitle) ? $subtitle : '',
-    'description' => isset($description) ? $description : '',
-    'button_primary_label' => isset($button_primary_label) ? $button_primary_label : ''
+    'title' => $title,
+    'subtitle' => $subtitle,
+    'description' => $description,
+    'button_primary_label' => $button_primary_label
 ])

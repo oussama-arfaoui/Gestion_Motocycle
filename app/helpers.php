@@ -38,13 +38,13 @@ if (!function_exists('processShortcodes')) {
             // Replace the shortcodes in the content with their processed versions
             foreach ($matches[0] as $index => $shortcode) {
                 // Add the processed shortcode to the content
+               
                 $content = str_replace($shortcode, $processedShortcodes[$index], $content);
             }
         }
         
-        // Remove the closing shortcode tag from the final result
-        $content = str_replace('[/Hero]', '', $content);
 
+        $content = preg_replace('/\[\/\w+\]/', '', $content);
         return $content;
     }
 }

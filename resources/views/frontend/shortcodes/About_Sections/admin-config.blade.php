@@ -1,7 +1,7 @@
 <!-- Form for configuring hero shortcode -->
 <section>
     <div class="form-group">
-        <label class="control-label">title</label>
+        <label class="control-label">Title</label>
         <input name="title" value="" class="form-control" />
     </div>
 
@@ -11,14 +11,16 @@
     </div>
 
     <div class="form-group">
-        <lable class="control-label">Description</lable>
+        <label class="control-label">Description</label>
         <textarea class="form-control" name="description" rows="3"></textarea>
     </div>
 
     <div class="form-group">
-        <label class="control-label">Button primary label</label>
-        <input name="button_primary_label" value="" class="form-control" />
+        <label class="control-label">Image</label>
+        <input type="file" name="image" class="form-control" accept="image/*" /> <!-- Assuming you want to upload an image -->
     </div>
+
+
     <div class="form-group">
         <label class="control-label">Style</label>
         <select name="style" class="form-control">

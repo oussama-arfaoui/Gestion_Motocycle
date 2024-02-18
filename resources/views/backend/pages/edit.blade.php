@@ -147,25 +147,39 @@
     });
 
     document.getElementById('generateShortcodeBtn').addEventListener('click', function(e) {
-        // Get data from dynamic inputs and construct shortcode
-        e.preventDefault();
-        var shortcodeName = "{{ ucfirst($shortcodeData['name']) }}";
+    // Prevent the default form submission behavior
+    e.preventDefault();
+    
+    // Get the selected shortcode type from the dropdown
+    var shortcodeType = document.getElementById('shortcodeType').value;
+    
+    // Extract the shortcode name from the selected value
+    var shortcodeName = shortcodeType.split('.').slice(-2, -1)[0];
+    
+    // Construct the shortcode
+    var shortcode = '[' + shortcodeName + ' ';
     
     // Get data from dynamic inputs and construct shortcode
-    var shortcode = '[' + shortcodeName + ' ';
     var inputs = document.querySelectorAll('#shortcodeConfigContainer input, #shortcodeConfigContainer textarea');
     inputs.forEach(function(input) {
         if (input.value.trim() !== '') {
             shortcode += input.getAttribute('name') + '="' + input.value.trim() + '" ';
         }
     });
+    
+    // Get selected value from dropdown and add it to the shortcode
+    var select = document.querySelector('#shortcodeConfigContainer select');
+    var selectedValue = select.options[select.selectedIndex].value;
+    shortcode += 'style="' + selectedValue + '" ';
+    
     shortcode += ']';
-
+    
     // Append the closing shortcode tag
     shortcode += '[/' + shortcodeName + ']';
-
+    
     // Append constructed shortcode to the content textarea
     var contentTextarea = document.getElementById('content');
     contentTextarea.value += shortcode;
-    });
+});
+
 </script>    
