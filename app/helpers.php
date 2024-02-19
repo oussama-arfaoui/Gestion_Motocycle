@@ -38,7 +38,6 @@ if (!function_exists('processShortcodes')) {
             // Replace the shortcodes in the content with their processed versions
             foreach ($matches[0] as $index => $shortcode) {
                 // Add the processed shortcode to the content
-               
                 $content = str_replace($shortcode, $processedShortcodes[$index], $content);
             }
         }

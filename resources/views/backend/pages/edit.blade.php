@@ -1,94 +1,106 @@
+@extends('backend.layouts.admin-dashboard')
 
-@include('backend.layouts.menu')
-@include('backend.layouts.topbar')
+@section('content')
+<div class="dashboard-main-container">
 
-
-
-<div>
-    <h2>Edit Page</h2>
-    <form action="{{ route('pages.update', $page->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" name="name" class="form-control" id="name" value="{{ $page->name }}" required>
-        </div>
-          <!-- Permalink section -->
-          <div class="form-group">
-            <label class="form-label required" for="slug" aria-required="true">Permalink</label>
-            <div class="input-group input-group-flat">
-                <span class="input-group-text">{{ config('app.url') }}</span>
-                <input class="form-control ps-0" type="text" name="slug" id="slug" value="{{ optional($page->slug)->key }}" required aria-required="true">
-                <span class="input-group-text slug-actions">
-                    <a href="#" class="link-secondary" data-bs-toggle="tooltip" aria-label="Generate URL" data-bs-original-title="Generate URL" data-bb-toggle="generate-slug">
-                        <span class="icon-tabler-wrapper">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wand" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M6 21l15 -15l-3 -3l-15 15l3 3"></path>
-                                <path d="M15 6l3 3"></path>
-                                <path d="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path>
-                                <path d="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path>
-                            </svg>
-                        </span>
-                    </a>
-                </span>
-            </div>
-            <small class="form-hint mt-n2 text-truncate" id="previewLink">Preview: 
-                @if($page->slug)
-                    <a href="{{ config('app.url') }}{{ $page->slug->key }}" target="_blank">{{ config('app.url') }}{{ $page->slug->key }}</a>
-                @else
-                    No preview available
-                @endif
-            </small>
-        </div>
-        <!-- End Permalink section -->
-
-    <!-- In your Blade template -->
-    <div class="form-group">
-        <label for="shortcodeType">Select Shortcode Type</label>
-        <select name="shortcodeType" id="shortcodeType" class="form-control">
-            <option value="">Select Shortcode</option>
-            @foreach ($shortcodeTypes as $shortcodeType => $shortcodeData)
-                <option value="{{ $shortcodeData['view'] }}">{{ ucfirst($shortcodeData['name']) }} Shortcode</option>
-            @endforeach
-        </select>
+    <div class="dashboard-main-container-breadcrumbs">
+        <a href='/admin'>Home</a>
+        <x-arrow-icon />
+        <a href="{{ route('pages.index') }}">Pages</a>
+        <x-arrow-icon />
+        <a href="#">Edit Pages</a>
     </div>
 
-        <div class="form-group" id="shortcodeConfigContainer">
-            <!-- The shortcode configuration will be dynamically loaded here -->
-            <!-- You can leave this empty -->
-        </div>
+    <div class="dashboard-main-container-actions">
+        <a class="dashboard-secondary-button" href="#">
+            <x-save-icon />
+            <span>Save</span>
+        </a>
+        <a class="dashboard-main-button" href="{{ route('pages.create') }}">
+            <x-save-icon />
+            <span>Save & Publish</span>
+        </a>
+    </div>
 
-        <button id="generateShortcodeBtn" class="btn btn-primary" disabled>Generate Shortcode</button>
-        <!-- End Shortcode configuration -->
+    <div class="dashboard-main-container-modules">
+        <form class="node-form" action="{{ route('pages.update', $page->id) }}" method="POST">
+            @csrf
+            @method('PUT')
 
-        <div class="form-group">
-            <label for="content">Content</label>
-            <textarea name="content" class="form-control" id="content" rows="4">{{ $page->content }}</textarea>
-        </div>
-        <div class="form-group">
-            <label for="image">Image</label>
-            <input type="text" name="image" class="form-control" id="image" value="{{ $page->image }}">
-        </div>
-        <div class="form-group">
-            <label for="template">Template</label>
-            <input type="text" name="template" class="form-control" id="template" value="{{ $page->template }}">
-        </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <input type="text" name="description" class="form-control" id="description" value="{{ $page->description }}">
-        </div>
-        <div class="form-group">
-            <label for="status">Status</label>
-            <select name="status" class="form-control" id="status">
-                <option value="published" {{ $page->status == 'published' ? 'selected' : '' }}>Published</option>
-                <option value="pending" {{ $page->status == 'pending' ? 'selected' : '' }}>Pending</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
+            <div class="node-input">
+                <label for="name">Name</label>
+                <input type="text" name="name" autocomplete="off" class="form-control" id="name"
+                    value="{{ $page->name }}" required>
+            </div>
+
+            <!-- Permalink section -->
+            <div class="node-permalink">
+                <label class="form-label required" for="slug" aria-required="true">Permalink</label>
+                <div class="node-permalink-preview">
+                    <span class="input-group-text">{{ config('app.url') }}/</span>
+                    <input class="form-control ps-0" type="text" name="slug" id="slug"
+                        value="{{ optional($page->slug)->key }}" required aria-required="true">
+                </div>
+            </div>
+            <small class="form-hint mt-n2 text-truncate" id="previewLink">Preview:
+                @if($page->slug)
+                <a href="{{ config('app.url') }}{{ $page->slug->key }}" target="_blank">{{ config('app.url') }}{{ $page->slug->key
+                    }}</a>
+                @else
+                No preview available
+                @endif
+            </small>
+            <!-- End Permalink section -->
+
+
+            <!-- In your Blade template -->
+            <div class="form-group">
+                <label for="shortcodeType">Select Shortcode Type</label>
+                <select name="shortcodeType" id="shortcodeType" class="form-control">
+                    <option value="">Select Shortcode</option>
+                    @foreach ($shortcodeTypes as $shortcodeType => $shortcodeData)
+                    <option value="{{ $shortcodeData['view'] }}">{{ ucfirst($shortcodeData['name']) }} Shortcode
+                    </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group" id="shortcodeConfigContainer">
+                <!-- The shortcode configuration will be dynamically loaded here -->
+                <!-- You can leave this empty -->
+            </div>
+
+            <button id="generateShortcodeBtn" class="btn btn-primary" disabled>Generate Shortcode</button>
+            <!-- End Shortcode configuration -->
+
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea name="content" class="form-control" id="content" rows="4">{{ $page->content }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="text" name="image" class="form-control" id="image" value="{{ $page->image }}">
+            </div>
+            <div class="form-group">
+                <label for="template">Template</label>
+                <input type="text" name="template" class="form-control" id="template" value="{{ $page->template }}">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" name="description" class="form-control" id="description"
+                    value="{{ $page->description }}">
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select name="status" class="form-control" id="status">
+                    <option value="published" {{ $page->status == 'published' ? 'selected' : '' }}>Published</option>
+                    <option value="pending" {{ $page->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
 </div>
-
 <script>
     // Function to generate a slug from the given string
     function generateSlug(str) {
@@ -182,4 +194,6 @@
     contentTextarea.value += shortcode;
 });
 
-</script>    
+</script>
+
+@endsection

@@ -1,0 +1,22 @@
+.dashboard_header{
+    height: 64px;
+    border-bottom: 1px solid $Gray100;
+    width: calc(100vw - 256px);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+
+    padding: 1rem;
+
+    &-buttons{
+        display: flex;
+        flex-direction: row;
+
+        justify-content: space-evenly;
+        padding: 1rem;
+
+        gap: 1rem;
+    }
+}

@@ -65,6 +65,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 # Carbon-x CMS documentation
+
 # Documentation For Database
 
 ## **Pages Table**
@@ -86,12 +87,12 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 - **Description:** Stores information about pages on the website.
 - **Columns:**
-    - **`id`**: Unique identifier for the page.
-    - `key` is the unique slug key for each page.
-    - `reference_id` stores the ID of the referenced page from the Pages table.
-    - `reference_type` specifies the type of the referenced model (e.g., 'App\Models\Page').
-    - `prefix` is an optional field that you may use.
-    - `created_at` and `updated_at` are timestamps for tracking creation and updates.
+- `id` is defined as an auto-increment primary key.
+- `key` is the unique slug key for each page.
+- `reference_id` stores the ID of the referenced page from the Pages table.
+- `reference_type` specifies the type of the referenced model (e.g., 'App\Models\Page').
+- `prefix` is an optional field that you may use.
+- `created_at` and `updated_at` are timestamps for tracking creation and updates.
 
 # Documentation For Backend
 
@@ -113,84 +114,15 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
     - **`update`**: Updates the details of a specific page in the database.
     - **`destroy`**: Deletes a specific page from the database.
 
-## **Route: web.php**
-
-Route::get('/pages', [PageController::class, 'index'])->name('pages.index');
-Route::get('/pages/create', [PageController::class, 'create'])->name('pages.create');
-Route::post('/pages', [PageController::class, 'store'])->name('pages.store');
-Route::get('/pages/{page}/edit', [PageController::class, 'edit'])->name('pages.edit');
-Route::put('/pages/{page}', [PageController::class, 'update'])->name('pages.update');
-Route::delete('/pages/{page}', [PageController::class, 'destroy'])->name('pages.destroy');
-
-## **Model: Slug**
+    ## **Model: Slug**
 
 - **Description:** Represents a page on the website.
-- **File Path:** **`C:\\MAMP\\htdocs\\Carbon-X\\app\\Models\\Slug.php`Methods:**
+- **File Path:** **`C:\MAMP\htdocs\Carbon-X\app\Models\Slug.php`**
+    **Methods:**
+## **Controller: I use PageController too and update store & edit**
 
-## **Controller: I use PageController too and update store & edit and SlugController**
-
-- **Description:** Handles requests related to slugs.
-- **File Path:** **`app/Http/Controllers/SlugController.php`**
-
-### **Routes**
-
-1. **Web Routes**
-    - **File Path:** **`routes/web.php`**
-    - **Routes:**
-        - **`GET /{slug}`**: Maps to **`SlugController@showBySlug`** for displaying page content by slug.
-
-### 
-
-### **Files Modified/Added**
-
-### 1. **`resources\views\backend\pages\edit.blade.php`** and **`resources\views\backend\pages\create.blade.php`**
-
-- **Description:** These files are responsible for rendering the page editing and creation forms in the backend.
-- **Functionality Added:**
-    - Integrated dropdown menu for selecting shortcodes.
-    - Dynamically loading the view to display shortcode attributes based on the selected shortcode type.
-    - Constructing and appending shortcodes to the content textarea.
-    - Utilized JavaScript for dynamic behavior and AJAX requests for fetching shortcode configurations.
-
-### 2. **`resources\functions\shortcodes.php`**
-
-- **Description:** Contains functions related to shortcodes.
-- **Functionality Added:**
-    - Defined functions **`getShortcodeTypes()`** and **`getShortcodeindex()`** to retrieve shortcode types and attributes.
-
-### 3. **`composer.json`**
-
-- **Description:** Configuration file for Composer.
-- **Changes Made:**
-    - Added autoloading for the **`shortcodes.php`** file.
-
-### 4. **`routes\web.php`**
-
-- **Description:** Contains route definitions for the web application.
-- **Changes Made:**
-    - Added routes for handling shortcodes and retrieving shortcode configurations.
-
-### 5. **`app\Http\Controllers\PageController.php`**
-
-- **Description:** Controller responsible for managing pages.
-- **Changes Made:**
-    - Updated **`store`** and **`edit`** functions to handle shortcode integration into page content and updating the slug table.
-
-### 6. **`app\Http\Controllers\SlugController.php`**
-
-- **Description:** Controller for managing slugs.
-- **Changes Made:**
-    - Added a method to handle default page rendering.
-
-### 7. **`app\helpers.php`**
-
-- **Description:** Contains helper functions.
-- **Changes Made:**
-    - Added function **`processShortcodes()`** to handle shortcode processing.
-    - Added function **`renderViewWithAttributes()`** to render views with attributes.
 
 # Documentation For Frontend
-
 ## **Views: Pages**
 
 - **Description:** Contains views related to managing pages in the dashboard.
@@ -198,41 +130,3 @@ Route::delete('/pages/{page}', [PageController::class, 'destroy'])->name('pages.
     - **`C:\MAMP\htdocs\Carbon-X\resources\views\backend\pages\index.blade.php`**: View for displaying a list of all pages.
     - **`C:\MAMP\htdocs\Carbon-X\resources\views\backend\pages\create.blade.php`**: View for creating a new page.
     - **`C:\MAMP\htdocs\Carbon-X\resources\views\backend\pages\edit.blade.php`**: View for editing an existing page.
-    
-    **Default Layout**
-    
-    - **Description:** Layout template for displaying page content.
-    - **File Path:** **`resources/views/frontend/layouts/default.blade.php`**
-
-### **Files Modified/Added**
-
-### 1. **`resources\views\frontend\shortcodes\hero\index.blade.php`**
-
-- **Description:** Renders the hero shortcode based on the provided style.
-- **Changes Made:**
-    - Determines the style to use based on the provided **`$style`** variable.
-    - Renders the corresponding view based on the determined style, passing relevant attributes.
-
-### 2. **`resources\views\frontend\shortcodes\hero\admin-config.blade.php`**
-
-- **Description:** Provides a form for configuring the hero shortcode in the page management interface.
-- **Functionality Added:**
-    - Form fields for configuring attributes of the hero shortcode:
-        - Title
-        - Subtitle
-        - Description
-        - Button primary label
-        - Style (dropdown menu for selecting a style)
-
-### 3. **`resources\views\frontend\shortcodes\hero\style\style1.blade.php`** and **`resources\views\frontend\shortcodes\hero\style\style2.blade.php`**
-
-- **Description:** Views for rendering different styles of the hero shortcode.
-- **Functionality:**
-    - Renders the hero shortcode with a specific style.
-    - Receives attributes passed from the **`index.blade.php`** file and incorporates them into the rendered view.
-
-### **Functionality Overview**
-
-- **Integration of Hero Shortcode:**
-    - Provided functionality for integrating the hero shortcode into frontend pages.
-    - Allows customization of the hero section's appearance and content through attributes such as title, subtitle, description, button label, and style.

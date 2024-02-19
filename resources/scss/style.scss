@@ -1,0 +1,21 @@
+// @import 'abstracts/';
+@import 'abstracts/variables';
+@import 'abstracts/animations';
+@import 'abstracts/mixins';
+@import 'abstracts/toggles';
+
+// @import 'vendors/';
+
+// @import 'base/';
+@import 'base/globals';
+
+// @import 'layout/';
+@import 'layout/backend/dashboard-globals';
+@import 'layout/backend/dashboard-sidebar';
+@import 'layout/backend/dashboard-header';
+
+// @import 'components/';
+
+// @import 'pages/';
+
+// @import 'themes/';

@@ -1,74 +1,76 @@
-@include('backend.layouts.menu')
-@include('backend.layouts.topbar')
+@extends('backend.layouts.admin-dashboard')
 
+@section('content')
+<div class="dashboard-main-container">
 
-    <div>
-        <h2>Create New Page</h2>
-        <form action="{{ route('pages.store') }}" method="POST">
+    <div class="dashboard-main-container-breadcrumbs">
+        <a href='/admin'>Home</a>
+        <x-arrow-icon />
+        <a href="{{ route('pages.index') }}">Pages</a>
+        <x-arrow-icon />
+        <a href="{{ route('pages.create') }}">Create Pages</a>
+    </div>
+
+    <div class="dashboard-main-container-actions">
+        <a class="dashboard-secondary-button" href="#">
+            <x-save-icon />
+            <span>Save</span>
+        </a>
+        <a class="dashboard-main-button" href="{{ route('pages.create') }}">
+            <x-save-icon />
+            <span>Save & Publish</span>
+        </a>
+    </div>
+
+    <div class="dashboard-main-container-modules">
+        <form class="node-form" action="{{ route('pages.store') }}" method="POST">
             @csrf
-            <div class="form-group">
+
+            <div class="node-input">
                 <label for="name">Name</label>
-                <input type="text" name="name" class="form-control" id="name" required>
+                <input type="text" name="name" class="form-control" id="name" required autocomplete="off">
             </div>
-
-            <div class="mb-3 position-relative">
-            <label class="form-label required" for="slug" aria-required="true">
-                Permalink
-            </label>
-            <div class="input-group input-group-flat">
-                <span class="input-group-text">
-                {{ config('app.url') }}
-                </span>
-                <input class="form-control ps-0" type="text" name="slug" id="slug" required aria-required="true">
-
-                <span class="input-group-text slug-actions">
-                    <a href="#" class="link-secondary" data-bs-toggle="tooltip" aria-label="Generate URL"
-                        data-bs-original-title="Generate URL" data-bb-toggle="generate-slug">
-                        <span class="icon-tabler-wrapper">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wand"
-                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M6 21l15 -15l-3 -3l-15 15l3 3"></path>
-                                <path d="M15 6l3 3"></path>
-                                <path
-                                    d="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path>
-                                <path
-                                    d="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path>
-                            </svg>
-                        </span>
-                    </a>
-                </span>
+        
+            <div class="node-permalink">
+                <label for="slug" aria-required="true">
+                    Permalink
+                </label>
+                
+                <div class="node-permalink-preview">
+                    <span>
+                        {{ config('app.url') }}/
+                    </span>
+                    <input type="text" name="slug" id="slug" required aria-required="true">
+                </div>
             </div>
-            <small class="form-hint mt-n2 text-truncate" id="previewLink">Preview: <a href="#" target="_blank">Link Preview</a></small>
-        </div>
-    
+        
+        
+            {{-- Shortcode Picker  --}}
 
-<!-- In your Blade template -->
-<div class="form-group">
-    <label for="shortcodeType">Select Shortcode Type</label>
-    <select name="shortcodeType" id="shortcodeType" class="form-control">
-        <option value="">Select Shortcode</option>
-        @foreach ($shortcodeTypes as $shortcodeType => $shortcodeData)
-            <option value="{{ $shortcodeData['view'] }}">{{ ucfirst($shortcodeData['name']) }} Shortcode</option>
-        @endforeach
-    </select>
-</div>
-
-<!-- In your Blade template -->
-<div class="form-group" id="shortcodeConfigContainer">
-    <!-- The shortcode configuration will be dynamically loaded here -->
-</div>
-
-<button id="generateShortcodeBtn" class="btn btn-primary" disabled>Generate Shortcode</button>
-
-
-
-        <div class="form-group">
-            <label for="content">Content</label>
-            <textarea name="content" class="form-control" id="content" rows="4"></textarea>
-        </div>       
-
+            <div>
+                <label for="shortcodeType">Select Shortcode Type</label>
+                <select name="shortcodeType" id="shortcodeType" class="form-control">
+                    <option value="">Select Shortcode</option>
+                    @foreach ($shortcodeTypes as $shortcodeType => $shortcodeData)
+                    <option value="{{ $shortcodeData['view'] }}">{{ ucfirst($shortcodeData['name']) }} Shortcode</option>
+                    @endforeach
+                </select>
+            </div>
+        
+            <!-- In your Blade template -->
+            <div class="form-group" id="shortcodeConfigContainer">
+                <!-- The shortcode configuration will be dynamically loaded here -->
+            </div>
+        
+            <button id="generateShortcodeBtn" class="btn btn-primary" disabled>Generate Shortcode</button>
+        
+        
+        
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea name="content" class="form-control" id="content" rows="4"></textarea>
+            </div>
+        
             <div class="form-group">
                 <label for="image">Image</label>
                 <input type="text" name="image" class="form-control" id="image">
@@ -91,9 +93,12 @@
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
     </div>
+    
+    
+</div>
 
 
-    <script>
+<script>
     // Function to generate a slug from the given string
     function generateSlug(str) {
         return str.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
@@ -186,4 +191,5 @@
     contentTextarea.value += shortcode;
 });
 
-</script>    
+</script>
+@endsection

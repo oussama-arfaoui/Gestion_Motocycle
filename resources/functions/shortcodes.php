@@ -21,6 +21,7 @@ function getShortcodeTypes() {
         // Add other shortcode types here if needed
     ];
 }
+
 function getShortcodeindex() {
     return [
 

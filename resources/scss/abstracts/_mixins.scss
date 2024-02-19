@@ -1,0 +1,20 @@
+@mixin Center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin Interactable{
+    transition: transform 200ms ease-out;
+    
+        &:hover {
+            transition: transform 50ms ease-out;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px hsla(0, 0%, 0%, 0.2);
+        }
+    
+        &:active {
+            transition: transform 50ms ease-out;
+            transform: translateY(2px);
+        }
+}

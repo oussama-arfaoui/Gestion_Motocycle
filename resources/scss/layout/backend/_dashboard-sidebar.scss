@@ -1,0 +1,169 @@
+.dashboard_sidebar {
+    display: flex;
+    flex-direction: column;
+
+    width: 256px;
+
+    height: 100vh;
+    border-right: 1px solid $Gray100;
+
+    &__logo {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-bottom: 1px solid $Gray100;
+        
+        width: 100%;
+        
+        img {
+
+            margin-right: 0.5rem;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+    }
+
+
+    &__search {
+
+        width: 100%;
+        height: 48px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 1rem;
+
+        input {
+            height: 100%;
+            border: none;
+            outline: none;
+
+            font-family: "Inter", sans-serif;
+
+            &::placeholder {
+                color: $Gray600;
+            }
+        }
+
+        svg {
+            opacity: 0.5;
+            margin-left: auto;
+        }
+
+    }
+
+
+    &__links {
+
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: $Gray500;
+            border-radius: 4px;
+
+            &:hover {
+                background: $Gray400;
+                cursor: pointer;
+            }
+
+        }
+
+        a,
+        button {
+
+            cursor: pointer;
+
+            border: none; // Button-Born Styling
+            background-color: transparent; // Button-Born Styling
+
+            width: 100%;
+            height: 48px;
+            padding: 1rem;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            opacity: 0.75;
+
+            width: 100%;
+
+            svg {
+                margin-right: 0.5rem;
+                stroke: $Gray900;
+                transition: transform 100ms ease-out;
+
+                &:last-child {
+                    margin-left: auto;
+                }
+            }
+
+            span {
+                text-transform: uppercase;
+
+                font-family: "Inter", sans-serif;
+                color: $Gray900;
+                font-size: 14px;
+                font-weight: 500;
+
+            }
+
+            &:hover {
+                opacity: 1;
+                padding-left: 1.5rem;
+
+                transition: padding-left 100ms ease-out;
+            }
+
+        }
+
+        &-innerlink {
+
+            width: 100%;
+            
+            a {
+                opacity: 1;
+
+                width: 100%;
+                height: 48px;
+                padding: 1rem;
+
+                background-color: $Gray100;
+
+                &:hover>span {
+                    opacity: 1;
+                }
+
+                span {
+                    text-transform: uppercase;
+                    color: $Gray900;
+                    font-size: 12px;
+                    font-weight: 500;
+
+                    opacity: 0.75;
+                }
+            }
+        }
+    }
+
+}
