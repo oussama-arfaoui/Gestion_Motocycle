@@ -12,3 +12,20 @@ for (let element of dropdowns) {
         arrow.classList.toggle('spin-arrow');
     });
 }
+
+$(document).ready(function () {
+    "use strict";
+    $('.previewImage ').on("change", function () {
+        var image = this.files[0],
+            type = $(this).attr("name");
+        // VALIDATE IF IT'S JPEG, JPG OR PNG FORMAT
+        if (image["type"] == "image/jpeg" || image["type"] == "image/jpg" || image["type"] == "image/png") {
+            var dataImage = new FileReader();
+            dataImage.readAsDataURL(image);
+            $(dataImage).on("load", function (event) {
+                var routeImage = event.target.result;
+                $(".previewImage_" + type).attr("src", routeImage);
+            });
+        }
+    });
+})

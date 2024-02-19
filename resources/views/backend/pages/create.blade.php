@@ -38,7 +38,7 @@
                 
                 <div class="node-permalink-preview">
                     <span>
-                        {{ config('app.url') }}/
+                        {{ config('app.url') }}
                     </span>
                     <input type="text" name="slug" id="slug" required aria-required="true">
                 </div>

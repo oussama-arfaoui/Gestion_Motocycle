@@ -37,7 +37,7 @@
             <div class="node-permalink">
                 <label class="form-label required" for="slug" aria-required="true">Permalink</label>
                 <div class="node-permalink-preview">
-                    <span class="input-group-text">{{ config('app.url') }}/</span>
+                    <span class="input-group-text">{{ config('app.url') }}</span>
                     <input class="form-control ps-0" type="text" name="slug" id="slug"
                         value="{{ optional($page->slug)->key }}" required aria-required="true">
                 </div>
