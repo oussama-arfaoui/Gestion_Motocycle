@@ -44,7 +44,8 @@
             </div>
             <small class="form-hint mt-n2 text-truncate" id="previewLink">Preview:
                 @if($page->slug)
-                <a href="{{ config('app.url') }}{{ $page->slug->key }}" target="_blank">{{ config('app.url') }}{{ $page->slug->key
+                <a href="{{ config('app.url') }}{{ $page->slug->key }}" target="_blank">{{ config('app.url') }}{{
+                    $page->slug->key
                     }}</a>
                 @else
                 No preview available
@@ -101,6 +102,7 @@
         </form>
     </div>
 </div>
+
 <script>
     // Function to generate a slug from the given string
     function generateSlug(str) {
@@ -193,6 +195,7 @@
     var contentTextarea = document.getElementById('content');
     contentTextarea.value += shortcode;
 });
+
 
 </script>
 
