@@ -16,10 +16,11 @@
             <x-save-icon />
             <span>Save</span>
         </a>
-        <a class="dashboard-main-button" href="{{ route('pages.create') }}">
+
+        <button type="submit" class="dashboard-main-button">
             <x-save-icon />
             <span>Save & Publish</span>
-        </a>
+        </button>
     </div>
 
     <div class="dashboard-main-container-modules">
@@ -47,7 +48,7 @@
         
             {{-- Shortcode Picker  --}}
 
-            <div>
+            <div class="node-shortcode-picker">
                 <label for="shortcodeType">Select Shortcode Type</label>
                 <select name="shortcodeType" id="shortcodeType" class="form-control">
                     <option value="">Select Shortcode</option>
@@ -62,39 +63,41 @@
                 <!-- The shortcode configuration will be dynamically loaded here -->
             </div>
         
-            <button id="generateShortcodeBtn" class="btn btn-primary" disabled>Generate Shortcode</button>
+            <button id="generateShortcodeBtn" class="dashboard-action-button" disabled>Generate Shortcode</button>
         
         
         
-            <div class="form-group">
+            <div class="node-input">
                 <label for="content">Content</label>
                 <textarea name="content" class="form-control" id="content" rows="4"></textarea>
             </div>
         
-            <div class="form-group">
+            <div class="node-input">
                 <label for="image">Image</label>
                 <input type="text" name="image" class="form-control" id="image">
             </div>
-            <div class="form-group">
+            <div class="node-input">
                 <label for="template">Template</label>
                 <input type="text" name="template" class="form-control" id="template">
             </div>
-            <div class="form-group">
+            <div class="node-input">
                 <label for="description">Description</label>
                 <input type="text" name="description" class="form-control" id="description">
             </div>
-            <div class="form-group">
+
+            <div class="node-selector">
                 <label for="status">Status</label>
                 <select name="status" class="form-control" id="status">
                     <option value="published">Published</option>
                     <option value="pending">Pending</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="dashboard-main-button">
+                <x-save-icon />
+                <span>Save & Publish</span>
+            </button>
         </form>
     </div>
-    
-    
 </div>
 
 
@@ -172,7 +175,7 @@
     var inputs = document.querySelectorAll('#shortcodeConfigContainer input, #shortcodeConfigContainer textarea');
     inputs.forEach(function(input) {
         if (input.value.trim() !== '') {
-            shortcode += input.getAttribute('name') + '="' + input.value.trim() + '" ';
+            shortcode += input.getAttribute('name') + '="' + input.value.trim().replace(/'/g, '’') + '" ';
         }
     });
     
@@ -182,6 +185,7 @@
     shortcode += 'style="' + selectedValue + '" ';
     
     shortcode += ']';
+    
     
     // Append the closing shortcode tag
     shortcode += '[/' + shortcodeName + ']';

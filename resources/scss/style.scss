@@ -14,8 +14,15 @@
 @import 'layout/backend/dashboard-sidebar';
 @import 'layout/backend/dashboard-header';
 
+@import 'layout/frontend/header';
+@import 'layout/frontend/footer';
+
 // @import 'components/';
+@import 'components/buttons';
 
 // @import 'pages/';
+@import 'pages/frontend/hero_slider/hero_slider_style1';
+@import 'pages/frontend/brands/brands_style1';
+@import 'pages/frontend/category_overview/category_overview_style1';
 
 // @import 'themes/';

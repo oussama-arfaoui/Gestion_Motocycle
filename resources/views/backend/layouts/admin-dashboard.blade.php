@@ -16,7 +16,7 @@
 
 
 
-<body class="body antialiased">
+<body class="dashboard antialiased">
     
     {{-- Sidebar --}}
     <div>
