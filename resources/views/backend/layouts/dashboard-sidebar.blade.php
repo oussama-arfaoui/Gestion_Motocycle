@@ -73,7 +73,7 @@
         </button>
 
         <div class="dashboard_sidebar__links-innerlink hide" id="dropdown-menu-nav-products">
-            <a href="/admin/products">
+            <a href="{{ route('products.index') }}">
                 <span>Product Items</span>
             </a>
 

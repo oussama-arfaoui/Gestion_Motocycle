@@ -53,3 +53,4 @@ function renderViewWithAttributes($view, $attributes) {
     // Render the view with the provided attributes
     return view($view, $attributes)->render();
 }
+

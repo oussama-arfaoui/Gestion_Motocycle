@@ -68,12 +68,12 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
     /************************
         * PRODUCTS ROUTES
     ************************/
-    Route::get('/products', [ProductsController::class, 'index']);
-    Route::get('/product', [ProductsController::class, 'create']);
-    Route::post('/product', [ProductsController::class, 'store']);
+    Route::get('/products', [ProductsController::class, 'index'])->name('products.index');
+    Route::get('/product', [ProductsController::class, 'create'])->name('products.create');
+    Route::post('/product', [ProductsController::class, 'store'])->name('products.store');
     Route::get('/product/{id}/edit', [ProductsController::class, 'edit'])->name('product.edit');
-    Route::post('/product/edit', [ProductsController::class, 'update']);
-    Route::post('/product/{id}/delete', [ProductsController::class, 'destroy'])->name('product.delete');
+    Route::post('/product/edit', [ProductsController::class, 'update'])->name('product.update');
+    Route::post('/product/{id}/delete', [ProductsController::class, 'destroy'])->name('product.destroy');
 
 
     /************************
@@ -122,3 +122,6 @@ Route::get('/get-shortcode-config/{shortcodeType}', function ($shortcodeType) {
     // Render the Blade view corresponding to the selected shortcode type
     return view($shortcodeType);
 });
+// web.php
+Route::post('/upload', [ImageController::class, 'upload'])->name('layouts.upload_image');
+

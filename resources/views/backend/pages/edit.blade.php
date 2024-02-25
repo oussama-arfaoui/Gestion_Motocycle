@@ -195,8 +195,6 @@
     var contentTextarea = document.getElementById('content');
     contentTextarea.value += shortcode;
 });
-
-
 </script>
 
 @endsection
