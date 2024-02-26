@@ -35,25 +35,25 @@
         <tbody>
             @foreach($products as $product)
             <tr>
-            @if($product->images)
+                @if($product->images)
 
-                 <!--hadi dyales image-->
-                    @php
-                        $imageArray = json_decode($product->images, true);
-                        $firstImage = isset($imageArray[0]) ? $imageArray[0] : null;
-                    @endphp
+                <!--hadi dyales image-->
+                @php
+                $imageArray = json_decode($product->images, true);
+                $firstImage = isset($imageArray[0]) ? $imageArray[0] : null;
+                @endphp
 
-                    @if($firstImage)
-                        <td><img src="{{ asset('storage/Images/general/' . $firstImage) }}" alt="First Image"></td>
-                    @else
-                        <td>No image available</td>
-                    @endif
+                @if($firstImage)
+                <td><img id="image-fucked" src="{{ asset('storage/Images/general/' . $firstImage) }}" alt="First Image"></td>
                 @else
-                    <td>No image available</td>
+                <td>No image available</td>
+                @endif
+                @else
+                <td>No image available</td>
                 @endif
                 <!--hadi dyales image-->
 
-                <td>{{ $product->product_name }}</td>              
+                <td>{{ $product->product_name }}</td>
                 <td>{{ $product->product_description }}</td>
                 <td>{{ $product->status }}</td>
                 <td>{{ $product->template }}</td>
@@ -67,12 +67,13 @@
                         </button>
                     </a>
                     <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onclick="confirmDelete({{ $product->id }})" class="dashboard-icon-button action-delete">
-                                <x-trash-icon />
-                            </button>
-                        </form>
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="confirmDelete({{ $product->id }})"
+                            class="dashboard-icon-button action-delete">
+                            <x-trash-icon />
+                        </button>
+                    </form>
 
 
                 </td>

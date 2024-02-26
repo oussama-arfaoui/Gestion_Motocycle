@@ -1,4 +1,61 @@
-<h2>Register</h2>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Carbon - Admin Dashboard</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+
+    @vite(['resources/css/app.css', 'resources/scss/style.scss', 'resources/js/app.js'])
+</head>
+
+
+
+<body class="auth antialiased">
+    <main class="dashboard_login">
+
+        {{--
+        <div class="dashboard_login-bg">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div> --}}
+
+        <div class="dashboard_login-content">
+
+            <div class="dashboard_login-content-text">
+                <h2>Carbon X - User Registration</h2>
+                <p>Create Your Account</p>
+            </div>
+
+            <form class="dashboard_login-content-form" action="/register" method="POST">
+                @csrf
+                <input input type="text" placeholder="name" name="name" id="name" required>
+
+                <input type="text" placeholder="Email" name="email" id="email" required>
+                
+                <input type="password" placeholder="Password" name="password" id="password" required>
+
+                <button class="dashboard_login-content-form-submit" id="login_submit">
+                    <span>Create Account</span>
+                </button>
+            </form>
+
+            <a class="dashboard_login-content-remember" href="#">By creating an account you agree to our Terms of Service.</a>
+            <a class="dashboard_login-content-remember" href="/login">Already Have An Account?</a>
+        </div>
+
+    </main>
+</body>
+
+</html>
+
+{{-- <h2>Register</h2>
 
 @if($errors->any())
     <div>
@@ -29,14 +86,6 @@
   
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="password" id="password" required>
-  
-
-      <div>
-        <label for="remember">
-            <input type="checkbox" name="remember" id="remember">
-            <span class="">Remember Me</span>
-        </label>
-      </div>
 
       <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
       <button>Register</button>
@@ -45,4 +94,4 @@
     <div class="container signin">
       <p>Already have an account? <a href="#">Sign in</a>.</p>
     </div>
-  </form>
+  </form> --}}

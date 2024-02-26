@@ -11,7 +11,7 @@
 
     position: fixed;
     z-index: 1000;
-    width: 100%;
+    width: 100vw;
     bottom: 0;
 
     &__left,
@@ -80,7 +80,7 @@
         z-index: 1000;
         width: 100%;
 
-        background: transparent;
+        background: linear-gradient(to right, hsla(0, 0%, 0%, 0.8), hsla(0, 0%, 0%, 0.5), hsla(0, 0%, 0%, 0.8));
         backdrop-filter: blur(10px);
 
         &__content {
@@ -104,6 +104,11 @@
                 margin-right: 1rem;
                 font-size: 16px;
 
+
+                &:hover {
+                    transform: translateY(-4px);
+                }
+
                 &:last-child {
                     margin-right: 0rem;
                 }
@@ -111,13 +116,25 @@
         }
 
         &__cta {
-            font-size: 12px;
+            button {
 
-            a {
-                svg {
+                &::before,
+                &::after {
                     display: none;
                 }
+
+                &:hover {
+                    a {
+
+                        span,
+                        svg {
+                            color: var(--light);
+                            stroke: var(--light);
+                        }
+                    }
+                }
             }
+
         }
     }
 
@@ -133,6 +150,14 @@
             a {
                 margin-right: 3rem;
                 font-size: 18px;
+
+                &:hover {
+                    transform: translateY(-4px);
+                }
+
+                &:last-child {
+                    margin-right: 0rem;
+                }
 
                 &:last-child {
                     margin-right: 0rem;

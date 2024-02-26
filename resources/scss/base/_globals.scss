@@ -41,6 +41,9 @@ a {
 .website {
   font-family: "Urbanist", sans-serif;
   font-optical-sizing: auto;
+
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 /// GLOBALS
@@ -70,10 +73,9 @@ a {
 }
 
 /* Larger Desktop styles */
-@media (min-width: 1280px){
+@media (min-width: 1280px) {
   .global_container {
     max-width: 1280px;
     margin: 0 auto;
   }
 }
-

@@ -57,6 +57,10 @@ Route::get('/home', function () {
     return view('welcome');
 });
 
+Route::get('/product-details', function () {
+    return view('frontend.pages.product_details');
+});
+
 
 
 /************************
@@ -124,6 +128,13 @@ Route::post('/media/upload', [ImageController::class, 'upload'])->name('media.up
 
 });
 
+
+/************************
+        * GENERATOR ROUTES
+    ************************/
+    Route::get('/shortcode_generator', function () {
+    return view('backend.generator.shortcode_generator');
+});
 
 
 

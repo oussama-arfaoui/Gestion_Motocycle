@@ -74,7 +74,7 @@
 
             <button id="generateShortcodeBtn" class="dashboard-action-button" disabled>Generate Shortcode</button>
             <!-- End Shortcode configuration -->
-
+            
             <div class="node-input">
                 <label for="content">Content</label>
                 <textarea name="content" class="form-control" id="content" rows="4">{{ $page->content }}</textarea>
@@ -87,7 +87,7 @@
                 <label for="template">Template</label>
                 <input type="text" name="template" class="form-control" id="template" value="{{ $page->template }}">
             </div>
-            <div class="node-input">
+            <div class="node-input"">
                 <label for=" description">Description</label>
                 <input type="text" name="description" class="form-control" id="description"
                     value="{{ $page->description }}">
@@ -199,6 +199,8 @@
     var contentTextarea = document.getElementById('content');
     contentTextarea.value += shortcode;
 });
+
+
 </script>
 
 @endsection
