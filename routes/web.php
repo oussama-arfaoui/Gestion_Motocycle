@@ -13,7 +13,8 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ServicesController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Http\RedirectResponse;
-
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ProductCategoriesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -73,7 +74,17 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
     Route::post('/product', [ProductsController::class, 'store'])->name('products.store');
     Route::get('/product/{id}/edit', [ProductsController::class, 'edit'])->name('product.edit');
     Route::post('/product/edit', [ProductsController::class, 'update'])->name('product.update');
-    Route::post('/product/{id}/delete', [ProductsController::class, 'destroy'])->name('product.destroy');
+    Route::delete('/product/{id}', [ProductsController::class, 'destroy'])->name('products.destroy');
+
+/************************
+ * PRODUCT CATEGORIES ROUTES
+ ************************/
+Route::get('/product-categories', [ProductCategoriesController::class, 'index'])->name('product-categories.index');
+Route::get('/product-categories/create', [ProductCategoriesController::class, 'create'])->name('product-categories.create');
+Route::post('/product-categories/store', [ProductCategoriesController::class, 'store'])->name('product-categories.store');
+Route::get('/product-categories/{id}/edit', [ProductCategoriesController::class, 'edit'])->name('product-categories.edit');
+Route::put('/product-categories/{id}', [ProductCategoriesController::class, 'update'])->name('product-categories.update');
+Route::delete('/product-categories/{id}', [ProductCategoriesController::class, 'destroy'])->name('product-categories.destroy');
 
 
     /************************
@@ -99,6 +110,18 @@ Route::get('/pages/{page}/edit', [PageController::class, 'edit'])->name('pages.e
 Route::put('/pages/{page}', [PageController::class, 'update'])->name('pages.update');
 Route::delete('/pages/{page}', [PageController::class, 'destroy'])->name('pages.destroy');
 
+        /************************
+        * media ROUTES
+        ************************/
+
+
+Route::get('/media', [ImageController::class, 'index'])->name('media.index');
+Route::get('/media/upload', [ImageController::class, 'showUploadForm'])->name('media.uploadForm');
+Route::post('/media/upload', [ImageController::class, 'upload'])->name('media.upload');
+
+
+
+
 });
 
 
@@ -122,6 +145,3 @@ Route::get('/get-shortcode-config/{shortcodeType}', function ($shortcodeType) {
     // Render the Blade view corresponding to the selected shortcode type
     return view($shortcodeType);
 });
-// web.php
-Route::post('/upload', [ImageController::class, 'upload'])->name('layouts.upload_image');
-

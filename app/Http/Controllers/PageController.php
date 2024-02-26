@@ -125,20 +125,17 @@ class PageController extends Controller
     public function destroy($id)
     {
         $page = Page::findOrFail($id);
+        
+        // Delete the associated slug entry
+        $slugEntry = Slug::where('reference_id', $id)
+                        ->where('reference_type', 'App\\Models\\Page')
+                        ->delete();
+    
+        // Delete the page
         $page->delete();
-
+    
         return redirect()->route('pages.index')
             ->with('success', 'Page deleted successfully.');
     }
-
-    public function showBySlug($slug)
-    {
-    $slugEntry = Slug::where('key', $slug)->first();
-    if (!$slugEntry) {
-        abort(404); // Or handle appropriately if slug not found
-    }
-
-    $page = $slugEntry->page;
-    return view('frontend.layouts.default', compact('page'));    
-    }
+    
 }

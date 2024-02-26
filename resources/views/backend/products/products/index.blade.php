@@ -22,36 +22,59 @@
     <table class="dashboard-main-container-table">
         <thead>
             <tr>
-            <th>Product Name</th>
-            <th>Product Description</th>
-            <th>Status</th>
-            <th>Template</th>
-            <th>SEO Title</th>
-            <th>Actions</th>
+                <th>Product Image</th>
+                <th>Product Name</th>
+                <th>Product Description</th>
+                <th>Status</th>
+                <th>Template</th>
+                <th>SEO Title</th>
+                <th>Categories</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach($products as $product)
             <tr>
-                <td>{{ $product->product_name }}</td>
+            @if($product->images)
+
+                 <!--hadi dyales image-->
+                    @php
+                        $imageArray = json_decode($product->images, true);
+                        $firstImage = isset($imageArray[0]) ? $imageArray[0] : null;
+                    @endphp
+
+                    @if($firstImage)
+                        <td><img src="{{ asset('storage/Images/general/' . $firstImage) }}" alt="First Image"></td>
+                    @else
+                        <td>No image available</td>
+                    @endif
+                @else
+                    <td>No image available</td>
+                @endif
+                <!--hadi dyales image-->
+
+                <td>{{ $product->product_name }}</td>              
                 <td>{{ $product->product_description }}</td>
                 <td>{{ $product->status }}</td>
                 <td>{{ $product->template }}</td>
                 <td>{{ $product->seo_title }}</td>
+                <td>{{ $product->category->category_name }}</td>
+                </td>
                 <td class="dashboard_main-table-actions">
                     <a href="{{ route('product.edit', $product->id) }}">
                         <button class="dashboard-icon-button action-edit">
                             <x-edit-icon />
                         </button>
                     </a>
+                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="confirmDelete({{ $product->id }})" class="dashboard-icon-button action-delete">
+                                <x-trash-icon />
+                            </button>
+                        </form>
 
-                    <form action="{{ route('product.destroy', $product->id) }}" method="POST" style="display: inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button onclick="confirmDelete({{ $product->id }})" class="dashboard-icon-button action-delete">
-                            <x-trash-icon />
-                        </button>
-                    </form>
+
                 </td>
             </tr>
             @endforeach

@@ -1,0 +1,130 @@
+.main-btn {
+    cursor: pointer;
+    @include Interactable;
+    border-radius: 8px;
+    background-color: var(--accent-color);
+    color: var(--light);
+    border: none;
+
+    padding: 0.5rem 1rem;
+
+    font-family: 'Urbanist', sans-serif;
+    font-size: 14px;
+    text-transform: capitalize;
+
+    a {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        color: var(--light);
+
+
+        svg {
+            height: 24px;
+            width: 24px;
+
+            stroke: var(--light);
+
+            &:first-child {
+                margin-right: 0.5rem;
+                animation: arrow-come 400ms forwards;
+            }
+
+            &:last-child {
+                animation: arrow-leave 400ms forwards;
+                display: none;
+            }
+        }
+    }
+
+    &:hover {
+        a {
+            svg {
+                &:first-child {
+                    animation: arrow-leave 400ms forwards;
+                    display: none;
+                }
+
+                &:last-child {
+                    animation: arrow-come 400ms forwards;
+                    margin-left: 0.5rem;
+                    display: block;
+                }
+            }
+        }
+    }
+
+}
+
+
+.section-btn {
+    cursor: pointer;
+    @include Interactable;
+    border-radius: 8px;
+    background-color: var(--accent-color);
+    color: var(--light);
+    border: none;
+
+    padding: 0.5rem 1rem;
+
+    a {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        color: var(--light);
+
+        font-family: 'Urbanist', sans-serif;
+        font-size: 14px;
+        text-transform: capitalize;
+
+        svg {
+            height: 24px;
+            width: 24px;
+
+            stroke: var(--light);
+
+            &:first-child {
+                margin-right: 0.5rem;
+                animation: arrow-come 400ms forwards;
+            }
+
+            &:last-child {
+                animation: arrow-leave 400ms forwards;
+                display: none;
+            }
+        }
+    }
+
+    &:hover {
+        a {
+            svg {
+                &:first-child {
+                    animation: arrow-leave 400ms forwards;
+                    display: none;
+                }
+
+                &:last-child {
+                    animation: arrow-come 400ms forwards;
+                    margin-left: 0.5rem;
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1025px) {
+
+    .main-btn,
+    .section-btn {
+        &:hover {
+            a {
+                svg:last-child {
+                    display: none;
+                }
+            }
+        }
+    }
+}

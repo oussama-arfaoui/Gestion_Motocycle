@@ -3,47 +3,43 @@
 function getShortcodeTypes() {
     return [
 
-        'Hero' => [
-            'name' => 'Hero',
-            //'view' => view('frontend.shortcodes.hero.admin-config'),   
-            'view' => 'frontend.shortcodes.Hero.admin-config', // Just the view identifier       
+        'hero_slider' => [
+            'name' => 'hero_slider',
+            'view' => 'frontend.shortcodes.hero_slider.admin-config',    
         ],
-        'Category_Overview' => [
-            'name' => 'Category_Overview',
-            //'view' => view('frontend.shortcodes.hero.admin-config'),   
-            'view' => 'frontend.shortcodes.Category_Overview.admin-config', // Just the view identifier       
+        'brands' => [
+            'name' => 'brands',  
+            'view' => 'frontend.shortcodes.brands.admin-config',  
         ],
-        'About_Sections' => [
-            'name' => 'About_Sections',
-            //'view' => view('frontend.shortcodes.hero.admin-config'),   
-            'view' => 'frontend.shortcodes.About_Sections.admin-config', // Just the view identifier       
+        'category_overview' => [
+            'name' => 'category_overview', 
+            'view' => 'frontend.shortcodes.category_overview.admin-config',     
         ],
-        // Add other shortcode types here if needed
+
+
     ];
 }
 
 function getShortcodeindex() {
     return [
 
-        'Hero' => [
-            'name' => 'Hero',
-            //'view' => view('frontend.shortcodes.hero.admin-config'),   
-            'view' => 'frontend.shortcodes.Hero.index', // Just the view identifier 
-            'attributes' => ['title', 'subtitle', 'description', 'button_primary_label', 'style'],      
+        'hero_slider' => [
+            'name' => 'hero_slider',
+ 
+            'view' => 'frontend.shortcodes.hero_slider.index', 
+            'attributes' =>['title', 'description', 'button_primary_label','style']      
         ],
-        'Category_Overview' => [
-            'name' => 'Category_Overview',
-            //'view' => view('frontend.shortcodes.hero.admin-config'),   
-            'view' => 'frontend.shortcodes.Category_Overview.index', // Just the view identifier 
-            'attributes' => ['title', 'subtitle', 'category_ids', 'style'],      
+        'brands' => [
+            'name' => 'brands',
+            'view' => 'frontend.shortcodes.brands.index', 
+            'attributes' => ['style']      
         ],
-        'About_Sections' => [
-            'name' => 'About_Sections',
-            //'view' => view('frontend.shortcodes.hero.admin-config'),   
-            'view' => 'frontend.shortcodes.About_Sections.index', // Just the view identifier 
-            'attributes' => ['title', 'subtitle', 'description', 'image', 'style'],      
+        'category_overview' => [
+            'name' => 'category_overview',
+            'view' => 'frontend.shortcodes.category_overview.index', 
+            'attributes' => ['section_tag', 'title', 'description', 'primary_button_label', 'category_title_1' , 'category_description_1', 'category_button_1','category_title_2' , 'category_description_2', 'category_button_2','style']      
         ],
-        // Add other shortcode types here if needed
+        
     ];
 }
 

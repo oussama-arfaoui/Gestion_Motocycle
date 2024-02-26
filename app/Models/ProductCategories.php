@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ProductCategories extends Model
 {
-    use HasFactory;
-    protected $table = "product_categories";
+    protected $fillable = ['category_name', 'image',]; // Added fillable property
+
+    // Your other model code...
 }
-?>

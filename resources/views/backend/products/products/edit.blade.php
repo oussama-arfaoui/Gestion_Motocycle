@@ -40,6 +40,16 @@
                 <input type="text" name="seo_title" id="seo_title" class="form-control" value="{{ $product->seo_title }}">
             </div>
         </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="categories" class="form-label">Categories</label>
+                <select name="categories[]" id="categories" class="form-select" multiple>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" >{{ $category->category_name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
         <div class="d-grid">
             <button type="submit" class="btn btn-primary">Save</button>
         </div>

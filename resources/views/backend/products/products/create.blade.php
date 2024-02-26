@@ -49,8 +49,19 @@
         </div>
         <div class="row mb-3">
             <div class="col-md-6">
-                <label for="image" class="form-label">Image</label>
-                <input type="file" name="image" id="image" class="form-control">
+                <label for="images" class="form-label">Images</label>
+                <input type="file" name="images[]" id="images" class="form-control" multiple>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="categories" class="form-label">Categories</label>
+                <select name="categories[]" id="categories" class="form-select" multiple>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="d-grid">

@@ -42,7 +42,8 @@
                         value="{{ optional($page->slug)->key }}" required aria-required="true">
                 </div>
             </div>
-            <small class="form-hint mt-n2 text-truncate" id="previewLink">Preview:
+
+            {{-- <small class="form-hint mt-n2 text-truncate" id="previewLink">Preview:
                 @if($page->slug)
                 <a href="{{ config('app.url') }}{{ $page->slug->key }}" target="_blank">{{ config('app.url') }}{{
                     $page->slug->key
@@ -50,12 +51,12 @@
                 @else
                 No preview available
                 @endif
-            </small>
+            </small> --}}
             <!-- End Permalink section -->
 
 
             <!-- In your Blade template -->
-            <div class="form-group">
+            <div class="node-shortcode-picker">
                 <label for="shortcodeType">Select Shortcode Type</label>
                 <select name="shortcodeType" id="shortcodeType" class="form-control">
                     <option value="">Select Shortcode</option>
@@ -71,34 +72,37 @@
                 <!-- You can leave this empty -->
             </div>
 
-            <button id="generateShortcodeBtn" class="btn btn-primary" disabled>Generate Shortcode</button>
+            <button id="generateShortcodeBtn" class="dashboard-action-button" disabled>Generate Shortcode</button>
             <!-- End Shortcode configuration -->
 
-            <div class="form-group">
+            <div class="node-input">
                 <label for="content">Content</label>
                 <textarea name="content" class="form-control" id="content" rows="4">{{ $page->content }}</textarea>
             </div>
-            <div class="form-group">
+            <div class="node-input">
                 <label for="image">Image</label>
                 <input type="text" name="image" class="form-control" id="image" value="{{ $page->image }}">
             </div>
-            <div class="form-group">
+            <div class="node-input">
                 <label for="template">Template</label>
                 <input type="text" name="template" class="form-control" id="template" value="{{ $page->template }}">
             </div>
-            <div class="form-group">
-                <label for="description">Description</label>
+            <div class="node-input">
+                <label for=" description">Description</label>
                 <input type="text" name="description" class="form-control" id="description"
                     value="{{ $page->description }}">
             </div>
-            <div class="form-group">
+            <div class="node-selector">
                 <label for="status">Status</label>
                 <select name="status" class="form-control" id="status">
                     <option value="published" {{ $page->status == 'published' ? 'selected' : '' }}>Published</option>
                     <option value="pending" {{ $page->status == 'pending' ? 'selected' : '' }}>Pending</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="dashboard-main-button">
+                <x-save-icon />
+                Update & Publish
+            </button>
         </form>
     </div>
 </div>
@@ -177,7 +181,7 @@
     var inputs = document.querySelectorAll('#shortcodeConfigContainer input, #shortcodeConfigContainer textarea');
     inputs.forEach(function(input) {
         if (input.value.trim() !== '') {
-            shortcode += input.getAttribute('name') + '="' + input.value.trim() + '" ';
+            shortcode += input.getAttribute('name') + '="' + input.value.trim().replace(/'/g, '’') + '" ';
         }
     });
     
