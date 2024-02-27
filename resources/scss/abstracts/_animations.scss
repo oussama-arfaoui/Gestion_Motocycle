@@ -22,16 +22,6 @@
     }
 }
 
-@keyframes moveBg {
-    from {
-        background-position: 0 50%;
-    }
-
-    to {
-        background-position: -1134px 50%;
-    }
-}
-
 @keyframes slide-come {
     0% {
         transform: translateX(200%);
@@ -77,5 +67,29 @@
 
     to {
         transform: translateX(-100%);
+    }
+}
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes fly-1 {
+    from {
+        transform: translateY(0.1em);
+    }
+
+    to {
+        transform: translateY(-0.1em);
     }
 }

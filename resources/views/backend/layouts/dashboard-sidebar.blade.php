@@ -23,7 +23,7 @@
     </div>
 
     {{-- Dashboard Links --}}
-    
+
     <div class="dashboard_sidebar__links">
 
         <a href="/admin/overview">
@@ -230,7 +230,7 @@
             <span>Settings</span>
         </a>
 
-     
+
         <a href="/admin/documnentation">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_58_1243)">
@@ -252,5 +252,26 @@
             <span>Documentation</span>
         </a>
 
+        <button id="dropdown-nav-generator">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 13.5L16.5 9L12 4.5" stroke="black" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M6 4.5L1.5 9L6 13.5" stroke="black" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+            <span>Generator</span>
+
+            <svg id="dropdown-nav-generator-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </button>
+
+        <div class="dashboard_sidebar__links-innerlink hide" id="dropdown-menu-nav-generator">
+            <a href="/shortcode_generator">
+                <span>Shortcode Generator</span>
+            </a>
+        </div>
     </div>
 </div>

@@ -47,7 +47,9 @@ Route::post('/forgot-password', [ForgotPasswordLinkController::class, 'store']);
 Route::post('/forgot-password/{token}', [ForgotPasswordController::class, 'reset']);
 
 
-
+Route::get('/shortcode_generator', function () {
+    return view('backend.generator.shortcode_generator');
+});
 
 /************************
  * PUBLIC ROUTES
@@ -57,6 +59,10 @@ Route::get('/', function () {
 });
 Route::get('/home', function () {
     return view('welcome');
+});
+
+Route::get('/product-details', function () {
+    return view('frontend.pages.product_details');
 });
 
 
@@ -122,9 +128,7 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
     Route::get('/media/upload', [ImageController::class, 'showUploadForm'])->name('media.uploadForm');
     Route::post('/media/upload', [ImageController::class, 'upload'])->name('media.upload');
 
-
-
-    /************************
+ /************************
      * brands ROUTES
      ************************/
 
@@ -134,11 +138,15 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
      Route::get('/brands/{id}/edit', [BrandsController::class, 'edit'])->name('brands.edit');
      Route::put('/brands/{id}', [BrandsController::class, 'update'])->name('brands.update');
      Route::delete('/brands/{id}', [BrandsController::class, 'destroy'])->name('brands.destroy');
- 
 
 
 });
 
+
+
+    /************************ ****************************************
+        * ************************ publig routing  ************************
+    ************************ ****************************************/
 
     /************************
         * Slug ROUTES
@@ -146,6 +154,14 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
 
 
     Route::get('/{slug}', 'App\Http\Controllers\SlugController@showBySlug')->name('pages.showBySlug');
+    
+    /************************
+        * products ROUTES
+    ************************/
+
+
+    
+    Route::get('/products/{product}', [ProductsController::class, 'show'])->name('products.show');
 
         /************************
             * ShortCode ROUTES

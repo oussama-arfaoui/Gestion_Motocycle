@@ -1,0 +1,27 @@
+{{-- Admin Config File --}}
+
+<section class="shortcode-editor">
+
+    <div class="node-input">
+        <label>title</label>
+        <input name="title" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>description</label>
+        <textarea name="description" value=""></textarea>
+    </div>
+
+
+
+    <div class="node-selector">
+        <label>Style</label>
+        <select name="style1">
+            <option value="style1">Style 1</option>
+            <option value="style1">Style 2</option>
+        </select>
+    </div>
+
+</section>

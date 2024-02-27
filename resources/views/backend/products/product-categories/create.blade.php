@@ -10,24 +10,31 @@
     </div>
 
     {{-- Form for creating a new category --}}
-    <form action="{{ route('product-categories.store') }}" method="POST" enctype="multipart/form-data" class="my-4 p-4 border border-gray-300 rounded-lg">
-    @csrf
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <label for="category_name" class="form-label">Category Name</label>
-            <input type="text" name="category_name" id="category_name" class="form-control">
-        </div>
+    <div class="dashboard-main-container-modules">
+
+        <form action="{{ route('product-categories.store') }}" method="POST" enctype="multipart/form-data"
+            class="node-form">
+            @csrf
+            
+                <div class="node-input">
+                    <label for="category_name" class="form-label">Category Name</label>
+                    <input type="text" name="category_name" id="category_name" class="form-control">
+                </div>
+            
+            
+                <div class="node-input">
+                    <label for="image" class="form-label">Image</label>
+                    <input type="file" name="image" id="image">
+                </div>
+            
+            
+                <button type="submit" class="dashboard-main-button">
+                <x-save-icon />
+                    <span>Save</span>
+                </button>
+            
+        </form>
     </div>
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <label for="image" class="form-label">Image</label>
-            <input type="file" name="image" id="image">
-        </div>
-    </div>
-    <div class="d-grid">
-        <button type="submit" class="btn btn-primary">Save</button>
-    </div>
-</form>
 
 
 </div>

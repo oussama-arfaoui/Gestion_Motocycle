@@ -35,15 +35,24 @@
             <tr>
                 <td>{{ $brand->name }}</td>
                 <td>{{ $brand->link }}</td>
-                <td><img src="{{ asset('storage/' . $brand->image) }}" alt="Brand Image" style="max-width: 100px;"></td>
+                @php
+                $imageArray = json_decode($brand->image, true);
+                $firstImage = isset($imageArray[0]) ? $imageArray[0] : null;
+                @endphp
+                <td>
+                    @if($firstImage)
+                    <img src="{{ asset('storage/Images/general/' . $firstImage) }}" alt="Brand Image">
+                    @else
+                    No image available
+                    @endif
+                </td>
                 <td class="dashboard_main-table-actions">
                     <a href="{{ route('brands.edit', $brand->id) }}">
                         <button class="dashboard-icon-button action-edit">
                             <x-edit-icon />
                         </button>
                     </a>
-
-                    <form action="{{ route('brands.destroy', $brand->id) }}" method="POST" style="display: inline;">
+                    <form id="deleteForm{{ $brand->id }}" action="{{ route('brands.destroy', $brand->id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
                         <button onclick="confirmDelete({{ $brand->id }})" class="dashboard-icon-button action-delete">
@@ -53,6 +62,7 @@
                 </td>
             </tr>
             @endforeach
+            
         </tbody>
     </table>
 </div>

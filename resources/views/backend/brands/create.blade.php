@@ -13,9 +13,9 @@
 
     <!-- Form -->
     <div class="dashboard-main-container-modules">
-        <form class="node-form" action="{{ route('brands.store') }}" method="POST">
+        <form class="node-form" action="{{ route('brands.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-
+        
             <!-- Name Input -->
             <div class="node-input">
                 <label for="name">Name</label>
@@ -28,20 +28,20 @@
                 <input type="text" name="link" class="form-control" id="link">
             </div>
         
-          
             <!-- Image Input -->
             <div class="node-input">
-                <label for="image">Image</label>
-                <input type="file" name="image" class="form-control" id="image">
+                <label for="images">Images</label>
+                <input type="file" name="images[]" class="form-control" id="images" multiple>
             </div>
-
-
+        
             <!-- Save Button -->
             <button type="submit" class="dashboard-main-button">
                 <x-save-icon />
                 <span>Save Brand</span>
             </button>
         </form>
+        
+        
     </div>
 </div>
 @endsection

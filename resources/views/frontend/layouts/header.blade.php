@@ -6,11 +6,11 @@
 
         <nav class="header__nav">
 
-            <a href="/">
+            <a href="/accueil">
                 Accueil
             </a>
 
-            <a href="/categories">
+            <a href="/catalogue">
                 Catalogue
             </a>
 
@@ -18,7 +18,7 @@
                 Resources
             </a>
 
-            <a href="/blog">
+            <a href="/actualites">
                 Actualités
             </a>
 
@@ -28,13 +28,9 @@
         </nav>
 
 
-        <button class="header__cta main-btn">
-            <a href="">
-                <x-call-icon />
-                Contactez-Nous!
-                <x-chevron-icon />
-            </a>
-        </button>
+        <div class="header__cta">
+            <x-primary_button path='/contact' text="Contactez-Nous"></x-primary_button>
+        </div>
     </div>
 </header>
 
