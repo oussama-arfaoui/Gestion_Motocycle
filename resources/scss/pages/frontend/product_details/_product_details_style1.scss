@@ -46,12 +46,14 @@
             max-width: calc(50% - 10px);
             margin-right: 10px;
 
+            width: 50%;
+
             #zoom-container {
                 overflow: hidden;
             }
 
             &-image {
-                width: 90%;
+                width: 45%;
                 display: block;
                 margin: 0 auto;
                 transition: transform 0.5s ease;
@@ -87,6 +89,8 @@
             padding-block: 3rem;
             max-width: calc(50% - 10px);
             margin-left: 10px;
+
+            width: 50%;
 
             &-detail {
 

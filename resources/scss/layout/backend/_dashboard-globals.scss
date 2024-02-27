@@ -5,7 +5,8 @@
     padding: 2rem;
     padding-top: 1rem;
 
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
 
     &-breadcrumbs {
         width: 100%;
@@ -59,6 +60,10 @@
             padding: 1rem;
             text-align: left;
 
+            img {
+                width: 50%;
+            }
+
             .dashboard-icon-button {
                 display: grid;
                 margin-right: 1rem;
@@ -75,10 +80,11 @@
             background-color: $Gray50;
         }
 
-        td:nth-child(2) {
+        td:last-child {
             display: flex;
             align-items: center;
             justify-content: center;
+
         }
 
     }
