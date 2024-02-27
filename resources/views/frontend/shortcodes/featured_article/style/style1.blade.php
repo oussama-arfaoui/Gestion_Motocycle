@@ -10,13 +10,13 @@
 
     <div class="featured_article_style1-featured">
         <div class="featured_article_style1-featured-image">
-            <img src="./projects/project-4.jpg" alt="project-image">
+            <img src="./blogs/blog-1.jpg" alt="project-image">
         </div>
 
         <div class="featured_article_style1-featured-text">
             <h3>{{ $article_title }}</h3>
             <p>{{ $article_description }}</p>
-            <x-primary_button path='#' text='{{$article_button}}'></x-primary_button>
+            <x-primary_button path='/actualites' text='{{$article_button}}'></x-primary_button>
         </div>
 
     </div>

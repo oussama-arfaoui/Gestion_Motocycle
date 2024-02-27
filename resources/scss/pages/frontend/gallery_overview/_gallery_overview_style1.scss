@@ -287,15 +287,17 @@
     background-color: rgba(0, 0, 0, 0.5);
     /* semi-transparent black */
     z-index: 9999;
+    
 
     &-content {
+        overflow: hidden;
         background-color: #000000;
         width: 80%;
-        height: 80%;
+        height: 100%;
         
         max-width: 600px;
         
-        margin: 5% auto;
+        margin: 0 auto;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         position: relative;
@@ -308,6 +310,10 @@
         justify-content: flex-end;
 
         color: var(--light);
+
+        video{
+            object-fit: contain;
+        }
         
         &-close{
             position: absolute;

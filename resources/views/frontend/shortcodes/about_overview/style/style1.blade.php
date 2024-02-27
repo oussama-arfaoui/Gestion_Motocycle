@@ -17,7 +17,7 @@
         </div>
 
         <div class="about_overview_style1-content-image">
-            <img src="./bgs/about_overview_newdoors.jpg" alt="It seems as if it's passed me by">
+            <img src="./bgs/about_overview_newdoors.png" alt="It seems as if it's passed me by">
         </div>
 
     </div>

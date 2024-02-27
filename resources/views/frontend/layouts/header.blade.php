@@ -6,30 +6,26 @@
 
         <nav class="header__nav">
 
-            <a href="/accueil">
-                Accueil
-            </a>
+            <li>
+                <a href="/accueil">Accueil</a>
+            </li>
 
-            <a href="/catalogue">
-                Catalogue
-            </a>
+            <li>
+                <a href="/catalogue">Catalogue</a>
+            </li>
 
-            <a href="/resources">
-                Resources
-            </a>
+            <li>
+                <a href="/actualites">Actualités</a>
+            </li>
 
-            <a href="/actualites">
-                Actualités
-            </a>
-
-            <a href="/contact">
-                Contact
-            </a>
+            <li>
+                <a href="/contact">Contact</a>
+            </li>
         </nav>
 
 
         <div class="header__cta">
-            <x-primary_button path='/contact' text="Contactez-Nous"></x-primary_button>
+            <x-primary_button path='tel: {{ $contact_number }}' text="Appellez-Nous"></x-primary_button>
         </div>
     </div>
 </header>
@@ -39,7 +35,7 @@
 
 <div class="BottomNav">
     <div class="BottomNav__left">
-        <a href="/">
+        <a href="/accueil">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path
                     d="M1.5 7.99999L7.46933 2.02999C7.76267 1.73732 8.23733 1.73732 8.53 2.02999L14.5 7.99999M3 6.49999V13.25C3 13.664 3.336 14 3.75 14H6.5V10.75C6.5 10.336 6.836 9.99999 7.25 9.99999H8.75C9.164 9.99999 9.5 10.336 9.5 10.75V14H12.25C12.664 14 13 13.664 13 13.25V6.49999M5.5 14H11"
@@ -47,7 +43,7 @@
             </svg>
             <p>Accueil</p>
         </a>
-        <a href="/categories">
+        <a href="/catalogue">
             <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3 2.5H8.83333V8.33333H3V2.5Z" stroke="white" stroke-width="1.5" stroke-linecap="round"
                     stroke-linejoin="round" />
@@ -63,7 +59,9 @@
     </div>
     <div class="BottomNav__middle">
         <button>
-            <x-call-icon />
+            <a href="tel: {{ $contact_number }}">
+                <x-call-icon />
+            </a>
         </button>
     </div>
 
@@ -76,7 +74,7 @@
             </svg>
             <p>Contact</p>
         </a>
-        <a href="/blog">
+        <a href="/actualites">
             <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M12.1667 1.66666H5.50001C5.05798 1.66666 4.63406 1.84225 4.3215 2.15481C4.00894 2.46737 3.83334 2.8913 3.83334 3.33332V16.6667C3.83334 17.1087 4.00894 17.5326 4.3215 17.8452C4.63406 18.1577 5.05798 18.3333 5.50001 18.3333H15.5C15.942 18.3333 16.366 18.1577 16.6785 17.8452C16.9911 17.5326 17.1667 17.1087 17.1667 16.6667V6.66666L12.1667 1.66666Z"

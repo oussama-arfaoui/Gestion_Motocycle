@@ -11,7 +11,7 @@
             frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
     </div>
 
-    <form class="contact_form_style1-form" action="#">
+    <form class="contact_form_style1-form @if(session('status') == 'success') success @elseif(session('status') == 'error') error @endif" action="#">
         @csrf
 
         <div class="contact_form_style1-form-row">

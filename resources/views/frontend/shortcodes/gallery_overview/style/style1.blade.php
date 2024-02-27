@@ -15,7 +15,7 @@
 
     <div class="gallery_overview_style1-grid">
         <div class="gallery_overview_style1-grid-item grid-item-1" onclick="showPopup(1)">
-            <img src="./projects/project-1.jpg" alt="">
+            <img src="./projects/thumbnails/project-1.jpg" alt="">
 
             <div class="gallery_overview_style1-grid-item-banner">
                 <h3>{{$project_title_1}}</h3>
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="gallery_overview_style1-grid-item grid-item-2" onclick="showPopup(2)">
-            <img src="./projects/project-2.jpg" alt="">
+            <img src="./projects/thumbnails/project-2.jpg" alt="">
 
             <div class="gallery_overview_style1-grid-item-banner">
                 <h3>{{$project_title_2}}</h3>
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="gallery_overview_style1-grid-item grid-item-3" onclick="showPopup(3)">
-            <img src="./projects/project-3.jpg" alt="">
+            <img src="./projects/thumbnails/project-3.jpg" alt="">
 
             <div class="gallery_overview_style1-grid-item-banner">
                 <h3>{{$project_title_3}}</h3>
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="gallery_overview_style1-grid-item grid-item-4" onclick="showPopup(4)">
-            <img src="./projects/project-4.jpg" alt="">
+            <img src="./projects/thumbnails/project-4.jpg" alt="">
 
             <div class="gallery_overview_style1-grid-item-banner">
                 <h3>{{$project_title_4}}</h3>
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="gallery_overview_style1-grid-item grid-item-5" onclick="showPopup(5)">
-            <img src="./projects/project-5.jpg" alt="">
+            <img src="./projects/thumbnails/project-5.jpg" alt="">
 
             <div class="gallery_overview_style1-grid-item-banner">
                 <h3>{{$project_title_5}}</h3>
@@ -58,8 +58,13 @@
 </section>
 
 <div id="project_popup1" class="project_popup" onclick="closePopup(1)">
-    <div style="background-image: url(./projects/project-1.jpg)" class="project_popup-content">
+    <div style="background-image: url(./projects/thumbnails/project-1.jpg)" class="project_popup-content">
         <span class="project_popup-content-close" onclick="closePopup(1)">&times;</span>
+
+        <video autoplay loop muted>
+            <source src="./projects/videos/project-1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
 
         <h2 class="project_popup-content-title">{{$project_title_1}}</h2>
         <p class="project_popup-content-description">{{$project_description_1}}</p>
@@ -74,9 +79,15 @@
     </div>
 </div>
 <div id="project_popup2" class="project_popup" onclick="closePopup(2)">
-    <div style="background-image: url(./projects/project-2.jpg)" class="project_popup-content">
+    <div style="background-image: url(./projects/thumbnails/project-2.jpg)" class="project_popup-content">
         <span class="project_popup-content-close" onclick="closePopup(2)">&times;</span>
     
+
+        <video autoplay loop muted>
+            <source src="./projects/videos/project-2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
         <h2 class="project_popup-content-title">{{$project_title_2}}</h2>
         <p class="project_popup-content-description">{{$project_description_2}}</p>
     
@@ -90,9 +101,15 @@
     </div>
 </div>
 <div id="project_popup3" class="project_popup" onclick="closePopup(3)">
-    <div style="background-image: url(./projects/project-3.jpg)" class="project_popup-content">
+    <div style="background-image: url(./projects/thumbnails/project-3.jpg)" class="project_popup-content">
         <span class="project_popup-content-close" onclick="closePopup(3)">&times;</span>
     
+
+        <video autoplay loop muted>
+            <source src="./projects/videos/project-3.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
         <h2 class="project_popup-content-title">{{$project_title_3}}</h2>
         <p class="project_popup-content-description">{{$project_description_3}}</p>
     
@@ -106,9 +123,15 @@
     </div>
 </div>
 <div id="project_popup4" class="project_popup" onclick="closePopup(4)">
-    <div style="background-image: url(./projects/project-1.jpg)" class="project_popup-content">
+    <div style="background-image: url(./projects/thumbnails/project-4.jpg)" class="project_popup-content">
         <span class="project_popup-content-close" onclick="closePopup(4)">&times;</span>
     
+
+        <video autoplay loop muted>
+            <source src="./projects/videos/project-4.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
         <h2 class="project_popup-content-title">{{$project_title_4}}</h2>
         <p class="project_popup-content-description">{{$project_description_4}}</p>
     
@@ -122,8 +145,13 @@
     </div>
 </div>
 <div id="project_popup5" class="project_popup" onclick="closePopup(5)">
-    <div style="background-image: url(./projects/project-1.jpg)" class="project_popup-content">
+    <div style="background-image: url(./thumbnails/project-5.jpg)" class="project_popup-content">
         <span class="project_popup-content-close" onclick="closePopup(5)">&times;</span>
+
+        <video autoplay loop muted>
+            <source src="./projects/videos/project-5.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     
         <h2 class="project_popup-content-title">{{$project_title_5}}</h2>
         <p class="project_popup-content-description">{{$project_description_5}}</p>

@@ -32,7 +32,7 @@
         </div>
     </section>
 
-    <section style="background-image: url('/bgs/slide-2.jpg')" class="hero-slider">
+    <section style="background-image: url('/bgs/slide-3.jpg')" class="hero-slider">
         <div class="hero-slider-dark-overlay"></div>
         <div class="hero-slider-content">
             <h1>Faites des économies exceptionnelles</h1>
@@ -41,7 +41,7 @@
         </div>
     </section>
 
-    <section style="background-image: url('/bgs/slide-2.jpg')" class="hero-slider">
+    <section style="background-image: url('/bgs/slide-4.jpg')" class="hero-slider">
         <div class="hero-slider-dark-overlay"></div>
         <div class="hero-slider-content">
             <h1>Ce que vous voyez est ce que vous obtenez</h1>
@@ -50,7 +50,7 @@
         </div>
     </section>
 
-    <section style="background-image: url('/bgs/slide-2.jpg')" class="hero-slider">
+    <section style="background-image: url('/bgs/slide-5.jpg')" class="hero-slider">
         <div class="hero-slider-dark-overlay"></div>
         <div class="hero-slider-content">
             <h1>Dédié aux promoteurs immobiliers</h1>

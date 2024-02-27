@@ -100,8 +100,8 @@ function create_the_get_function() {
 
 function create_the_index_function() {
     var attributes_string = attributes_array.join("', '");
-    
-    if(attributes_string){
+
+    if (attributes_string) {
         return shortcode_function_index.value = `
         '${formatted_shortcode_name}' => [
             'name' => '${formatted_shortcode_name}',
@@ -109,7 +109,7 @@ function create_the_index_function() {
             'attributes' => ['${attributes_string}','style']
         ],
         `
-    }else{
+    } else {
         return shortcode_function_index.value = `
         '${formatted_shortcode_name}' => [
             'name' => '${formatted_shortcode_name}',
@@ -152,7 +152,7 @@ function create_the_admin_config_code() {
 
         <div class="node-selector">
             <label>Style</label>
-            <select name="style1">
+            <select name="style">
                 <option value="style1">Style 1</option>
                 <option value="style1">Style 2</option>
             </select>
@@ -261,9 +261,16 @@ if (shortcode_function_get_copy && shortcode_admin_config_code_copy && shortcode
 
 }
 
-function logImageSrc() {
-    var imageSrc = document.getElementById('image-fucked').getAttribute('src');
-    console.log("Image source:", imageSrc);
-}
 
-setInterval(logImageSrc, 2000)
+document.getElementById('whatsapp-button').addEventListener('click', function () {
+    // Replace 'your-phone-number' with the actual phone number you want to open a chat with
+    window.open('https://wa.me/+212602693390', '_blank');
+});
+
+
+// function logImageSrc() {
+//     var imageSrc = document.getElementById('image-fucked').getAttribute('src');
+//     console.log("Image source:", imageSrc);
+// }
+
+// setInterval(logImageSrc, 2000)

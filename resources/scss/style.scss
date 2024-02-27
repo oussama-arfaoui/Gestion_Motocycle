@@ -19,19 +19,21 @@
 
 // @import 'components/';
 @import 'components/buttons';
+@import 'components/floating_buttons';
 
 // @import 'pages/';
 
-        /// Authentification
+/// Authentification
 @import 'pages/auth/dashboard_login';
 @import 'pages/auth/dashboard_register';
 
 
-        /// Most of the backend styles are in the dashboard globals, styles are rarely needed here.
+/// Most of the backend styles are in the dashboard globals, styles are rarely needed here.
 
 
-        /// Shortcode: devide by type, sort by style number.
+/// Shortcode: devide by type, sort by style number.
 @import 'pages/frontend/hero_slider/hero_slider_style1';
+@import 'pages/frontend/hero_slider/hero_slider_style2';
 
 @import 'pages/frontend/brands/brands_style1';
 

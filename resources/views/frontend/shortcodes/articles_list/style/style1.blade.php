@@ -10,7 +10,7 @@
 
     <div class="articles_list_style1-item">
         <div class="articles_list_style1-item-image">
-            <img src="./projects/project-4.jpg" alt="project-image">
+            <img src="./blogs/blog-1.jpg" alt="project-image">
         </div>
 
         <div class="articles_list_style1-item-text">
@@ -23,7 +23,7 @@
     
     <div class="articles_list_style1-item">
         <div class="articles_list_style1-item-image">
-            <img src="./projects/project-4.jpg" alt="project-image">
+            <img src="./blogs/blog-1.jpg" alt="project-image">
         </div>
 
         <div class="articles_list_style1-item-text">
@@ -36,7 +36,7 @@
 
     <div class="articles_list_style1-item">
         <div class="articles_list_style1-item-image">
-            <img src="./projects/project-4.jpg" alt="project-image">
+            <img src="./blogs/blog-1.jpg" alt="project-image">
         </div>
 
         <div class="articles_list_style1-item-text">
@@ -49,7 +49,7 @@
 
     <div class="articles_list_style1-item">
         <div class="articles_list_style1-item-image">
-            <img src="./projects/project-4.jpg" alt="project-image">
+            <img src="./blogs/blog-1.jpg" alt="project-image">
         </div>
 
         <div class="articles_list_style1-item-text">

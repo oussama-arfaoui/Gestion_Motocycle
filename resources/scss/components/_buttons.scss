@@ -255,8 +255,6 @@
 
     margin-right: 1rem;
 
-    animation: fly-1 1s ease-in-out infinite alternate;
-
     a {
         font-family: 'Urbanist', sans-serif;
 
@@ -411,7 +409,7 @@
 @media (max-width: 768px){
     .sell-btn{
         position: fixed;
-        bottom: 5rem;
+        bottom: 7rem;
         right: 1rem;
         z-index: 1000;
     }

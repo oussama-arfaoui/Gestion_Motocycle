@@ -74,6 +74,7 @@
 
         textarea {
             height: 200px;
+            font-family: 'Urbanist', sans-serif;
         }
 
         &-submit {
@@ -91,21 +92,29 @@
     }
 }
 
+.contact_form_style1-form .success {
+    border-color: $Green300;
+}
+
+.contact_form_style1-form .error {
+    border-color: $Red300;
+}
+
 @media screen and (max-width: 1024px) {
     .contact_form_style1 {
         flex-direction: column;
 
         &-text {
-            width: 80%;
+            width: 100%;
 
             &-title {
-                width: 80%;
+                width: 100%;
                 font-size: 32px;
                 margin-bottom: 2rem;
             }
 
             &-description {
-                width: 80%;
+                width: 100%;
                 line-height: 1.5;
                 margin-bottom: 2rem;
             }

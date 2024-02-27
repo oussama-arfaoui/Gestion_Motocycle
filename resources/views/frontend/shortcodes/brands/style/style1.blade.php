@@ -1,13 +1,16 @@
 <div class="logos">
     <div class="logos-slide">
-        <img src="./logos/3m.svg" />
-        <img src="./logos/barstool-store.svg" />
-        <img src="./logos/budweiser.svg" />
-        <img src="./logos/buzzfeed.svg" />
-        <img src="./logos/forbes.svg" />
-        <img src="./logos/macys.svg" />
-        <img src="./logos/menshealth.svg" />
-        <img src="./logos/mrbeast.svg" />
+        <img src="./brands/brand-1.png" />
+        <img src="./brands/brand-2.png" />
+        <img src="./brands/brand-3.png" />
+        <img src="./brands/brand-4.png" />
+        <img src="./brands/brand-5.png" />
+        <img src="./brands/brand-6.png" />
+        <img src="./brands/brand-7.png" />
+        <img src="./brands/brand-8.png" />
+        <img src="./brands/brand-9.png" />
+        <img src="./brands/brand-10.png" />
+        <img src="./brands/brand-11.png" />
     </div>
 </div>
 <script>
