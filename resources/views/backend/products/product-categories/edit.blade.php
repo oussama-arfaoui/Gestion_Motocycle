@@ -26,7 +26,11 @@
                         value="{{ $category->category_name }}">
                 </div>
             
-            
+                <div class="node-input">
+                    <label for="description" class="form-label">Description</label>
+                    <input type="text" name="description" id="description" class="form-control" value="{{ $category->description }}">
+                </div>
+
                 <div class="node-input">
                     <label for="image" class="form-label">Image</label>
                     <input type="file" name="image" id="image">

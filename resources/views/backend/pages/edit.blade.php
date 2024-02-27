@@ -185,10 +185,13 @@
         }
     });
     
-    // Get selected value from dropdown and add it to the shortcode
-    var select = document.querySelector('#shortcodeConfigContainer select');
-    var selectedValue = select.options[select.selectedIndex].value;
-    shortcode += 'style="' + selectedValue + '" ';
+    // Get selected values from multi-select dropdowns and add them to the shortcode with their respective attribute names
+    var selects = document.querySelectorAll('#shortcodeConfigContainer select');
+    selects.forEach(function(select) {
+        var selectedOptions = [...select.selectedOptions].map(option => option.value);
+        var attributeName = select.getAttribute('name');
+        shortcode += attributeName + '="' + selectedOptions.join(',') + '" ';
+    });
     
     shortcode += ']';
     

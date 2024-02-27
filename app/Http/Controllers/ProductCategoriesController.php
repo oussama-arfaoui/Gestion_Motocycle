@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProductCategories;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Product;
 
 class ProductCategoriesController extends Controller
 {
@@ -18,7 +19,11 @@ class ProductCategoriesController extends Controller
         $categories = ProductCategories::all();
         return view('backend.products.product-categories.index', compact('categories'));
     }
-
+    public function show(ProductCategories $categories)
+    {
+        $categories = $categories->load('products');
+        return view('frontend.pages.ProductCategories_details', compact('categories'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -35,11 +40,13 @@ class ProductCategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'category_name' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust file types and size as needed
+            'description' => 'required|string|max:255',
         ]);
     
         if ($validator->fails()) {
@@ -51,7 +58,7 @@ class ProductCategoriesController extends Controller
             // Store the uploaded file in the specified directory
             $imageName = $request->file('image')->getClientOriginalName();
             $request->file('image')->storeAs('images/general', $imageName, 'public');
-
+    
         } else {
             // Default image name if no image is uploaded
             $imageName = 'default.jpg'; // Adjust as needed
@@ -60,10 +67,12 @@ class ProductCategoriesController extends Controller
         ProductCategories::create([
             'category_name' => $request->category_name,
             'image' => $imageName,
+            'description' => $request->description, // Include description field
         ]);
     
         return redirect()->route('product-categories.index')->with('success', 'Category created successfully.');
     }
+    
     public function edit($id)
     {
         $category = ProductCategories::findOrFail($id);
@@ -75,6 +84,7 @@ class ProductCategoriesController extends Controller
         $validator = Validator::make($request->all(), [
             'category_name' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust file types and size as needed
+            'description' => 'required|string|max:255',
         ]);
     
         if ($validator->fails()) {
@@ -93,10 +103,13 @@ class ProductCategoriesController extends Controller
         }
     
         $category->category_name = $request->category_name;
+        // Update the category description
+        $category->description = $request->description;
         $category->save();
     
         return redirect()->route('product-categories.index')->with('success', 'Category updated successfully.');
     }
+    
     /**
      * Remove the specified resource from storage.
      *

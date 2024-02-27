@@ -24,7 +24,10 @@ class ProductsController extends Controller
             ->with('products', $products)
             ->with('user', $user);
     }
-
+    public function show(Product $product)
+    {
+        return view('frontend.pages.product_details', compact('product'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -40,18 +43,21 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        // Retrieve all input data
-        $data = $request->all();
-    
         // Validate input data
-        $validator = Validator::make($data, [
-            "product_name" => ['required', 'string', 'max:255'],
-            "product_description" => ['required', 'string', 'max:255'],
-            "status" => ['required', 'string', 'max:255'],
-            "template" => ['required', 'string', 'max:255'],
-            "seo_title" => ['required', 'string', 'max:255'],
-            "images.*" => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Adjust validation as needed
-            "categories" => ['required', 'array'], // Categories must be an array
+        $validator = Validator::make($request->all(), [
+            'product_name' => 'required|string|max:255',
+            'product_description' => 'required|string|max:255',
+            'status' => 'required|string|max:255',
+            'template' => 'required|string|max:255',
+            'seo_title' => 'required|string|max:255',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'categories' => 'required|array',
+            'points' => 'nullable|string',
+            'characteristics' => 'nullable|string',
+            'attributes.name' => 'nullable|array',
+            'attributes.value' => 'nullable|array',
+            'attributes.name.*' => 'nullable|string',
+            'attributes.value.*' => 'nullable|string',
         ]);
     
         // If validation fails, redirect back with errors and old input
@@ -63,29 +69,33 @@ class ProductsController extends Controller
         $imageNames = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $imageName = $image->store('Images/general', 'public'); // Use 'public' disk
+                $imageName = $image->store('Images/general', 'public');
                 $imageNames[] = basename($imageName);
             }
         } else {
-            $imageNames[] = 'default.jpg'; // Default image name if no image is uploaded
+            $imageNames[] = 'default.jpg';
         }
     
-        // Create a new product instance
-        $product = new Product();
-        $product->product_name = $data["product_name"];
-        $product->product_description = $data["product_description"];
-        $product->status = $data["status"];
-        $product->template = $data["template"];
-        $product->seo_title = $data["seo_title"];
-        $product->category_id = $data["categories"][0]; // Assuming only one category is selected
-        $product->images = json_encode($imageNames); // Save the image filenames to the database
-    
-        // Save the product
-        $product->save();
+            // Create a new product instance
+            $product = new Product();
+            $product->product_name = $request->input('product_name');
+            $product->product_description = $request->input('product_description');
+            $product->status = $request->input('status');
+            $product->template = $request->input('template');
+            $product->seo_title = $request->input('seo_title');
+            $product->category_id = $request->input('categories')[0]; // Assuming only one category is selected
+            $product->images = json_encode($imageNames);
+            $product->points = json_encode(explode(PHP_EOL, $request->input('points')));
+            $product->characteristics = $request->input('characteristics');
+            $product->attributes = json_encode(array_combine($request->input('attributes.name'), $request->input('attributes.value')));
+
+            // Save the product
+            $product->save();
     
         // Redirect the user to the products index page
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
+    
     
     /**
      * Show the form for editing the specified resource.

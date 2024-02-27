@@ -56,7 +56,24 @@
                 <input type="file" name="images[]" id="images" class="form-control" multiple>
             </div>
 
-
+            <div class="node-input">
+                <label for="points" class="form-label">List of Points</label>
+                <textarea name="points" id="points" class="form-control" rows="4"></textarea>
+            </div>
+                       
+            <div class="node-input">
+                <label for="characteristics" class="form-label">Characteristics</label>
+                <textarea name="characteristics" id="characteristics" class="form-control"></textarea>
+            </div>
+            
+            <div class="node-input" id="attributeFields">
+                <label for="attributes" class="form-label">Attributes</label>
+                <div class="attribute">
+                    <input type="text" name="attributes[name][]" placeholder="Attribute Name" class="form-control">
+                    <input type="text" name="attributes[value][]" placeholder="Attribute Value" class="form-control">
+                </div>
+            </div>
+            <button type="button" id="addAttribute" class="btn btn-primary mt-3">Add Attribute</button>
 
             <div class="node-selector">
                 <label for="categories" class="form-label">Categories</label>
@@ -66,8 +83,6 @@
                     @endforeach
                 </select>
             </div>
-
-
 
             <button class="dashboard-main-button" type="submit">
                 <x-save-icon />
@@ -79,4 +94,25 @@
         </form>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById('addAttribute').addEventListener('click', function() {
+            var attributeField = document.createElement('div');
+            attributeField.classList.add('attribute');
+            attributeField.innerHTML = `
+                <input type="text" name="attributes[name][]" placeholder="Attribute Name" class="form-control">
+                <input type="text" name="attributes[value][]" placeholder="Attribute Value" class="form-control">
+                <button type="button" class="btn btn-danger removeAttribute">Remove</button>
+            `;
+            document.getElementById('attributeFields').appendChild(attributeField);
+        });
+
+        document.getElementById('attributeFields').addEventListener('click', function(e) {
+            if (e.target.classList.contains('removeAttribute')) {
+                e.target.parentElement.remove();
+            }
+        });
+    });
+</script>
 @endsection

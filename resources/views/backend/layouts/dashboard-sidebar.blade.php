@@ -159,7 +159,7 @@
         </button>
 
         <div class="dashboard_sidebar__links-innerlink hide" id="dropdown-menu-nav-ecommerce">
-            <a href="/admin/ecommerce/brands">
+            <a href="{{ route('brands.index') }}">
                 <span>Brands & Sponsors</span>
             </a>
             <a href="/admin/ecommerce/discounts">

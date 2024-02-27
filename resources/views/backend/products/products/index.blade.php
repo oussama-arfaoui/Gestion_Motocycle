@@ -61,6 +61,12 @@
                 <td>{{ $product->category->category_name }}</td>
                 </td>
                 <td class="dashboard_main-table-actions">
+                        <!-- Add button for viewing product details -->
+                    <a href="{{ route('products.show', $product->id) }}" target="_blank">
+                        <button class="dashboard-icon-button action-view">
+                            <x-eye-icon />
+                        </button>
+                    </a>
                     <a href="{{ route('product.edit', $product->id) }}">
                         <button class="dashboard-icon-button action-edit">
                             <x-edit-icon />

@@ -33,6 +33,11 @@
                 <td>{{ $category->category_name }}</td>
                 <td>{{ $category->image }}</td>
                 <td class="dashboard_main-table-actions">
+                    <a href="{{ route('product-categories.show', $category->id) }}" target="_blank">
+                        <button class="dashboard-icon-button action-view">
+                            <x-eye-icon />
+                        </button>
+                    </a>
                     <a href="{{ route('product-categories.edit', $category->id) }}">
                         <button class="dashboard-icon-button action-edit">
                             <x-edit-icon />
