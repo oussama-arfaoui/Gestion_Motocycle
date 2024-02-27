@@ -25,7 +25,11 @@
             </div>
 
             <h2>{{ $product->product_name }}</h2>
-            <p>{{ $product->category->category_name }}</p>
+            <p>
+                <a href="{{ route('product-categories.show', $product->category->id) }}">
+                    {{ $product->category->category_name }}
+                </a>
+            </p>            
         </section>
 
         <section class="product_details_style1-hero">
@@ -88,13 +92,14 @@
                         <td>Caractéristique</td>
                         <td>Données</td>
                     </thead>
-
+                    @if(!is_null($product->attributes))
                     @foreach(json_decode($product->attributes, true) as $name => $value)
                     <tr>
                         <td>{{ $name }}</td>
                         <td>{{ $value }}</td>
                     </tr>
                 @endforeach
+                @endif
                 </table>
             </div>
         </section>

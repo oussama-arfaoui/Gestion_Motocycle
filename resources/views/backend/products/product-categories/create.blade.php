@@ -20,7 +20,10 @@
                     <label for="category_name" class="form-label">Category Name</label>
                     <input type="text" name="category_name" id="category_name" class="form-control">
                 </div>
-            
+                <div class="node-input">
+                    <label for="description" class="form-label">Description</label>
+                    <input type="text" name="description" id="description" class="form-control">
+                </div>
             
                 <div class="node-input">
                     <label for="image" class="form-label">Image</label>

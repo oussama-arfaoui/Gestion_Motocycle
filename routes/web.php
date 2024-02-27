@@ -159,9 +159,12 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
         * products ROUTES
     ************************/
 
-
-    
     Route::get('/products/{product}', [ProductsController::class, 'show'])->name('products.show');
+        /************************
+        * ProductCategories ROUTES
+    ************************/
+
+    Route::get('/product-categories/{categories}', [ProductCategoriesController::class, 'show'])->name('product-categories.show');
 
         /************************
             * ShortCode ROUTES

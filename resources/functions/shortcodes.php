@@ -78,7 +78,12 @@ function getShortcodeTypes() {
         'view' => 'frontend.shortcodes.products_list.admin-config',
     ],
     
-
+    // select catalogue /products
+    
+    'products_categories_list' => [
+        'name' => 'products_categories_list',
+        'view' => 'frontend.shortcodes.products_categories_list.admin-config',
+    ],
 
 
     ];
@@ -182,7 +187,13 @@ function getShortcodeindex() {
         'attributes' => ['title','style']
     ],
     
+        // select Catalogue / Products
     
+        'products_categories_list' => [
+            'name' => 'products_categories_list',
+            'view' => 'frontend.shortcodes.products_categories_list.index',
+            'attributes' => ['categories','style']
+        ],
     
     ];
 };

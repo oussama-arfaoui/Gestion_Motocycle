@@ -19,7 +19,7 @@
 
     <div class="node-selector">
         <label>Style</label>
-        <select name="style2">
+        <select name="style">
             <option value="style1">Style 1</option>
             <option value="style2">Style 2</option>
         </select>

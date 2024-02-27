@@ -152,7 +152,7 @@ function create_the_admin_config_code() {
 
         <div class="node-selector">
             <label>Style</label>
-            <select name="style1">
+            <select name="style">
                 <option value="style1">Style 1</option>
                 <option value="style1">Style 2</option>
             </select>
