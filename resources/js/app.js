@@ -262,12 +262,6 @@ if (shortcode_function_get_copy && shortcode_admin_config_code_copy && shortcode
 }
 
 
-document.getElementById('whatsapp-button').addEventListener('click', function () {
-    // Replace 'your-phone-number' with the actual phone number you want to open a chat with
-    window.open('https://wa.me/+212602693390', '_blank');
-});
-
-
 // function logImageSrc() {
 //     var imageSrc = document.getElementById('image-fucked').getAttribute('src');
 //     console.log("Image source:", imageSrc);

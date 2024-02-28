@@ -37,7 +37,13 @@
     </div>
 
     <div class="hero_slider_style2-indicator">
-        <x-copy-icon /> {{-- Change Later --}}
+        <svg class="with-icon_icon__MHUeb" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision"
+            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
+            width="24" style="color:var(--geist-foreground);width:24px;height:24px">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M8 12l4 4 4-4" />
+            <path d="M12 8v8" />
+        </svg> 
         <p>Plus en Bas !!</p>
     </div>
 </section>
