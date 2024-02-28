@@ -20,16 +20,13 @@
     </div>
 
     <div class="dashboard-main-container-modules">
-        <div class="row">
+        <div class="dashboard-images-gallery">
             @foreach ($fileNames as $fileName)
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="image-container">
+            
                     <a href="{{ asset('storage/Images/general/' . $fileName) }}" data-lightbox="image-gallery">
-                    
-                <img src="{{ asset('storage/Images/general/' . $fileName) }}" alt="{{ $fileName }}">
+                        <img src="{{ asset('storage/Images/general/' . $fileName) }}" alt="{{ $fileName }}">
                     </a>
-                </div>
-            </div>
+            
             @endforeach
         </div>
     </div>
