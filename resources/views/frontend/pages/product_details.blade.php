@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>TITLE - A Carbon Developed Website</title>
+    <title>{{ $page_title }}</title>
 
     @vite(['resources/css/app.css', 'resources/scss/style.scss', 'resources/js/app.js'])
 </head>

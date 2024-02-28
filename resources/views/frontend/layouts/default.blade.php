@@ -8,7 +8,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
     <link rel="icon" type="image/png" href="/favicon/favicon.png">
 
-    <title>New Doors - Number 1 Supplier Moroccan Supplier of Quality PVC Doors</title>
+    <title>{{ $page_title }}</title>
 
     @vite(['resources/css/app.css', 'resources/scss/style.scss', 'resources/js/app.js'])
 </head>

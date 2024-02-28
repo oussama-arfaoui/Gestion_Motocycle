@@ -1,0 +1,97 @@
+.category_overview_style2 {
+
+    padding-block: 2rem;
+
+    h2 {
+        font-size: 32px;
+        margin-bottom: 2rem;
+        width: 50%;
+    }
+
+    p {
+        width: 48ch;
+        line-height: 1.5;
+        margin-bottom: 4rem;
+    }
+
+    &-categories {
+        display: flex;
+        flex-direction: row;
+
+        justify-content: space-evenly;
+        gap: 1rem;
+
+        width: 100%;
+
+        &-category {
+            width: 100%;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            &:nth-child(1),
+            &:nth-child(3) {
+                margin-top: 7rem;
+            }
+
+            &-image {
+                width: 350px;
+                height: 350px;
+
+                border-radius: 50%;
+                margin-bottom: 1rem;
+
+                border: 1px solid var(--primary-color);
+
+                overflow: hidden;
+                
+                
+                img {
+                    width: 100%;
+                }
+            }
+            
+            &-text {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                
+                position: relative;
+                
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: -80%;
+                    left: 70%;
+                    transform: translate(-50%, -50%);
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    background-color: var(--accent-color);
+                    z-index: -1;
+                    opacity: 0;
+                    animation: pulse 1s infinite alternate;
+                }
+                svg {
+
+                    width: 48px;
+                    height: 48px;
+                    color: var(--accent-color);
+                    stroke: var(--accent-color);
+                    fill: var(--accent-color);
+                    transform: translate(5.5rem, -7rem);
+
+                }
+
+                h3 {
+                    background-color: var(--accent-color);
+                    color: var(--light);
+                    padding: 0.5rem 1rem;
+                }
+            }
+        }
+    }
+}
