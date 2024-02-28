@@ -11,10 +11,10 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
-    {{-- @vite(['resources/css/app.css', 'resources/scss/style.scss', 'resources/js/app.js']) --}}
+    @vite(['resources/css/app.css', 'resources/scss/style.scss', 'resources/js/app.js'])
 
 
-    <link rel="stylesheet" href="{{asset('/build/assets/style.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('/build/assets/style.css')}}"> --}}
 </head>
 
 
