@@ -54,9 +54,11 @@ Route::get('/shortcode_generator', function () {
 /************************
  * PUBLIC ROUTES
  ************************/
-Route::get('/', function () {
-    return view('auth.login');
-});
+//Route::get('/', function () {
+//    return view('auth.login');
+//});
+Route::redirect('/', '/accueil');
+
 Route::get('/home', function () {
     return view('welcome');
 });
