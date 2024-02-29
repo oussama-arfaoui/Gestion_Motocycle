@@ -85,6 +85,12 @@ function getShortcodeTypes() {
         'view' => 'frontend.shortcodes.products_categories_list.admin-config',
     ],
 
+    // testimonials
+
+    'testimonials' => [
+        'name' => 'testimonials',
+        'view' => 'frontend.shortcodes.testimonials.admin-config',
+    ],
 
     ];
 }
@@ -194,6 +200,14 @@ function getShortcodeindex() {
             'view' => 'frontend.shortcodes.products_categories_list.index',
             'attributes' => ['categories','style']
         ],
-    
+
+    // testimonials
+
+        'testimonials' => [
+            'name' => 'testimonials',
+            'view' => 'frontend.shortcodes.testimonials.index',
+            'attributes' => ['title', 'description', 'testimonials','style']
+        ],
+        
     ];
 };

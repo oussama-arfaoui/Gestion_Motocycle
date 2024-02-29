@@ -49,9 +49,6 @@ Route::post('/forgot-password', [ForgotPasswordLinkController::class, 'store']);
 Route::post('/forgot-password/{token}', [ForgotPasswordController::class, 'reset']);
 
 
-Route::get('/shortcode_generator', function () {
-    return view('backend.generator.shortcode_generator');
-});
 
 /************************
  * PUBLIC ROUTES
@@ -152,6 +149,19 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
      Route::get('/admin/testimonials/{id}/edit', [TestimonialController::class, 'edit'])->name('testimonials.edit');
      Route::put('/admin/testimonials/{id}', [TestimonialController::class, 'update'])->name('testimonials.update');
      Route::delete('/admin/testimonials/{id}', [TestimonialController::class, 'destroy'])->name('testimonials.destroy');
+
+
+
+ /************************
+     * shortcode_generator ROUTES
+     ************************/
+
+
+     Route::get('/admin/shortcode_generator', function () {
+        return view('backend.generator.shortcode_generator');
+    })->name('shortcode_generator');
+    
+
 });
 
 
