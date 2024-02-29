@@ -272,7 +272,7 @@
         </button>
 
         <div class="dashboard_sidebar__links-innerlink hide" id="dropdown-menu-nav-generator">
-            <a href="/shortcode_generator">
+            <a href="{{ route('shortcode_generator') }}">
                 <span>Shortcode Generator</span>
             </a>
         </div>
