@@ -1,4 +1,24 @@
 <header class="header">
+    <div class="global_container header__info">
+        <div class="header__info-node">
+            <p>Numero Telephone: </p>
+            <h3>{{$contact_number}} </h3>
+        </div>
+    
+        <div class="header__info-node">
+            <p>Numero Whatsapp: </p>
+            <h3>{{$contact_whatsapp}} </h3>
+        </div>
+    
+        <div class="header__info-node">
+            <p>Contact Email: </p>
+            <h3>{{$contact_email}} </h3>
+        </div>
+    
+    
+    </div>
+
+
     <div class="global_container header__content">
         <div class="header__logo">
             <img src={{@asset('/logos/primary-logo.svg')}} alt="logo-img">
@@ -11,11 +31,15 @@
             </li>
 
             <li>
-                <a href="/catalogue">Catalogue</a>
+                <a href="/catalogue">Moto</a>
             </li>
 
             <li>
-                <a href="/actualites">Actualités</a>
+                <a href="/catalogue">Gadgets & Jouets</a>
+            </li>
+
+            <li>
+                <a href="/catalogue">Accessoires</a>
             </li>
 
             <li>

@@ -20,11 +20,20 @@ class MyGlobalVariablesProvider extends ServiceProvider
     public function boot(): void
     {
         $dataToShare = [
-        'company_name' => 'Mobinardo',
-        'page_title' => 'Mobinardo - Votre Boutique de Mobilité',
-        'contact_number' => '+212652800991',
-        'contact_whatsapp' => '0652800991',
-        'contact_email' => 'contact@newdoors.ma',
+        'company_name' => 'Mobi Nardo',
+        'company_description' => 'Mobi Nardo propose une large gamme de vélos, gadgets et accessoires de mobilité pour toute la famille. Qualité, choix et service client exceptionnel sont au rendez-vous pour des déplacements en toute sécurité et style.',
+        
+        'page_title' => 'Mobi Nardo - Votre Boutique de Mobilité',
+        
+        'contact_number' => '+212 664351312',
+        'contact_whatsapp' => '+212 664351312',
+        'contact_email' => 'contact@mobinardo.ma',
+        'physical_address' => 'Lotissement mysane bouskoura 816/1 zone industrielle oulad saleh', 
+        
+        'social_facebook_link' => '#',
+        'social_instagram_link' => '#',
+        'social_tiktok_link' => '#',
+        'social_linkedin_link' => '#',
     ];
 
     view()->share($dataToShare);

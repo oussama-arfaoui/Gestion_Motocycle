@@ -17,7 +17,7 @@
         </div>
 
         <div class="about_overview_style1-content-image">
-            <img src="./bgs/about_overview_newdoors.png" alt="It seems as if it's passed me by">
+            <img src="./bgs/background-1.jpg" alt="It seems as if it's passed me by">
         </div>
 
     </div>
@@ -29,7 +29,7 @@
         <div class="about_overview_style1-nodes-node">
 
             <div class="about_overview_style1-nodes-node-icon">
-                <img src="./icons/quality-icon.png" alt="">
+                <img src="./icons/icon-quality.png" alt="">
             </div>
 
             <h3>{{$node_title_1}}</h3>
@@ -38,7 +38,7 @@
 
         <div class="about_overview_style1-nodes-node">
             <div class="about_overview_style1-nodes-node-icon">
-                <img src="./icons/selection.png" alt="">
+                <img src="./icons/icon-innovation.png" alt="">
             </div>
 
             <h3>{{$node_title_2}}</h3>
@@ -48,7 +48,7 @@
         <div class="about_overview_style1-nodes-node">
 
             <div class="about_overview_style1-nodes-node-icon">
-                <img src="./icons/service-icon.png" alt="">
+                <img src="./icons/icon-service.png" alt="">
             </div>
 
             <h3>{{$node_title_3}}</h3>
@@ -58,7 +58,7 @@
         <div class="about_overview_style1-nodes-node">
 
             <div class="about_overview_style1-nodes-node-icon">
-                <img src="./icons/efficiency-icon.png" alt="">
+                <img src="./icons/icon-efficiency.png" alt="">
             </div>
 
             <h3>{{$node_title_4}}</h3>

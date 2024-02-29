@@ -15,7 +15,7 @@
             </svg></button>
 
 
-        <section style="background-image: url('/bgs/slide-1.jpg')" class="hero-slider active">
+        <section style="background-image: url('/bgs/background-3.jpg')" class="hero-slider active">
             <div class="hero-slider-dark-overlay"></div>
             <div class="hero-slider-content">
                 <h1>{{$title}}</h1>
@@ -25,7 +25,7 @@
         </section>
 
 
-        <section style="background-image: url('/bgs/slide-2.jpg')" class="hero-slider">
+        <section style="background-image: url('/bgs/background-6.jpg')" class="hero-slider">
             <div class="hero-slider-dark-overlay"></div>
             <div class="hero-slider-content">
                 <h1>Qualité et diversité à prix abordable</h1>
@@ -36,7 +36,7 @@
         <!-- Add more slides as needed -->
     </div>
 
-    <div class="hero_slider_style2-indicator">
+    <a class="hero_slider_style2-indicator">
         <svg class="with-icon_icon__MHUeb" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision"
             stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
             width="24" style="color:var(--geist-foreground);width:24px;height:24px">
@@ -44,8 +44,8 @@
             <path d="M8 12l4 4 4-4" />
             <path d="M12 8v8" />
         </svg> 
-        <p>Plus en Bas !!</p>
-    </div>
+        <p>Voir Plus en Bas !!</p>
+    </a>
 </section>
 
 <script>

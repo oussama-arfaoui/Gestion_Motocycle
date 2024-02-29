@@ -478,7 +478,7 @@
 
     border-radius: 8px;
     padding: 1rem;
-    width: 50%;
+    width: 100%;
 
     margin-bottom: 3rem;
     padding-inline: 2rem;
@@ -496,5 +496,30 @@
             font-family: 'Inter', sans-serif;
             width: 100%;
         }
+    }
+}
+
+.dashboard-images-gallery{
+
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 100%;
+
+    gap: 0.5rem;
+
+    a{
+        overflow: hidden;
+        width: 24%;
+        height: 400px;
+
+        display: grid;
+        place-items: center;
+
+        border: 1px solid $Gray300;
+    }
+
+    img{
+        width: 60%;
     }
 }

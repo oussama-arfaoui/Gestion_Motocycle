@@ -12,10 +12,12 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\BrandsController;
+use App\Http\Controllers\TestimonialController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProductCategoriesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +60,6 @@ Route::get('/shortcode_generator', function () {
 //    return view('auth.login');
 //});
 Route::redirect('/', '/accueil');
-
 Route::get('/home', function () {
     return view('welcome');
 });
@@ -79,22 +80,22 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
     /************************
         * PRODUCTS ROUTES
     ************************/
-    Route::get('/products', [ProductsController::class, 'index'])->name('products.index');
-    Route::get('/product', [ProductsController::class, 'create'])->name('products.create');
-    Route::post('/product', [ProductsController::class, 'store'])->name('products.store');
-    Route::get('/product/{id}/edit', [ProductsController::class, 'edit'])->name('product.edit');
-    Route::post('/product/edit', [ProductsController::class, 'update'])->name('product.update');
-    Route::delete('/product/{id}', [ProductsController::class, 'destroy'])->name('products.destroy');
+    Route::get('/admin/products', [ProductsController::class, 'index'])->name('products.index');
+    Route::get('/admin/product', [ProductsController::class, 'create'])->name('products.create');
+    Route::post('/admin/product', [ProductsController::class, 'store'])->name('products.store');
+    Route::get('/admin/product/{id}/edit', [ProductsController::class, 'edit'])->name('product.edit');
+    Route::post('/admin/product/edit', [ProductsController::class, 'update'])->name('product.update');
+    Route::delete('/admin/product/{id}', [ProductsController::class, 'destroy'])->name('products.destroy');
 
     /************************
      * PRODUCT CATEGORIES ROUTES
      ************************/
-    Route::get('/product-categories', [ProductCategoriesController::class, 'index'])->name('product-categories.index');
-    Route::get('/product-categories/create', [ProductCategoriesController::class, 'create'])->name('product-categories.create');
-    Route::post('/product-categories/store', [ProductCategoriesController::class, 'store'])->name('product-categories.store');
-    Route::get('/product-categories/{id}/edit', [ProductCategoriesController::class, 'edit'])->name('product-categories.edit');
-    Route::put('/product-categories/{id}', [ProductCategoriesController::class, 'update'])->name('product-categories.update');
-    Route::delete('/product-categories/{id}', [ProductCategoriesController::class, 'destroy'])->name('product-categories.destroy');
+    Route::get('/admin/product-categories', [ProductCategoriesController::class, 'index'])->name('product-categories.index');
+    Route::get('/admin/product-categories/create', [ProductCategoriesController::class, 'create'])->name('product-categories.create');
+    Route::post('/admin/product-categories/store', [ProductCategoriesController::class, 'store'])->name('product-categories.store');
+    Route::get('/admin/product-categories/{id}/edit', [ProductCategoriesController::class, 'edit'])->name('product-categories.edit');
+    Route::put('/admin/product-categories/{id}', [ProductCategoriesController::class, 'update'])->name('product-categories.update');
+    Route::delete('/admin/product-categories/{id}', [ProductCategoriesController::class, 'destroy'])->name('product-categories.destroy');
 
 
 
@@ -102,46 +103,55 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
     /************************
         * SERVICES ROUTES
     ************************/
-    Route::get('/services', [ServicesController::class, 'index']);
-    Route::get('/service', [ServicesController::class, 'create']);
-    Route::post('/service', [ServicesController::class, 'store']);
-    Route::get('/service/{id}/edit', [ServicesController::class, 'edit'])->name('service.edit');
-    Route::post('/service/edit', [ServicesController::class, 'update']);
-    Route::post('/service/{id}/delete', [ServicesController::class, 'destroy'])->name('service.delete');
+    Route::get('/admin/services', [ServicesController::class, 'index']);
+    Route::get('/admin/service', [ServicesController::class, 'create']);
+    Route::post('/admin/service', [ServicesController::class, 'store']);
+    Route::get('/admin/service/{id}/edit', [ServicesController::class, 'edit'])->name('service.edit');
+    Route::post('/admin/service/edit', [ServicesController::class, 'update']);
+    Route::post('/admin/service/{id}/delete', [ServicesController::class, 'destroy'])->name('service.delete');
 
         /************************
         * Pages ROUTES
         ************************/
 
     Route::resource('pages', PageController::class);
-    Route::get('/pages', [PageController::class, 'index'])->name('pages.index');
-    Route::get('/pages/create', [PageController::class, 'create'])->name('pages.create');
-    Route::post('/pages', [PageController::class, 'store'])->name('pages.store');
-    Route::get('/pages/{page}/edit', [PageController::class, 'edit'])->name('pages.edit');
-    Route::put('/pages/{page}', [PageController::class, 'update'])->name('pages.update');
-    Route::delete('/pages/{page}', [PageController::class, 'destroy'])->name('pages.destroy');
+    Route::get('/admin/pages', [PageController::class, 'index'])->name('pages.index');
+    Route::get('/admin/pages/create', [PageController::class, 'create'])->name('pages.create');
+    Route::post('/admin/pages', [PageController::class, 'store'])->name('pages.store');
+    Route::get('/admin/pages/{page}/edit', [PageController::class, 'edit'])->name('pages.edit');
+    Route::put('/admin/admin/pages/{page}', [PageController::class, 'update'])->name('pages.update');
+    Route::delete('/admin/pages/{page}', [PageController::class, 'destroy'])->name('pages.destroy');
 
         /************************
         * media ROUTES
         ************************/
 
 
-    Route::get('/media', [ImageController::class, 'index'])->name('media.index');
-    Route::get('/media/upload', [ImageController::class, 'showUploadForm'])->name('media.uploadForm');
-    Route::post('/media/upload', [ImageController::class, 'upload'])->name('media.upload');
+    Route::get('/admin/media', [ImageController::class, 'index'])->name('media.index');
+    Route::get('/admin/media/upload', [ImageController::class, 'showUploadForm'])->name('media.uploadForm');
+    Route::post('/admin/media/upload', [ImageController::class, 'upload'])->name('media.upload');
 
  /************************
      * brands ROUTES
      ************************/
 
-     Route::get('/brands', [BrandsController::class, 'index'])->name('brands.index');
-     Route::get('/brands/create', [BrandsController::class, 'create'])->name('brands.create');
-     Route::post('/brands/store', [BrandsController::class, 'store'])->name('brands.store');
-     Route::get('/brands/{id}/edit', [BrandsController::class, 'edit'])->name('brands.edit');
-     Route::put('/brands/{id}', [BrandsController::class, 'update'])->name('brands.update');
-     Route::delete('/brands/{id}', [BrandsController::class, 'destroy'])->name('brands.destroy');
+     Route::get('/admin/brands', [BrandsController::class, 'index'])->name('brands.index');
+     Route::get('/admin/brands/create', [BrandsController::class, 'create'])->name('brands.create');
+     Route::post('/admin/brands/store', [BrandsController::class, 'store'])->name('brands.store');
+     Route::get('/admin/brands/{id}/edit', [BrandsController::class, 'edit'])->name('brands.edit');
+     Route::put('/admin/brands/{id}', [BrandsController::class, 'update'])->name('brands.update');
+     Route::delete('/admin/brands/{id}', [BrandsController::class, 'destroy'])->name('brands.destroy');
 
+ /************************
+     * testimonials ROUTES
+     ************************/
 
+     Route::get('/admin/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
+     Route::get('/admin/testimonials/create', [TestimonialController::class, 'create'])->name('testimonials.create');
+     Route::post('/admin/testimonials/store', [TestimonialController::class, 'store'])->name('testimonials.store');
+     Route::get('/admin/testimonials/{id}/edit', [TestimonialController::class, 'edit'])->name('testimonials.edit');
+     Route::put('/admin/testimonials/{id}', [TestimonialController::class, 'update'])->name('testimonials.update');
+     Route::delete('/admin/testimonials/{id}', [TestimonialController::class, 'destroy'])->name('testimonials.destroy');
 });
 
 
