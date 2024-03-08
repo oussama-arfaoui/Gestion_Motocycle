@@ -1,16 +1,16 @@
 {{-- Sidebar for the admin Dashboard --}}
 
 
-<div class="dashboard_sidebar">
+<div id="dashboard_sidebar" class="dashboard_sidebar">
     {{-- Logo Display in the Dashboard--}}
     <div class="dashboard_sidebar__logo">
         <img src={{asset('/logos/carbon-logo.svg')}} alt="logo">
         <h1>Carbon Website</h1>
     </div>
 
-    {{-- Dashboard Search --}}
+    {{-- Dashboard Search : Maybe someday when I configure the logic--}}
 
-    <div class="dashboard_sidebar__search">
+    {{-- <div class="dashboard_sidebar__search">
         <input type="search" placeholder="Search...">
 
         <svg class="with-icon_icon__MHUeb" data-testid="geist-icon" fill="none" height="24"
@@ -20,7 +20,7 @@
             <path d="M11 17.25a6.25 6.25 0 110-12.5 6.25 6.25 0 010 12.5z" />
             <path d="M16 16l4.5 4.5" />
         </svg>
-    </div>
+    </div> --}}
 
     {{-- Dashboard Links --}}
 
@@ -102,16 +102,20 @@
         </a>
         <a href="{{ route('testimonials.index') }}">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">;
-                <path stroke-opacity="0.75" d="M14.25 8.66668C14.2523 9.54659 14.0467 10.4146 13.65 11.2C13.1796 12.1412 12.4565 12.9328 11.5616 13.4862C10.6668 14.0396 9.63548 14.3329 8.58332 14.3333C7.70341 14.3356 6.8354 14.13 6.04999 13.7333L2.25 15L3.51666 11.2C3.11995 10.4146 2.91437 9.54659 2.91667 8.66668C2.91707 7.61452 3.21041 6.58325 3.76381 5.68838C4.31721 4.79352 5.10883 4.0704 6.04999 3.60002C6.8354 3.20331 7.70341 2.99772 8.58332 3.00002H8.91666C10.3062 3.07668 11.6187 3.66319 12.6027 4.64726C13.5868 5.63132 14.1733 6.94378 14.25 8.33334V8.66668Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path stroke-opacity="0.75"
+                    d="M14.25 8.66668C14.2523 9.54659 14.0467 10.4146 13.65 11.2C13.1796 12.1412 12.4565 12.9328 11.5616 13.4862C10.6668 14.0396 9.63548 14.3329 8.58332 14.3333C7.70341 14.3356 6.8354 14.13 6.04999 13.7333L2.25 15L3.51666 11.2C3.11995 10.4146 2.91437 9.54659 2.91667 8.66668C2.91707 7.61452 3.21041 6.58325 3.76381 5.68838C4.31721 4.79352 5.10883 4.0704 6.04999 3.60002C6.8354 3.20331 7.70341 2.99772 8.58332 3.00002H8.91666C10.3062 3.07668 11.6187 3.66319 12.6027 4.64726C13.5868 5.63132 14.1733 6.94378 14.25 8.33334V8.66668Z"
+                    stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                 <g clip-path="url(#clip0_123_733)">
-                <path stroke-opacity="0.75" d="M13.125 0.8125L14.3803 3.35562L17.1875 3.76594L15.1562 5.74437L15.6356 8.53937L13.125 7.21906L10.6144 8.53937L11.0938 5.74437L9.0625 3.76594L11.8697 3.35562L13.125 0.8125Z" fill="white" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path stroke-opacity="0.75"
+                        d="M13.125 0.8125L14.3803 3.35562L17.1875 3.76594L15.1562 5.74437L15.6356 8.53937L13.125 7.21906L10.6144 8.53937L11.0938 5.74437L9.0625 3.76594L11.8697 3.35562L13.125 0.8125Z"
+                        fill="white" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                 </g>
                 <defs>
-                <clipPath id="clip0_123_733">
-                <rect width="9.75" height="9.75" fill="white" transform="translate(8.25)"/>
-                </clipPath>
+                    <clipPath id="clip0_123_733">
+                        <rect width="9.75" height="9.75" fill="white" transform="translate(8.25)" />
+                    </clipPath>
                 </defs>
-                </svg>
+            </svg>
             <span>Testimonial</span>
         </a>
 
@@ -205,10 +209,15 @@
 
         <a href="{{ route('media.index') }}">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">;
-                <path stroke-opacity="0.75" d="M14.25 2.25H3.75C2.92157 2.25 2.25 2.92157 2.25 3.75V14.25C2.25 15.0784 2.92157 15.75 3.75 15.75H14.25C15.0784 15.75 15.75 15.0784 15.75 14.25V3.75C15.75 2.92157 15.0784 2.25 14.25 2.25Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path stroke-opacity="0.75" d="M6.375 7.5C6.99632 7.5 7.5 6.99632 7.5 6.375C7.5 5.75368 6.99632 5.25 6.375 5.25C5.75368 5.25 5.25 5.75368 5.25 6.375C5.25 6.99632 5.75368 7.5 6.375 7.5Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path stroke-opacity="0.75" d="M15.75 11.25L12 7.5L3.75 15.75" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                <path stroke-opacity="0.75"
+                    d="M14.25 2.25H3.75C2.92157 2.25 2.25 2.92157 2.25 3.75V14.25C2.25 15.0784 2.92157 15.75 3.75 15.75H14.25C15.0784 15.75 15.75 15.0784 15.75 14.25V3.75C15.75 2.92157 15.0784 2.25 14.25 2.25Z"
+                    stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path stroke-opacity="0.75"
+                    d="M6.375 7.5C6.99632 7.5 7.5 6.99632 7.5 6.375C7.5 5.75368 6.99632 5.25 6.375 5.25C5.75368 5.25 5.25 5.75368 5.25 6.375C5.25 6.99632 5.75368 7.5 6.375 7.5Z"
+                    stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path stroke-opacity="0.75" d="M15.75 11.25L12 7.5L3.75 15.75" stroke="black" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
             <span>Media</span>
         </a>
 
@@ -278,3 +287,17 @@
         </div>
     </div>
 </div>
+
+<button id="dashboard_menu_toggle" class="dashboard_sidebar__button">
+    <x-menu-icon />
+</button>
+
+<script>
+    const dashboard_menu_toggle = document.getElementById("dashboard_menu_toggle");
+    const dashboard_sidebar = document.getElementById("dashboard_sidebar");
+
+    dashboard_menu_toggle.addEventListener("click", () => {
+        console.log("test")
+        dashboard_sidebar.classList.toggle('show-block')
+    })
+</script>

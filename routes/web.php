@@ -1,22 +1,22 @@
 <?php
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\ShortcodeController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\ForgotPasswordLinkController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ServicesController;
-use App\Http\Controllers\BrandsController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ShortcodeController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\TestimonialController;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Http\RedirectResponse;
-use App\Http\Controllers\ImageController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProductCategoriesController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordLinkController;
 
 
 /*
@@ -57,13 +57,15 @@ Route::post('/forgot-password/{token}', [ForgotPasswordController::class, 'reset
 //    return view('auth.login');
 //});
 Route::redirect('/', '/accueil');
-Route::get('/home', function () {
-    return view('welcome');
-});
 
-Route::get('/product-details', function () {
-    return view('frontend.pages.product_details');
-});
+
+// Route::get('/home', function () {
+//     return view('welcome');
+// });
+
+// Route::get('/product-details', function () {
+//     return view('frontend.pages.product_details');
+// });
 
 
 

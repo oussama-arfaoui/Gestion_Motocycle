@@ -1,6 +1,6 @@
 <header class="header">
 
-    {{-- <div class="global_container header__info">
+    <div class="global_container header__info">
         <div class="header__info-node">
             <p>Numero Telephone: </p>
             <h3>{{$contact_number}} </h3>
@@ -17,7 +17,7 @@
         </div>
 
 
-    </div> --}}
+    </div>
 
 
     <div class="global_container header__content">
@@ -32,12 +32,30 @@
             </li>
 
             <li>
-                <a href="/spaces">Spaces</a>
+                <a href="/entreprise"></a>
             </li>
 
-            <li>
-                <a href="/a-propos">à Propos</a>
+            <li id="catalogue">
+                <a href="/catalogue">
+                    <span>Catalogue</span>
+                    <x-chevron-icon />
+                </a>
             </li>
+
+            <li id="services">
+                <a href="/services">
+                    <span>services</span>
+                    <x-chevron-icon />
+                </a>
+            </li>
+
+            <li id="projects">
+                <a href="/projects">
+                    <span>projects</span>
+                    <x-chevron-icon />
+                </a>
+            </li>
+
 
             <li>
                 <a href="/actualites">Actualités</a>
@@ -51,6 +69,30 @@
     </div>
 </header>
 
+<div class="header__menu ">
+    <div class="header__menu-content global_container">
+
+        <ul id="navigation-links" class="header__menu-content-dropdown">
+            <li>
+                <a href="/projects">
+                    <span>Sub Item #1</span>
+                    <x-chevron-icon />
+                </a>
+            </li>
+        </ul>
+        <ul id="navigation-sublinks" class="header__menu-content-dropwdown-sub">
+            <li>
+                <a href="#">Sub Sub Item #1</a>
+            </li>
+            <li>
+                <a href="#">Sub Sub Item #2</a>
+            </li>
+            <li>
+                <a href="#">Sub Sub Item #3</a>
+            </li>
+        </ul>
+    </div>
+</div>
 
 {{-- Bottom Navigation --}}
 
@@ -113,3 +155,11 @@
         </a>
     </div>
 </div>
+
+
+<script>
+    const navigation_links = document.getElementById("navigation-links");
+    const navigation_sublinks = document.getElementById("navigation-sublinks");
+
+
+</script>

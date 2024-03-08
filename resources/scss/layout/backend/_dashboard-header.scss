@@ -1,4 +1,4 @@
-.dashboard_header{
+.dashboard_header {
     height: 64px;
     border-bottom: 1px solid $Gray100;
     width: calc(100vw - 256px);
@@ -8,9 +8,14 @@
     align-items: center;
     justify-content: flex-end;
 
+    @media (max-width: 1024px) {
+        width: 100vw;
+        justify-content: center;
+    }
+
     padding: 1rem;
 
-    &-buttons{
+    &-buttons {
         display: flex;
         flex-direction: row;
 

@@ -1,14 +1,18 @@
-.show{
+.show {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.hide{
+.show-block {
+    display: block !important;
+}
+
+.hide {
     display: none;
 }
 
-.spin-arrow{
+.spin-arrow {
     transform: rotateZ(180deg);
     transition: transform 100ms ease-out;
 }
