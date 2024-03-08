@@ -107,20 +107,22 @@
 
         &-image {
             width: 50%;
-            height: auto;
 
             overflow: hidden;
 
             border-top-right-radius: 8px;
             border-bottom-right-radius: 8px;
 
-            img {
-                height: 100%;
+            img{
                 width: 100%;
+                height: 100%;
             }
         }
-
+        
         &-alternate-image {
+            display: grid;
+            place-items: center;
+            
             width: 50%;
             height: auto;
 
@@ -197,7 +199,7 @@
                 }
 
                 &-description {
-                    width: 48ch;
+                    width: 70%;
                     line-height: 1.5;
                     margin-bottom: 2rem;
                 }
@@ -341,7 +343,7 @@
                 }
 
                 &-description {
-                    width: 48ch;
+                    width: 90%;
                     line-height: 1.5;
                     margin-bottom: 2rem;
                 }

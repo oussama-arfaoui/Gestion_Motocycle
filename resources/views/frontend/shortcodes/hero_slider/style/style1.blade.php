@@ -13,51 +13,25 @@
         </svg></button>
 
 
-    <section style="background-image: url('/bgs/slide-1.jpg')" class="hero-slider active">
+    <section style="background-image: url('/blanks/1920x1080.png')" class="hero-slider active"> {{-- Remove the active
+        class when duplicating --}}
         <div class="hero-slider-dark-overlay"></div>
         <div class="hero-slider-content">
             <h1>{{$title}}</h1>
             <p>{{$description}}</p>
-            <x-primary_button path='/catalogue' text="{{$button_primary_label}}"></x-primary_button>
+            <x-primary_button path='/spaces' text="{{$button_primary_label}}"></x-primary_button>
         </div>
     </section>
 
-
-    <section style="background-image: url('/bgs/slide-2.jpg')" class="hero-slider">
+    <section style="background-image: url('/blanks/1920x1080.png')" class="hero-slider ">
         <div class="hero-slider-dark-overlay"></div>
         <div class="hero-slider-content">
-            <h1>Qualité et diversité à prix abordable</h1>
-            <p>Une large gamme de portes PVC haut de gamme sans sacrifier votre budget.</p>
-            <x-primary_button path='/catalogue' text="Voir Nos options"></x-primary_button>
+            <h1>Second Slide</h1>
+            <p>Second Slide Description</p>
+            <x-primary_button path='/spaces' text="Primary Button"></x-primary_button>
         </div>
     </section>
 
-    <section style="background-image: url('/bgs/slide-3.jpg')" class="hero-slider">
-        <div class="hero-slider-dark-overlay"></div>
-        <div class="hero-slider-content">
-            <h1>Faites des économies exceptionnelles</h1>
-            <p>Des portes PVC livrées rapidement pour une installation immédiate.</p>
-            <x-primary_button path='/catalogue' text="{{$button_primary_label}}"></x-primary_button>
-        </div>
-    </section>
-
-    <section style="background-image: url('/bgs/slide-4.jpg')" class="hero-slider">
-        <div class="hero-slider-dark-overlay"></div>
-        <div class="hero-slider-content">
-            <h1>Ce que vous voyez est ce que vous obtenez</h1>
-            <p>Des devis transparents et des représentations exactes des produits.</p>
-            <x-primary_button path='/catalogue' text="Obtenir Un Devis Gratuit"></x-primary_button>
-        </div>
-    </section>
-
-    <section style="background-image: url('/bgs/slide-5.jpg')" class="hero-slider">
-        <div class="hero-slider-dark-overlay"></div>
-        <div class="hero-slider-content">
-            <h1>Dédié aux promoteurs immobiliers</h1>
-            <p>Nous répondons spécifiquement à vos besoins en portes en grand volume.</p>
-            <x-primary_button path='/catalogue' text="Contactez-Nous Directement"></x-primary_button>
-        </div>
-    </section>
     <!-- Add more slides as needed -->
 </div>
 

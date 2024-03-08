@@ -52,6 +52,7 @@
                 border: 1px solid $Gray900;
                 margin-bottom: 1rem;
                 padding: 0.5rem 1rem;
+                transition: border-color 0.3s ease;
 
                 @include Interactable;
 
@@ -97,17 +98,17 @@
                     }
                 }
 
-                &:hover{
+                &:hover {
                     svg {
-                    
-                            &:nth-child(2) {
-                                display: none;
-                            }
-                    
-                            &:nth-child(3) {
-                                display: block;
-                            }
+
+                        &:nth-child(2) {
+                            display: none;
                         }
+
+                        &:nth-child(3) {
+                            display: block;
+                        }
+                    }
                 }
             }
 
@@ -127,47 +128,5 @@
                 transition: transform 50ms ease;
             }
         }
-    }
-
-
-
-
-}
-
-@keyframes gradient {
-    0% {
-        background-position: 0% 0%;
-    }
-
-    50% {
-        background-position: 100% 100%;
-    }
-
-    100% {
-        background-position: 0% 0%;
-    }
-}
-
-
-
-@keyframes wave {
-    2% {
-        transform: translateX(1);
-    }
-
-    25% {
-        transform: translateX(-25%);
-    }
-
-    50% {
-        transform: translateX(-50%);
-    }
-
-    75% {
-        transform: translateX(-25%);
-    }
-
-    100% {
-        transform: translateX(1);
     }
 }

@@ -2,10 +2,9 @@
 
     <div class="about_overview_style3-content-text">
         <div class="about_overview_style3-content-text-tag">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M3 21H21M18 21V6.2C18 5.0799 18 4.51984 17.782 4.09202C17.5903 3.71569 17.2843 3.40973 16.908 3.21799C16.4802 3 15.9201 3 14.8 3H9.2C8.0799 3 7.51984 3 7.09202 3.21799C6.71569 3.40973 6.40973 3.71569 6.21799 4.09202C6 4.51984 6 5.0799 6 6.2V21M15 12H15.01"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m16.2 19 4.8-7-4.8-7H3l4.8 7L3 19h13.2Z" />
             </svg>
             <p>{{$section_tag}}</p>
         </div>
@@ -73,10 +72,9 @@
 
     <div class="about_overview_style3-content-text">
         <div class="about_overview_style3-content-text-tag">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M3 21H21M18 21V6.2C18 5.0799 18 4.51984 17.782 4.09202C17.5903 3.71569 17.2843 3.40973 16.908 3.21799C16.4802 3 15.9201 3 14.8 3H9.2C8.0799 3 7.51984 3 7.09202 3.21799C6.71569 3.40973 6.40973 3.71569 6.21799 4.09202C6 4.51984 6 5.0799 6 6.2V21M15 12H15.01"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m16.2 19 4.8-7-4.8-7H3l4.8 7L3 19h13.2Z" />
             </svg>
             <p>Découvrez nos Gadgets et Jouets</p>
         </div>
@@ -154,10 +152,9 @@
 
     <div class="about_overview_style3-content-text">
         <div class="about_overview_style3-content-text-tag">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M3 21H21M18 21V6.2C18 5.0799 18 4.51984 17.782 4.09202C17.5903 3.71569 17.2843 3.40973 16.908 3.21799C16.4802 3 15.9201 3 14.8 3H9.2C8.0799 3 7.51984 3 7.09202 3.21799C6.71569 3.40973 6.40973 3.71569 6.21799 4.09202C6 4.51984 6 5.0799 6 6.2V21M15 12H15.01"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m16.2 19 4.8-7-4.8-7H3l4.8 7L3 19h13.2Z" />
             </svg>
             <p>Explorez nos Accessoires</p>
         </div>
@@ -183,8 +180,7 @@
                 </div>
 
                 <h3>Protection Maximale</h3>
-                <p>Des casques de haute qualité et des équipements de protection pour assurer votre sécurité sur la
-                    route.</p>
+                <p>Des casques de haute qualité et des équipements de protection pour assurer votre sécurité sur la route.</p>
             </div>
 
             <div class="about_overview_style3-collection-nodes-node">

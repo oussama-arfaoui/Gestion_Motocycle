@@ -27,8 +27,16 @@ class AppServiceProvider extends ServiceProvider
                 $categorys = ProductCategories::all();
                 $view->with('categorys', $categorys);
             });
+            View::composer('frontend.shortcodes.products_categories_list.style.style2', function ($view) {
+                $categorys = ProductCategories::all();
+                $view->with('categorys', $categorys);
+            });
             // Retrieve categories data and pass it to the view
             View::composer('frontend.shortcodes.testimonials.style.style1', function ($view) {
+                $testimonialss = Testimonial::all();
+                $view->with('testimonialss', $testimonialss);
+            });            
+            View::composer('frontend.shortcodes.testimonials.style.style2', function ($view) {
                 $testimonialss = Testimonial::all();
                 $view->with('testimonialss', $testimonialss);
             });            

@@ -10,20 +10,7 @@
 
     <div class="articles_list_style1-item">
         <div class="articles_list_style1-item-image">
-            <img src="./blogs/blog-1.jpg" alt="project-image">
-        </div>
-
-        <div class="articles_list_style1-item-text">
-            <h3>{{ $article_title }}</h3>
-            <p>{{ $article_description }}</p>
-            <x-primary_button path='#' text='{{$article_button}}'></x-primary_button>
-        </div>
-
-    </div>
-    
-    <div class="articles_list_style1-item">
-        <div class="articles_list_style1-item-image">
-            <img src="./blogs/blog-1.jpg" alt="project-image">
+            <img src="./blanks/500x400.png" alt="project-image">
         </div>
 
         <div class="articles_list_style1-item-text">
@@ -36,7 +23,7 @@
 
     <div class="articles_list_style1-item">
         <div class="articles_list_style1-item-image">
-            <img src="./blogs/blog-1.jpg" alt="project-image">
+            <img src="./blanks/500x400.png" alt="project-image">
         </div>
 
         <div class="articles_list_style1-item-text">
@@ -49,7 +36,20 @@
 
     <div class="articles_list_style1-item">
         <div class="articles_list_style1-item-image">
-            <img src="./blogs/blog-1.jpg" alt="project-image">
+            <img src="./blanks/500x400.png" alt="project-image">
+        </div>
+
+        <div class="articles_list_style1-item-text">
+            <h3>{{ $article_title }}</h3>
+            <p>{{ $article_description }}</p>
+            <x-primary_button path='#' text='{{$article_button}}'></x-primary_button>
+        </div>
+
+    </div>
+
+    <div class="articles_list_style1-item">
+        <div class="articles_list_style1-item-image">
+            <img src="./blanks/500x400.png" alt="project-image">
         </div>
 
         <div class="articles_list_style1-item-text">

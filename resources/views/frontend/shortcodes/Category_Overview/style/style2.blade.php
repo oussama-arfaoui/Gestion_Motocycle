@@ -5,9 +5,9 @@
     <p>{{ $description }}</p>
 
     <div class="category_overview_style2-categories">
-        <a href="/catalogue" class="category_overview_style2-categories-category">
+        <a href="/spaces" class="category_overview_style2-categories-category">
             <div class="category_overview_style2-categories-category-image">
-                <img src="./categories/category-1.jpg" alt="">
+                <img src="./categories/category-1.png" alt="">
             </div>
             <div class="category_overview_style2-categories-category-text">
                 <h3>Mobinardo Jouets et Gadgets</h3>
@@ -19,9 +19,9 @@
             </div>
         </a>
 
-        <a href="/catalogue" class="category_overview_style2-categories-category">
+        <a href="/spaces" class="category_overview_style2-categories-category">
             <div class="category_overview_style2-categories-category-image">
-                <img src="./categories/category-2.jpg" alt="">
+                <img src="./categories/category-2.png" alt="">
             </div>
             <div class="category_overview_style2-categories-category-text">
                 <h3>Mobinardo MotorBikes</h3>
@@ -33,9 +33,9 @@
             </div>
         </a>
 
-        <a href="/catalogue" class="category_overview_style2-categories-category">
+        <a href="/spaces" class="category_overview_style2-categories-category">
             <div class="category_overview_style2-categories-category-image">
-                <img src="./categories/category-3.jpg" alt="">
+                <img src="./categories/category-3.png" alt="">
             </div>
             <div class="category_overview_style2-categories-category-text">
                 <h3>Mobinardo Accessories</h3>

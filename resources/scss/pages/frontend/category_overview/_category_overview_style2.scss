@@ -46,9 +46,11 @@
 
                 overflow: hidden;
 
+                display: grid;
+                place-items: center;
 
                 img {
-                    width: 100%;
+                    width: 50%;
                 }
             }
 
@@ -71,7 +73,7 @@
                     height: 8px;
                     border-radius: 50%;
                     background-color: var(--accent-color);
-                    z-index: -1;
+                    z-index: 5;
                     opacity: 0;
                     animation: pulse 1s infinite alternate;
                 }

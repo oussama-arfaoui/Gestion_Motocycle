@@ -16,7 +16,7 @@
     </div>
 
     <div class="node-selector">
-        <label for="testimonials" class="form-label">testimonials</label>
+        <label class="control-label">testimonials</label>
         <select name="testimonials" id="testimonials" class="form-select" multiple>
             @foreach($testimonials as $testimonial)
                 <option value="{{ $testimonial->id }}">{{ $testimonial->name }}</option>

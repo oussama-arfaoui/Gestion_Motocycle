@@ -1,22 +1,23 @@
 <header class="header">
-    <div class="global_container header__info">
+
+    {{-- <div class="global_container header__info">
         <div class="header__info-node">
             <p>Numero Telephone: </p>
             <h3>{{$contact_number}} </h3>
         </div>
-    
+
         <div class="header__info-node">
             <p>Numero Whatsapp: </p>
             <h3>{{$contact_whatsapp}} </h3>
         </div>
-    
+
         <div class="header__info-node">
             <p>Contact Email: </p>
             <h3>{{$contact_email}} </h3>
         </div>
-    
-    
-    </div>
+
+
+    </div> --}}
 
 
     <div class="global_container header__content">
@@ -31,25 +32,21 @@
             </li>
 
             <li>
-                <a href="/catalogue">Moto</a>
+                <a href="/spaces">Spaces</a>
             </li>
 
             <li>
-                <a href="/catalogue">Gadgets & Jouets</a>
+                <a href="/a-propos">à Propos</a>
             </li>
 
             <li>
-                <a href="/catalogue">Accessoires</a>
-            </li>
-
-            <li>
-                <a href="/contact">Contact</a>
+                <a href="/actualites">Actualités</a>
             </li>
         </nav>
 
 
         <div class="header__cta">
-            <x-primary_button path='tel: {{ $contact_number }}' text="Appellez-Nous"></x-primary_button>
+            <x-primary_button path='/contact' text="Contactez-Nous!"></x-primary_button>
         </div>
     </div>
 </header>
@@ -67,7 +64,7 @@
             </svg>
             <p>Accueil</p>
         </a>
-        <a href="/catalogue">
+        <a href="/spaces">
             <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3 2.5H8.83333V8.33333H3V2.5Z" stroke="white" stroke-width="1.5" stroke-linecap="round"
                     stroke-linejoin="round" />
@@ -78,7 +75,7 @@
                 <path d="M3 11.6667H8.83333V17.5H3V11.6667Z" stroke="white" stroke-width="1.5" stroke-linecap="round"
                     stroke-linejoin="round" />
             </svg>
-            <p>Catalogue</p>
+            <p>Spaces</p>
         </a>
     </div>
     <div class="BottomNav__middle">

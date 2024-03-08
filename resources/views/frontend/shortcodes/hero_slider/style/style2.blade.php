@@ -20,7 +20,7 @@
             <div class="hero-slider-content">
                 <h1>{{$title}}</h1>
                 <p>{{$description}}</p>
-                <x-primary_button path='/catalogue' text="{{$button_primary_label}}"></x-primary_button>
+                <x-primary_button path='/spaces' text="{{$button_primary_label}}"></x-primary_button>
             </div>
         </section>
 
@@ -30,22 +30,14 @@
             <div class="hero-slider-content">
                 <h1>Qualité et diversité à prix abordable</h1>
                 <p>Une large gamme de portes PVC haut de gamme sans sacrifier votre budget.</p>
-                <x-primary_button path='/catalogue' text="Voir Nos options"></x-primary_button>
+                <x-primary_button path='/spaces' text="Voir Nos options"></x-primary_button>
             </div>
         </section>
         <!-- Add more slides as needed -->
+        <a class="hero_slider_style2-indicator">
+            <x-chevron-icon></x-chevron-icon>
+        </a>
     </div>
-
-    <a class="hero_slider_style2-indicator">
-        <svg class="with-icon_icon__MHUeb" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision"
-            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
-            width="24" style="color:var(--geist-foreground);width:24px;height:24px">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M8 12l4 4 4-4" />
-            <path d="M12 8v8" />
-        </svg> 
-        <p>Voir Plus en Bas !!</p>
-    </a>
 </section>
 
 <script>

@@ -1,0 +1,107 @@
+.testimonials_style1 {
+
+    padding-block: 4rem;
+
+    &-text {
+        h2 {
+            font-size: 32px;
+            margin-bottom: 2rem;
+            width: 50%;
+
+            @media (max-width: 768px) {
+                font-size: 24px;
+                width: 100%;
+            }
+        }
+    }
+
+    &-items {
+
+        width: 100%;
+        overflow: hidden;
+
+        display: grid;
+        place-items: center;
+
+        .testimonials_style1-items-item {
+            display: none;
+            width: fit-content
+
+            img {
+                margin-bottom: 1rem;
+            }
+
+            p {
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+
+            &:first-child {
+                display: block;
+            }
+        }
+    }
+
+    &_navigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .prev,
+        .next {
+            height: 3rem;
+            width: 4rem;
+
+            background-color: transparent;
+
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+
+
+            display: grid;
+            place-items: center;
+
+            margin-inline: 2rem;
+
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--accent-color);
+
+                svg {
+                    stroke: var(--light);
+                }
+            }
+
+            svg {
+                width: 24px;
+                stroke: var(--accent-color);
+            }
+
+        }
+
+        .prev {
+            svg {
+                transform: rotateZ(180deg);
+            }
+        }
+
+        .dots {
+            display: flex;
+
+            .dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                margin: 0 5px;
+                border: 1px solid var(--accent-color);
+                cursor: pointer;
+
+                &.active {
+                    background-color: var(--accent-color);
+                    ;
+                }
+            }
+        }
+    }
+}

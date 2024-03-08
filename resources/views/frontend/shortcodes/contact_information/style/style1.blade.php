@@ -12,7 +12,7 @@
         
         <div class="contact_information_style1-info-node">
             <div class="contact_information_style1-info-node-image">
-                <img src="./icons/contact-call.png" alt="">
+                <img src="./icons/icon-call.png" alt="">
             </div>
         
             <div class="contact_information_style1-info-node-text">
@@ -23,7 +23,7 @@
 
         <div class="contact_information_style1-info-node">
             <div class="contact_information_style1-info-node-image">
-                <img src="./icons/email-contact.png" alt="">
+                <img src="./icons/icon-email.png" alt="">
             </div>
 
             <div class="contact_information_style1-info-node-text">
@@ -34,7 +34,7 @@
 
         <div class="contact_information_style1-info-node">
             <div class="contact_information_style1-info-node-image">
-                <img src="./icons/location.png" alt="">
+                <img src="./icons/icon-location.png" alt="">
             </div>
 
             <div class="contact_information_style1-info-node-text">

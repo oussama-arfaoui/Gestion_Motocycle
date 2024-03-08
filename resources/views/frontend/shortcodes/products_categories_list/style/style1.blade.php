@@ -1,20 +1,20 @@
 @foreach(explode(',', $categories) as $categoryId)
 @foreach($categorys as $category)
 @if($category->id == $categoryId)
-<section class="category_with_examples_style1 global_container">
+<section class="products_categories_list_style1 global_container">
 
-    <div class="category_with_examples_style1-button">
+    <div class="products_categories_list_style1-button">
         <x-primary_button path='/product-categories/{{ $category->id }}' text='{{ $category->category_name }}'>
         </x-primary_button>
     </div>
 
-    <div class="category_with_examples_style1-items">
+    <div class="products_categories_list_style1-items">
 
-        <div class="category_with_examples_style1-items">
+        <div class="products_categories_list_style1-items">
             @php $products = $category->products->take(3); @endphp
             @foreach($products as $product)
-            <div class="category_with_examples_style1-items-item">
-                <div class="category_with_examples_style1-items-item-tag">
+            <div class="products_categories_list_style1-items-item">
+                <div class="products_categories_list_style1-items-item-tag">
                     <p>{{ $product->status }}</p>
                 </div>
                 <!-- Check if images exist for the product -->
@@ -40,7 +40,7 @@
             </div>
             @endforeach
 
-            <div class="category_with_examples_style1-items-item category_with_examples_style1-items-more">
+            <div class="products_categories_list_style1-items-item products_categories_list_style1-items-more">
                 <a href="{{ route('product-categories.show', $category->id) }}">
                     <h3>Découvrez Plus...</h3>
                     <svg class="with-icon_icon__MHUeb" data-testid="geist-icon" fill="none" height="24"

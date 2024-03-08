@@ -1,17 +1,17 @@
 .main-btn {
     background-color: var(--accent-color);
 
-    border-radius: .3em;
+    border-radius: 8px;
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    transition: .5s;
-    border: 1px solid var(--accent-color);
+    transition: 100ms;
+    border: 2px solid var(--dark);
     color: var(--accent-color);
     z-index: 1;
+    box-shadow: 0px 2px 0px 0px rgb(0,0,0);
 
     a {
-
         cursor: pointer;
         padding-inline: 12px;
         padding-block: 6px;
@@ -24,7 +24,7 @@
 
 
         span {
-            font-family: 'Urbanist', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 18px;
             font-weight: 500;
             text-transform: capitalize;
@@ -51,21 +51,21 @@
                 display: none;
             }
         }
-
     }
 
     &:hover {
+
+        box-shadow: 0px 4px 0px 0px rgb(0, 0, 0);
+        transform: translateY(-2px);
 
         a {
 
             span {
                 transform: translateX(4px);
                 transition: transform 400ms;
-                color: var(--accent-color);
             }
 
             svg {
-                stroke: var(--accent-color);
 
                 &:nth-child(2) {
                     animation: arrow-leave 400ms forwards;
@@ -80,53 +80,10 @@
         }
     }
 
-    &::before,
-    &::after {
-        content: '';
-        display: block;
-        width: 50px;
-        height: 50px;
-        transform: translate(-50%, -50%);
-        position: absolute;
-        border-radius: 50%;
-        z-index: -1;
-        background-color: var(--light);
-        transition: 500ms ease;
 
-    }
-
-    &::before {
-        top: -2rem;
-        left: -2rem;
-    }
-
-    &::after {
-        left: calc(100% + 2rem);
-        top: calc(100% + 2rem);
-    }
-
-    &:hover::before,
-    &:hover::after {
-        height: 500px;
-        width: 500px;
-    }
-
-    &:active {
-        filter: brightness(.8);
-    }
 }
 
-@keyframes flash {
-    from {
-        box-shadow: 0px 0px 0px 8px hsla(164, 56%, 46%, 0.5);
-        /* Start with a larger transparent box-shadow */
-    }
 
-    to {
-        box-shadow: 0px 0px 0px 8px hsla(164, 56%, 46%, 0.1);
-        /* End with a thinner box-shadow with desired opacity */
-    }
-}
 
 .sell-btn {
     background-color: var(--accent-color);
@@ -157,7 +114,7 @@
 
 
         span {
-            font-family: 'Urbanist', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 18px;
             font-weight: 500;
             text-transform: capitalize;
@@ -256,7 +213,7 @@
     margin-right: 1rem;
 
     a {
-        font-family: 'Urbanist', sans-serif;
+        font-family: 'Inter', sans-serif;
 
         padding: 0.5rem 1rem;
         display: flex;
@@ -306,7 +263,7 @@
         justify-content: space-evenly;
         color: var(--light);
 
-        font-family: 'Urbanist', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 14px;
         text-transform: capitalize;
 
@@ -363,7 +320,7 @@
         justify-content: space-evenly;
         color: var(--light);
 
-        font-family: 'Urbanist', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 16px;
         text-transform: capitalize;
 
@@ -406,8 +363,8 @@
     }
 }
 
-@media (max-width: 768px){
-    .sell-btn{
+@media (max-width: 768px) {
+    .sell-btn {
         position: fixed;
         bottom: 7rem;
         right: 1rem;

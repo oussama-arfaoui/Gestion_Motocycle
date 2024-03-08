@@ -8,28 +8,28 @@
     background: linear-gradient(to right, hsla(0, 0%, 100%, 0.9), hsla(0, 0%, 100%, 0.7), hsla(0, 0%, 100%, 0.9));
     backdrop-filter: blur(10px);
 
-    &__info{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+    // &__info{
+    //     display: flex;
+    //     flex-direction: row;
+    //     justify-content: space-between;
 
-        &-node{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            color: var(--primary-color);
+    //     &-node{
+    //         display: flex;
+    //         flex-direction: row;
+    //         align-items: center;
+    //         color: var(--primary-color);
             
-            p{
-                margin-right: 1rem;
-                font-size: 10px;
-                text-transform: uppercase;
-            }
+    //         p{
+    //             margin-right: 1rem;
+    //             font-size: 10px;
+    //             text-transform: uppercase;
+    //         }
 
-            h3{
-                font-size: 14px;
-            }
-        }
-    }
+    //         h3{
+    //             font-size: 14px;
+    //         }
+    //     }
+    // }
 
     &__content {
         display: flex;
@@ -39,7 +39,7 @@
     }
 
     &__logo {
-        width: 15%;
+        width: 10%;
 
         img {
             width: 100%;
@@ -75,6 +75,7 @@
             a {
                 color: var(--dark);
                 font-size: 18px;
+                text-transform: capitalize;
 
                 &:hover{
                     color: var(--accent-color);
@@ -115,7 +116,7 @@
 
     position: fixed;
     z-index: 1000;
-    width: 100vw;
+    width: 100%;
     bottom: 0;
 
     &__left,
