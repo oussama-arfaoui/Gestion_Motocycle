@@ -15,36 +15,28 @@
             </svg></button>
 
 
-        <section style="background-image: url('/bgs/slide-1.jpg')" class="hero-slider active">
+        <section style="background-image: url('/bgs/background-3.jpg')" class="hero-slider active">
             <div class="hero-slider-dark-overlay"></div>
             <div class="hero-slider-content">
                 <h1>{{$title}}</h1>
                 <p>{{$description}}</p>
-                <x-primary_button path='/catalogue' text="{{$button_primary_label}}"></x-primary_button>
+                <x-primary_button path='/spaces' text="{{$button_primary_label}}"></x-primary_button>
             </div>
         </section>
 
 
-        <section style="background-image: url('/bgs/slide-2.jpg')" class="hero-slider">
+        <section style="background-image: url('/bgs/background-6.jpg')" class="hero-slider">
             <div class="hero-slider-dark-overlay"></div>
             <div class="hero-slider-content">
                 <h1>Qualité et diversité à prix abordable</h1>
                 <p>Une large gamme de portes PVC haut de gamme sans sacrifier votre budget.</p>
-                <x-primary_button path='/catalogue' text="Voir Nos options"></x-primary_button>
+                <x-primary_button path='/spaces' text="Voir Nos options"></x-primary_button>
             </div>
         </section>
         <!-- Add more slides as needed -->
-    </div>
-
-    <div class="hero_slider_style2-indicator">
-        <svg class="with-icon_icon__MHUeb" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision"
-            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
-            width="24" style="color:var(--geist-foreground);width:24px;height:24px">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M8 12l4 4 4-4" />
-            <path d="M12 8v8" />
-        </svg> 
-        <p>Plus en Bas !!</p>
+        <a class="hero_slider_style2-indicator">
+            <x-chevron-icon></x-chevron-icon>
+        </a>
     </div>
 </section>
 

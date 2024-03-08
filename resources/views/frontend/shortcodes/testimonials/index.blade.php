@@ -11,7 +11,7 @@ $viewName = "frontend.shortcodes.testimonials.style.$style";
 @includeIf($viewName, [
 
 'title'=> $title,
-'description'=> $title,
+'description'=> $description,
 'testimonials' => $testimonials,
 
 ])

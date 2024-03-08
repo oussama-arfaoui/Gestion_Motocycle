@@ -5,41 +5,41 @@
     <div class="contact_information_style1-text">
         <h2 class="contact_information_style1-text-title">{{$title}}</h2>
         <p class="contact_information_style1-text-description">{{$description}}</p>
-        <x-action_button action="tel: {{$node_description_1}}" text="{{$primary_button_label}}"></x-action_button>
-        <x-action_button action="tel: {{$node_description_1}}" text="{{$secondary_button_label}}"></x-action_button>
+        <x-action_button action="tel: {{$contact_number}}" text="{{$primary_button_label}}"></x-action_button>
+        <x-action_button action="tel: {{$contact_whatsapp}}" text="{{$secondary_button_label}}"></x-action_button>
     </div>
     <div class="contact_information_style1-info">
         
         <div class="contact_information_style1-info-node">
             <div class="contact_information_style1-info-node-image">
-                <img src="./icons/contact-call.png" alt="">
+                <img src="./icons/icon-call.png" alt="">
             </div>
         
             <div class="contact_information_style1-info-node-text">
                 <p>{{$node_title_1}}</p>
-                <h3>{{$node_description_1}}</h3>
+                <h3>{{$contact_number}}</h3>
             </div>
         </div>
 
         <div class="contact_information_style1-info-node">
             <div class="contact_information_style1-info-node-image">
-                <img src="./icons/email-contact.png" alt="">
+                <img src="./icons/icon-email.png" alt="">
             </div>
 
             <div class="contact_information_style1-info-node-text">
                 <p>{{$node_title_2}}</p>
-                <h3>{{$node_description_2}}</h3>
+                <h3>{{$contact_email}}</h3>
             </div>
         </div>
 
         <div class="contact_information_style1-info-node">
             <div class="contact_information_style1-info-node-image">
-                <img src="./icons/location.png" alt="">
+                <img src="./icons/icon-location.png" alt="">
             </div>
 
             <div class="contact_information_style1-info-node-text">
                 <p>{{$node_title_3}}</p>
-                <h3>{{$node_description_3}}</h3>
+                <h3>{{$physical_address}}</h3>
             </div>
         </div>
 

@@ -9,8 +9,9 @@
 
 
     <div class="featured_article_style1-featured">
+
         <div class="featured_article_style1-featured-image">
-            <img src="./blogs/blog-1.jpg" alt="project-image">
+            <img src="./blanks/500x400.png" alt="project-image">
         </div>
 
         <div class="featured_article_style1-featured-text">

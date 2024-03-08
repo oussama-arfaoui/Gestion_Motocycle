@@ -37,6 +37,24 @@ function getShortcodeTypes() {
             'name' => 'homepage_cta', 
             'view' => 'frontend.shortcodes.homepage_cta.admin-config',     
         ],
+        'about_extension' => [
+            'name' => 'about_extension',
+            'view' => 'frontend.shortcodes.about_extension.admin-config',
+        ],
+        'product_overview' => [
+            'name' => 'product_overview',
+            'view' => 'frontend.shortcodes.product_overview.admin-config',
+        ],
+        'why_choose_us' => [
+            'name' => 'why_choose_us',
+            'view' => 'frontend.shortcodes.why_choose_us.admin-config',
+        ],
+        'testimonials' => [
+        'name' => 'testimonials',
+        'view' => 'frontend.shortcodes.testimonials.admin-config',
+    ],
+    
+    
 
         //  Contact Page
 
@@ -50,6 +68,11 @@ function getShortcodeTypes() {
         'name' => 'contact_form',
         'view' => 'frontend.shortcodes.contact_form.admin-config',
     ],
+    'contact_hero' => [
+        'name' => 'contact_hero',
+        'view' => 'frontend.shortcodes.contact_hero.admin-config',
+    ],
+    
     
 
     // Actualités, Blog, News
@@ -77,20 +100,31 @@ function getShortcodeTypes() {
         'name' => 'products_list',
         'view' => 'frontend.shortcodes.products_list.admin-config',
     ],
-    
-    // select catalogue /products
+
     
     'products_categories_list' => [
         'name' => 'products_categories_list',
         'view' => 'frontend.shortcodes.products_categories_list.admin-config',
     ],
 
-    // testimonials
+    /// About 
 
-    'testimonials' => [
-        'name' => 'testimonials',
-        'view' => 'frontend.shortcodes.testimonials.admin-config',
+    'word_from_director' => [
+        'name' => 'word_from_director',
+        'view' => 'frontend.shortcodes.word_from_director.admin-config',
     ],
+    'meet_the_team' => [
+        'name' => 'meet_the_team',
+        'view' => 'frontend.shortcodes.meet_the_team.admin-config',
+    ],
+        'mission_value_vision' => [
+            'name' => 'mission_value_vision',
+            'view' => 'frontend.shortcodes.mission_value_vision.admin-config',
+        ],
+    
+    
+    
+    
 
     ];
 }
@@ -144,6 +178,37 @@ function getShortcodeindex() {
             'view' => 'frontend.shortcodes.homepage_cta.index', 
             'attributes' => [ 'title', 'description', 'primary_button_label','style']      
         ],
+        'about_extension' => [
+            'name' => 'about_extension',
+            'view' => 'frontend.shortcodes.about_extension.index',
+            'attributes' => ['title', 'description', 'node_title_1', 'node_description_1', 'node_title_2', 'node_description_2', 'node_title_3', 'node_description_3', 'node_title_4', 'node_description_4','style']
+        ],
+        
+        'product_overview' => [
+            'name' => 'product_overview',
+            'view' => 'frontend.shortcodes.product_overview.index',
+            'attributes' => ['section_tag', 'title', 'subtitle', 'description', 
+            'primary_button_label', 'secondary_button_label', 'ternary_button_label', 
+            'node_icon_1', 'node_title_1', 'node_description_1',
+            'node_icon_2', 'node_title_2', 'node_description_2',
+            'node_icon_3', 'node_title_3', 'node_description_3',
+            'node_icon_4', 'node_title_4', 'node_description_4',
+            'style']
+        ],
+        'why_choose_us' => [
+            'name' => 'why_choose_us',
+            'view' => 'frontend.shortcodes.why_choose_us.index',
+            'attributes' => ['section_tag', 'title', 'description', 'primary_button_label', 'node_icon_1', 'node_title_1', 'node_description_1', 'node_icon_2', 'node_title_2', 'node_description_2', 'node_icon_3', 'node_title_3', 'node_description_3', 'node_icon_4', 'node_title_4', 'node_description_4','style']
+        ],
+        'testimonials' => [
+            'name' => 'testimonials',
+            'view' => 'frontend.shortcodes.testimonials.index',
+            'attributes' => ['title', 'description', 'testimonials','style']
+        ],
+    
+        
+        
+        
         
         // Contact
 
@@ -156,13 +221,17 @@ function getShortcodeindex() {
         'node_description_1', 'node_description_2', 'node_description_3',
         'style']
     ],
-
-    
     'contact_form' => [
         'name' => 'contact_form',
         'view' => 'frontend.shortcodes.contact_form.index',
         'attributes' => ['title', 'description','style']
     ],
+        'contact_hero' => [
+            'name' => 'contact_hero',
+            'view' => 'frontend.shortcodes.contact_hero.index',
+            'attributes' => ['title', 'description', 'primary_action', 'secondary_action','style']
+        ],
+        
 
     // Actuality, Blog, News
     
@@ -193,21 +262,40 @@ function getShortcodeindex() {
         'attributes' => ['title','style']
     ],
     
-        // select Catalogue / Products
-    
         'products_categories_list' => [
             'name' => 'products_categories_list',
             'view' => 'frontend.shortcodes.products_categories_list.index',
             'attributes' => ['categories','style']
         ],
 
-    // testimonials
 
-        'testimonials' => [
-            'name' => 'testimonials',
-            'view' => 'frontend.shortcodes.testimonials.index',
-            'attributes' => ['title', 'description', 'testimonials','style']
+        // About
+
+        
+        'word_from_director' => [
+            'name' => 'word_from_director',
+            'view' => 'frontend.shortcodes.word_from_director.index',
+            'attributes' => ['section_tag', 'title', 'description', 'name_tag','style']
         ],
+        'meet_the_team' => [
+            'name' => 'meet_the_team',
+            'view' => 'frontend.shortcodes.meet_the_team.index',
+            'attributes' => ['section_tag', 'title', 'description', 'member_1', 'job_title_1', 'member_2', 'job_title_2', 'member_3', 'job_title_3','style']
+        ],
+        'mission_value_mission' => [
+            'name' => 'mission_value_mission',
+            'view' => 'frontend.shortcodes.mission_value_mission.index',
+            'attributes' => ['section_tag', 'title', 'description', 'node_title_1', 'node_description_1', 'node_title_2', 'node_description_2', 'node_title_3', 'node_description_3','style']
+        ],
+        'mission_value_vision' => [
+            'name' => 'mission_value_vision',
+            'view' => 'frontend.shortcodes.mission_value_vision.index',
+            'attributes' => ['section_tag', 'title', 'description', 'node_title_1', 'node_description_1', 'node_title_2', 'node_description_2', 'node_title_3', 'node_description_3','style']
+        ],
+        
+        
+        
+        
         
     ];
 };

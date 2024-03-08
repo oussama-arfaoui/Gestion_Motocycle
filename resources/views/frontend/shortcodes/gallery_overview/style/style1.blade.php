@@ -1,10 +1,9 @@
 <section class="gallery_overview_style1 global_container">
     <div class="gallery_overview_style1-text">
         <div class="gallery_overview_style1-text-tag">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M3 21H21M18 21V6.2C18 5.0799 18 4.51984 17.782 4.09202C17.5903 3.71569 17.2843 3.40973 16.908 3.21799C16.4802 3 15.9201 3 14.8 3H9.2C8.0799 3 7.51984 3 7.09202 3.21799C6.71569 3.40973 6.40973 3.71569 6.21799 4.09202C6 4.51984 6 5.0799 6 6.2V21M15 12H15.01"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m16.2 19 4.8-7-4.8-7H3l4.8 7L3 19h13.2Z" />
             </svg>
             <p>{{$section_tag}}</p>
         </div>
@@ -68,10 +67,11 @@
 
         <h2 class="project_popup-content-title">{{$project_title_1}}</h2>
         <p class="project_popup-content-description">{{$project_description_1}}</p>
-    
+
         <ul class="project_popup-content-data">
             <li class="project_popup-content-data-point">Quantité De Portes:
-                <span>{{$project_number_of_doors_1}}</span></li>
+                <span>{{$project_number_of_doors_1}}</span>
+            </li>
             <li class="project_popup-content-data-point">Date: <span>{{$project_date_1}}</span> </li>
             <li class="project_popup-content-data-point">Période: <span>{{$project_period_1}}</span></li>
             <li class="project_popup-content-data-point">Location: <span>{{$project_location_1}}</span></li>
@@ -81,7 +81,7 @@
 <div id="project_popup2" class="project_popup" onclick="closePopup(2)">
     <div style="background-image: url(./projects/thumbnails/project-2.jpg)" class="project_popup-content">
         <span class="project_popup-content-close" onclick="closePopup(2)">&times;</span>
-    
+
 
         <video autoplay loop muted>
             <source src="./projects/videos/project-2.mp4" type="video/mp4">
@@ -90,10 +90,11 @@
 
         <h2 class="project_popup-content-title">{{$project_title_2}}</h2>
         <p class="project_popup-content-description">{{$project_description_2}}</p>
-    
+
         <ul class="project_popup-content-data">
             <li class="project_popup-content-data-point">Quantité De Portes:
-                <span>{{$project_number_of_doors_2}}</span></li>
+                <span>{{$project_number_of_doors_2}}</span>
+            </li>
             <li class="project_popup-content-data-point">Date: <span>{{$project_date_2}}</span> </li>
             <li class="project_popup-content-data-point">Période: <span>{{$project_period_2}}</span></li>
             <li class="project_popup-content-data-point">Location: <span>{{$project_location_2}}</span></li>
@@ -103,7 +104,7 @@
 <div id="project_popup3" class="project_popup" onclick="closePopup(3)">
     <div style="background-image: url(./projects/thumbnails/project-3.jpg)" class="project_popup-content">
         <span class="project_popup-content-close" onclick="closePopup(3)">&times;</span>
-    
+
 
         <video autoplay loop muted>
             <source src="./projects/videos/project-3.mp4" type="video/mp4">
@@ -112,10 +113,11 @@
 
         <h2 class="project_popup-content-title">{{$project_title_3}}</h2>
         <p class="project_popup-content-description">{{$project_description_3}}</p>
-    
+
         <ul class="project_popup-content-data">
             <li class="project_popup-content-data-point">Quantité De Portes:
-                <span>{{$project_number_of_doors_3}}</span></li>
+                <span>{{$project_number_of_doors_3}}</span>
+            </li>
             <li class="project_popup-content-data-point">Date: <span>{{$project_date_3}}</span> </li>
             <li class="project_popup-content-data-point">Période: <span>{{$project_period_3}}</span></li>
             <li class="project_popup-content-data-point">Location: <span>{{$project_location_3}}</span></li>
@@ -125,7 +127,7 @@
 <div id="project_popup4" class="project_popup" onclick="closePopup(4)">
     <div style="background-image: url(./projects/thumbnails/project-4.jpg)" class="project_popup-content">
         <span class="project_popup-content-close" onclick="closePopup(4)">&times;</span>
-    
+
 
         <video autoplay loop muted>
             <source src="./projects/videos/project-4.mp4" type="video/mp4">
@@ -134,10 +136,11 @@
 
         <h2 class="project_popup-content-title">{{$project_title_4}}</h2>
         <p class="project_popup-content-description">{{$project_description_4}}</p>
-    
+
         <ul class="project_popup-content-data">
             <li class="project_popup-content-data-point">Quantité De Portes:
-                <span>{{$project_number_of_doors_4}}</span></li>
+                <span>{{$project_number_of_doors_4}}</span>
+            </li>
             <li class="project_popup-content-data-point">Date: <span>{{$project_date_4}}</span> </li>
             <li class="project_popup-content-data-point">Période: <span>{{$project_period_4}}</span></li>
             <li class="project_popup-content-data-point">Location: <span>{{$project_location_4}}</span></li>
@@ -152,13 +155,14 @@
             <source src="./projects/videos/project-5.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-    
+
         <h2 class="project_popup-content-title">{{$project_title_5}}</h2>
         <p class="project_popup-content-description">{{$project_description_5}}</p>
-    
+
         <ul class="project_popup-content-data">
             <li class="project_popup-content-data-point">Quantité De Portes:
-                <span>{{$project_number_of_doors_5}}</span></li>
+                <span>{{$project_number_of_doors_5}}</span>
+            </li>
             <li class="project_popup-content-data-point">Date: <span>{{$project_date_5}}</span> </li>
             <li class="project_popup-content-data-point">Période: <span>{{$project_period_5}}</span></li>
             <li class="project_popup-content-data-point">Location: <span>{{$project_location_5}}</span></li>

@@ -2,7 +2,7 @@
 
     .hero-carousel {
         position: relative;
-        height: 95vh;
+        height: 100vh;
         overflow: hidden;
         display: flex;
         align-items: stretch;
@@ -36,7 +36,6 @@
 
         .hero-slider {
             background-size: cover;
-            background-position-y: 50%;
             position: absolute;
             top: 0;
             left: 0;
@@ -98,6 +97,9 @@
 
 
     &-indicator {
+        position: absolute;
+        z-index: 10;
+        bottom: 0;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -107,9 +109,15 @@
 
         height: 5vh;
 
+        background: linear-gradient(to top, #222222, #00000000);
+
         svg {
-            stroke: $Gray900;
+            width: 32px;
+            rotate: 90deg;
+            stroke: var(--accent-color);
             margin-right: 1rem;
+
+            animation: fly-x 500ms infinite alternate;
         }
     }
 }
@@ -126,7 +134,7 @@
                 top: 0;
                 bottom: 0;
                 width: 2rem;
-                background-color: rgba(0, 0, 0, 0.2);
+                background-color: rgba(0, 0, 0, 0.1);
                 color: white;
                 border: none;
                 cursor: pointer;

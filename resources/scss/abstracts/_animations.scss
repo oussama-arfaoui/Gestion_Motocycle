@@ -94,6 +94,16 @@
     }
 }
 
+@keyframes fly-x {
+    from {
+        transform: translateX(0.1em);
+    }
+
+    to {
+        transform: translateX(-0.1em);
+    }
+}
+
 @keyframes pulse {
     0% {
         width: 8px;
@@ -104,10 +114,17 @@
 
     100% {
         width: 40px;
-        /* Final width */
         height: 40px;
-        /* Final height */
         opacity: 0.5;
-        /* Final opacity */
+    }
+}
+
+@keyframes flash {
+    from {
+        box-shadow: 0px 0px 0px 8px hsla(164, 56%, 46%, 0.5);
+    }
+
+    to {
+        box-shadow: 0px 0px 0px 8px hsla(164, 56%, 46%, 0.1);
     }
 }

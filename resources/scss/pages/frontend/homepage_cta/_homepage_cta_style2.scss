@@ -1,0 +1,30 @@
+.homepage_cta_style2 {
+    padding-block: 8rem;
+
+    background: linear-gradient(to top, $Gray50, transparent);
+    background-position-y: 0;
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        h2 {
+            font-size: 36px;
+            margin-bottom: 2.5rem;
+            text-transform: capitalize;
+            text-align: center;
+
+
+            @media (max-width: 1024px) {
+                font-size: 32px;
+            }
+            
+            @media (max-width: 768px) {
+                font-size: 24px;
+            }
+
+        }
+    }
+}

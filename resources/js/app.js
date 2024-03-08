@@ -154,7 +154,7 @@ function create_the_admin_config_code() {
             <label>Style</label>
             <select name="style">
                 <option value="style1">Style 1</option>
-                <option value="style1">Style 2</option>
+                <option value="style2">Style 2</option>
             </select>
         </div>
 

@@ -5,11 +5,10 @@
     <p>{{ $description }}</p>
 
     <div class="category_overview_style2-categories">
-        <a href="/catalogue" class="category_overview_style2-categories-category">
+        <a href="/spaces" class="category_overview_style2-categories-category">
             <div class="category_overview_style2-categories-category-image">
-                <img src="#" alt="">
+                <img src="./categories/category-1.png" alt="">
             </div>
-            <img src="#" alt="">
             <div class="category_overview_style2-categories-category-text">
                 <h3>Mobinardo Jouets et Gadgets</h3>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -20,11 +19,10 @@
             </div>
         </a>
 
-        <a href="/catalogue" class="category_overview_style2-categories-category">
+        <a href="/spaces" class="category_overview_style2-categories-category">
             <div class="category_overview_style2-categories-category-image">
-                <img src="#" alt="">
+                <img src="./categories/category-2.png" alt="">
             </div>
-            <img src="#" alt="">
             <div class="category_overview_style2-categories-category-text">
                 <h3>Mobinardo MotorBikes</h3>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -35,11 +33,10 @@
             </div>
         </a>
 
-        <a href="/catalogue" class="category_overview_style2-categories-category">
+        <a href="/spaces" class="category_overview_style2-categories-category">
             <div class="category_overview_style2-categories-category-image">
-                <img src="#" alt="">
+                <img src="./categories/category-3.png" alt="">
             </div>
-            <img src="#" alt="">
             <div class="category_overview_style2-categories-category-text">
                 <h3>Mobinardo Accessories</h3>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

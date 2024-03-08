@@ -67,19 +67,19 @@
             @include Interactable;
 
             &::placeholder {
-                font-family: 'Urbanist', sans-serif;
+                font-family: 'Inter', sans-serif;
                 font-size: 16px;
             }
         }
 
         textarea {
             height: 200px;
-            font-family: 'Urbanist', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         &-submit {
             background-color: var(--accent-color);
-            font-family: 'Urbanist', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 18px;
             font-weight: 600;
             color: var(--light);
@@ -165,7 +165,7 @@
                 @include Interactable;
 
                 &::placeholder {
-                    font-family: 'Urbanist', sans-serif;
+                    font-family: 'Inter', sans-serif;
                     font-size: 16px;
                 }
             }
@@ -176,7 +176,7 @@
 
             &-submit {
                 background-color: var(--accent-color);
-                font-family: 'Urbanist', sans-serif;
+                font-family: 'Inter', sans-serif;
                 font-size: 18px;
                 font-weight: 600;
                 color: var(--light);
