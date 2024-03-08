@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProductCategoriesController;
+use App\Http\Controllers\OdooIntegrationController;
+use App\Http\Controllers\HomeController;
 
 
 /*
@@ -30,7 +32,12 @@ use App\Http\Controllers\ProductCategoriesController;
 |
 */
 
+/************************
+ * odoo
+ ************************/
 
+ Route::get('/products_list', [OdooIntegrationController::class, 'showProducts']);
+ 
 /************************
  * AUTH ROUTING
  ************************/
@@ -73,6 +80,13 @@ Route::get('/product-details', function () {
 Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () {
     //Route::get('/admin-home', function () { return view('welcome');} );
     Route::get('/dashboard', [DashboardController::class, 'index']);
+
+    Route::redirect('/admin', '/admin/home');
+    
+     /************************
+        * PRODUCTS ROUTES
+    ************************/
+    Route::get('/admin/home', [HomeController::class, 'index'])->name('home.index');
 
     /************************
         * PRODUCTS ROUTES

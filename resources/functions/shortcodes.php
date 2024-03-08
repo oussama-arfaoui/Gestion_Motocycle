@@ -116,7 +116,7 @@ function getShortcodeindex() {
         'brands' => [
             'name' => 'brands',
             'view' => 'frontend.shortcodes.brands.index', 
-            'attributes' => ['style']      
+            'attributes' => ['Brands','style']      
         ],
         'category_overview' => [
             'name' => 'category_overview',

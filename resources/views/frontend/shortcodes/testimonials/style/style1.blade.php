@@ -7,6 +7,7 @@
         <x-primary_button path='/product-categories/{{ $testimonialy->id }}' text='{{ $testimonialy->name }}'>
         </x-primary_button>
     </div>
+    
     <div class="category_with_examples_style1-items-item">
         <div class="category_with_examples_style1-items-item-tag">
             <p>{{ $testimonialy->name }}</p>
@@ -22,6 +23,7 @@
         <p>{{ $testimonialy->job_location }}</p>
         <p>{{ $testimonialy->testimonial }}</p>
     </div>
+
 </section>
 @endif
 @endforeach
