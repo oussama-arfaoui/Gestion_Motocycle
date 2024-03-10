@@ -173,9 +173,7 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
 
      Route::get('/admin/shortcode_generator', function () {
         return view('backend.generator.shortcode_generator');
-    })->name('shortcode_generator');
-    
-
+    })->name('shortcode_generator');   
 });
 
 
