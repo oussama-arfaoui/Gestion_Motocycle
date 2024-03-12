@@ -14,18 +14,16 @@
                         <img src="{{ asset('storage/Images/general/' . $firstImage) }}" alt="Brand Image">
                     @else
                         No image available
-                    @endif
-                    
-                @endif
-
-            @endforeach
-        @endforeach
-
-    </div>
-</div>
+                    @endif 
+                </div>
+            </div>
+            <script>
+                var copy = document.querySelector(".logos-slide").cloneNode(true);
+                document.querySelector(".logos").appendChild(copy);
+            </script>
 
 
-<script>
-    var copy = document.querySelector(".logos-slide").cloneNode(true);
-    document.querySelector(".logos").appendChild(copy);
-</script>
+        @endif
+    @endforeach
+@endforeach
+

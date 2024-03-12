@@ -5,8 +5,8 @@
     <div class="contact_information_style1-text">
         <h2 class="contact_information_style1-text-title">{{$title}}</h2>
         <p class="contact_information_style1-text-description">{{$description}}</p>
-        <x-action_button action="tel: {{$contact_number}}" text="{{$primary_button_label}}"></x-action_button>
-        <x-action_button action="tel: {{$contact_whatsapp}}" text="{{$secondary_button_label}}"></x-action_button>
+        <x-action_button action="tel: {{$contact_number}}" text="{{$primary_button_label}}"><x-call-icon/></x-action_button>
+        <x-action_button action="tel: {{$contact_whatsapp}}" text="{{$secondary_button_label}}"><x-whatsapp-icon /></x-action_button>
     </div>
     <div class="contact_information_style1-info">
         

@@ -17,9 +17,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProductCategoriesController;
 use App\Http\Controllers\OdooIntegrationController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\ForgotPasswordLinkController;
-
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectsCategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,8 +35,8 @@ use App\Http\Controllers\Auth\ForgotPasswordLinkController;
  * odoo
  ************************/
 
- Route::get('/products_list', [OdooIntegrationController::class, 'showProducts']);
- 
+Route::get('/products_list', [OdooIntegrationController::class, 'showProducts']);
+
 /************************
  * AUTH ROUTING
  ************************/
@@ -97,7 +96,7 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
     Route::get('/admin/product', [ProductsController::class, 'create'])->name('products.create');
     Route::post('/admin/product', [ProductsController::class, 'store'])->name('products.store');
     Route::get('/admin/product/{id}/edit', [ProductsController::class, 'edit'])->name('product.edit');
-    Route::post('/admin/product/edit', [ProductsController::class, 'update'])->name('product.update');
+    Route::put('/admin/product/{id}', [ProductsController::class, 'update'])->name('product.update');
     Route::delete('/admin/product/{id}', [ProductsController::class, 'destroy'])->name('products.destroy');
 
     /************************
@@ -166,8 +165,25 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
      Route::put('/admin/testimonials/{id}', [TestimonialController::class, 'update'])->name('testimonials.update');
      Route::delete('/admin/testimonials/{id}', [TestimonialController::class, 'destroy'])->name('testimonials.destroy');
 
-
-
+ /************************
+     * Projects/Portfolio ROUTES
+     ************************/
+    Route::get('/admin/projects', [ProjectController::class, 'index'])->name('projects.index');
+    Route::get('/admin/projects/create', [ProjectController::class, 'create'])->name('projects.create');
+    Route::post('/admin/projects/store', [ProjectController::class, 'store'])->name('projects.store');
+    Route::get('/admin/projects/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+    Route::put('/admin/projects/{id}', [ProjectController::class, 'update'])->name('projects.update');
+    Route::delete('/admin/projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+        /************************
+     * Projects CATEGORIES ROUTES
+     ************************/
+    Route::get('/admin/projects-categories', [ProjectsCategoriesController::class, 'index'])->name('projects-categories.index');
+    Route::get('/admin/projects-categories/create', [ProjectsCategoriesController::class, 'create'])->name('projects-categories.create');
+    Route::post('/admin/projects-categories/store', [ProjectsCategoriesController::class, 'store'])->name('projects-categories.store');
+    Route::get('/admin/projects-categories/{id}/edit', [ProjectsCategoriesController::class, 'edit'])->name('projects-categories.edit');
+    Route::put('/admin/projects-categories/{id}', [ProjectsCategoriesController::class, 'update'])->name('projects-categories.update');
+    Route::delete('/admin/projects-categories/{id}', [ProjectsCategoriesController::class, 'destroy'])->name('projects-categories.destroy');
+        /************************
  /************************
      * shortcode_generator ROUTES
      ************************/
@@ -201,6 +217,17 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
     ************************/
 
     Route::get('/product-categories/{categories}', [ProductCategoriesController::class, 'show'])->name('product-categories.show');
+    
+    /************************
+        * projects ROUTES
+    ************************/
+
+    Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
+        /************************
+        * projects-categories ROUTES
+    ************************/
+
+    Route::get('/projects-categories/{projectscategories}', [ProjectsCategoriesController::class, 'show'])->name('projects-categories.show');
 
         /************************
             * ShortCode ROUTES

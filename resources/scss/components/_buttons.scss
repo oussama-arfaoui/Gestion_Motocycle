@@ -232,6 +232,8 @@
 
     margin-right: 1rem;
 
+    @include Interactable;
+
     a {
         font-family: 'Inter', sans-serif;
 
@@ -257,6 +259,7 @@
 
         svg {
             stroke: var(--light);
+            fill: transparent;
             margin-right: 1rem;
             height: 28px;
             width: 28px;

@@ -1,6 +1,6 @@
 @php
-// Get the currently authenticated user
-$user = auth()->user();
+    // Get the currently authenticated user
+    $user = auth()->user();
 @endphp
 
 <div class="dashboard_header">

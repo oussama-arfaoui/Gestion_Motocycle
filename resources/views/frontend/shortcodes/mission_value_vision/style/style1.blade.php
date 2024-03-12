@@ -22,19 +22,19 @@
         <div class="mission_value_vision_style1-content-nodes">
 
             <div class="mission_value_vision_style1-content-nodes-node">
-                <img src="./icons/icon-values.png" alt="icon">
+                <img src="./icons/icon-mission.png" alt="icon">
                 <h3>{{ $node_title_1 }}</h3>
                 <p>{{ $node_description_1 }}</p>
             </div>
-
+            
             <div class="mission_value_vision_style1-content-nodes-node">
-                <img src="./icons/icon-vision.png" alt="icon">
+                <img src="./icons/icon-values.png" alt="icon">
                 <h3>{{ $node_title_2 }}</h3>
                 <p>{{ $node_description_2 }}</p>
             </div>
-
+            
             <div class="mission_value_vision_style1-content-nodes-node">
-                <img src="./icons/icon-mission.png" alt="icon">
+                <img src="./icons/icon-vision.png" alt="icon">
                 <h3>{{ $node_title_3 }}</h3>
                 <p>{{ $node_description_3 }}</p>
             </div>

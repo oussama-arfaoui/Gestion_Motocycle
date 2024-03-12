@@ -44,7 +44,8 @@
                 @endphp
 
                 @if($firstImage)
-                <td><img id="image-fucked" src="{{ asset('storage/Images/general/' . $firstImage) }}" alt="First Image"></td>
+                <td><img id="image-fucked" src="{{ asset('storage/Images/general/' . $firstImage) }}" alt="First Image">
+                </td>
                 @else
                 <td>No image available</td>
                 @endif
@@ -58,10 +59,10 @@
                 <td>{{ $product->status }}</td>
                 <td>{{ $product->template }}</td>
                 <td>{{ $product->seo_title }}</td>
-                <td>{{ $product->category->category_name }}</td>
+                <td>{{ optional($product->category)->category_name ?? 'null' }}</td>
                 </td>
                 <td class="dashboard_main-table-actions">
-                        <!-- Add button for viewing product details -->
+                    <!-- Add button for viewing product details -->
                     <a href="{{ route('products.show', $product->id) }}" target="_blank">
                         <button class="dashboard-icon-button action-view">
                             <x-eye-icon />
@@ -72,7 +73,7 @@
                             <x-edit-icon />
                         </button>
                     </a>
-                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline;">
+                    <form action="{{ route('products.destroy', $product->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" onclick="confirmDelete({{ $product->id }})"

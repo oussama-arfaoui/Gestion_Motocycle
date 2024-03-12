@@ -3,7 +3,7 @@
         <div class="row v-center">
             <div class="header-item item-left">
                 <div class="logo">
-                    <a href="#">
+                    <a href="/accueil">
                         <img src={{@asset('./logos/primary-logo.svg')}} alt="">
                     </a>
                 </div>
@@ -28,8 +28,12 @@
                             <a href="/accueil">Accueil</a>
                         </li>
 
+                        <li>
+                            <a href="/entreprise">Entreprise</a>
+                        </li>
+
                         <li class="menu-item-has-children">
-                            <a href="#">Catalogue <i class="fa fa-angle-down"></i></a>
+                            <a href="/catalogue">Catalogue <i class="fa fa-angle-down"></i></a>
                             <div class="sub-menu mega-menu mega-menu-column-4">
                                 <div class="list-item">
                                     <h4 class="title">Fournitures Indutrielles</h4>
@@ -66,7 +70,7 @@
                         </li>
 
                         <li class="menu-item-has-children">
-                            <a href="#">Services <i class="fas fa-angle-down"></i></a>
+                            <a href="/services">Services <i class="fas fa-angle-down"></i></a>
                             <div class="sub-menu single-column-menu">
                                 <ul>
                                     <li><a href="#">Maintenance</a></li>
@@ -76,7 +80,7 @@
                         </li>
 
                         <li class="menu-item-has-children">
-                            <a href="#">Projets <i class="fa fa-angle-down"></i></a>
+                            <a href="/projects">Projets <i class="fa fa-angle-down"></i></a>
                             <div class="sub-menu mega-menu mega-menu-column-4">
                                 <div class="list-item">
                                     <h4 class="title">Pharmaceutiques</h4>
@@ -131,11 +135,7 @@
                         </li>
                         
                         <li>
-                            <a href="#">Actualités</a>
-                        </li>
-                        
-                        <li>
-                            <a href="#">Contact</a>
+                            <a href="/actualites">Actualités</a>
                         </li>
                     </ul>
                 </nav>

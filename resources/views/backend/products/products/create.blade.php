@@ -7,6 +7,8 @@
         <a href='/admin'>Home</a>
         <x-arrow-icon />
         <a href="{{ route('products.index') }}">Products</a>
+        <x-arrow-icon />
+        <a href="{{ route('products.create') }}">Create Product</a>
     </div>
 
     {{-- Actions for the products table --}}

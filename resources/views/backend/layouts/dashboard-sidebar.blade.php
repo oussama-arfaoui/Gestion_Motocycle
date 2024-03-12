@@ -119,7 +119,9 @@
             <span>Testimonial</span>
         </a>
 
-        <a href="/admin/projects">
+
+
+        <button id="dropdown-nav-projects">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2.25 2.25H7.5V7.5H2.25V2.25Z" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round"
                     stroke-linejoin="round" />
@@ -130,10 +132,26 @@
                 <path d="M2.25 10.5H7.5V15.75H2.25V10.5Z" stroke-opacity="0.75" stroke-width="1.5"
                     stroke-linecap="round" stroke-linejoin="round" />
             </svg>
-            <span>Projects</span>
-        </a>
+            <span>projects</span>
 
 
+            <svg id="dropdown-nav-projects-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </button>
+
+        <div class="dashboard_sidebar__links-innerlink hide" id="dropdown-menu-nav-projects">
+            <a href="{{ route('projects.index') }}">
+                <span>Projects Items</span>
+            </a>
+
+            <a href="{{ route('projects-categories.index') }}">
+                <span>Projects Categories</span>
+            </a>
+        </div>
+        
         <a href="/admin/contact">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
