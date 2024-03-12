@@ -19,7 +19,7 @@ use App\Http\Controllers\OdooIntegrationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectsCategoriesController;
-
+use App\Http\Controllers\SettingsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -191,7 +191,21 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
 
      Route::get('/admin/shortcode_generator', function () {
         return view('backend.generator.shortcode_generator');
-    })->name('shortcode_generator');   
+    })->name('shortcode_generator');  
+    
+     
+     /************************* Settings ROUTES************************/
+            /************************
+             * pagesstyle ROUTES
+             ************************/
+
+            Route::get('/admin/pagesstyle', [SettingsController::class, 'indexpagesstyle'])->name('pagesstyle.index');
+            Route::put('/admin/pagesstyle', [SettingsController::class, 'updateAllPagesStyle'])->name('pagesstyle.updateAll');
+            Route::delete('/admin/pagesstyle/{id}', [SettingsController::class, 'destroypagesstyle'])->name('pagesstyle.destroy');
+
+
+
+
 });
 
 

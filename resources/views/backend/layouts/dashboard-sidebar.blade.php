@@ -241,7 +241,11 @@
 
         {{-- Dashboard Links that lead to accessibility: Settings, documentation... --}}
 
-        <a href="/admin/settings">
+  
+
+     
+        </a>
+        <button id="dropdown-nav-Settings">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_53_1199)">
                     <path
@@ -258,8 +262,28 @@
                 </defs>
             </svg>
             <span>Settings</span>
-        </a>
 
+
+            <svg id="dropdown-nav-Settings-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </button>
+
+        <div class="dashboard_sidebar__links-innerlink hide" id="dropdown-menu-nav-Settings">
+            <a href="{{ route('projects.index') }}">
+                <span>General settings</span>
+            </a>
+
+            <a href="{{ route('projects.index') }}">
+                <span>Navbar</span>
+            </a>
+
+            <a href="{{ route('pagesstyle.index') }}">
+                <span>Pages style</span>
+            </a>
+        </div>
 
         <a href="/admin/documnentation">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

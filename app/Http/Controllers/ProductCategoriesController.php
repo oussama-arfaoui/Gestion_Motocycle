@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\ProductCategories;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
+use App\Models\Pagesstyle;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\File;
 
 class ProductCategoriesController extends Controller
 {
@@ -22,8 +25,28 @@ class ProductCategoriesController extends Controller
     public function show(ProductCategories $categories)
     {
         $categories = $categories->load('products');
-        return view('frontend.pages.ProductCategories_details', compact('categories'));
+
+        // Fetch the page style from the database based on the name '/product-categories'
+        $pageStyle = Pagesstyle::where('name', '/product-categories')->first();
+
+        if ($pageStyle) {
+            // Define the path to the style file
+            $styleFilePath = resource_path("views/frontend/pages/products/Productcatergories/style/{$pageStyle->style}.blade.php");
+
+            // Check if the style file exists
+            if (File::exists($styleFilePath)) {
+                // Render the view using the dynamic style
+                return view("frontend.pages.products.Productcatergories.style.{$pageStyle->style}", compact('categories'));
+            } else {
+                // Default to a fallback style if the specified style file does not exist
+                return view("frontend.pages.products.Productcatergories.style.style1", compact('categories'));
+            }
+        } else {
+            // Default to a fallback style if no style is found in the database
+            return view("frontend.pages.products.Productcatergories.style.style1", compact('categories'));
+        }
     }
+    
     /**
      * Show the form for creating a new resource.
      *

@@ -18,8 +18,7 @@ class Product extends Model
         'template',
         'seo_title',
         'category_id',
-    ];
-    
+    ];    
 
     public function categories()
     {

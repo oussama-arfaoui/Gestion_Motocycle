@@ -22,7 +22,7 @@
             <img src="./logos/primary-logo.svg" alt="">
         </div>
 
-        <h2>{{ $categories->category_name }} </h2>
+        <h2>{{ $categories->category_name }}</h2>
         <p>{{ $categories->description}} </p>
     </section>
 
