@@ -31,7 +31,13 @@
             @foreach($categories as $category)
             <tr>
                 <td>{{ $category->category_name }}</td>
-                <td>{{ $category->image }}</td>
+                <td>
+                    @if($category->image)
+                        <img src="{{ asset('storage/Images/general/' . $category->image) }}" alt="Category Image">
+                    @else
+                        No image available
+                    @endif
+                </td>
                 <td class="dashboard_main-table-actions">
                     <a href="{{ route('product-categories.show', $category->id) }}" target="_blank">
                         <button class="dashboard-icon-button action-view">

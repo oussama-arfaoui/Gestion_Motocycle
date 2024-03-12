@@ -126,6 +126,9 @@ class ProductsController extends Controller
             "seo_title" => ['required', 'string', 'max:255'],
             "images.*" => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Adjust validation as needed
             "categories" => ['required', 'array'], // Categories must be an array
+            "points" => ['nullable', 'string'], // Add validation for points if needed
+            "characteristics" => ['nullable', 'string'], // Add validation for characteristics if needed
+            // Remove validation for fixed attributes
         ]);
     
         // If validation fails, redirect back with errors and old input
@@ -133,37 +136,40 @@ class ProductsController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
     
-        // Update product data
-        $product->update([
-            'product_name' => $request->input('product_name'),
-            'product_description' => $request->input('product_description'),
-            'status' => $request->input('status'),
-            'template' => $request->input('template'),
-            'seo_title' => $request->input('seo_title'),
-            'category_id' => $request->input('categories')[0], // Assuming only one category is selected
-        ]);
+        // Find the product by its ID
+        $product = Product::findOrFail($id);
     
-        // Handle image update for multiple images
+        // Handle image upload for multiple images
+        $imageNames = [];
         if ($request->hasFile('images')) {
-            $imageNames = [];
             foreach ($request->file('images') as $image) {
-                $imageName = $image->storeAs('Images/general', $image->hashName(), 'public'); // Use 'public' disk
+                $imageName = $image->store('Images/general', 'public');
                 $imageNames[] = basename($imageName);
             }
-    
-            // Delete previous images
-            $previousImages = json_decode($product->images, true);
-            foreach ($previousImages as $previousImage) {
-                Storage::disk('public')->delete('Images/general/' . $previousImage);
-            }
-    
-            // Update product images
-            $product->update(['images' => json_encode($imageNames)]);
+        } else {
+            // Use existing image names if no new images uploaded
+            $imageNames = json_decode($product->images, true) ?? [];
         }
     
+        // Update products attributes
+        $product->product_name = $request->input('product_name');
+        $product->product_description = $request->input('product_description');
+        $product->status = $request->input('status');
+        $product->template = $request->input('template');
+        $product->seo_title = $request->input('seo_title');
+        $product->category_id = $request->input('categories')[0];
+        $product->images = json_encode($imageNames);
+        $product->points = json_encode(explode(PHP_EOL, $request->input('points')));
+        $product->characteristics = $request->input('characteristics');
+        $product->attributes = json_encode(array_combine($request->input('attributes.name'), $request->input('attributes.value')));
+    
+        // Save the updated products
+        $product->save();
+    
         // Redirect the user to the products index page
-        return redirect()->route('products.index')->with('success', 'Product updated successfully.');
+        return redirect()->route('products.index')->with('success', 'Products updated successfully.');
     }
+    
     
     public function destroy($id)
     {
