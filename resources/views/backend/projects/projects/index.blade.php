@@ -61,7 +61,6 @@
                 <td>{{ $project->template }}</td>
                 <td>{{ $project->seo_title }}</td>
                 <td>{{ optional($project->projectscategory)->category_name ?? 'null' }}</td>
-
                 </td>
                 <td class="dashboard_main-table-actions">
                         <!-- Add button for viewing project details -->

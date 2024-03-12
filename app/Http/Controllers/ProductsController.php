@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Pagesstyle;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\File;
 
 class ProductsController extends Controller
 {
@@ -24,9 +27,28 @@ class ProductsController extends Controller
             ->with('products', $products)
             ->with('user', $user);
     }
+
     public function show(Product $product)
     {
-        return view('frontend.pages.product_details', compact('product'));
+        // Fetch the page style from the database based on the name '/products'
+        $pageStyle = Pagesstyle::where('name', '/products')->first();
+
+        if ($pageStyle) {
+            // Define the path to the style file
+            $styleFilePath = resource_path("views/frontend/pages/products/Productdetails/style/{$pageStyle->style}.blade.php");
+
+            // Check if the style file exists
+            if (File::exists($styleFilePath)) {
+                // Render the view using the dynamic style
+                return view("frontend.pages.products.Productdetails.style.{$pageStyle->style}", compact('product'));
+            } else {
+                // Default to a fallback style if the specified style file does not exist
+                return view("frontend.pages.products.Productdetails.style.style1", compact('product'));
+            }
+        } else {
+            // Default to a fallback style if no style is found in the database
+            return view("frontend.pages.products.Productdetails.style.style1", compact('product'));
+        }
     }
     /**
      * Show the form for creating a new resource.
