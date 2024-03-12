@@ -8,6 +8,27 @@
     overflow-x: hidden;
     overflow-y: scroll;
 
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: $Gray500;
+        border-radius: 4px;
+
+        &:hover {
+            background: $Gray400;
+            cursor: pointer;
+        }
+
+    }
+
     @media (max-width: 1024px) {
         width: 100vw;
         height: auto;
@@ -28,8 +49,9 @@
 
         a,
         svg {
-            color: $Gray900;
-            stroke: $Gray900;
+            color: var(--db-light);
+            stroke: var(--db-light);
+
             margin-left: 1rem;
             opacity: 0.7;
 
@@ -70,9 +92,9 @@
 
         th,
         td {
-            border: 1px solid $Gray200;
+            border: 1px solid var(--db-gray);
             padding: 1rem;
-            text-align: left;
+            text-align: start;
 
             img {
                 width: 50%;
@@ -86,25 +108,24 @@
 
         th {
             text-align: center;
-            background-color: $Gray300;
+            background-color: var(--db-gray);
         }
 
 
         tr:hover {
-            background-color: $Gray50;
+            background-color: var(--db-dark-gray);
         }
 
         td:last-child {
             display: flex;
-            align-items: center;
             justify-content: center;
-
+            align-items: center;
         }
 
     }
 
     &-modules {
-        border: 1px solid $Gray300;
+        border: 1px solid var(--db-gray);
         border-radius: 1rem;
 
         padding: 1rem;
@@ -137,41 +158,7 @@
     }
 
 
-    /// OVERVIEW PAGE SPECIFIC
 
-    .overview__title {
-        font-size: 28px;
-        margin-bottom: 2rem;
-
-        @media (max-width: 1024px) {
-            font-size: 14px;
-        }
-    }
-
-    .overview__section {
-        border: 1px solid $Gray300;
-        border-radius: 8px;
-
-        padding: 2rem;
-
-        &-title{
-            margin-bottom: 2rem;
-        }
-
-        &-cards {
-            border: 1px solid red;
-
-            &-card {
-                width: 20%;
-                border: 1px solid purple;
-                height: 256px;
-
-                a {
-                    width: 100%;
-                }
-            }
-        }
-    }
 }
 
 .dashboard-icon-button {
@@ -187,7 +174,7 @@
     }
 
     border-radius: 8px;
-    border: 1px solid $Gray800;
+    border: 1px solid var(--db-light);
 
     display: grid;
     place-items: center;
@@ -204,22 +191,22 @@
             height: 20px;
         }
 
-        stroke: $Gray800;
+        stroke: var(--db-light);
     }
 
 }
 
 
 .action-view {
-    background-color: $Blue100;
+    background-color: var(--db-blue);
 }
 
 .action-edit {
-    background-color: $Purple100;
+    background-color: var(--db-purple);
 }
 
 .action-delete {
-    background-color: $Red100;
+    background-color: var(--db-red);
 }
 
 .dashboard-icon-dropdown {
@@ -230,7 +217,7 @@
     height: 32px;
     padding-inline: 0.5rem;
 
-    border: 1px solid $Gray800;
+    border: 1px solid var(--db-light);
     border-radius: 8px;
 
     background-color: transparent;
@@ -247,10 +234,11 @@
         font-style: normal;
         font-weight: 600;
         font-size: 14px;
+        color: var(--db-light);
     }
 
     svg {
-        stroke: $Gray800;
+        stroke: var(--db-light);
     }
 }
 
@@ -258,10 +246,10 @@
     position: absolute;
     z-index: 9999;
 
-    border: 1px solid $Gray800;
+    border: 1px solid var(--db-light);
     border-radius: 8px;
 
-    background-color: $Gray50;
+    background-color: var(--db-dark);
     box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.2);
 
     top: 54px;
@@ -315,11 +303,11 @@
 
     height: 32px;
     background-color: transparent;
-    color: $Gray900;
+    color: var(--db-light);
 
     padding-inline: 0.5rem;
 
-    border: 1px solid $Gray900;
+    border: 1px solid var(--db-light);
     border-radius: 8px;
 
     display: flex;
@@ -334,7 +322,7 @@
 
 
     svg {
-        stroke: $Gray900;
+        stroke: var(--db-light);
         margin-right: 0.5rem;
     }
 
@@ -349,8 +337,11 @@
     background-color: $Gray800;
     color: $Gray100;
 
+
+
     padding-inline: 0.5rem;
 
+    border: 1px solid var(--db-gray);
     border-radius: 8px;
 
     font-family: "Inter", sans-serif;
@@ -378,7 +369,7 @@
 
         label {
             font-size: 16px;
-            color: $Gray700;
+            color: var(--db-light);
             margin-bottom: 0.5rem;
         }
 
@@ -396,19 +387,21 @@
             left: 352px;
             top: 242px;
 
-            border: 1px solid $Gray300;
+            border: 1px solid var(--db-gray);
             border-radius: 8px;
 
             padding-inline: 0.5rem;
 
-            color: $Gray900;
+            color: var(--db-light);
             font-family: 'Inter',
             sans-serif;
             font-size: 14px;
             font-weight: 500;
 
+            background-color: var(--db-dark);
+
             &::placeholder {
-                color: $Gray400;
+                color: var(--db-gray);
                 font-family: 'Inter', sans-serif;
                 font-size: 14px;
                 font-weight: 400;
@@ -424,7 +417,7 @@
             }
 
             border-radius: 8px;
-            border: 1px solid $Gray300;
+            border: 1px solid var(--db-gray);
 
             padding: 1rem;
             line-height: 1.5;
@@ -433,6 +426,9 @@
             overflow: scroll;
 
             @include Interactable;
+
+            background-color: var(--db-dark);
+            color: var(--db-light);
 
             &::-webkit-scrollbar {
                 width: 8px;
@@ -465,7 +461,7 @@
 
         label {
             font-size: 16px;
-            color: $Gray700;
+            color: var(--db-light);
             margin-bottom: 0.5rem;
         }
 
@@ -475,8 +471,11 @@
             input {
                 outline: none;
                 border: none;
-                border-bottom: 1px solid $Gray500;
+                border-bottom: 1px solid var(--db-gray);
                 padding: 0.25rem 0.5rem;
+
+                background-color: var(--db-dark);
+                color: var(--db-light);
             }
         }
     }
@@ -492,7 +491,7 @@
 
         label {
             font-size: 16px;
-            color: $Gray700;
+            color: var(--db-light);
             margin-bottom: 0.1rem;
         }
 
@@ -506,17 +505,40 @@
             left: 352px;
             top: 242px;
 
-            border: 1px solid $Gray300;
+            border: 1px solid var(--db-gray);
             border-radius: 8px;
 
             padding-inline: 0.5rem;
 
-            color: $Gray900;
+            background-color: var(--db-dark);
+
+            color: var(--db-light);
             font-family: 'Inter', sans-serif;
             font-size: 14px;
             font-weight: 500;
 
             @include Interactable;
+
+            &::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            /* Track */
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            /* Handle */
+            &::-webkit-scrollbar-thumb {
+                background: $Gray500;
+                border-radius: 4px;
+
+                &:hover {
+                    background: $Gray400;
+                    cursor: pointer;
+                }
+
+            }
         }
     }
 
@@ -525,7 +547,8 @@
 
         input,
         textarea {
-            background-color: $Gray100;
+            background-color: var(--db-dark-gray);
+            color: var(--db-light);
             height: 256px;
         }
 
@@ -538,7 +561,7 @@
 
         &-action {
             margin-bottom: 1rem;
-            background-color: $Blue200;
+            background-color: var(--db-blue);
             margin-right: 1rem;
         }
     }
@@ -547,8 +570,8 @@
 
 
 .shortcode-editor {
-    background-color: $Gray50;
-    border: 1px solid $Gray300;
+    background-color: var(--db-dark-gray);
+    border: 1px solid var(--db-gray);
 
     border-radius: 8px;
     padding: 1rem;
@@ -594,7 +617,7 @@
         display: grid;
         place-items: center;
 
-        border: 1px solid $Gray300;
+        border: 1px solid var(--db-gray);
     }
 
     img {

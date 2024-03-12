@@ -15,6 +15,8 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProductCategoriesController;
+use App\Http\Controllers\OdooIntegrationController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordLinkController;
 
@@ -30,7 +32,12 @@ use App\Http\Controllers\Auth\ForgotPasswordLinkController;
 |
 */
 
+/************************
+ * odoo
+ ************************/
 
+ Route::get('/products_list', [OdooIntegrationController::class, 'showProducts']);
+ 
 /************************
  * AUTH ROUTING
  ************************/
@@ -75,6 +82,13 @@ Route::redirect('/', '/accueil');
 Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () {
     //Route::get('/admin-home', function () { return view('welcome');} );
     Route::get('/dashboard', [DashboardController::class, 'index']);
+
+    Route::redirect('/admin', '/admin/home');
+    
+     /************************
+        * PRODUCTS ROUTES
+    ************************/
+    Route::get('/admin/home', [HomeController::class, 'index'])->name('home.index');
 
     /************************
         * PRODUCTS ROUTES

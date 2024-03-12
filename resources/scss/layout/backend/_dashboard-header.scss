@@ -1,6 +1,6 @@
 .dashboard_header {
     height: 64px;
-    border-bottom: 1px solid $Gray100;
+    border-bottom: 1px solid var(--db-gray);
     width: calc(100vw - 256px);
 
     display: flex;

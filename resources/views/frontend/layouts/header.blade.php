@@ -1,165 +1,214 @@
 <header class="header">
+    <div class="global_container">
+        <div class="row v-center">
+            <div class="header-item item-left">
+                <div class="logo">
+                    <a href="#">
+                        <img src={{@asset('./logos/primary-logo.svg')}} alt="">
+                    </a>
+                </div>
+            </div>
 
-    <div class="global_container header__info">
-        <div class="header__info-node">
-            <p>Numero Telephone: </p>
-            <h3>{{$contact_number}} </h3>
-        </div>
+            <!-- menu start here -->
+            <div class="header-item item-center">
+                <div class="menu-overlay"></div>
 
-        <div class="header__info-node">
-            <p>Numero Whatsapp: </p>
-            <h3>{{$contact_whatsapp}} </h3>
-        </div>
+                <nav class="menu">
+                    <div class="mobile-menu-head">
+                        <div class="go-back">
+                            <x-chevron-icon></x-chevron-icon>
+                        </div>
+                        <div class="current-menu-title"></div>
+                        <div class="mobile-menu-close">
+                            <x-add-icon></x-add-icon>
+                        </div>
+                    </div>
+                    <ul class="menu-main">
+                        <li>
+                            <a href="/accueil">Accueil</a>
+                        </li>
 
-        <div class="header__info-node">
-            <p>Contact Email: </p>
-            <h3>{{$contact_email}} </h3>
-        </div>
+                        <li class="menu-item-has-children">
+                            <a href="#">Catalogue <i class="fa fa-angle-down"></i></a>
+                            <div class="sub-menu mega-menu mega-menu-column-4">
+                                <div class="list-item">
+                                    <h4 class="title">Fournitures Indutrielles</h4>
+                                    <ul>
+                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="#">Product List</a></li>
+                                    </ul>
+                                </div>
+                                <div class="list-item">
+                                    <h4 class="title">Outils Industrielles</h4>
+                                    <ul>
+                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="#">Product List</a></li>
+                                    </ul>
+                                </div>
+                                <div class="list-item">
+                                    <img src={{@asset('./blanks/500x500.png')}} alt="shop">
+                                </div>
+                            </div>
+                        </li>
 
+                        <li class="menu-item-has-children">
+                            <a href="#">Services <i class="fas fa-angle-down"></i></a>
+                            <div class="sub-menu single-column-menu">
+                                <ul>
+                                    <li><a href="#">Maintenance</a></li>
+                                    <li><a href="#">Machinerie</a></li>
+                                </ul>
+                            </div>
+                        </li>
 
-    </div>
+                        <li class="menu-item-has-children">
+                            <a href="#">Projets <i class="fa fa-angle-down"></i></a>
+                            <div class="sub-menu mega-menu mega-menu-column-4">
+                                <div class="list-item">
+                                    <h4 class="title">Pharmaceutiques</h4>
+                                    <ul>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                    </ul>
+                                    <h4 class="title">Minières</h4>
+                                    <ul>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                    </ul>
+                                </div>
+                                <div class="list-item">
+                                    <h4 class="title">Plasturgie</h4>
+                                    <ul>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                    </ul>
+                                    <h4 class="title">Ceramique</h4>
+                                    <ul>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                    </ul>
+                                </div>
+                                <div class="list-item">
+                                    <h4 class="title">Agro-Alimentaires</h4>
+                                    <ul>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                    </ul>
+                                </div>
+                                <div class="list-item">
+                                    <img src={{@asset('./blanks/500x500.png')}} alt="shop">
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li>
+                            <a href="#">Actualités</a>
+                        </li>
+                        
+                        <li>
+                            <a href="#">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
 
+            </div>
+            <x-primary_button path="/contact" text="Contactez Nous"></x-primary_button>
+            <!-- menu end here -->
 
-    <div class="global_container header__content">
-        <div class="header__logo">
-            <img src={{@asset('/logos/primary-logo.svg')}} alt="logo-img">
-        </div>
-
-        <nav class="header__nav">
-
-            <li>
-                <a href="/accueil">Accueil</a>
-            </li>
-
-            <li>
-                <a href="/entreprise"></a>
-            </li>
-
-            <li id="catalogue">
-                <a href="/catalogue">
-                    <span>Catalogue</span>
-                    <x-chevron-icon />
-                </a>
-            </li>
-
-            <li id="services">
-                <a href="/services">
-                    <span>services</span>
-                    <x-chevron-icon />
-                </a>
-            </li>
-
-            <li id="projects">
-                <a href="/projects">
-                    <span>projects</span>
-                    <x-chevron-icon />
-                </a>
-            </li>
-
-
-            <li>
-                <a href="/actualites">Actualités</a>
-            </li>
-        </nav>
-
-
-        <div class="header__cta">
-            <x-primary_button path='/contact' text="Contactez-Nous!"></x-primary_button>
+            <div class="header-item item-right">
+                <div class="mobile-menu-trigger">
+                    <span></span>
+                </div>
+            </div>
         </div>
     </div>
 </header>
 
-<div class="header__menu ">
-    <div class="header__menu-content global_container">
-
-        <ul id="navigation-links" class="header__menu-content-dropdown">
-            <li>
-                <a href="/projects">
-                    <span>Sub Item #1</span>
-                    <x-chevron-icon />
-                </a>
-            </li>
-        </ul>
-        <ul id="navigation-sublinks" class="header__menu-content-dropwdown-sub">
-            <li>
-                <a href="#">Sub Sub Item #1</a>
-            </li>
-            <li>
-                <a href="#">Sub Sub Item #2</a>
-            </li>
-            <li>
-                <a href="#">Sub Sub Item #3</a>
-            </li>
-        </ul>
-    </div>
-</div>
-
-{{-- Bottom Navigation --}}
-
-<div class="BottomNav">
-    <div class="BottomNav__left">
-        <a href="/accueil">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path
-                    d="M1.5 7.99999L7.46933 2.02999C7.76267 1.73732 8.23733 1.73732 8.53 2.02999L14.5 7.99999M3 6.49999V13.25C3 13.664 3.336 14 3.75 14H6.5V10.75C6.5 10.336 6.836 9.99999 7.25 9.99999H8.75C9.164 9.99999 9.5 10.336 9.5 10.75V14H12.25C12.664 14 13 13.664 13 13.25V6.49999M5.5 14H11"
-                    stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <p>Accueil</p>
-        </a>
-        <a href="/spaces">
-            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 2.5H8.83333V8.33333H3V2.5Z" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                <path d="M12.1667 2.5H18V8.33333H12.1667V2.5Z" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                <path d="M12.1667 11.6667H18V17.5H12.1667V11.6667Z" stroke="white" stroke-width="1.5"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M3 11.6667H8.83333V17.5H3V11.6667Z" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                    stroke-linejoin="round" />
-            </svg>
-            <p>Spaces</p>
-        </a>
-    </div>
-    <div class="BottomNav__middle">
-        <button>
-            <a href="tel: {{ $contact_number }}">
-                <x-call-icon />
-            </a>
-        </button>
-    </div>
-
-    <div class="BottomNav__right">
-        <a href="/contact">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M17.5 9.58333C17.5029 10.6832 17.2459 11.7682 16.75 12.75C16.162 13.9264 15.2581 14.916 14.1395 15.6077C13.021 16.2995 11.7319 16.6662 10.4167 16.6667C9.31678 16.6695 8.23176 16.4126 7.25 15.9167L2.5 17.5L4.08333 12.75C3.58744 11.7682 3.33047 10.6832 3.33333 9.58333C3.33384 8.26812 3.70051 6.97904 4.39227 5.86045C5.08402 4.74187 6.07355 3.83797 7.25 3.24999C8.23176 2.7541 9.31678 2.49713 10.4167 2.49999H10.8333C12.5703 2.59582 14.2109 3.32896 15.441 4.55904C16.671 5.78912 17.4042 7.4297 17.5 9.16666V9.58333Z"
-                    stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <p>Contact</p>
-        </a>
-        <a href="/actualites">
-            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M12.1667 1.66666H5.50001C5.05798 1.66666 4.63406 1.84225 4.3215 2.15481C4.00894 2.46737 3.83334 2.8913 3.83334 3.33332V16.6667C3.83334 17.1087 4.00894 17.5326 4.3215 17.8452C4.63406 18.1577 5.05798 18.3333 5.50001 18.3333H15.5C15.942 18.3333 16.366 18.1577 16.6785 17.8452C16.9911 17.5326 17.1667 17.1087 17.1667 16.6667V6.66666L12.1667 1.66666Z"
-                    stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M12.1667 1.66666V6.66666H17.1667" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                <path d="M13.8333 10.8333H7.16666" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                <path d="M13.8333 14.1667H7.16666" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                <path d="M8.83332 7.5H7.16666" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                    stroke-linejoin="round" />
-            </svg>
-            <p>Actualités</p>
-        </a>
-    </div>
-</div>
-
-
 <script>
-    const navigation_links = document.getElementById("navigation-links");
-    const navigation_sublinks = document.getElementById("navigation-sublinks");
-
-
+    const menu = document.querySelector(".menu");
+    const menuMain = menu.querySelector(".menu-main");
+    const goBack = menu.querySelector(".go-back");
+    const menuTrigger = document.querySelector(".mobile-menu-trigger");
+    const closeMenu = menu.querySelector(".mobile-menu-close");
+    let subMenu;
+    menuMain.addEventListener("click", (e) =>{
+    if(!menu.classList.contains("active")){
+    return;
+    }
+    if(e.target.closest(".menu-item-has-children")){
+    const hasChildren = e.target.closest(".menu-item-has-children");
+    showSubMenu(hasChildren);
+    }
+    });
+    goBack.addEventListener("click",() =>{
+    hideSubMenu();
+    })
+    menuTrigger.addEventListener("click",() =>{
+    toggleMenu();
+    })
+    closeMenu.addEventListener("click",() =>{
+    toggleMenu();
+    })
+    document.querySelector(".menu-overlay").addEventListener("click",() =>{
+    toggleMenu();
+    })
+    function toggleMenu(){
+    menu.classList.toggle("active");
+    document.querySelector(".menu-overlay").classList.toggle("active");
+    }
+    function showSubMenu(hasChildren){
+    subMenu = hasChildren.querySelector(".sub-menu");
+    subMenu.classList.add("active");
+    subMenu.style.animation = "slideLeft 0.5s ease forwards";
+    const menuTitle = hasChildren.querySelector("i").parentNode.childNodes[0].textContent;
+    menu.querySelector(".current-menu-title").innerHTML=menuTitle;
+    menu.querySelector(".mobile-menu-head").classList.add("active");
+    }
+    
+    function hideSubMenu(){
+    subMenu.style.animation = "slideRight 0.5s ease forwards";
+    setTimeout(() =>{
+    subMenu.classList.remove("active");
+    },300);
+    menu.querySelector(".current-menu-title").innerHTML="";
+    menu.querySelector(".mobile-menu-head").classList.remove("active");
+    }
+    
+    window.onresize = function(){
+    if(this.innerWidth >991){
+    if(menu.classList.contains("active")){
+    toggleMenu();
+    }
+    
+    }
+    }
 </script>

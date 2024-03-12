@@ -1,0 +1,48 @@
+.about_extension_style2 {
+    padding-bottom: 4rem;
+
+    &-nodes {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+
+        @media (max-width: 1024px) {
+            display: grid;
+            place-items: center;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+        }
+
+        @media (max-width: 768px) {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &-node {
+            flex: auto;
+            width: 100%;
+
+            border: 1px solid var(--accent-color);
+            border-top-right-radius: 2rem;
+            border-bottom-left-radius: 2rem;
+
+            padding: 2rem 1rem;
+
+            text-align: center;
+
+            img {
+                width: 64px;
+                margin-bottom: 2rem;
+            }
+
+            h3 {
+                color: var(--accent-color);
+                margin-bottom: 0.5rem;
+            }
+
+            p {
+                line-height: 1.5;
+            }
+        }
+    }
+}

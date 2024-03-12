@@ -1,15 +1,18 @@
 <button class="main-btn">
     <a href="{{$path}}">
 
-        <span>{{$text}}</span>
 
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        <svg class="arr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="feather feather-chevron-right">
             <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
 
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        <span class="text">{{$text}}</span>
+
+        <span class="circle"></span>
+
+        <svg class="arr-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="feather feather-arrow-right">
             <line x1="5" y1="12" x2="19" y2="12"></line>

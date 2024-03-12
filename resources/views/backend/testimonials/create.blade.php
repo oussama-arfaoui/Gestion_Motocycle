@@ -8,7 +8,7 @@
         <x-arrow-icon />
         <a href="{{ route('testimonials.index') }}">Testimonials</a>
         <x-arrow-icon />
-        <span>Create Testimonial</span>
+        <a href="{{ route('testimonials.create') }}">Create Testimonial</a>
     </div>
 
     <!-- Form -->

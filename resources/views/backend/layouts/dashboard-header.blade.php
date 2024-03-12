@@ -1,3 +1,8 @@
+@php
+// Get the currently authenticated user
+$user = auth()->user();
+@endphp
+
 <div class="dashboard_header">
   <div class="dashboard_header-buttons">
 
@@ -21,7 +26,7 @@
       </svg></button>
 
     {{-- Theme Button --}}
-    <button class="dashboard-icon-button">
+    <button class="dashboard-icon-button dashboard-theme-toggler">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M15.75 9.5925C15.6321 10.8692 15.1529 12.0858 14.3687 13.1001C13.5845 14.1144 12.5277 14.8843 11.3218 15.3199C10.116 15.7555 8.81104 15.8386 7.55967 15.5596C6.30831 15.2805 5.16229 14.6509 4.25572 13.7443C3.34914 12.8378 2.7195 11.6917 2.44048 10.4404C2.16145 9.18901 2.24459 7.88406 2.68014 6.67822C3.1157 5.47238 3.88567 4.41552 4.89996 3.63131C5.91424 2.8471 7.1309 2.36798 8.40755 2.25C7.66011 3.2612 7.30043 4.50709 7.39395 5.76106C7.48746 7.01503 8.02794 8.19379 8.9171 9.08295C9.80625 9.9721 10.985 10.5126 12.239 10.6061C13.493 10.6996 14.7388 10.3399 15.75 9.5925Z"
@@ -53,7 +58,7 @@
         stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
 
-    <span>Username</span>
+    <span>{{ $user->name }}</span>
 
     <svg id="dropdown-username-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M3.5 5.25L7 8.75L10.5 5.25" stroke-width="1.5" stroke-linecap="round"
@@ -68,3 +73,37 @@
     </ul>
   </div>
 </div>
+
+{{-- 
+<script>
+  const root = document.documentElement;
+        let isToggled = false;
+
+        const toggleColors = () => {
+            if (isToggled) {
+                root.style.setProperty('--db-light', '#111827');
+                root.style.setProperty('--db-dark', '#F9FAFB');
+                root.style.setProperty('--db-gray', '#D2D5DA');
+                root.style.setProperty('--db-dark-gray', '#1f29371c');
+
+                root.style.setProperty('--db-blue', '#93c5fd');
+                root.style.setProperty('--db-purple', '#d8b4fe');
+                root.style.setProperty('--db-red', '#FCA5A5');
+                root.style.removeProperty('--db-green');
+            } else {
+                root.style.setProperty('--db-light', '#d1cfcc');
+                root.style.setProperty('--db-dark', '#000100');
+                root.style.setProperty('--db-gray', '#d1cfcc81');
+                root.style.setProperty('--db-dark-gray', '#54545481');
+
+                root.style.setProperty('--db-blue', '#5268a589');
+                root.style.setProperty('--db-purple', '#cfced18c');
+                root.style.setProperty('--db-red', '#ffac7c8a');
+                root.style.setProperty('--db-green', '#cbd62e80');
+            }
+
+            isToggled = !isToggled;
+        };
+
+        document.querySelector('.dashboard-theme-toggler').addEventListener('click', toggleColors);
+</script> --}}

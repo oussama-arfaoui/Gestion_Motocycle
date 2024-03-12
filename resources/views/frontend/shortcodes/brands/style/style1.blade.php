@@ -1,27 +1,30 @@
 <div class="logos">
     <div class="logos-slide">
-        <img src="./blanks/128x64.png" />
-        <img src="./blanks/128x64.png" />
-        <img src="./blanks/128x64.png" />
-        <img src="./blanks/128x64.png" />
-        <img src="./blanks/128x64.png" />
-        <img src="./blanks/128x64.png" />
-        <img src="./blanks/128x64.png" />
-        <img src="./blanks/128x64.png" />
-        <img src="./blanks/128x64.png" />
-        <img src="./blanks/128x64.png" />
-        {{-- <img src="./brands/brand-2.png" />
-        <img src="./brands/brand-3.png" />
-        <img src="./brands/brand-4.png" />
-        <img src="./brands/brand-5.png" />
-        <img src="./brands/brand-6.png" />
-        <img src="./brands/brand-7.png" />
-        <img src="./brands/brand-8.png" />
-        <img src="./brands/brand-9.png" />
-        <img src="./brands/brand-10.png" />
-        <img src="./brands/brand-11.png" /> --}}
+
+        @foreach(explode(',', $Brands) as $BrandsId)
+            @foreach($Brandss as $Brandy)
+                @if($Brandy->id == $BrandsId)
+
+                    @php
+                        $imageArray = json_decode($Brandy->image, true);
+                        $firstImage = isset($imageArray[0]) ? $imageArray[0] : null;
+                    @endphp
+
+                    @if($firstImage)
+                        <img src="{{ asset('storage/Images/general/' . $firstImage) }}" alt="Brand Image">
+                    @else
+                        No image available
+                    @endif
+                    
+                @endif
+
+            @endforeach
+        @endforeach
+
     </div>
 </div>
+
+
 <script>
     var copy = document.querySelector(".logos-slide").cloneNode(true);
     document.querySelector(".logos").appendChild(copy);

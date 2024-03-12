@@ -2,15 +2,15 @@
     <div class="testimonials_style1-text">
         <h2>{{$title}}</h2>
     </div>
-    <div class="testimonials_style1-items">
-        {{-- Testimonials Loops --}}
-        @foreach(explode(',', $testimonials) as $testimonialsId)
-        @foreach($testimonialss as $testimonialy)
-        @if($testimonialy->id == $testimonialsId)
-        <div class="testimonials_style1-items-item">
-            @if($testimonialy->image)
-            <img src="{{ asset('storage/Images/general/' . $testimonialy->image) }}" alt="{{$testimonialy->image}}">
-            @else
+    
+    <div class="category_with_examples_style1-items-item">
+        <div class="category_with_examples_style1-items-item-tag">
+            <p>{{ $testimonialy->name }}</p>
+        </div>
+        <!-- Check if images exist for the product -->
+        <p>   @if($testimonialy->image)
+        <img src="{{ asset('storage/Images/general/' . $testimonialy->image) }}" alt="Testimonial Image">
+        @else
             <p>No image available</p>
             @endif
             <p>{{ $testimonialy->testimonial }}</p>
@@ -33,6 +33,7 @@
             <x-chevron-icon></x-chevron-icon>
         </button>
     </div>
+
 </section>
 
 <script>

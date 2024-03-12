@@ -207,9 +207,39 @@ $Gray900: #111827;
 /// FRONTEND
 
 :root {
+    /// ADMIN DASHBOARD
+
+    /// dark mode
+
+    // --db-light: #d1cfcc;
+    // --db-dark: #000100;
+    // --db-gray: #d1cfcc81;
+    // --db-dark-gray: #54545481;
+
+    // --db-blue: #5268a589;
+    // --db-purple: #cfced18c;
+    // --db-red: #ffac7c8a;
+    // --db-green: #cbd62e80;
+
+
+    /// Light Mode
+
+    --db-light: #111827;
+    --db-dark: #F9FAFB;
+    --db-gray: #D2D5DA;
+    --db-dark-gray: #1f29371c;
+
+    --db-blue: #93c5fd;
+    --db-purple: #d8b4fe;
+    --db-red: #FCA5A5;
+
+
+    /// WEBSITE
+
     --light: #ffffff;
     --dark: #222222;
 
-    --primary-color: #000000;
+    --primary-color: #1B2446;
     --accent-color: #DC2626;
+
 }

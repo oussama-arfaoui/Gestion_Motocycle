@@ -9,6 +9,12 @@ function getShortcodeTypes() {
             'name' => 'page_banner', 
             'view' => 'frontend.shortcodes.page_banner.admin-config',     
         ],
+        
+    'banner_message' => [
+        'name' => 'banner_message',
+        'view' => 'frontend.shortcodes.banner_message.admin-config',
+    ],
+    
 
 
         /// Homepage
@@ -16,6 +22,10 @@ function getShortcodeTypes() {
         'hero_slider' => [
             'name' => 'hero_slider',
             'view' => 'frontend.shortcodes.hero_slider.admin-config',    
+        ],
+        'hero_section' => [
+            'name' => 'hero_section',
+            'view' => 'frontend.shortcodes.hero_section.admin-config',
         ],
         'brands' => [
             'name' => 'brands',  
@@ -139,6 +149,13 @@ function getShortcodeindex() {
             'view' => 'frontend.shortcodes.page_banner.index', 
             'attributes' => [ 'title', 'description','style']      
         ],
+        
+        'banner_message' => [
+            'name' => 'banner_message',
+            'view' => 'frontend.shortcodes.banner_message.index',
+            'attributes' => ['title', 'path','style']
+        ],
+        
 
         // Homepage
 
@@ -147,10 +164,15 @@ function getShortcodeindex() {
             'view' => 'frontend.shortcodes.hero_slider.index', 
             'attributes' =>['title', 'description', 'button_primary_label','style']      
         ],
+        'hero_section' => [
+            'name' => 'hero_section',
+            'view' => 'frontend.shortcodes.hero_section.index',
+            'attributes' => ['section_tag', 'title', 'subtitle', 'description', 'primary_button_label', 'secondary_button_label','style']
+        ],
         'brands' => [
             'name' => 'brands',
             'view' => 'frontend.shortcodes.brands.index', 
-            'attributes' => ['style']      
+            'attributes' => ['Brands','style']      
         ],
         'category_overview' => [
             'name' => 'category_overview',
@@ -205,6 +227,7 @@ function getShortcodeindex() {
             'view' => 'frontend.shortcodes.testimonials.index',
             'attributes' => ['title', 'description', 'testimonials','style']
         ],
+        
     
         
         
@@ -282,20 +305,11 @@ function getShortcodeindex() {
             'view' => 'frontend.shortcodes.meet_the_team.index',
             'attributes' => ['section_tag', 'title', 'description', 'member_1', 'job_title_1', 'member_2', 'job_title_2', 'member_3', 'job_title_3','style']
         ],
-        'mission_value_mission' => [
-            'name' => 'mission_value_mission',
-            'view' => 'frontend.shortcodes.mission_value_mission.index',
-            'attributes' => ['section_tag', 'title', 'description', 'node_title_1', 'node_description_1', 'node_title_2', 'node_description_2', 'node_title_3', 'node_description_3','style']
-        ],
         'mission_value_vision' => [
             'name' => 'mission_value_vision',
             'view' => 'frontend.shortcodes.mission_value_vision.index',
             'attributes' => ['section_tag', 'title', 'description', 'node_title_1', 'node_description_1', 'node_title_2', 'node_description_2', 'node_title_3', 'node_description_3','style']
-        ],
-        
-        
-        
-        
+        ]
         
     ];
 };

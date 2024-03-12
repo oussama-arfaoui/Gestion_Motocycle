@@ -1,3 +1,5 @@
+
+
 const hero_slider_counter = 8000;
 
 
@@ -155,6 +157,14 @@ function create_the_admin_config_code() {
             <select name="style">
                 <option value="style1">Style 1</option>
                 <option value="style2">Style 2</option>
+                <option value="style3">Style 3</option>
+                <option value="style4">Style 4</option>
+                <option value="style5">Style 5</option>
+                <option value="style6">Style 6</option>
+                <option value="style7">Style 7</option>
+                <option value="style8">Style 8</option>
+                <option value="style9">Style 9</option>
+                <option value="style10">Style 10</option>
             </select>
         </div>
 
@@ -268,3 +278,77 @@ if (shortcode_function_get_copy && shortcode_admin_config_code_copy && shortcode
 // }
 
 // setInterval(logImageSrc, 2000)
+
+
+// Function to play sound
+const click_1 = new Audio('https://assets.mixkit.co/active_storage/sfx/1120/1120-preview.mp3');
+const click_2 = new Audio("https://assets.mixkit.co/active_storage/sfx/1118/1118-preview.mp3");
+const sound_success = new Audio("https://assets.mixkit.co/active_storage/sfx/1107/1107-preview.mp3");
+
+function playSound(element) {
+    element.play();
+}
+
+// Add click event listener to elements with class "dashboard-icon-button"
+document.addEventListener('DOMContentLoaded', function () {
+
+    var buttons = document.querySelectorAll('.dashboard-icon-button');
+    var sidebarLinks = document.querySelector('.dashboard_sidebar__links');
+    var dashboardMainButton = document.querySelectorAll('.dashboard-main-button');
+
+    
+    buttons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            playSound(click_1);
+        });
+    });
+    
+    sidebarLinks.addEventListener('click', function (event) {
+        // Check if the event target is a child element
+        var isChild = event.target.closest('.dashboard_sidebar__links') !== null;
+        if (isChild) {
+            playSound(click_2);
+        }
+    });
+
+    dashboardMainButton.forEach(function (button) {
+        button.addEventListener('click', function () {
+            playSound(sound_success);
+        });
+    });
+});
+
+
+/// DARK THEME
+const root = document.documentElement;
+let isToggled = localStorage.getItem('isToggled') === 'true';
+
+const toggleColors = () => {
+    if (isToggled) {
+        root.style.setProperty('--db-light', '#111827');
+        root.style.setProperty('--db-dark', '#F9FAFB');
+        root.style.setProperty('--db-gray', '#D2D5DA');
+        root.style.setProperty('--db-dark-gray', '#1f29371c');
+
+        root.style.setProperty('--db-blue', '#93c5fd');
+        root.style.setProperty('--db-purple', '#d8b4fe');
+        root.style.setProperty('--db-red', '#FCA5A5');
+        root.style.removeProperty('--db-green');
+    } else {
+        root.style.setProperty('--db-light', '#d1cfcc');
+        root.style.setProperty('--db-dark', '#000100');
+        root.style.setProperty('--db-gray', '#d1cfcc81');
+        root.style.setProperty('--db-dark-gray', '#54545481');
+
+        root.style.setProperty('--db-blue', '#5268a589');
+        root.style.setProperty('--db-purple', '#cfced18c');
+        root.style.setProperty('--db-red', '#ffac7c8a');
+        root.style.setProperty('--db-green', '#cbd62e80');
+    }
+
+    isToggled = !isToggled;
+    localStorage.setItem('isToggled', isToggled);
+};
+
+
+document.querySelector('.dashboard-theme-toggler').addEventListener('click', toggleColors);

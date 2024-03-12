@@ -1,86 +1,106 @@
 .main-btn {
-    background-color: var(--accent-color);
-
-    border-radius: 8px;
     position: relative;
-    overflow: hidden;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    
+    gap: 0.5rem;
+    padding: 0.5rem 2rem;
+    border: 1px solid transparent;
+
+    background-color: var(--accent-color);
+    border-radius: 8px;
+
+    box-shadow: 0 0 0 2px #ffffff;
+
     cursor: pointer;
-    transition: 100ms;
-    border: 2px solid var(--dark);
-    color: var(--accent-color);
-    z-index: 1;
-    box-shadow: 0px 2px 0px 0px rgb(0,0,0);
+    
+    overflow: hidden;
+    
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 
     a {
-        cursor: pointer;
-        padding-inline: 12px;
-        padding-block: 6px;
-        border-radius: 8px;
-        gap: 8px;
-
-        @include Center;
-        flex-direction: row;
-
-
-
-        span {
-            font-family: 'Inter', sans-serif;
-            font-size: 18px;
-            font-weight: 500;
-            text-transform: capitalize;
-            transition: transform 200ms;
-            color: var(--light);
-        }
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--light);
 
         svg {
+            position: absolute;
+            width: 16px;
+            height: 16px;
             stroke: var(--light);
-            width: 18px;
-            height: 18px;
+            z-index: 9;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        svg {
-            transition: opacity 100ms ease-out;
+        .arr-1 {
+            right: 16px;
+        }
 
+        .arr-2 {
+            left: -25%;
+        }
 
-            &:nth-child(2) {
-                animation: arrow-come 400ms forwards;
-            }
+        .circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
 
-            &:nth-child(3) {
-                animation: arrow-leave 400ms forwards;
-                display: none;
-            }
+        .text {
+            position: relative;
+            z-index: 1;
+            transform: translateX(-12px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            margin-inline: 0.5rem;
         }
     }
 
     &:hover {
-
-        box-shadow: 0px 4px 0px 0px rgb(0, 0, 0);
-        transform: translateY(-2px);
+        box-shadow: 0 0 0 12px transparent;
+        border-radius: 12px;
 
         a {
-
-            span {
-                transform: translateX(4px);
-                transition: transform 400ms;
-            }
+            color: var(--light);
 
             svg {
+                stroke: var(--light);
+            }
 
-                &:nth-child(2) {
-                    animation: arrow-leave 400ms forwards;
-                    display: none;
-                }
+            .arr-1 {
+                right: -25%;
+            }
 
-                &:nth-child(3) {
-                    display: block;
-                    animation: arrow-come 400ms forwards;
-                }
+            .arr-2 {
+                left: 16px;
+            }
+
+            .circle {
+                width: 420px;
+                height: 420px; // Hell ye
+                opacity: 1;
+            }
+
+            .text {
+                transform: translateX(12px);
             }
         }
     }
 
 
+    &:active {
+        scale: 0.95;
+        box-shadow: 0 0 0 4px var(--accent-color);
+    }
 }
 
 
