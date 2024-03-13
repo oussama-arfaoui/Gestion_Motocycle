@@ -41,7 +41,7 @@
                 </td>
                 
                 <td class="dashboard_main-table-actions">
-                    <a href="{{ route('product-categories.show', $category->id) }}" target="_blank">
+                    <a href="{{ route('projects-categories.show', $category->id) }}" target="_blank">
                         <button class="dashboard-icon-button action-view">
                             <x-eye-icon />
                         </button>

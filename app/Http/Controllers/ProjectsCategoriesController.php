@@ -7,6 +7,9 @@ use App\Models\ProjectsCategories;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Projects;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Pagesstyle;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\File;
 
 class ProjectsCategoriesController extends Controller
 {
@@ -20,6 +23,63 @@ class ProjectsCategoriesController extends Controller
         $projectscategories = ProjectsCategories::all();
         return view('backend.projects.project-categories.index', compact('projectscategories'));
     }
+
+    public function showall()
+    {
+                    // Load all categories along with their associated projects
+        $categories = ProjectsCategories::with('projects')->get();
+            
+              // Fetch the page style from the database based on the name '/projects-categories-list'
+        $pageStyle = Pagesstyle::where('name', '/projects-categories-list')->first();
+        
+        if ($pageStyle) {
+            // Define the path to the style file
+            $styleFilePath = resource_path("views/frontend/pages/projects/Project_categories_list/{$pageStyle->style}.blade.php");
+            
+            // Check if the style file exists
+            if (File::exists($styleFilePath)) {
+                // Render the view using the dynamic style
+                return view("frontend.pages.projects.Project_categories_list.{$pageStyle->style}",compact('categories'));
+            } else {
+                // Default to a fallback style if the specified style file does not exist
+                return view("frontend.pages.projects.Project_categories_list.style1",compact('categories'));
+            }
+        } else {
+            // Default to a fallback style if no style is found in the database
+            return view("frontend.pages.projects.Project_categories_list.style1", compact('categories'));
+        }
+    }   
+    
+    public function show($categoryId)
+    {
+        // Load the project category
+        $projectscategory = ProjectsCategories::findOrFail($categoryId);
+        
+        // Load the associated projects
+        $projects = $projectscategory->projects;
+        
+        // Fetch the page style from the database based on the name '/projects-categories'
+        $pageStyle = Pagesstyle::where('name', '/projects-categories')->first();
+        
+        if ($pageStyle) {
+            // Define the path to the style file
+            $styleFilePath = resource_path("views/frontend/pages/projects/Projectslist/{$pageStyle->style}.blade.php");
+            
+            // Check if the style file exists
+            if (File::exists($styleFilePath)) {
+                // Render the view using the dynamic style
+                return view("frontend.pages.projects.Projectslist.{$pageStyle->style}", compact('projectscategory', 'projects'));
+            } else {
+                // Default to a fallback style if the specified style file does not exist
+                return view("frontend.pages.projects.Projectslist.style1", compact('projectscategory', 'projects'));
+            }
+        } else {
+            // Default to a fallback style if no style is found in the database
+            return view("frontend.pages.projects.Projectslist.style1", compact('projectscategory', 'projects'));
+        }
+    }
+    
+    
 
     public function create()
     {

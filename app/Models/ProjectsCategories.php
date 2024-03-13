@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectsCategories extends Model
 {
     use HasFactory;
+
     protected $table = "project_categories";
-    protected $fillable = ['category_name', 'image', 'description',]; // Added fillable property
-    
+
+    protected $fillable = ['category_name', 'image', 'description'];
+
     public function projects()
     {
-        return $this->belongsToMany(Projects::class, 'project_categories', 'category_id', 'project_id');
+        return $this->hasMany(Projects::class, 'category_id'); // Specify the correct foreign key
     }
-    // Your other model code...
 }

@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Pagesstyle;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\File;
 
 class ProjectController extends Controller
 {
@@ -25,10 +28,34 @@ class ProjectController extends Controller
             ->with('user', $user);
     }
 
-    public function show(Projects $projects)
+    public function show(Projects $project)
     {
-        return view('frontend.pages.projects_details', compact('project'));
+        // Load the project category related to this project
+        $project->load('projectscategory');
+    
+        // Fetch the page style from the database based on the name '/projects'
+        $pageStyle = Pagesstyle::where('name', '/projects')->first();
+    
+        if ($pageStyle) {
+            // Define the path to the style file
+            $styleFilePath = resource_path("views/frontend/pages/projects/Projectdetails/{$pageStyle->style}.blade.php");
+           
+            // Check if the style file exists
+            if (File::exists($styleFilePath)) {
+                // Render the view using the dynamic style
+                return view("frontend.pages.projects.Projectdetails.{$pageStyle->style}", compact('project'));
+            } else {
+                // Default to a fallback style if the specified style file does not exist
+                return view("frontend.pages.projects.Projectdetails.style1", compact('project'));
+            }
+        } else {
+            // Default to a fallback style if no style is found in the database
+            return view("frontend.pages.projects.Projectdetails.style1", compact('project'));
+        }
     }
+    
+    
+    
     /**
      * Show the form for creating a new resource.
      */

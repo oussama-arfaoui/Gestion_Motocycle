@@ -50,6 +50,7 @@ class ProductsController extends Controller
             return view("frontend.pages.products.Productdetails.style.style1", compact('product'));
         }
     }
+    
     /**
      * Show the form for creating a new resource.
      */

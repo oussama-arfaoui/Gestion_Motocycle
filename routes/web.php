@@ -34,7 +34,7 @@ use App\Http\Controllers\SettingsController;
 /************************
  * odoo
  ************************/
-
+Route::get('/projects-categories-list', [ProjectsCategoriesController::class, 'showall'])->name('projects-categories.showall');
 Route::get('/products_list', [OdooIntegrationController::class, 'showProducts']);
 
 /************************
@@ -51,8 +51,7 @@ Route::post('/login', [LoginController::class, 'doLogin']);
 
 Route::post('/logout', [LogoutController::class, 'doLogout']);
 
-Route::post('/forgot-password', [ForgotPasswordLinkController::class, 'store']);
-Route::post('/forgot-password/{token}', [ForgotPasswordController::class, 'reset']);
+
 
 
 
@@ -243,6 +242,8 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
 
     Route::get('/projects-categories/{projectscategories}', [ProjectsCategoriesController::class, 'show'])->name('projects-categories.show');
 
+
+
         /************************
             * ShortCode ROUTES
         ************************/
@@ -252,4 +253,7 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
     Route::get('/get-shortcode-config/{shortcodeType}', function ($shortcodeType) {
         // Render the Blade view corresponding to the selected shortcode type
         return view($shortcodeType);
+
+
+        
 });
