@@ -13,6 +13,11 @@
     img {
         width: 10%;
         margin-bottom: 1rem;
+
+        @media (max-width: 1024px) {
+            width: 40%;
+        }
+
     }
 
     .footer-content {
@@ -25,7 +30,11 @@
             max-width: 250px;
             margin-bottom: 30px;
 
-            p{
+            @media (max-width: 1024px) {
+                max-width: 100%;
+            }
+
+            p {
                 margin-bottom: 1rem;
                 line-height: 1.5;
             }

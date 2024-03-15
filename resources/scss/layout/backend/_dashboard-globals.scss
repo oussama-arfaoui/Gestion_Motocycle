@@ -400,6 +400,8 @@
 
             background-color: var(--db-dark);
 
+            margin-bottom: 1rem;
+
             &::placeholder {
                 color: var(--db-gray);
                 font-family: 'Inter', sans-serif;
@@ -429,6 +431,52 @@
 
             background-color: var(--db-dark);
             color: var(--db-light);
+
+            &::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            /* Track */
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            /* Handle */
+            &::-webkit-scrollbar-thumb {
+                background: $Gray500;
+                border-radius: 4px;
+
+                &:hover {
+                    background: $Gray400;
+                    cursor: pointer;
+                }
+
+            }
+        }
+
+        select {
+            cursor: pointer;
+            outline: none;
+
+            width: 256px;
+
+            height: 32px;
+            left: 352px;
+            top: 242px;
+
+            border: 1px solid var(--db-gray);
+            border-radius: 8px;
+
+            padding-inline: 0.5rem;
+
+            background-color: var(--db-dark);
+
+            color: var(--db-light);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+
+            @include Interactable;
 
             &::-webkit-scrollbar {
                 width: 8px;
@@ -598,6 +646,8 @@
                 width: 100%;
             }
         }
+
+
     }
 }
 
@@ -622,5 +672,105 @@
 
     img {
         width: 60%;
+    }
+}
+
+.dashboard-final-actions {
+    display: flex;
+    flex-direction: row;
+}
+
+.dashboard-row {
+    display: flex;
+    flex-direction: row;
+
+    gap: 1rem;
+    width: 50%;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+
+    input {
+
+        @include Interactable;
+
+        width: 256px;
+
+        @media (max-width: 1024px) {
+            width: 100%;
+        }
+
+        height: 32px;
+        left: 352px;
+        top: 242px;
+
+        border: 1px solid var(--db-gray);
+        border-radius: 8px;
+
+        padding-inline: 0.5rem;
+
+        color: var(--db-light);
+        font-family: 'Inter',
+        sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+
+        background-color: var(--db-dark);
+
+        margin-bottom: 1rem;
+
+        &::placeholder {
+            color: var(--db-gray);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+        }
+    }
+
+    select {
+        cursor: pointer;
+        outline: none;
+
+        width: 256px;
+
+        height: 32px;
+        left: 352px;
+        top: 242px;
+
+        border: 1px solid var(--db-gray);
+        border-radius: 8px;
+
+        padding-inline: 0.5rem;
+
+        background-color: var(--db-dark);
+
+        color: var(--db-light);
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+
+        @include Interactable;
+
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: $Gray500;
+            border-radius: 4px;
+
+            &:hover {
+                background: $Gray400;
+                cursor: pointer;
+            }
+
+        }
     }
 }

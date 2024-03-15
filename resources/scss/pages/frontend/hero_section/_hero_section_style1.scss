@@ -5,7 +5,8 @@
     background-image: url("/public/bgs/bg-1.png");
     color: var(--light);
 
-    border-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
 
 
     &-content {
@@ -50,8 +51,6 @@
                 }
 
                 button {
-                    border-color: var(--light);
-
 
                     // &:last-child {
                     //     margin-right: 0rem;

@@ -1,29 +1,45 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>{{ $page_title }}</title>
-
-    @vite(['resources/css/app.css', 'resources/scss/style.scss', 'resources/js/app.js'])
-</head>
+<x-page-head />
 
 
 
 <body class="website antialiased">
 
     @include('frontend.layouts.header')
-
-    <section class="page_banner_style1 global_container">
-
-        <div class="page_banner_style1-logo">
-            <img src="./logos/primary-logo.svg" alt="">
+    
+    <section class="page_banner_style1 ">
+        <div class="page_banner_style1-content global_container">
+    
+            <div class="page_banner_style1-content-logo">
+                <img src="./logos/primary-logo.svg" alt="">
+            </div>
+    
+            <h2>{{ $categories->category_name }}</h2>
+            <p>{{ $categories->description}}</p>
         </div>
-
-        <h2>{{ $categories->category_name }}</h2>
-        <p>{{ $categories->description}} </p>
+    
+        <svg class="editorial" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28 " preserveAspectRatio="none">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 
+                58-18 88-18s
+                58 18 88 18 
+                58-18 88-18 
+                58 18 88 18
+                v44h-352z" />
+            </defs>
+            <g class="parallax1">
+                <use xlink:href="#gentle-wave" x="50" y="3" fill="#fff" />
+            </g>
+            <g class="parallax2">
+                <use xlink:href="#gentle-wave" x="50" y="0" fill="var(--primary-color)" />
+            </g>
+            <g class="parallax3">
+                <use xlink:href="#gentle-wave" x="50" y="9" fill="var(--accent-color)" />
+            </g>
+            <g class="parallax4">
+                <use xlink:href="#gentle-wave" x="50" y="6" fill="#fff" />
+            </g>
+        </svg>
     </section>
 
     <main class="products_list_style1 global_container">

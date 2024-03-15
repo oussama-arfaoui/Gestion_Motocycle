@@ -6,7 +6,7 @@
     <div class="dashboard-main-container-breadcrumbs">
         <a href='/admin'>Home</a>
         <x-arrow-icon />
-        <a href="/shortcode_generator">Shortcode Generator</a>
+        <a href="/admin/shortcode_generator">Shortcode Generator</a>
     </div>
 
     <div class="dashboard-main-container-actions">

@@ -133,6 +133,13 @@ function getShortcodeTypes() {
         ],
     
     
+    /// Services
+
+    
+    'double_screen' => [
+        'name' => 'double_screen',
+        'view' => 'frontend.shortcodes.double_screen.admin-config',
+    ],
     
     
 
@@ -309,7 +316,16 @@ function getShortcodeindex() {
             'name' => 'mission_value_vision',
             'view' => 'frontend.shortcodes.mission_value_vision.index',
             'attributes' => ['section_tag', 'title', 'description', 'node_title_1', 'node_description_1', 'node_title_2', 'node_description_2', 'node_title_3', 'node_description_3','style']
-        ]
+        ],
+        
+        /// Services
+
+        
+        'double_screen' => [
+            'name' => 'double_screen',
+            'view' => 'frontend.shortcodes.double_screen.index',
+            'attributes' => ['title_1', 'description_1', 'button_1', 'title_2', 'description_2', 'button_2','style']
+        ],
         
     ];
 };

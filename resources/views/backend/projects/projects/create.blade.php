@@ -7,6 +7,8 @@
         <a href='/admin'>Home</a>
         <x-arrow-icon />
         <a href="{{ route('projects.index') }}">Projects</a> <!-- Change route to projects.index -->
+        <x-arrow-icon />
+        <a href="{{ route('projects.create') }}">Projects</a> <!-- Change route to projects.index -->
     </div>
 
     {{-- Actions for the projects table --}}

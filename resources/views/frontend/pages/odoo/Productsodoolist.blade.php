@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr-FR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Odoo Products List</title>
-</head>
+<x-page-head />
 <body>
     <h1>Odoo Products List</h1>
     <ul>

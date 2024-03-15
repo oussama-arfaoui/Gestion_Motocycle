@@ -1,6 +1,6 @@
 .whatsapp-button {
     animation: fly-1 1s ease-in-out infinite alternate;
-    
+
     position: fixed;
     bottom: 32px;
     left: 20px;
@@ -24,8 +24,78 @@
     height: 32px;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
     .whatsapp-button {
-            bottom: 68px;
+        bottom: 68px;
+    }
+}
+
+
+.floating-actions {
+    background-color: var(--primary-color);
+
+    position: fixed;
+    z-index: 1000;
+
+    bottom: 92px;
+    right: 0;
+
+
+    border-left: 1px solid var(--light);
+
+    li {
+
+        button {
+            width: 48px;
+            height: 48px;
+
+            border: none;
+            border-bottom: 1px solid var(--light);
+
+            background-color: var(--primary-color);
+
+            svg {
+                stroke: var(--light);
+                color: var(--light);
+            }
         }
+    }
+
+
+    &-menu {
+        background-color: var(--primary-color);
+
+        position: fixed;
+        z-index: 999;
+
+        bottom: 92px;
+        right: 0;
+
+        ul {
+
+            li {
+                height: 48px;
+
+                display: flex;
+                width: 150px;
+                
+                align-items: center;
+                margin-right: 64px;
+
+                a{
+                    width: 100%;
+                    height: 100%;
+
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+
+                    span{
+                        color: var(--light);
+                    }
+                }
+            }
+        }
+    }
 }

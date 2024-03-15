@@ -7,6 +7,8 @@
         <a href='/admin'>Home</a>
         <x-arrow-icon />
         <a href="{{ route('products.index') }}">Products</a>
+        <x-arrow-icon />
+        <a href="#">Edit Product</a>
     </div>
 
     {{-- Form for editing a product --}}

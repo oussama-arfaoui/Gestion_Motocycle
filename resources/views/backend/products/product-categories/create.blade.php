@@ -7,6 +7,8 @@
         <a href='/admin'>Home</a>
         <x-arrow-icon />
         <a href="{{ route('product-categories.index') }}">Product Categories</a>
+        <x-arrow-icon />
+        <a href="{{ route('product-categories.create') }}">Create Product Category</a>
     </div>
 
     {{-- Form for creating a new category --}}
