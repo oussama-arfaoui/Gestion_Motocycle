@@ -5,7 +5,7 @@ const hero_slider_counter = 8000;
 
 // Code for functioning Dropdowns
 
-const dropdowns = ["nav-products", "nav-ecommerce", "nav-generator", "nav-projects", "nav-Settings", "username"];
+const dropdowns = ["nav-products", "nav-ecommerce", "nav-generator","nav-projects", "nav-Settings", "nav-Services","username"];
 
 for (let element of dropdowns) {
     const dropdownButton = document.getElementById(`dropdown-${element}`);
