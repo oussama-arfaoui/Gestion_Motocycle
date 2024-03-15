@@ -62,7 +62,7 @@ class ServiceController extends Controller
         $validator = Validator::make($request->all(), [
             'service_title' => 'required|string|max:191',
             'service_subtitle' => 'required|string|max:191',
-            'service_description' => 'required|string|max:191',
+            'service_description' => 'required|string',
             'status' => 'required|string|max:60',
             'template' => 'required|string|max:191',
             'seo_title' => 'required|string|max:191',

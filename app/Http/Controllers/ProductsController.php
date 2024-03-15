@@ -69,7 +69,7 @@ class ProductsController extends Controller
         // Validate input data
         $validator = Validator::make($request->all(), [
             'product_name' => 'required|string|max:255',
-            'product_description' => 'required|string|max:255',
+            'product_description' => 'required|string',
             'status' => 'required|string|max:255',
             'template' => 'required|string|max:255',
             'seo_title' => 'required|string|max:255',

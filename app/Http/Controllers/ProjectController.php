@@ -71,7 +71,7 @@ class ProjectController extends Controller
         $validator = Validator::make($request->all(), [
             'projects_title' => 'required|string|max:191',
             'projects_subtitle' => 'required|string|max:191',
-            'projects_description' => 'required|string|max:191',
+            'projects_description' => 'required|string',
             'status' => 'required|string|max:60',
             'template' => 'required|string|max:191',
             'seo_title' => 'required|string|max:191',
