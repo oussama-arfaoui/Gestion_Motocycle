@@ -83,7 +83,7 @@
         </div>
 
 
-        <a href="/admin/services">
+        <button id="dropdown-nav-Services">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M13.5 6H14.25C15.0456 6 15.8087 6.31607 16.3713 6.87868C16.9339 7.44129 17.25 8.20435 17.25 9C17.25 9.79565 16.9339 10.5587 16.3713 11.1213C15.8087 11.6839 15.0456 12 14.25 12H13.5"
@@ -99,7 +99,27 @@
                     stroke-linejoin="round" />
             </svg>
             <span>Services</span>
-        </a>
+
+
+            <svg id="dropdown-nav-Services-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </button>
+
+        <div class="dashboard_sidebar__links-innerlink hide" id="dropdown-menu-nav-Services">
+            <a href="{{ route('services.index') }}">
+                <span>Services Items</span>
+            </a>
+
+            <a href="{{ route('service-categories.index') }}">
+                <span>Services Categories</span>
+            </a>
+        </div>
+
+
+
         <a href="{{ route('testimonials.index') }}">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">;
                 <path stroke-opacity="0.75"

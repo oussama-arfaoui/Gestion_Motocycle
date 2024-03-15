@@ -20,12 +20,14 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectsCategoriesController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ServiceCategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
+| Here is where you can register web routes for your application. Thesesi
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
@@ -112,14 +114,25 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
 
 
     /************************
-        * SERVICES ROUTES
-    ************************/
-    Route::get('/admin/services', [ServicesController::class, 'index']);
-    Route::get('/admin/service', [ServicesController::class, 'create']);
-    Route::post('/admin/service', [ServicesController::class, 'store']);
-    Route::get('/admin/service/{id}/edit', [ServicesController::class, 'edit'])->name('service.edit');
-    Route::post('/admin/service/edit', [ServicesController::class, 'update']);
-    Route::post('/admin/service/{id}/delete', [ServicesController::class, 'destroy'])->name('service.delete');
+     * services ROUTES 
+     ************************/
+    Route::get('/admin/services', [ServiceController::class, 'index'])->name('services.index');
+    Route::get('/admin/services/create', [ServiceController::class, 'create'])->name('services.create');
+    Route::post('/admin/services/store', [ServiceController::class, 'store'])->name('services.store');
+    Route::get('/admin/services/{id}/edit', [ServiceController::class, 'edit'])->name('services.edit');
+    Route::put('/admin/services/{id}', [ServiceController::class, 'update'])->name('services.update');
+    Route::delete('/admin/services/{id}', [ServiceController::class, 'destroy'])->name('services.destroy');
+    /************************
+     * Services CATEGORIES ROUTES
+     ************************/
+    Route::get('/admin/service-categories', [ServiceCategoryController::class, 'index'])->name('service-categories.index');
+    Route::get('/admin/service-categories/create', [ServiceCategoryController::class, 'create'])->name('service-categories.create');
+    Route::post('/admin/service-categories/store', [ServiceCategoryController::class, 'store'])->name('service-categories.store');
+    Route::get('/admin/service-categories/{id}/edit', [ServiceCategoryController::class, 'edit'])->name('service-categories.edit');
+    Route::put('/admin/service-categories/{id}', [ServiceCategoryController::class, 'update'])->name('service-categories.update');
+    Route::delete('/admin/service-categories/{id}', [ServiceCategoryController::class, 'destroy'])->name('service-categories.destroy');
+
+
 
         /************************
         * Pages ROUTES
@@ -242,6 +255,16 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
 
     Route::get('/projects-categories/{projectscategories}', [ProjectsCategoriesController::class, 'show'])->name('projects-categories.show');
 
+        /************************
+        * services ROUTES
+    ************************/
+
+    Route::get('/services/{service}', [ServiceController::class, 'show'])->name('services.show');
+        /************************
+        * service-categories ROUTES
+    ************************/
+   
+    Route::get('/service-categories/{servicescategories}', [ServiceCategoryController::class, 'show'])->name('service-categories.show');
 
 
         /************************

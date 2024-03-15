@@ -8,6 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
-    protected $table = "bs_services";
+
+    protected $fillable = [
+        'service_title',
+        'service_subtitle',
+        'service_description',
+        'status',
+        'template',
+        'seo_title',
+        'category_id',
+        'images',
+        'points',
+        'characteristics',
+        'attributes',
+    ];
+
+    public function category()
+    {
+        return $this->belongsTo(ServiceCategory::class, 'category_id');
+    }
 }
-?>
