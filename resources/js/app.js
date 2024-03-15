@@ -5,7 +5,7 @@ const hero_slider_counter = 8000;
 
 // Code for functioning Dropdowns
 
-const dropdowns = ["nav-products", "nav-ecommerce", "nav-generator","nav-projects", "nav-Settings","username"];
+const dropdowns = ["nav-products", "nav-ecommerce", "nav-generator", "nav-projects", "nav-Settings", "username"];
 
 for (let element of dropdowns) {
     const dropdownButton = document.getElementById(`dropdown-${element}`);
@@ -296,26 +296,35 @@ document.addEventListener('DOMContentLoaded', function () {
     var sidebarLinks = document.querySelector('.dashboard_sidebar__links');
     var dashboardMainButton = document.querySelectorAll('.dashboard-main-button');
 
-    
-    buttons.forEach(function (button) {
-        button.addEventListener('click', function () {
-            playSound(click_1);
-        });
-    });
-    
-    sidebarLinks.addEventListener('click', function (event) {
-        // Check if the event target is a child element
-        var isChild = event.target.closest('.dashboard_sidebar__links') !== null;
-        if (isChild) {
-            playSound(click_2);
-        }
-    });
+    if (buttons) {
 
-    dashboardMainButton.forEach(function (button) {
-        button.addEventListener('click', function () {
-            playSound(sound_success);
+
+        buttons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                playSound(click_1);
+            });
         });
-    });
+    }
+
+    if (sidebarLinks) {
+        sidebarLinks.addEventListener('click', function (event) {
+            // Check if the event target is a child element
+            var isChild = event.target.closest('.dashboard_sidebar__links') !== null;
+            if (isChild) {
+                playSound(click_2);
+            }
+        });
+    }
+
+    if (dashboardMainButton) {
+
+        dashboardMainButton.forEach(function (button) {
+            button.addEventListener('click', function () {
+                playSound(sound_success);
+            });
+        });
+    }
+
 });
 
 
@@ -351,4 +360,6 @@ const toggleColors = () => {
 };
 
 
-document.querySelector('.dashboard-theme-toggler').addEventListener('click', toggleColors);
+if (document.querySelector('.dashboard-theme-toggler')) {
+    document.querySelector('.dashboard-theme-toggler').addEventListener('click', toggleColors);
+}

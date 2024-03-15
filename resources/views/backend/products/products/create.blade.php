@@ -62,7 +62,7 @@
                 <label for="points" class="form-label">List of Points</label>
                 <textarea name="points" id="points" class="form-control" rows="4"></textarea>
             </div>
-                       
+
             <div class="node-input">
                 <label for="characteristics" class="form-label">Characteristics</label>
                 <textarea name="characteristics" id="characteristics" class="form-control"></textarea>

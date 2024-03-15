@@ -6,7 +6,7 @@
     <div class="dashboard-main-container-breadcrumbs">
         <a href='/admin'>Home</a>
         <x-arrow-icon />
-        <a href="{{ route('product-categories.index') }}">Product Categories</a>
+        <a href="#">Product Categories</a>
     </div>
 
     {{-- Actions for the product categories table --}}

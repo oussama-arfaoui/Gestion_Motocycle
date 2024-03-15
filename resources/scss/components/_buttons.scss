@@ -13,7 +13,7 @@
     background-color: var(--accent-color);
     border-radius: 8px;
 
-    box-shadow: 0 0 0 2px #ffffff;
+    box-shadow: 0 0 0 2px var(--accent-color);
 
     cursor: pointer;
     
@@ -24,13 +24,13 @@
     a {
         font-size: 16px;
         font-weight: 600;
-        color: var(--light);
+        color: var(--dark);
 
         svg {
             position: absolute;
             width: 16px;
             height: 16px;
-            stroke: var(--light);
+            stroke: var(--dark);
             z-index: 9;
             transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
@@ -70,10 +70,10 @@
         border-radius: 12px;
 
         a {
-            color: var(--light);
+            color: var(--dark);
 
             svg {
-                stroke: var(--light);
+                stroke: var(--dark);
             }
 
             .arr-1 {

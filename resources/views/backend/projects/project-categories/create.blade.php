@@ -7,6 +7,8 @@
         <a href='/admin'>Home</a>
         <x-arrow-icon />
         <a href="{{ route('projects-categories.index') }}">Project Categories</a>
+        <x-arrow-icon />
+        <a href="{{ route('projects-categories.create') }}">Create Project Category</a>
     </div>
 
     {{-- Form for creating a new category --}}

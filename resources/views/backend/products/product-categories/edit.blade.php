@@ -8,7 +8,7 @@
         <x-arrow-icon />
         <a href="{{ route('product-categories.index') }}">Product Categories</a>
         <x-arrow-icon />
-        <span>Edit Category</span>
+        <a href="#">Product Categories</a>
     </div>
 
     {{-- Form for editing the category --}}

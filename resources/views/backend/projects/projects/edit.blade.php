@@ -7,6 +7,8 @@
         <a href='/admin'>Home</a>
         <x-arrow-icon />
         <a href="{{ route('projects.index') }}">Projects</a>
+        <x-arrow-icon />
+        <a href="#">Edit Project</a>
     </div>
 
     <div class="dashboard-main-container-modules">

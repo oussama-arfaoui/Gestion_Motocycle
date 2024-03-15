@@ -8,7 +8,7 @@
         <x-arrow-icon />
         <a href="{{ route('brands.index') }}">Brands</a>
         <x-arrow-icon />
-        <span>Edit Brand</span>
+        <a href="#">Edit Brand</a>
     </div>
 
     <!-- Form -->
