@@ -7,9 +7,50 @@ use App\Models\Pagesstyle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Models\GeneralSettings;
 
 class SettingsController extends Controller
 {
+   
+    public function indexgeneral_settings()
+    {
+        $general_settings = GeneralSettings::first(); // Assuming there's only one row for general settings
+        return view('backend.Settings.general_settings.index', compact('general_settings'));
+    }
+    
+    public function updateAllgeneral_settings(Request $request)
+    {
+        // Update or create the general settings
+        GeneralSettings::updateOrCreate(
+            [],
+            [
+                'logo' => $request->input('logo'),
+                'favicon' => $request->input('favicon'),
+                'login_screen_background' => $request->input('login_screen_background'),
+                'title' => $request->input('title'),
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'updated_at' => now(),
+            ]
+        );
+    
+        // Redirect the user to the general settings index page
+        return redirect()->route('general_settings.index')->with('success', 'General settings updated successfully.');
+    }
+    
+    
+    
+    
+    public function destroygeneral_settings($id)
+    {
+        $general_settings = GeneralSettings::findOrFail($id);
+        $general_settings->delete();
+
+        return redirect()->back()->with('success', 'Style deleted successfully.');
+    }
+   
+   
+   
     /**
      * Display a listing of the resource.
      */
