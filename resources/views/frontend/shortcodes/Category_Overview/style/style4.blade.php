@@ -11,12 +11,12 @@
             </div>
             <h2 class="category_overview_style4-content-text-title">{{$title}}</h2>
             <p class="category_overview_style4-content-text-description">{{$description}}</p>
-            <x-primary_button path='/contact' text="{{$primary_button_label}}"></x-primary_button>
+            <x-primary_button path='/services' text="{{$primary_button_label}}"></x-primary_button>
         </div>
 
 
         <div class="category_overview_style4-content-category">
-            <a href="/catalogue" class="category_overview_style4-content-category-image">
+            <a href="/services/5" class="category_overview_style4-content-category-image">
                 <div class="category_overview_style4-content-category-image-text">
                     <h3>{{ $category_title_1 }}</h3>
                     <p>{{ $category_description_1 }}</p>
@@ -25,25 +25,25 @@
 
             <div class="category_overview_style4-content-category-nodes">
                 <div class="category_overview_style4-content-category-nodes-node">
-                    <img src="./icons/icon-quality-price.png" alt="quality-icon">
+                    <img src="./icons/icon-safety.png" alt="quality-icon">
                     <h3>Maintenance Préventive</h3>
                     <p>Évitez les pannes avec notre service de maintenance proactive.</p>
                 </div>
 
                 <div class="category_overview_style4-content-category-nodes-node">
-                    <img src="./icons/icon-proximity.png" alt="quality-icon">
+                    <img src="./icons/icon-quick.png" alt="quality-icon">
                     <h3>Réparation Rapide</h3>
                     <p>Rétablissez rapidement la production avec notre service de réparation.</p>
                 </div>
 
                 <div class="category_overview_style4-content-category-nodes-node">
-                    <img src="./icons/icon-flexibility.png" alt="quality-icon">
+                    <img src="./icons/icon-optimization.png" alt="quality-icon">
                     <h3>Optimisation des Performances</h3>
                     <p>Maximisez l'efficacité de vos équipements avec nos solutions d'optimisation.</p>
                 </div>
 
                 <div class="category_overview_style4-content-category-nodes-node">
-                    <img src="./icons/icon-productivity.png" alt="quality-icon">
+                    <img src="./icons/icon-availability.png" alt="quality-icon">
                     <h3>Service 24/7</h3>
                     <p>Nous sommes disponibles jour et nuit pour répondre à vos besoins urgents.</p>
                 </div>
@@ -53,31 +53,31 @@
         <div class="category_overview_style4-content-category">
             <div class="category_overview_style4-content-category-nodes">
                 <div class="category_overview_style4-content-category-nodes-node">
-                    <img src="./icons/icon-quality-price.png" alt="quality-icon">
+                    <img src="./icons/icon-expert.png" alt="quality-icon">
                     <h3>Consultation Expert</h3>
                     <p>Travaillez avec nos experts pour concevoir la machine parfaite.</p>
                 </div>
 
                 <div class="category_overview_style4-content-category-nodes-node">
-                    <img src="./icons/icon-proximity.png" alt="quality-icon">
+                    <img src="./icons/icon-industrial-precision.png" alt="quality-icon">
                     <h3>Ingénierie de Précision</h3>
                     <p>Des machines de qualité construites avec précision.</p>
                 </div>
 
                 <div class="category_overview_style4-content-category-nodes-node">
-                    <img src="./icons/icon-flexibility.png" alt="quality-icon">
+                    <img src="./icons/icon-custom.png" alt="quality-icon">
                     <h3>Fabrication Personnalisée</h3>
                     <p>Des solutions sur mesure pour répondre à vos besoins spécifiques.</p>
                 </div>
 
                 <div class="category_overview_style4-content-category-nodes-node">
-                    <img src="./icons/icon-productivity.png" alt="quality-icon">
+                    <img src="./icons/icon-installation.png" alt="quality-icon">
                     <h3>Installation et Formation</h3>
                     <p>Assistance professionnelle pour l'installation et la formation de votre personnel.</p>
                 </div>
             </div>
 
-            <a href="/catalogue" class="category_overview_style4-content-category-image">
+            <a href="/services/4" class="category_overview_style4-content-category-image">
                 <div class="category_overview_style4-content-category-image-text">
                     <h3>{{ $category_title_1 }}</h3>
                     <p>{{ $category_description_1 }}</p>

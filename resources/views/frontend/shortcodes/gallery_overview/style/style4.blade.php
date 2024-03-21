@@ -12,7 +12,7 @@
             <h2 class="gallery_overview_style4-content-text-title">{{$title}}</h2>
             <p class="gallery_overview_style4-content-text-description">{{$description}}</p>
 
-            <x-primary_button path='/projects' text='{{$primary_button_label}}'></x-primary_button>
+            <x-primary_button path='/projects-categories-list' text='{{$primary_button_label}}'></x-primary_button>
         </div>
 
         <div class="swiper">

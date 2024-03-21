@@ -1,5 +1,25 @@
 <header id="header" class="header">
     <div class="global_container">
+        
+        <div class="global_container header__info">
+            <div class="header__info-node">
+                <p>Numero Telephone: </p>
+                <h3>{{$contact_number}}</h3>
+            </div>
+        
+            <div class="header__info-node">
+                <p>Numero Whatsapp: </p>
+                <h3>{{$contact_whatsapp}}</h3>
+            </div>
+        
+            <div class="header__info-node">
+                <p>Contact Email: </p>
+                <h3>{{$contact_email}} </h3>
+            </div>
+        
+        
+        </div>
+
         <div class="row v-center">
             <div class="header-item item-left">
                 <div class="logo">
@@ -34,54 +54,51 @@
 
                         <li class="menu-item-has-children">
                             <a href="/catalogue">Catalogue <i class="fa fa-angle-down"></i></a>
-                            <div class="sub-menu mega-menu mega-menu-column-4">
+                            {{-- <div class="sub-menu mega-menu mega-menu-column-4">
                                 <div class="list-item">
-                                    <h4 class="title">Fournitures Indutrielles</h4>
+                                    <a href="/product-categories/20" class="title">Fournitures Indutrielles</a>
                                     <ul>
-                                        <li><a href="#">Product List</a></li>
-                                        <li><a href="#">Product List</a></li>
-                                        <li><a href="#">Product List</a></li>
-                                        <li><a href="#">Product List</a></li>
-                                        <li><a href="#">Product List</a></li>
-                                        <li><a href="#">Product List</a></li>
-                                        <li><a href="#">Product List</a></li>
-                                        <li><a href="#">Product List</a></li>
-                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="/products/45">Bandes Industrielles</a></li>
+                                        <li><a href="/products/46">Chaines Industrielles</a></li>
+                                        <li><a href="/products/47">Courroies Industrielles</a></li>
+                                        <li><a href="/products/48">Coussinets Industriels</a></li>
+                                        <li><a href="/products/49">Embouts Industriels</a></li>
+                                        <li><a href="/products/50">Etancheité Industrielle</a></li>
+                                        <li><a href="/products/51">Huiles Et Graisses</a></li>
+                                        <li><a href="/products/52">Paliers Industriels</a></li>
+                                        <li><a href="/product-categories/21">Découvrir Plus...</a></li>
                                     </ul>
                                 </div>
                                 <div class="list-item">
-                                    <h4 class="title">Outils Industrielles</h4>
+                                    <a href="/product-categories/21" class="title">Matériaux Industrielles</a>
                                     <ul>
-                                        <li><a href="#">Product List</a></li>
-                                        <li><a href="#">Product List</a></li>
-                                        <li><a href="#">Product List</a></li>
-                                        <li><a href="#">Product List</a></li>
-                                        <li><a href="#">Product List</a></li>
-                                        <li><a href="#">Product List</a></li>
-                                        <li><a href="#">Product List</a></li>
-                                        <li><a href="#">Product List</a></li>
-                                        <li><a href="#">Product List</a></li>
+                                        <li><a href="/products/57">Chariot D'atelier</a></li>
+                                        <li><a href="/products/58">Chariot de magasin</a></li>
+                                        <li><a href="/products/59">Diable à Dossier</a></li>
+                                        <li><a href="/products/60">Diable à Fut</a></li>
+                                        <li><a href="/products/61">Gerbeur Manuel</a></li>
+                                        <li><a href="/products/62">Grue Mobile</a></li>
+                                        <li><a href="/products/63">Palan Et Treuil</a></li>
+                                        <li><a href="/products/64">Remorque à Main</a></li>
+                                        <li><a href="/product-categories/21">Découvrir Plus...</a></li>
                                     </ul>
                                 </div>
-                                <div class="list-item">
-                                    <img src={{@asset('./blanks/500x500.png')}} alt="shop">
-                                </div>
-                            </div>
+                            </div> --}}
                         </li>
-
+{{-- 
                         <li class="menu-item-has-children">
                             <a href="/services">Services <i class="fas fa-angle-down"></i></a>
                             <div class="sub-menu single-column-menu">
                                 <ul>
-                                    <li><a href="#">Maintenance</a></li>
-                                    <li><a href="#">Machinerie</a></li>
+                                    <li><a href="/services/4">Maintenance</a></li>
+                                    <li><a href="/services/5">Machinerie</a></li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
 
                         <li class="menu-item-has-children">
                             <a href="/projects-categories-list">Projets <i class="fa fa-angle-down"></i></a>
-                            <div class="sub-menu mega-menu mega-menu-column-4">
+                            {{-- <div class="sub-menu mega-menu mega-menu-column-4">
                                 <div class="list-item">
                                     <h4 class="title">Pharmaceutiques</h4>
                                     <ul>
@@ -131,7 +148,7 @@
                                 <div class="list-item">
                                     <img src={{@asset('./blanks/500x500.png')}} alt="shop">
                                 </div>
-                            </div>
+                            </div> --}}
                         </li>
 
                         <li>
@@ -163,9 +180,12 @@
                 <path stroke="white"
                     d="M1.5 6H13.5V12.75C13.5 13.5456 13.1839 14.3087 12.6213 14.8713C12.0587 15.4339 11.2956 15.75 10.5 15.75H4.5C3.70435 15.75 2.94129 15.4339 2.37868 14.8713C1.81607 14.3087 1.5 13.5456 1.5 12.75V6Z"
                     stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                <path stroke="white" d="M4.5 0.75V3" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                <path stroke="white" d="M7.5 0.75V3" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                <path stroke="white" d="M10.5 0.75V3" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path stroke="white" d="M4.5 0.75V3" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path stroke="white" d="M7.5 0.75V3" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path stroke="white" d="M10.5 0.75V3" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
             </svg>
             <p>Services</p>
         </a>
@@ -211,7 +231,7 @@
             </svg>
             <p>Contact</p>
         </a>
-        <a href="/actualites">
+        <a href="/entreprise">
             <svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16"
                 style="color: currentcolor;">
                 <path fill-rule="evenodd" clip-rule="evenodd"

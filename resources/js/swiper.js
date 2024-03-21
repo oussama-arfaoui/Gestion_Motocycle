@@ -7,15 +7,12 @@ const swiper = new Swiper('.swiper', {
     watchSlidesVisibility: true,
     centeredSlides: true,
 
-    autoplay: {
-        delay: 5000,
-    },
 
-    // effect: 'coverflow',
-    // coverflowEffect: {
-    //     rotate: 30,
-    //     slideShadows: false,
-    // },
+    effect: 'coverflow',
+    coverflowEffect: {
+        rotate: 30,
+        slideShadows: false,
+    },
 
     grabCursor: true,
 
@@ -46,12 +43,7 @@ const swiper2 = new Swiper('.swiper-2', {
 
     freeMode: true,
     loop: true,
-    autoplay: {
-        delay: 0,
-    },
 
-    slidesPerView: 2.5,
-    spaceBetween: 75,
     speed: 15000,
 
 
@@ -64,10 +56,9 @@ const swiper2 = new Swiper('.swiper-2', {
     // freeMode: true,
     // spaceBetween: 30,
 
-    // autoplay: {
-    //     delay: 5000,
-    // },
-
+    autoplay: {
+        delay: 0,
+    },
 
     // grabCursor: true,
 
@@ -82,12 +73,12 @@ const swiper2 = new Swiper('.swiper-2', {
         // when window width is <= 768px
         768: {
             slidesPerView: 1,
-            spaceBetween: 50,
+            spaceBetween: 100,
         },
 
         1024: {
             slidesPerView: 2.5,
-            spaceBetween: 75,
+            spaceBetween: 100,
         }
     }
 

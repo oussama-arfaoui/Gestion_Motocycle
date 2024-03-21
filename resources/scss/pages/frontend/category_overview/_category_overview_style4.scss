@@ -106,7 +106,7 @@
                 flex-direction: column;
                 gap: 2rem;
 
-                &:last-child{
+                &:last-child {
                     flex-direction: column-reverse;
                 }
             }
@@ -119,13 +119,22 @@
 
                 border-radius: 1rem;
 
+                @media (max-width: 1024px) {
+                    width: 80%;
+                }
+
                 @media (max-width: 768px) {
                     width: 100%;
                     height: 50vh;
                     border-radius: 0;
                 }
 
-                background-image: url('/public/blanks/500x500.png');
+                background-image: url('/public/bgs/bg_service_1.png');
+
+                &:last-child {
+                    background-image: url('/public/bgs/bg_service_2.png');
+                }
+
                 background-position: center center;
                 background-size: cover;
                 background-repeat: no-repeat;
@@ -134,10 +143,10 @@
                 flex-direction: row;
                 align-items: flex-end;
 
-                padding: 2rem;
 
 
                 &-text {
+                    padding: 2rem;
                     color: var(--light);
                     text-align: center;
                     width: 100%;
@@ -204,4 +213,3 @@
         }
     }
 }
-

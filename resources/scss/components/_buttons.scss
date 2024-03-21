@@ -24,13 +24,13 @@
     a {
         font-size: 16px;
         font-weight: 600;
-        color: var(--dark);
+        color: var(--light);
 
         svg {
             position: absolute;
             width: 16px;
             height: 16px;
-            stroke: var(--dark);
+            stroke: var(--light);
             z-index: 9;
             transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
@@ -70,10 +70,10 @@
         border-radius: 12px;
 
         a {
-            color: var(--dark);
+            color: var(--light);
 
             svg {
-                stroke: var(--dark);
+                stroke: var(--light);
             }
 
             .arr-1 {
@@ -117,7 +117,7 @@
     color: var(--accent-color);
     z-index: 1;
 
-    box-shadow: 0px 0px 0px 8px #34B79555;
+    box-shadow: 0px 0px 0px 8px #bd272d55;
     animation: flash 1000ms infinite alternate;
 
     a {
@@ -166,7 +166,7 @@
 
     &:hover {
 
-        box-shadow: 0px 0px 0px 8px #34B79555;
+        box-shadow: 0px 0px 0px 8px #bd272d55;
         animation: none;
 
         a {
@@ -389,8 +389,8 @@
 @media (max-width: 768px) {
     .sell-btn {
         position: fixed;
-        bottom: 7rem;
-        right: 1rem;
+        bottom: 5rem;
+        right: 25%;
         z-index: 1000;
     }
 }

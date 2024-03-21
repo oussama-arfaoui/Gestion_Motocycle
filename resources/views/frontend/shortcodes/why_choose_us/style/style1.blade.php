@@ -20,25 +20,25 @@
         <div class="why_choose_us_style1-content-nodes">
 
             <div class="why_choose_us_style1-content-nodes-node">
-                <img src="./icons/{{$node_icon_1}}.png" alt="quality-icon">
+                <img src="./icons/icon-{{$node_icon_1}}.png" alt="quality-icon">
                 <h3>{{ $node_title_1 }}</h3>
                 <p>{{ $node_description_1 }}</p>
             </div>
 
             <div class="why_choose_us_style1-content-nodes-node">
-                <img src="./icons/{{$node_icon_2}}.png" alt="quality-icon">
+                <img src="./icons/icon-{{$node_icon_2}}.png" alt="quality-icon">
                 <h3>{{ $node_title_2 }}</h3>
                 <p>{{ $node_description_2 }}</p>
             </div>
 
             <div class="why_choose_us_style1-content-nodes-node">
-                <img src="./icons/{{$node_icon_3}}.png" alt="quality-icon">
+                <img src="./icons/icon-{{$node_icon_3}}.png" alt="quality-icon">
                 <h3>{{ $node_title_3 }}</h3>
                 <p>{{ $node_description_3 }}</p>
             </div>
 
             <div class="why_choose_us_style1-content-nodes-node">
-                <img src="./icons/{{$node_icon_4}}.png" alt="quality-icon">
+                <img src="./icons/icon-{{$node_icon_4}}.png" alt="quality-icon">
                 <h3>{{ $node_title_4 }}</h3>
                 <p>{{ $node_description_4 }}</p>
             </div>

@@ -13,11 +13,11 @@
             <h2 class="category_overview_style3-content-text-title">{{$title}}</h2>
             <p class="category_overview_style3-content-text-description">{{$description}}</p>
 
-            <x-primary_button path='/contact' text="{{$primary_button_label}}"></x-primary_button>
+            <x-primary_button path='/catalogue' text="{{$primary_button_label}}"></x-primary_button>
         </div>
 
         <div class="category_overview_style3-content-categories">
-            <a href="/catalogue" class="category_overview_style3-content-categories-category">
+            <a href="/product-categories/21" class="category_overview_style3-content-categories-category">
                 {{-- <a href="/contact" class="category_overview_style3-content-categories-category-image">
                     <img src={{@asset("./blanks/500x500.png")}} alt="">
                 </a> --}}
@@ -27,12 +27,12 @@
                     <p>{{ $category_description_1 }}</p>
                 </div>
             </a>
-            
-            <a href="/catalogue" class="category_overview_style3-content-categories-category">
+
+            <a href="/product-categories/20" class="category_overview_style3-content-categories-category">
                 {{-- <a href="/contact" class="category_overview_style3-content-categories-category-image">
                     <img src={{@asset("./blanks/500x500.png")}} alt="">
                 </a> --}}
-                
+
                 <div class="category_overview_style3-content-categories-category-text">
                     <h3>{{ $category_title_2 }}</h3>
                     <p>{{ $category_description_2 }}</p>

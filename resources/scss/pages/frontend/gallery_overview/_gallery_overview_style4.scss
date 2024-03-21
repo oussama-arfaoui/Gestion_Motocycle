@@ -115,8 +115,9 @@
             width: 100%;
 
             @media (max-width: 1024px) {
-                padding: 1rem;
-                position: static;
+                margin: 1rem;
+                padding: 0rem;
+                width: 90%;
             }
 
             img {

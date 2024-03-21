@@ -24,6 +24,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 40px;
+        justify-content: space-between;
 
         .footer-column {
             flex: 1 1 100%;

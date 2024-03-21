@@ -14,7 +14,7 @@
             </div>
             <h2 class="about_overview_style5-content-text-title">{{$title}}</h2>
             <p class="about_overview_style5-content-text-description">{{$description}}</p>
-            <x-primary_button path='/contact' text="{{$primary_button_label}}"></x-primary_button>
+            <x-primary_button path='/entreprise' text="{{$primary_button_label}}"></x-primary_button>
         </div>
         {{--
         <div class="about_overview_style5-content-image">

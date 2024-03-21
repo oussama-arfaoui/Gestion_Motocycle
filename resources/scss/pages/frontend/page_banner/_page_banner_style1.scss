@@ -21,7 +21,8 @@
             font-size: 48px;
             position: relative;
             color: transparent;
-            background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+            // background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+            background: linear-gradient(90deg, var(--accent-color)0%, var(--primary-color) 50%, var(--accent-color) 100%);
             background-size: 400% 400%;
             animation: gradient-animation 10s ease infinite;
             -webkit-background-clip: text;

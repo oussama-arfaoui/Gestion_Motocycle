@@ -121,10 +121,10 @@
 
 @keyframes flash {
     from {
-        box-shadow: 0px 0px 0px 8px hsla(164, 56%, 46%, 0.5);
+        box-shadow: 0px 0px 0px 8px #27bd7cb9;
     }
 
     to {
-        box-shadow: 0px 0px 0px 8px hsla(164, 56%, 46%, 0.1);
+        box-shadow: 0px 0px 0px 8px #27bd7714;
     }
 }
