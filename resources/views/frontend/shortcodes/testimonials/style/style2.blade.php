@@ -3,8 +3,15 @@
 <section class="testimonials_style2 global_container">
 
     <div class="testimonials_style2-text">
-        <h2>{{ $title }}</h2>
-        <p>{{ $description }}</p>
+        <div class="testimonials_style2-text-tag">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m16.2 19 4.8-7-4.8-7H3l4.8 7L3 19h13.2Z" />
+            </svg>
+            <p>Témoignage</p>
+        </div>
+        <h2 class="testimonials_style2-text-title">{{ $title }}</h2>
+        <p class="testimonials_style2-text-description">{{ $description }}</p>
     </div>
 
     <div class="testimonials_style2-items">

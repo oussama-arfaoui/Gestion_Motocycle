@@ -9,7 +9,33 @@
 
         padding-block: 2rem;
 
-        h2 {
+        &-tag {
+            display: flex;
+            flex-direction: row;
+
+            width: fit-content;
+            align-items: center;
+            justify-content: space-evenly;
+
+            margin-bottom: 0.5rem;
+
+            svg {
+                height: 24px;
+                width: 24px;
+
+                stroke: var(--accent-color);
+                margin-right: 0.5rem;
+            }
+
+            p {
+                color: var(--accent-color);
+                text-transform: uppercase;
+                font-size: 12px;
+                font-weight: 800;
+            }
+        }
+
+        &-title {
             font-size: 48px;
             margin-bottom: 2.5rem;
             text-transform: capitalize;
@@ -24,7 +50,7 @@
             }
         }
 
-        p {
+        &-description {
             width: 70%;
             font-size: 18px;
             line-height: 1.75;

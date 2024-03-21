@@ -10,12 +10,12 @@
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="/accueil">Accueil</a></li>
-                    <li><a href="/spaces">Catalogue</a></li>
+                    <li><a href="/entreprise">Entreprise</a></li>
+                    <li><a href="/catalogue">Catalogue</a></li>
+                    <li><a href="/services">Services</a></li>
+                    <li><a href="/projects-categories-list">Projets</a></li>
                     <li><a href="/contact">Contact</a></li>
                     <li><a href="/actualites">Actualites</a></li>
-                    <li><a href="/product-categories/16">Salle One2One</a></li>
-                    <li><a href="/product-categories/17">Salle de Réunion</a></li>
-                    <li><a href="/product-categories/18">Salle de Conférence</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -73,12 +73,12 @@
                             </svg></a></li>
                 </ul>
                 <div class="hashtag">
-                    <span>#Space2Work</span>
-                    <span>#SpacetoWork</span>
-                    <span>#SpaceForWork</span>
-                    <span>#Space2Work</span>
-                    <span>#Space2Work</span>
-                    <span>#WorkingSpace</span>
+                    <span>#WireNext</span>
+                    <span>#MaintenanceWireNext</span>
+                    <span>#MachinerieWireNext</span>
+                    <span>#WireNextINdustrielles</span>
+                    <span>#WireNextIndustie</span>
+                    <span>#WireNextMaroc</span>
                 </div>
             </div>
             <div class="footer-column">
@@ -89,4 +89,16 @@
             </div>
         </div>
     </div>
+
+    {{--
+    Holy Throne of Earth
+
+    In faith we are preserved
+
+    Across the whole of space
+
+    No shameful thought, no unclean deed
+
+    Obscures the glory of our race
+    --}}
 </footer>

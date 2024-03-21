@@ -1,8 +1,8 @@
 .hero_section_style1 {
-    padding-block: 8rem;
-    padding-top: calc(6rem + 96px);
+    padding-block: calc(6rem + 96px);
 
-    background-image: url("/public/bgs/bg-1.png");
+    background-image: url("/public/blanks/1920x1080.png");
+    background-position: center;
     color: var(--light);
 
     border-bottom-left-radius: 2rem;
@@ -49,16 +49,6 @@
                     flex-direction: column;
                     gap: 2rem;
                 }
-
-                button {
-
-                    // &:last-child {
-                    //     margin-right: 0rem;
-                    //     background-color: var(--primary-color);
-
-                    // }
-                }
-
             }
         }
     }

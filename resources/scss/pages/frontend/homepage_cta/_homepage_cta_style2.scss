@@ -1,10 +1,10 @@
 .homepage_cta_style2 {
     padding-block: 8rem;
 
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, var(--accent-color), #e73c7e);
+    // background: linear-gradient(-45deg, #ee7752, #e73c7e, var(--accent-color), #e73c7e);
+    background: var(--accent-color);
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
-    height: 50vh;
     background-position-y: 0;
 
     &-content {
@@ -38,6 +38,11 @@
             width: 80%;
 
             margin-bottom: 2rem;
+        }
+
+        button{
+            background-color: transparent;
+            border: 1px solid var(--light);
         }
     }
 }

@@ -26,6 +26,8 @@
 
             border-radius: 8px;
 
+            min-height: 50vh;
+
             &-tag {
                 width: fit-content;
                 align-self: flex-end;
@@ -42,8 +44,8 @@
             }
 
             img {
-                width: 80%;
-                margin-bottom: auto;
+                width: 100%;
+                margin-block: auto;
             }
 
             h3 {

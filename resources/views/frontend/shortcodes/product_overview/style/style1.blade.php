@@ -28,22 +28,22 @@
     <div class="product_overview_style1-section">
         <div class="product_overview_style1-section-nodes">
             <div class="product_overview_style1-section-nodes-node">
-                <img src="./icons/{{$node_icon_1}}.png" alt="">
+                <img src="./icons/icon-{{$node_icon_1}}.png" alt="">
                 <h4>{{ $node_title_1 }}</h4>
                 <p>{{ $node_description_1 }}</p>
             </div>
             <div class="product_overview_style1-section-nodes-node">
-                <img src="./icons/{{$node_icon_2}}.png" alt="">
+                <img src="./icons/icon-{{$node_icon_2}}.png" alt="">
                 <h4>{{ $node_title_2 }}</h4>
                 <p>{{ $node_description_2 }}</p>
             </div>
             <div class="product_overview_style1-section-nodes-node">
-                <img src="./icons/{{$node_icon_3}}.png" alt="">
+                <img src="./icons/icon-{{$node_icon_3}}.png" alt="">
                 <h4>{{ $node_title_3 }}</h4>
                 <p>{{ $node_description_3 }}</p>
             </div>
             <div class="product_overview_style1-section-nodes-node">
-                <img src="./icons/{{$node_icon_4}}.png" alt="">
+                <img src="./icons/icon-{{$node_icon_4}}.png" alt="">
                 <h4>{{ $node_title_4 }}</h4>
                 <p>{{ $node_description_4 }}</p>
             </div>
@@ -54,11 +54,11 @@
     </div>
 
     <div class="product_overview_style1-actions">
-        <x-primary_button path='#' text='{{ $primary_button_label }}'></x-primary_button>
+        <x-primary_button path='/contact' text='{{ $secondary_button_label }}'></x-primary_button>
 
-        <x-primary_button path='#' text='{{ $secondary_button_label }}'></x-primary_button>
+        {{-- <x-primary_button path='/contact' text='{{ $secondary_button_label }}'></x-primary_button> --}}
 
-        <x-primary_button path='#' text='{{ $ternary_button_label }}'></x-primary_button>
+        {{-- <x-primary_button path='#' text='{{ $ternary_button_label }}'></x-primary_button> --}}
     </div>
 
 </section>

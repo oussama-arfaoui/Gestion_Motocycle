@@ -17,7 +17,7 @@
         <div class="category_overview_style1-content-item">
 
             <div class="category_overview_style1-content-item-image">
-                <img src="./doors/exterior_doors/door-exterior-3.png" alt="Exterior door Image">
+                <img src="./blanks/400x500.png" alt="Salsa">
             </div>
 
             <div class="category_overview_style1-content-item-text">
@@ -37,7 +37,7 @@
         <div class="category_overview_style1-content-item">
 
             <div class="category_overview_style1-content-item-image">
-                <img src="./doors/interior_doors/door-interior-6.png" alt="Exterior door Image">
+                <img src="./blanks/400x500.png" alt="Salsa">
             </div>
 
             <div class="category_overview_style1-content-item-text">

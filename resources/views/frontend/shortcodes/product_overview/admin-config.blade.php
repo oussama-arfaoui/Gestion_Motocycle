@@ -51,7 +51,7 @@
 
     <div class="node-input">
         <label>node_icon_1</label>
-        <input name="node_title_1" value="" />
+        <input name="node_icon_1" value="" />
     </div>
 
 
@@ -69,7 +69,7 @@
 
     <div class="node-input">
         <label>node_icon_2</label>
-        <input name="node_title_2" value="" />
+        <input name="node_icon_2" value="" />
     </div>
 
 
@@ -87,7 +87,7 @@
 
     <div class="node-input">
         <label>node_icon_3</label>
-        <input name="node_title_3" value="" />
+        <input name="node_icon_3" value="" />
     </div>
 
 
@@ -106,7 +106,7 @@
 
     <div class="node-input">
         <label>node_icon_4</label>
-        <input name="node_title_4" value="" />
+        <input name="node_icon_4" value="" />
     </div>
 
 
