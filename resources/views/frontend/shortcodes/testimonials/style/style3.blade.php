@@ -32,14 +32,14 @@
                         </p>
                     </div>
                     <div class="testimonials_style3-content-slide-content">
-                        <div class="testimonials_style3-content-slide-content-image">
+                        {{-- <div class="testimonials_style3-content-slide-content-image">
                             @if($testimonialy->image)
                             <img src="{{ asset('storage/Images/general/' . $testimonialy->image) }}"
                                 alt="Testimonial Image">
                             @else
                             <p>No image available</p>
                             @endif
-                        </div>
+                        </div> --}}
                         <div data-swiper-parallax="-200" class="testimonials_style3-content-slide-content-text">
                             <p>{{ $testimonialy->testimonial }}</p>
                         </div>

@@ -22,9 +22,9 @@
     <table class="dashboard-main-container-table">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Service Title</th>
                 <th>Service Description</th>
-                <th>Status</th>
                 <th>Category</th>
                 <th>Images</th>
                 <th>Points</th>
@@ -36,9 +36,9 @@
         <tbody>
             @foreach($services as $service)
             <tr>
+                <td>{{ $service->id }}</td>
                 <td>{{ $service->service_title }}</td>
                 <td>{{ $service->service_description }}</td>
-                <td>{{ $service->status }}</td>
                 <td>{{ optional($service->category)->category_name ?? 'null' }}</td>
                     <!-- Check if images exist for the project -->
                     @if($service->images)

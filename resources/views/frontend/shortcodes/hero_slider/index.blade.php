@@ -6,7 +6,23 @@ $viewName = "frontend.shortcodes.hero_slider.style.$style";
 
 {{-- Render the corresponding view --}}
 @includeIf($viewName, [
-'title' => $title,
-'description' => $description,
-'button_primary_label' => $button_primary_label,
+
+'section_tag' => $section_tag = $section_tag ?? "",
+
+'title' => $title = $title ?? "",
+
+'subtitle' => $subtitle = $subtitle ?? "",
+
+'description' => $description = $description ?? "",
+
+'keyword' => $keyword = $keyword ?? "",
+
+'primary_button_label' => $primary_button_label = $primary_button_label ?? "",
+
+'primary_button_link' => $primary_button_link = $primary_button_link ?? "",
+
+'secondary_button_label' => $secondary_button_label = $secondary_button_label ?? "",
+
+'secondary_button_link' => $secondary_button_link = $secondary_button_link ?? "",
+
 ])

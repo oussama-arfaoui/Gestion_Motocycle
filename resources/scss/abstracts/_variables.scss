@@ -228,6 +228,7 @@ $Gray900: #111827;
     --db-dark: #F9FAFB;
     --db-gray: #D2D5DA;
     --db-dark-gray: #1f29371c;
+    --db-accent: #cb0202;
 
     --db-blue: #93c5fd;
     --db-purple: #d8b4fe;
@@ -239,7 +240,20 @@ $Gray900: #111827;
     --light: #ffffff;
     --dark: #000000;
 
-    --primary-color: #156DD5;
-    --accent-color: #2EA365;
+    --primary-color: #000000;
+    --accent-color: #ffa000;
+    --accent-color-half: #ffa20087;
+    --accent-color-barely: #ffa20014;
 
+    --accent-color-1: #F1EEE4;
+
+
+
+    /// SHADOWS
+    
+    --shadow-s: 0 1px 3px hsla(0,0%, .2); 
+    --shadow-m: 0 4px 6px hsla(0,0%, .2); 
+    --shadow-l: 0 5px 15px hsla(0,0%, .2); 
+    --shadow-xl: 0 10px 24px hsla(0,0%, .2); 
+    --shadow-xxl: 0 15px 35px hsla(0,0%, .2); 
 }

@@ -9,7 +9,7 @@
         </div>
         <h2 class="category_overview_style1-text-title">{{$title}}</h2>
         <p class="category_overview_style1-text-description">{{$description}}</p>
-        <x-primary_button path='/spaces' text="{{$primary_button_label}}"></x-primary_button>
+        <x-primary_button path="{{$primary_button_link}}" text="{{$primary_button_label}}"></x-primary_button>
     </div>
 
     <div class="category_overview_style1-content">
@@ -17,14 +17,32 @@
         <div class="category_overview_style1-content-item">
 
             <div class="category_overview_style1-content-item-image">
-                <img src="./blanks/400x500.png" alt="Salsa">
+                <img src="/bgs/category_overview/category_1.png" alt="Salsa">
+            </div>
+
+            <div class="category_overview_style1-content-item-text">
+                <h3>{{$category_title_1}}</h3>
+                <p>{{$category_description_1}}</p>
+                <button class="option-btn">
+                    <a href="{{$category_link_1}}">
+                        {{$category_button_1}}
+                        <x-chevron-icon></x-chevron-icon>
+                    </a>
+                </button>
+            </div>
+        </div>
+
+        <div class="category_overview_style1-content-item">
+
+            <div class="category_overview_style1-content-item-image">
+                <img src="/bgs/category_overview/category_2.png" alt="Salsa">
             </div>
 
             <div class="category_overview_style1-content-item-text">
                 <h3>{{$category_title_2}}</h3>
                 <p>{{$category_description_2}}</p>
                 <button class="option-btn">
-                    <a href="/spaces"> {{-- MUST BE REPLACED WITH THE CATEGORY DETAILS LINK: PORtes Exterieur--}}
+                    <a href="{{$category_link_2}}">
                         <span>
                             {{$category_button_2}}
                         </span>
@@ -33,25 +51,6 @@
                 </button>
             </div>
         </div>
-
-        <div class="category_overview_style1-content-item">
-
-            <div class="category_overview_style1-content-item-image">
-                <img src="./blanks/400x500.png" alt="Salsa">
-            </div>
-
-            <div class="category_overview_style1-content-item-text">
-                <h3>{{$category_title_1}}</h3>
-                <p>{{$category_description_1}}</p>
-                <button class="option-btn">
-                    <a href="/spaces"> {{-- MUST BE REPLACED WITH THE CATEGORY DETAILS LINK: PORtes Exterieur--}}
-                        {{$category_button_1}}
-                        <x-chevron-icon></x-chevron-icon>
-                    </a>
-                </button>
-            </div>
-        </div>
-
 
     </div>
 </section>

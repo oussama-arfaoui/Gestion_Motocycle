@@ -1,5 +1,3 @@
-{{-- Index File --}}
-
 {{-- Determine which style to use --}}
 @php
 $style = $style ?? ''; // Default to empty string if style is not provided
@@ -9,24 +7,54 @@ $viewName = "frontend.shortcodes.contact_information.style.$style";
 {{-- Render the corresponding view --}}
 @includeIf($viewName, [
 
-'title' => $title,
+'section_tag' => $section_tag = $section_tag ?? "",
 
-'description' => $description,
+'title' => $title = $title ?? "",
 
-'primary_button_label' => $primary_button_label,
+'subtitle' => $subtitle = $subtitle ?? "",
 
-'secondary_button_label' => $secondary_button_label,
+'description' => $description = $description ?? "",
 
-'node_title_1' => $node_title_1,
+'primary_button_label' => $primary_button_label = $primary_button_label ?? "",
 
-'node_title_2' => $node_title_2,
+'primary_button_link' => $primary_button_link = $primary_button_link ?? "",
 
-'node_title_3' => $node_title_3,
+'secondary_button_label' => $secondary_button_label = $secondary_button_label ?? "",
 
-'node_description_1' => $node_description_1,
+'secondary_button_link' => $secondary_button_link = $secondary_button_link ?? "",
 
-'node_description_2' => $node_description_2,
+'keyword' => $keyword = $keyword ?? "",
 
-'node_description_3' => $node_description_3,
+'node_icon_1' => $node_icon_1 = $node_icon_1 ?? "",
+
+'node_title_1' => $node_title_1 = $node_title_1 ?? "",
+
+'node_description_1' => $node_description_1 = $node_description_1 ?? "",
+
+'node_icon_2' => $node_icon_2 = $node_icon_2 ?? "",
+
+'node_title_2' => $node_title_2 = $node_title_2 ?? "",
+
+'node_description_2' => $node_description_2 = $node_description_2 ?? "",
+
+'node_icon_3' => $node_icon_3 = $node_icon_3 ?? "",
+
+'node_title_3' => $node_title_3 = $node_title_3 ?? "",
+
+'node_description_3' => $node_description_3 = $node_description_3 ?? "",
+
+'node_icon_4' => $node_icon_4 = $node_icon_4 ?? "",
+
+'node_title_4' => $node_title_4 = $node_title_4 ?? "",
+
+'node_description_4' => $node_description_4 = $node_description_4 ?? "",
+
+'extra_info_1' => $extra_info_1 = $extra_info_1 ?? "",
+
+'extra_info_2' => $extra_info_2 = $extra_info_2 ?? "",
+
+'extra_info_3' => $extra_info_3 = $extra_info_3 ?? "",
+
+'extra_info_4' => $extra_info_4 = $extra_info_4 ?? "",
 
 ])

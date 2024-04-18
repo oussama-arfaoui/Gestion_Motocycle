@@ -1,80 +1,152 @@
-<!-- Form for configuring hero shortcode -->
 <section class="shortcode-editor">
 
     <div class="node-input">
-        <label class="control-label">Section Tag</label>
+        <label>section_tag</label>
         <input name="section_tag" value="" />
     </div>
-    
+
+
+
     <div class="node-input">
-        <label class="control-label">Title</label>
+        <label>title</label>
         <input name="title" value="" />
     </div>
-    
+
+
+
     <div class="node-input">
-        <label class="control-label">Subtitle</label>
+        <label>subtitle</label>
         <input name="subtitle" value="" />
     </div>
-    
+
+
+
     <div class="node-input">
-        <label class="control-label">Description</label>
+        <label>description</label>
         <textarea name="description" value=""></textarea>
     </div>
-    
+
+
+
     <div class="node-input">
-        <label class="control-label">Primary Button Label</label>
+        <label>primary_button_label</label>
         <input name="primary_button_label" value="" />
     </div>
-    
 
-    {{-- Node --}}
+
 
     <div class="node-input">
-        <label class="control-label">Node Title 1</label>
+        <label>primary_button_link</label>
+        <input name="primary_button_link" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>secondary_button_label</label>
+        <input name="secondary_button_label" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>secondary_button_link</label>
+        <input name="secondary_button_link" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>keyword</label>
+        <input name="keyword" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>node_icon_1</label>
+        <input name="node_icon_1" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>node_title_1</label>
         <input name="node_title_1" value="" />
     </div>
 
-    <div class="node-input">
-        <label class="control-label">Node Description 1</label>
-        <textarea name="node_description_1" value="" ></textarea>
-    </div>
-    {{-- Node --}}
+
 
     <div class="node-input">
-        <label class="control-label">Node Title 2</label>
+        <label>node_description_1</label>
+        <textarea name="node_description_1" value=""></textarea>
+    </div>
+
+
+
+    <div class="node-input">
+        <label>node_icon_2</label>
+        <input name="node_icon_2" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>node_title_2</label>
         <input name="node_title_2" value="" />
     </div>
 
-    <div class="node-input">
-        <label class="control-label">Node Description 2</label>
-        <textarea name="node_description_2" value="" ></textarea>
-    </div>
-    {{-- Node --}}
+
 
     <div class="node-input">
-        <label class="control-label">Node Title 3</label>
+        <label>node_description_2</label>
+        <textarea name="node_description_2" value=""></textarea>
+    </div>
+
+
+
+    <div class="node-input">
+        <label>node_icon_3</label>
+        <input name="node_icon_3" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>node_title_3</label>
         <input name="node_title_3" value="" />
     </div>
 
-    <div class="node-input">
-        <label class="control-label">Node Description 3</label>
-        <textarea name="node_description_3" value="" ></textarea>
-    </div>
-    {{-- Node --}}
+
 
     <div class="node-input">
-        <label class="control-label">Node Title 4</label>
+        <label>node_description_3</label>
+        <textarea name="node_description_3" value=""></textarea>
+    </div>
+
+
+
+    <div class="node-input">
+        <label>node_icon_4</label>
+        <input name="node_icon_4" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>node_title_4</label>
         <input name="node_title_4" value="" />
     </div>
 
+
+
     <div class="node-input">
-        <label class="control-label">Node Description 4</label>
-        <textarea name="node_description_4" value="" ></textarea>
+        <label>node_description_4</label>
+        <textarea name="node_description_4" value=""></textarea>
     </div>
 
-    
 
-    
+
     <div class="node-selector">
         <label>Style</label>
         <select name="style">

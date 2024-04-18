@@ -11,6 +11,10 @@
             font-size: 36px;
             margin-bottom: 2rem;
             text-align: center;
+
+            @media (max-width: 768px) {
+                font-size: 28px;
+            }
         }
 
         &-cards {

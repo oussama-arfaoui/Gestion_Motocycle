@@ -69,20 +69,19 @@
 
         &-collection {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(3, 1fr);
-
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(5, 1fr);
             gap: 1rem;
 
             img {
                 width: 100%;
+                height: 100%;
+                object-fit: cover;
                 border-radius: 8px;
-
                 cursor: pointer;
                 @include Interactable;
             }
         }
-
     }
 
 }
@@ -160,15 +159,14 @@
 
             &-collection {
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: repeat(2, 1fr);
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(10, 1fr);
 
                 gap: 1rem;
 
                 img {
                     width: 100%;
                     border-radius: 8px;
-
                     @include Interactable;
                 }
             }
@@ -251,9 +249,9 @@
             }
 
             &-collection {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(10, 1fr);
                 gap: 1rem;
 
                 img {
@@ -272,7 +270,7 @@
 .project_popup {
     display: none;
     position: fixed;
-    z-index: 999;
+    z-index: 99999;
     left: 0;
     top: 0;
     width: 100%;

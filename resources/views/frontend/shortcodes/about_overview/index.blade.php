@@ -6,22 +6,47 @@ $viewName = "frontend.shortcodes.about_overview.style.$style";
 
 {{-- Render the corresponding view --}}
 @includeIf($viewName, [
-'section_tag' => $section_tag,
 
-'title' => $title,
-'subtitle' => $subtitle,
-'description' => $description,
-'primary_button_label' => $primary_button_label,
+'section_tag' => $section_tag = $section_tag ?? "",
 
-'node_title_1' => $node_title_1,
-'node_description_1' => $node_description_1,
+'title' => $title = $title ?? "",
 
-'node_title_2' => $node_title_2,
-'node_description_2' => $node_description_2,
+'subtitle' => $subtitle = $subtitle ?? "",
 
-'node_title_3' => $node_title_3,
-'node_description_3' => $node_description_3,
+'description' => $description = $description ?? "",
 
-'node_title_4' => $node_title_4,
-'node_description_4' => $node_description_4,
+'primary_button_label' => $primary_button_label = $primary_button_label ?? "",
+
+'primary_button_link' => $primary_button_link = $primary_button_link ?? "",
+
+'secondary_button_label' => $secondary_button_label = $secondary_button_label ?? "",
+
+'secondary_button_link' => $secondary_button_link = $secondary_button_link ?? "",
+
+'keyword' => $keyword = $keyword ?? "",
+
+'node_icon_1' => $node_icon_1 = $node_icon_1 ?? "",
+
+'node_title_1' => $node_title_1 = $node_title_1 ?? "",
+
+'node_description_1' => $node_description_1 = $node_description_1 ?? "",
+
+'node_icon_2' => $node_icon_2 = $node_icon_2 ?? "",
+
+'node_title_2' => $node_title_2 = $node_title_2 ?? "",
+
+'node_description_2' => $node_description_2 = $node_description_2 ?? "",
+
+'node_icon_3' => $node_icon_3 = $node_icon_3 ?? "",
+
+'node_title_3' => $node_title_3 = $node_title_3 ?? "",
+
+'node_description_3' => $node_description_3 = $node_description_3 ?? "",
+
+'node_icon_4' => $node_icon_4 = $node_icon_4 ?? "",
+
+'node_title_4' => $node_title_4 = $node_title_4 ?? "",
+
+'node_description_4' => $node_description_4 = $node_description_4 ?? "",
+
 ])

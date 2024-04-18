@@ -31,14 +31,20 @@
     <table class="dashboard-main-container-table">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Name</th>
+                <th>Description</th>
+                <th>Content</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach($pages as $page)
             <tr>
+                <td>{{ $page->id }}</td>
                 <td>{{ $page->name }}</td>
+                <td>{{ $page->description }}</td>
+                <td>{{ $page->content }}</td>
                 <td class="dashboard_main-table-actions">
                     <a href="{{ config('app.url') }}{{ $page->slug->key }}" target="_blank">
                         <button class="dashboard-icon-button action-view">

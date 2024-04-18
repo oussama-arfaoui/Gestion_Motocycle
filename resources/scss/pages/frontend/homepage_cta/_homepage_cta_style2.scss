@@ -1,8 +1,8 @@
 .homepage_cta_style2 {
     padding-block: 8rem;
 
-    // background: linear-gradient(-45deg, #ee7752, #e73c7e, var(--accent-color), #e73c7e);
-    background: var(--accent-color);
+    background: linear-gradient(-45deg,var(--primary-color), var(--accent-color), var(--primary-color));
+    // background: var(--accent-color);
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
     background-position-y: 0;

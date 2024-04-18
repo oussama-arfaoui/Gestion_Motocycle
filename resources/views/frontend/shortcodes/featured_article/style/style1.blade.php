@@ -11,7 +11,7 @@
     <div class="featured_article_style1-featured">
 
         <div class="featured_article_style1-featured-image">
-            <img src="./blanks/500x400.png" alt="project-image">
+            <img src="./blogs/featured.jpg" alt="project-image">
         </div>
 
         <div class="featured_article_style1-featured-text">

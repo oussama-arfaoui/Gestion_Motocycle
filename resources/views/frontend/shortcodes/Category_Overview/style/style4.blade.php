@@ -11,12 +11,12 @@
             </div>
             <h2 class="category_overview_style4-content-text-title">{{$title}}</h2>
             <p class="category_overview_style4-content-text-description">{{$description}}</p>
-            <x-primary_button path='/services' text="{{$primary_button_label}}"></x-primary_button>
+            <x-primary_button path='/service-categories/5' text="{{$primary_button_label}}"></x-primary_button>
         </div>
 
 
         <div class="category_overview_style4-content-category">
-            <a href="/services/5" class="category_overview_style4-content-category-image">
+            <a href="{{$category_link_1}}" class="category_overview_style4-content-category-image">
                 <div class="category_overview_style4-content-category-image-text">
                     <h3>{{ $category_title_1 }}</h3>
                     <p>{{ $category_description_1 }}</p>
@@ -25,66 +25,51 @@
 
             <div class="category_overview_style4-content-category-nodes">
                 <div class="category_overview_style4-content-category-nodes-node">
-                    <img src="./icons/icon-safety.png" alt="quality-icon">
-                    <h3>Maintenance Préventive</h3>
-                    <p>Évitez les pannes avec notre service de maintenance proactive.</p>
+                    <img src="./icons/icon-{{$node_icon_1}}.png" alt="{{$node_icon_1}}-icon">
+                    <h3>{{$node_title_1}}</h3>
+                    <p>{{$node_description_1}}</p>
+                </div>
+                <div class="category_overview_style4-content-category-nodes-node">
+                    <img src="./icons/icon-{{$node_icon_2}}.png" alt="{{$node_icon_1}}-icon">
+                    <h3>{{$node_title_2}}</h3>
+                    <p>{{$node_description_2}}</p>
+                </div>
+                <div class="category_overview_style4-content-category-nodes-node">
+                    <img src="./icons/icon-{{$node_icon_3}}.png" alt="{{$node_icon_1}}-icon">
+                    <h3>{{$node_title_3}}</h3>
+                    <p>{{$node_description_3}}</p>
+                </div>
+                <div class="category_overview_style4-content-category-nodes-node">
+                    <img src="./icons/icon-{{$node_icon_4}}.png" alt="{{$node_icon_1}}-icon">
+                    <h3>{{$node_title_4}}</h3>
+                    <p>{{$node_description_4}}</p>
                 </div>
 
-                <div class="category_overview_style4-content-category-nodes-node">
-                    <img src="./icons/icon-quick.png" alt="quality-icon">
-                    <h3>Réparation Rapide</h3>
-                    <p>Rétablissez rapidement la production avec notre service de réparation.</p>
-                </div>
-
-                <div class="category_overview_style4-content-category-nodes-node">
-                    <img src="./icons/icon-optimization.png" alt="quality-icon">
-                    <h3>Optimisation des Performances</h3>
-                    <p>Maximisez l'efficacité de vos équipements avec nos solutions d'optimisation.</p>
-                </div>
-
-                <div class="category_overview_style4-content-category-nodes-node">
-                    <img src="./icons/icon-availability.png" alt="quality-icon">
-                    <h3>Service 24/7</h3>
-                    <p>Nous sommes disponibles jour et nuit pour répondre à vos besoins urgents.</p>
-                </div>
             </div>
         </div>
 
-        <div class="category_overview_style4-content-category">
+        {{-- <div class="category_overview_style4-content-category">
             <div class="category_overview_style4-content-category-nodes">
                 <div class="category_overview_style4-content-category-nodes-node">
-                    <img src="./icons/icon-expert.png" alt="quality-icon">
-                    <h3>Consultation Expert</h3>
-                    <p>Travaillez avec nos experts pour concevoir la machine parfaite.</p>
+                    <img src="./icons/icon-{{$node_icon_3}}.png" alt="{{$node_icon_1}}-icon">
+                    <h3>{{$node_title_3}}</h3>
+                    <p>{{$node_description_3}}</p>
                 </div>
-
                 <div class="category_overview_style4-content-category-nodes-node">
-                    <img src="./icons/icon-industrial-precision.png" alt="quality-icon">
-                    <h3>Ingénierie de Précision</h3>
-                    <p>Des machines de qualité construites avec précision.</p>
-                </div>
-
-                <div class="category_overview_style4-content-category-nodes-node">
-                    <img src="./icons/icon-custom.png" alt="quality-icon">
-                    <h3>Fabrication Personnalisée</h3>
-                    <p>Des solutions sur mesure pour répondre à vos besoins spécifiques.</p>
-                </div>
-
-                <div class="category_overview_style4-content-category-nodes-node">
-                    <img src="./icons/icon-installation.png" alt="quality-icon">
-                    <h3>Installation et Formation</h3>
-                    <p>Assistance professionnelle pour l'installation et la formation de votre personnel.</p>
+                    <img src="./icons/icon-{{$node_icon_4}}.png" alt="{{$node_icon_1}}-icon">
+                    <h3>{{$node_title_4}}</h3>
+                    <p>{{$node_description_4}}</p>
                 </div>
             </div>
 
-            <a href="/services/4" class="category_overview_style4-content-category-image">
+            <a href="{{$category_link_2}}" class="category_overview_style4-content-category-image">
                 <div class="category_overview_style4-content-category-image-text">
-                    <h3>{{ $category_title_1 }}</h3>
-                    <p>{{ $category_description_1 }}</p>
+                    <h3>{{ $category_title_2 }}</h3>
+                    <p>{{ $category_description_2 }}</p>
                 </div>
             </a>
-        </div>
+        </div> --}}
     </div>
 
-   
+
 </section>

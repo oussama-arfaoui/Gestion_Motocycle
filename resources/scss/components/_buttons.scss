@@ -5,7 +5,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    
+
     gap: 0.5rem;
     padding: 0.5rem 2rem;
     border: 1px solid transparent;
@@ -16,9 +16,9 @@
     box-shadow: 0 0 0 2px var(--accent-color);
 
     cursor: pointer;
-    
+
     overflow: hidden;
-    
+
     transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 
     a {
@@ -103,7 +103,110 @@
     }
 }
 
+.secondary-btn {
+    position: relative;
 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    gap: 0.5rem;
+    padding: 0.5rem 2rem;
+    border: 1px solid var(--accent);
+
+    background-color: transparent;
+    border-radius: 8px;
+
+    box-shadow: 0 0 0 2px var(--accent-color);
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+
+    a {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--accent-color);
+
+        svg {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            stroke: var(--accent-color);
+            z-index: 9;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .arr-1 {
+            right: 16px;
+        }
+
+        .arr-2 {
+            left: -25%;
+        }
+
+        .circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .text {
+            position: relative;
+            z-index: 1;
+            transform: translateX(-12px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            margin-inline: 0.5rem;
+        }
+    }
+
+    &:hover {
+        box-shadow: 0 0 0 12px transparent;
+        border-radius: 12px;
+
+        a {
+            color: var(--light);
+
+            svg {
+                stroke: var(--light);
+            }
+
+            .arr-1 {
+                right: -25%;
+            }
+
+            .arr-2 {
+                left: 16px;
+            }
+
+            .circle {
+                width: 420px;
+                height: 420px; // Hell ye
+                opacity: 1;
+            }
+
+            .text {
+                transform: translateX(12px);
+            }
+        }
+    }
+
+
+    &:active {
+        scale: 0.95;
+        box-shadow: 0 0 0 4px var(--accent-color);
+    }
+}
 
 .sell-btn {
     background-color: var(--accent-color);

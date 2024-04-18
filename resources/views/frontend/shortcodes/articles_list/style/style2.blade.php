@@ -11,43 +11,7 @@
 
         <div class="articles_list_style2-items-item">
             <div class="articles_list_style2-items-item-image">
-                <img src="./blanks/500x400.png" alt="project-image">
-            </div>
-
-            <div class="articles_list_style2-items-item-text">
-                <h3>{{ $article_title }}</h3>
-                <p>{{ $article_description }}</p>
-                <x-primary_button path='#' text='{{$article_button}}'></x-primary_button>
-            </div>
-        </div>
-
-        <div class="articles_list_style2-items-item">
-            <div class="articles_list_style2-items-item-image">
-                <img src="./blanks/500x400.png" alt="project-image">
-            </div>
-
-            <div class="articles_list_style2-items-item-text">
-                <h3>{{ $article_title }}</h3>
-                <p>{{ $article_description }}</p>
-                <x-primary_button path='#' text='{{$article_button}}'></x-primary_button>
-            </div>
-        </div>
-
-        <div class="articles_list_style2-items-item">
-            <div class="articles_list_style2-items-item-image">
-                <img src="./blanks/500x400.png" alt="project-image">
-            </div>
-
-            <div class="articles_list_style2-items-item-text">
-                <h3>{{ $article_title }}</h3>
-                <p>{{ $article_description }}</p>
-                <x-primary_button path='#' text='{{$article_button}}'></x-primary_button>
-            </div>
-        </div>
-
-        <div class="articles_list_style2-items-item">
-            <div class="articles_list_style2-items-item-image">
-                <img src="./blanks/500x400.png" alt="project-image">
+                <img src="./blogs/post1.jpg" alt="project-image">
             </div>
 
             <div class="articles_list_style2-items-item-text">

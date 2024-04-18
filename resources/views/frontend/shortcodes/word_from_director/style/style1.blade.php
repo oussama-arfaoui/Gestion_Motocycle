@@ -18,7 +18,7 @@
         </div>
 
         <div class="word_from_director_style1-content-image">
-            <img src="./blanks/500x500.png" alt="director">
+            <img src="./bgs/director.png" alt="director">
         </div>
     </div>
 

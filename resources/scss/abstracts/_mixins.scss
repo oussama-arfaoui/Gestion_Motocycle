@@ -1,20 +1,38 @@
-@mixin Center{
+@mixin Center {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-@mixin Interactable{
+@mixin Interactable {
     transition: transform 200ms ease-out;
-    
-        &:hover {
-            transition: transform 50ms ease-out;
-            transform: translateY(-2px);
-            box-shadow: 0 2px 4px hsla(0, 0%, 0%, 0.2);
-        }
-    
-        &:active {
-            transition: transform 50ms ease-out;
-            transform: translateY(2px);
-        }
+
+    &:hover {
+        transition: transform 50ms ease-out;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px hsla(0, 0%, 0%, 0.2);
+    }
+
+    &:active {
+        transition: transform 50ms ease-out;
+        transform: translateY(2px);
+    }
+}
+
+
+@mixin Node_Grid {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+    @media (max-width: 1024px) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+
+    @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+    }
 }

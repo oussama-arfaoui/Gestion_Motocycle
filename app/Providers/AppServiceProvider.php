@@ -58,5 +58,13 @@ class AppServiceProvider extends ServiceProvider
                 $Brandss = Brand::all();
                 $view->with('Brandss', $Brandss);
             });   
+            View::composer('frontend.shortcodes.brands.style.style3', function ($view) {
+                $Brandss = Brand::all();
+                $view->with('Brandss', $Brandss);
+            });   
+            View::composer('frontend.shortcodes.brands.style.style4', function ($view) {
+                $Brandss = Brand::all();
+                $view->with('Brandss', $Brandss);
+            });   
     }
 }

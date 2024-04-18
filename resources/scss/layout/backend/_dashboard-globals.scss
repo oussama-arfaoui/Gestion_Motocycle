@@ -96,8 +96,16 @@
             padding: 1rem;
             text-align: start;
 
+            font-size: 14px;
+
+            max-width: 200px;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
             img {
-                width: 50%;
+                max-width: 100px;
             }
 
             .dashboard-icon-button {
@@ -107,8 +115,10 @@
         }
 
         th {
-            text-align: center;
-            background-color: var(--db-gray);
+            background-color: $Gray800;
+            color: var(--db-dark);
+            border: 1px solid $Gray600;
+
         }
 
 
@@ -117,9 +127,13 @@
         }
 
         td:last-child {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            white-space: nowrap;
+
+            .dashboard-icon-button {
+                /// Add ,form here if you want the delete button to be in the same line as the other notiication
+                margin: 0.2rem;
+                display: inline-block;
+            }
         }
 
     }

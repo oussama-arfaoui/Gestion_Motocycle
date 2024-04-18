@@ -14,7 +14,7 @@
             <p>{{ $description }}</p>
 
             <div class="hero_section_style1-content-text-actions">
-                <x-primary_button path="/services" text="{{ $primary_button_label }}"></x-primary_button>
+                <x-primary_button path="/service-categories/5" text="{{ $primary_button_label }}"></x-primary_button>
                 <x-primary_button path="/catalogue" text="{{ $secondary_button_label }}"></x-primary_button>
             </div>
         </div>

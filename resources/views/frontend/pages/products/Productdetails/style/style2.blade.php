@@ -69,7 +69,7 @@
                         <li>No points available</li>
                         @endif
                     </ul>
-                    <x-sell_button text='Demandez Un Devis' path="tel: {{$contact_number}}"></x-sell_button>
+                    <x-sell_button text='Demandez Un Devis' path="tel: {{$contact_number_1}}"></x-sell_button>
                 </div>
             </div>
         </section>

@@ -166,10 +166,12 @@ function getShortcodeindex() {
 
         // Homepage
 
+        
+        
         'hero_slider' => [
             'name' => 'hero_slider',
-            'view' => 'frontend.shortcodes.hero_slider.index', 
-            'attributes' =>['title', 'description', 'button_primary_label','style']      
+            'view' => 'frontend.shortcodes.hero_slider.index',
+            'attributes' => ['section_tag', 'title', 'subtitle', 'description', 'keyword', 'primary_button_label', 'primary_button_link', 'secondary_button_label', 'secondary_button_link' ,'style']
         ],
         'hero_section' => [
             'name' => 'hero_section',
@@ -183,14 +185,14 @@ function getShortcodeindex() {
         ],
         'category_overview' => [
             'name' => 'category_overview',
-            'view' => 'frontend.shortcodes.category_overview.index', 
-            'attributes' => ['section_tag', 'title', 'description', 'primary_button_label', 'category_title_1' , 'category_description_1', 'category_button_1','category_title_2' , 'category_description_2', 'category_button_2','style']      
+            'view' => 'frontend.shortcodes.category_overview.index',
+            'attributes' => ['section_tag', 'title', 'subtitle', 'description', 'primary_button_label', 'primary_button_link', 'secondary_button_label', 'secondary_button_link', 'keyword', 'node_icon_1', 'node_title_1', 'node_description_1', 'node_icon_2', 'node_title_2', 'node_description_2', 'node_icon_3', 'node_title_3', 'node_description_3', 'node_icon_4', 'node_title_4', 'node_description_4', 'category_title_1', 'category_description_1', 'category_button_1', 'category_link_1', 'category_title_2', 'category_description_2', 'category_button_2', 'category_link_2', 'category_title_3', 'category_description_3', 'category_button_3', 'category_link_3', 'category_title_4', 'category_description_4', 'category_button_4', 'category_link_4','style']
         ],
         'about_overview' => [
             'name' => 'about_overview',
-            'view' => 'frontend.shortcodes.about_overview.index', 
-            'attributes' => ['section_tag', 'title', 'subtitle', 'description', 'primary_button_label', 'node_title_1' , 'node_description_1', 'node_title_2' , 'node_description_2','node_title_3' , 'node_description_3','node_title_4' , 'node_description_4','style']      
-        ],
+            'view' => 'frontend.shortcodes.about_overview.index',
+            'attributes' => ['section_tag', 'title', 'subtitle', 'description', 'primary_button_label', 'primary_button_link', 'secondary_button_label', 'secondary_button_link', 'keyword', 'node_icon_1', 'node_title_1', 'node_description_1', 'node_icon_2', 'node_title_2', 'node_description_2', 'node_icon_3', 'node_title_3', 'node_description_3', 'node_icon_4', 'node_title_4', 'node_description_4','style']
+        ],  
         'gallery_overview' => [
             'name' => 'gallery_overview',
             'view' => 'frontend.shortcodes.gallery_overview.index', 
@@ -244,13 +246,10 @@ function getShortcodeindex() {
 
         
     'contact_information' => [
-        'name' => 'contact_information',
-        'view' => 'frontend.shortcodes.contact_information.index',
-        'attributes' => ['title', 'description', 'primary_button_label', 'secondary_button_label',
-        'node_title_1', 'node_title_2', 'node_title_3',
-        'node_description_1', 'node_description_2', 'node_description_3',
-        'style']
-    ],
+            'name' => 'contact_information',
+            'view' => 'frontend.shortcodes.contact_information.index',
+            'attributes' => ['section_tag', 'title', 'subtitle', 'description', 'primary_button_label', 'primary_button_link', 'secondary_button_label', 'secondary_button_link', 'keyword', 'node_icon_1', 'node_title_1', 'node_description_1', 'node_icon_2', 'node_title_2', 'node_description_2', 'node_icon_3', 'node_title_3', 'node_description_3', 'node_icon_4', 'node_title_4', 'node_description_4', 'extra_info_1', 'extra_info_2', 'extra_info_3', 'extra_info_4','style']
+        ],
     'contact_form' => [
         'name' => 'contact_form',
         'view' => 'frontend.shortcodes.contact_form.index',

@@ -1,4 +1,4 @@
-<a href="https://wa.me/{{$contact_whatsapp}}" id="whatsapp-button" class="whatsapp-button">
+<a href="https://wa.me/{{$contact_whatsapp_1}}" id="whatsapp-button" class="whatsapp-button">
     <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
         style="fill: rgba(255, 255, 255, 1);">
         <path fill-rule="evenodd" clip-rule="evenodd"

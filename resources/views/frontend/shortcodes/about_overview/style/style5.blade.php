@@ -31,7 +31,7 @@ const parallaxSection = document.querySelector('.about_overview_style5');
 
 const sectionOffset = parallaxSection.getBoundingClientRect().top;
 
-    let scrollPosition = window.scrollY - (parallaxSection.clientHeight + 500); // Adjust the offset and factor here
+    let scrollPosition = window.scrollY - (parallaxSection.clientHeight + 1920); // Adjust the offset and factor here
     parallaxSection.style.backgroundPositionY = scrollPosition * 0.3 + 'px'; // Adjust the speed of the parallax effect here
 
 });

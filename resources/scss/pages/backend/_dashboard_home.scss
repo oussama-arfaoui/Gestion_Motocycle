@@ -1,0 +1,58 @@
+.dashboard_home {
+    &-welcome {
+        margin-bottom: 3rem;
+
+        h2 {
+            font-size: 32px;
+
+            span {
+                color: var(--db-accent);
+            }
+        }
+    }
+
+    &-information {
+
+        h2 {
+            font-size: 20px;
+            margin-bottom: 1rem;
+        }
+
+        &-table {
+            display: flex;
+            flex-direction: row;
+
+            ul {
+
+                &:nth-child(1),
+                &:nth-child(2) {
+                    margin-right: 2rem;
+                }
+
+                &:nth-child(1) {
+                    li {
+                        font-weight: 600;
+                    }
+                }
+
+                &:nth-child(3) {
+                    width: calc(100% / 3 - 2rem);
+
+                    @media (max-width: 768px) {
+                        width: 100%;
+                    }
+
+                    li {
+                        font-style: italic;
+                    }
+                }
+
+                li {
+                    font-size: 14px;
+                    text-overflow: ellipsis;
+                    margin-bottom: 0.5rem;
+                }
+            }
+        }
+    }
+}

@@ -1,10 +1,22 @@
-{{-- Admin Config File --}}
-
 <section class="shortcode-editor">
+
+    <div class="node-input">
+        <label>section_tag</label>
+        <input name="section_tag" value="" />
+    </div>
+
+
 
     <div class="node-input">
         <label>title</label>
         <input name="title" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>subtitle</label>
+        <input name="subtitle" value="" />
     </div>
 
 
@@ -24,8 +36,36 @@
 
 
     <div class="node-input">
+        <label>primary_button_link</label>
+        <input name="primary_button_link" value="" />
+    </div>
+
+
+
+    <div class="node-input">
         <label>secondary_button_label</label>
         <input name="secondary_button_label" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>secondary_button_link</label>
+        <input name="secondary_button_link" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>keyword</label>
+        <input name="keyword" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>node_icon_1</label>
+        <input name="node_icon_1" value="" />
     </div>
 
 
@@ -38,22 +78,22 @@
 
 
     <div class="node-input">
-        <label>node_title_2</label>
-        <input name="node_title_2" value="" />
-    </div>
-
-
-
-    <div class="node-input">
-        <label>node_title_3</label>
-        <input name="node_title_3" value="" />
-    </div>
-
-
-
-    <div class="node-input">
         <label>node_description_1</label>
         <textarea name="node_description_1" value=""></textarea>
+    </div>
+
+
+
+    <div class="node-input">
+        <label>node_icon_2</label>
+        <input name="node_icon_2" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>node_title_2</label>
+        <input name="node_title_2" value="" />
     </div>
 
 
@@ -66,8 +106,71 @@
 
 
     <div class="node-input">
+        <label>node_icon_3</label>
+        <input name="node_icon_3" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>node_title_3</label>
+        <input name="node_title_3" value="" />
+    </div>
+
+
+
+    <div class="node-input">
         <label>node_description_3</label>
         <textarea name="node_description_3" value=""></textarea>
+    </div>
+
+
+
+    <div class="node-input">
+        <label>node_icon_4</label>
+        <input name="node_icon_4" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>node_title_4</label>
+        <input name="node_title_4" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>node_description_4</label>
+        <textarea name="node_description_4" value=""></textarea>
+    </div>
+
+
+
+    <div class="node-input">
+        <label>extra_info_1</label>
+        <input name="extra_info_1" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>extra_info_2</label>
+        <input name="extra_info_2" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>extra_info_3</label>
+        <input name="extra_info_3" value="" />
+    </div>
+
+
+
+    <div class="node-input">
+        <label>extra_info_4</label>
+        <input name="extra_info_4" value="" />
     </div>
 
 

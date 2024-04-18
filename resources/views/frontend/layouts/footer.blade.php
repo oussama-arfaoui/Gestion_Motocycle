@@ -83,9 +83,9 @@
             </div>
             <div class="footer-column">
                 <h4>Contact Us</h4>
-                <p>Email: {{$contact_email}}</p>
-                <p>Phone: {{$contact_number}}</p>
-                <p>whatsapp: {{$contact_whatsapp}}</p>
+                <p>Email: {{$contact_email_1}}</p>
+                <p>Phone: {{$contact_number_1}}</p>
+                <p>whatsapp: {{$contact_whatsapp_1}}</p>
             </div>
         </div>
     </div>

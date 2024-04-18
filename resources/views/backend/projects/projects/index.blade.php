@@ -22,13 +22,12 @@
     <table class="dashboard-main-container-table">
         <thead>
             <tr>
-                <th>Project Image</th> <!-- Change to Project Image -->
+                <th>ID</th> <!-- Change to Project Image -->
                 <th>Project Title</th> <!-- Change to Project Title -->
                 <th>Project Subtitle</th> <!-- Add Project Subtitle -->
                 <th>Project Description</th> <!-- Add Project Description -->
+                <th>Project Image</th> <!-- Change to Project Image -->
                 <th>Status</th>
-                <th>Template</th>
-                <th>SEO Title</th>
                 <th>Categories</th>
                 <th>Actions</th>
             </tr>
@@ -36,6 +35,11 @@
         <tbody>
             @foreach($projects as $project) <!-- Change $products to $projects -->
             <tr>
+                <td>{{ $project->id }}</td> <!-- Change to projects_title -->
+                
+                <td>{{ $project->projects_title }}</td> <!-- Change to projects_title -->
+                <td>{{ $project->projects_subtitle }}</td> <!-- Add projects_subtitle -->
+                <td>{{ $project->projects_description }}</td> <!-- Add projects_description -->
                 @if($project->images)
 
                 <!--hadi dyales image-->
@@ -53,13 +57,7 @@
                 <td>No image available</td>
                 @endif
                 <!--hadi dyales image-->
-
-                <td>{{ $project->projects_title }}</td> <!-- Change to projects_title -->
-                <td>{{ $project->projects_subtitle }}</td> <!-- Add projects_subtitle -->
-                <td>{{ $project->projects_description }}</td> <!-- Add projects_description -->
                 <td>{{ $project->status }}</td>
-                <td>{{ $project->template }}</td>
-                <td>{{ $project->seo_title }}</td>
                 <td>{{ optional($project->projectscategory)->category_name ?? 'null' }}</td>
                 </td>
                 <td class="dashboard_main-table-actions">

@@ -1,9 +1,41 @@
 
+/**
+ * 
+ * CONSTANTS
+ */
+
 
 const hero_slider_counter = 8000;
 
 
-// Code for functioning Dropdowns
+const generate_button = document.getElementById("generate_button")
+const clean_button = document.getElementById("clean_button")
+
+const shortcode_name = document.getElementById('shortcode_name');
+const shortcode_array = document.getElementById('shortcode_array');
+
+const shortcode_function_get = document.getElementById('shortcode_function_get');
+const shortcode_function_index = document.getElementById('shortcode_function_index');
+const shortcode_admin_config_code = document.getElementById('shortcode_admin_config_code');
+const shortcode_index = document.getElementById('shortcode_index');
+const shortcode_style_template = document.getElementById('shortcode_style_template');
+
+const shortcode_function_get_copy = document.getElementById('shortcode_function_get_copy');
+const shortcode_function_index_copy = document.getElementById('shortcode_function_index_copy');
+const shortcode_admin_config_code_copy = document.getElementById('shortcode_admin_config_code_copy');
+const shortcode_index_copy = document.getElementById('shortcode_index_copy');
+const shortcode_style_template_copy = document.getElementById('shortcode_style_template_copy');
+
+
+
+
+
+/**
+ * 
+ * DROPDOWNS CODE
+ *  Add the name of the dropdow in the array to make it function
+ */
+
 
 const dropdowns = ["nav-products", "nav-ecommerce", "nav-generator","nav-projects", "nav-Settings", "nav-Services","username"];
 
@@ -23,25 +55,18 @@ for (let element of dropdowns) {
 };
 
 
-//// CODE for Shortcode Generator
 
-const generate_button = document.getElementById("generate_button")
-const clean_button = document.getElementById("clean_button")
 
-const shortcode_name = document.getElementById('shortcode_name');
-const shortcode_array = document.getElementById('shortcode_array');
 
-const shortcode_function_get = document.getElementById('shortcode_function_get');
-const shortcode_function_index = document.getElementById('shortcode_function_index');
-const shortcode_admin_config_code = document.getElementById('shortcode_admin_config_code');
-const shortcode_index = document.getElementById('shortcode_index');
-const shortcode_style_template = document.getElementById('shortcode_style_template');
 
-const shortcode_function_get_copy = document.getElementById('shortcode_function_get_copy');
-const shortcode_function_index_copy = document.getElementById('shortcode_function_index_copy');
-const shortcode_admin_config_code_copy = document.getElementById('shortcode_admin_config_code_copy');
-const shortcode_index_copy = document.getElementById('shortcode_index_copy');
-const shortcode_style_template_copy = document.getElementById('shortcode_style_template_copy');
+
+
+/**
+ * 
+ * SHORTCODE GENERATOR:
+ *  Dashboard tab that allows you to easily create a shortcode
+ */
+
 
 
 let attributes_array;
@@ -190,7 +215,7 @@ function create_the_index_code() {
 
     for (let element of attributes_array) {
         index_code += `
-            '${element}' => $${element},
+            '${element}' => $${element} = $${element} ?? "",
             `
     }
 
@@ -272,94 +297,3 @@ if (shortcode_function_get_copy && shortcode_admin_config_code_copy && shortcode
 }
 
 
-// function logImageSrc() {
-//     var imageSrc = document.getElementById('image-fucked').getAttribute('src');
-//     console.log("Image source:", imageSrc);
-// }
-
-// setInterval(logImageSrc, 2000)
-
-
-// Function to play sound
-const click_1 = new Audio('https://assets.mixkit.co/active_storage/sfx/1120/1120-preview.mp3');
-const click_2 = new Audio("https://assets.mixkit.co/active_storage/sfx/1118/1118-preview.mp3");
-const sound_success = new Audio("https://assets.mixkit.co/active_storage/sfx/1107/1107-preview.mp3");
-
-function playSound(element) {
-    element.play();
-}
-
-// Add click event listener to elements with class "dashboard-icon-button"
-document.addEventListener('DOMContentLoaded', function () {
-
-    var buttons = document.querySelectorAll('.dashboard-icon-button');
-    var sidebarLinks = document.querySelector('.dashboard_sidebar__links');
-    var dashboardMainButton = document.querySelectorAll('.dashboard-main-button');
-
-    if (buttons) {
-
-
-        buttons.forEach(function (button) {
-            button.addEventListener('click', function () {
-                playSound(click_1);
-            });
-        });
-    }
-
-    if (sidebarLinks) {
-        sidebarLinks.addEventListener('click', function (event) {
-            // Check if the event target is a child element
-            var isChild = event.target.closest('.dashboard_sidebar__links') !== null;
-            if (isChild) {
-                playSound(click_2);
-            }
-        });
-    }
-
-    if (dashboardMainButton) {
-
-        dashboardMainButton.forEach(function (button) {
-            button.addEventListener('click', function () {
-                playSound(sound_success);
-            });
-        });
-    }
-
-});
-
-
-/// DARK THEME
-const root = document.documentElement;
-let isToggled = localStorage.getItem('isToggled') === 'true';
-
-const toggleColors = () => {
-    if (isToggled) {
-        root.style.setProperty('--db-light', '#111827');
-        root.style.setProperty('--db-dark', '#F9FAFB');
-        root.style.setProperty('--db-gray', '#D2D5DA');
-        root.style.setProperty('--db-dark-gray', '#1f29371c');
-
-        root.style.setProperty('--db-blue', '#93c5fd');
-        root.style.setProperty('--db-purple', '#d8b4fe');
-        root.style.setProperty('--db-red', '#FCA5A5');
-        root.style.removeProperty('--db-green');
-    } else {
-        root.style.setProperty('--db-light', '#d1cfcc');
-        root.style.setProperty('--db-dark', '#000100');
-        root.style.setProperty('--db-gray', '#d1cfcc81');
-        root.style.setProperty('--db-dark-gray', '#54545481');
-
-        root.style.setProperty('--db-blue', '#5268a589');
-        root.style.setProperty('--db-purple', '#cfced18c');
-        root.style.setProperty('--db-red', '#ffac7c8a');
-        root.style.setProperty('--db-green', '#cbd62e80');
-    }
-
-    isToggled = !isToggled;
-    localStorage.setItem('isToggled', isToggled);
-};
-
-
-if (document.querySelector('.dashboard-theme-toggler')) {
-    document.querySelector('.dashboard-theme-toggler').addEventListener('click', toggleColors);
-}

@@ -96,20 +96,31 @@
             flex-direction: row;
             align-items: center;
 
-            gap: 4rem;
+            gap: 2rem;
 
             width: 100%;
 
+            padding-inline: 4rem;
+            
+            @media (max-width: 1024px) {
+                display: grid;
+                place-items: center;
+                grid-template-columns: repeat(2, 1fr);
+                
+                gap: 1rem;
+                padding-inline: 1rem;
+            }
+
             @media (max-width: 768px) {
+                display: flex;
                 flex-direction: column;
                 gap: 0;
+                padding-inline: 1rem;
             }
 
             &-category {
-                width: 50%;
-                height: 70vh;
+                min-height: 400px;
 
-                margin: 2rem;
 
                 @media (max-width: 768px) {
                     width: 100%;
@@ -118,10 +129,18 @@
                 }
 
 
-                background-image: url('/public/bgs/bg_category_1.png');
+                background-image: url('/public/bgs/category_overview/category_1.png');
 
-                &:last-child {
-                    background-image: url('/public/bgs/bg_category_2.png');
+                &:nth-child(2) {
+                    background-image: url('/public/bgs/category_overview/category_2.png');
+                }
+
+                &:nth-child(3) {
+                    background-image: url('/public/bgs/category_overview/category_3.png');
+                }
+
+                &:nth-child(4) {
+                    background-image: url('/public/bgs/category_overview/category_4.png');
                 }
 
                 background-position: center center;
@@ -135,7 +154,7 @@
                 border-radius: 1rem;
 
                 @media (max-width: 768px) {
-                    border-radius: 0;
+                    // border-radius: 0;
                 }
 
                 &-text {
@@ -167,9 +186,9 @@
                     }
 
                     p {
-                        width: 70%;
+                        width: 80%;
 
-                        @media (max-width: 768px) {
+                        @media (max-width: 1024px) {
                             width: 100%;
                         }
                     }

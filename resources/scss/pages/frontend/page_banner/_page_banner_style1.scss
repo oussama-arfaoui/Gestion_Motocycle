@@ -1,6 +1,6 @@
 .page_banner_style1 {
 
-    padding-top: 10vh;
+    padding-top: 12rem;
 
     // background-image: url(/public/bgs/pagebanner_bg.png);
     // background-size: cover;
@@ -42,8 +42,8 @@
 
 @media screen and (max-width: 768px) {
     .page_banner_style1 {
-        padding-top: 0;
-        padding: 1rem;
+
+        padding-block: 1rem;
 
         &-content {
 
@@ -86,7 +86,6 @@
     display: block;
     width: 100%;
     max-height: 60px;
-    margin-bottom: 4rem;
 }
 
 .parallax1>use {

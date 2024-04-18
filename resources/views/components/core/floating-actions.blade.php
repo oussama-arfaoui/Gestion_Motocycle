@@ -44,13 +44,13 @@
 <div class="floating-actions-menu">
     <ul>
         <li>
-            <a href="tel: {{$contact_number}}"><span>{{$contact_number}}</span></a>
+            <a href="tel: {{$contact_number_1}}"><span>{{$contact_number_1}}</span></a>
         </li>
         <li>
-            <a href="https://wa.me/{{ $contact_whatsapp }}"><span>{{ $contact_whatsapp }}</span></a>
+            <a href="https://wa.me/{{ $contact_whatsapp_1 }}"><span>{{ $contact_whatsapp_1 }}</span></a>
         </li>
         <li>
-            <a href="mailto: {{$contact_email}}"><span>{{$contact_email}}</span></a>
+            <a href="mailto: {{$contact_email_1}}"><span>{{$contact_email_1}}</span></a>
         </li>
         {{-- <li>
             <a href="/contact">{{$physical_address}}</a>

@@ -29,21 +29,29 @@
 
 
 /// Most of the backend styles are in the dashboard globals, styles are rarely needed here.
+@import 'pages/backend/dashboard_home';
 
 
 /// Shortcode: devide by type, sort by style number.
 @import 'pages/frontend/hero_slider/hero_slider_style1';
 @import 'pages/frontend/hero_slider/hero_slider_style2';
+@import 'pages/frontend/hero_slider/hero_slider_style3';
+@import 'pages/frontend/hero_slider/hero_slider_style4';
 
 @import 'pages/frontend/hero_section/hero_section_style1';
 
 @import 'pages/frontend/brands/brands_style1';
 @import 'pages/frontend/brands/brands_style2';
+@import 'pages/frontend/brands/brands_style3';
+@import 'pages/frontend/brands/brands_style4';
 
 @import 'pages/frontend/category_overview/category_overview_style1';
 @import 'pages/frontend/category_overview/category_overview_style2';
 @import 'pages/frontend/category_overview/category_overview_style3';
 @import 'pages/frontend/category_overview/category_overview_style4';
+@import 'pages/frontend/category_overview/category_overview_style5';
+@import 'pages/frontend/category_overview/category_overview_style6';
+@import 'pages/frontend/category_overview/category_overview_style7';
 
 @import 'pages/frontend/about_overview/about_overview_style1';
 @import 'pages/frontend/about_overview/about_overview_style2';
@@ -67,6 +75,9 @@
 @import 'pages/frontend/page_banner/page_banner_style1';
 
 @import 'pages/frontend/contact_information/contact_information_style1';
+@import 'pages/frontend/contact_information/contact_information_style2';
+@import 'pages/frontend/contact_information/contact_information_style3';
+@import 'pages/frontend/contact_information/contact_information_style4';
 
 @import 'pages/frontend/contact_form/contact_form_style1';
 
@@ -110,7 +121,6 @@
 @import 'pages/frontend/projects_list/projects_list_style1';
 
 @import 'pages/frontend/project_details/project_details_style1';
-
 
 
 // @import 'themes/';
