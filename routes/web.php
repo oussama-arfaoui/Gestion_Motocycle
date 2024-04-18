@@ -207,6 +207,13 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
     
      
      /************************* Settings ROUTES************************/
+                 /************************
+             * general_settings ROUTES
+             ************************/
+            Route::get('/admin/general_settings', [SettingsController::class, 'indexgeneral_settings'])->name('general_settings.index');
+            Route::put('/admin/general_settings', [SettingsController::class, 'updateAllgeneral_settings'])->name('general_settings.updateAll');
+            Route::delete('/admin/general_settings/{id}', [SettingsController::class, 'destroygeneral_settings'])->name('general_settings.destroy');
+
             /************************
              * pagesstyle ROUTES
              ************************/

@@ -292,7 +292,7 @@
         </button>
 
         <div class="dashboard_sidebar__links-innerlink hide" id="dropdown-menu-nav-Settings">
-            <a href="{{ route('projects.index') }}">
+            <a href="{{ route('general_settings.index') }}">
                 <span>General settings</span>
             </a>
 
