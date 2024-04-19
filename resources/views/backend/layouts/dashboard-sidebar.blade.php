@@ -344,6 +344,9 @@
             <a href="{{ route('shortcode_generator') }}">
                 <span>Shortcode Generator</span>
             </a>
+            <a href="{{ route('shortcode_editor') }}">
+                <span>Shortcode Editor</span>
+            </a>
         </div>
     </div>
 </div>

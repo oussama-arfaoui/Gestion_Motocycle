@@ -37,7 +37,7 @@ const shortcode_style_template_copy = document.getElementById('shortcode_style_t
  */
 
 
-const dropdowns = ["nav-products", "nav-ecommerce", "nav-generator","nav-projects", "nav-Settings", "nav-Services","username"];
+const dropdowns = ["nav-products", "nav-ecommerce", "nav-generator", "nav-projects", "nav-Settings", "nav-Services", "username"];
 
 for (let element of dropdowns) {
     const dropdownButton = document.getElementById(`dropdown-${element}`);
@@ -297,3 +297,111 @@ if (shortcode_function_get_copy && shortcode_admin_config_code_copy && shortcode
 }
 
 
+/// EDITING SHORTCODES
+
+// Sample shortcode
+const shortcode = '[hero_slider section_tag="nothing" title="This is the Title For the Hero Section" subtitle="This is the Subtitle For the Hero Section" description="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritati" keyword="Wonderway" primary_button_label="Primary Button" primary_button_link="Primary Link" secondary_button_label="Secondary button" secondary_button_link="Secondary Link" style="style4" ][/hero_slider][brands Brands="19,19,19,19,19,19,19,19,19,19" style="style2" ][/brands][category_overview section_tag="Category Overview" title="This is the title for the category overview" subtitle="this is the subtitle for the category overview" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." primary_button_label="Primary Button" primary_button_link="/catalogue" secondary_button_label="Secondary Button" secondary_button_link="/contact" keyword="Category Overview" node_icon_1="quality" node_title_1="Node Title" node_description_1="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." node_icon_2="service" node_title_2="Node Title" node_description_2="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." node_icon_3="customize" node_title_3="Node Title" node_description_3="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." node_icon_4="efficiency" node_title_4="Node Title" node_description_4="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." category_title_1="Category Title" category_description_1="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." category_button_1="Discover More" category_link_1="/category" category_title_2="Category Title" category_description_2="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." category_button_2="Discover More" category_link_2="/category" category_title_3="Category Title" category_description_3="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." category_button_3="Discover More" category_link_3="/catalogue" category_title_4="Category Title" category_description_4="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." category_button_4="Discover More" category_link_4="Category Title" style="style7" ][/category_overview][about_overview section_tag="About Overview" title="This is the title for the about overview" subtitle="This is the subtitle for the about overview" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." primary_button_label="Primary Button" primary_button_link="Primary Link" secondary_button_label="Secondary Button" secondary_button_link="Secondary Link" keyword="Wonderway" node_icon_1="quality" node_title_1="Node Title" node_description_1="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." node_icon_2="efficiency" node_title_2="Node Title" node_description_2="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." node_icon_3="custom" node_title_3="Node Title" node_description_3="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." node_icon_4="service" node_title_4="Node Title" node_description_4="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." style="style5" ][/about_overview]';
+
+
+let shortcode_editor = document.getElementById("shortcode-editor");
+
+function parseAttributes(attributes) {
+    const regex = /(\w+)="([^"]*)"/g;
+    let matches = [];
+    let match;
+    while ((match = regex.exec(attributes)) !== null) {
+        matches.push({ key: match[1], value: match[2] });
+    }
+    return matches;
+}
+
+// Function to parse shortcode
+function parseShortcode(shortcode) {
+    const regex = /\[(\w+)(.*?)\]/g;
+    let matches = [];
+    let match;
+    while ((match = regex.exec(shortcode)) !== null) {
+        matches.push({ tag: match[1], attributes: parseAttributes(match[2]) });
+    }
+    return matches;
+}
+
+const parsedShortcode = parseShortcode(shortcode);
+
+
+function createInputsForAttributes(attributes) {
+    const container = document.createElement('div');
+    container.classList.add('node-input');
+
+    attributes.forEach((attribute, index) => {
+        const label = document.createElement('label');
+        label.textContent = `${attribute.key}:`;
+
+        let input;
+        if (attribute.key.toLowerCase().includes('description')) {
+            input = document.createElement('textarea');
+            input.textContent = attribute.value;
+        } else {
+            input = document.createElement('input');
+            input.setAttribute('type', 'text');
+            input.setAttribute('value', attribute.value);
+        }
+
+        container.appendChild(label);
+        container.appendChild(input);
+    });
+    return container;
+}
+
+// Function to create HTML input elements for each shortcode
+function createInputsForShortcode(parsedShortcode) {
+    
+    parsedShortcode.forEach((shortcode, index) => {
+        const shortcode_module = document.createElement('div');
+        shortcode_module.classList.add('shortcode_module')
+        
+
+        const label = document.createElement('h3');
+        label.textContent = `${shortcode.tag}`;
+        shortcode_module.appendChild(label);
+        label.classList.add('shortcode_module-title')
+    
+        shortcode.attributes.forEach((attribute, index) => {
+            shortcode_module.appendChild(createInputsForAttributes([attribute]));
+        });
+
+        shortcode_editor.appendChild(shortcode_module);
+    });
+
+
+    return shortcode_editor;
+}
+
+
+shortcode_editor = createInputsForShortcode(parsedShortcode);
+
+
+const registerChangesButton = document.getElementById('registerChangesButton');
+
+function registerChangesAndGenerateShortcode() {
+    let modifiedShortcode = '';
+    const shortcodeModules = document.querySelectorAll('.shortcode_module');
+    shortcodeModules.forEach((module, index) => {
+        const tag = module.querySelector('.shortcode_module-title').textContent;
+        modifiedShortcode += `[${tag}`;
+        const inputs = module.querySelectorAll('input, textarea');
+        inputs.forEach((input, inputIndex) => {
+            const key = input.previousElementSibling.textContent.replace(':', '').trim();
+            const value = input.value.replace(/'/g, '’');
+            modifiedShortcode += ` ${key}="${value}"`;
+        });
+        modifiedShortcode += ']';
+    });
+    console.log(modifiedShortcode);
+    // You can further process the modified shortcode as needed (e.g., send it to a server, update a preview, etc.)
+}
+
+registerChangesButton.addEventListener('click', ()=>{
+    console.log("hello")
+    registerChangesAndGenerateShortcode()
+} );

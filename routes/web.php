@@ -204,6 +204,10 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
      Route::get('/admin/shortcode_generator', function () {
         return view('backend.generator.shortcode_generator');
     })->name('shortcode_generator');  
+
+     Route::get('/admin/shortcode_editor', function () {
+        return view('backend.generator.shortcode_editor');
+    })->name('shortcode_editor');  
     
      
      /************************* Settings ROUTES************************/

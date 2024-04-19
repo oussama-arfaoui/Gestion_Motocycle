@@ -642,6 +642,24 @@
     margin-bottom: 3rem;
     padding-inline: 2rem;
 
+    .shortcode_module {
+        margin-block: 2rem;
+        
+        border-bottom: 4px solid var(--db-gray);
+
+        &-title {
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .node-input{
+            margin-bottom: 0.5rem;
+        }
+
+    }
+
 
     .node-input,
     .node-selector {
@@ -655,13 +673,12 @@
         textarea {
             font-family: 'Inter', sans-serif;
             width: 50%;
+            min-height: 128px;
 
             @media (max-width: 1024px) {
                 width: 100%;
             }
         }
-
-
     }
 }
 
