@@ -64,37 +64,36 @@ class ProductCategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'category_name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust file types and size as needed
-            'description' => 'required|string|max:255',
-        ]);
-    
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-    
-        // Check if an image is uploaded
-        if ($request->hasFile('image')) {
-            // Store the uploaded file in the specified directory
-            $imageName = $request->file('image')->getClientOriginalName();
-            $request->file('image')->storeAs('images/general', $imageName, 'public');
-    
-        } else {
-            // Default image name if no image is uploaded
-            $imageName = 'default.jpg'; // Adjust as needed
-        }
-    
-        ProductCategories::create([
-            'category_name' => $request->category_name,
-            'image' => $imageName,
-            'description' => $request->description, // Include description field
-        ]);
-    
-        return redirect()->route('product-categories.index')->with('success', 'Category created successfully.');
+public function store(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'category_name' => 'required|string|max:255',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust file types and size as needed
+        'description' => 'required|string|max:255',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
     }
+
+    // Check if an image is uploaded
+    if ($request->hasFile('image')) {
+        // Store the uploaded file in the specified directory
+        $imageName = $request->file('image')->store('Images/general', 'public');
+    } else {
+        // Default image name if no image is uploaded
+        $imageName = 'default.jpg'; // Adjust as needed
+    }
+
+    ProductCategories::create([
+        'category_name' => $request->category_name,
+        'image' => basename($imageName), // Extracting filename from the full path
+        'description' => $request->description, // Include description field
+    ]);
+
+    return redirect()->route('product-categories.index')->with('success', 'Category created successfully.');
+}
+
     
     public function edit($id)
     {
@@ -119,11 +118,11 @@ class ProductCategoriesController extends Controller
         // Check if an image is uploaded
         if ($request->hasFile('image')) {
             // Store the uploaded file in the specified directory
-            $imageName = $request->file('image')->getClientOriginalName();
-            $request->file('image')->storeAs('images/general', $imageName);
+            $imageName = $request->file('image')->store('Images/general', 'public');
             // Update the image name in the database
-            $category->image = $imageName;
+            $category->image = basename($imageName);
         }
+
     
         $category->category_name = $request->category_name;
         // Update the category description

@@ -11,7 +11,13 @@
 
         <div class="products_categories_list_style2-nodes-node">
             <div class="products_categories_list_style2-nodes-node-image">
-                <img src="./blanks/500x500.png" alt="category_image">
+
+                    @if($category->image)
+                        <img src="{{ asset('/storage/app/public/Images/general/' . $category->image) }}" alt="Category Image">
+                    @else
+                        No image available
+                    @endif
+                
             </div>
             <x-primary_button path='/product-categories/{{ $category->id }}' text='{{ $category->category_name }}'>
             </x-primary_button>

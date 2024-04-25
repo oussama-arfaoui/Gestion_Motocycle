@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Blog extends Model
+class Blogs extends Model
 {
+    protected $table = 'blogs';
     use HasFactory;
-    protected $table = "blogs";
+    protected $fillable = ['category_id', 'title', 'content', 'image', 'views', 'status'];
 }
-?>

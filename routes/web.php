@@ -22,6 +22,8 @@ use App\Http\Controllers\ProjectsCategoriesController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceCategoryController;
+use App\Http\Controllers\BlogsController;
+use App\Http\Controllers\BlogsCategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -226,6 +228,24 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
             Route::put('/admin/pagesstyle', [SettingsController::class, 'updateAllPagesStyle'])->name('pagesstyle.updateAll');
             Route::delete('/admin/pagesstyle/{id}', [SettingsController::class, 'destroypagesstyle'])->name('pagesstyle.destroy');
 
+    /************************
+     * blogs ROUTES 
+     ************************/
+    Route::get('/admin/blogs', [BlogsController::class, 'index'])->name('blogs.index');
+    Route::get('/admin/blogs/create', [BlogsController::class, 'create'])->name('blogs.create');
+    Route::post('/admin/blogs/store', [BlogsController::class, 'store'])->name('blogs.store');
+    Route::get('/admin/blogs/{id}/edit', [BlogsController::class, 'edit'])->name('blogs.edit');
+    Route::put('/admin/blogs/{id}', [BlogsController::class, 'update'])->name('blogs.update');
+    Route::delete('/admin/blogs/{id}', [BlogsController::class, 'destroy'])->name('blogs.destroy');
+    /************************
+     * blogs CATEGORIES ROUTES
+     ************************/
+    Route::get('/admin/blogs-categories', [BlogsCategoryController::class, 'index'])->name('blogs-categories.index');
+    Route::get('/admin/blogs-categories/create', [BlogsCategoryController::class, 'create'])->name('blogs-categories.create');
+    Route::post('/admin/blogs-categories/store', [BlogsCategoryController::class, 'store'])->name('blogs-categories.store');
+    Route::get('/admin/blogs-categories/{id}/edit', [BlogsCategoryController::class, 'edit'])->name('blogs-categories.edit');
+    Route::put('/admin/blogs-categories/{id}', [BlogsCategoryController::class, 'update'])->name('blogs-categories.update');
+    Route::delete('/admin/blogs-categories/{id}', [BlogsCategoryController::class, 'destroy'])->name('blogs-categories.destroy');
 
 
 
@@ -277,6 +297,16 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
    
     Route::get('/service-categories/{servicescategories}', [ServiceCategoryController::class, 'show'])->name('service-categories.show');
 
+        /************************
+        * BLOGS ROUTES
+    ************************/
+
+    Route::get('/services/{service}', [BlogsController::class, 'show'])->name('blogs.show');
+        /************************
+        * BLOGS-categories ROUTES
+    ************************/
+   
+    Route::get('/service-categories/{servicescategories}', [BlogsCategoryController::class, 'show'])->name('blogs-categories.show');
 
         /************************
             * ShortCode ROUTES
