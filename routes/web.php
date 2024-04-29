@@ -301,13 +301,12 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
         * BLOGS ROUTES
     ************************/
 
-    Route::get('/services/{service}', [BlogsController::class, 'show'])->name('blogs.show');
+    Route::get('/Blog/{blog}', [BlogsController::class, 'show'])->name('blogs.show');
         /************************
         * BLOGS-categories ROUTES
     ************************/
    
-    Route::get('/service-categories/{servicescategories}', [BlogsCategoryController::class, 'show'])->name('blogs-categories.show');
-
+    Route::get('/Blogs-categories/{blogcategories}', [BlogsCategoryController::class, 'show'])->name('blogs-categories.show');
         /************************
             * ShortCode ROUTES
         ************************/

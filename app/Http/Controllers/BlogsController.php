@@ -8,6 +8,10 @@ use App\Models\Blogs;
 use App\Models\BlogsCategories;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator; // Add this line to import the Validator facade
+use App\Models\Pagesstyle;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\File;
+
 
 class BlogsController extends Controller
 {
@@ -18,7 +22,33 @@ class BlogsController extends Controller
         return view('backend.blogs.blogs.index', compact('blogs'));
 
     } 
-          
+       
+    
+    public function show(Blogs $blog)
+    {
+        // Fetch the page style from the database based on the name '/blog'
+        $pageStyle = Pagesstyle::where('name', '/Blog')->first();
+
+        if ($pageStyle) {
+            // Define the path to the style file
+            $styleFilePath = resource_path("views/frontend/pages/blog/blogdetails/{$pageStyle->style}.blade.php");
+
+            // Check if the style file exists
+            if (File::exists($styleFilePath)) {
+                // Render the view using the dynamic style
+                return view("frontend.pages.blog.blogdetails.{$pageStyle->style}", compact('blog'));
+            } else {
+                // Default to a fallback style if the specified style file does not exist
+                return view("frontend.pages.blog.blogdetails.style1", compact('blog'));
+            }
+        } else {
+            // Default to a fallback style if no style is found in the database
+            return view("frontend.pages.blog.blogdetails.style1", compact('blog'));
+        }
+    }
+    
+
+
     public function create()
     {
         $categories = BlogsCategories::all();
@@ -57,11 +87,6 @@ class BlogsController extends Controller
     
     
 
-    public function show($id)
-    {
-        $blog = Blogs::findOrFail($id);
-        return view('blogs.show', compact('blog'));
-    }
 
     public function edit($id)
     {

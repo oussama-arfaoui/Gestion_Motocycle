@@ -66,5 +66,8 @@ class AppServiceProvider extends ServiceProvider
                 $Brandss = Brand::all();
                 $view->with('Brandss', $Brandss);
             });   
+
+
+
     }
 }

@@ -7,6 +7,10 @@ use App\Models\BlogsCategories;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Models\Pagesstyle;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\File;
+
 
 class BlogsCategoryController extends Controller
 {
@@ -15,6 +19,36 @@ class BlogsCategoryController extends Controller
         $categories = BlogsCategories::all();
         return view('backend.blogs.blog-categories.index', compact('categories'));
     }
+
+    public function show(BlogsCategories $blogcategories)
+    {
+        // Load the associated blogs
+        $blogs = $blogcategories->blogs;
+        $blogcategories = BlogsCategories::findOrFail($blogcategories->id);
+
+        // Fetch the page style from the database based on the name '/Blogs-categories'
+        $pageStyle = Pagesstyle::where('name', '/Blogs-categories')->first();
+    
+        if ($pageStyle) {
+            // Define the path to the style file
+            $styleFilePath = resource_path("views/frontend/pages/blog/blogcategories/{$pageStyle->style}.blade.php");
+    
+            // Check if the style file exists
+            if (File::exists($styleFilePath)) {
+                // Render the view using the dynamic style
+                return view("frontend.pages.blog.blogcategories.{$pageStyle->style}", compact('blogcategories', 'blogs'));
+            } else {
+                // Default to a fallback style if the specified style file does not exist
+                return view("frontend.pages.blog.blogcategories.style1", compact('blogcategories', 'blogs'));
+            }
+        } else {
+            // Default to a fallback style if no style is found in the database
+          
+            return view("frontend.pages.blog.blogcategories.style1", compact('blogcategories', 'blogs'));
+
+        }
+    }
+    
 
     public function create()
     {
@@ -54,11 +88,6 @@ class BlogsCategoryController extends Controller
     }
     
 
-    public function show($id)
-    {
-        $category = BlogsCategories::findOrFail($id);
-        return view('backend.blogs.blog-categories.show', compact('category'));
-    }
 
     public function edit($id)
     {

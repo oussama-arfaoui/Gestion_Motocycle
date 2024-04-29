@@ -7,7 +7,7 @@
   <div class="dashboard_header-buttons">
 
     {{-- Live Site Button --}}
-    <button class="dashboard-icon-button">
+    <a href="{{ env('APP_URL') }}" target="_blank" class="dashboard-icon-button">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_62_1250)">
           <path
@@ -23,7 +23,7 @@
             <rect width="20" height="20" fill="white" />
           </clipPath>
         </defs>
-      </svg></button>
+      </svg></a>
 
     {{-- Theme Button --}}
     <button class="dashboard-icon-button dashboard-theme-toggler">

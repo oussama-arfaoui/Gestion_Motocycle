@@ -17,9 +17,9 @@
         <form action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data" class="node-form">
             @csrf
             <div class="node-input">
-                <label for="category_id" class="form-label">Parent Category</label>
+                <label for="category_id" class="form-label">Category</label>
                 <select name="category_id" id="category_id" class="form-control">
-                    <option value="">Select Parent Category</option>
+                    <option value="">Select Category</option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach

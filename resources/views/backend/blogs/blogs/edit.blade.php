@@ -18,9 +18,9 @@
             @csrf
             @method('PUT') <!-- Add this line to use PUT method for update -->
             <div class="node-input">
-                <label for="category_id" class="form-label">Parent Category</label>
+                <label for="category_id" class="form-label">Category</label>
                 <select name="category_id" id="category_id" class="form-control">
-                    <option value="">Select Parent Category</option>
+                    <option value="">Select Category</option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}" {{ $category->id == $blog->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
                     @endforeach
