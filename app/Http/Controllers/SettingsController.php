@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\GeneralSettings;
+use Illuminate\Support\Facades\Storage;
 
 class SettingsController extends Controller
 {
@@ -17,27 +18,53 @@ class SettingsController extends Controller
         $general_settings = GeneralSettings::first(); // Assuming there's only one row for general settings
         return view('backend.Settings.general_settings.index', compact('general_settings'));
     }
-    
     public function updateAllgeneral_settings(Request $request)
     {
-        // Update or create the general settings
-        GeneralSettings::updateOrCreate(
-            [],
-            [
-                'logo' => $request->input('logo'),
-                'favicon' => $request->input('favicon'),
-                'login_screen_background' => $request->input('login_screen_background'),
-                'title' => $request->input('title'),
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'updated_at' => now(),
-            ]
-        );
+        // Find the general settings by its ID or create a new instance if it doesn't exist
+        $generalSettings = GeneralSettings::firstOrNew();
+        
+        // Handle image upload for logo
+        if ($request->hasFile('logo')) {
+            $imageNamesLogo = [];
+            foreach ($request->file('logo') as $image) {
+                $imageName = $image->store('Images/general', 'public');
+                $imageNamesLogo[] = basename($imageName); // Store only the basename
+            }
+            $generalSettings->logo = json_encode($imageNamesLogo); // Store as JSON array
+        }
+        
+        // Handle image upload for favicon
+        if ($request->hasFile('favicon')) {
+            $imageNamesFavicon = [];
+            foreach ($request->file('favicon') as $image) {
+                $imageName = $image->store('Images/general', 'public');
+                $imageNamesFavicon[] = basename($imageName); // Store only the basename
+            }
+            $generalSettings->favicon = json_encode($imageNamesFavicon); // Store as JSON array
+        }
+        
+        // Handle image upload for login screen background
+        if ($request->hasFile('login_screen_background')) {
+            $imageNamesLoginScreenBackground = [];
+            foreach ($request->file('login_screen_background') as $image) {
+                $imageName = $image->store('Images/general', 'public');
+                $imageNamesLoginScreenBackground[] = basename($imageName); // Store only the basename
+            }
+            $generalSettings->login_screen_background = json_encode($imageNamesLoginScreenBackground); // Store as JSON array
+        }
+        
+        // Update other fields
+        $generalSettings->title = $request->input('title');
+        $generalSettings->name = $request->input('name');
+        $generalSettings->email = $request->input('email');
+        $generalSettings->updated_at = now();
+    
+        // Save the updated general settings
+        $generalSettings->save();
     
         // Redirect the user to the general settings index page
         return redirect()->route('general_settings.index')->with('success', 'General settings updated successfully.');
     }
-    
     
     
     
