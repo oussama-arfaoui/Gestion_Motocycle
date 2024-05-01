@@ -355,11 +355,3 @@
     <x-menu-icon />
 </button>
 
-<script>
-    const dashboard_menu_toggle = document.getElementById("dashboard_menu_toggle");
-    const dashboard_sidebar = document.getElementById("dashboard_sidebar");
-
-    dashboard_menu_toggle.addEventListener("click", () => {
-        dashboard_sidebar.classList.toggle('show-block')
-    })
-</script>

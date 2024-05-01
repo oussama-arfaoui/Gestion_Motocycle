@@ -52,27 +52,20 @@
                             <x-edit-icon />
                         </button>
                     </a>
-                    <form id="deleteForm{{ $brand->id }}" action="{{ route('brands.destroy', $brand->id) }}" method="POST" style="display: inline;">
+                    <form id="deleteForm{{ $brand->id }}" action="{{ route('brands.destroy', $brand->id) }}"
+                        method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
-                        <button onclick="confirmDelete({{ $brand->id }})" class="dashboard-icon-button action-delete">
+                        <button id="page_delete_button" class="dashboard-icon-button action-delete">
                             <x-trash-icon />
                         </button>
                     </form>
                 </td>
             </tr>
             @endforeach
-            
+
         </tbody>
     </table>
 </div>
-
-<script>
-    function confirmDelete(brandId) {
-        if (confirm('Are you sure you want to delete this brand?')) {
-            document.getElementById('deleteForm' + brandId).submit();
-        }
-    }
-</script>
 
 @endsection

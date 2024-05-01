@@ -73,37 +73,3 @@
     </ul>
   </div>
 </div>
-
-{{-- 
-<script>
-  const root = document.documentElement;
-        let isToggled = false;
-
-        const toggleColors = () => {
-            if (isToggled) {
-                root.style.setProperty('--db-light', '#111827');
-                root.style.setProperty('--db-dark', '#F9FAFB');
-                root.style.setProperty('--db-gray', '#D2D5DA');
-                root.style.setProperty('--db-dark-gray', '#1f29371c');
-
-                root.style.setProperty('--db-blue', '#93c5fd');
-                root.style.setProperty('--db-purple', '#d8b4fe');
-                root.style.setProperty('--db-red', '#FCA5A5');
-                root.style.removeProperty('--db-green');
-            } else {
-                root.style.setProperty('--db-light', '#d1cfcc');
-                root.style.setProperty('--db-dark', '#000100');
-                root.style.setProperty('--db-gray', '#d1cfcc81');
-                root.style.setProperty('--db-dark-gray', '#54545481');
-
-                root.style.setProperty('--db-blue', '#5268a589');
-                root.style.setProperty('--db-purple', '#cfced18c');
-                root.style.setProperty('--db-red', '#ffac7c8a');
-                root.style.setProperty('--db-green', '#cbd62e80');
-            }
-
-            isToggled = !isToggled;
-        };
-
-        document.querySelector('.dashboard-theme-toggler').addEventListener('click', toggleColors);
-</script> --}}

@@ -16,3 +16,11 @@
     transform: rotateZ(180deg);
     transition: transform 100ms ease-out;
 }
+
+.notify{
+    animation: notify 5s ease-out forwards;
+}
+
+.remove_notif{
+    animation: remove_notif 1ms forwards;               /// Don't say anything
+}

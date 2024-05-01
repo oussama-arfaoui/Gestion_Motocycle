@@ -28,7 +28,7 @@
 
                 @foreach($pagesstyles as $pagesstyle)
                 <div class="attribute">
-                    <div class="dashboard-row">
+                    <div class="dashboard-row-half">
                         <input type="text" name="styles[{{ $pagesstyle->id }}][name]" placeholder="Attribute Name"
                             class="form-control " value="{{ $pagesstyle->name }}">
                         <select name="styles[{{ $pagesstyle->id }}][style]" class="form-control">
@@ -52,7 +52,7 @@
 
             <div class="node-input" id="attributeFields">
                 <label for="attributes" class="form-label">Add New Style</label>
-                <div class="dashboard-row">
+                <div class="dashboard-row-half">
                     <input type="text" name="newStyles[name][]" placeholder="Attribute Name" class="form-control">
                     <select name="newStyles[style][]" class="form-control">
                         <option value="style1">Style 1</option>

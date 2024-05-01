@@ -7,6 +7,8 @@
         <a href='/admin'>Home</a>
         <x-arrow-icon />
         <a href="{{ route('services.index') }}">Services</a> <!-- Change route to services.index -->
+        <x-arrow-icon />
+        <a href="{{ route('services.create') }}">Create New Service</a> <!-- Change route to services.create -->
     </div>
 
     {{-- Actions for the services table --}}
