@@ -15,7 +15,7 @@
     <div class="dashboard-main-container-modules">
 
 
-            <form action="{{ route('product.update', $product->id) }}" method="POST">
+            <form action="{{ route('product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -51,11 +51,15 @@
 
             <!-- Images -->
             <div class="node-input">
-                <label for="images" class="form-label">Images</label>
                 @foreach(json_decode($product->images) as $image)
-                <img src="{{ asset('storage/Images/general/' . $image) }}" alt="Project Image">
+                <img src="{{ asset('storage/Images/general/' . $image) }}" alt="Project Image" style="max-width: 300px; margin-top: 10px;">
                 @endforeach
-                <input type="file" name="images[]" id="images" class="form-control" multiple>
+            </div>
+            <!-- Images -->
+            <div class="node-input">
+                <label for="images" class="form-label">Images</label>
+                <div id="imageContainer"></div> <!-- Container for preview images -->
+                <input type="file" name="images[]" id="images" class="form-control" onchange="previewImage(event)" multiple >
             </div>
 
             <div class="node-input">
@@ -104,6 +108,28 @@
 </div>
 
 <script>
+    function previewImage(event) {
+        var imageContainer = document.getElementById('imageContainer');
+        imageContainer.innerHTML = ''; // Clear previous images
+
+        var fileList = event.target.files;
+        for (var i = 0; i < fileList.length; i++) {
+            var file = fileList[i];
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = 'Project Image';
+                img.style.maxWidth = '200px';
+                img.style.marginTop = '10px';
+                imageContainer.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('addAttribute').addEventListener('click', function() {
             var attributeField = document.createElement('div');

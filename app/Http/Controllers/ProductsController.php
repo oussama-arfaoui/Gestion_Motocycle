@@ -162,17 +162,17 @@ class ProductsController extends Controller
         // Find the product by its ID
         $product = Product::findOrFail($id);
     
-        // Handle image upload for multiple images
-        $imageNames = [];
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $imageName = $image->store('Images/general', 'public');
-                $imageNames[] = basename($imageName);
-            }
-        } else {
-            // Use existing image names if no new images uploaded
-            $imageNames = json_decode($product->images, true) ?? [];
-        }
+                // Handle image upload for multiple images
+                $imageNames = [];
+                if ($request->hasFile('images')) {
+                    foreach ($request->file('images') as $image) {
+                        $imageName = $image->store('Images/general', 'public');
+                        $imageNames[] = basename($imageName);
+                    }
+                } else {
+                    // Use existing image names if no new images uploaded
+                    $imageNames = json_decode($product->images, true) ?? [];
+                }
     
         // Update products attributes
         $product->product_name = $request->input('product_name');

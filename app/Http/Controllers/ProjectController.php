@@ -165,11 +165,14 @@ class ProjectController extends Controller
                 $imageName = $image->store('Images/general', 'public');
                 $imageNames[] = basename($imageName);
             }
+            // Debug statement to check uploaded images
+           
         } else {
             // Use existing image names if no new images uploaded
             $imageNames = json_decode($project->images, true) ?? [];
         }
-    
+
+     
         // Update project attributes
         $project->projects_title = $request->input('projects_title');
         $project->projects_subtitle = $request->input('projects_subtitle');
@@ -189,6 +192,8 @@ class ProjectController extends Controller
         // Redirect the user to the projects index page
         return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
     }
+
+
     public function destroy($id)
     {
         // Retrieve the project
