@@ -164,10 +164,10 @@
             header.classList.remove('header--fixed');
         }
     });
-</script>
+
 
 {{-- Notifcation bar disappears --}}
-<script>
+
     document.addEventListener('DOMContentLoaded', function() {
         var notificationBar = document.getElementById('notificationBar');
         var closeNotificationBtn = document.getElementById('closeNotificationBtn');

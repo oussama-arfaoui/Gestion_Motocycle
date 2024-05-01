@@ -6,7 +6,9 @@
     <div class="dashboard-main-container-breadcrumbs">
         <a href='/admin'>Home</a>
         <x-arrow-icon />
-        <span>Create New Service Category</span>
+        <a href="{{ route('service-categories.index') }}">Service Categories</a>
+        <x-arrow-icon />
+        <a href="{{ route('service-categories.create') }}">Create new Service Category</a>
     </div>
 
     {{-- Form for creating a new service category --}}

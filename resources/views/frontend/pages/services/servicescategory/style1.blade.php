@@ -6,6 +6,8 @@
     <title>{{ $page_title }}</title>
     @vite(['resources/css/app.css', 'resources/scss/style.scss', 'resources/js/app.js'])
 </head>
+
+
 <body class="website antialiased">
     @include('frontend.layouts.header')
     <section class="page_banner_style1 global_container">
@@ -15,6 +17,8 @@
         <h2>{{ $servicescategories->category_name }}</h2>
         <p>{{ $servicescategories->description }}</p>
     </section>
+
+
     <main class="projects_list_style1 global_container">
         <div class="projects_list_style1-items">
             @foreach($services as $service)
@@ -45,6 +49,8 @@
             @endforeach
         </div>
     </main>
+
+    
     @include('frontend.layouts.footer')
 </body>
 </html>

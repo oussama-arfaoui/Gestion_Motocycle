@@ -6,7 +6,7 @@
     <div class="dashboard-main-container-breadcrumbs">
         <a href='/admin'>Home</a>
         <x-arrow-icon />
-        <a href="#">Product Categories</a>
+        <a href="{{ route('product-categories.index') }}">Product Categories</a>
     </div>
 
     {{-- Actions for the product categories table --}}
@@ -22,6 +22,7 @@
     <table class="dashboard-main-container-table">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Category Name</th>
                 <th>Category Image</th>
                 <th>Actions</th>
@@ -30,6 +31,7 @@
         <tbody>
             @foreach($categories as $category)
             <tr>
+                <td>{{ $category->id }}</td>
                 <td>{{ $category->category_name }}</td>
                 <td>
                     @if($category->image)
