@@ -18,15 +18,15 @@ class ProductsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-        $products = Product::all(); // Use Eloquent ORM to retrieve all products
-        $user = User::find(1);
-        return view('backend.products.products.index')
-            ->with('products', $products)
-            ->with('user', $user);
-    }
+        public function index()
+        {
+            $categories = ProductCategories::all();
+            $products = Product::all(); // Use Eloquent ORM to retrieve all products
+            $user = User::find(1);
+            
+            return view('backend.products.products.index', compact('products', 'categories', 'user'));
+        }
+
 
     public function show(Product $product)
     {

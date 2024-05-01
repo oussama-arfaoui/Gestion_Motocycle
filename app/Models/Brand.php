@@ -11,6 +11,5 @@ class Brand extends Model
     protected $table = 'brands';
     use HasFactory;
     protected $fillable = ['name', 'link', 'image'];
-
-    
+   
 }

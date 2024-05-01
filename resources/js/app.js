@@ -90,7 +90,7 @@ if (closeDbNotification) {
  */
 
 
-const dropdowns = ["nav-products", "nav-ecommerce", "nav-generator", "nav-projects", "nav-Settings", "nav-Services", "username"];
+const dropdowns = ["nav-products", "nav-ecommerce", "nav-generator", "nav-projects", "nav-Settings", "nav-Services", "nav-Blogs", "username"];
 
 for (let element of dropdowns) {
     const dropdownButton = document.getElementById(`dropdown-${element}`);

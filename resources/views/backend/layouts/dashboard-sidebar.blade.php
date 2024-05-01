@@ -225,7 +225,7 @@
             </a>
         </div>
 
-        <a href="/admin/blogs">
+        <button id="dropdown-nav-Blogs">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M5.30162 16.1999H12.1642C14.098 16.1999 15.6659 14.6319 15.6659 12.6983V4.40153C15.6659 2.46795 14.098 0.899902 12.1642 0.899902H5.30162C3.36804 0.899902 1.79999 2.46795 1.79999 4.40153V12.6983C1.79999 14.6319 3.36804 16.1999 5.30162 16.1999Z"
@@ -234,7 +234,22 @@
                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
             <span>Blogs</span>
-        </a>
+
+            <svg id="dropdown-nav-Blogs-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </button>
+
+        <div class="dashboard_sidebar__links-innerlink hide" id="dropdown-menu-nav-Blogs">
+            <a href="{{ route('blogs.index') }}">
+                <span>Blog</span>
+            </a>
+            <a href="{{ route('blogs-categories.index') }}">
+                <span>Blog categories</span>
+            </a>
+        </div>
 
 
         <a href="/admin/activity">

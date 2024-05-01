@@ -59,7 +59,7 @@
                 <!-- Check if the first image exists -->
                 @if($firstImage)
                 <!-- Display the first image -->
-                <img src="{{ asset('storage/Images/general/' . $firstImage) }}" alt="Product Image">
+                <img src="{{ asset(json_decode($product->images)[0]) }}" alt="Product Image">
                 @else
                 <p>No image available</p>
                 @endif
