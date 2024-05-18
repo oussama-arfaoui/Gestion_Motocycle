@@ -6,6 +6,20 @@
 
     padding: 8rem;
 
+    background-image: url('/public/bgs/category_overview/bg_desktop.png');
+    background-size: cover;
+    background-position: center center;
+
+    color: var(--light);
+
+    @media (max-width: 1024px) {
+        background-image: url('/public/bgs/category_overview/bg_tablet.png');
+    }
+
+    @media (max-width: 768px) {
+        background-image: url('/public/bgs/category_overview/bg_mobile.png');
+    }
+
     @media (max-width: 1024px) {
         padding: 2rem;
     }
@@ -42,7 +56,7 @@
             margin-bottom: 0.5rem;
 
             p {
-                color: var(--accent-color);
+                color: var(--accent-color-1);
                 text-transform: uppercase;
                 font-size: 12px;
                 font-weight: 800;
@@ -152,6 +166,10 @@
 
             width: 100%;
 
+            background: linear-gradient(to right, var(--accent-color), var(--accent-color-half), var(--accent-color));
+
+            color: var(--light);
+
             &-image {
                 width: 80%;
                 margin-bottom: 1rem;
@@ -185,7 +203,8 @@
     }
 
     &-nodes {
-        display: flex;
+        display: none;
+        // display: flex;
         flex-direction: row;
         gap: 2rem;
         place-items: center;

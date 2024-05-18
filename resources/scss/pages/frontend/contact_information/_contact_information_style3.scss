@@ -9,7 +9,7 @@
     @media (max-width: 768px) {}
 
     &-sidebar {
-        padding-block: 1rem;
+        padding-block: 4rem;
         padding-inline: 2rem;
         background-color: var(--primary-color);
         width: 30%;
@@ -18,7 +18,10 @@
             width: 100%;
         }
 
-        @media (max-width: 768px) {}
+        @media (max-width: 768px) {
+            padding: 1rem;
+        }
+
 
         &-text {
             width: 100%;
@@ -104,7 +107,19 @@
                     flex-direction: column;
 
                     button {
-                        width: 100%;
+                        min-width: 100%;
+
+                        a{
+                            padding: 0.5rem;
+                        }
+                        svg {
+                            width: 16px;
+                            margin-right: 0.5rem;
+                        }
+
+                        span{
+                            font-size: 12px;
+                        }
                     }
                 }
             }
@@ -136,6 +151,10 @@
 
                 margin-bottom: 2rem;
 
+                @media (max-width: 768px){
+                    min-width: 100%;
+                }
+
                 &-image {
                     height: 48px;
                     margin-right: 1rem;
@@ -162,12 +181,22 @@
                         text-decoration: underline;
                         margin-left: 1rem;
                     }
+
+
+                    @media (max-width: 768px) {
+                        p{
+                            font-size: 14px;
+                        }
+
+                        h3{
+                            font-size: 14px;                        }
+                    }
                 }
             }
         }
 
         &-social {
-            background-color: var(--dark);
+            background-color: var(--primary-color);
             min-height: 36px;
             display: flex;
             flex-direction: row;

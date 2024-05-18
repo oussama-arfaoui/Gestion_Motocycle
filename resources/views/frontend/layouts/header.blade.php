@@ -16,11 +16,13 @@
     <div class="header__main">
 
         <nav class="header__main-navigation">
-            <a href="/accueil">Home</a>
-            <a href="/entreprise">Entreprise</a>
-            <a href="/services">Services</a>
-            <a href="/projects">Projects</a>
-            <a href="/blog">Blog</a>
+            <a href="/accueil">Accueil</a>
+            <a href="/a-propos">A propos</a>
+            <a href="/nos-domaines">Nos domaines</a>
+            <a href="/nos-ralisations-">Nos réalisations</a>
+            <a href="/politique-qualit">Politique qualité</a>
+            <a href="/processus-de-fabrication">Processus de fabrication</a>
+            <a href="/carrire">Carrière</a>
             <a href="/contact">Contact</a>
         </nav>
 

@@ -1,0 +1,123 @@
+.history_through_years_style1{
+    padding-block: 4rem;
+
+    display: flex;
+    flex-direction: row;
+
+    &-buttons{
+        display: flex;
+        flex-direction: column;
+        width: 20%;
+
+        gap: 1rem;
+
+        
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
+
+        &-button{
+            width: 100%;
+            padding: 1rem;
+
+            font-size: 18px;
+            font-weight: 600;
+            border: 1px solid transparent;
+            border-bottom: none;
+            background-color: transparent;
+            transition: transform 0.05s ease-out;
+            
+            border-radius: 1rem;
+
+            &:hover{
+                cursor: pointer;
+                transform: scale(1.25);
+                transition: transform 0.1s ease-out;
+                color: var(--accent-color);
+
+            }
+
+        }
+
+        
+        .active{
+            background-color: var(--accent-color);
+            color: var(--light);
+            transform: scale(1);
+            transition: transform 0.1s ease-out;
+
+            @media (max-width: 768px) {
+                border-radius: 10px;
+            }
+
+        }
+
+    }
+
+    &-screens{
+        width: 80%;
+        display: grid;
+        place-items: center;
+
+        padding: 1rem;
+
+        &-screen{
+            width: 100%;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            height: 100%;
+
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            
+            &-animated-line{
+                height: 10rem;
+                width: 2px;
+                border-radius: 2px;
+
+                background-color: var(--accent-color);
+
+                animation: animated-line-down 0.8s ease-out;
+
+                margin-block: 2rem;
+            }
+            
+            h2 {
+                font-size: 24px;
+                margin-bottom: 2rem;
+                text-transform: capitalize;
+    
+                @media (max-width: 1024px) {
+                    font-size: 20px;
+                }
+    
+                @media (max-width: 768px) {
+                    font-size: 18px;
+                }
+            }
+    
+            p {
+                font-size: 18px;
+                width: 100%;
+                line-height: 1.5;
+                margin-bottom: 2rem;
+                text-indent: 2rem;
+    
+                width: 100%;
+    
+    
+                @media (max-width: 768px) {
+                    font-size: 16px;
+                    text-indent: 0;
+                }
+            }
+    
+        }
+    }
+}

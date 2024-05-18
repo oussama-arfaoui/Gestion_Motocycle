@@ -12,11 +12,18 @@ use Illuminate\Support\Facades\Storage;
 
 class SettingsController extends Controller
 {
+
+
    
     public function indexgeneral_settings()
     {
         $general_settings = GeneralSettings::first(); // Assuming there's only one row for general settings
         return view('backend.Settings.general_settings.index', compact('general_settings'));
+    }
+    public function indexgeneral_documnentation()
+    {
+        $documnentation = GeneralSettings::first(); // Assuming there's only one row for general settings
+        return view('backend.documnentation.index', compact('documnentation'));
     }
     public function updateAllgeneral_settings(Request $request)
     {

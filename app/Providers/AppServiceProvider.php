@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use App\Models\ProductCategories;
 use App\Models\Testimonial;
 use App\Models\Brand;
+use App\Models\Projects;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -66,8 +67,24 @@ class AppServiceProvider extends ServiceProvider
                 $Brandss = Brand::all();
                 $view->with('Brandss', $Brandss);
             });   
-
-
+            
+        //for Projects  
+        View::composer('frontend.shortcodes.projects.style.style1', function ($view) {
+            $Projectss = Projects::all();
+            $view->with('Projectss', $Projectss);
+        });   
+        View::composer('frontend.shortcodes.projects.style.style2', function ($view) {
+            $Projectss = Projects::all();
+            $view->with('Projectss', $Projectss);
+        });   
+        View::composer('frontend.shortcodes.projects.style.style3', function ($view) {
+            $Projectss = Projects::all();
+            $view->with('Projectss', $Projectss);
+        });   
+        View::composer('frontend.shortcodes.projects.style.style4', function ($view) {
+            $Projectss = Projects::all();
+            $view->with('Projectss', $Projectss);
+        });   
 
     }
 }

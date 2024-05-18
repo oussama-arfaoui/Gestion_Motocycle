@@ -51,9 +51,11 @@
 
             text-align: center;
 
+
             h1 {
-                font-size: 64px;
+                font-size: 48px;
                 font-weight: 800;
+                width: 80%;
 
                 @media (max-width: 1024px) {
                     font-size: 48px;
@@ -65,9 +67,11 @@
             }
 
             h2 {
-                font-size: 48px;
+                font-size: 32px;
                 font-weight: 500;
                 margin-bottom: 1rem;
+
+                color: var(--accent-color);
 
                 @media (max-width: 1024px) {
                     font-size: 36px;
@@ -101,10 +105,11 @@
                 align-items: center;
                 justify-content: center;
 
-                margin-bottom: 4rem;
+                margin-bottom: 14rem;
 
                 @media (max-width: 768px) {
                     flex-direction: column;
+                    margin-bottom: 8rem;
                 }
 
                 button {

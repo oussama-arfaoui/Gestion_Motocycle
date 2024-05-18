@@ -64,7 +64,16 @@ function getShortcodeTypes() {
         'view' => 'frontend.shortcodes.testimonials.admin-config',
     ],
     
+    'office_politics' => [
+        'name' => 'office_politics',
+        'view' => 'frontend.shortcodes.office_politics.admin-config',
+    ],
     
+    
+    'history_through_years' => [
+        'name' => 'history_through_years',
+        'view' => 'frontend.shortcodes.history_through_years.admin-config',
+    ],
 
         //  Contact Page
 
@@ -117,6 +126,11 @@ function getShortcodeTypes() {
         'view' => 'frontend.shortcodes.products_categories_list.admin-config',
     ],
 
+    'service_categories_list' => [
+        'name' => 'service_categories_list',
+        'view' => 'frontend.shortcodes.service_categories_list.admin-config',
+    ],
+
     /// About 
 
     'word_from_director' => [
@@ -141,8 +155,21 @@ function getShortcodeTypes() {
         'view' => 'frontend.shortcodes.double_screen.admin-config',
     ],
     
-    
+    'projects' => [
+        'name' => 'projects',  
+        'view' => 'frontend.shortcodes.projects.admin-config',  
+    ],
 
+
+    'threed_scene' => [
+        'name' => 'threed_scene',
+        'view' => 'frontend.shortcodes.threed_scene.admin-config',
+    ],
+        
+    'custom_module' => [
+        'name' => 'custom_module',
+        'view' => 'frontend.shortcodes.custom_module.admin-config',
+    ],
     ];
 }
 
@@ -238,6 +265,19 @@ function getShortcodeindex() {
         ],
         
     
+        'office_politics' => [
+            'name' => 'office_politics',
+            'view' => 'frontend.shortcodes.office_politics.index',
+            'attributes' => ['section_tag', 'title', 'subtitle', 'title_1', 'description_1', 'title_2', 'description_2', 'keyword', 'list_icon', 'list_node_1', 'list_node_2', 'list_node_3', 'list_node_4', 'list_node_5', 'list_node_6', 'list_node_7', 'list_node_8', 'list_node_9', 'list_node_10','style']
+        ],
+        
+        
+        
+        'history_through_years' => [
+            'name' => 'history_through_years',
+            'view' => 'frontend.shortcodes.history_through_years.index',
+            'attributes' => ['section_tag', 'title', 'subtitle', 'description', 'primary_button_label', 'primary_button_link', 'secondary_button_label', 'secondary_button_link', 'keyword', 'year_1', 'year_event_title_1', 'year_event_description_1', 'year_2', 'year_event_title_2', 'year_event_description_2', 'year_3', 'year_event_title_3', 'year_event_description_3', 'year_4', 'year_event_title_4', 'year_event_description_4', 'year_5', 'year_event_title_5', 'year_event_description_5', 'year_6', 'year_event_title_6', 'year_event_description_6', 'year_7', 'year_event_title_7', 'year_event_description_7', 'year_8', 'year_event_title_8', 'year_event_description_8', 'year_9', 'year_event_title_9', 'year_event_description_9', 'year_10', 'year_event_title_10', 'year_event_description_10','style']
+        ],
         
         
         
@@ -297,7 +337,11 @@ function getShortcodeindex() {
             'attributes' => ['categories','style']
         ],
 
-
+        'service_categories_list' => [
+            'name' => 'service_categories_list',
+            'view' => 'frontend.shortcodes.service_categories_list.index',
+            'attributes' => ['title', 'description', 'service_title_1', 'services_description_1', 'service_title_2', 'services_description_2', 'service_title_3', 'services_description_3', 'service_title_4', 'services_description_4', 'service_title_5', 'services_description_5','style']
+        ],
         // About
 
         
@@ -326,5 +370,23 @@ function getShortcodeindex() {
             'attributes' => ['title_1', 'description_1', 'button_1', 'title_2', 'description_2', 'button_2','style']
         ],
         
+        'projects' => [
+            'name' => 'projects',
+            'view' => 'frontend.shortcodes.projects.index', 
+            'attributes' => ['title','projects','style']      
+        ],
+
+        'threed_scene' => [
+            'name' => 'threed_scene',
+            'view' => 'frontend.shortcodes.threed_scene.index',
+            'attributes' => ['title', 'description','style']
+        ],
+   
+    
+    'custom_module' => [
+        'name' => 'custom_module',
+        'view' => 'frontend.shortcodes.custom_module.index',
+        'attributes' => ['title','style']
+    ],
     ];
 };

@@ -227,6 +227,10 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
             Route::get('/admin/pagesstyle', [SettingsController::class, 'indexpagesstyle'])->name('pagesstyle.index');
             Route::put('/admin/pagesstyle', [SettingsController::class, 'updateAllPagesStyle'])->name('pagesstyle.updateAll');
             Route::delete('/admin/pagesstyle/{id}', [SettingsController::class, 'destroypagesstyle'])->name('pagesstyle.destroy');
+               /************************
+             * documnentation ROUTES
+             ************************/
+            Route::get('/admin/documnentation', [SettingsController::class, 'indexgeneral_documnentation'])->name('documnentation.index');
 
     /************************
      * blogs ROUTES 
