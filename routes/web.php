@@ -24,6 +24,10 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceCategoryController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\BlogsCategoryController;
+use App\Http\Controllers\CarrierController;
+use App\Http\Controllers\CarrierCategoryController;
+use App\Http\Controllers\JobofferController;
+use App\Http\Controllers\JobapplicationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -251,6 +255,42 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
     Route::put('/admin/blogs-categories/{id}', [BlogsCategoryController::class, 'update'])->name('blogs-categories.update');
     Route::delete('/admin/blogs-categories/{id}', [BlogsCategoryController::class, 'destroy'])->name('blogs-categories.destroy');
 
+    /************************
+     * carrier ROUTES 
+     ************************/
+    Route::get('/admin/carrier', [CarrierController::class, 'index'])->name('carrier.index');
+    Route::get('/admin/carrier/create', [CarrierController::class, 'create'])->name('carrier.create');
+    Route::post('/admin/carrier/store', [CarrierController::class, 'store'])->name('carrier.store');
+    Route::get('/admin/carrier/{id}/edit', [CarrierController::class, 'edit'])->name('carrier.edit');
+    Route::put('/admin/carrier/{id}', [CarrierController::class, 'update'])->name('carrier.update');
+    Route::delete('/admin/carrier/{id}', [CarrierController::class, 'destroy'])->name('carrier.destroy');
+    /************************
+     * carrier CATEGORIES ROUTES
+     ************************/
+    Route::get('/admin/carrier-categories', [CarrierCategoryController::class, 'index'])->name('carrier-categories.index');
+    Route::get('/admin/carrier-categories/create', [CarrierCategoryController::class, 'create'])->name('carrier-categories.create');
+    Route::post('/admin/carrier-categories/store', [CarrierCategoryController::class, 'store'])->name('carrier-categories.store');
+    Route::get('/admin/carrier-categories/{id}/edit', [CarrierCategoryController::class, 'edit'])->name('carrier-categories.edit');
+    Route::put('/admin/carrier-categories/{id}', [CarrierCategoryController::class, 'update'])->name('carrier-categories.update');
+    Route::delete('/admin/carrier-categories/{id}', [CarrierCategoryController::class, 'destroy'])->name('carrier-categories.destroy');
+    /************************
+     * jobapplication ROUTES 
+     ************************/
+    Route::get('/admin/jobapplication', [JobapplicationController::class, 'index'])->name('jobapplication.index');
+    Route::get('/admin/jobapplication/create', [JobapplicationController::class, 'create'])->name('jobapplication.create');
+    Route::post('/admin/jobapplication/store', [JobapplicationController::class, 'store'])->name('jobapplication.store');
+    Route::get('/admin/jobapplication/{id}/edit', [JobapplicationController::class, 'edit'])->name('jobapplication.edit');
+    Route::put('/admin/jobapplication/{id}', [JobapplicationController::class, 'update'])->name('jobapplication.update');
+    Route::delete('/admin/jobapplication/{id}', [JobapplicationController::class, 'destroy'])->name('jobapplication.destroy');
+    /************************
+     * joboffer ROUTES
+     ************************/
+    Route::get('/admin/joboffer', [JobofferController::class, 'index'])->name('joboffer.index');
+    Route::get('/admin/joboffer/create', [JobofferController::class, 'create'])->name('joboffer.create');
+    Route::post('/admin/joboffer/store', [JobofferController::class, 'store'])->name('joboffer.store');
+    Route::get('/admin/joboffer/{id}/edit', [JobofferController::class, 'edit'])->name('joboffer.edit');
+    Route::put('/admin/joboffer/{id}', [JobofferController::class, 'update'])->name('cjoboffer.update');
+    Route::delete('/admin/joboffer/{id}', [JobofferController::class, 'destroy'])->name('joboffer.destroy');
 
 
 });
