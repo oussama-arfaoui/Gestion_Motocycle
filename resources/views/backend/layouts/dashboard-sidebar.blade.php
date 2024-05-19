@@ -277,6 +277,35 @@
             </a>
         </div>
 
+        <button id="dropdown-nav-Job">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M5.30162 16.1999H12.1642C14.098 16.1999 15.6659 14.6319 15.6659 12.6983V4.40153C15.6659 2.46795 14.098 0.899902 12.1642 0.899902H5.30162C3.36804 0.899902 1.79999 2.46795 1.79999 4.40153V12.6983C1.79999 14.6319 3.36804 16.1999 5.30162 16.1999Z"
+                    stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M11.5459 11.8814H5.91882M11.5459 8.4337H5.91882M8.06624 4.9939H5.91923" stroke-opacity="0.75"
+                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span>Job</span>
+
+            <svg id="dropdown-nav-Job-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </button>
+
+        <div class="dashboard_sidebar__links-innerlink hide" id="dropdown-menu-nav-Job">
+            <a href="{{ route('jobapplication.index') }}">
+                <span>Job applications</span>
+            </a>
+            <a href="{{ route('joboffer.index') }}">
+                <span>Job offer</span>
+            </a>
+            <a href="{{ route('job-categories.index') }}">
+                <span>Job categories</span>
+            </a>
+        </div>
+        
         
         <a href="/admin/activity">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

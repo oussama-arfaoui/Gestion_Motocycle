@@ -28,6 +28,7 @@ use App\Http\Controllers\CarrierController;
 use App\Http\Controllers\CarrierCategoryController;
 use App\Http\Controllers\JobofferController;
 use App\Http\Controllers\JobapplicationController;
+use App\Http\Controllers\JobCategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -291,6 +292,15 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
     Route::get('/admin/joboffer/{id}/edit', [JobofferController::class, 'edit'])->name('joboffer.edit');
     Route::put('/admin/joboffer/{id}', [JobofferController::class, 'update'])->name('cjoboffer.update');
     Route::delete('/admin/joboffer/{id}', [JobofferController::class, 'destroy'])->name('joboffer.destroy');
+    /************************
+     * job-categories ROUTES
+     ************************/
+    Route::get('/admin/job-categories', [JobCategoryController::class, 'index'])->name('job-categories.index');
+    Route::get('/admin/job-categories/create', [JobCategoryController::class, 'create'])->name('job-categories.create');
+    Route::post('/admin/job-categories/store', [JobCategoryController::class, 'store'])->name('job-categories.store');
+    Route::get('/admin/job-categories/{id}/edit', [JobCategoryController::class, 'edit'])->name('job-categories.edit');
+    Route::put('/admin/job-categories/{id}', [JobCategoryController::class, 'update'])->name('job-categories.update');
+    Route::delete('/admin/job-categories/{id}', [JobCategoryController::class, 'destroy'])->name('job-categories.destroy');
 
 
 });
