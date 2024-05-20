@@ -31,6 +31,12 @@ function getShortcodeTypes() {
             'name' => 'brands',  
             'view' => 'frontend.shortcodes.brands.admin-config',  
         ],
+
+        'carrers' => [
+            'name' => 'carrers',  
+            'view' => 'frontend.shortcodes.carrers.admin-config',  
+        ],
+
         'category_overview' => [
             'name' => 'category_overview', 
             'view' => 'frontend.shortcodes.category_overview.admin-config',     
@@ -209,6 +215,11 @@ function getShortcodeindex() {
             'name' => 'brands',
             'view' => 'frontend.shortcodes.brands.index', 
             'attributes' => ['Brands','style']      
+        ],
+        'carrers' => [
+            'name' => 'carrers',
+            'view' => 'frontend.shortcodes.carrers.index', 
+            'attributes' => ['title','carrers','style']      
         ],
         'category_overview' => [
             'name' => 'category_overview',

@@ -6,45 +6,34 @@
     <div class="dashboard-main-container-breadcrumbs">
         <a href='/admin'>Home</a>
         <x-arrow-icon />
-        <a href="{{ route('blogs.index') }}">Blogs</a>
+        <a href="{{ route('carrier.index') }}">Carriers</a>
         <x-arrow-icon />
-        <span>Create New Blog</span>
+        <span>Create New Carrier</span>
     </div>
 
-    {{-- Form for creating a new blog --}}
+    {{-- Form for creating a new carrier --}}
     <div class="dashboard-main-container-modules">
 
-        <form action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data" class="node-form">
+        <form action="{{ route('carrier.store') }}" method="POST" class="node-form">
             @csrf
             <div class="node-input">
-                <label for="category_id" class="form-label">Category</label>
-                <select name="category_id" id="category_id" class="form-control">
-                    <option value="">Select Category</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="node-input">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" name="title" id="title" class="form-control">
+                <input type="text" name="title" id="title" class="form-control" required>
             </div>
 
             <div class="node-input">
-                <label for="content" class="form-label">Content</label>
-                <textarea name="content" id="content" class="form-control" rows="4"></textarea>
+                <label for="description" class="form-label">Description</label>
+                <textarea name="description" id="description" class="form-control" rows="4"></textarea>
             </div>
-                     
-            <div class="node-input">
-                <label for="images" class="form-label">Images</label>
-                <input type="file" name="images[]" id="images" class="form-control" onchange="previewImage(event)" multiple>
-                <img id="image-preview" src="#" alt="Preview Image" style="display: none; max-width: 200px; margin-top: 10px;">
-            </div>                      
 
             <div class="node-input">
-                <label for="views" class="form-label">Views</label>
-                <input type="number" name="views" id="views" class="form-control">
+                <label for="requirements" class="form-label">Requirements</label>
+                <textarea name="requirements" id="requirements" class="form-control" rows="4"></textarea>
+            </div>
+
+            <div class="node-input">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" name="location" id="location" class="form-control">
             </div>
 
             <div class="node-input">
@@ -52,8 +41,37 @@
                 <select name="status" id="status" class="form-control">
                     <option value="published">Published</option>
                     <option value="draft">Draft</option>
-                    <option value="archived">Archived</option>
                 </select>
+            </div>
+
+            <div class="node-input">
+                <label for="time" class="form-label">Time</label>
+                <input type="datetime-local" name="time" id="time" class="form-control">
+            </div>
+
+            <div class="node-input">
+                <label for="category_id" class="form-label">Job Category</label>
+                <select name="category_id" id="category_id" class="form-control">
+                    <option value="">Select Category</option>
+                    @foreach($jobcategories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="node-input">
+                <label for="carrier_category_id" class="form-label">Carrier Category</label>
+                <select name="carrier_category_id" id="carrier_category_id" class="form-control">
+                    <option value="">Select Category</option>
+                    @foreach($carriercategories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="node-input">
+                <label for="is_job_offer" class="form-label">Is Job Offer</label>
+                <input type="checkbox" name="is_job_offer" id="is_job_offer" value="1">
             </div>
 
             <button class="dashboard-main-button" type="submit">
@@ -64,17 +82,5 @@
         </form>
     </div>
 </div>
-
-<script>
-    function previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = function() {
-            var output = document.getElementById('image-preview');
-            output.src = reader.result;
-            output.style.display = 'block';
-        }
-        reader.readAsDataURL(event.target.files[0]);
-    }
-</script>
 
 @endsection

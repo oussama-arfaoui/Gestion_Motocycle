@@ -36,11 +36,14 @@
                 <td>{{ $jobCategory->status }}</td>
                 <td class="dashboard_main-table-actions">
                     <!-- Add button for viewing job category details -->
+                    {{-- Commented out for now --}}
+                    {{--
                     <a href="{{ route('job-categories.show', $jobCategory->id) }}" target="_blank">
                         <button class="dashboard-icon-button action-view">
                             <x-eye-icon />
                         </button>
                     </a>
+                    --}}
                     <a href="{{ route('job-categories.edit', $jobCategory->id) }}">
                         <button class="dashboard-icon-button action-edit">
                             <x-edit-icon />

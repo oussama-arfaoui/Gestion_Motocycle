@@ -6,53 +6,31 @@
     <div class="dashboard-main-container-breadcrumbs">
         <a href='/admin'>Home</a>
         <x-arrow-icon />
-        <a href="{{ route('blogs.index') }}">Blogs</a>
+        <a href="{{ route('job-categories.index') }}">Job Categories</a>
         <x-arrow-icon />
-        <span>Create New Blog</span>
+        <span>Create New Job Category</span>
     </div>
 
-    {{-- Form for creating a new blog --}}
+    {{-- Form for creating a new job category --}}
     <div class="dashboard-main-container-modules">
 
-        <form action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data" class="node-form">
+        <form action="{{ route('job-categories.store') }}" method="POST" class="node-form">
             @csrf
             <div class="node-input">
-                <label for="category_id" class="form-label">Category</label>
-                <select name="category_id" id="category_id" class="form-control">
-                    <option value="">Select Category</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
+                <label for="name" class="form-label">Name</label>
+                <input type="text" name="name" id="name" class="form-control" required>
             </div>
 
             <div class="node-input">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" name="title" id="title" class="form-control">
-            </div>
-
-            <div class="node-input">
-                <label for="content" class="form-label">Content</label>
-                <textarea name="content" id="content" class="form-control" rows="4"></textarea>
-            </div>
-                     
-            <div class="node-input">
-                <label for="images" class="form-label">Images</label>
-                <input type="file" name="images[]" id="images" class="form-control" onchange="previewImage(event)" multiple>
-                <img id="image-preview" src="#" alt="Preview Image" style="display: none; max-width: 200px; margin-top: 10px;">
-            </div>                      
-
-            <div class="node-input">
-                <label for="views" class="form-label">Views</label>
-                <input type="number" name="views" id="views" class="form-control">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="description" id="description" class="form-control" rows="4"></textarea>
             </div>
 
             <div class="node-input">
                 <label for="status" class="form-label">Status</label>
                 <select name="status" id="status" class="form-control">
-                    <option value="published">Published</option>
-                    <option value="draft">Draft</option>
-                    <option value="archived">Archived</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
                 </select>
             </div>
 
@@ -64,17 +42,5 @@
         </form>
     </div>
 </div>
-
-<script>
-    function previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = function() {
-            var output = document.getElementById('image-preview');
-            output.src = reader.result;
-            output.style.display = 'block';
-        }
-        reader.readAsDataURL(event.target.files[0]);
-    }
-</script>
 
 @endsection

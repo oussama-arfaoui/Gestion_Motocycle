@@ -6,59 +6,37 @@
     <div class="dashboard-main-container-breadcrumbs">
         <a href='/admin'>Home</a>
         <x-arrow-icon />
-        <span>Carrier Categories</span>
+        <span>Create New Carrier Category</span>
     </div>
 
-    {{-- Actions for the carrier categories table --}}
-    <div class="dashboard-main-container-actions">
-        {{-- Main Button --}}
-        <a class="dashboard-main-button" href="{{ route('carrier-categories.create') }}">
-            <x-add-icon />
-            <span>Create New Category</span>
-        </a>
-    </div>
+    {{-- Form for creating a new carrier category --}}
+    <div class="dashboard-main-container-modules">
+        <form action="{{ route('carrier-categories.store') }}" method="POST">
+            @csrf
 
-    {{-- Table --}}
-    <table class="dashboard-main-container-table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($carrierCategories as $category)
-            <tr>
-                <td>{{ $category->name }}</td>
-                <td>{{ $category->description }}</td>
-                <td>{{ $category->status }}</td>
-                <td class="dashboard_main-table-actions">
-                    <a href="{{ route('carrier-categories.show', $category->id) }}" target="_blank">
-                        <button class="dashboard-icon-button action-view">
-                            <x-eye-icon />
-                        </button>
-                    </a>
-                    <a href="{{ route('carrier-categories.edit', $category->id) }}">
-                        <button class="dashboard-icon-button action-edit">
-                            <x-edit-icon />
-                        </button>
-                    </a>
-                    <!-- Add your delete form for category here -->
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+            <div class="node-input">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" name="name" id="name" class="form-control" required>
+            </div>
+
+            <div class="node-input">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="description" id="description" class="form-control" rows="4"></textarea>
+            </div>
+
+            <div class="node-input">
+                <label for="status" class="form-label">Status</label>
+                <select name="status" id="status" class="form-control">
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </div>
+
+            <button class="dashboard-main-button" type="submit">
+                <x-save-icon />
+                <span>Save</span>
+            </button>
+        </form>
+    </div>
 </div>
-
-<script>
-    function confirmDelete(categoryId) {
-        if (confirm('Are you sure you want to delete this category?')) {
-            document.getElementById('deleteForm' + categoryId).submit();
-        }
-    }
-</script>
-
 @endsection

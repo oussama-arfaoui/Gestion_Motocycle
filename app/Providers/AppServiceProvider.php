@@ -8,6 +8,7 @@ use App\Models\ProductCategories;
 use App\Models\Testimonial;
 use App\Models\Brand;
 use App\Models\Projects;
+use App\Models\Carrier;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -86,5 +87,23 @@ class AppServiceProvider extends ServiceProvider
             $view->with('Projectss', $Projectss);
         });   
 
+
+        //for Carrier  
+        View::composer('frontend.shortcodes.carrers.style.style1', function ($view) {
+            $Carrerss = Carrier::all();
+            $view->with('Carrerss', $Carrerss);
+        });   
+        View::composer('frontend.shortcodes.carrers.style.style2', function ($view) {
+            $Carrerss = Carrier::all();
+            $view->with('Carrerss', $Carrerss);
+        });   
+        View::composer('frontend.shortcodes.carrers.style.style3', function ($view) {
+            $Carrerss = Carrier::all();
+            $view->with('Carrerss', $Carrerss);
+        });   
+        View::composer('frontend.shortcodes.carrers.style.style4', function ($view) {
+            $Carrerss = Carrier::all();
+            $view->with('Carrerss', $Carrerss);
+        });  
     }
 }
