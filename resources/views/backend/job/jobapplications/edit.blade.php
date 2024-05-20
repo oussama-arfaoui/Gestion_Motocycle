@@ -6,92 +6,63 @@
     <div class="dashboard-main-container-breadcrumbs">
         <a href='/admin'>Home</a>
         <x-arrow-icon />
-        <a href="{{ route('blogs-categories.index') }}">Blog Categories</a>
+        <a href="{{ route('jobapplication.index') }}">Job Applications</a>
         <x-arrow-icon />
-        <span>Edit Blog categories</span>
+        <span>Edit Job Application</span>
     </div>
 
-    {{-- Form for editing the categories --}}
+    {{-- Form for editing an existing job application --}}
     <div class="dashboard-main-container-modules">
-        <form action="{{ route('blogs-categories.update', $category->id) }}" method="POST" enctype="multipart/form-data" class="node-form">
+        <form action="{{ route('jobapplication.update', $jobApplication->id) }}" method="POST" enctype="multipart/form-data"
+            class="node-form">
             @csrf
             @method('PUT')
-
             <div class="node-input">
-                <label for="parent_id" class="form-label">Parent categories</label>
-                <select name="parent_id" id="parent_id" class="form-control">
-                    <option value="">Select Parent categories</option>
-                    @foreach($categories as $cat)
-                        <option value="{{ $cat->id }}" {{ $cat->id == $category->parent_id ? 'selected' : '' }}>{{ $cat->name }}</option>
+                <label for="career_id" class="form-label">Select Career</label>
+                <select name="career_id" id="career_id" class="form-control" required>
+                    <option value="">Select Career</option>
+                    @foreach($carriers as $career)
+                        <option value="{{ $career->id }}" {{ $career->id == $jobApplication->career_id ? 'selected' : '' }}>
+                            {{ $career->title }}
+                        </option>
                     @endforeach
                 </select>
             </div>
-
             <div class="node-input">
-                <label for="category_name" class="form-label">Category Name</label>
-                <input type="text" name="category_name" id="category_name" class="form-control" value="{{ $category->name }}" required maxlength="191">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" name="name" id="name" class="form-control" value="{{ $jobApplication->name }}" required>
             </div>
-
             <div class="node-input">
-                <label for="description" class="form-label">Description</label>
-                <input type="text" name="description" id="description" class="form-control" value="{{ $category->description }}">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" class="form-control" value="{{ $jobApplication->email }}" required>
             </div>
-
             <div class="node-input">
-                <label for="order" class="form-label">Order</label>
-                <input type="number" name="order" id="order" class="form-control" value="{{ $category->order }}">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="text" name="phone" id="phone" class="form-control" value="{{ $jobApplication->phone }}" required>
             </div>
-
+            <div class="node-input">
+                <label for="cv" class="form-label">CV (PDF only)</label>
+                <input type="file" name="cv" id="cv" class="form-control" accept=".pdf">
+                @if($jobApplication->cv)
+                    <iframe src="{{ asset('storage/' . $jobApplication->cv) }}" style="width: 100px; height: 100px;" frameborder="0"></iframe>
+                @endif
+            </div>
+            <div class="node-input">
+                <label for="message" class="form-label">Message</label>
+                <textarea name="message" id="message" class="form-control">{{ $jobApplication->message }}</textarea>
+            </div>
             <div class="node-input">
                 <label for="status" class="form-label">Status</label>
                 <select name="status" id="status" class="form-control">
-                    <option value="published" {{ $category->status == 'published' ? 'selected' : '' }}>Published</option>
-                    <option value="draft" {{ $category->status == 'draft' ? 'selected' : '' }}>Draft</option>
-                    <option value="archived" {{ $category->status == 'archived' ? 'selected' : '' }}>Archived</option>
+                    <option value="pending" {{ $jobApplication->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                    <option value="reviewed" {{ $jobApplication->status == 'reviewed' ? 'selected' : '' }}>Reviewed</option>
                 </select>
             </div>
-
-            <!-- Images -->
-            <div class="node-input" id="old-images-preview">
-                <label for="images" class="form-label">Old Images</label>
-                @foreach(json_decode($category->image) as $image)
-                    <img src="{{ asset('storage/Images/general/' . $image) }}" alt="Old Project Image" style="max-width: 300px; margin-top: 10px;">
-                @endforeach
-            </div>
-            
-            <div class="node-input">
-                <label for="new_images" class="form-label">New Images</label>
-                <input type="file" name="new_images[]" id="new_images" class="form-control" onchange="previewImage(event)" multiple>
-                <div id="new-images-preview" style="margin-top: 10px;"></div>
-            </div>
-            
             <button type="submit" class="dashboard-main-button">
                 <x-save-icon />
-                <span>Save</span>
+                <span>Update</span>
             </button>
         </form>
     </div>
 </div>
-
-<script>
-    function previewImage(event) {
-        var oldImagesPreview = document.getElementById('old-images-preview');
-        oldImagesPreview.style.display = 'none';
-
-        var output = document.getElementById('new-images-preview');
-        output.innerHTML = '';
-        for (var i = 0; i < event.target.files.length; i++) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                var img = document.createElement("img");
-                img.src = e.target.result;
-                img.style.maxWidth = '200px';
-                img.style.marginTop = '10px';
-                output.appendChild(img);
-            }
-            reader.readAsDataURL(event.target.files[i]);
-        }
-    }
-</script>
-
 @endsection

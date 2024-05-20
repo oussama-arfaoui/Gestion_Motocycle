@@ -13,6 +13,6 @@ class JobApplications extends Model
 
     public function carrier()
     {
-        return $this->belongsTo(Carrier::class);
+        return $this->belongsTo(Carrier::class, 'career_id');
     }
 }

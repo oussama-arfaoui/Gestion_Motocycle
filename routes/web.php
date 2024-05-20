@@ -280,6 +280,7 @@ Route::namespace('Admin')->middleware(['auth', 'superuser'])->group(function () 
     Route::get('/admin/jobapplication', [JobapplicationController::class, 'index'])->name('jobapplication.index');
     Route::get('/admin/jobapplication/create', [JobapplicationController::class, 'create'])->name('jobapplication.create');
     Route::post('/admin/jobapplication/store', [JobapplicationController::class, 'store'])->name('jobapplication.store');
+    Route::post('/admin/jobapplication/store', [JobapplicationController::class, 'userstore'])->name('jobapplication.userstore');
     Route::get('/admin/jobapplication/{id}/edit', [JobapplicationController::class, 'edit'])->name('jobapplication.edit');
     Route::put('/admin/jobapplication/{id}', [JobapplicationController::class, 'update'])->name('jobapplication.update');
     Route::delete('/admin/jobapplication/{id}', [JobapplicationController::class, 'destroy'])->name('jobapplication.destroy');

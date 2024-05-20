@@ -18,6 +18,7 @@
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Message</th>
+                <th>CV</th>
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
@@ -25,24 +26,27 @@
         <tbody>
             @foreach($jobApplications as $application)
             <tr>
-                <td>{{ $application->career->title }}</td>
+                <td>{{ $application->carrier->title }}</td>
                 <td>{{ $application->name }}</td>
                 <td>{{ $application->email }}</td>
                 <td>{{ $application->phone }}</td>
                 <td>{{ $application->message }}</td>
+                <td> 
+                    <a href="{{ asset('storage/' . $application->cv) }}" target="_blank">
+                        <iframe src="{{ asset('storage/' . $application->cv) }}" width="100" height="100" style="border: none;"></iframe>
+                    </a>                   
+                 </td>                
                 <td>{{ $application->status }}</td>
                 <td class="dashboard_main-table-actions">
-                    <a href="{{ route('job-applications.show', $application->id) }}" target="_blank">
-                        <button class="dashboard-icon-button action-view">
-                            <x-eye-icon />
+
+                    <form action="{{ route('jobapplication.destroy', $application->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="confirmDelete({{ $application->id }})"
+                            class="dashboard-icon-button action-delete">
+                            <x-trash-icon />
                         </button>
-                    </a>
-                    <a href="{{ route('job-applications.edit', $application->id) }}">
-                        <button class="dashboard-icon-button action-edit">
-                            <x-edit-icon />
-                        </button>
-                    </a>
-                    <!-- Add your delete form for application here -->
+                    </form>
                 </td>
             </tr>
             @endforeach
