@@ -11,7 +11,7 @@
                     </div>
                     <div class="hero_slider_style3-slide-overlay"></div>
                     <div class="hero_slider_style3-slide-content">
-                        <h1>{{ $title }}</h1>
+                        <h1><span>{{$keyword}}</span>{{ $title }}</h1>
                         <h2>{{ $subtitle }}</h2>
                         <p>{{ $description }}</p>
                         <div class="hero_slider_style3-slide-content-actions">
@@ -26,7 +26,7 @@
             </div>
 
 
-            <div class="swiper-slide">
+            {{-- <div class="swiper-slide">
                 <div class="hero_slider_style3-slide">
                     <div class="hero_slider_style3-slide-bg">
 
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
 

@@ -1,229 +1,211 @@
-.header {
+.header{
     display: flex;
     flex-direction: column;
+    padding-top: 0;
 
-    transition: top 0.5s ease-out;
-
-
-    @media (max-width: 768px) {
+    @media (max-width: 768px){
         display: none;
     }
 
-    &__notification {
+    &__top{
+        background-color: var(--secondary-color);
+
+        border-bottom-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+
+
+        width: 100%;
+        padding-inline: 16px;
+        padding-block: 8px;
+
+        
         display: flex;
         flex-direction: row;
-
-        background-color: var(--dark);
-        color: var(--light);
-
         justify-content: space-between;
-        align-items: center;
         min-height: 36px;
-        padding-inline: 4rem;
+        
+        &-info{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            gap: 2rem;
 
-        @media (max-width: 1024px) {
-            padding-inline: 1rem;
+            li{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-evenly;
+
+                gap: 0.5rem;
+
+                svg{
+                    width: 24px;
+                    height: 24px;
+                    stroke: var(--light);
+                }
+
+                span{
+                    color: var(--light);
+                }
+            }
         }
+        
+        &-socials {
 
-        p {
-            font-size: 12px;
+            &-icons {
+                display: flex;
+                flex-direction: row;
+                
+                a {
+                    margin: 0.2rem;
 
-            a {
-                font-weight: 600;
-                color: var(--light);
-                text-decoration: underline;
+                    svg {
+                        fill: var(--light);
+                    }
+                }
+            }
+        }
+    }
+
+    &__middle{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        
+        padding-block: 1.5rem;
+        padding-inline: 1rem;
+
+        &-logo{
+            width: 30%;
+
+            img{
+                width: 100%;
             }
         }
 
-        button {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
+        &-buttons{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1rem;
+
+            &-icon{
+                padding: 0.5rem;
+
+                border: 1px solid var(--secondary-color);
+                border-radius: 50%;
+
+                display: grid;
+                place-items: center;
+
+                background-color: transparent;
+
+                cursor: pointer;
+
+                @include Interactable;
+                
+                svg{
+                    color: var(--secondary-color);
+                }
+
+                &:nth-child(2){
+                    margin-right: 1rem;
+                }
+            }
         }
     }
 
 
-    &__main {
-        background-color: var(--accent-color-1);
-        min-height: 72px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+    &__bottom{
+        background-color: var(--primary-color);
+        border-radius: 2rem;
+        padding: 1rem;
 
-        padding-inline: 4rem;
-
-        @media (max-width: 1024px) {
-            padding-inline: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            flex-direction: row-reverse;
-        }
-
-
-        &-navigation {
-            width: 40%;
+        box-shadow: var(--shadow-s);
+        
+        &-navigation{
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
-
-            @media (max-width: 1024px) {
-                font-size: 14px;
+            align-items: center;
+            justify-content: space-evenly;
+        
+            li{
+                color: var(--light);
+                
+                a{
+                    font-weight: 500;
+                    color: var(--light);
+                }
             }
 
-            @media (max-width: 768px) {
+            .seperator{
+                height: 1rem;
+                width: 1px;
+                background-color: var(--light);
+
+            }
+        }
+    }
+}
+
+.mobile-nav, .mobile-logo{
+    display: none;
+}
+
+@media (max-width: 768px){
+    .mobile-logo{
+        position: fixed;
+        width: 100vw;
+
+        display: block;
+        top: 0;
+        z-index: 10000;
+
+        background-color: var(--light);
+
+        &-image{
+            display: grid;
+            place-items: center;
+            width: 100%;
+
+            img{
                 width: 80%;
             }
         }
-
-        &-logo {
-            width: 10%;
-
-            img {
-                width: 100%;
-            }
-        }
-
-        &-actions {
-            width: 40%;
-            display: flex;
-            justify-content: space-evenly;
-
-            @media (max-width: 1024px) {
-                flex-direction: row;
-            }
-
-            @media (max-width: 768px) {
-                display: none;
-            }
-
-            a {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-evenly;
-
-                @media (max-width: 1024px) {
-                    flex-direction: column;
-                }
-
-                svg {
-                    margin-right: 1rem;
-                    width: 24px;
-
-                    @media (max-width: 1024px) {
-                        margin: 0;
-                        margin-bottom: 0.5rem;
-                    }
-                }
-
-                span {
-                    font-weight: 600;
-                }
-            }
-        }
     }
+    
+    .mobile-nav{
+        position: fixed;
+    width: 100vw;
 
+    bottom: 0;
+    z-index: 10000;
 
-    &__social {
-        background-color: var(--dark);
-        min-height: 36px;
+    background-color: var(--secondary-color);
+
+    display: grid;
+    align-items: center;
+    
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+
+    ul{
+        width: 100%;
+        height: 100%;
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: flex-end;
-        padding-inline: 4rem;
+        justify-content: space-evenly;
+        padding-block: 1rem;
 
-    }
-}
-
-
-.header--fixed {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-
-    transition: top 0.5s ease-out;
-}
-
-
-
-.navigation_mobile {
-    position: fixed;
-    z-index: 1000;
-    bottom: 0;
-
-    width: 100%;
-    padding-block: 1rem;
-    padding-inline: 0.5rem;
-
-    background: linear-gradient(to left, hsla(0, 0%, 100%, 0.9), hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0.9), );
-
-    display: none;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-
-    @media (max-width:768px) {
-        display: flex;
-    }
-
-    &-logo {
-        width: 33%;
-
-        img {
-            width: 100%;
-        }
-    }
-
-    &-action,
-    &-menu {
-        width: 50%;
-        display: grid;
-        place-items: center;
-    }
-
-    &-action {
-        height: 100%;
-
-        button {
-            padding-block: 0.5rem;
-            padding-inline: 0.5rem;
-
-            border-radius: 1rem;
-
-            border: none;
-
-            background-color: var(--accent-color);
-
-            box-shadow: 0px 2px 0px 0px #00000076;
-
-            &:active {
-                box-shadow: none;
-            }
-
-            a {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-evenly;
-                width: 100%;
-
-                svg {
-                    stroke: var(--dark);
-                    margin-right: 0.5rem;
-                    width: 18px;
-                }
-
-                span {
-                    font-weight: 800;
-                    font-size: 12px;
-                    text-transform: uppercase;
-                }
+        a{
+            svg{
+                width: 24px;
+                height: 24px;
             }
         }
     }
+}
 }

@@ -1,5 +1,5 @@
-<section class="hero_slider_style2">
-    <div class="hero_slider_style2-swiper">
+<section id="introduction" class="hero_slider_style2">
+    <div class="hero_slider_style2-swiper global_container">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
 
@@ -23,45 +23,6 @@
                     </div>
                 </div>
 
-            </div>
-
-
-            <div class="swiper-slide">
-                <div class="hero_slider_style2-slide">
-                    <div class="hero_slider_style2-slide-bg">
-
-                    </div>
-                    <div class="hero_slider_style2-slide-overlay"></div>
-                    <div class="hero_slider_style2-slide-content">
-                        <h1>{{ $title }}</h1>
-                        <h2>{{ $subtitle }}</h2>
-                        <p>{{ $description }}</p>
-                        <div class="hero_slider_style2-slide-content-actions">
-                            <x-primary_button text='{{$primary_button_label}}' path='{{$primary_button_link}}'>
-                            </x-primary_button>
-                            <x-secondary_button text='{{$secondary_button_label}}' path='{{$secondary_button_link}}'>
-                            </x-secondary_button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="hero_slider_style2-slide">
-                    <div class="hero_slider_style2-slide-bg">
-                    </div>
-                    <div class="hero_slider_style2-slide-overlay"></div>
-                    <div class="hero_slider_style2-slide-content">
-                        <h1>{{ $title }}</h1>
-                        <h2>{{ $subtitle }}</h2>
-                        <p>{{ $description }}</p>
-                        <div class="hero_slider_style2-slide-content-actions">
-                            <x-primary_button text='{{$primary_button_label}}' path='{{$primary_button_link}}'>
-                            </x-primary_button>
-                            <x-secondary_button text='{{$secondary_button_label}}' path='{{$secondary_button_link}}'>
-                            </x-secondary_button>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </div>

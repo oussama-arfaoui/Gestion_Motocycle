@@ -1,5 +1,5 @@
-<div class="brands_style4 global_container">
-    <div class="brands_style4-content">
+<div class="brands_style4">
+    <div class="brands_style4-content global_container">
 
         <h2>Nos Partenaires et Marques de Confiance</h2>
 

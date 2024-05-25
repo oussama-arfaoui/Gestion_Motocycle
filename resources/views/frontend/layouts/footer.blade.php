@@ -9,13 +9,11 @@
             <div class="footer-column">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="/accueil">Accueil</a></li>
-                    <li><a href="/entreprise">Entreprise</a></li>
-                    <li><a href="/catalogue">Catalogue</a></li>
-                    <li><a href="/services">Services</a></li>
-                    <li><a href="/projects-categories-list">Projets</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                    <li><a href="/actualites">Actualites</a></li>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#about-section">À Propos de Nous</a></li>
+                    <li><a href="#why-us-section">Pourquoi Nous</a></li>
+                    <li><a href="#gallery-section">Gallerie des Projets</a></li>
+                    <li><a href="#contact-section">Contactez-Nous</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -73,12 +71,12 @@
                             </svg></a></li>
                 </ul>
                 <div class="hashtag">
-                    <span>#WireNext</span>
-                    <span>#MaintenanceWireNext</span>
-                    <span>#MachinerieWireNext</span>
-                    <span>#WireNextINdustrielles</span>
-                    <span>#WireNextIndustie</span>
-                    <span>#WireNextMaroc</span>
+                    <span>#GreenStorageSolutions</span>
+                    <span>#StorageSolutions</span>
+                    <span>#StorageEcologic</span>
+                    <span>#StorageGreenSolutions</span>
+                    <span>#SolutionsGreenStorage</span>
+                    <span>#StorageMaroc</span>
                 </div>
             </div>
             <div class="footer-column">

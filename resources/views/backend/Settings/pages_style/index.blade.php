@@ -90,7 +90,7 @@ function confirmDelete() {
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('addAttribute').addEventListener('click', function() {
             var attributeField = document.createElement('div');
-            attributeField.classList.add('attribute');
+            attributeField.classList.add('dashboard-row');
             attributeField.innerHTML = `
                 <input type="text" name="newStyles[name][]" placeholder="Attribute Name" class="form-control">
                 <select name="newStyles[style][]" class="form-control">
@@ -99,7 +99,7 @@ function confirmDelete() {
                     <option value="style3">Style 3</option>
                     <!-- Add more options if needed -->
                 </select>
-                <button type="button" class="btn btn-danger removeAttribute" onclick="removeAttribute(this)">Remove</button>
+                <button type="button" class="dashboard-danger-button removeAttribute" onclick="removeAttribute(this)">Remove</button>
             `;
             document.getElementById('attributeFields').appendChild(attributeField);
         });

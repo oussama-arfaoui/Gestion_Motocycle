@@ -361,13 +361,36 @@
 
     font-family: "Inter", sans-serif;
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
+    display: grid;
+    place-items: center;
     margin-bottom: 3rem;
 
 }
+
+.dashboard-danger-button {
+    cursor: pointer;
+    @include Interactable;
+
+    height: 32px;
+    background-color: $Red800;
+    color: $Gray100;
+
+
+
+    padding-inline: 0.5rem;
+
+    border: 1px solid var(--db-gray);
+    border-radius: 8px;
+
+    font-family: "Inter", sans-serif;
+
+    display: grid;
+    place-items: center;
+    margin-bottom: 3rem;
+
+}
+
+
 
 
 /// NODES
@@ -376,7 +399,8 @@
 .node {
 
     &-input,
-    &-display {
+    &-display, 
+    &-file-input {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -424,6 +448,68 @@
                 font-weight: 400;
             }
         }
+
+        /* file upload button */
+
+        input[type="file"]{
+            
+            @include Interactable;
+
+            width: 256px;
+
+            @media (max-width: 1024px) {
+                width: 100%;
+            }
+
+            height: auto;
+            left: 0;
+            top: 0;
+
+            border: 1px solid var(--db-gray);
+            border-radius: 8px;
+
+            padding-inline: 0;
+
+            color: var(--db-light);
+            font-family: 'Inter',
+            sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+
+            background-color: var(--db-dark);
+
+            margin-bottom: 1rem;
+
+            &::placeholder {
+                color: var(--db-gray);
+                font-family: 'Inter', sans-serif;
+                font-size: 14px;
+                font-weight: 400;
+            }
+        }
+        input[type="file"]::file-selector-button {
+
+    border-radius: 4px;
+    padding: 0 16px;
+    height: 40px;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+    margin-right: 16px;
+    transition: background-color 200ms;
+  }
+
+/* file upload button hover state */
+input[type="file"]::file-selector-button:hover {
+    background-color: #f3f4f6;
+  }
+  
+  /* file upload button active state */
+  input[type="file"]::file-selector-button:active {
+    background-color: #e5e7eb;
+  }
+  
 
 
         textarea {
@@ -720,6 +806,12 @@
 
     width: 100%;
 
+    
+    @media (max-width: 768px) {
+        gap: 0.2rem;
+        flex-direction: column;
+    }
+
     &-half {
         display: flex;
         flex-direction: row;
@@ -900,3 +992,4 @@
         }
     }
 }
+

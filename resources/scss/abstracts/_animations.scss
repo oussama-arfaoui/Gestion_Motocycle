@@ -113,3 +113,44 @@
         transform: translateY(300px);
     }
 }
+
+@keyframes animated-line-down{
+    from{
+        height: 0;
+    }
+    to{
+        height: 10rem;
+    }
+}
+
+
+
+@keyframes moveRandomly1 {
+    0%{
+        transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(-24px, 24px);
+    }
+    75% {
+      transform: translate(16px, 16px);
+    }
+  }
+
+  @keyframes moveRandomly2 {
+    0%{
+        transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(24px, -24px);
+    }
+    75% {
+      transform: translate(-16px, -16px);
+    }
+  }

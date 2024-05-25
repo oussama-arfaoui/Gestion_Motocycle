@@ -1,7 +1,7 @@
 <div class="brands_style2 global_container">
     <div class="brands_style2-content">
 
-        <h2>RÉFÉRENCES</h2>
+        <h2>Nos Partenaires et Marques de Confiance</h2>
 
         <div class="brands_style2-content-cards">
 

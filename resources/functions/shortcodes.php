@@ -31,12 +31,6 @@ function getShortcodeTypes() {
             'name' => 'brands',  
             'view' => 'frontend.shortcodes.brands.admin-config',  
         ],
-
-        'carrers' => [
-            'name' => 'carrers',  
-            'view' => 'frontend.shortcodes.carrers.admin-config',  
-        ],
-
         'category_overview' => [
             'name' => 'category_overview', 
             'view' => 'frontend.shortcodes.category_overview.admin-config',     
@@ -70,6 +64,12 @@ function getShortcodeTypes() {
         'view' => 'frontend.shortcodes.testimonials.admin-config',
     ],
     
+        'service_overview' => [
+        'name' => 'service_overview',
+        'view' => 'frontend.shortcodes.service_overview.admin-config',
+    ],
+    
+    
     'office_politics' => [
         'name' => 'office_politics',
         'view' => 'frontend.shortcodes.office_politics.admin-config',
@@ -80,6 +80,7 @@ function getShortcodeTypes() {
         'name' => 'history_through_years',
         'view' => 'frontend.shortcodes.history_through_years.admin-config',
     ],
+    
 
         //  Contact Page
 
@@ -131,11 +132,12 @@ function getShortcodeTypes() {
         'name' => 'products_categories_list',
         'view' => 'frontend.shortcodes.products_categories_list.admin-config',
     ],
-
+    
     'service_categories_list' => [
         'name' => 'service_categories_list',
         'view' => 'frontend.shortcodes.service_categories_list.admin-config',
     ],
+    
 
     /// About 
 
@@ -151,7 +153,11 @@ function getShortcodeTypes() {
             'name' => 'mission_value_vision',
             'view' => 'frontend.shortcodes.mission_value_vision.admin-config',
         ],
-    
+        'enterprise_description' => [
+            'name' => 'enterprise_description',
+            'view' => 'frontend.shortcodes.enterprise_description.admin-config',
+        ],
+        
     
     /// Services
 
@@ -161,12 +167,9 @@ function getShortcodeTypes() {
         'view' => 'frontend.shortcodes.double_screen.admin-config',
     ],
     
-    'projects' => [
-        'name' => 'projects',  
-        'view' => 'frontend.shortcodes.projects.admin-config',  
-    ],
+    /// Extras
 
-
+    
     'threed_scene' => [
         'name' => 'threed_scene',
         'view' => 'frontend.shortcodes.threed_scene.admin-config',
@@ -176,8 +179,24 @@ function getShortcodeTypes() {
         'name' => 'custom_module',
         'view' => 'frontend.shortcodes.custom_module.admin-config',
     ],
+    
+
     ];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function getShortcodeindex() {
     return [
@@ -216,11 +235,6 @@ function getShortcodeindex() {
             'view' => 'frontend.shortcodes.brands.index', 
             'attributes' => ['Brands','style']      
         ],
-        'carrers' => [
-            'name' => 'carrers',
-            'view' => 'frontend.shortcodes.carrers.index', 
-            'attributes' => ['title','carrers','style']      
-        ],
         'category_overview' => [
             'name' => 'category_overview',
             'view' => 'frontend.shortcodes.category_overview.index',
@@ -233,15 +247,10 @@ function getShortcodeindex() {
         ],  
         'gallery_overview' => [
             'name' => 'gallery_overview',
-            'view' => 'frontend.shortcodes.gallery_overview.index', 
-            'attributes' => ['section_tag', 'title', 'description', 'primary_button_label',
-            'project_title_1' , 'project_description_1', 'project_period_1', 'project_number_of_doors_1', 'project_location_1', 'project_date_1' ,
-            'project_title_2' , 'project_description_2', 'project_period_2', 'project_number_of_doors_2', 'project_location_2', 'project_date_2' ,
-            'project_title_3' , 'project_description_3', 'project_period_3', 'project_number_of_doors_3', 'project_location_3', 'project_date_3' ,
-            'project_title_4' , 'project_description_4', 'project_period_4', 'project_number_of_doors_4', 'project_location_4', 'project_date_4' ,
-            'project_title_5' , 'project_description_5', 'project_period_5', 'project_number_of_doors_5', 'project_location_5', 'project_date_5' ,
-            'style']
+            'view' => 'frontend.shortcodes.gallery_overview.index',
+            'attributes' => ['section_tag', 'title', 'subtitle', 'description', 'primary_button_label', 'primary_button_link', 'secondary_button_label', 'secondary_button_link', 'keyword', 'project_title_1', 'project_description_1', 'project_button_label_1', 'project_button_link_1', 'project_title_2', 'project_description_2', 'project_button_label_2', 'project_button_link_2', 'project_title_3', 'project_description_3', 'project_button_label_3', 'project_button_link_3', 'project_title_4', 'project_description_4', 'project_button_label_4', 'project_button_link_4', 'project_title_5', 'project_description_5', 'project_button_label_5', 'project_button_link_5','style']
         ],
+        
         'homepage_cta' => [
             'name' => 'homepage_cta',
             'view' => 'frontend.shortcodes.homepage_cta.index', 
@@ -267,15 +276,22 @@ function getShortcodeindex() {
         'why_choose_us' => [
             'name' => 'why_choose_us',
             'view' => 'frontend.shortcodes.why_choose_us.index',
-            'attributes' => ['section_tag', 'title', 'description', 'primary_button_label', 'node_icon_1', 'node_title_1', 'node_description_1', 'node_icon_2', 'node_title_2', 'node_description_2', 'node_icon_3', 'node_title_3', 'node_description_3', 'node_icon_4', 'node_title_4', 'node_description_4','style']
+            'attributes' => ['section_tag', 'title', 'subtitle', 'description', 'primary_button_label', 'primary_button_link', 'secondary_button_label', 'secondary_button_link', 'keyword', 'node_icon_1', 'node_title_1', 'node_description_1', 'node_icon_2', 'node_title_2', 'node_description_2', 'node_icon_3', 'node_title_3', 'node_description_3', 'node_icon_4', 'node_title_4', 'node_description_4','style']
         ],
+        
         'testimonials' => [
             'name' => 'testimonials',
             'view' => 'frontend.shortcodes.testimonials.index',
             'attributes' => ['title', 'description', 'testimonials','style']
         ],
         
-    
+        'service_overview' => [
+            'name' => 'service_overview',
+            'view' => 'frontend.shortcodes.service_overview.index',
+            'attributes' => ['section_tag', 'title', 'subtitle', 'description', 'primary_button_label', 'primary_button_link', 'secondary_button_label', 'secondary_button_link', 'keyword', 'node_icon_1', 'node_title_1', 'node_description_1', 'node_icon_2', 'node_title_2', 'node_description_2', 'node_icon_3', 'node_title_3', 'node_description_3', 'node_icon_4', 'node_title_4', 'node_description_4','style']
+        ],
+
+        
         'office_politics' => [
             'name' => 'office_politics',
             'view' => 'frontend.shortcodes.office_politics.index',
@@ -348,11 +364,14 @@ function getShortcodeindex() {
             'attributes' => ['categories','style']
         ],
 
+        
         'service_categories_list' => [
             'name' => 'service_categories_list',
             'view' => 'frontend.shortcodes.service_categories_list.index',
             'attributes' => ['title', 'description', 'service_title_1', 'services_description_1', 'service_title_2', 'services_description_2', 'service_title_3', 'services_description_3', 'service_title_4', 'services_description_4', 'service_title_5', 'services_description_5','style']
         ],
+        
+
         // About
 
         
@@ -372,6 +391,14 @@ function getShortcodeindex() {
             'attributes' => ['section_tag', 'title', 'description', 'node_title_1', 'node_description_1', 'node_title_2', 'node_description_2', 'node_title_3', 'node_description_3','style']
         ],
         
+        'enterprise_description' => [
+            'name' => 'enterprise_description',
+            'view' => 'frontend.shortcodes.enterprise_description.index',
+            'attributes' => ['section_tag', 'title', 'subtitle', 'description', 'link_1', 'link_2', 'link_3', 'link_4', 'keyword','style']
+        ],
+        
+    
+        
         /// Services
 
         
@@ -381,12 +408,10 @@ function getShortcodeindex() {
             'attributes' => ['title_1', 'description_1', 'button_1', 'title_2', 'description_2', 'button_2','style']
         ],
         
-        'projects' => [
-            'name' => 'projects',
-            'view' => 'frontend.shortcodes.projects.index', 
-            'attributes' => ['title','projects','style']      
-        ],
 
+        /// extras
+
+        
         'threed_scene' => [
             'name' => 'threed_scene',
             'view' => 'frontend.shortcodes.threed_scene.index',
@@ -399,5 +424,6 @@ function getShortcodeindex() {
         'view' => 'frontend.shortcodes.custom_module.index',
         'attributes' => ['title','style']
     ],
+    
     ];
 };

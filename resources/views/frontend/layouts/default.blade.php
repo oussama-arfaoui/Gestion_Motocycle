@@ -11,7 +11,8 @@
 
     @include('frontend.layouts.footer')
 
-    <x-floating-actions />
+    <x-floating-sections />
+    <x-floating-whatsapp />
 </body>
 
 </html>

@@ -1,37 +1,33 @@
 <section class="testimonials_style1 global_container">
-
     <div class="testimonials_style1-text">
         <h2>{{$title}}</h2>
     </div>
     
-    <div class="category_with_examples_style1-items-item">      
-
-
-                @foreach($testimonialss as $testimonialy)
-
-                <div class="category_with_examples_style1-items-item-tag">
-                    <p>{{ $testimonialy->name }}</p>
-                </div>
-
-                    @php
-                    $imageArray = json_decode($testimonialy->image, true);
-                    $firstImage = isset($imageArray[0]) ? $imageArray[0] : null;
-                    @endphp
-
-                        @if($firstImage)
-                        <img src="{{ asset('storage/Images/general/' . $firstImage) }}" alt="Brand Image">
-                        @else
-                        No image available
-                        @endif
-                @endforeach
-
-
+    <div class="category_with_examples_style1-items-item">
+        <div class="category_with_examples_style1-items-item-tag">
+            <p>{{ $testimonialy->name }}</p>
+        </div>
+        <!-- Check if images exist for the product -->
+        <p>   @if($testimonialy->image)
+        <img src="{{ asset('storage/Images/general/' . $testimonialy->image) }}" alt="Testimonial Image">
+        @else
+            <p>No image available</p>
+            @endif
+            <p>{{ $testimonialy->testimonial }}</p>
+        </div>
+        @endif
+        @endforeach
+        @endforeach
+        {{-- End of Testimonials Loop --}}
     </div>
-
     <div class="testimonials_style1_navigation">
         <button class="prev">
             <x-chevron-icon></x-chevron-icon>
         </button>
+        
+        <div class="dots">
+            {{-- Dots will be added dynamically --}}
+        </div>
 
         <button class="next">
             <x-chevron-icon></x-chevron-icon>
@@ -39,8 +35,6 @@
     </div>
 
 </section>
-
-
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
