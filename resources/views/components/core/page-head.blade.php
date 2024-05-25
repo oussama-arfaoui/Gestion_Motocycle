@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" href="/favicon/favicon.png">
     <title>{{ $page_title }}</title>
 
-    @vite(['resources/css/app.css', 'resources/scss/style.scss', 'resources/js/app.js', 'resources/js/swiper.js'])
+    @vite(['resources/css/app.css', 'resources/scss/style.scss', 'resources/js/app.js', 'resources/js/swiper.js', 'resources/js/animations.js'])
 
     {{-- Swiper JS --}}
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">

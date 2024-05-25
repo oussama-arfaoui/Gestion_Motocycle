@@ -237,23 +237,25 @@ $Gray900: #111827;
 
     /// WEBSITE
 
-    --light: #ffffff;
-    --dark: #000000;
+    --light: #fefefe;
+    --dark: #2f3338;
 
-    --primary-color: #000000;
-    --accent-color: #ffa000;
-    --accent-color-half: #ffa20087;
-    --accent-color-barely: #ffa20014;
+    --primary-color: #1cb162;
+    --secondary-color: #534945;
 
-    --accent-color-1: #F1EEE4;
+    --accent-color: hsl(148, 71%, 52%);
+    --accent-color-half: hsl(148, 71%, 52%, 0.5);
+    --accent-color-barely: hsl(148, 71%, 52%, 0.25);
+
+    --accent-color-1: hsl(148, 71%, 52%);
 
 
 
     /// SHADOWS
     
-    --shadow-s: 0 1px 3px hsla(0,0%, .2); 
-    --shadow-m: 0 4px 6px hsla(0,0%, .2); 
-    --shadow-l: 0 5px 15px hsla(0,0%, .2); 
-    --shadow-xl: 0 10px 24px hsla(0,0%, .2); 
-    --shadow-xxl: 0 15px 35px hsla(0,0%, .2); 
+    --shadow-s: 0 1px 3px hsla(0, 0%, 0%, .2); 
+    --shadow-m: 0 4px 6px hsla(0,0%,0%, .2); 
+    --shadow-l: 0 5px 15px hsla(0,0%,0%, .2); 
+    --shadow-xl: 0 10px 24px hsla(0,0%,0%, .2); 
+    --shadow-xxl: 0 15px 35px hsla(0,0%,0%, .2); 
 }

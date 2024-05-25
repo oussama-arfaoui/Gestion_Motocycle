@@ -39,7 +39,7 @@
                 <input type="text" name="description" id="description" class="form-control">
             </div>
             
-            <div class="node-input">
+            <div class="node-file-input">
                 <label for="images" class="form-label">Images</label>
                 <input type="file" name="images[]" id="images" class="form-control" onchange="previewImage(event)" multiple>
                 <img id="image-preview" src="#" alt="Preview Image" style="display: none; max-width: 200px; margin-top: 10px;">

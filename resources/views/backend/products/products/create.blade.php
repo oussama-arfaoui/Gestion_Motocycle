@@ -53,7 +53,7 @@
             </div>
 
 
-            <div class="node-input">
+            <div class="node-file-input">
                 <label for="images" class="form-label">Images</label>
                 <input type="file" name="images[]" id="images" class="form-control" multiple>
             </div>
@@ -70,12 +70,12 @@
             
             <div class="node-input" id="attributeFields">
                 <label for="attributes" class="form-label">Attributes</label>
-                <div class="attribute">
+                <div class="dashboard-row">
                     <input type="text" name="attributes[name][]" placeholder="Attribute Name" class="form-control">
                     <input type="text" name="attributes[value][]" placeholder="Attribute Value" class="form-control">
+                    <button type="button" id="addAttribute" class="dashboard-action-button">Add Attribute</button>
                 </div>
             </div>
-            <button type="button" id="addAttribute" class="btn btn-primary mt-3">Add Attribute</button>
 
             <div class="node-selector">
                 <label for="categories" class="form-label">Categories</label>
@@ -101,11 +101,11 @@
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('addAttribute').addEventListener('click', function() {
             var attributeField = document.createElement('div');
-            attributeField.classList.add('attribute');
+            attributeField.classList.add('dashboard-row');
             attributeField.innerHTML = `
                 <input type="text" name="attributes[name][]" placeholder="Attribute Name" class="form-control">
                 <input type="text" name="attributes[value][]" placeholder="Attribute Value" class="form-control">
-                <button type="button" class="btn btn-danger removeAttribute">Remove</button>
+                <button type="button" class="dashboard-danger-button removeAttribute">Remove</button>
             `;
             document.getElementById('attributeFields').appendChild(attributeField);
         });

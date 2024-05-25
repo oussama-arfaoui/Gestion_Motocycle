@@ -14,7 +14,7 @@
     <div class="dashboard-main-container-modules">
 
         {{-- Form for editing a project --}}
-        <form action="{{ route('projects.update', $project->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('projects.update', $project->id) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -68,16 +68,12 @@
             </div>
 
             <!-- Images -->
-            <div class="node-input">
-                @foreach(json_decode($project->images) as $image)
-                <img src="{{ asset('storage/Images/general/' . $image) }}" alt="Project Image" style="max-width: 300px; margin-top: 10px;">
-                @endforeach
-            </div>
-            <!-- Images -->
-            <div class="node-input">
+            <div class="node-file-input">
                 <label for="images" class="form-label">Images</label>
-                <div id="imageContainer"></div> <!-- Container for preview images -->
-                <input type="file" name="images[]" id="images" class="form-control" onchange="previewImage(event)" multiple >
+                @foreach(json_decode($project->images) as $image)
+                <img src="{{ asset('storage/Images/general/' . $image) }}" alt="Project Image">
+                @endforeach
+                <input type="file" name="images[]" id="images" class="form-control" multiple>
             </div>
 
             <!-- Points -->
@@ -98,15 +94,15 @@
             <div class="node-input" id="attributeFields">
                 <label for="attributes" class="form-label">Attributes</label>
                 @foreach(json_decode($project->attributes) as $attribute => $value)
-                <div class="attribute">
+                <div class="dashboard-row">
                     <input type="text" name="attributes[name][]" placeholder="Attribute Name" value="{{ $attribute }}"
                         class="form-control">
                     <input type="text" name="attributes[value][]" placeholder="Attribute Value" value="{{ $value }}"
                         class="form-control">
+                        <button type="button" id="addAttribute" class="dashboard-action-button">Add Attribute</button>
                 </div>
                 @endforeach
             </div>
-            <button type="button" id="addAttribute" class="btn btn-primary mt-3">Add Attribute</button>
 
             <button type="submit" class="dashboard-main-button">
                 <x-save-icon />
@@ -118,36 +114,14 @@
 </div>
 
 <script>
-    function previewImage(event) {
-        var imageContainer = document.getElementById('imageContainer');
-        imageContainer.innerHTML = ''; // Clear previous images
-
-        var fileList = event.target.files;
-        for (var i = 0; i < fileList.length; i++) {
-            var file = fileList[i];
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                var img = document.createElement('img');
-                img.src = e.target.result;
-                img.alt = 'Project Image';
-                img.style.maxWidth = '200px';
-                img.style.marginTop = '10px';
-                imageContainer.appendChild(img);
-            };
-
-            reader.readAsDataURL(file);
-        }
-    }
-
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('addAttribute').addEventListener('click', function() {
             var attributeField = document.createElement('div');
-            attributeField.classList.add('attribute');
+            attributeField.classList.add('dashboard-row');
             attributeField.innerHTML = `
                 <input type="text" name="attributes[name][]" placeholder="Attribute Name" class="form-control">
                 <input type="text" name="attributes[value][]" placeholder="Attribute Value" class="form-control">
-                <button type="button" class="btn btn-danger removeAttribute">Remove</button>
+                <button type="button" class="dashboard-danger-button removeAttribute">Remove</button>
             `;
             document.getElementById('attributeFields').appendChild(attributeField);
         });
@@ -159,5 +133,4 @@
         });
     });
 </script>
-
 @endsection

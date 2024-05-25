@@ -1,5 +1,27 @@
 {{-- Style 1 File --}}
 
+{{-- TEMPORARY SOLUTION --}}
+
+
+<div id="gallery-section" class="global_container">
+    <div class="why_choose_us_style1-content-text">
+        <div class="why_choose_us_style1-content-text-tag">
+            {{-- <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m16.2 19 4.8-7-4.8-7H3l4.8 7L3 19h13.2Z" />
+        </svg> --}}
+        <p>{{$section_tag}}</p>
+    </div>
+    <h2 class="why_choose_us_style1-content-text-title">{{$title}}</h2>
+    <p class="why_choose_us_style1-content-text-description">{{$description}}</p>
+    <x-primary_button path='{{$primary_button_link}}' text="{{$primary_button_label}}"></x-primary_button>
+</div>
+</div>
+
+
+
+{{-- END OF TEMPORARY SOLUTION --}}
+
 
 <section class="history_through_years_style1 global_container">
     <div class="history_through_years_style1-buttons">
@@ -112,22 +134,22 @@
     showYear(currentYear);
 
 
-    // Tilt effect
-    document.body.addEventListener('mousemove', (e) => {
-        const xPercent = (e.clientX / window.innerWidth - 0.5) * 2; // range [-1, 1]
-        const yPercent = (e.clientY / window.innerHeight - 0.5) * 2; // range [-1, 1]
-        const maxTilt = 20; // max tilt in degrees
+//     // Tilt effect
+//     document.body.addEventListener('mousemove', (e) => {
+//         const xPercent = (e.clientX / window.innerWidth - 0.5) * 2; // range [-1, 1]
+//         const yPercent = (e.clientY / window.innerHeight - 0.5) * 2; // range [-1, 1]
+//         const maxTilt = 20; // max tilt in degrees
 
-    document.querySelectorAll('.history_through_years_style1-screens-screen').forEach(screen => {
-        screen.style.transform = `rotateX(${yPercent * maxTilt}deg) rotateY(${xPercent * maxTilt}deg)`;
-    });
-});
+//     document.querySelectorAll('.history_through_years_style1-screens-screen').forEach(screen => {
+//         screen.style.transform = `rotateX(${yPercent * maxTilt}deg) rotateY(${xPercent * maxTilt}deg)`;
+//     });
+// });
 
-document.body.addEventListener('mouseleave', () => {
-    document.querySelectorAll('.history_through_years_style1-screens-screen').forEach(screen => {
-        screen.style.transform = 'rotateX(0deg) rotateY(0deg)';
-    });
-});
+// document.body.addEventListener('mouseleave', () => {
+//     document.querySelectorAll('.history_through_years_style1-screens-screen').forEach(screen => {
+//         screen.style.transform = 'rotateX(0deg) rotateY(0deg)';
+//     });
+// });
 
 </script>
 

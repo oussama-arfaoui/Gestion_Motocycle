@@ -7,7 +7,7 @@
 
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
     <link rel="icon" type="image/png" href="/favicon/favicon.png">
-    <title>{{ $page_title }}</title>
+    <title>Carbon Dashboard | {{$page_title}}</title>
 
     @vite(['resources/css/app.css', 'resources/scss/style.scss', 'resources/js/app.js', 'resources/js/swiper.js'])
 

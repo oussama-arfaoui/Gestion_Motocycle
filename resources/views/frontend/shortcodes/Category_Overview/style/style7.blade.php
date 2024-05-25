@@ -72,7 +72,7 @@
 
 
     </div>
-
+{{-- 
     <div class="category_overview_style7-nodes">
         <div class="category_overview_style7-nodes-node">
             <img src="./icons/icon-{{$node_icon_1}}.png" alt="{{$node_icon_1}}-icon">
@@ -94,5 +94,5 @@
             <h3>{{$node_title_4}}</h3>
             <p>{{$node_description_4}}</p>
         </div>
-    </div>
+    </div> --}}
 </section>

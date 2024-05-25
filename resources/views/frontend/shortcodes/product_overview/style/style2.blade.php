@@ -45,7 +45,7 @@
     </div>
 
     <div class="product_overview_style1-actions">
-        <x-primary_button path='tel: {{$contact_number_1}}' text='{{ $primary_button_label }}'></x-primary_button>
+        <x-primary_button path='tel: {{$contact_number}}' text='{{ $primary_button_label }}'></x-primary_button>
     </div>
 
 </section>

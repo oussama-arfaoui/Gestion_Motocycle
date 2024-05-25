@@ -90,7 +90,7 @@ if (closeDbNotification) {
  */
 
 
-const dropdowns = ["nav-products", "nav-ecommerce", "nav-generator", "nav-projects", "nav-Settings", "nav-Services", "nav-Blogs", "nav-Job", "nav-Carrier", "username"];
+const dropdowns = ["nav-products", "nav-ecommerce", "nav-generator", "nav-projects", "nav-Settings", "nav-Services", "nav-Blogs", "username"];
 
 for (let element of dropdowns) {
     const dropdownButton = document.getElementById(`dropdown-${element}`);
@@ -526,3 +526,5 @@ if (page_delete_button) {
 dashboard_menu_toggle.addEventListener("click", () => {
     dashboard_sidebar.classList.toggle('show-block')
 })
+
+

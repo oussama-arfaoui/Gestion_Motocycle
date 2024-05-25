@@ -54,7 +54,7 @@
             </div>
 
             <!-- Images -->
-            <div class="node-input">
+            <div class="node-file-input">
                 <label for="images" class="form-label">Images</label>
                 @foreach(json_decode($service->images) as $image)
                 <img src="{{ asset('storage/Images/general/' . $image) }}" alt="service Image">
@@ -77,15 +77,15 @@
             <div class="node-input" id="attributeFields">
                 <label for="attributes" class="form-label">Attributes</label>
                 @foreach(json_decode($service->attributes) as $attribute => $value)
-                <div class="attribute">
+                <div class="dashboard-row">
                     <input type="text" name="attributes[name][]" placeholder="Attribute Name" value="{{ $attribute }}"
                         class="form-control">
                     <input type="text" name="attributes[value][]" placeholder="Attribute Value" value="{{ $value }}"
                         class="form-control">
+                    <button type="button" id="addAttribute" class="btn btn-primary mt-3">Add Attribute</button>
                 </div>
                 @endforeach
             </div>
-            <button type="button" id="addAttribute" class="btn btn-primary mt-3">Add Attribute</button>
 
             <button class="dashboard-main-button" type="submit">
                 <x-save-icon />
@@ -99,11 +99,11 @@
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('addAttribute').addEventListener('click', function() {
             var attributeField = document.createElement('div');
-            attributeField.classList.add('attribute');
+            attributeField.classList.add('dashboard-row');
             attributeField.innerHTML = `
                 <input type="text" name="attributes[name][]" placeholder="Attribute Name" class="form-control">
                 <input type="text" name="attributes[value][]" placeholder="Attribute Value" class="form-control">
-                <button type="button" class="btn btn-danger removeAttribute">Remove</button>
+                <button type="button" class="dashboard-danger-button removeAttribute">Remove</button>
             `;
             document.getElementById('attributeFields').appendChild(attributeField);
         });

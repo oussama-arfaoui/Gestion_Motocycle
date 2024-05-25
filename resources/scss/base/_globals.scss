@@ -2,10 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 /// This is the website font (replace with every website)
-@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Ephesis&family=Lexend:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 html {
   box-sizing: border-box;
+}
+
+body{
+  // background-image: url('/public/bgs/global_theme.png');
+  background-size: cover;
+  background-position: center center;
 }
 
 
@@ -15,6 +20,8 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
+
+  scroll-behavior: smooth;
 }
 
 ul {
@@ -47,8 +54,9 @@ a {
 
 
 .website {
-  font-family: "Figtree", sans-serif;
+  font-family: "Rubik", sans-serif;
   font-optical-sizing: auto;
+  font-style: normal;
 
   max-width: 100vw;
   overflow-x: hidden;
