@@ -14,7 +14,7 @@
             </div>
             <h2 class="why_choose_us_style1-content-text-title">{{$title}}</h2>
             <p class="why_choose_us_style1-content-text-description">{{$description}}</p>
-            <x-primary_button path='/contact' text="{{$primary_button_label}}"></x-primary_button>
+            <x-primary_button path='{{$primary_button_link}}' text="{{$primary_button_label}}"></x-primary_button>
         </div>
 
         <div class="why_choose_us_style1-content-nodes">

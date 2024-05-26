@@ -21,7 +21,7 @@
 
         <div class="mission_value_vision_style2-content-nodes">
 
-            <div class="mission_value_vision_style2-content-nodes-node">
+            {{-- <div class="mission_value_vision_style2-content-nodes-node">
                 <img src="./icons/icon-mission.png" alt="icon">
                 <h3>{{ $node_title_1 }}</h3>
                 <p>{{ $node_description_1 }}</p>
@@ -37,8 +37,43 @@
                 <img src="./icons/icon-vision.png" alt="icon">
                 <h3>{{ $node_title_3 }}</h3>
                 <p>{{ $node_description_3 }}</p>
+            </div> --}}
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="./icons/icon-mission.png" alt="icon">
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>{{ $node_title_1 }}</h3>
+                        <p>{{ $node_description_1 }}</p>
+                    </div>
+                </div>
             </div>
 
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="./icons/icon-values.png" alt="icon">
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>{{ $node_title_2 }}</h3>
+                        <p>{{ $node_description_2 }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="./icons/icon-vision.png" alt="icon">
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>{{ $node_title_3 }}</h3>
+                        <p>{{ $node_description_3 }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
