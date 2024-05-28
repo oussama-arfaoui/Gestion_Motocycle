@@ -1,6 +1,6 @@
 <footer class="footer">
     <div class="global_container">
-        <img src="./logos/primary-logo.svg" alt="">
+        <img src="./logos/primary-logo.png" alt="">
         <div class="footer-content">
             <div class="footer-column">
                 <h4>About {{ $company_name }}</h4>
@@ -9,11 +9,14 @@
             <div class="footer-column">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="#introduction">Introduction</a></li>
-                    <li><a href="#about-section">À Propos de Nous</a></li>
-                    <li><a href="#why-us-section">Pourquoi Nous</a></li>
-                    <li><a href="#gallery-section">Gallerie des Projets</a></li>
-                    <li><a href="#contact-section">Contactez-Nous</a></li>
+                    <li><a href="/">Accueil</a></li>
+                    <li><a href="/a-propos">À Propos</a></li>
+                    <li><a href="/nos-domaines">Nos Domaines</a></li>
+                    <li><a href="/nos-realisations">Nos Réalisations</a></li>
+                    <li><a href="/politique-qualite">Politique Qualité</a></li>
+                    <li><a href="/processus-de-fabrication">Processus de Fabrication</a></li>
+                    <li><a href="/carrieres">Carrière</a></li>
+                    <li><a href="/contact">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -71,12 +74,12 @@
                             </svg></a></li>
                 </ul>
                 <div class="hashtag">
-                    <span>#GreenStorageSolutions</span>
-                    <span>#StorageSolutions</span>
-                    <span>#StorageEcologic</span>
-                    <span>#StorageGreenSolutions</span>
-                    <span>#SolutionsGreenStorage</span>
-                    <span>#StorageMaroc</span>
+                    <span>#GlobtenIndustries</span>
+                    <span>#GlobtenMaroc</span>
+                    <span>#Globten</span>
+                    <span>#GlobtenIndustrial</span>
+                    <span>#Globten</span>
+                    <span>#Globten</span>
                 </div>
             </div>
             <div class="footer-column">

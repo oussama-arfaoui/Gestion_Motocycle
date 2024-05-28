@@ -22,9 +22,11 @@
         </div>
 
         <label class="control-label">Style</label>
-        <select name="style" class="form-control">
+        <select name="style">
             <option value="style1">Style 1</option>
             <option value="style2">Style 2</option>
+            <option value="style3">Style 2</option>
+            <option value="style4">Style 2</option>
         </select>
     </div>
 </section>

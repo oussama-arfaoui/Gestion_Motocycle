@@ -14,6 +14,15 @@ function getShortcodeTypes() {
         'name' => 'banner_message',
         'view' => 'frontend.shortcodes.banner_message.admin-config',
     ],
+    'projects' => [
+        'name' => 'projects',
+        'view' => 'frontend.shortcodes.projects.admin-config',
+    ],
+    
+    'careers' => [
+        'name' => 'careers',
+        'view' => 'frontend.shortcodes.careers.admin-config',
+    ],
     
 
 
@@ -179,8 +188,8 @@ function getShortcodeTypes() {
         'name' => 'custom_module',
         'view' => 'frontend.shortcodes.custom_module.admin-config',
     ],
-    
 
+    
     ];
 }
 
@@ -213,6 +222,18 @@ function getShortcodeindex() {
             'name' => 'banner_message',
             'view' => 'frontend.shortcodes.banner_message.index',
             'attributes' => ['title', 'path','style']
+        ],
+        
+        'projects' => [
+            'name' => 'projects',
+            'view' => 'frontend.shortcodes.projects.index',
+            'attributes' => ['title','style']
+        ],
+        
+        'careers' => [
+            'name' => 'careers',
+            'view' => 'frontend.shortcodes.carrers.index',
+            'attributes' => ['title' ,'style']
         ],
         
 

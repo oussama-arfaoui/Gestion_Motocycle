@@ -250,6 +250,40 @@
                 <span>Blog categories</span>
             </a>
         </div>
+        
+        <button id="dropdown-nav-Careers">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 7H4C2.89543 7 2 7.89543 2 9V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19V9C22 7.89543 21.1046 7 20 7Z"  stroke-width="2" stroke-opacity="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 21V5C16 4.46957 15.7893 3.96086 15.4142 3.58579C15.0391 3.21071 14.5304 3 14 3H10C9.46957 3 8.96086 3.21071 8.58579 3.58579C8.21071 3.96086 8 4.46957 8 5V21" stroke-opacity="0.75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                
+                
+            <span>Careers</span>
+
+            <svg id="dropdown-nav-Careers-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </button>
+
+        <div class="dashboard_sidebar__links-innerlink hide" id="dropdown-menu-nav-Careers">
+            <a href="/admin/carrier">
+                <span>Career</span>
+            </a>
+            <a href="/admin/carrier-categories">
+                <span>Carrier Categories</span>
+            </a>
+            <a href="/admin/jobapplication">
+                <span>Job Application</span>
+            </a>
+            <a href="/admin/joboffer">
+                <span>Job Offer</span>
+            </a>
+            <a href="/admin/job-categories">
+                <span>Job Categories</span>
+            </a>
+        </div>
 
 
         <a href="/admin/activity">

@@ -9,6 +9,10 @@
         margin-bottom: 1rem;
     }
 
+    &-title{
+        margin-block: 2rem;
+    }
+
     &-items {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -58,10 +62,24 @@
                 border-top-left-radius: 0;
                 border-top-right-radius: 0;
 
+                background-color: var(--primary-color);
+                height: 36px;
+                border: none;
+
+                cursor: pointer;
+
+                &:hover{
+                    background-color: var(--accent-color);
+                }
+
                 a {
 
                     border-top-left-radius: 0;
                     border-top-right-radius: 0;
+
+                    font-weight: 600;
+                    font-size: 16px;
+                    color: var(--light);
                 }
             }
         }

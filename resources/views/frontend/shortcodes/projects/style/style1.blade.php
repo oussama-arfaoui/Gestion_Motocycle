@@ -2,7 +2,7 @@
 
 <section class="products_list_style1 global_container">
 
-    <h2>{{$title}}</h2>
+    <h2 class="products_list_style1-title">{{$title}}</h2>
     
     <div class="products_list_style1-items">
         @foreach(explode(',', $Projects) as $ProjectsId)

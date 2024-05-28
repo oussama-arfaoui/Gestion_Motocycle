@@ -17,7 +17,7 @@
 
     <div class="product_overview_style1-section global_container">
         <div class="product_overview_style1-section-img">
-            <img src="./bgs/service-overview-1.jpg" alt="">
+            <img src="./blanks/1000x1000.png" alt="">
         </div>
         <div class="product_overview_style1-section-text">
             <h3>{{ $subtitle }}</h3>
@@ -49,12 +49,12 @@
             </div>
         </div>
         <div class="product_overview_style1-section-img">
-            <img src="./bgs/service-overview-2.jpg" alt="">
+            <img src="./blanks/1000x1000.png" alt="">
         </div>
     </div>
 
     <div class="product_overview_style1-actions">
-        <x-primary_button path='tel: {{$contact_number}}' text='{{ $primary_button_label }}'></x-primary_button>
+        <x-primary_button path='tel: {{$contact_number_1}}' text='{{ $primary_button_label }}'></x-primary_button>
 
         <x-primary_button path='/service-categories/5' text='{{ $secondary_button_label }}'></x-primary_button>
 

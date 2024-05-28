@@ -8,19 +8,74 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="m16.2 19 4.8-7-4.8-7H3l4.8 7L3 19h13.2Z" />
                 </svg>
-                <p>{{$section_tag}}</p>
+                <p>1ère étape</p>
             </div>
-            <h2 class="about_overview_style1-content-text-title">{{$title}}</h2>
-            <p class="about_overview_style1-content-text-description">{{$description}}</p>
-            <div class="about_overview_style1-content-text-actions">
-                <x-primary_button path='{{$primary_button_link}}' text="{{$primary_button_label}}"></x-primary_button>
-                <x-secondary_button path='{{$secondary_button_link}}' text="{{$secondary_button_label}}"></x-secondary_button>
-            </div>
+            <h2 class="about_overview_style1-content-text-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, rem.</h2>
+            <p class="about_overview_style1-content-text-description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat delectus at architecto, inventore ea obcaecati dicta excepturi, assumenda quia omnis, odit eveniet mollitia temporibus autem vitae dolorum provident et quasi tempore amet fugit molestiae cumque expedita velit. Deleniti, ipsam explicabo.</p>
         </div>
 
         <div class="about_overview_style1-content-image">
             <img src="./bgs/about_overview/bg_img.png" alt="It seems as if it's passed me by">
         </div>
+
+    </div>
+    <div class="about_overview_style1-content">
+
+        <div class="about_overview_style1-content-image">
+            <img src="./bgs/about_overview/bg_img.png" alt="It seems as if it's passed me by">
+        </div>
+
+        <div class="about_overview_style1-content-text">
+            <div class="about_overview_style1-content-text-tag">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m16.2 19 4.8-7-4.8-7H3l4.8 7L3 19h13.2Z" />
+                </svg>
+                <p>2ème étape</p>
+            </div>
+            <h2 class="about_overview_style1-content-text-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, voluptas?</h2>
+            <p class="about_overview_style1-content-text-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias suscipit, aperiam ullam voluptates repudiandae facilis ipsum quasi in sequi, autem necessitatibus mollitia illo minima fuga nemo quam, consequuntur temporibus modi eum quas reiciendis iure inventore. Blanditiis pariatur ad quo odit?</p>
+        </div>
+
+    </div>
+    <div class="about_overview_style1-content">
+
+        <div class="about_overview_style1-content-text">
+            <div class="about_overview_style1-content-text-tag">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m16.2 19 4.8-7-4.8-7H3l4.8 7L3 19h13.2Z" />
+                </svg>
+                <p>3ème étape</p>
+            </div>
+            <h2 class="about_overview_style1-content-text-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, voluptas.</h2>
+            <p class="about_overview_style1-content-text-description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate repellat nesciunt quod labore necessitatibus dolorem, aliquid alias quibusdam est provident magnam veritatis harum ratione vel velit rem incidunt consectetur? Deserunt animi nobis sapiente? Natus corporis quae optio eveniet nihil at.</p>
+        </div>
+
+        <div class="about_overview_style1-content-image">
+            <img src="./bgs/about_overview/bg_img.png" alt="It seems as if it's passed me by">
+        </div>
+
+    </div>
+    <div class="about_overview_style1-content">
+
+        <div class="about_overview_style1-content-image">
+            <img src="./bgs/about_overview/bg_img.png" alt="It seems as if it's passed me by">
+        </div>
+
+        <div class="about_overview_style1-content-text">
+            <div class="about_overview_style1-content-text-tag">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m16.2 19 4.8-7-4.8-7H3l4.8 7L3 19h13.2Z" />
+                </svg>
+                <p>4ème étape</p>
+            </div>
+            <h2 class="about_overview_style1-content-text-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, recusandae!</h2>
+            <p class="about_overview_style1-content-text-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate illum numquam inventore excepturi temporibus. Eum porro libero culpa eveniet vero optio maiores voluptates! Deserunt impedit recusandae ratione debitis! Vitae maiores assumenda eveniet placeat, natus sunt eius iure corporis mollitia minus.</p>
+        </div>
+
+        
 
     </div>
 

@@ -107,6 +107,8 @@
             line-height: 1.5;
             margin-bottom: 2rem;
 
+            text-align: justify;
+
             width: 90%;
 
             @media (max-width: 1024px) {
@@ -129,6 +131,13 @@
                 flex-direction: row;
                 align-items: center;
                 gap: 1rem;
+                
+                text-align: justify;
+
+                svg{
+                    width: 24px !important;
+                    height: 24px !important;
+                }
             }
         }
     }

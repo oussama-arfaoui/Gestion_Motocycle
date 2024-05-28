@@ -59,12 +59,15 @@
 
     &-screens{
 
+        min-width: 100%;
+
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
 
-        background-color: var(--accent-color);
-        background-image: linear-gradient(356deg, #2c3fbb 0%, var(--accent-color) 74%);
+        // background-color: var(--accent-color);
+        // background-image: linear-gradient(356deg, rgba(255, 255, 255, 0.1) 0%, var(--accent-color) 74%);
 
+        background-color: var(--dark);
 
         color: var(--light);
         padding: 2rem;

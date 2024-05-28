@@ -2,7 +2,7 @@
 
 <section class="products_list_style1 global_container">
 
-    <h2>{{$title}}</h2>
+    <h2 class="products_list_style1-title">{{$title}}</h2>
     
     <div class="products_list_style1-items">
         @foreach(explode(',', $Projects) as $ProjectsId)
@@ -26,7 +26,11 @@
                     
                             <h3>{{ $Projecty->projects_title }}</h3>
                            
-                            <x-primary_button path="{{ route('projects.show', $Projecty->id) }}" text="Filler text"></x-primary_button>
+                            <button class="products_list_style1-items-item-button">
+                            <a href="{{ route('projects.show', $Projecty->id) }}">
+                                Découvrez Plus
+                            </a>
+                        </button>
                         </div>
             
                 @endif
