@@ -19,9 +19,9 @@ function getShortcodeTypes() {
         'view' => 'frontend.shortcodes.projects.admin-config',
     ],
     
-    'careers' => [
-        'name' => 'careers',
-        'view' => 'frontend.shortcodes.careers.admin-config',
+    'carrers' => [
+        'name' => 'carrers',  
+        'view' => 'frontend.shortcodes.carrers.admin-config',  
     ],
     
 
@@ -230,10 +230,10 @@ function getShortcodeindex() {
             'attributes' => ['title','style']
         ],
         
-        'careers' => [
-            'name' => 'careers',
-            'view' => 'frontend.shortcodes.carrers.index',
-            'attributes' => ['title' ,'style']
+        'carrers' => [
+            'name' => 'carrers',
+            'view' => 'frontend.shortcodes.carrers.index', 
+            'attributes' => ['title','carrers','style']      
         ],
         
 
