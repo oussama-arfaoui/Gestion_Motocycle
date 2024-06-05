@@ -15,9 +15,9 @@
                         <h2>{{ $subtitle }}</h2>
                         <p>{{ $description }}</p>
                         <div class="hero_slider_style2-slide-content-actions">
-                            <x-primary_button text='{{$primary_button_label}}' path='{{$primary_button_link}}'>
+                            <x-primary_button text='Découvrir nos Services' path='/contact'>
                             </x-primary_button>
-                            <x-secondary_button text='{{$secondary_button_label}}' path='{{$secondary_button_link}}'>
+                            <x-secondary_button text='Explorer nos Produits' path='{{$secondary_button_link}}'>
                             </x-secondary_button>
                         </div>
                     </div>

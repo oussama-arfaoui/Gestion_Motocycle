@@ -43,6 +43,7 @@ use App\Http\Controllers\JobCategoryController;
 /************************
  * odoo
  ************************/
+Route::get('/products-categories-list', [ProductCategoriesController::class, 'showall'])->name('products-categories.showall');
 Route::get('/projects-categories-list', [ProjectsCategoriesController::class, 'showall'])->name('projects-categories.showall');
 Route::get('/products_list', [OdooIntegrationController::class, 'showProducts']);
 

@@ -1,136 +1,313 @@
-<header id="website-header" class="header global_container">
-        <div class="header__top">
-            <ul class="header__top-info">
-                <li>
-                    <x-whatsapp-icon />
-                    <span>{{$contact_whatsapp_1}}</span>
-                </li>
-                <li>
-                    <x-call-icon />
-                    <span>{{$contact_number_1}}</span>
-                </li>
-            </ul>
-            {{-- Social Icons Bar --}}
-            
-            <div class="header__top-socials">
-            <div class="header__top-socials-icons">
-                {{-- TIKTOK --}}
-                <a href="{{$social_tiktok_link}}">
-                    <svg width="24" height="24" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M18.0132 7.02155C17.0966 6.81921 16.2674 6.33057 15.6446 5.62576C15.0218 4.92095 14.6374 4.0362 14.5466 3.09848V2.69232H11.3744V15.3108C11.375 15.8707 11.2001 16.4166 10.8746 16.8712C10.549 17.3258 10.0891 17.666 9.56023 17.8437C9.03132 18.0214 8.46013 18.0275 7.92758 17.8611C7.39502 17.6948 6.92809 17.3645 6.59294 16.9169C6.29267 16.5208 6.1088 16.0482 6.06213 15.5526C6.01546 15.057 6.10784 14.5582 6.32883 14.1126C6.54982 13.667 6.89061 13.2924 7.31264 13.031C7.73468 12.7697 8.22113 12.6321 8.71699 12.6339C8.99122 12.6323 9.26409 12.6728 9.52616 12.7539V9.52309C9.22119 9.48518 8.91386 9.46975 8.60665 9.47694C7.47503 9.50729 6.37678 9.86826 5.44639 10.5156C4.516 11.163 3.79386 12.0687 3.36839 13.1218C2.94293 14.1749 2.8326 15.3297 3.05093 16.4448C3.26925 17.5599 3.80675 18.5869 4.59761 19.4C5.40814 20.2273 6.44535 20.794 7.57744 21.0281C8.70954 21.2623 9.88542 21.1533 10.9557 20.715C12.0259 20.2767 12.9422 19.529 13.5882 18.5667C14.2341 17.6045 14.5806 16.4711 14.5834 15.3108V8.84925C15.8629 9.76674 17.3971 10.2575 18.9695 10.2523V7.11386C18.6606 7.11514 18.3525 7.0842 18.05 7.02155H18.0132Z" />
-                    </svg>
-                </a>
+<header id="header" class="header">
 
-                {{-- INSTAGRAM --}}
-                <a href="{{$social_instagram_link}}">
-                    <svg width="24" height="24" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M20.1094 8.5123C20.1001 7.81318 19.9697 7.12102 19.7241 6.46676C19.5111 5.9149 19.1858 5.41371 18.7689 4.99522C18.352 4.57673 17.8528 4.25013 17.303 4.0363C16.6597 3.79386 15.98 3.66277 15.293 3.64861C14.4084 3.60892 14.128 3.59784 11.8825 3.59784C9.63712 3.59784 9.34931 3.59784 8.47119 3.64861C7.78446 3.66287 7.10512 3.79396 6.46207 4.0363C5.91226 4.24998 5.41293 4.57653 4.99604 4.99504C4.57915 5.41355 4.25387 5.91482 4.04101 6.46676C3.79903 7.11212 3.66873 7.79425 3.65574 8.48369C3.6162 9.37261 3.60425 9.65415 3.60425 11.9083C3.60425 14.1625 3.60425 14.4505 3.65574 15.3329C3.66953 16.0234 3.79918 16.7046 4.04101 17.3517C4.25423 17.9035 4.57975 18.4045 4.99678 18.8229C5.41381 19.2412 5.91318 19.5676 6.46299 19.7812C7.10428 20.0334 7.78374 20.1739 8.47211 20.1966C9.35759 20.2363 9.63804 20.2483 11.8835 20.2483C14.1289 20.2483 14.4167 20.2483 15.2948 20.1966C15.9818 20.183 16.6615 20.0522 17.3049 19.8098C17.8544 19.5958 18.3536 19.2691 18.7704 18.8506C19.1873 18.4322 19.5127 17.9311 19.7259 17.3794C19.9678 16.7332 20.0974 16.052 20.1112 15.3606C20.1507 14.4726 20.1627 14.1911 20.1627 11.936C20.1609 9.68184 20.1609 9.39569 20.1094 8.5123ZM11.877 16.1711C9.52862 16.1711 7.62616 14.2612 7.62616 11.9037C7.62616 9.54615 9.52862 7.6363 11.877 7.6363C13.0044 7.6363 14.0857 8.0859 14.8829 8.88619C15.68 9.68648 16.1279 10.7719 16.1279 11.9037C16.1279 13.0355 15.68 14.1209 14.8829 14.9212C14.0857 15.7215 13.0044 16.1711 11.877 16.1711ZM16.2971 8.47353C16.1669 8.47365 16.0379 8.448 15.9176 8.39803C15.7973 8.34807 15.688 8.27478 15.5959 8.18235C15.5039 8.08993 15.4308 7.98018 15.3811 7.8594C15.3313 7.73861 15.3057 7.60916 15.3059 7.47845C15.3059 7.34784 15.3315 7.2185 15.3813 7.09783C15.4311 6.97716 15.5041 6.86751 15.5961 6.77516C15.6881 6.6828 15.7973 6.60953 15.9175 6.55955C16.0377 6.50957 16.1665 6.48384 16.2966 6.48384C16.4267 6.48384 16.5556 6.50957 16.6758 6.55955C16.796 6.60953 16.9052 6.6828 16.9972 6.77516C17.0892 6.86751 17.1622 6.97716 17.212 7.09783C17.2618 7.2185 17.2874 7.34784 17.2874 7.47845C17.2874 8.02861 16.8442 8.47353 16.2971 8.47353Z" />
-                        <path
-                            d="M11.877 14.6757C13.402 14.6757 14.6383 13.4346 14.6383 11.9037C14.6383 10.3728 13.402 9.13171 11.877 9.13171C10.352 9.13171 9.11572 10.3728 9.11572 11.9037C9.11572 13.4346 10.352 14.6757 11.877 14.6757Z" />
-                    </svg>
-                </a>
+    <div class="header__info">
+        <div class="global_container">
 
-                {{-- FACEBOOK --}}
-                <a href="{{$social_facebook_link}}">
-                    <svg width="24" height="24" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M11.3074 2.69415C6.2299 2.69415 2.11328 6.82677 2.11328 11.924C2.11328 16.5302 5.47499 20.348 9.87114 21.0431V14.5926H7.5356V11.924H9.87114V9.89046C9.87114 7.57538 11.244 6.29877 13.3432 6.29877C14.3491 6.29877 15.4029 6.47877 15.4029 6.47877V8.74861H14.2406C13.1004 8.74861 12.7437 9.46123 12.7437 10.1914V11.9222H15.2916L14.8843 14.5908H12.7437V21.0412C17.1398 20.3498 20.5015 16.5311 20.5015 11.924C20.5015 6.82677 16.3849 2.69415 11.3074 2.69415Z" />
-                        </svg>
-                    </a>
-                    
+            <div class="header__info-node">
+                <p>Numero Telephone: </p>
+                <h3>{{ $contact_number_1 }}</h3>
+            </div>
 
-                {{-- LINKEDIN --}}
-                <a href="{{$social_linkedin_link}}">
-                    <svg width="24" height="24" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                        d="M5.27848 6.64339C6.38961 6.64339 7.29035 5.73914 7.29035 4.6237C7.29035 3.50825 6.38961 2.604 5.27848 2.604C4.16735 2.604 3.2666 3.50825 3.2666 4.6237C3.2666 5.73914 4.16735 6.64339 5.27848 6.64339Z" />
-                        <path
-                        d="M9.19008 8.17383V19.3791H12.6557V13.8378C12.6557 12.3757 12.9297 10.9597 14.7356 10.9597C16.5167 10.9597 16.5388 12.6314 16.5388 13.9301V19.38H20.0062V13.2351C20.0062 10.2166 19.3589 7.89691 15.8445 7.89691C14.1572 7.89691 13.0263 8.82645 12.5637 9.70614H12.5168V8.17383H9.19008ZM3.54248 8.17383H7.01361V19.3791H3.54248V8.17383Z" />
-                    </svg>
-                </a>
+            <div class="header__info-node">
+                <p>Numero Whatsapp: </p>
+                <h3>{{ $contact_whatsapp_1 }}</h3>
+            </div>
+
+            <div class="header__info-node">
+                <p>Contact Email: </p>
+                <h3>{{ $contact_email_1 }} </h3>
             </div>
         </div>
     </div>
-        
 
-       <div class="header__bottom">
-        <div class="header__bottom-logo">
-            <img src="/blanks/128x64.png" alt="Globten Logo">
+    <div class="global_container">
+
+        <div class="row v-center">
+            <div class="header-item item-left">
+                <div class="logo">
+                    <a href="/accueil">
+                        <img src={{@asset('./logos/highturbo.png')}} alt="">
+                    </a>
+                </div>
+            </div>
+
+            <!-- menu start here -->
+            <div class="header-item item-center">
+                <div class="menu-overlay"></div>
+
+                <nav class="menu">
+                    <div class="mobile-menu-head">
+                        <div class="go-back">
+                            <x-chevron-icon></x-chevron-icon>
+                        </div>
+                        <div class="current-menu-title"></div>
+                        <div class="mobile-menu-close">
+                            <x-add-icon></x-add-icon>
+                        </div>
+                    </div>
+                    <ul class="menu-main">
+                        <li>
+                            <a href="/accueil">Accueil</a>
+                        </li>
+
+                        <li>
+                            <a href="/entreprise">Entreprise</a>
+                        </li>
+
+                        {{--<li class="menu-item-has-children">
+                            <a href="/catalogue">Catalogue <i class="fa fa-angle-down"></i></a>
+                            <div class="sub-menu mega-menu mega-menu-column-4">
+                                <div class="list-item">
+                                    <a href="/product-categories/20" class="title">Fournitures Indutrielles</a>
+                                    <ul>
+                                        <li><a href="/products/45">Bandes Industrielles</a></li>
+                                        <li><a href="/products/46">Chaines Industrielles</a></li>
+                                        <li><a href="/products/47">Courroies Industrielles</a></li>
+                                        <li><a href="/products/48">Coussinets Industriels</a></li>
+                                        <li><a href="/products/49">Embouts Industriels</a></li>
+                                        <li><a href="/products/50">Etancheité Industrielle</a></li>
+                                        <li><a href="/products/51">Huiles Et Graisses</a></li>
+                                        <li><a href="/products/52">Paliers Industriels</a></li>
+                                        <li><a href="/product-categories/21">Découvrir Plus...</a></li>
+                                    </ul>
+                                </div>
+                                <div class="list-item">
+                                    <a href="/product-categories/21" class="title">Matériaux Industrielles</a>
+                                    <ul>
+                                        <li><a href="/products/57">Chariot D'atelier</a></li>
+                                        <li><a href="/products/58">Chariot de magasin</a></li>
+                                        <li><a href="/products/59">Diable à Dossier</a></li>
+                                        <li><a href="/products/60">Diable à Fut</a></li>
+                                        <li><a href="/products/61">Gerbeur Manuel</a></li>
+                                        <li><a href="/products/62">Grue Mobile</a></li>
+                                        <li><a href="/products/63">Palan Et Treuil</a></li>
+                                        <li><a href="/products/64">Remorque à Main</a></li>
+                                        <li><a href="/product-categories/21">Découvrir Plus...</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>--}}
+
+                        <li class="menu-item-has-children">
+                            <a href="/service-categories/5">Services <i class="fas fa-angle-down"></i></a>
+                            {{-- <div class="sub-menu single-column-menu">
+                                <ul>
+                                    <li><a href="/services/4">Maintenance</a></li>
+                                    <li><a href="/services/5">Machinerie</a></li>
+                                </ul>
+                            </div> --}}
+                        </li>
+
+                        {{--<li class="menu-item-has-children">
+                            <a href="/projects-categories-list">Projets <i class="fa fa-angle-down"></i></a>
+                            <div class="sub-menu mega-menu mega-menu-column-4">
+                                <div class="list-item">
+                                    <h4 class="title">Pharmaceutiques</h4>
+                                    <ul>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                    </ul>
+                                    <h4 class="title">Minières</h4>
+                                    <ul>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                    </ul>
+                                </div>
+                                <div class="list-item">
+                                    <h4 class="title">Plasturgie</h4>
+                                    <ul>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                    </ul>
+                                    <h4 class="title">Ceramique</h4>
+                                    <ul>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                    </ul>
+                                </div>
+                                <div class="list-item">
+                                    <h4 class="title">Agro-Alimentaires</h4>
+                                    <ul>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                        <li><a href="#">Project List</a></li>
+                                    </ul>
+                                </div>
+                                <div class="list-item">
+                                    <img src={{@asset('./blanks/500x500.png')}} alt="shop">
+                                </div>
+                            </div>
+                        </li>
+                        --}}
+
+                        <li>
+                            <a href="/actualites">Actualités</a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+            <x-primary_button path="/contact" text="Contactez Nous"></x-primary_button>
+            <!-- menu end here -->
+
+            {{-- <div class="header-item item-right">
+                <div class="mobile-menu-trigger">
+                    <span></span>
+                </div>
+            </div> --}}
         </div>
-        <div class="header__bottom-navigation">
-            <a href="/">Accueil</a>
-            <a href="/a-propos">Entreprise</a>
-            <a href="/nos-domaines">Nos Domaines</a>
-            <a href="/nos-realisations">Nos Réalisations</a>
-            <a href="/politique-qualite">Politique Qualité</a>
-            <a href="/processus-de-fabrication">Processus De Fabrication</a>
-            <a href="/carrier">Carrière</a>
-        </div>
-        <div class="header__bottom-action">
-            <x-primary_button path="/contact" text="Contactez-Nous"></x-primary_button>
-        </div>
-       </div>
+    </div>
 </header>
 
-<div class="mobile-nav">
-    <ul>
-        <a href="#introduction" data-section="introduction">
-            <svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 6.56062L8.00001 2.06062L3.50001 6.56062V13.5L6.00001 13.5V11C6.00001 9.89539 6.89544 8.99996 8.00001 8.99996C9.10458 8.99996 10 9.89539 10 11V13.5L12.5 13.5V6.56062ZM13.78 5.71933L8.70711 0.646409C8.31659 0.255886 7.68342 0.255883 7.2929 0.646409L2.21987 5.71944C2.21974 5.71957 2.21961 5.7197 2.21949 5.71982L0.469676 7.46963L-0.0606537 7.99996L1.00001 9.06062L1.53034 8.53029L2.00001 8.06062V14.25V15H2.75001L6.00001 15H7.50001H8.50001H10L13.25 15H14V14.25V8.06062L14.4697 8.53029L15 9.06062L16.0607 7.99996L15.5303 7.46963L13.7806 5.71993C13.7804 5.71973 13.7802 5.71953 13.78 5.71933ZM8.50001 11V13.5H7.50001V11C7.50001 10.7238 7.72386 10.5 8.00001 10.5C8.27615 10.5 8.50001 10.7238 8.50001 11Z" fill="white"></path></svg>
-            <span>Accueil</span>
-        </a>
-        <a href="#about-section" data-section="about-section">
-            <svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" ><path fill-rule="evenodd" clip-rule="evenodd" d="M8 14.5C11.5899 14.5 14.5 11.5899 14.5 8C14.5 4.41015 11.5899 1.5 8 1.5C4.41015 1.5 1.5 4.41015 1.5 8C1.5 11.5899 4.41015 14.5 8 14.5ZM8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM6.25 7H7H7.74999C8.30227 7 8.74999 7.44772 8.74999 8V11.5V12.25H7.24999V11.5V8.5H7H6.25V7ZM8 6C8.55229 6 9 5.55228 9 5C9 4.44772 8.55229 4 8 4C7.44772 4 7 4.44772 7 5C7 5.55228 7.44772 6 8 6Z" fill="white"></path></svg>
-            <span>À Propos</span>
-        </a>
-        <a href="tel: {{$contact_number_1}}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone-outgoing"><polyline points="23 7 23 1 17 1"></polyline><line x1="16" y1="8" x2="23" y2="1"></line><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-        </a>
-        <a href="#gallery-section" data-section="gallery-section">
-            <svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" ><path fill-rule="evenodd" clip-rule="evenodd" d="M14.5 2.5H1.5V9.18933L2.96966 7.71967L3.18933 7.5H3.49999H6.63001H6.93933L6.96966 7.46967L10.4697 3.96967L11.5303 3.96967L14.5 6.93934V2.5ZM8.00066 8.55999L9.53034 10.0897L10.0607 10.62L9.00001 11.6807L8.46968 11.1503L6.31935 9H3.81065L1.53032 11.2803L1.5 11.3106V12.5C1.5 13.0523 1.94772 13.5 2.5 13.5H13.5C14.0523 13.5 14.5 13.0523 14.5 12.5V9.06066L11 5.56066L8.03032 8.53033L8.00066 8.55999ZM4.05312e-06 10.8107V12.5C4.05312e-06 13.8807 1.11929 15 2.5 15H13.5C14.8807 15 16 13.8807 16 12.5V9.56066L16.5607 9L16.0303 8.46967L16 8.43934V2.5V1H14.5H1.5H4.05312e-06V2.5V10.6893L-0.0606689 10.75L4.05312e-06 10.8107Z" fill="white"></path></svg>
-            <span>Gallerie</span>
-        </a>
-        <a href="#contact-section" data-section="contact-section">
-            <svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" ><path d="M5.5 1H2.87785C1.63626 1 0.694688 2.11946 0.907423 3.34268L1.14841 4.72836C1.96878 9.4455 5.51475 13.2235 10.1705 14.3409L12.5333 14.908C13.7909 15.2098 15 14.2566 15 12.9632V10.5L11.75 8.25L9.25 10.75L5.25 6.75L7.75 4.25L5.5 1Z" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="transparent"></path></svg>
-            <span>Contact</span>
-        </a>
-    </ul>
-</div>
 
-<div class="mobile-logo">
-    <div class="mobile-logo-image">
-        <img src="./logos/primary-logo.png" alt="logo">
+<div class="BottomNav">
+    <div class="BottomNav__left">
+        <a href="/accueil">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                    d="M1.5 7.99999L7.46933 2.02999C7.76267 1.73732 8.23733 1.73732 8.53 2.02999L14.5 7.99999M3 6.49999V13.25C3 13.664 3.336 14 3.75 14H6.5V10.75C6.5 10.336 6.836 9.99999 7.25 9.99999H8.75C9.164 9.99999 9.5 10.336 9.5 10.75V14H12.25C12.664 14 13 13.664 13 13.25V6.49999M5.5 14H11"
+                    stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <p>Accueil</p>
+        </a>
+        <a href="/service-categories/5">
+            <svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="white"
+                    d="M13.5 6H14.25C15.0456 6 15.8087 6.31607 16.3713 6.87868C16.9339 7.44129 17.25 8.20435 17.25 9C17.25 9.79565 16.9339 10.5587 16.3713 11.1213C15.8087 11.6839 15.0456 12 14.25 12H13.5"
+                    stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path stroke="white"
+                    d="M1.5 6H13.5V12.75C13.5 13.5456 13.1839 14.3087 12.6213 14.8713C12.0587 15.4339 11.2956 15.75 10.5 15.75H4.5C3.70435 15.75 2.94129 15.4339 2.37868 14.8713C1.81607 14.3087 1.5 13.5456 1.5 12.75V6Z"
+                    stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path stroke="white" d="M4.5 0.75V3" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path stroke="white" d="M7.5 0.75V3" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path stroke="white" d="M10.5 0.75V3" stroke-opacity="0.75" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+            <p>Services</p>
+        </a>
+    </div>
+    <div class="BottomNav__middle">
+        <button>
+            <a href="tel: {{ $contact_number_1 }}">
+                <x-call-icon />
+            </a>
+        </button>
+    </div>
+
+    <div class="BottomNav__right">
+        <a href="/contact">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M17.5 9.58333C17.5029 10.6832 17.2459 11.7682 16.75 12.75C16.162 13.9264 15.2581 14.916 14.1395 15.6077C13.021 16.2995 11.7319 16.6662 10.4167 16.6667C9.31678 16.6695 8.23176 16.4126 7.25 15.9167L2.5 17.5L4.08333 12.75C3.58744 11.7682 3.33047 10.6832 3.33333 9.58333C3.33384 8.26812 3.70051 6.97904 4.39227 5.86045C5.08402 4.74187 6.07355 3.83797 7.25 3.24999C8.23176 2.7541 9.31678 2.49713 10.4167 2.49999H10.8333C12.5703 2.59582 14.2109 3.32896 15.441 4.55904C16.671 5.78912 17.4042 7.4297 17.5 9.16666V9.58333Z"
+                    stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <p>Contact</p>
+        </a>
+        <a href="/entreprise">
+            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M12.1667 1.66666H5.50001C5.05798 1.66666 4.63406 1.84225 4.3215 2.15481C4.00894 2.46737 3.83334 2.8913 3.83334 3.33332V16.6667C3.83334 17.1087 4.00894 17.5326 4.3215 17.8452C4.63406 18.1577 5.05798 18.3333 5.50001 18.3333H15.5C15.942 18.3333 16.366 18.1577 16.6785 17.8452C16.9911 17.5326 17.1667 17.1087 17.1667 16.6667V6.66666L12.1667 1.66666Z"
+                    stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M12.1667 1.66666V6.66666H17.1667" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M13.8333 10.8333H7.16666" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M13.8333 14.1667H7.16666" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M8.83332 7.5H7.16666" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+            <p>Entreprise</p>
+        </a>
     </div>
 </div>
 
 
-
-{{-- HEADER BECOMES FIXED AFTER SCROLL --}}
+<script>
+    const menu = document.querySelector(".menu");
+    const menuMain = menu.querySelector(".menu-main");
+    const goBack = menu.querySelector(".go-back");
+    const menuTrigger = document.querySelector(".mobile-menu-trigger");
+    const closeMenu = menu.querySelector(".mobile-menu-close");
+    let subMenu;
+    menuMain.addEventListener("click", (e) =>{
+    if(!menu.classList.contains("active")){
+    return;
+    }
+    if(e.target.closest(".menu-item-has-children")){
+    const hasChildren = e.target.closest(".menu-item-has-children");
+    showSubMenu(hasChildren);
+    }
+    });
+    goBack.addEventListener("click",() =>{
+    hideSubMenu();
+    })
+    menuTrigger.addEventListener("click",() =>{
+    toggleMenu();
+    })
+    closeMenu.addEventListener("click",() =>{
+    toggleMenu();
+    })
+    document.querySelector(".menu-overlay").addEventListener("click",() =>{
+    toggleMenu();
+    })
+    function toggleMenu(){
+    menu.classList.toggle("active");
+    document.querySelector(".menu-overlay").classList.toggle("active");
+    }
+    function showSubMenu(hasChildren){
+    subMenu = hasChildren.querySelector(".sub-menu");
+    subMenu.classList.add("active");
+    subMenu.style.animation = "slideLeft 0.5s ease forwards";
+    const menuTitle = hasChildren.querySelector("i").parentNode.childNodes[0].textContent;
+    menu.querySelector(".current-menu-title").innerHTML=menuTitle;
+    menu.querySelector(".mobile-menu-head").classList.add("active");
+    }
+    
+    function hideSubMenu(){
+    subMenu.style.animation = "slideRight 0.5s ease forwards";
+    setTimeout(() =>{
+    subMenu.classList.remove("active");
+    },300);
+    menu.querySelector(".current-menu-title").innerHTML="";
+    menu.querySelector(".mobile-menu-head").classList.remove("active");
+    }
+    
+    window.onresize = function(){
+    if(this.innerWidth >991){
+    if(menu.classList.contains("active")){
+    toggleMenu();
+    }
+    
+    }
+    }
+</script>
 
 <script>
     window.addEventListener('scroll', function() {
-        var header = document.getElementById('website-header');
-        var distanceY = window.pageYOffset || document.documentElement.scrollTop;
-        var triggerHeight = 36 + 72 + 36; // Adjust this value as needed
-        
-        if (distanceY > triggerHeight) {
-            header.classList.add('header--fixed');
+        var header = document.getElementById('header');
+        var scrollPosition = window.scrollY;
+
+        if (scrollPosition > 100) { // Change '100' to the desired scroll amount
+            header.style.position = 'fixed';
         } else {
-            header.classList.remove('header--fixed');
+            header.style.position = 'static'; // Change to 'relative' or 'absolute' as needed
         }
     });
-
-
-// {{-- Notifcation bar disappears --}}
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var notificationBar = document.getElementById('notificationBar');
-        var closeNotificationBtn = document.getElementById('closeNotificationBtn');
-
-        closeNotificationBtn.addEventListener('click', function() {
-            notificationBar.style.display = 'none';
-        });
-    });
-
 </script>

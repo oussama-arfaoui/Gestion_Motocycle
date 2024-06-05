@@ -22,6 +22,45 @@ class ProductCategoriesController extends Controller
         $categories = ProductCategories::all();
         return view('backend.products.product-categories.index', compact('categories'));
     }
+
+
+
+    public function showall()
+    {
+                    // Load all categories along with their associated projects
+        $categories = ProductCategories::with('products')->get();
+            
+              // Fetch the page style from the database based on the name '/projects-categories-list'
+        $pageStyle = Pagesstyle::where('name', '/products-categories-list')->first();
+        
+        if ($pageStyle) {
+            // Define the path to the style file
+            $styleFilePath = resource_path("views/frontend/pages/products/Product_categories_list/{$pageStyle->style}.blade.php");
+            
+            // Check if the style file exists
+            if (File::exists($styleFilePath)) {
+                // Render the view using the dynamic style
+                return view("frontend.pages.products.Product_categories_list.{$pageStyle->style}",compact('categories'));
+            } else {
+                // Default to a fallback style if the specified style file does not exist
+                return view("frontend.pages.products.Product_categories_list.style1",compact('categories'));
+            }
+        } else {
+            // Default to a fallback style if no style is found in the database
+            return view("frontend.pages.products.Product_categories_list.style1", compact('categories'));
+        }
+    }   
+
+
+
+
+
+
+
+
+
+
+
     public function show(ProductCategories $categories)
     {
         $categories = $categories->load('products');

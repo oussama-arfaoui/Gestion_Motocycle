@@ -31,11 +31,18 @@
                 <td>{{ $application->email }}</td>
                 <td>{{ $application->phone }}</td>
                 <td>{{ $application->message }}</td>
-                <td> 
+                <td>
                     <a href="{{ asset('storage/' . $application->cv) }}" target="_blank">
-                        <iframe src="{{ asset('storage/' . $application->cv) }}" width="100" height="100" style="border: none;"></iframe>
-                    </a>                   
-                 </td>                
+                        <div style="width: 100px; height: 100px; border: none;">
+                            <iframe src="{{ asset('storage/' . $application->cv) }}" width="100" height="100" style="border: none;"></iframe>
+                        </div>
+                    </a>
+                    <a href="{{ asset('storage/' . $application->cv) }}" download>
+                        <button class="dashboard-icon-button action-download">
+                            <x-eye-icon />
+                        </button>
+                    </a>                
+                </td>                                        
                 <td>{{ $application->status }}</td>
                 <td class="dashboard_main-table-actions">
 
