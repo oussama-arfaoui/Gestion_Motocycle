@@ -8,25 +8,32 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $table = "products";
 
-    // Define the fillable attributes
+    protected $table = 'products';
+
     protected $fillable = [
-        'product_name',
-        'product_description',
-        'status',
-        'template',
-        'seo_title',
-        'category_id',
-    ];    
+        'variant_id',
+        'name',
+        'SKU',
+        'price',
+        'image',
+        'created_at',
+        'updated_at',
+    ];
 
-    public function categories()
+    /**
+     * Relation vers la variante parente.
+     */
+    public function variant()
     {
-        return $this->belongsToMany(ProductCategories::class, 'product_categories', 'product_id', 'category_id');
+        return $this->belongsTo(ProductVariant::class, 'variant_id');
     }
+
+    /**
+     * Relation pratique pour accéder à la catégorie via la variante.
+     */
     public function category()
     {
-        return $this->belongsTo(ProductCategories::class, 'category_id');
+        return $this->variant->category ?? null;
     }
 }
-?>

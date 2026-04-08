@@ -27,7 +27,7 @@ Laravel has the most extensive and thorough [documentation](https://laravel.com/
 
 You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
 ## Laravel Sponsors
 
@@ -64,69 +64,3 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# Carbon-x CMS documentation
-
-# Documentation For Database
-
-## **Pages Table**
-
-- **Description:** Stores information about pages on the website.
-- **Columns:**
-    - **`id`**: Unique identifier for the page.
-    - **`name`**: Name of the page.
-    - **`content`**: Content of the page.
-    - **`user_id`**: ID of the user who created the page.
-    - **`image`**: Path to the image associated with the page.
-    - **`template`**: Template used for the page.
-    - **`description`**: Description of the page.
-    - **`status`**: Status of the page (e.g., published).
-    - **`created_at`**: Timestamp indicating when the page was created.
-    - **`updated_at`**: Timestamp indicating when the page was last updated.
-
-## **Slugs Table**
-
-- **Description:** Stores information about pages on the website.
-- **Columns:**
-- `id` is defined as an auto-increment primary key.
-- `key` is the unique slug key for each page.
-- `reference_id` stores the ID of the referenced page from the Pages table.
-- `reference_type` specifies the type of the referenced model (e.g., 'App\Models\Page').
-- `prefix` is an optional field that you may use.
-- `created_at` and `updated_at` are timestamps for tracking creation and updates.
-
-# Documentation For Backend
-
-## **Model: Page**
-
-- **Description:** Represents a page on the website.
-- **File Path:** **`C:\MAMP\htdocs\Carbon-X\app\Models\Page.php`**
-
-## **Controller: PageController**
-
-- **Description:** Manages CRUD operations for pages.
-- **File Path:** **`C:\MAMP\htdocs\Carbon-X\app\Http\Controllers\PageController.php`**
-- **Methods:**
-    - **`index`**: Displays a list of all pages.
-    - **`create`**: Displays the form for creating a new page.
-    - **`store`**: Stores a newly created page in the database.
-    - **`show`**: Displays the details of a specific page.
-    - **`edit`**: Displays the form for editing a specific page.
-    - **`update`**: Updates the details of a specific page in the database.
-    - **`destroy`**: Deletes a specific page from the database.
-
-    ## **Model: Slug**
-
-- **Description:** Represents a page on the website.
-- **File Path:** **`C:\MAMP\htdocs\Carbon-X\app\Models\Slug.php`**
-    **Methods:**
-## **Controller: I use PageController too and update store & edit**
-
-
-# Documentation For Frontend
-## **Views: Pages**
-
-- **Description:** Contains views related to managing pages in the dashboard.
-- **File Paths:**
-    - **`C:\MAMP\htdocs\Carbon-X\resources\views\backend\pages\index.blade.php`**: View for displaying a list of all pages.
-    - **`C:\MAMP\htdocs\Carbon-X\resources\views\backend\pages\create.blade.php`**: View for creating a new page.
-    - **`C:\MAMP\htdocs\Carbon-X\resources\views\backend\pages\edit.blade.php`**: View for editing an existing page.

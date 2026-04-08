@@ -3,107 +3,26 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\View;
-use App\Models\ProductCategories;
-use App\Models\Testimonial;
-use App\Models\Brand;
-use App\Models\Projects;
-use App\Models\Carrier;
-
+use Illuminate\Support\Facades\Schema;
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
+     *
+     * @return void
      */
-    public function register(): void
+    public function register()
     {
         //
     }
 
     /**
      * Bootstrap any application services.
+     *
+     * @return void
      */
-    public function boot(): void
+    public function boot()
     {
-            // Retrieve categories data and pass it to the view
-            //for ProductCategories
-            View::composer('frontend.shortcodes.products_categories_list.style.style1', function ($view) {
-                $categorys = ProductCategories::all();
-                $view->with('categorys', $categorys);
-            });
-            View::composer('frontend.shortcodes.products_categories_list.style.style2', function ($view) {
-                $categorys = ProductCategories::all();
-                $view->with('categorys', $categorys);
-            });
-            
-            // Retrieve categories data and pass it to the view
-             //for Testimonial
-            View::composer('frontend.shortcodes.testimonials.style.style1', function ($view) {
-                $testimonialss = Testimonial::all();
-                $view->with('testimonialss', $testimonialss);
-            });   
-            View::composer('frontend.shortcodes.testimonials.style.style2', function ($view) {
-                $testimonialss = Testimonial::all();
-                $view->with('testimonialss', $testimonialss);
-            });    
-            View::composer('frontend.shortcodes.testimonials.style.style3', function ($view) {
-                $testimonialss = Testimonial::all();
-                $view->with('testimonialss', $testimonialss);
-            });    
-
-              //for brands           
-            View::composer('frontend.shortcodes.brands.style.style1', function ($view) {
-                $Brandss = Brand::all();
-                $view->with('Brandss', $Brandss);
-            });   
-            View::composer('frontend.shortcodes.brands.style.style2', function ($view) {
-                $Brandss = Brand::all();
-                $view->with('Brandss', $Brandss);
-            });   
-            View::composer('frontend.shortcodes.brands.style.style3', function ($view) {
-                $Brandss = Brand::all();
-                $view->with('Brandss', $Brandss);
-            });   
-            View::composer('frontend.shortcodes.brands.style.style4', function ($view) {
-                $Brandss = Brand::all();
-                $view->with('Brandss', $Brandss);
-            });   
-            
-        //for Projects  
-        View::composer('frontend.shortcodes.projects.style.style1', function ($view) {
-            $Projectss = Projects::all();
-            $view->with('Projectss', $Projectss);
-        });   
-        View::composer('frontend.shortcodes.projects.style.style2', function ($view) {
-            $Projectss = Projects::all();
-            $view->with('Projectss', $Projectss);
-        });   
-        View::composer('frontend.shortcodes.projects.style.style3', function ($view) {
-            $Projectss = Projects::all();
-            $view->with('Projectss', $Projectss);
-        });   
-        View::composer('frontend.shortcodes.projects.style.style4', function ($view) {
-            $Projectss = Projects::all();
-            $view->with('Projectss', $Projectss);
-        });   
-
-
-        //for Carrier  
-        View::composer('frontend.shortcodes.carrers.style.style1', function ($view) {
-            $Carrerss = Carrier::all();
-            $view->with('Carrerss', $Carrerss);
-        });   
-        View::composer('frontend.shortcodes.carrers.style.style2', function ($view) {
-            $Carrerss = Carrier::all();
-            $view->with('Carrerss', $Carrerss);
-        });   
-        View::composer('frontend.shortcodes.carrers.style.style3', function ($view) {
-            $Carrerss = Carrier::all();
-            $view->with('Carrerss', $Carrerss);
-        });   
-        View::composer('frontend.shortcodes.carrers.style.style4', function ($view) {
-            $Carrerss = Carrier::all();
-            $view->with('Carrerss', $Carrerss);
-        });  
+        Schema::defaultStringLength(191);
     }
 }
