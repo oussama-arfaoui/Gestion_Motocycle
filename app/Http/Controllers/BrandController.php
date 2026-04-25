@@ -28,7 +28,11 @@ public function store(Request $request)
         $request->all(),
         [
             'name' => 'required|max:190',
-            'brand_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'brand_img' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ],
+        [
+            'brand_img.mimes' => 'Format non accepté ! Utilisez seulement : JPG, JPEG, PNG ou WEBP',
+            'brand_img.max'   => 'Image trop grande ! Maximum 2MB autorisé',
         ]
     );
 
@@ -82,7 +86,10 @@ public function update(Request $request, $id)
 
     $request->validate([
         'name' => 'required|string|max:191',
-        'brand_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'brand_img' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+    ], [
+        'brand_img.mimes' => 'Format non accepté ! Utilisez seulement : JPG, JPEG, PNG ou WEBP',
+        'brand_img.max'   => 'Image trop grande ! Maximum 2MB autorisé',
     ]);
 
     if ($request->hasFile('brand_img')) {
@@ -180,7 +187,10 @@ public function update(Request $request, $id)
             $validator = \Validator::make($request->all(), [
                 'name' => 'required|max:190',
                 'quantity' => 'nullable|integer|min:0',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            ], [
+                'image.mimes' => 'Format non accepté ! Utilisez seulement : JPG, JPEG, PNG ou WEBP',
+                'image.max'   => 'Image trop grande ! Maximum 2MB autorisé',
             ]);
 
             if ($validator->fails()) {
@@ -211,6 +221,9 @@ public function update(Request $request, $id)
             }
 
             $family->name = $request->name;
+            if ($request->has('price')) {
+                $family->price = (float)$request->input('price', 0);
+            }
             $family->quantity = $request->quantity ?? $family->quantity ?? 0;
             $family->save();
 
@@ -259,7 +272,10 @@ public function update(Request $request, $id)
                     $validator = \Validator::make($request->all(), [
                         'name' => 'required|max:190',
                         'quantity' => 'required|integer|min:1',
-                        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                        'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+                    ], [
+                        'image.mimes' => 'Format non accepté ! Utilisez seulement : JPG, JPEG, PNG ou WEBP',
+                        'image.max'   => 'Image trop grande ! Maximum 2MB autorisé',
                     ]);
 
                     if ($validator->fails()) {
@@ -268,6 +284,7 @@ public function update(Request $request, $id)
 
                     $variant = new \App\Models\ProductVariant();
                     $variant->name = $request->name;
+                    $variant->price = (float)($request->input('price', 0));
                     $variant->quantity = $request->quantity;
                     $variant->category_id = $parentId;
                     
@@ -346,8 +363,13 @@ public function update(Request $request, $id)
         
         // Add SHOW-ROOM and DEPOT counts
         $families->each(function ($family) {
-            $family->qty_showroom = $family->chassisNumbers->where('location', 'SHOW-ROOM')->count();
-            $family->qty_depot = $family->chassisNumbers->where('location', 'DEPOT')->count();
+            $total = $family->quantity ?? 0;
+            $showroom = $family->chassisNumbers->where('location', 'SHOW-ROOM')->count();
+            $depot = $family->chassisNumbers->where('location', 'DEPOT')->count();
+            
+            $family->qty_showroom = $showroom;
+            // Dépôt = total - showroom (pour garantir total = showroom + depot)
+            $family->qty_depot = $total - $showroom;
         });
         
         return response()->json(['families' => $families]);
@@ -358,7 +380,7 @@ public function update(Request $request, $id)
     {
         $variant = \App\Models\ProductVariant::with('chassisNumbers')->find($familyId);
         if (!$variant) {
-            return response()->json(['products' => []]);
+            return response()->json(['products' => [], 'counters' => null]);
         }
 
         $products = $variant->chassisNumbers->map(function($chassis) use ($variant) {
@@ -367,11 +389,128 @@ public function update(Request $request, $id)
                 'name' => $variant->name,
                 'chassis_number' => $chassis->chassis_number,
                 'date' => $chassis->date ? date('Y-m-d', strtotime($chassis->date)) : null,
-                'location' => $chassis->location
+                'location' => $chassis->location ?: 'DEPOT' // Valeur par défaut
             ];
         });
 
-        return response()->json(['products' => $products]);
+        // Utiliser quantity comme total et répartir selon les châssis réels
+        $total = $variant->quantity ?? 0;
+        $realShowroom = $variant->chassisNumbers->where('location', 'SHOW-ROOM')->count();
+        $realDepot = $variant->chassisNumbers->where('location', 'DEPOT')->count();
+        
+        // Garantir la cohérence : total = showroom + depot
+        if ($realShowroom + $realDepot > 0) {
+            $showroom = $realShowroom;
+            $depot = $realDepot;
+            $total = $showroom + $depot;
+        } else {
+            // Pas de châssis réels, tout en dépôt
+            $showroom = 0;
+            $depot = $total;
+        }
+
+        $counters = [
+            'total' => $total,
+            'depot' => $depot,
+            'showroom' => $showroom
+        ];
+
+        return response()->json(['products' => $products, 'counters' => $counters]);
+    }
+    
+    // Analyser tout le stock par emplacement
+    public function analyzeAllStock()
+    {
+        try {
+            // Récupérer tous les numéros de châssis avec leurs variantes
+            $allChassis = \App\Models\ChassisNumber::with('variant.category.brand')->get();
+            
+            // Utiliser les quantities des variantes comme total global
+            $allVariants = \App\Models\ProductVariant::all();
+            $totalGlobal = $allVariants->sum('quantity');
+            $realShowroomGlobal = $allChassis->where('location', 'SHOW-ROOM')->count();
+            $realDepotGlobal = $allChassis->where('location', 'DEPOT')->count();
+            
+            // Toujours garantir que total = showroom + depot
+            // Si des chassis réels existent, les utiliser et ajuster le total
+            if ($realShowroomGlobal + $realDepotGlobal > 0) {
+                $showroomGlobal = $realShowroomGlobal;
+                $depotGlobal = $realDepotGlobal;
+                $totalGlobal = $showroomGlobal + $depotGlobal;
+            } else {
+                // Pas de chassis réels, tout en dépôt
+                $showroomGlobal = 0;
+                $depotGlobal = $totalGlobal;
+            }
+            
+            $stockAnalysis = [
+                'total_global' => $totalGlobal,
+                'depot_global' => $depotGlobal,
+                'showroom_global' => $showroomGlobal,
+                'by_brand' => [],
+                'by_family' => [],
+                'details' => []
+            ];
+            
+            // Analyser par marque — inclure toutes les marques (avec ou sans chassis)
+            $allBrands = \App\Models\Brand::with(['productCategories.variants'])->get();
+            foreach ($allBrands as $brand) {
+                $brandVariants = \App\Models\ProductVariant::whereHas('category', function($q) use ($brand) {
+                    $q->where('brand_id', $brand->id);
+                })->get();
+                $brandTotal = $brandVariants->sum('quantity');
+                $brandVariantIds = $brandVariants->pluck('id');
+                $brandChassis = $allChassis->filter(fn($c) => $brandVariantIds->contains($c->variant_id ?? null));
+                $brandShowroom = $brandChassis->where('location', 'SHOW-ROOM')->count();
+                $brandDepot    = $brandChassis->where('location', 'DEPOT')->count();
+                // Garantir la cohérence : total = showroom + depot
+                if ($brandShowroom + $brandDepot > 0) {
+                    $brandTotal = $brandShowroom + $brandDepot;
+                } else {
+                    $brandDepot = $brandTotal;
+                }
+                $stockAnalysis['by_brand'][$brand->name] = [
+                    'total'   => $brandTotal,
+                    'depot'   => $brandDepot,
+                    'showroom'=> $brandShowroom,
+                ];
+            }
+
+            // Analyser par famille — inclure toutes les variantes (avec ou sans chassis)
+            foreach ($allVariants as $variant) {
+                $familyName    = $variant->name ?? 'Non assigné';
+                $familyTotal   = $variant->quantity ?? 0;
+                $familyChassis = $allChassis->where('variant_id', $variant->id);
+                $familyShowroom= $familyChassis->where('location', 'SHOW-ROOM')->count();
+                $familyDepot   = $familyChassis->where('location', 'DEPOT')->count();
+                // Garantir la cohérence : total = showroom + depot
+                if ($familyShowroom + $familyDepot > 0) {
+                    $familyTotal = $familyShowroom + $familyDepot;
+                } else {
+                    $familyDepot = $familyTotal;
+                }
+                $stockAnalysis['by_family'][$familyName] = [
+                    'total'   => $familyTotal,
+                    'depot'   => $familyDepot,
+                    'showroom'=> $familyShowroom,
+                ];
+            }
+            
+            // Détails pour debug
+            $stockAnalysis['details'] = $allChassis->take(10)->map(function($chassis) {
+                return [
+                    'chassis_number' => $chassis->chassis_number,
+                    'location' => $chassis->location,
+                    'brand' => $chassis->variant->category->brand->name ?? 'N/A',
+                    'family' => $chassis->variant->name ?? 'N/A',
+                ];
+            });
+            
+            return response()->json(['success' => true, 'analysis' => $stockAnalysis]);
+            
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
     }
     
     // Edit Chassis Number

@@ -218,9 +218,97 @@ function pixelSourceCode($platform, $pixelId)
         return sprintf($script, $pixelId, $pixelId);
     }
 
+}
+/**
+ * Check if the current user can create a store based on their plan's max_stores limit.
+ * Returns true if creation is allowed, false if the limit is reached.
+ */
+function canCreateStore()
+{
+    try {
+        $user = \Auth::user();
+        if (!$user) {
+            return false;
+        }
 
+        // Get the super admin (creator)
+        $creator = null;
+        if ($user->type == 'super admin') {
+            $creator = $user;
+        } else {
+            $creatorId = $user->creatorId();
+            if ($creatorId) {
+                $creator = \App\Models\User::find($creatorId);
+            }
+        }
 
+        if (!$creator || $creator->type != 'super admin') {
+            return false;
+        }
 
+        // Get the plan's max_stores limit
+        $plan = \App\Models\Plan::find($creator->plan);
+        if (!$plan) {
+            return true; // No plan found, allow by default
+        }
+
+        // -1 means unlimited
+        if ($plan->max_stores == -1) {
+            return true;
+        }
+
+        // Count stores created by super admin
+        $totalStores = \App\Models\Store::where('created_by', $creator->id)->count();
+
+        // Allow creation only if under the plan limit
+        return $totalStores < $plan->max_stores;
+
+    } catch (\Exception $e) {
+        \Log::error('Error in canCreateStore: ' . $e->getMessage());
+        return true;
+    }
+}
+
+/**
+ * Get the store creation message for when limit is reached
+ */
+function getStoreCreationMessage()
+{
+    return __('Your store creation limit is reached. Please upgrade your plan to create more stores.');
+}
+
+/**
+ * Get the current super admin's store count
+ */
+function getSuperAdminStoreCount()
+{
+    try {
+        $user = \Auth::user();
+        if (!$user) {
+            return 0;
+        }
+
+        // Get the super admin (creator)
+        $creator = null;
+        if ($user->type == 'super admin') {
+            $creator = $user;
+        } else {
+            $creatorId = $user->creatorId();
+            if ($creatorId) {
+                $creator = \App\Models\User::find($creatorId);
+            }
+        }
+
+        if (!$creator || $creator->type != 'super admin') {
+            return 0;
+        }
+
+        return \App\Models\Store::where('created_by', $creator->id)->count();
+        
+    } catch (\Exception $e) {
+        \Log::error('Error in getSuperAdminStoreCount: ' . $e->getMessage());
+        return 0;
+    }
 }
 
 ?>

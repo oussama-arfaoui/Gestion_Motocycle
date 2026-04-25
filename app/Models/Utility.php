@@ -623,236 +623,231 @@ class Utility extends Model
         $arr = [
             'theme1' => [
                 'theme1-v1' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme1/Home.png')),
-                    'color' => '202126',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme1/Home.svg')),
+                    'color' => 'FF6B6B',
                 ],
                 'theme1-v2' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme1/Home-1.png')),
-                    'color' => '698CA6',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme1/Home-1.svg')),
+                    'color' => 'FF8E53',
                 ],
                 'theme1-v3' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme1/Home-2.png')),
-                    'color' => '798B4D',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme1/Home-2.svg')),
+                    'color' => '4ECDC4',
                 ],
                 'theme1-v4' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme1/Home-3.png')),
-                    'color' => '9F864F',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme1/Home-3.svg')),
+                    'color' => 'FF6B9D',
                 ],
                 'theme1-v5' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme1/Home-4.png')),
-                    'color' => '39777D',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme1/Home-4.svg')),
+                    'color' => 'C44569',
                 ],
             ],
 
             'theme2' => [
                 'theme2-v1' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme2/Home.png')),
-                    'color' => 'A96332',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme2/Home.svg')),
+                    'color' => '2C3E50',
                 ],
                 'theme2-v2' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme2/Home-1.png')),
-                    'color' => '327BA9',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme2/Home-1.svg')),
+                    'color' => '3498DB',
                 ],
                 'theme2-v3' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme2/Home-2.png')),
-                    'color' => '938A26',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme2/Home-2.svg')),
+                    'color' => '34495E',
                 ],
                 'theme2-v4' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme2/Home-3.png')),
-                    'color' => '0F8076',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme2/Home-3.svg')),
+                    'color' => '2980B9',
                 ],
                 'theme2-v5' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme2/Home-4.png')),
-                    'color' => 'D98005',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme2/Home-4.svg')),
+                    'color' => '1ABC9C',
                 ],
             ],
 
             'theme3' => [
                 'theme3-v1' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme3/Home.png')),
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme3/Home.svg')),
                     'color' => 'D6B29A',
                 ],
                 'theme3-v2' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme3/Home-1.png')),
-                    'color' => 'CBD69A',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme3/Home-1.svg')),
+                    'color' => '8B7355',
                 ],
                 'theme3-v3' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme3/Home-2.png')),
-                    'color' => '87CEEB',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme3/Home-2.svg')),
+                    'color' => 'A0826D',
                 ],
                 'theme3-v4' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme3/Home-3.png')),
-                    'color' => 'FD787A',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme3/Home-3.svg')),
+                    'color' => 'CD853F',
                 ],
                 'theme3-v5' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme3/Home-4.png')),
-                    'color' => 'FDCA78',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme3/Home-4.svg')),
+                    'color' => 'DEB887',
                 ],
             ],
 
             'theme4' => [
                 'theme4-v1' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme4/Home.png')),
-                    'color' => '203D3E',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme4/Home.svg')),
+                    'color' => '1a1a1a',
                 ],
                 'theme4-v2' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme4/Home-1.png')),
-                    'color' => '20293E',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme4/Home-1.svg')),
+                    'color' => '434343',
                 ],
                 'theme4-v3' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme4/Home-2.png')),
-                    'color' => '3E2021',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme4/Home-2.svg')),
+                    'color' => '2d2d2d',
                 ],
                 'theme4-v4' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme4/Home-3.png')),
-                    'color' => '3D203E',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme4/Home-3.svg')),
+                    'color' => '404040',
                 ],
                 'theme4-v5' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme4/Home-4.png')),
-                    'color' => '3E3720',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme4/Home-4.svg')),
+                    'color' => '555555',
                 ],
             ],
 
             'theme5' => [
                 'theme5-v1' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme5/Home.png')),
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme5/Home.svg')),
                     'color' => 'FF6B31',
                 ],
                 'theme5-v2' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme5/Home-1.png')),
-                    'color' => '4DA1A9',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme5/Home-1.svg')),
+                    'color' => 'FFA500',
                 ],
                 'theme5-v3' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme5/Home-2.png')),
-                    'color' => 'C1BAA1',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme5/Home-2.svg')),
+                    'color' => 'FF8C42',
                 ],
                 'theme5-v4' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme5/Home-3.png')),
-                    'color' => 'FF6666',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme5/Home-3.svg')),
+                    'color' => 'FF7F50',
                 ],
                 'theme5-v5' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme5/Home-4.png')),
-                    'color' => '6983D9',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme5/Home-4.svg')),
+                    'color' => 'FF6347',
                 ],
             ],
 
             'theme6' => [
                 'theme6-v1' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme6/Home.png')),
-                    'color' => 'A8B626',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme6/Home.svg')),
+                    'color' => '27AE60',
                 ],
                 'theme6-v2' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme6/Home-1.png')),
-                    'color' => '6B4226',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme6/Home-1.svg')),
+                    'color' => '2ECC71',
                 ],
                 'theme6-v3' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme6/Home-2.png')),
-                    'color' => 'DB7093',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme6/Home-2.svg')),
+                    'color' => '52C77E',
                 ],
                 'theme6-v4' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme6/Home-3.png')),
-                    'color' => 'A2B8BF',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme6/Home-3.svg')),
+                    'color' => '16A085',
                 ],
                 'theme6-v5' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme6/Home-4.png')),
-                    'color' => 'FEA700',
-
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme6/Home-4.svg')),
+                    'color' => '1ABC9C',
                 ],
             ],
 
             'theme7' => [
                 'theme7-v1' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme7/Home.png')),
-                    'color' => 'A23D22',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme7/Home.svg')),
+                    'color' => 'E74C3C',
                 ],
                 'theme7-v2' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme7/Home-1.png')),
-                    'color' => 'EA8E40',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme7/Home-1.svg')),
+                    'color' => 'C0392B',
                 ],
                 'theme7-v3' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme7/Home-2.png')),
-                    'color' => 'AD7842',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme7/Home-2.svg')),
+                    'color' => 'FF6B6B',
                 ],
                 'theme7-v4' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme7/Home-3.png')),
-                    'color' => 'A5B68D',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme7/Home-3.svg')),
+                    'color' => 'E74C3C',
                 ],
                 'theme7-v5' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme7/Home-4.png')),
-                    'color' => 'EF5A6F',
-
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme7/Home-4.svg')),
+                    'color' => 'A93226',
                 ],
             ],
 
             'theme8' => [
                 'theme8-v1' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme8/Home.png')),
-                    'color' => 'fea05e',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme8/Home.svg')),
+                    'color' => '3498DB',
                 ],
                 'theme8-v2' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme8/Home-1.png')),
-                    'color' => 'fec65e',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme8/Home-1.svg')),
+                    'color' => '2980B9',
                 ],
                 'theme8-v3' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme8/Home-2.png')),
-                    'color' => 'fe5e61',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme8/Home-2.svg')),
+                    'color' => '5DADE2',
                 ],
                 'theme8-v4' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme8/Home-3.png')),
-                    'color' => 'ca8c80',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme8/Home-3.svg')),
+                    'color' => '1F618D',
                 ],
                 'theme8-v5' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme8/Home-4.png')),
-                    'color' => 'c9a65b',
-
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme8/Home-4.svg')),
+                    'color' => '154360',
                 ],
             ],
 
             'theme9' => [
                 'theme9-v1' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme9/Home.png')),
-                    'color' => '9E9E8C',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme9/Home.svg')),
+                    'color' => '9B59B6',
                 ],
                 'theme9-v2' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme9/Home-1.png')),
-                    'color' => 'FF7F3E',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme9/Home-1.svg')),
+                    'color' => '8E44AD',
                 ],
                 'theme9-v3' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme9/Home-2.png')),
-                    'color' => '387478',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme9/Home-2.svg')),
+                    'color' => 'BB8FCE',
                 ],
                 'theme9-v4' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme9/Home-3.png')),
-                    'color' => '798645',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme9/Home-3.svg')),
+                    'color' => '7D3C98',
                 ],
                 'theme9-v5' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme9/Home-4.png')),
-                    'color' => '859F3D',
-
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme9/Home-4.svg')),
+                    'color' => '6C3483',
                 ],
             ],
 
             'theme10' => [
                 'theme10-v1' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme10/Home.png')),
-                    'color' => '333333',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme10/Home.svg')),
+                    'color' => 'F39C12',
                 ],
                 'theme10-v2' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme10/Home-1.png')),
-                    'color' => '007BFF',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme10/Home-1.svg')),
+                    'color' => 'F1C40F',
                 ],
                 'theme10-v3' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme10/Home-2.png')),
-                    'color' => 'FFC107',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme10/Home-2.svg')),
+                    'color' => 'F4D03F',
                 ],
                 'theme10-v4' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme10/Home-3.png')),
-                    'color' => '17C3B2',
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme10/Home-3.svg')),
+                    'color' => 'D68910',
                 ],
                 'theme10-v5' => [
-                    'img_path' => asset(Storage::url('uploads/store_theme/theme10/Home-4.png')),
-                    'color' => 'E63946',
-
+                    'img_path' => asset(Storage::url('uploads/store_theme/theme10/Home-4.svg')),
+                    'color' => 'B7950B',
                 ],
                 // 'theme10-v6' => [
                 //     'img_path' => asset(Storage::url('uploads/store_theme/theme10/Home-5.png')),

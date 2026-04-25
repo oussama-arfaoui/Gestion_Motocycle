@@ -305,6 +305,7 @@ Route::group(['middleware' => ['verified']], function () {
         Route::get('/brands/{brandId}/models', [BrandController::class, 'getModels']);
         Route::get('/models/{modelId}/families', [BrandController::class, 'getFamilies']);
         Route::get('/families/{familyId}/products', [BrandController::class, 'getProducts']);
+        Route::get('/stock/analyze', [BrandController::class, 'analyzeAllStock']);
         
         // 🔹 Edit and Delete routes for hierarchy items
         Route::get('/models/{id}/edit', [BrandController::class, 'editModel'])->name('models.edit');
@@ -719,6 +720,19 @@ Route::get('/config-cache', function() {
 
 //==================================== Pos Routes ====================================//
 Route::middleware(['auth', 'XSS'])->group(function () {
+    // Routes spécifiques AVANT Route::resource pour éviter la capture par GET /pos/{pos}
+    Route::get('printview/pos', [PosController::class, 'printView'])->name('pos.printview');
+    Route::get('pos/data/store', [PosController::class, 'store'])->name('pos.data.store');
+
+    // POS Hierarchy Routes
+    Route::get('pos/brands/{brandId}/models', [PosController::class, 'getPosModels'])->name('pos.brands.models');
+    Route::get('pos/models/{modelId}/families', [PosController::class, 'getPosFamilies'])->name('pos.models.families');
+    Route::get('pos/families/{familyId}/chassis', [PosController::class, 'getPosChassis'])->name('pos.families.chassis');
+    Route::post('pos/add-to-cart', [PosController::class, 'addToPosCart'])->name('pos.add.to.cart');
+    Route::get('pos/search-chassis', [PosController::class, 'searchChassis'])->name('pos.search.chassis');
+    Route::post('pos/create-order', [ChassisOrderController::class, 'store'])->name('pos.create.order');
+
+    // Resource route en dernier (crée GET /pos/{pos} qui capture tout)
     Route::resource('pos', PosController::class)->middleware(['verified']);
     Route::post('/cartdiscount', [PosController::class, 'cartdiscount'])->name('cartdiscount');
     Route::get('product-categories', [ProductCategorieController::class, 'getProductCategories'])->name('product.categories');
@@ -727,16 +741,6 @@ Route::middleware(['auth', 'XSS'])->group(function () {
     Route::patch('update-cart', [ProductController::class, 'updateCart']);
     Route::delete('remove-from-cart', [ProductController::class, 'removeFromCart']);
     Route::post('empty-cart', [ProductController::class, 'emptyCart']);
-    Route::get('printview/pos', [PosController::class, 'printView'])->name('pos.printview');
-    Route::get('pos/data/store', [PosController::class, 'store'])->name('pos.data.store');
-    
-    // POS Hierarchy Routes
-    Route::get('pos/brands/{brandId}/models', [PosController::class, 'getPosModels'])->name('pos.brands.models');
-    Route::get('pos/models/{modelId}/families', [PosController::class, 'getPosFamilies'])->name('pos.models.families');
-    Route::get('pos/families/{familyId}/chassis', [PosController::class, 'getPosChassis'])->name('pos.families.chassis');
-    Route::post('pos/add-to-cart', [PosController::class, 'addToPosCart'])->name('pos.add.to.cart');
-    Route::get('pos/search-chassis', [PosController::class, 'searchChassis'])->name('pos.search.chassis');
-    Route::post('pos/create-order', [ChassisOrderController::class, 'store'])->name('pos.create.order');
     
     // Chassis Orders Routes
     Route::get('chassis-orders', [ChassisOrderController::class, 'index'])->name('chassis-orders.index');
@@ -750,6 +754,7 @@ Route::middleware(['auth', 'XSS'])->group(function () {
     //variant
     Route::get('pos-productVariant/{id}/{session}', [ProductController::class, 'productVariant']);
     Route::get('addToCartVariant/{id}/{session}/{variation_id?}', [ProductController::class, 'addToCartVariant'])->name('addToCartVariant');
+    Route::get('get-products-variant-quantity', [ProductController::class, 'getVariantQuantity'])->name('get.products.variant.quantity');
 });
 
 Route::get('express-checkout/create/{id}/',[ExpresscheckoutController::class,'create'])->name('expresscheckout.create')->middleware(['auth','XSS']);

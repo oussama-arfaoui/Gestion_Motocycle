@@ -226,25 +226,24 @@ public function update(Request $request, ProductCategorie $productCategorie)
         }
     }
     public function getProductCategories(){
-        $user = \Auth::user()->current_store;
-        $productCategory = ProductCategorie::where('store_id',$user)->get();
-        $html = '<div class="mr-2 zoom-in cat-tab-item ">
-                    <div class="card rounded-10 card-stats mb-0 cat-active overflow-hidden" data-id="0">
-                    <div class="category-select" data-cat-id="0">
-                        <button type="button" class="btn tab-btns btn-primary">'.__("All Categories").'</button>
+        // Récupérer toutes les marques pour les utiliser comme filtres
+        $brands = \App\Models\Brand::orderBy('name')->get();
+        
+        $html = '<div class="mr-2 zoom-in cat-tab-item cat-active">
+                    <div class="card rounded-10 card-stats mb-0 overflow-hidden" data-id="0" data-cat-id="0">
+                    <div class="brand-filter-btn" data-brand-id="0">
+                        <button type="button" class="btn tab-btns btn-primary">'.__("Toutes les catégories").'</button>
                     </div>
                     </div>
                 </div>';
-        foreach($productCategory as $key => $cat){
-            $dcls = 'category-select';
-            $html .= ' <div class="mr-2 zoom-in cat-tab-item cat-list-btn">
-            <div class="card rounded-10 card-stats mb-0 overflow-hidden " data-id="'.$cat->id.'">
-               <div class="'.$dcls.'" data-cat-id="'.$cat->id.'">
-                  <button type="button" class="btn tab-btns ">'.$cat->name.'</button>
+        foreach($brands as $brand){
+            $html .= '<div class="mr-2 zoom-in cat-tab-item cat-list-btn">
+            <div class="card rounded-10 card-stats mb-0 overflow-hidden" data-id="'.$brand->id.'" data-cat-id="'.$brand->id.'">
+               <div class="brand-filter-btn" data-brand-id="'.$brand->id.'">
+                  <button type="button" class="btn tab-btns">'.$brand->name.'</button>
                </div>
             </div>
          </div>';
-
         }
         return Response($html);
     }

@@ -143,6 +143,7 @@ $logo = \App\Models\Utility::get_file('uploads/logo');
         </div>
     </div>
 
+    @include('partials.store-limit-overlay')
     @include('partials.admin.footer')
     @if ($settings['enable_cookie'] == 'on')
         @include('layouts.cookie_consent')

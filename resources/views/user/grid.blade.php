@@ -22,8 +22,13 @@
     <a href="{{ route('store-resource.index') }}" class="btn btn-sm btn-primary btn-icon" data-bs-toggle="tooltip"
         data-bs-placement="top" title="{{ __('List View') }}"><i class="fas fa-list"></i></a>
     @can('Create Store')
-        <a href="#"  data-size="md" data-url="{{ route('store-resource.create') }}" data-ajax-popup="true" data-title="{{__('Create New Store')}}"  class="btn btn-sm btn-primary btn-icon" data-bs-toggle="tooltip"
-            data-bs-placement="top" title="{{ __('Create New Store') }}"><i class="ti ti-plus"></i></a>
+        @if(canCreateStore())
+            <a href="#"  data-size="md" data-url="{{ route('store-resource.create') }}" data-ajax-popup="true" data-title="{{__('Create New Store')}}"  class="btn btn-sm btn-primary btn-icon" data-bs-toggle="tooltip"
+                data-bs-placement="top" title="{{ __('Create New Store') }}"><i class="ti ti-plus"></i></a>
+        @else
+            <a href="{{ route('plans.index') }}" class="btn btn-sm btn-secondary btn-icon disabled" style="opacity:0.6;cursor:not-allowed;" data-bs-toggle="tooltip"
+                data-bs-placement="top" title="{{ __('Veuillez améliorer votre plan pour créer plus de magasins') }}"><i class="ti ti-lock"></i> {{ __('Créer un magasin') }}</a>
+        @endif
     @endcan
 </div>
 @endsection
@@ -31,7 +36,7 @@
 @section('filter')
 @endsection
 @section('content')
-    @if(\Auth::user()->type = 'super admin')
+    @if(\Auth::user()->type == 'super admin')
         <div class="row">
             @foreach($users as $user)
             <div class="col-md-4 col-xxl-3 col-sm-6 col-12">

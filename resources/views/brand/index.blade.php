@@ -13,16 +13,17 @@ $brand_logo = asset('storage/uploads/brand_image/');
 @endsection
 
 @section('action-btn')
-<div class="pr-2 action-btn-wrapper" id="main-add-btn">
-        <a href="#" class="btn btn-sm btn-icon  btn-primary"
-            data-ajax-popup="true"
-            data-url="{{ route('brands.create') }}"
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            title="{{ __('Create') }}"
-            data-title="{{ __('Ajouter une marque') }}">
-            <i data-feather="plus"></i>
-        </a>
+<div class="d-flex gap-2 align-items-center" id="main-add-btn">
+    <button class="btn btn-info" onclick="analyzeAllStock()">
+        <i class="ti ti-chart-bar me-1"></i> {{ __('Analyser Stock') }}
+    </button>
+    <a href="#" class="btn btn-primary"
+       data-ajax-popup="true"
+       data-size="md"
+       data-url="{{ route('brands.create') }}"
+       data-title="{{ __('Ajouter une marque') }}">
+        <i class="ti ti-plus me-1"></i> {{ __('Créer une marque') }}
+    </a>
 </div>
 @endsection
 
@@ -170,6 +171,20 @@ $brand_logo = asset('storage/uploads/brand_image/');
                         <input type="text" class="form-control" id="itemName" name="name" required>
                     </div>
                     
+                    <div id="priceField" class="mb-3" style="display: none;">
+                        <label for="itemPrice" class="form-label fw-semibold">
+                            {{ __('Prix de vente') }} <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-primary text-white">
+                                <i class="ti ti-currency-dirham me-1"></i> MAD
+                            </span>
+                            <input type="number" class="form-control" id="itemPrice" name="price"
+                                   min="0" step="1" placeholder="{{ __('Ex: 35000') }}">
+                        </div>
+                        <small class="text-muted">{{ __('Saisissez le prix catalogue de cette famille de produit') }}</small>
+                    </div>
+
                     <div id="quantityField" class="mb-3" style="display: none;">
                         <label for="quantity" class="form-label">{{ __('Quantité') }}</label>
                         <input type="number" class="form-control" id="quantity" name="quantity" min="1">
@@ -299,6 +314,30 @@ $brand_logo = asset('storage/uploads/brand_image/');
                 <button type="button" class="btn btn-primary" onclick="saveScannedChassis()">
                     <i class="ti ti-check me-2"></i>{{ __('Enregistrer') }}
                 </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stock Analysis Modal -->
+<div class="modal fade" id="stockAnalysisModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ __('Analyse Complète du Stock') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="stockAnalysisContent">
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">{{ __('Analyse en cours...') }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Fermer') }}</button>
             </div>
         </div>
     </div>
@@ -1087,7 +1126,31 @@ function loadProducts(familyId) {
             console.log('Products data:', data);
             const container = document.getElementById('products-level');
             if (data.products && data.products.length > 0) {
+                // Afficher les compteurs de manière simple
+                let countersHtml = '';
+                if (data.counters) {
+                    countersHtml = `
+                        <div class="alert alert-info mb-3">
+                            <div class="row text-center">
+                                <div class="col-md-4">
+                                    <h5 class="mb-0">${data.counters.total}</h5>
+                                    <small class="text-muted">{{ __('Quantité totale') }}</small>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5 class="mb-0 text-warning">${data.counters.showroom}</h5>
+                                    <small class="text-muted">{{ __('Show Room') }}</small>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5 class="mb-0 text-info">${data.counters.depot}</h5>
+                                    <small class="text-muted">{{ __('Dépôt') }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
                 let html = '<div class="mb-3"><button class="btn btn-primary btn-sm" onclick="showAddModal(\'chassis\', ' + familyId + ')"><i class="ti ti-plus me-2"></i>{{ __("Ajouter des numéros de châssis") }}</button></div>';
+                html += countersHtml;
                 html += '<div class="list-group">';
                 data.products.forEach(product => {
                     html += `
@@ -1265,6 +1328,7 @@ function showAddModal(type, parentId, itemId = null) {
             break;
         case 'family':
             nameField.style.display = 'block';
+            document.getElementById('priceField').style.display = 'block';
             quantityField.style.display = 'block';
             imageField.style.display = 'block';
             chassisField.style.display = 'none';
@@ -1273,16 +1337,12 @@ function showAddModal(type, parentId, itemId = null) {
                 fetch(`/families/${itemId}/edit`, {
                     headers: { 'Accept': 'application/json' }
                 })
-                    .then(response => {
-                        console.log('Edit family response status:', response.status);
-                        return response.json();
-                    })
+                    .then(response => response.json())
                     .then(data => {
-                        console.log('Edit family data:', data);
                         if (data.family) {
                             document.getElementById('itemName').value = data.family.name;
+                            document.getElementById('itemPrice').value = data.family.price || '';
                             document.getElementById('quantity').value = data.family.quantity;
-                            // Show existing image if available
                             if (data.family.image) {
                                 const img = imagePreview.querySelector('img');
                                 img.src = `{{ asset('storage/uploads/family_image') }}/${data.family.image}`;
@@ -1379,6 +1439,394 @@ function deleteFamily(id) {
             showNotification('{{ __("Erreur lors de la suppression") }}', 'danger');
         });
     }
+}
+
+// Chassis Functions
+function showChassisInputs() {
+    const container = document.getElementById('chassisInputsContainer');
+    container.style.display = 'block';
+    
+    // Add first row if empty
+    const numbersContainer = document.getElementById('chassisNumbersContainer');
+    if (numbersContainer.children.length === 0) {
+        addChassisInput();
+    }
+}
+
+function showScanModal() {
+    const scanModal = new bootstrap.Modal(document.getElementById('scanModal'));
+    scannedChassisNumbers = [];
+    updateScannedList();
+    scanModal.show();
+    
+    // Focus on scan input
+    setTimeout(() => {
+        document.getElementById('scanInput').focus();
+    }, 500);
+}
+
+function addChassisInput() {
+    const container = document.getElementById('chassisNumbersContainer');
+    const index = container.children.length;
+    
+    const row = document.createElement('div');
+    row.className = 'input-group mb-2 chassis-input-row';
+    row.innerHTML = `
+        <input type="text" class="form-control chassis-number" placeholder="{{ __('Numéro de châssis') }}">
+        <input type="date" class="form-control chassis-date" placeholder="{{ __('Date') }}">
+        <div class="form-control d-flex gap-3 p-2">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="location_${index}" id="location_${index}_depot" value="DEPOT" checked>
+                <label class="form-check-label" for="location_${index}_depot">{{ __('DEPOT') }}</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="location_${index}" id="location_${index}_showroom" value="SHOW-ROOM">
+                <label class="form-check-label" for="location_${index}_showroom">{{ __('SHOW-ROOM') }}</label>
+            </div>
+        </div>
+        <button type="button" class="btn btn-outline-secondary" onclick="addChassisInput()">
+            <i class="ti ti-plus"></i>
+        </button>
+        <button type="button" class="btn btn-outline-danger" onclick="removeChassisInput(this)">
+            <i class="ti ti-minus"></i>
+        </button>
+    `;
+    
+    container.appendChild(row);
+}
+
+function removeChassisInput(button) {
+    const container = document.getElementById('chassisNumbersContainer');
+    if (container.children.length > 1) {
+        button.closest('.chassis-input-row').remove();
+    }
+}
+
+function updateScannedList() {
+    const listContainer = document.getElementById('scannedList');
+    if (scannedChassisNumbers.length === 0) {
+        listContainer.innerHTML = '<div class="text-muted text-center">{{ __("Aucun numéro scanné") }}</div>';
+    } else {
+        let html = '';
+        scannedChassisNumbers.forEach((chassis, index) => {
+            html += `
+                <div class="d-flex justify-content-between align-items-center mb-2 p-2 border rounded">
+                    <span><strong>${chassis.number}</strong></span>
+                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeScannedChassis(${index})">
+                        <i class="ti ti-trash"></i>
+                    </button>
+                </div>
+            `;
+        });
+        listContainer.innerHTML = html;
+    }
+}
+
+function removeScannedChassis(index) {
+    scannedChassisNumbers.splice(index, 1);
+    updateScannedList();
+}
+
+function finishScanning() {
+    if (scannedChassisNumbers.length === 0) {
+        alert('{{ __("Veuillez scanner au moins un numéro de châssis") }}');
+        return;
+    }
+    
+    // Hide scan modal and show time/location modal
+    bootstrap.Modal.getInstance(document.getElementById('scanModal')).hide();
+    
+    const timeLocationModal = new bootstrap.Modal(document.getElementById('timeLocationModal'));
+    
+    // Update final scanned list
+    const finalList = document.getElementById('finalScannedList');
+    let html = '';
+    scannedChassisNumbers.forEach(chassis => {
+        html += `<div class="mb-1"><strong>${chassis.number}</strong></div>`;
+    });
+    finalList.innerHTML = html;
+    
+    // Set today's date as default
+    document.getElementById('globalDate').value = new Date().toISOString().split('T')[0];
+    
+    timeLocationModal.show();
+}
+
+function saveScannedChassis() {
+    const globalDate = document.getElementById('globalDate').value;
+    const globalLocation = document.querySelector('input[name="globalLocation"]:checked').value;
+    
+    if (scannedChassisNumbers.length === 0) {
+        alert('{{ __("Aucun numéro scanné à enregistrer") }}');
+        return;
+    }
+    
+    // Prepare chassis data with same structure as manual input
+    const chassisData = scannedChassisNumbers.map(chassis => ({
+        number: chassis.number,
+        date: globalDate,
+        location: globalLocation
+    }));
+    
+    // Get current family ID from the modal
+    const parentId = document.getElementById('parentId').value;
+    
+    // Send to server using same endpoint as manual input
+    const formData = new FormData();
+    formData.append('action_type', 'chassis');
+    formData.append('parent_id', parentId);
+    
+    chassisData.forEach((chassis, index) => {
+        formData.append(`chassis_numbers[${index}][number]`, chassis.number);
+        formData.append(`chassis_numbers[${index}][date]`, chassis.date);
+        formData.append(`chassis_numbers[${index}][location]`, chassis.location);
+    });
+    
+    const csrfToken = document.querySelector('meta[name="csrf-token"]');
+    fetch('/hierarchy-store', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-TOKEN': csrfToken.getAttribute('content'),
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Close all modals
+            bootstrap.Modal.getInstance(document.getElementById('timeLocationModal')).hide();
+            bootstrap.Modal.getInstance(document.getElementById('addItemModal')).hide();
+            
+            showNotification(data.message, 'success');
+            loadProducts(currentFamilyId);
+        } else {
+            showNotification(data.message || '{{ __("Une erreur est survenue") }}', 'danger');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showNotification('{{ __("Une erreur est survenue: ") }}' + error.message, 'danger');
+    });
+}
+
+// Scan input handler
+document.addEventListener('DOMContentLoaded', function() {
+    const scanInput = document.getElementById('scanInput');
+    if (scanInput) {
+        scanInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const value = this.value.trim();
+                
+                if (value && !scannedChassisNumbers.find(c => c.number === value)) {
+                    scannedChassisNumbers.push({ number: value });
+                    updateScannedList();
+                    this.value = '';
+                } else if (scannedChassisNumbers.find(c => c.number === value)) {
+                    showNotification('{{ __("Ce numéro de châssis a déjà été scanné") }}', 'warning');
+                }
+            }
+        });
+    }
+});
+
+// Stock Analysis Function
+function analyzeAllStock() {
+    const modal = new bootstrap.Modal(document.getElementById('stockAnalysisModal'));
+    const content = document.getElementById('stockAnalysisContent');
+    
+    // Reset content with loader
+    content.innerHTML = `
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">{{ __('Analyse en cours...') }}</span>
+            </div>
+        </div>
+    `;
+    
+    modal.show();
+    
+    // Fetch stock analysis
+    fetch('/stock/analyze', {
+        method: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            displayStockAnalysis(data.analysis);
+        } else {
+            content.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="ti ti-alert-circle me-2"></i>
+                    {{ __('Erreur lors de l\'analyse : ') }} ${data.message}
+                </div>
+            `;
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        content.innerHTML = `
+            <div class="alert alert-danger">
+                <i class="ti ti-alert-circle me-2"></i>
+                {{ __('Erreur de connexion : ') }} ${error.message}
+            </div>
+        `;
+    });
+}
+
+function displayStockAnalysis(analysis) {
+    const content = document.getElementById('stockAnalysisContent');
+    
+    let html = `
+        <!-- Résumé Global -->
+        <div class="alert alert-primary mb-4">
+            <h6 class="alert-heading">{{ __('Résumé Global du Stock') }}</h6>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <h4 class="mb-0">${analysis.total_global}</h4>
+                    <small class="text-muted">{{ __('Total Global') }}</small>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="mb-0 text-warning">${analysis.showroom_global}</h4>
+                    <small class="text-muted">{{ __('Show Room') }}</small>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="mb-0 text-info">${analysis.depot_global}</h4>
+                    <small class="text-muted">{{ __('Dépôt') }}</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Par Marque -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="mb-0">{{ __('Stock par Marque') }}</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>{{ __('Marque') }}</th>
+                                        <th class="text-center">{{ __('Total') }}</th>
+                                        <th class="text-center">{{ __('Showroom') }}</th>
+                                        <th class="text-center">{{ __('Dépôt') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+    `;
+    
+    // Ajouter les marques
+    for (const [brandName, data] of Object.entries(analysis.by_brand)) {
+        html += `
+            <tr>
+                <td><strong>${brandName}</strong></td>
+                <td class="text-center">${data.total}</td>
+                <td class="text-center text-warning">${data.showroom}</td>
+                <td class="text-center text-info">${data.depot}</td>
+            </tr>
+        `;
+    }
+    
+    html += `
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Par Famille -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="mb-0">{{ __('Stock par Famille') }}</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>{{ __('Famille') }}</th>
+                                        <th class="text-center">{{ __('Total') }}</th>
+                                        <th class="text-center">{{ __('Showroom') }}</th>
+                                        <th class="text-center">{{ __('Dépôt') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+    `;
+    
+    // Ajouter les familles (limitées aux 10 premières)
+    const families = Object.entries(analysis.by_family).slice(0, 10);
+    for (const [familyName, data] of families) {
+        html += `
+            <tr>
+                <td><strong>${familyName}</strong></td>
+                <td class="text-center">${data.total}</td>
+                <td class="text-center text-warning">${data.showroom}</td>
+                <td class="text-center text-info">${data.depot}</td>
+            </tr>
+        `;
+    }
+    
+    html += `
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Alertes si incohérences -->
+        ${analysis.showroom_global + analysis.depot_global !== analysis.total_global ? 
+            `<div class="alert alert-warning mt-3">
+                <i class="ti ti-alert-triangle me-2"></i>
+                {{ __('Attention : Incohérence détectée dans les compteurs globaux !') }}
+            </div>` : ''
+        }
+    `;
+    
+    content.innerHTML = html;
+}
+
+function validateBrandImage(input) {
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+    const allowedExtensions = ['jpg', 'jpeg', 'png', 'webp'];
+    const errorDiv = document.getElementById('brand-img-error');
+    const preview = document.getElementById('brandPreview');
+    const file = input.files[0];
+
+    if (!file) return;
+
+    const ext = file.name.split('.').pop().toLowerCase();
+    if (!allowedTypes.includes(file.type) || !allowedExtensions.includes(ext)) {
+        errorDiv.textContent = 'Format non accepté ! Utilisez seulement : JPG, JPEG, PNG ou WEBP';
+        errorDiv.style.display = 'block';
+        input.value = '';
+        if (preview) preview.src = '';
+        return;
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+        errorDiv.textContent = 'Image trop grande ! Maximum 2MB autorisé';
+        errorDiv.style.display = 'block';
+        input.value = '';
+        if (preview) preview.src = '';
+        return;
+    }
+
+    errorDiv.style.display = 'none';
+    const reader = new FileReader();
+    reader.onload = function(e) { if (preview) preview.src = e.target.result; };
+    reader.readAsDataURL(file);
 }
 
 // Initialize on page load

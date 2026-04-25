@@ -7,8 +7,11 @@
         </div>
         <div class="form-group">
             <label for="brand_img" class="form-label">{{ __('Upload Brand Image') }}</label>
+            <small class="d-block text-muted mb-1"><strong>Formats acceptés :</strong> JPG, JPEG, PNG, WEBP &nbsp;|&nbsp; <strong>Max :</strong> 2MB</small>
             <input type="file" name="brand_img" id="brand_img" class="form-control"
-                onchange="document.getElementById('brandPreview').src = window.URL.createObjectURL(this.files[0])">
+                accept="image/jpeg,image/jpg,image/png,image/webp,.jpg,.jpeg,.png,.webp"
+                onchange="validateBrandImage(this)">
+            <div id="brand-img-error" class="alert alert-danger py-2 mt-1" style="display:none;"></div>
             <img id="brandPreview" src="" width="20%" class="mt-2"/>
         </div>
     </div>

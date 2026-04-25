@@ -551,7 +551,7 @@ class PosController extends Controller
     {
         $variant = \App\Models\ProductVariant::with('chassisNumbers')->find($familyId);
         if (!$variant) {
-            return response()->json(['products' => []]);
+            return response()->json(['products' => [], 'variant' => null]);
         }
 
         $products = $variant->chassisNumbers->map(function($chassis) use ($variant) {
@@ -560,59 +560,91 @@ class PosController extends Controller
                 'name' => $variant->name,
                 'chassis_number' => $chassis->chassis_number,
                 'variant_id' => $variant->id,
-                'price' => \App\Models\Utility::priceFormat($variant->price ?? 0)
+                'location' => $chassis->location ?? 'DEPOT',
+                'price' => (float)($variant->price ?? 0),
+                'price_formatted' => \App\Models\Utility::priceFormat($variant->price ?? 0),
             ];
         });
 
-        return response()->json(['products' => $products]);
+        return response()->json([
+            'products' => $products,
+            'variant' => [
+                'id' => $variant->id,
+                'name' => $variant->name,
+                'quantity' => $variant->quantity ?? 0,
+                'price' => (float)($variant->price ?? 0),
+                'price_formatted' => \App\Models\Utility::priceFormat($variant->price ?? 0),
+            ]
+        ]);
     }
 
     public function addToPosCart(Request $request)
     {
         $selectedChassis = $request->input('selected_chassis', []);
         $familyId = $request->input('family_id');
+        $inputPrice = (float)($request->input('price', 0));
         
-        if (empty($selectedChassis)) {
-            return response()->json(['success' => false, 'message' => __('Veuillez sélectionner au moins un numéro de châssis')]);
-        }
+        $user  = \Auth::user();
+        $store = Store::where('id', $user->current_store)->where('created_by', $user->creatorId())->first();
 
-        $variant = \App\Models\ProductVariant::with('chassisNumbers')->find($familyId);
+        $variant = \App\Models\ProductVariant::with(['chassisNumbers', 'category'])
+            ->find($familyId);
         if (!$variant) {
             return response()->json(['success' => false, 'message' => __('Famille non trouvée')]);
         }
-
-        // Get current user and store
-        $user = \Auth::user();
-        $store = Store::where('id', $user->current_store)->where('created_by', $user->creatorId())->first();
         
         // Get or create session
         $session_key = 'pos';
         $cart = session()->get($session_key, []);
 
-        foreach ($selectedChassis as $chassisId) {
-            $chassis = \App\Models\ChassisNumber::find($chassisId);
-            if ($chassis && $chassis->variant_id == $familyId) {
-                $productId = 'chassis_' . $chassis->id;
-                
-                if (!isset($cart[$productId])) {
-                    $price = $variant->price ?? 0;
-                    $cart[$productId] = [
-                        'id' => $productId,
-                        'product_name' => $variant->name . ' - ' . $chassis->chassis_number,
-                        'variant_id' => $variant->id,
-                        'variant_name' => $variant->name,
-                        'chassis_number' => $chassis->chassis_number,
-                        'price' => $price,
-                        'variant_price' => $price,
-                        'quantity' => 1,
-                        'subtotal' => $price,
-                        'variant_subtotal' => $price,
-                        'tax' => [],
-                        'originalquantity' => 1,
-                        'originalvariantquantity' => 1,
-                        'store_id' => $store ? $store->id : null
-                    ];
+        if (!empty($selectedChassis)) {
+            // Ajouter les chassis sélectionnés individuellement
+            foreach ($selectedChassis as $chassisId) {
+                $chassis = \App\Models\ChassisNumber::find($chassisId);
+                if ($chassis && $chassis->variant_id == $familyId) {
+                    $productId = 'chassis_' . $chassis->id;
+                    if (!isset($cart[$productId])) {
+                        $price = $inputPrice > 0 ? $inputPrice : ($variant->price ?? 0);
+                        $cart[$productId] = [
+                            'id' => $productId,
+                            'product_name' => $variant->name . ' - ' . $chassis->chassis_number,
+                            'variant_id' => $variant->id,
+                            'variant_name' => $variant->name,
+                            'chassis_number' => $chassis->chassis_number,
+                            'price' => $price,
+                            'variant_price' => $price,
+                            'quantity' => 1,
+                            'subtotal' => $price,
+                            'variant_subtotal' => $price,
+                            'tax' => [],
+                            'originalquantity' => 1,
+                            'originalvariantquantity' => 1,
+                            'store_id' => $store ? $store->id : null
+                        ];
+                    }
                 }
+            }
+        } else {
+            // Pas de chassis individuel : ajouter la famille entière
+            $productId = 'family_' . $variant->id;
+            if (!isset($cart[$productId])) {
+                $price = $inputPrice > 0 ? $inputPrice : ($variant->price ?? 0);
+                $cart[$productId] = [
+                    'id' => $productId,
+                    'product_name' => $variant->name,
+                    'variant_id' => $variant->id,
+                    'variant_name' => $variant->name,
+                    'chassis_number' => __('N/A'),
+                    'price' => $price,
+                    'variant_price' => $price,
+                    'quantity' => 1,
+                    'subtotal' => $price,
+                    'variant_subtotal' => $price,
+                    'tax' => [],
+                    'originalquantity' => $variant->quantity ?? 1,
+                    'originalvariantquantity' => $variant->quantity ?? 1,
+                    'store_id' => $store ? $store->id : null
+                ];
             }
         }
 
@@ -642,34 +674,46 @@ class PosController extends Controller
 
     public function searchChassis(Request $request)
     {
-        $query = $request->get('q', '');
-        
-        if (strlen($query) < 1) {
-            return response()->json(['results' => []]);
-        }
+        try {
+            $query = trim($request->get('q', ''));
 
-        $results = \App\Models\ChassisNumber::where('chassis_number', 'LIKE', "%{$query}%")
-            ->with(['variant.category.parent.brand'])
-            ->limit(20)
-            ->get()
-            ->map(function ($chassis) {
-                $variant = $chassis->variant;
-                $category = $variant ? $variant->category : null;
-                $parentCategory = $category ? $category->parent : null;
-                $brand = $parentCategory ? $parentCategory->brand : ($category ? $category->brand : null);
+            if (strlen($query) < 1) {
+                return response()->json(['results' => []]);
+            }
+
+            $rows = \App\Models\ChassisNumber::where('chassis_number', 'LIKE', "%{$query}%")
+                ->limit(20)
+                ->get();
+
+            $results = $rows->map(function ($chassis) {
+                // Load relations manually to avoid eager-loading chain errors
+                $variant  = $chassis->variant_id
+                            ? \App\Models\ProductVariant::find($chassis->variant_id)
+                            : null;
+                $category = $variant && $variant->category_id
+                            ? \App\Models\ProductCategorie::find($variant->category_id)
+                            : null;
+                $brand    = $category && $category->brand_id
+                            ? \App\Models\Brand::find($category->brand_id)
+                            : null;
 
                 return [
-                    'id' => $chassis->id,
+                    'id'             => $chassis->id,
                     'chassis_number' => $chassis->chassis_number,
-                    'variant_id' => $chassis->variant_id,
-                    'family_name' => $variant ? $variant->name : '',
-                    'model_name' => $category ? $category->name : '',
-                    'brand_name' => $brand ? $brand->name : '',
-                    'location' => $chassis->location ?? 'DEPOT',
-                    'price' => $variant ? ($variant->price ?? 0) : 0,
+                    'variant_id'     => $chassis->variant_id,
+                    'family_name'    => $variant  ? $variant->name  : '',
+                    'model_name'     => $category ? $category->name : '',
+                    'brand_name'     => $brand    ? $brand->name    : '',
+                    'location'       => $chassis->location ?? 'DEPOT',
+                    'price'          => $variant  ? (float)($variant->price ?? 0) : 0,
                 ];
             });
 
-        return response()->json(['results' => $results]);
+            return response()->json(['results' => $results]);
+
+        } catch (\Exception $e) {
+            \Log::error('searchChassis error: ' . $e->getMessage());
+            return response()->json(['results' => [], 'error' => $e->getMessage()], 200);
+        }
     }
 }
