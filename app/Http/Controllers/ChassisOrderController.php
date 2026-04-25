@@ -15,12 +15,21 @@ class ChassisOrderController extends Controller
 {
     public function index()
     {
+        $storeId = Auth::user()->current_store;
+
         $orders = ChassisOrder::with('items')
-            ->where('store_id', Auth::user()->current_store)
+            ->where('store_id', $storeId)
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('chassis_orders.index', compact('orders'));
+        $stats = [
+            'total'     => $orders->count(),
+            'pending'   => $orders->where('status', 'pending')->count(),
+            'validated' => $orders->where('status', 'validated')->count(),
+            'rejected'  => $orders->where('status', 'rejected')->count(),
+        ];
+
+        return view('chassis_orders.index', compact('orders', 'stats'));
     }
 
     public function show($id)
@@ -35,7 +44,9 @@ class ChassisOrderController extends Controller
             'customer_name' => 'nullable|string|max:191',
             'customer_phone' => 'nullable|string|max:191',
             'discount' => 'nullable|numeric|min:0',
+            'tva' => 'nullable|numeric|min:0|max:100',
             'notes' => 'nullable|string',
+            'comment' => 'nullable|string',
             'items' => 'required|array|min:1',
             'items.*.chassis_number_id' => 'required|integer',
             'items.*.price' => 'required|numeric|min:0',
@@ -48,10 +59,12 @@ class ChassisOrderController extends Controller
                 'customer_name' => $request->customer_name,
                 'customer_phone' => $request->customer_phone,
                 'discount' => $request->discount ?? 0,
+                'tva' => $request->tva ?? 0,
                 'status' => 'pending',
                 'user_id' => Auth::id(),
                 'store_id' => Auth::user()->current_store,
                 'notes' => $request->notes,
+                'comment' => $request->comment,
             ]);
 
             $totalPrice = 0;
@@ -86,7 +99,9 @@ class ChassisOrderController extends Controller
                 $chassis->delete();
             }
 
-            $order->update(['total_price' => $totalPrice]);
+            $tva = $request->tva ?? 0;
+            $tvaAmount = $totalPrice * $tva / 100;
+            $order->update(['total_price' => $totalPrice + $tvaAmount]);
 
             // Clear POS cart session
             $sessionKey = $request->session_key ?? request()->segment(count(request()->segments()));
@@ -242,7 +257,8 @@ class ChassisOrderController extends Controller
     public function invoice($id)
     {
         $order = ChassisOrder::with('items')->findOrFail($id);
-        return view('chassis_orders.invoice', compact('order'));
+        $store = \App\Models\Store::find(Auth::user()->current_store);
+        return view('chassis_orders.invoice', compact('order', 'store'));
     }
 
     public function destroy($id)

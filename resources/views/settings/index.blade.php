@@ -128,6 +128,74 @@
         });
     </script>
 @endpush
+@push('css-page')
+<style>
+    /* ── LIMITED ACCESS overlay ── */
+    .plan-locked-pane {
+        position: relative;
+        min-height: 280px;
+    }
+    .plan-locked-pane > * {
+        filter: blur(4px);
+        pointer-events: none;
+        user-select: none;
+    }
+    .limited-access-overlay {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 48px 20px;
+        background: linear-gradient(135deg,#fffbeb 0%,#fff1f2 100%);
+        border-radius: 10px;
+        border: 1.5px dashed #f59e0b;
+    }
+    .limited-access-box {
+        text-align: center;
+        background: #fff;
+        border: 2px solid #f59e0b;
+        border-radius: 14px;
+        padding: 36px 48px;
+        box-shadow: 0 8px 32px rgba(0,0,0,.12);
+        max-width: 420px;
+    }
+    .limited-access-box .la-icon {
+        width: 64px; height: 64px;
+        background: linear-gradient(135deg,#f59e0b,#ef4444);
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 16px;
+        color: #fff; font-size: 28px;
+    }
+    .limited-access-box h4 {
+        font-weight: 800;
+        font-size: 18px;
+        color: #1a1a2e;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+    .limited-access-box p {
+        color: #6c757d;
+        font-size: 13px;
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+    .limited-access-box .la-badge {
+        display: inline-block;
+        background: linear-gradient(90deg,#f59e0b,#ef4444);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        padding: 4px 12px;
+        border-radius: 20px;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+    }
+    /* lock icon on tab */
+    .nav-link .ti-lock { color: #f59e0b; font-size: 12px; }
+</style>
+@endpush
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -207,13 +275,16 @@
                     role="tab" aria-controls="pixel_settings"
                     aria-selected="false">{{ __('Pixel Fields Settings') }}</a>
             </li>
-            @if ($plan->pwa_store == 'on')
-                <li class="nav-item col-xxl-2 col-xl-3 col-md-4 col-sm-6  col-12 text-center">
-                    <a class="nav-link  border border-primary common-radius" id="pills-pwa_setting-tab" data-bs-toggle="pill" href="#pwa_settings"
-                        role="tab" aria-controls="pwa_settings"
-                        aria-selected="false">{{ __('PWA Settings') }}</a>
-                </li>
-            @endif
+            <li class="nav-item col-xxl-2 col-xl-3 col-md-4 col-sm-6  col-12 text-center">
+                <a class="nav-link  border border-primary common-radius" id="pills-pwa_setting-tab" data-bs-toggle="pill" href="#pwa_settings"
+                    role="tab" aria-controls="pwa_settings"
+                    aria-selected="false">
+                    {{ __('PWA Settings') }}
+                    @if($plan->pwa_store != 'on')
+                        <i class="ti ti-lock"></i>
+                    @endif
+                </a>
+            </li>
             <li class="nav-item col-xxl-2 col-xl-3 col-md-4 col-sm-6  col-12 text-center">
                 <a class="nav-link  border border-primary common-radius" id="pills-webhook_setting-tab" data-bs-toggle="pill" href="#webhook_settings"
                     role="tab" aria-controls="webhook_settings"
@@ -7027,6 +7098,16 @@
                                 </div>
                             </div>
                             <div class="card-body">
+                                @if ($plan->pwa_store != 'on')
+                                    <div class="limited-access-overlay">
+                                        <div class="limited-access-box">
+                                            <div class="la-icon"><i class="ti ti-lock"></i></div>
+                                            <span class="la-badge">Plan Requis</span>
+                                            <h4>Limited Access</h4>
+                                            <p>This page is denied by your current store plan.<br>Upgrade your plan to unlock PWA Settings.</p>
+                                        </div>
+                                    </div>
+                                @endif
                                 @if ($plan->pwa_store == 'on')
                                     {{ Form::model($store_settings, ['route' => ['setting.pwa', $store_settings['id']], 'method' => 'POST', 'enctype' => 'multipart/form-data']) }}
                                         <div class="form-group col-md-4 ">

@@ -21,12 +21,45 @@
 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Home') }}</a></li>
 <li class="breadcrumb-item active" aria-current="page">{{ __('Pos') }}</li>
 @endsection
+
+@push('styles')
+<style>
+.chassis-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.chassis-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+}
+.chassis-card .btn-primary {
+    min-width: 100px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+.chassis-card .btn-primary:hover {
+    background-color: #0056b3 !important;
+    border-color: #0056b3 !important;
+}
+.chassis-card .badge {
+    font-size: 0.75rem;
+}
+.alert-info .btn-success {
+    white-space: nowrap;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.9rem;
+}
+.alert-info .btn-success:hover {
+    background-color: #218838 !important;
+    border-color: #1e7e34 !important;
+}
+</style>
+@endpush
 @section('content')
     <div class="mt-4 product-tab-wrp">
         <div class="card-header">
             <div class="row align-items-center">
                 <div class="col-md-4 pdp-section-title">
-                    <h3 class="mb-3">Product Section</h3>
+                    <h3 class="mb-3">{{ __('Section Produits') }}</h3>
                 </div>
                 <div class="col-md-4 text-end">
                     <!-- Language Switcher -->
@@ -98,7 +131,7 @@
             <div class="card-body py-3">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <div class="input-group input-group-lg">
+                        <div class="input-group">
                             <span class="input-group-text bg-primary text-white"><i class="ti ti-barcode"></i></span>
                             <input type="text" id="scanChassisInput" class="form-control" 
                                    placeholder="{{ __('Scanner ou saisir un numéro de châssis...') }}" autofocus>
@@ -131,7 +164,7 @@
                 </div>
             </div>
         </div>
-        <?php $lastsegment = request()->segment(count(request()->segments())) ?>
+        <?php $lastsegment = 'pos'; ?>
 
         <div class="mt-2 row row-gap pdp-sop-card">
             <div class="col-lg-7">
@@ -155,6 +188,9 @@
                                     </button>
                                 </div>
 
+                                <!-- Search Results Container -->
+                                <div id="product-listing" class="mb-3" style="display:none;"></div>
+
                                 <!-- Content Container -->
                                 <div id="pos-hierarchy-content">
                                     <!-- Brands Level -->
@@ -172,7 +208,10 @@
                                                         <div class="card h-100 brand-card" onclick="loadPosModels({{ $brand->id }}, '{{ $brand->name }}')">
                                                             <div class="card-body d-flex align-items-center">
                                                                 @if ($brand->brand_img)
-                                                                    <img src="{{ asset('storage/uploads/brand_image/') }}/{{ $brand->brand_img }}" alt="{{ $brand->name }}" class="me-3" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;">
+                                                                    <img src="{{ \App\Models\Utility::get_file('uploads/brand_image/' . $brand->brand_img) }}" alt="{{ $brand->name }}" class="me-3" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                                                                    <div class="me-3 bg-primary rounded d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; display:none !important;">
+                                                                        <i class="ti ti-brand text-white"></i>
+                                                                    </div>
                                                                 @else
                                                                     <div class="me-3 bg-primary rounded d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
                                                                         <i class="ti ti-brand text-white"></i>
@@ -230,7 +269,7 @@
                     <div class="card-header p-3">
                         <div class="row align-items-center row-gap">
                             <div class="col-md-6">
-                                <h3 class="mb-0">{{__('Billing Section')}}</h3>
+                                <h3 class="mb-0">{{ __('Section Facturation') }}</h3>
                             </div>
                             <div class="col-md-6">
                                 {{ Form::select('customer_id',$customers,'', array('class' => 'form-control select customer_select','id'=>'customer','required'=>'required')) }}
@@ -246,11 +285,11 @@
                                 <thead>
                                 <tr>
                                     <th></th>
-                                    <th class="text-left">{{__('Name')}}</th>
-                                    <th class="text-center">{{__('QTY')}}</th>
-                                    <th>{{__('Tax')}}</th>
-                                    <th class="text-center">{{__('Price')}}</th>
-                                    <th class="text-center">{{__('Sub Total')}}</th>
+                                    <th class="text-left">{{ __('Nom') }}</th>
+                                    <th class="text-center">{{ __('Qté') }}</th>
+                                    <th>{{ __('Taxe') }}</th>
+                                    <th class="text-center">{{ __('Prix') }}</th>
+                                    <th class="text-center">{{ __('Sous-total') }}</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -259,15 +298,15 @@
                                 @if(session($lastsegment) && !empty(session($lastsegment)) && count(session($lastsegment)) > 0)
                                     @foreach(session($lastsegment) as $id => $details)
                                         @php
-                                            $isChassis = str_starts_with($id, 'chassis_');
+                                            $isChassis = str_starts_with($id, 'chassis_') || str_starts_with($id, 'family_');
                                             $product = null;
                                             $image_url = 'default.jpg';
                                             
                                             if ($isChassis) {
-                                                // Chassis item - no Product record needed
-                                                $variant = \App\Models\ProductVariant::find($details['variant_id']);
-                                                if ($variant && $variant->image) {
-                                                    $image_url = $variant->image;
+                                                $variant = \App\Models\ProductVariant::with('category.brand')->find($details['variant_id']);
+                                                $brand_img_url = null;
+                                                if ($variant && $variant->category && $variant->category->brand && $variant->category->brand->brand_img) {
+                                                    $brand_img_url = \App\Models\Utility::get_file('uploads/brand_image/' . $variant->category->brand->brand_img);
                                                 }
                                                 $total = $total + (float) ($details['variant_subtotal'] ?? $details['subtotal'] ?? 0);
                                             } elseif (isset($details['variant_id']) && $details['variant_id'] > 0) {
@@ -297,8 +336,16 @@
                                                 <tr data-product-id="{{$id}}" id="product-variant-id-{{$details['variant_id']}}">
                                             @endif
                                                     <td class="cart-images">
-                                                        <img alt="Image placeholder" src="{{ asset('storage/uploads/products/') . $image_url }}" class="card-image avatar rounded-circle-sale border border-2 border-primary rounded">
-                                                </td>
+                                                        @if($isChassis && !empty($brand_img_url))
+                                                            <img alt="brand" src="{{ $brand_img_url }}" class="card-image avatar rounded-circle-sale border border-2 border-primary rounded" style="width:40px;height:40px;object-fit:cover;">
+                                                        @elseif($isChassis)
+                                                            <div class="avatar rounded-circle-sale border border-2 border-primary rounded d-flex align-items-center justify-content-center bg-light" style="width:40px;height:40px;">
+                                                                <i class="ti ti-motorbike text-primary"></i>
+                                                            </div>
+                                                        @else
+                                                            <img alt="Image placeholder" src="{{ \App\Models\Utility::get_file('uploads/is_cover_image/') . $image_url }}" class="card-image avatar rounded-circle-sale border border-2 border-primary rounded" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\'d-flex align-items-center justify-content-center bg-light rounded\' style=\'width:40px;height:40px;\'><i class=\'ti ti-photo text-muted\'></i></div>';">
+                                                        @endif
+                                                    </td>
                                                 @if($isChassis)
                                                     <td class="name">
                                                         {{ $details['variant_name'] ?? '' }}
@@ -345,9 +392,16 @@
                                                 </td>
 
                                                 @if($isChassis)
-                                                    <td class="price text-right">{{ \App\Models\Utility::priceFormat($details['variant_price'] ?? $details['price'] ?? 0) }}</td>
+                                                    @php $chassisPrice = (float)($details['variant_price'] ?? $details['price'] ?? 0); @endphp
+                                                    <td class="price text-right">
+                                                        @if($chassisPrice > 0)
+                                                            {{ \App\Models\Utility::priceFormat($chassisPrice) }}
+                                                        @else
+                                                            <span class="badge bg-warning text-dark">{{ __('À définir') }}</span>
+                                                        @endif
+                                                    </td>
                                                     <td class="col-sm-3 mt-2">
-                                                        <span class="subtotal">{{ \App\Models\Utility::priceFormat($details['variant_subtotal'] ?? $details['subtotal'] ?? 0) }}</span>
+                                                        <span class="subtotal">{{ $chassisPrice > 0 ? \App\Models\Utility::priceFormat($chassisPrice) : '-' }}</span>
                                                     </td>
                                                 @elseif($details['variant_id'] <= 0)
                                                     <td class="price text-right">{{ \App\Models\Utility::priceFormat($details['price']) }}</td>
@@ -375,7 +429,7 @@
                                     @endforeach
                                 @else
                                     <tr class="text-center no-found">
-                                        <td colspan="7">{{__('No Data Found.!')}}</td>
+                                        <td colspan="7">{{ __('Aucun produit dans le panier') }}</td>
                                     </tr>
                                 @endif
                                 </tbody>
@@ -516,7 +570,20 @@
                             <input type="text" class="form-control" id="pay_notes" placeholder="{{ __('Notes optionnelles') }}">
                         </div>
                     </div>
-                    <h6 class="mb-3">{{ __('Définir le prix pour chaque châssis') }}</h6>
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label class="form-label fw-semibold">{{ __('TVA') }} (%)</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="pay_tva" value="0" min="0" max="100" step="0.01" placeholder="0">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <label class="form-label fw-semibold">{{ __('Commentaire') }}</label>
+                            <textarea class="form-control" id="pay_comment" rows="2" placeholder="{{ __('Commentaire sur la commande...') }}"></textarea>
+                        </div>
+                    </div>
+                    <h6 class="mb-3">{{ __('Récapitulatif de la commande') }}</h6>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="payItemsTable">
                             <thead class="table-light">
@@ -524,12 +591,22 @@
                                     <th>{{ __('Produit') }}</th>
                                     <th>{{ __('N° Châssis') }}</th>
                                     <th>{{ __('Prix unitaire') }}</th>
+                                    <th>{{ __('Quantité') }}</th>
+                                    <th>{{ __('Sous-total') }}</th>
                                 </tr>
                             </thead>
                             <tbody id="payItemsBody"></tbody>
                             <tfoot>
+                                <tr>
+                                    <td colspan="4" class="text-end">{{ __('Sous-total HT') }}</td>
+                                    <td id="paySubtotalDisplay">0</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-end">{{ __('TVA') }} (<span id="payTvaPercent">0</span>%)</td>
+                                    <td id="payTvaAmountDisplay">0</td>
+                                </tr>
                                 <tr class="table-warning">
-                                    <td colspan="2" class="text-end fw-bold">{{ __('Total') }}</td>
+                                    <td colspan="4" class="text-end fw-bold">{{ __('Total TTC') }}</td>
                                     <td class="fw-bold" id="payTotalDisplay">0</td>
                                 </tr>
                             </tfoot>
@@ -551,7 +628,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="chassisModalTitle">{{ __('Sélectionner les numéros de châssis') }}</h5>
+                    <h5 class="modal-title text-truncate" id="chassisModalTitle" style="max-width:80%;" title="{{ __('Sélectionner les numéros de châssis') }}">{{ __('Sélectionner les numéros de châssis') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -567,6 +644,47 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Annuler') }}</button>
                     <button type="button" class="btn btn-primary" onclick="validateChassisSelection()">{{ __('Valider et ajouter au panier') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Price Input Modal -->
+    <div class="modal fade" id="priceInputModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="priceModalTitle">{{ __('Ajouter au panier - Définir le prix') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">{{ __('Produit') }}</label>
+                        <input type="text" class="form-control bg-light" id="priceProductName" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">
+                            {{ __('Prix de vente') }} <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-text bg-primary text-white">
+                                <i class="ti ti-currency-dirham me-1"></i>
+                                {{ \App\Models\Store::where('id',\Auth::user()->current_store)->first()->currency ?? 'MAD' }}
+                            </span>
+                            <input type="number" class="form-control form-control-lg" id="priceInput"
+                                   min="1" step="1" placeholder="{{ __('Ex: 35000') }}" required
+                                   style="font-size:1.3rem; font-weight:600;">
+                        </div>
+                        <div id="priceHint" class="mt-2"></div>
+                    </div>
+                    <input type="hidden" id="priceVariantId">
+                    <input type="hidden" id="priceChassisId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Annuler') }}</button>
+                    <button type="button" class="btn btn-success" id="confirmAddToCart">
+                        <i class="ti ti-shopping-cart me-1"></i>{{ __('Ajouter au panier') }}
+                    </button>
                 </div>
             </div>
         </div>
@@ -627,7 +745,14 @@
             });
 
 
-            function searchProducts(url, value,cat_id,store_id = '0') {
+            function searchProducts(url, value, cat_id, store_id = '0') {
+                if (!value || value.trim() === '') {
+                    // Vider la recherche : afficher la hiérarchie normale
+                    $('#product-listing').hide().html('');
+                    $('#pos-hierarchy-content').show();
+                    return;
+                }
+
                 var session_key = $('#empty_cart').val();
                 $.ajax({
                     type: 'GET',
@@ -635,11 +760,22 @@
                     data: {
                         'search': value,
                         'cat_id': cat_id,
-                        'store_id' : store_id,
+                        'store_id': store_id,
                         'session_key': session_key
                     },
                     success: function (data) {
-                        $('#product-listing').html(data);
+                        // Cacher la hiérarchie, afficher les résultats
+                        $('#pos-hierarchy-content').hide();
+                        $('#product-listing').html(data).show();
+                    },
+                    error: function () {
+                        $('#pos-hierarchy-content').hide();
+                        $('#product-listing').html(`
+                            <div class="alert alert-danger">
+                                <i class="ti ti-alert-triangle me-2"></i>
+                                {{ __('Erreur lors de la recherche') }}
+                            </div>
+                        `).show();
                     }
                 });
             }
@@ -780,9 +916,12 @@
                     $.ajax({
                         url: ele.data('url'),
                         method: "DELETE",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
                         data: {
                             id: ele.attr("data-id"),
-
+                            session_key: '{{ $lastsegment }}'
                         },
                         success: function (data) {
                             if (data.code == '200') {
@@ -858,21 +997,26 @@
 
             });
 
-            $(document).on('click', '.category-select', function (e) {
-                var cat = $(this).data('cat-id');
-                var white = 'text-white';
-                var dark = 'text-dark';
-                $('.category-select').find('.tab-btns').removeClass('btn-primary')
-                $(this).find('.tab-btns').addClass('btn-primary')
-                $('.category-select').parent().removeClass('cat-active');
-                $('.category-select').find('.card-title').removeClass('text-white').addClass('text-dark');
-                $('.category-select').find('.card-title').parent().removeClass('text-white').addClass('text-dark');
-                $(this).find('.card-title').removeClass('text-dark').addClass('text-white');
-                $(this).find('.card-title').parent().removeClass('text-dark').addClass('text-white');
-                $(this).parent().addClass('cat-active');
-                var url = '{{ route('search.products') }}'
-                var store_id=$('#store_id').val();
-                searchProducts(url,'',cat,store_id);
+            // Filtre par marque
+            $(document).on('click', '.brand-filter-btn', function (e) {
+                var brandId = $(this).data('brand-id');
+                // Mettre à jour les styles des boutons
+                $('.brand-filter-btn').find('.tab-btns').removeClass('btn-primary');
+                $(this).find('.tab-btns').addClass('btn-primary');
+                $('.brand-filter-btn').closest('.cat-tab-item').removeClass('cat-active');
+                $(this).closest('.cat-tab-item').addClass('cat-active');
+
+                if (brandId == 0) {
+                    // Afficher toutes les marques
+                    posCurrentLevel = 'brands';
+                    posCurrentBrandId = null;
+                    posShowLevel('pos-brands-level');
+                    posUpdateBreadcrumb([{name: '{{ __("Marques") }}', level: 'brands'}]);
+                } else {
+                    // Naviguer directement vers les modèles de cette marque
+                    var brandName = $(this).find('.tab-btns').text();
+                    loadPosModels(brandId, brandName);
+                }
             });
 
             $(document).on('change keyup', '.discount', function () {
@@ -1082,6 +1226,9 @@
         }
 
         function posGoBack() {
+            $('#product-listing').hide().html('');
+            $('#pos-hierarchy-content').show();
+            document.getElementById('searchproduct').value = '';
             if (posCurrentLevel === 'models') {
                 posCurrentLevel = 'brands';
                 posCurrentBrandId = null;
@@ -1110,6 +1257,9 @@
         }
 
         function posNavigateToLevel(level, data) {
+            $('#product-listing').hide().html('');
+            $('#pos-hierarchy-content').show();
+            document.getElementById('searchproduct').value = '';
             if (level === 'brands') {
                 posCurrentLevel = 'brands';
                 posCurrentBrandId = null;
@@ -1247,7 +1397,18 @@
         function loadPosChassis(familyId, familyName) {
             posCurrentLevel = 'chassis';
             posCurrentFamilyId = familyId;
-            
+
+            // Afficher le spinner pendant le chargement
+            const container = document.getElementById('pos-chassis-level');
+            container.innerHTML = `<div class="text-center py-4"><div class="spinner-border text-primary"></div></div>`;
+            posShowLevel('pos-chassis-level');
+            posUpdateBreadcrumb([
+                {name: '{{ __("Marques") }}', level: 'brands'},
+                {name: '{{ __("Modèles") }}', level: 'models', data: {brandId: posCurrentBrandId}},
+                {name: '{{ __("Familles") }}', level: 'families', data: {modelId: posCurrentModelId}},
+                {name: familyName || '{{ __("Numéros de châssis") }}', level: 'chassis', data: {familyId: familyId}}
+            ]);
+
             fetch(`/pos/families/${familyId}/chassis`, {
                 method: 'GET',
                 headers: {
@@ -1258,48 +1419,88 @@
             })
             .then(response => response.json())
             .then(data => {
-                const container = document.getElementById('pos-chassis-level');
-                if (data.products && data.products.length > 0) {
-                    let html = `
-                        <div class="mb-3">
-                            <button class="btn btn-primary" onclick="showChassisSelectionModal(${familyId}, '${familyName}')">
-                                <i class="ti ti-list-check me-2"></i>{{ __('Sélectionner les numéros de châssis') }}
+                const variant = data.variant;
+                const products = data.products || [];
+                const totalQty = variant ? variant.quantity : 0;
+
+                let html = '';
+
+                // En-tête avec infos de la famille
+                if (variant) {
+                    html += `
+                        <div class="alert alert-info d-flex align-items-center justify-content-between mb-3">
+                            <div>
+                                <i class="ti ti-motorbike me-2" style="font-size:1.4rem;"></i>
+                                <strong>${variant.name}</strong>
+                                &nbsp;—&nbsp;
+                                <span class="badge bg-primary fs-6">${totalQty} {{ __('moto(s) disponible(s)') }}</span>
+                            </div>
+                            <button class="btn btn-success btn-sm" onclick="showPriceModal(${familyId}, '${variant.name}', null, ${variant.price || 0})">
+                                <i class="ti ti-shopping-cart me-1"></i>{{ __('Ajouter au panier') }}
                             </button>
                         </div>
-                        <div class="row row-gap-3">
                     `;
-                    data.products.forEach(product => {
+                }
+
+                if (products.length > 0) {
+                    // Afficher les numéros de châssis individuels
+                    html += `<div class="row row-gap-3">`;
+                    products.forEach(product => {
+                        const locColor = product.location === 'SHOW-ROOM' ? 'success' : 'secondary';
                         html += `
                             <div class="col-md-6 col-lg-4">
-                                <div class="card h-100 chassis-card">
-                                    <div class="card-body d-flex align-items-center">
-                                        <i class="ti ti-box me-3 text-info" style="font-size: 2rem;"></i>
-                                        <div class="flex-grow-1">
-                                            <h6 class="mb-1 fw-bold">${product.name}</h6>
-                                            <small class="text-muted">{{ __('Numéro de châssis') }}: ${product.chassis_number}</small>
+                                <div class="card h-100 chassis-card border-0 shadow-sm">
+                                    <div class="card-body p-3">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <i class="ti ti-motorbike text-info me-2" style="font-size: 1.5rem;"></i>
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-1 fw-bold">${product.name}</h6>
+                                                <small class="text-muted">
+                                                    <i class="ti ti-barcode me-1"></i>${product.chassis_number}
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="badge bg-${locColor}">${product.location || 'DEPOT'}</span>
+                                            <button class="btn btn-sm btn-primary"
+                                                    onclick="showPriceModal(${product.variant_id}, '${product.name}', ${product.id}, ${product.price || 0})">
+                                                <i class="ti ti-plus me-1"></i>{{ __('Ajouter') }}
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         `;
                     });
-                    html += '</div>';
-                    container.innerHTML = html;
+                    html += `</div>`;
+                } else if (totalQty > 0) {
+                    // Pas de châssis individuels mais stock disponible
+                    html += `
+                        <div class="alert alert-warning">
+                            <i class="ti ti-info-circle me-2"></i>
+                            {{ __('Aucun numéro de châssis individuel enregistré. Le stock disponible est de') }}
+                            <strong>${totalQty} {{ __('unité(s)') }}</strong>.
+                            {{ __('Utilisez le bouton "Ajouter au panier" ci-dessus.') }}
+                        </div>
+                    `;
                 } else {
-                    container.innerHTML = `
+                    html += `
                         <div class="text-center py-5">
-                            <i class="ti ti-box text-muted" style="font-size: 3rem;"></i>
-                            <h5 class="mt-3 text-muted">{{ __('Aucun numéro de châssis trouvé') }}</h5>
+                            <i class="ti ti-package-off text-muted" style="font-size: 3rem;"></i>
+                            <h5 class="mt-3 text-muted">{{ __('Rupture de stock') }}</h5>
                         </div>
                     `;
                 }
-                posShowLevel('pos-chassis-level');
-                posUpdateBreadcrumb([
-                    {name: '{{ __("Marques") }}', level: 'brands'},
-                    {name: '{{ __("Modèles") }}', level: 'models', data: {brandId: posCurrentBrandId}},
-                    {name: '{{ __("Familles") }}', level: 'families', data: {modelId: posCurrentModelId}},
-                    {name: familyName || '{{ __("Numéros de châssis") }}', level: 'chassis', data: {familyId: familyId}}
-                ]);
+
+                container.innerHTML = html;
+            })
+            .catch(err => {
+                console.error('Error loading chassis:', err);
+                container.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="ti ti-alert-triangle me-2"></i>{{ __('Erreur de chargement') }}
+                    </div>
+                `;
             });
         }
 
@@ -1369,11 +1570,6 @@
                 selectedChassis.push(checkbox.value);
             });
             
-            if (selectedChassis.length === 0) {
-                alert('{{ __("Veuillez sélectionner au moins un numéro de châssis") }}');
-                return;
-            }
-            
             const familyId = document.getElementById('selectedFamilyId').value;
             
             fetch('/pos/add-to-cart', {
@@ -1406,7 +1602,7 @@
                     $('.btn-empty button').addClass('btn-clear-cart');
                     
                     // Reload page to show updated cart
-                    location.reload();
+                    setTimeout(() => location.reload(), 600);
                 } else {
                     show_toastr('{{ __("Error") }}', data.message, 'error');
                 }
@@ -1428,15 +1624,33 @@
                 scanResultsDiv.style.display = 'none';
                 return;
             }
+
+            scanResultsBody.innerHTML = `<tr><td colspan="6" class="text-center py-2"><div class="spinner-border spinner-border-sm text-primary me-2"></div>{{ __('Recherche en cours...') }}</td></tr>`;
+            scanResultsDiv.style.display = 'block';
+
+            const csrfToken = document.querySelector('meta[name="csrf-token"]');
             
             fetch(`/pos/search-chassis?q=${encodeURIComponent(query)}`, {
                 headers: {
                     'Accept': 'application/json',
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'X-CSRF-TOKEN': csrfToken ? csrfToken.getAttribute('content') : ''
                 }
             })
-            .then(r => r.json())
+            .then(async r => {
+                const text = await r.text();
+                try {
+                    return JSON.parse(text);
+                } catch (e) {
+                    const preview = text.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().substring(0, 300);
+                    throw new Error('HTTP ' + r.status + ' — ' + preview);
+                }
+            })
             .then(data => {
+                if (data.error) {
+                    scanResultsBody.innerHTML = `<tr><td colspan="6" class="text-center text-danger py-3"><i class="ti ti-alert-triangle me-2"></i>{{ __('Erreur') }}: ${data.error}</td></tr>`;
+                    scanResultsDiv.style.display = 'block';
+                    return;
+                }
                 if (data.results && data.results.length > 0) {
                     let html = '';
                     data.results.forEach(item => {
@@ -1458,12 +1672,20 @@
                     scanResultsBody.innerHTML = html;
                     scanResultsDiv.style.display = 'block';
                 } else {
-                    scanResultsBody.innerHTML = `<tr><td colspan="6" class="text-center text-muted py-3">{{ __('Aucun résultat trouvé') }}</td></tr>`;
+                    scanResultsBody.innerHTML = `<tr><td colspan="6" class="text-center py-3">
+                        <div class="alert alert-warning mb-0">
+                            <i class="ti ti-search-off me-2"></i>
+                            <strong>{{ __('Aucun résultat trouvé') }}</strong>
+                            <br><small class="text-muted">{{ __('Vérifiez le numéro de châssis et réessayez') }}</small>
+                        </div>
+                    </td></tr>`;
                     scanResultsDiv.style.display = 'block';
                 }
             })
             .catch(err => {
                 console.error('Scan search error:', err);
+                scanResultsBody.innerHTML = `<tr><td colspan="6" class="text-center text-danger py-3"><i class="ti ti-alert-triangle me-2"></i>${err.message || '{{ __("Erreur lors de la recherche") }}'}</td></tr>`;
+                scanResultsDiv.style.display = 'block';
             });
         }
 
@@ -1483,7 +1705,13 @@
         }
 
         document.getElementById('scanSearchBtn').addEventListener('click', function() {
-            performScanSearch(scanInput.value.trim());
+            const query = scanInput.value.trim();
+            if (!query) {
+                scanResultsBody.innerHTML = `<tr><td colspan="6" class="text-center text-warning py-3"><i class="ti ti-alert-circle me-2"></i>{{ __('Veuillez saisir un numéro de châssis') }}</td></tr>`;
+                scanResultsDiv.style.display = 'block';
+                return;
+            }
+            performScanSearch(query);
         });
 
         // Add scanned chassis to cart
@@ -1510,10 +1738,17 @@
             .then(data => {
                 if (data.success) {
                     show_toastr('Success', data.message, 'success');
-                    // Remove the row from results
-                    btn.closest('tr').fadeOut(300, function() { $(this).remove(); });
-                    // Reload to update cart
-                    setTimeout(() => location.reload(), 800);
+                    // Change button to success state
+                    btn.removeClass('btn-primary').addClass('btn-success').html('<i class="ti ti-check me-1"></i>{{ __("Ajouté") }}');
+                    // Update displayed totals
+                    if (data.total) {
+                        $('#displaytotal').text(data.total);
+                        $('.totalamount').text(data.total);
+                    }
+                    $('#btn-pur button').removeAttr('disabled');
+                    $('.btn-empty button').addClass('btn-clear-cart');
+                    // Reload after short delay to update cart table
+                    setTimeout(() => location.reload(), 1200);
                 } else {
                     show_toastr('{{ __("Error") }}', data.message, 'error');
                     btn.prop('disabled', false).html('<i class="ti ti-plus me-1"></i>{{ __("Ajouter") }}');
@@ -1525,78 +1760,220 @@
             });
         });
 
+        // ==================== PRICE INPUT MODAL ====================
+        function showPriceModal(variantId, productName, chassisId = null, price = 0) {
+            // Si le prix catalogue existe déjà, ajouter directement sans modal
+            if (price > 0) {
+                addToCartDirect(variantId, productName, chassisId, price);
+                return;
+            }
+
+            // Sinon ouvrir le modal pour saisir le prix manuellement
+            document.getElementById('priceProductName').value = productName;
+            document.getElementById('priceVariantId').value = variantId;
+            document.getElementById('priceChassisId').value = chassisId || '';
+            document.getElementById('priceInput').value = '';
+            document.getElementById('priceHint').innerHTML = `<small class="text-warning"><i class="ti ti-alert-triangle me-1"></i>{{ __('Aucun prix catalogue. Saisissez le prix de vente.') }}</small>`;
+
+            const modal = new bootstrap.Modal(document.getElementById('priceInputModal'));
+            modal.show();
+            document.getElementById('priceInputModal').addEventListener('shown.bs.modal', function handler() {
+                document.getElementById('priceInput').focus();
+                this.removeEventListener('shown.bs.modal', handler);
+            });
+        }
+
+        function addToCartDirect(variantId, productName, chassisId, price) {
+            const payload = { family_id: variantId, price: price };
+            if (chassisId) payload.selected_chassis = [chassisId];
+
+            show_toastr('', '{{ __("Ajout en cours...") }}', 'info');
+
+            fetch('/pos/add-to-cart', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    show_toastr('{{ __("Succès") }}', productName + ' {{ __("ajouté au panier") }}', 'success');
+                    // Rafraîchir le panier
+                    if (typeof refreshCart === 'function') refreshCart();
+                    else location.reload();
+                } else {
+                    show_toastr('{{ __("Erreur") }}', data.message || '{{ __("Erreur lors de l\'ajout") }}', 'error');
+                }
+            })
+            .catch(err => {
+                console.error('Add to cart error:', err);
+                show_toastr('{{ __("Erreur") }}', '{{ __("Erreur réseau") }}', 'error');
+            });
+        }
+
+        // Confirmer l'ajout au panier avec prix
+        document.getElementById('confirmAddToCart').addEventListener('click', function() {
+            const price = parseFloat(document.getElementById('priceInput').value);
+            const variantId = document.getElementById('priceVariantId').value;
+            const chassisId = document.getElementById('priceChassisId').value;
+            
+            if (isNaN(price) || price <= 0) {
+                show_toastr('{{ __("Error") }}', '{{ __("Veuillez saisir un prix valide") }}', 'error');
+                document.getElementById('priceInput').focus();
+                return;
+            }
+            
+            const btn = this;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="ti ti-loader me-1"></i>{{ __("Ajout...") }}';
+            
+            const payload = {
+                family_id: variantId,
+                price: price
+            };
+            
+            if (chassisId) {
+                payload.selected_chassis = [chassisId];
+            }
+            
+            fetch('/pos/add-to-cart', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    bootstrap.Modal.getInstance(document.getElementById('priceInputModal')).hide();
+                    show_toastr('Success', data.message, 'success');
+                    
+                    // Update displayed totals
+                    if (data.total) {
+                        $('#displaytotal').text(data.total);
+                        $('.totalamount').text(data.total);
+                    }
+                    $('#btn-pur button').removeAttr('disabled');
+                    $('.btn-empty button').addClass('btn-clear-cart');
+                    
+                    // Reload to update cart table
+                    setTimeout(() => location.reload(), 800);
+                } else {
+                    show_toastr('{{ __("Error") }}', data.message, 'error');
+                }
+                btn.disabled = false;
+                btn.innerHTML = '<i class="ti ti-shopping-cart me-1"></i>{{ __("Ajouter au panier") }}';
+            })
+            .catch(err => {
+                console.error('Add to cart error:', err);
+                show_toastr('{{ __("Error") }}', '{{ __("Une erreur est survenue") }}', 'error');
+                btn.disabled = false;
+                btn.innerHTML = '<i class="ti ti-shopping-cart me-1"></i>{{ __("Ajouter au panier") }}';
+            });
+        });
+
         // ==================== PAY / CREATE ORDER MODAL ====================
         const payModal = document.getElementById('payOrderModal');
         
+        const cur = '{{ \App\Models\Store::where("id",\Auth::user()->current_store)->first()->currency ?? "MAD" }}';
+
+        function recalcPayTotals(subtotal) {
+            const tva = parseFloat(document.getElementById('pay_tva').value) || 0;
+            const tvaAmount = subtotal * tva / 100;
+            const total = subtotal + tvaAmount;
+            document.getElementById('paySubtotalDisplay').textContent    = cur + ' ' + subtotal.toFixed(2);
+            document.getElementById('payTvaPercent').textContent         = tva;
+            document.getElementById('payTvaAmountDisplay').textContent   = cur + ' ' + tvaAmount.toFixed(2);
+            document.getElementById('payTotalDisplay').textContent       = cur + ' ' + total.toFixed(2);
+        }
+
+        document.getElementById('pay_tva')?.addEventListener('input', function() {
+            const subtotal = parseFloat(this.closest('.modal-body')?.dataset.subtotal || 0);
+            recalcPayTotals(subtotal);
+        });
+
         document.getElementById('openPayModal')?.addEventListener('click', function() {
-            const cartRows = document.querySelectorAll('#tbody tr[data-chassis-id]');
+            const cartRows = document.querySelectorAll('#tbody tr[data-chassis-id], #tbody tr[data-product-id]');
             const payBody = document.getElementById('payItemsBody');
             let html = '';
-            
+            let subtotal = 0;
+
             if (cartRows.length > 0) {
                 cartRows.forEach(row => {
-                    const chassisId = row.getAttribute('data-chassis-id');
-                    const chassisNumber = row.getAttribute('data-chassis-number');
+                    const chassisNumber = row.getAttribute('data-chassis-number') || 'N/A';
                     const nameCell = row.querySelector('.name');
                     const productName = nameCell ? nameCell.textContent.trim().split('\n')[0].trim() : '';
-                    
+                    const priceCell = row.querySelector('.price');
+                    const priceText = priceCell ? priceCell.textContent.trim() : '0';
+                    const price = parseFloat(priceText.replace(/[^0-9.]/g, '')) || 0;
+                    const qtyCell = row.querySelector('.quantity');
+                    const quantity = qtyCell ? parseInt(qtyCell.textContent.trim()) : 1;
+                    const rowSubtotal = price * quantity;
+                    subtotal += rowSubtotal;
+
                     html += `<tr>
                         <td>${productName}</td>
                         <td><span class="badge bg-info">${chassisNumber}</span></td>
-                        <td>
-                            <input type="number" class="form-control pay-item-price" 
-                                   data-chassis-id="${chassisId}" 
-                                   value="0" min="0" step="0.01" 
-                                   placeholder="{{ __('Saisir le prix') }}">
-                        </td>
+                        <td class="text-end">${cur} ${price.toFixed(2)}</td>
+                        <td class="text-center">${quantity}</td>
+                        <td class="text-end fw-bold">${cur} ${rowSubtotal.toFixed(2)}</td>
                     </tr>`;
                 });
             } else {
-                html = `<tr><td colspan="3" class="text-center text-muted py-3">{{ __('Aucun châssis dans le panier') }}</td></tr>`;
+                html = `<tr><td colspan="5" class="text-center text-muted py-3">{{ __('Aucun article dans le panier') }}</td></tr>`;
             }
-            
+
             payBody.innerHTML = html;
-            updatePayTotal();
-            
+            // Reset form fields
+            document.getElementById('pay_tva').value = '0';
+            document.getElementById('pay_comment').value = '';
+            // Store subtotal on modal-body for TVA recalc
+            document.querySelector('#payOrderModal .modal-body').dataset.subtotal = subtotal;
+            recalcPayTotals(subtotal);
+
             const modal = new bootstrap.Modal(payModal);
             modal.show();
         });
 
-        // Update total when prices change
-        $(document).on('input', '.pay-item-price', function() {
-            updatePayTotal();
-        });
-
-        function updatePayTotal() {
-            let total = 0;
-            document.querySelectorAll('.pay-item-price').forEach(input => {
-                total += parseFloat(input.value) || 0;
-            });
-            document.getElementById('payTotalDisplay').textContent = total.toLocaleString();
-        }
-
         // Confirm and create order
         document.getElementById('confirmPayOrder')?.addEventListener('click', function() {
             const btn = this;
+            const cartRows = document.querySelectorAll('#tbody tr[data-chassis-id], #tbody tr[data-product-id]');
             const items = [];
-            let valid = true;
             
-            document.querySelectorAll('.pay-item-price').forEach(input => {
-                const price = parseFloat(input.value);
-                if (isNaN(price) || price <= 0) {
-                    valid = false;
-                    input.classList.add('is-invalid');
-                } else {
-                    input.classList.remove('is-invalid');
+            cartRows.forEach(row => {
+                const chassisId = row.getAttribute('data-chassis-id');
+                const productId = row.getAttribute('data-product-id');
+                const priceCell = row.querySelector('.price');
+                const priceText = priceCell ? priceCell.textContent.trim() : '0';
+                const price = parseFloat(priceText.replace(/[^0-9.]/g, '')) || 0;
+                
+                if (chassisId) {
                     items.push({
-                        chassis_number_id: parseInt(input.dataset.chassisId),
+                        chassis_number_id: parseInt(chassisId),
                         price: price
                     });
+                } else if (productId) {
+                    // For family items, we need to handle differently
+                    const variantId = row.getAttribute('data-variant-id');
+                    if (variantId) {
+                        items.push({
+                            variant_id: parseInt(variantId),
+                            price: price
+                        });
+                    }
                 }
             });
             
-            if (!valid || items.length === 0) {
-                show_toastr('{{ __("Error") }}', '{{ __("Veuillez saisir un prix valide pour chaque châssis") }}', 'error');
+            if (items.length === 0) {
+                show_toastr('{{ __("Error") }}', '{{ __("Aucun article dans le panier") }}', 'error');
                 return;
             }
             
@@ -1614,6 +1991,8 @@
                     customer_name: document.getElementById('pay_customer_name').value,
                     customer_phone: document.getElementById('pay_customer_phone').value,
                     notes: document.getElementById('pay_notes').value,
+                    comment: document.getElementById('pay_comment').value,
+                    tva: parseFloat(document.getElementById('pay_tva').value) || 0,
                     discount: parseFloat($('.discount').val()) || 0,
                     items: items,
                     session_key: '{{ $lastsegment }}'

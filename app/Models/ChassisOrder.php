@@ -12,10 +12,12 @@ class ChassisOrder extends Model
         'customer_phone',
         'total_price',
         'discount',
+        'tva',
         'status',
         'user_id',
         'store_id',
         'notes',
+        'comment',
     ];
 
     public function items()

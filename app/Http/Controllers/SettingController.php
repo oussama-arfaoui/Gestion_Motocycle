@@ -40,7 +40,7 @@ class SettingController extends Controller
 
                 if ($store_settings) {
                     if ($store_settings['domains']) {
-                        $serverIp   = $_SERVER['SERVER_ADDR'];
+                        $serverIp   = $_SERVER['SERVER_ADDR'] ?? request()->server('SERVER_ADDR', '127.0.0.1');
                         $domain = $store_settings['domains'];
                         if (isset($domain) && !empty($domain)) {
                             $domainip = gethostbyname($domain);
@@ -51,7 +51,7 @@ class SettingController extends Controller
                             $domainPointing = 0;
                         }
                     } else {
-                        $serverIp   = $_SERVER['SERVER_ADDR'];
+                        $serverIp   = $_SERVER['SERVER_ADDR'] ?? request()->server('SERVER_ADDR', '127.0.0.1');
                         $domain = $serverIp;
                         $domainip = gethostbyname($domain);
                         $domainPointing = 0;
@@ -68,10 +68,11 @@ class SettingController extends Controller
                     );
                     $serverIp   = gethostbyname($serverName);
 
-                    if ($serverIp == $_SERVER['SERVER_ADDR']) {
-                        $serverIp;
+                    $srvAddr = $_SERVER['SERVER_ADDR'] ?? request()->server('SERVER_ADDR', '127.0.0.1');
+                    if ($serverIp == $srvAddr) {
+                        $serverIp = $srvAddr;
                     } else {
-                        $serverIp = request()->server('SERVER_ADDR');
+                        $serverIp = $srvAddr;
                     }
 
                     $plan                        = \Auth::user()->currentPlan;
@@ -90,7 +91,7 @@ class SettingController extends Controller
 
                     $urlParts = parse_url($input);
 
-                    $serverIp   = $_SERVER['SERVER_ADDR'];
+                    $serverIp   = $_SERVER['SERVER_ADDR'] ?? request()->server('SERVER_ADDR', '127.0.0.1');
                     if (!empty($store_settings['subdomain']) || !empty($urlParts['host'])) {
                         $subdomain_Ip   = gethostbyname($urlParts['host']);
                         if ($serverIp == $subdomain_Ip) {
