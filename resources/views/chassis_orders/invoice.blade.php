@@ -63,43 +63,41 @@
 
         /* ── TOP HEADER band ── */
         .top-band {
-            background: var(--primary);
+            background: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            padding: 32px 40px 28px;
+            padding: 28px 40px 20px;
             position: relative;
+            border-top: 5px solid var(--accent);
+            border-bottom: 3px solid #f0f0f0;
         }
         .top-band::after {
             content: '';
             position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            bottom: -3px; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2), var(--primary));
         }
         .store-logo-header {
-            height: 80px;
+            height: 72px;
             width: auto;
             object-fit: contain;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
             filter: brightness(0) invert(1);
         }
-        .company-name {
-            font-size: 42px;
-            font-weight: 900;
-            color: var(--white);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            line-height: 1;
+        .mobinardo-logo {
+            height: 90px;
+            width: auto;
+            object-fit: contain;
         }
-        .company-name span { color: var(--accent); }
         .company-tagline {
             font-size: 11px;
-            color: rgba(255,255,255,.5);
+            color: #888;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-top: 8px;
+            margin-top: 6px;
         }
         /* ── Invoice ref bottom-right ── */
         .invoice-ref-bottom {
@@ -537,22 +535,9 @@
 
         <!-- ── TOP HEADER ── -->
         <div class="top-band">
-            @if(!empty($store->logo))
-                <img src="{{ asset('storage/uploads/store/' . $store->slug . '/' . $store->logo) }}"
-                     alt="{{ $storeName }}"
-                     class="store-logo-header"
-                     onerror="this.style.display='none'">
-            @endif
-            <div class="company-name">
-                <?php
-                    $parts = explode('-', strtoupper($storeName));
-                    if (count($parts) >= 2) {
-                        echo htmlspecialchars($parts[0]) . '<span>-</span>' . htmlspecialchars(implode('-', array_slice($parts, 1)));
-                    } else {
-                        echo htmlspecialchars(strtoupper($storeName));
-                    }
-                ?>
-            </div>
+            <img src="{{ asset('images/mobinardo-logo.png') }}"
+                 alt="MOBINARDO"
+                 class="mobinardo-logo">
             <div class="company-tagline">
                 {{ $storeCity }}@if($storeAddr) &nbsp;&bull;&nbsp; {{ $storeAddr }}@endif
             </div>
