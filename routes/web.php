@@ -750,6 +750,7 @@ Route::middleware(['auth', 'XSS'])->group(function () {
     Route::post('chassis-orders/{id}/validate', [ChassisOrderController::class, 'validate_order'])->name('chassis-orders.validate');
     Route::post('chassis-orders/{id}/reject', [ChassisOrderController::class, 'reject'])->name('chassis-orders.reject');
     Route::get('chassis-orders/{id}/invoice', [ChassisOrderController::class, 'invoice'])->name('chassis-orders.invoice');
+    Route::post('chassis-orders/{id}/sign', [ChassisOrderController::class, 'sign'])->name('chassis-orders.sign');
     
     //variant
     Route::get('pos-productVariant/{id}/{session}', [ProductController::class, 'productVariant']);

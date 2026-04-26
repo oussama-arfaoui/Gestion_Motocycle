@@ -256,9 +256,26 @@ class ChassisOrderController extends Controller
 
     public function invoice($id)
     {
-        $order = ChassisOrder::with('items')->findOrFail($id);
+        $order = ChassisOrder::with(['items', 'signer'])->findOrFail($id);
         $store = \App\Models\Store::find(Auth::user()->current_store);
         return view('chassis_orders.invoice', compact('order', 'store'));
+    }
+
+    public function sign(Request $request, $id)
+    {
+        $request->validate(['signature' => 'required|string']);
+        $order = ChassisOrder::findOrFail($id);
+        $order->update([
+            'signature' => $request->signature,
+            'signed_at' => now(),
+            'signed_by' => Auth::id(),
+            'status'    => 'validated',
+        ]);
+        return response()->json([
+            'success'   => true,
+            'signed_at' => $order->signed_at->format('d/m/Y à H:i'),
+            'signer'    => Auth::user()->name,
+        ]);
     }
 
     public function destroy($id)

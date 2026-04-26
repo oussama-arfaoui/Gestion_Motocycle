@@ -18,6 +18,13 @@ class ChassisOrder extends Model
         'store_id',
         'notes',
         'comment',
+        'signature',
+        'signed_at',
+        'signed_by',
+    ];
+
+    protected $casts = [
+        'signed_at' => 'datetime',
     ];
 
     public function items()
@@ -28,6 +35,11 @@ class ChassisOrder extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function signer()
+    {
+        return $this->belongsTo(User::class, 'signed_by');
     }
 
     public static function generateOrderNumber()

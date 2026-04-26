@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facture {{ $order->order_number }}</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         :root {
             --primary: #1a1a2e;
@@ -65,9 +65,10 @@
         .top-band {
             background: var(--primary);
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            padding: 28px 40px 24px;
+            text-align: center;
+            padding: 32px 40px 28px;
             position: relative;
         }
         .top-band::after {
@@ -77,34 +78,160 @@
             height: 4px;
             background: linear-gradient(90deg, var(--accent), var(--accent2));
         }
+        .store-logo-header {
+            height: 80px;
+            width: auto;
+            object-fit: contain;
+            margin-bottom: 14px;
+            filter: brightness(0) invert(1);
+        }
         .company-name {
-            font-size: 32px;
-            font-weight: 800;
+            font-size: 42px;
+            font-weight: 900;
             color: var(--white);
-            letter-spacing: 2px;
+            letter-spacing: 4px;
             text-transform: uppercase;
+            line-height: 1;
         }
         .company-name span { color: var(--accent); }
-        .invoice-label {
+        .company-tagline {
+            font-size: 11px;
+            color: rgba(255,255,255,.5);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 8px;
+        }
+        /* ── Invoice ref bottom-right ── */
+        .invoice-ref-bottom {
             text-align: right;
         }
-        .invoice-label .word {
-            font-size: 13px;
-            font-weight: 600;
-            color: rgba(255,255,255,.6);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-        .invoice-label .number {
-            font-size: 22px;
+        .invoice-ref-bottom .ref-label {
+            font-size: 10px;
             font-weight: 700;
-            color: var(--white);
-            margin-top: 2px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            margin-bottom: 4px;
         }
-        .invoice-label .date-line {
+        .invoice-ref-bottom .ref-number {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--primary);
+            font-family: monospace;
+            letter-spacing: 1px;
+        }
+        .invoice-ref-bottom .ref-date {
             font-size: 12px;
-            color: rgba(255,255,255,.55);
+            color: var(--muted);
             margin-top: 4px;
+        }
+        /* ── Electronic Signature ── */
+        .sig-section {
+            margin-top: 28px;
+        }
+        .sig-section-title {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .sig-section-title::before {
+            content: '';
+            display: inline-block;
+            width: 16px; height: 2px;
+            background: var(--accent);
+        }
+        .sig-canvas-wrap {
+            border: 1.5px dashed #ced4da;
+            border-radius: 8px;
+            background: #f8f9fa;
+            position: relative;
+            display: inline-block;
+        }
+        .sig-canvas-wrap canvas {
+            display: block;
+            border-radius: 8px;
+            cursor: crosshair;
+        }
+        .sig-canvas-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            font-size: 12px;
+            color: #adb5bd;
+            font-style: italic;
+        }
+        .sig-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .btn-sig-clear {
+            padding: 7px 16px;
+            border: 1.5px solid var(--border);
+            background: #fff;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            color: var(--muted);
+            transition: all .15s;
+        }
+        .btn-sig-clear:hover { border-color: #adb5bd; color: var(--text); }
+        .btn-sig-validate {
+            padding: 7px 20px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: .3px;
+            transition: background .15s;
+        }
+        .btn-sig-validate:hover { background: var(--accent); }
+        .btn-sig-validate:disabled { opacity: .6; cursor: not-allowed; }
+        .sig-saved-wrap { text-align: center; }
+        .sig-verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .sig-saved-img {
+            display: block;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            max-width: 260px;
+            max-height: 90px;
+            background: #fff;
+        }
+        .sig-meta {
+            font-size: 10px;
+            color: var(--muted);
+            margin-top: 5px;
+        }
+        #sigMsg {
+            font-size: 12px;
+            margin-top: 6px;
+            padding: 6px 10px;
+            border-radius: 4px;
+            display: none;
         }
 
         /* ── STATUS bar ── */
@@ -410,25 +537,24 @@
 
         <!-- ── TOP HEADER ── -->
         <div class="top-band">
-            <div>
-                <div class="company-name">
-                    <?php
-                        $parts = explode('-', strtoupper($storeName));
-                        if (count($parts) >= 2) {
-                            echo htmlspecialchars($parts[0]) . '<span>-</span>' . htmlspecialchars(implode('-', array_slice($parts, 1)));
-                        } else {
-                            echo htmlspecialchars(strtoupper($storeName));
-                        }
-                    ?>
-                </div>
-                <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:6px;letter-spacing:.5px;">
-                    {{ $storeCity }}@if($storeAddr), {{ $storeAddr }}@endif
-                </div>
+            @if(!empty($store->logo))
+                <img src="{{ asset('storage/uploads/store/' . $store->slug . '/' . $store->logo) }}"
+                     alt="{{ $storeName }}"
+                     class="store-logo-header"
+                     onerror="this.style.display='none'">
+            @endif
+            <div class="company-name">
+                <?php
+                    $parts = explode('-', strtoupper($storeName));
+                    if (count($parts) >= 2) {
+                        echo htmlspecialchars($parts[0]) . '<span>-</span>' . htmlspecialchars(implode('-', array_slice($parts, 1)));
+                    } else {
+                        echo htmlspecialchars(strtoupper($storeName));
+                    }
+                ?>
             </div>
-            <div class="invoice-label">
-                <div class="word">Facture</div>
-                <div class="number">{{ $order->order_number }}</div>
-                <div class="date-line">{{ $storeCity }} le {{ $order->created_at->format('d/m/Y') }}</div>
+            <div class="company-tagline">
+                {{ $storeCity }}@if($storeAddr) &nbsp;&bull;&nbsp; {{ $storeAddr }}@endif
             </div>
         </div>
 
@@ -461,21 +587,23 @@
                     </div>
                 </div>
                 <div class="info-box" style="flex:1;">
-                    <span class="box-label">Commande</span>
-                    <div class="field-block">
-                        <div class="field-name">N° Facture</div>
-                        <div class="field-val" style="font-family:monospace;font-size:16px;">{{ $order->order_number }}</div>
-                    </div>
-                    <div class="field-block">
-                        <div class="field-name">Date</div>
-                        <div class="field-val">{{ $order->created_at->format('d/m/Y') }}</div>
-                    </div>
-                    @if($order->created_by ?? false)
+                    <span class="box-label">Vendeur</span>
                     <div class="field-block">
                         <div class="field-name">Commercial</div>
                         <div class="field-val">{{ $order->user->name ?? '—' }}</div>
                     </div>
-                    @endif
+                    <div class="field-block">
+                        <div class="field-name">Statut</div>
+                        <div class="field-val">
+                            @if($order->status == 'pending')
+                                <span class="badge badge-pending">En attente</span>
+                            @elseif($order->status == 'validated')
+                                <span class="badge badge-validated">Validée</span>
+                            @else
+                                <span class="badge badge-rejected">Rejetée</span>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -578,35 +706,177 @@
             @endif
             @endif
 
-            <!-- Footer -->
+            <!-- Footer: stamp + invoice-ref + signature -->
             <div class="invoice-footer">
-                <div class="footer-stamp">
-                    <?php
-                        $fp = explode('-', strtoupper($storeName));
-                        if (count($fp) >= 2) {
-                            echo '<div class="stamp-name">' . htmlspecialchars($fp[0]) . '<span>-</span>' . htmlspecialchars(implode('-', array_slice($fp, 1))) . '</div>';
-                        } else {
-                            echo '<div class="stamp-name">' . htmlspecialchars(strtoupper($storeName)) . '</div>';
-                        }
-                    ?>
-                    <div class="stamp-sub">Signature & Cachet</div>
+                <div>
+                    <div class="footer-stamp">
+                        <?php
+                            $fp = explode('-', strtoupper($storeName));
+                            if (count($fp) >= 2) {
+                                echo '<div class="stamp-name">' . htmlspecialchars($fp[0]) . '<span>-</span>' . htmlspecialchars(implode('-', array_slice($fp, 1))) . '</div>';
+                            } else {
+                                echo '<div class="stamp-name">' . htmlspecialchars(strtoupper($storeName)) . '</div>';
+                            }
+                        ?>
+                        <div class="stamp-sub">Cachet officiel</div>
+                    </div>
+                    <div class="footer-addr" style="margin-top:12px;">
+                        @if($storeAddr)<div>{{ $storeAddr }}@if($storeCity), {{ $storeCity }}@endif</div>@endif
+                        @if($storePhone)<div><strong>Tél :</strong> {{ $storePhone }}</div>@endif
+                        @if($storeEmail)<div><strong>Email :</strong> {{ $storeEmail }}</div>@endif
+                        <div style="margin-top:4px;font-size:10px;color:#aaa;">Merci pour votre confiance</div>
+                    </div>
                 </div>
-                <div class="footer-addr">
-                    @if($storeAddr)
-                        <div>{{ $storeAddr }}@if($storeCity), {{ $storeCity }}@endif</div>
-                    @endif
-                    @if($storePhone)
-                        <div><strong>Tél :</strong> {{ $storePhone }}</div>
-                    @endif
-                    @if($storeEmail)
-                        <div><strong>Email :</strong> {{ $storeEmail }}</div>
-                    @endif
-                    <div style="margin-top:6px;font-size:10px;color:#aaa;">{{ __('Merci pour votre confiance') }}</div>
+
+                <!-- Right: invoice ref + electronic signature -->
+                <div>
+                    <!-- Invoice N° + Date — bottom right, once -->
+                    <div class="invoice-ref-bottom">
+                        <div class="ref-label">Facture</div>
+                        <div class="ref-number">{{ $order->order_number }}</div>
+                        <div class="ref-date">{{ $storeCity }} le {{ $order->created_at->format('d/m/Y') }}</div>
+                    </div>
+
+                    <!-- Electronic signature -->
+                    <div class="sig-section">
+                        <div class="sig-section-title">Signature électronique de validation</div>
+
+                        @if($order->signature)
+                            {{-- Already signed: show saved signature --}}
+                            <div class="sig-saved-wrap">
+                                <div class="sig-verified-badge">
+                                    <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                    Facture validée et signée
+                                </div>
+                                <img src="{{ $order->signature }}" alt="Signature" class="sig-saved-img">
+                                <div class="sig-meta">
+                                    Signé le {{ $order->signed_at ? $order->signed_at->format('d/m/Y \\\u00e0 H:i') : '' }}
+                                    @if($order->signer) &nbsp;&bull;&nbsp; {{ $order->signer->name }} @endif
+                                </div>
+                            </div>
+                        @else
+                            @auth
+                                {{-- Canvas signature pad --}}
+                                <div class="sig-canvas-wrap" id="sigWrap">
+                                    <canvas id="sigCanvas" width="300" height="110"></canvas>
+                                    <div class="sig-canvas-placeholder" id="sigPlaceholder">Dessinez votre signature ici</div>
+                                </div>
+                                <div class="sig-actions">
+                                    <button class="btn-sig-clear" onclick="clearSig()">&#8635; Effacer</button>
+                                    <button class="btn-sig-validate" id="btnValidate" onclick="saveSig()">
+                                        &#10003; Valider &amp; Signer
+                                    </button>
+                                </div>
+                                <div id="sigMsg"></div>
+                            @else
+                                <div style="color:var(--muted);font-size:12px;font-style:italic;text-align:right;">En attente de validation admin…</div>
+                            @endauth
+                        @endif
+                    </div>
                 </div>
             </div>
 
         </div><!-- /invoice-body -->
     </div><!-- /page -->
+
+@auth
+<script>
+(function() {
+    const canvas  = document.getElementById('sigCanvas');
+    if (!canvas) return;
+    const ctx     = canvas.getContext('2d');
+    const placeholder = document.getElementById('sigPlaceholder');
+    let drawing   = false;
+    let hasDrawn  = false;
+
+    ctx.strokeStyle = '#1a1a2e';
+    ctx.lineWidth   = 2;
+    ctx.lineCap     = 'round';
+    ctx.lineJoin    = 'round';
+
+    function getPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const src  = e.touches ? e.touches[0] : e;
+        return { x: src.clientX - rect.left, y: src.clientY - rect.top };
+    }
+
+    function startDraw(e) {
+        drawing = true;
+        hasDrawn = true;
+        if (placeholder) placeholder.style.display = 'none';
+        ctx.beginPath();
+        const p = getPos(e);
+        ctx.moveTo(p.x, p.y);
+        e.preventDefault();
+    }
+    function draw(e) {
+        if (!drawing) return;
+        const p = getPos(e);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+        e.preventDefault();
+    }
+    function stopDraw() { drawing = false; }
+
+    canvas.addEventListener('mousedown',  startDraw);
+    canvas.addEventListener('mousemove',  draw);
+    canvas.addEventListener('mouseup',    stopDraw);
+    canvas.addEventListener('mouseleave', stopDraw);
+    canvas.addEventListener('touchstart', startDraw, { passive: false });
+    canvas.addEventListener('touchmove',  draw,      { passive: false });
+    canvas.addEventListener('touchend',   stopDraw);
+
+    window.clearSig = function() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        hasDrawn = false;
+        if (placeholder) placeholder.style.display = 'flex';
+    };
+
+    window.saveSig = function() {
+        if (!hasDrawn) {
+            alert('Veuillez dessiner votre signature avant de valider.');
+            return;
+        }
+        const btn = document.getElementById('btnValidate');
+        btn.disabled = true;
+        btn.textContent = 'Validation en cours…';
+
+        const sigData = canvas.toDataURL('image/png');
+
+        fetch('{{ route("chassis-orders.sign", $order->id) }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN':  '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ signature: sigData })
+        })
+        .then(r => r.json())
+        .then(data => {
+            const msg = document.getElementById('sigMsg');
+            if (data.success) {
+                msg.style.display = 'block';
+                msg.style.background = '#d1fae5';
+                msg.style.color = '#065f46';
+                msg.innerHTML = '✓ Facture validée et signée par ' + data.signer + ' le ' + data.signed_at;
+                setTimeout(() => window.location.reload(), 1400);
+            } else {
+                btn.disabled = false;
+                btn.textContent = '✓ Valider & Signer';
+                msg.style.display = 'block';
+                msg.style.background = '#fee2e2';
+                msg.style.color = '#991b1b';
+                msg.textContent = 'Erreur lors de la validation.';
+            }
+        })
+        .catch(() => {
+            btn.disabled = false;
+            btn.textContent = '✓ Valider & Signer';
+        });
+    };
+})();
+</script>
+@endauth
 
 </body>
 </html>
