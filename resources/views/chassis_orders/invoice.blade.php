@@ -741,7 +741,8 @@
                             </div>
                         @else
                             @auth
-                                {{-- Canvas signature pad --}}
+                                @if(Auth::user()->type === 'admin')
+                                    {{-- Canvas signature pad --}}
                                 <div class="sig-canvas-wrap" id="sigWrap">
                                     <canvas id="sigCanvas" width="300" height="110"></canvas>
                                     <div class="sig-canvas-placeholder" id="sigPlaceholder">Dessinez votre signature ici</div>
@@ -753,8 +754,11 @@
                                     </button>
                                 </div>
                                 <div id="sigMsg"></div>
+                                @else
+                                    <div style="color:var(--muted);font-size:12px;font-style:italic;text-align:right;">Seul un admin peut signer cette facture.</div>
+                                @endif
                             @else
-                                <div style="color:var(--muted);font-size:12px;font-style:italic;text-align:right;">En attente de validation admin…</div>
+                                <div style="color:var(--muted);font-size:12px;font-style:italic;text-align:right;">Connectez-vous en tant qu'admin pour signer.</div>
                             @endauth
                         @endif
                     </div>
