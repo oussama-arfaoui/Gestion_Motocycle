@@ -72,11 +72,38 @@
     }
 
     /* ── Table rows ── */
-    .orders-table tr.order-row { border-left: 4px solid transparent; transition: background .1s; }
-    .orders-table tr.order-row.status-pending   { border-left-color: #f59e0b; }
-    .orders-table tr.order-row.status-validated { border-left-color: #10b981; }
-    .orders-table tr.order-row.status-rejected  { border-left-color: #ef4444; }
-    .orders-table tr.order-row:hover { background: #fafafa; }
+    .orders-table { border-collapse: separate; border-spacing: 0; }
+    .orders-table thead th {
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        border: none;
+        color: #475569;
+        font-weight: 700;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 16px 12px;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+    .orders-table tbody tr {
+        border-bottom: 1px solid #e2e8f0;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .orders-table tbody tr:hover {
+        background: linear-gradient(90deg, #f8fafc 0%, #f1f5f9 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .orders-table tbody td {
+        padding: 12px;
+        vertical-align: middle;
+        border: none;
+        line-height: 1.4;
+    }
+    .orders-table tr.order-row.status-pending   { border-left: 4px solid #f59e0b; }
+    .orders-table tr.order-row.status-validated { border-left: 4px solid #10b981; }
+    .orders-table tr.order-row.status-rejected  { border-left: 4px solid #ef4444; }
 
     /* ── Status pill ── */
     .status-pill {
@@ -94,29 +121,69 @@
 
     /* ── Order number ── */
     .order-num {
-        font-family: monospace; font-size: 13px; font-weight: 700;
-        color: #1a1a2e; letter-spacing: .5px;
+        font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        color: #1e293b;
+        letter-spacing: 0.5px;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        padding: 4px 8px;
+        border-radius: 6px;
+        border: 1px solid #cbd5e1;
+        display: inline-block;
+        line-height: 1.2;
     }
-    .order-num small { font-size: 10px; color: #999; font-family: sans-serif; font-weight: 400; }
+    .order-num small { 
+        font-size: 9px; 
+        color: #64748b; 
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+        font-weight: 400;
+        display: block;
+        margin-top: 1px;
+    }
 
     /* ── Item chips ── */
     .item-chip {
-        display: inline-flex; align-items: center; gap: 4px;
-        background: #f0f4ff; border: 1px solid #c7d2fe;
-        border-radius: 6px; padding: 2px 7px;
-        font-size: 11px; font-weight: 600; color: #3730a3;
-        margin: 1px 0;
+        display: inline-flex; align-items: center; gap: 3px;
+        background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+        border: 1px solid #c7d2fe;
+        border-radius: 6px; padding: 2px 6px;
+        font-size: 10px; font-weight: 600; color: #4338ca;
+        margin: 1px 3px 1px 0;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+        transition: all 0.2s;
+    }
+    .item-chip:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.12);
     }
     .price-chip {
         display: inline-block;
-        background: #f0fdf4; border: 1px solid #bbf7d0;
-        border-radius: 5px; padding: 1px 7px;
-        font-size: 11px; font-weight: 600; color: #166534;
+        background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        border: 1px solid #bbf7d0;
+        border-radius: 6px; padding: 2px 6px;
+        font-size: 10px; font-weight: 700; color: #166534;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.08);
     }
 
     /* ── Total ── */
-    .total-val { font-size: 14px; font-weight: 700; color: #1a1a2e; }
-    .tva-note  { font-size: 10px; color: #999; }
+    .total-val { 
+        font-size: 14px; 
+        font-weight: 800; 
+        color: #1e293b;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        padding: 4px 8px;
+        border-radius: 6px;
+        border: 1px solid #cbd5e1;
+        display: inline-block;
+        line-height: 1.2;
+    }
+    .tva-note  { 
+        font-size: 10px; 
+        color: #64748b; 
+        margin-top: 4px;
+        font-style: italic;
+    }
 
     /* ── Empty state ── */
     .empty-state { padding: 60px 20px; text-align: center; }
@@ -181,39 +248,25 @@
     </div>
 </div>
 
-{{-- ── VALIDATION FLOW ── --}}
-<div class="flow-bar mb-4">
-    <span style="font-size:11px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:1px;margin-right:16px;">Flux</span>
-    <div class="flow-step">
-        <div class="flow-dot" style="background:#f59e0b;"></div>
-        <span style="color:#92600a;">Créée</span>
-        <span style="color:#bbb;font-weight:400;font-size:11px;">({{ $stats['pending'] }})</span>
-    </div>
-    <div class="flow-arrow"></div>
-    <div class="flow-step">
-        <div class="flow-dot" style="background:#3b82f6;"></div>
-        <span style="color:#1e40af;">En traitement</span>
-    </div>
-    <div class="flow-arrow"></div>
-    <div class="flow-step">
-        <div class="flow-dot" style="background:#10b981;"></div>
-        <span style="color:#065f46;">Validée</span>
-        <span style="color:#bbb;font-weight:400;font-size:11px;">({{ $stats['validated'] }})</span>
-    </div>
-    <div class="ms-auto d-flex align-items-center gap-6" style="gap:20px;">
-        <div class="flow-step">
-            <div class="flow-dot" style="background:#ef4444;"></div>
-            <span style="color:#991b1b;">Rejetée</span>
-            <span style="color:#bbb;font-weight:400;font-size:11px;">({{ $stats['rejected'] }})</span>
-        </div>
-    </div>
-</div>
 
 {{-- ── MAIN TABLE CARD ── --}}
-<div class="card border-0 shadow-sm">
+<div class="card border-0 shadow-lg" style="border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0;">
     <div class="card-header bg-white border-bottom-0 pb-0 pt-3 px-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="mb-0 fw-bold">{{ __('Liste des Commandes') }}</h5>
+            <div class="d-flex gap-2 align-items-center">
+                <div class="input-group input-group-sm" style="max-width: 300px;">
+                    <span class="input-group-text bg-light border-end-0">
+                        <i class="ti ti-calendar text-muted"></i>
+                    </span>
+                    <input type="date" id="dateFilterStart" class="form-control border-start-0" placeholder="Début">
+                    <span class="input-group-text bg-light border-start-0 border-end-0">→</span>
+                    <input type="date" id="dateFilterEnd" class="form-control border-start-0" placeholder="Fin">
+                    <button class="btn btn-sm btn-outline-secondary" type="button" id="clearDateFilter">
+                        <i class="ti ti-x"></i>
+                    </button>
+                </div>
+            </div>
         </div>
         {{-- Filter tabs --}}
         <ul class="nav filter-tabs" id="statusFilterTabs">
@@ -240,24 +293,24 @@
         </ul>
     </div>
 
-    <div class="card-body p-0">
+    <div class="card-body p-3">
         <div class="table-responsive">
             <table class="table table-hover orders-table mb-0" id="orders-table">
                 <thead style="background:#f8f9fa;">
                     <tr>
-                        <th style="padding-left:20px;">{{ __('N° Commande') }}</th>
+                        <th>{{ __('N° Commande') }}</th>
                         <th>{{ __('Client') }}</th>
                         <th>{{ __('Articles') }}</th>
                         <th>{{ __('Total') }}</th>
                         <th>{{ __('Statut') }}</th>
                         <th>{{ __('Date') }}</th>
-                        <th class="text-end" style="padding-right:20px;">{{ __('Actions') }}</th>
+                        <th class="text-end">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($orders as $order)
                         <tr class="order-row status-{{ $order->status }}" data-status="{{ $order->status }}">
-                            <td style="padding-left:20px;">
+                            <td>
                                 <div class="order-num">{{ $order->order_number }}</div>
                                 <small class="text-muted">{{ $order->items->count() }} article(s)</small>
                             </td>
@@ -273,12 +326,12 @@
                             </td>
                             <td>
                                 @foreach($order->items as $item)
-                                    <div class="d-flex align-items-center gap-1 mb-1 flex-wrap">
-                                        <span style="font-size:11px;color:#666;">{{ $item->brand_name }} → {{ $item->model_name }}</span><br>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-1 flex-wrap">
-                                        <span class="item-chip"><i class="ti ti-key" style="font-size:10px;"></i>{{ $item->chassis_number }}</span>
-                                        <span class="price-chip">{{ \App\Models\Utility::priceFormat($item->price) }}</span>
+                                    <div style="margin-bottom: 4px;">
+                                        <div style="font-size:10px;color:#666; margin-bottom: 2px;">{{ $item->brand_name }} → {{ $item->model_name }}</div>
+                                        <div class="d-flex align-items-center gap-1 flex-wrap">
+                                            <span class="item-chip"><i class="ti ti-key" style="font-size:9px;"></i>{{ $item->chassis_number }}</span>
+                                            <span class="price-chip">{{ \App\Models\Utility::priceFormat($item->price) }}</span>
+                                        </div>
                                     </div>
                                 @endforeach
                             </td>
@@ -304,12 +357,14 @@
                                 <div style="font-size:13px;">{{ $order->created_at->format('d/m/Y') }}</div>
                                 <small class="text-muted">{{ $order->created_at->format('H:i') }}</small>
                             </td>
-                            <td class="text-end" style="padding-right:20px;">
+                            <td class="text-end">
                                 <div class="d-flex justify-content-end gap-1 flex-wrap">
+                                    @if(in_array(\Auth::user()->type, ['super admin', 'admin']))
                                     <a href="{{ route('chassis-orders.invoice', $order->id) }}"
                                        class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="{{ __('Facture') }}" target="_blank">
                                         <i class="ti ti-file-invoice"></i>
                                     </a>
+                                    @endif
                                     <button class="btn btn-sm btn-outline-info view-order-btn"
                                             data-id="{{ $order->id }}" data-bs-toggle="tooltip" title="{{ __('Voir') }}">
                                         <i class="ti ti-eye"></i>
@@ -396,9 +451,43 @@
         document.querySelectorAll('#statusFilterTabs .nav-link').forEach(l => {
             l.classList.toggle('active', l.dataset.filter === filter);
         });
+        applyAllFilters();
+    }
+
+    // ── Date filter ──
+    function applyDateFilter() {
+        applyAllFilters();
+    }
+
+    function applyAllFilters() {
+        const statusFilter = document.querySelector('#statusFilterTabs .nav-link.active')?.dataset.filter || 'all';
+        const startDate = document.getElementById('dateFilterStart').value;
+        const endDate = document.getElementById('dateFilterEnd').value;
+        
         document.querySelectorAll('#orders-table tbody tr.order-row').forEach(row => {
-            const match = filter === 'all' || row.dataset.status === filter;
-            row.style.display = match ? '' : 'none';
+            // Status filter
+            const statusMatch = statusFilter === 'all' || row.dataset.status === statusFilter;
+            
+            // Date filter
+            let dateMatch = true;
+            if (startDate || endDate) {
+                const orderDate = row.querySelector('td:nth-child(6) div')?.textContent; // Format: d/m/Y
+                if (orderDate) {
+                    const [day, month, year] = orderDate.split('/');
+                    const orderDateObj = new Date(`${year}-${month}-${day}`);
+                    
+                    if (startDate) {
+                        const start = new Date(startDate);
+                        dateMatch = dateMatch && orderDateObj >= start;
+                    }
+                    if (endDate) {
+                        const end = new Date(endDate);
+                        dateMatch = dateMatch && orderDateObj <= end;
+                    }
+                }
+            }
+            
+            row.style.display = (statusMatch && dateMatch) ? '' : 'none';
         });
     }
     document.querySelectorAll('#statusFilterTabs .nav-link').forEach(link => {
@@ -412,6 +501,15 @@
             applyFilter(this.dataset.filter);
             document.querySelector('.card.border-0')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
+    });
+
+    // Date filter event listeners
+    document.getElementById('dateFilterStart')?.addEventListener('change', applyDateFilter);
+    document.getElementById('dateFilterEnd')?.addEventListener('change', applyDateFilter);
+    document.getElementById('clearDateFilter')?.addEventListener('click', function() {
+        document.getElementById('dateFilterStart').value = '';
+        document.getElementById('dateFilterEnd').value = '';
+        applyDateFilter();
     });
 
     // View Order

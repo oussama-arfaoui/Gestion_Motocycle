@@ -111,37 +111,57 @@ public function storeSlug($slug)
         visitor()->visit($store);
     }
 
+    // Set language session
+    if (isset($store->lang)) {
+        $lang = session()->get('lang');
+        if (!isset($lang)) {
+            session(['lang' => $store->lang]);
+            $storelang = session()->get('lang');
+            \App::setLocale(isset($storelang) ? $storelang : 'en');
+        } else {
+            session(['lang' => $lang]);
+            $storelang = session()->get('lang');
+            \App::setLocale(isset($storelang) ? $storelang : 'en');
+        }
+    }
+    session(['slug' => $slug]);
+
     $userstore = UserStore::where('store_id', $store->id)->first();
 
-    // Get all brands for this store
-    $brands = Brand::where('store_id', $store->id)->get();
+    // Eager-load brands → categories → variants → products
+    $brands = Brand::with(['categories.variants.products'])
+        ->where('store_id', $store->id)
+        ->get();
 
-    // Optional: select a default brand (first one)
-    $selectedBrand = $brands->first();
+    // Image base URLs
+    $brand_logo_url      = Utility::get_file('uploads/brand_image/');
+    $category_img_url    = Utility::get_file('uploads/product_image/');
+    $variant_img_url     = Utility::get_file('uploads/product_variant/');
 
-    // Categories for the selected brand
-    $categories = $selectedBrand
-        ? ProductCategorie::where('store_id', $store->id)
-            ->where('brand_id', $selectedBrand->id)
-            ->get()
-        : collect();
+    // Cart / wishlist
+    $cart       = session()->get($slug, []);
+    $total_item = isset($cart['products']) ? count($cart['products']) : 0;
+    
+    if(isset($cart['wishlist'])) {
+        $wishlist = $cart['wishlist'];
+    } else {
+        $wishlist = [];
+    }
 
-    // Optional: select first category
-    $selectedCategory = $categories->first();
+    // Page options and blog
+    $page_slug_urls = PageOption::where('store_id', $store->id)->get();
+    $blog = Blog::where('store_id', $store->id)->first();
 
-    // Variants for the selected category
-    $variants = $selectedCategory
-        ? ProductVariant::where('category_id', $selectedCategory->id)->get()
-        : collect();
-
-    // Now you can pass these to the view
     return view('storefront.' . $store->theme_dir . '.index', compact(
         'store',
         'brands',
-        'selectedBrand',
-        'categories',
-        'selectedCategory',
-        'variants'
+        'brand_logo_url',
+        'category_img_url',
+        'variant_img_url',
+        'total_item',
+        'wishlist',
+        'page_slug_urls',
+        'blog'
     ));
 }
     public function index()
@@ -1317,8 +1337,8 @@ public function storeSlug($slug)
             $variant = ProductVariantOption::where('name',$variant_name)->where('product_id',$product_id)->first();
             $product = Product::find($product_id);
 
-            if (!empty($product->is_cover)) {
-                $pro_img = $product->is_cover;
+            if (!empty($product->image)) {
+                $pro_img = $product->image;
             } else {
                 $pro_img = 'default.jpg';
             }
@@ -1986,8 +2006,8 @@ public function storeSlug($slug)
                 $quantity = $variant->quantity;
             }
 
-            if (!empty($product->is_cover)) {
-                $pro_img = $product->is_cover;
+            if (!empty($product->image)) {
+                $pro_img = $product->image;
             } else {
                 $pro_img = 'default.jpg';
             }
@@ -4213,8 +4233,8 @@ public function storeSlug($slug)
                             ]
                         );
                     } else {
-                        if ($product->is_cover != null) {
-                            $img =  $product->is_cover;
+                        if ($product->image != null) {
+                            $img =  $product->image;
                         } else {
                             $img = false;
                         }
@@ -4232,7 +4252,7 @@ public function storeSlug($slug)
                             "enable_product_variant" => $product->enable_product_variant,
                             "variants_json" => $product->variants_json,
                             // "image" => ($img == true) ? Storage::url('uploads/is_cover_image/' . $product->is_cover) : '',
-                            "image" =>  ($img == true) ? $product->is_cover:'',
+                            "image" =>  ($img == true) ? $product->image:'',
                             "product_image" =>  isset($product->product_img) && isset($product->product_img->product_images) ? $product->product_img->product_images : '',
                             "is_active" => $product->is_active,
                             "description" => $product->description,
@@ -4241,8 +4261,8 @@ public function storeSlug($slug)
                     }
                 } else {
 
-                    if ($product->is_cover != null) {
-                        $img = $product->is_cover;
+                    if ($product->image != null) {
+                        $img = $product->image;
                     } else {
                         $img = false;
                     }
@@ -4260,7 +4280,7 @@ public function storeSlug($slug)
                         "product_display" => $product->product_display,
                         "enable_product_variant" => $product->enable_product_variant,
                         "variants_json" => $product->variants_json,
-                        "image" => ($img == true) ? $product->is_cover:'',
+                        "image" => ($img == true) ? $product->image:'',
                         "product_image" =>  isset($product->product_img) && isset($product->product_img->product_images) ? $product->product_img->product_images : '',
                         "is_active" => $product->is_active,
                         "description" => $product->description,
@@ -4268,8 +4288,8 @@ public function storeSlug($slug)
                     ];
                 }
             } else {
-                if ($product->is_cover != null) {
-                    $img = $product->is_cover;
+                if ($product->image != null) {
+                    $img = $product->image;
                 } else {
                     $img = false;
                 }
@@ -4287,7 +4307,7 @@ public function storeSlug($slug)
                     "product_display" => $product->product_display,
                     "enable_product_variant" => $product->enable_product_variant,
                     "variants_json" => $product->variants_json,
-                    "image" => ($img == true) ? $product->is_cover : '',
+                    "image" => ($img == true) ? $product->image : '',
                     "product_image" =>  isset($product->product_img) && isset($product->product_img->product_images) ? $product->product_img->product_images : '',
                     "is_active" => $product->is_active,
                     "description" => $product->description,

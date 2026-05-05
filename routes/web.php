@@ -74,6 +74,15 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
  */
+
+Route::get('/storage/uploads/{path}', function ($path) {
+    $file = storage_path('uploads/' . $path);
+    if (!file_exists($file)) {
+        abort(404);
+    }
+    $mime = mime_content_type($file);
+    return response()->file($file, ['Content-Type' => $mime]);
+})->where('path', '.*')->name('storage.uploads');
 Route::get('/', [DashboardController::class, 'index'])->name('start')->middleware(['XSS']);
 
 Route::get('login/{lang?}', function () {

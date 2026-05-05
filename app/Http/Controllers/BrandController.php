@@ -453,7 +453,7 @@ public function update(Request $request, $id)
             ];
             
             // Analyser par marque — inclure toutes les marques (avec ou sans chassis)
-            $allBrands = \App\Models\Brand::with(['productCategories.variants'])->get();
+            $allBrands = \App\Models\Brand::with(['categories.variants'])->get();
             foreach ($allBrands as $brand) {
                 $brandVariants = \App\Models\ProductVariant::whereHas('category', function($q) use ($brand) {
                     $q->where('brand_id', $brand->id);

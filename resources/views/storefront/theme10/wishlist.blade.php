@@ -4,8 +4,8 @@
 @endsection
 
 @php
-    $imgpath = \App\Models\Utility::get_file('uploads/is_cover_image/');
-    $imgpath2 = \App\Models\Utility::get_file('uploads/product_image/');
+    $imgpath = \App\Models\Utility::get_file('uploads/product/');
+    $imgpath2 = \App\Models\Utility::get_file('uploads/product/');
 @endphp
 
 @section('content')

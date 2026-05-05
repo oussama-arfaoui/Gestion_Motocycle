@@ -61,68 +61,8 @@
                 <div class="col-md-4 pdp-section-title">
                     <h3 class="mb-3">{{ __('Section Produits') }}</h3>
                 </div>
-                <div class="col-md-4 text-end">
-                    <!-- Language Switcher -->
-                    <div class="dropdown">
-                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            <i class="ti ti-world me-2"></i>
-                            @switch(app()->getLocale())
-                                @case('en')
-                                    <span>English</span>
-                                    @break
-                                @case('fr')
-                                    <span>Français</span>
-                                    @break
-                                @case('ar')
-                                    <span>العربية</span>
-                                    @break
-                                @default
-                                    <span>{{ __('Language') }}</span>
-                            @endswitch
-                            <i class="ti ti-chevron-down ms-2"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item {{ app()->getLocale() == 'en' ? 'active' : '' }}" href="{{ route('change.language', 'en') }}">
-                                    <i class="ti ti-flag me-2"></i>English
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item {{ app()->getLocale() == 'fr' ? 'active' : '' }}" href="{{ route('change.language', 'fr') }}">
-                                    <i class="ti ti-flag me-2"></i>Français
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item {{ app()->getLocale() == 'ar' ? 'active' : '' }}" href="{{ route('change.language', 'ar') }}">
-                                    <i class="ti ti-flag me-2"></i>العربية
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
                 <div class="col-md-4">
                 </div>
-            </div>
-        </div>
-        <div class="category-wrp mb-4">
-            <div class="ms-0 row">
-                <div class="button-list b-bottom catgory-pad category-tab-wrapper ps-0 col-lg-8 col-12" >
-                    <div class="form-row m-0 gap-3" id="categories-listing">
-                    </div>
-                </div>
-                <div class="col-lg-4 col-12 ps-0 search-main-form">
-                    <div class="search-bar-left search-form-wrp d-flex">
-                        <form class="search-input-wrp">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="ti ti-search"></i></span>
-                                </div>
-                                <input id="searchproduct" type="text" data-url="{{ route('search.products') }}" placeholder="{{ __('Search Product') }}" class="form-control pr-4 rounded-right">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
             </div>
         </div>
 

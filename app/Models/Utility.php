@@ -2060,7 +2060,7 @@ class Utility extends Model
                 );
                 return \Storage::disk($storageSetting['storage_setting'])->url($path);
             }
-            return url('/').\Storage::disk($storageSetting['storage_setting'])->url($path);
+            return rtrim(config('app.url'), '/') . '/storage/' . $path;
             // return env('APP_URL').\Storage::disk($storageSetting['storage_setting'])->url($path);
         } catch (\Throwable $th) {
             return '';

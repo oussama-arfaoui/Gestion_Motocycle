@@ -25,7 +25,7 @@
                                 <span class="dash-micon">
                                     <i class="ti ti-home"></i>
                                 </span>
-                                <span class="dash-mtext">{{ __('Tableau de bord') }}</span>
+                                <span class="dash-mtext">{{ __('Dashboard') }}</span>
                             </a>
                         </li>
                     @endcan
@@ -119,7 +119,7 @@
                                     <i class="ti ti-settings"></i>
                                 </span>
                                 <span class="dash-mtext">
-                                    {{ __('Stockage des paramètres') }}
+                                    {{ __('Settings') }}
                                 </span>
                             </a>
                         </li>
@@ -131,7 +131,7 @@
                             <span class="dash-micon">
                                 <i class="ti ti-home"></i>
                             </span>
-                            <span class="dash-mtext">{{ __('Tableau de bord') }}</span>
+                            <span class="dash-mtext">{{ __('Dashboard') }}</span>
                         </a>
                     </li>
                     @can('Manage Themes')
@@ -141,7 +141,7 @@
                                 <span class="dash-micon">
                                     <i class="ti ti-layout-2"></i>
                                 </span>
-                                <span class="dash-mtext">{{ __('Thèmes') }}</span>
+                                <span class="dash-mtext">{{ __('Themes') }}</span>
                             </a>
                         </li>
                     @endcan
@@ -150,7 +150,7 @@
                             <span class="dash-micon">
                                 <i class="ti ti-users"></i>
                             </span>
-                            <span class="dash-mtext">{{ __('Personnel') }}</span>
+                            <span class="dash-mtext">{{ __('Staff') }}</span>
                             <span class="dash-arrow">
                                 <i data-feather="chevron-right"></i>
                             </span>
@@ -177,7 +177,7 @@
                                 <span class="dash-micon">
                                     <i class="ti ti-layers-difference"></i>
                                 </span>
-                                <span class="dash-mtext">{{ __('Point de point') }}</span>
+                                <span class="dash-mtext">{{ __('POS') }}</span>
                             </a>
                         </li>
                     @endcan
@@ -187,7 +187,7 @@
                             <span class="dash-micon">
                                 <i class="ti ti-license"></i>
                             </span>
-                            <span class="dash-mtext">{{ __('Boutique') }}</span>
+                            <span class="dash-mtext">{{ __('Store') }}</span>
                         </a>
                     </li>
                     <li class="dash-item {{ Request::segment(1) == 'chassis-orders' ? ' active' : 'collapsed' }}">
@@ -196,7 +196,7 @@
                             <span class="dash-micon">
                                 <i class="ti ti-receipt"></i>
                             </span>
-                            <span class="dash-mtext">{{ __('Commandes') }}</span>
+                            <span class="dash-mtext">{{ __('Orders') }}</span>
                         </a>
                     </li>
                    <!-- @can('Manage Customers')
@@ -239,7 +239,7 @@
                                     <i class="ti ti-settings"></i>
                                 </span>
                                 <span class="dash-mtext">
-                                    {{ __('Stockage des paramètres') }}
+                                    {{ __('Settings') }}
                                 </span>
                             </a>
                         </li>

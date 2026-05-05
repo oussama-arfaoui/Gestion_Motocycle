@@ -120,15 +120,13 @@ class DashboardController extends Controller
                     $saleData = $this->getSaleChart(['duration' => 'week'],$userstore);
                     $store_id = Store::where('id', $store->current_store)->first();
                     if ($store_id) {
-                        // $app_url = trim(env('APP_URL'), '/');
-                        // $store_id['store_url'] = $app_url . '/store/' . $store_id['slug'];
                         if ($store_id['enable_storelink'] == 'on') {
-                            $app_url = trim(env('APP_URL'), '/');
+                            $app_url = rtrim(env('APP_URL'), '/');
                             $store_id['store_url'] = $app_url . '/store/' . $store_id['slug'];
                         } else if ($store_id['enable_domain'] == 'on') {
-                            $store_id['store_url'] = 'https://' . $store_id['domains'] . '/';
+                            $store_id['store_url'] = 'https://' . rtrim($store_id['domains'], '/');
                         } else {
-                            $store_id['store_url'] = 'https://' . $store_id['subdomain'] . '/';
+                            $store_id['store_url'] = 'https://' . rtrim($store_id['subdomain'], '/');
                         }
                     }
                     $totle_sale = 0;

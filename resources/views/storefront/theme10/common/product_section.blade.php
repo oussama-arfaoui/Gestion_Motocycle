@@ -1,20 +1,22 @@
+@php
+    $__productImgBase = \App\Models\Utility::get_file('uploads/product/');
+    $__defaultImg = \App\Models\Utility::get_file('uploads/is_cover_image/') . 'default.jpg';
+@endphp
 <div class="product-card">
     <div class="product-card-inner">
         <div class="product-card-image">
             <a href="{{ route('store.product.product_view', [$store->slug, $product->id]) }}" class="default-img img-wrapper">
-                @if (!empty($product->is_cover))
-                    <img alt="product-card-image" src="{{ $coverImg . $product->is_cover }}" >
+                @if (!empty($product->image))
+                    <img alt="product-card-image" src="{{ $__productImgBase . $product->image }}" >
                 @else
-                    <img alt="product-card-image" src="{{ asset(Storage::url('uploads/is_cover_image/default.jpg')) }}" >
+                    <img alt="product-card-image" src="{{ $__defaultImg }}" >
                 @endif
             </a>
             <a href="{{ route('store.product.product_view', [$store->slug, $product->id]) }}" class="hover-img img-wrapper">
-                @if (isset($product->product_img) && !empty($product->product_img))
-                    <img alt="product-card-image" src="{{ $productImg . $product->product_img->product_images }}" >
-                @elseif (!empty($product->is_cover))
-                    <img alt="product-card-image" src="{{ $coverImg . $product->is_cover }}" >
+                @if (!empty($product->image))
+                    <img alt="product-card-image" src="{{ $__productImgBase . $product->image }}" >
                 @else
-                    <img alt="product-card-image" src="{{ asset(Storage::url('uploads/is_cover_image/default.jpg')) }}" >
+                    <img alt="product-card-image" src="{{ $__defaultImg }}" >
                 @endif
             </a>
             <div class="pro-btn-wrapper">
