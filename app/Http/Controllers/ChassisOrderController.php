@@ -15,6 +15,9 @@ class ChassisOrderController extends Controller
 {
     public function index()
     {
+        if (Auth::user()->type !== 'Owner' && !Auth::user()->can('Manage Orders') && !Auth::user()->can('Show Orders')) {
+            return redirect()->route('profile')->with('error', __('Permission denied.'));
+        }
         $storeId = Auth::user()->current_store;
 
         $orders = ChassisOrder::with('items')
@@ -40,31 +43,38 @@ class ChassisOrderController extends Controller
 
     public function store(Request $request)
     {
+        if (Auth::user()->type !== 'Owner' && !Auth::user()->can('Create Order') && !Auth::user()->can('Manage Orders') && !Auth::user()->can('Show Orders')) {
+            return response()->json(['success' => false, 'message' => __('Permission denied.')], 403);
+        }
         $request->validate([
-            'customer_name' => 'nullable|string|max:191',
-            'customer_phone' => 'nullable|string|max:191',
-            'discount' => 'nullable|numeric|min:0',
-            'tva' => 'nullable|numeric|min:0|max:100',
-            'notes' => 'nullable|string',
-            'comment' => 'nullable|string',
-            'items' => 'required|array|min:1',
-            'items.*.chassis_number_id' => 'required|integer',
-            'items.*.price' => 'required|numeric|min:0',
+            'customer_name'              => 'nullable|string|max:191',
+            'customer_phone'             => 'nullable|string|max:191',
+            'doc_type'                   => 'nullable|in:CIN,RC,ICE',
+            'doc_number'                 => 'nullable|string|max:100',
+            'discount'                   => 'nullable|numeric|min:0',
+            'tva'                        => 'nullable|numeric|min:0|max:100',
+            'notes'                      => 'nullable|string',
+            'comment'                    => 'nullable|string',
+            'items'                      => 'required|array|min:1',
+            'items.*.chassis_number_id'  => 'required|integer',
+            'items.*.price'              => 'required|numeric|min:0',
         ]);
 
         DB::beginTransaction();
         try {
             $order = ChassisOrder::create([
-                'order_number' => ChassisOrder::generateOrderNumber(),
-                'customer_name' => $request->customer_name,
+                'order_number'   => ChassisOrder::generateOrderNumber(),
+                'customer_name'  => $request->customer_name,
                 'customer_phone' => $request->customer_phone,
-                'discount' => $request->discount ?? 0,
-                'tva' => $request->tva ?? 0,
-                'status' => 'pending',
-                'user_id' => Auth::id(),
-                'store_id' => Auth::user()->current_store,
-                'notes' => $request->notes,
-                'comment' => $request->comment,
+                'doc_type'       => $request->doc_type,
+                'doc_number'     => $request->doc_number,
+                'discount'       => $request->discount ?? 0,
+                'tva'            => $request->tva ?? 0,
+                'status'         => 'pending',
+                'user_id'        => Auth::id(),
+                'store_id'       => Auth::user()->current_store,
+                'notes'          => $request->notes,
+                'comment'        => $request->comment,
             ]);
 
             $totalPrice = 0;
@@ -129,6 +139,9 @@ class ChassisOrderController extends Controller
 
     public function update(Request $request, $id)
     {
+        if (Auth::user()->type !== 'Owner' && !Auth::user()->can('Edit Order')) {
+            return response()->json(['success' => false, 'message' => __('Permission denied.')], 403);
+        }
         $request->validate([
             'customer_name' => 'nullable|string|max:191',
             'customer_phone' => 'nullable|string|max:191',
@@ -189,6 +202,9 @@ class ChassisOrderController extends Controller
 
     public function validate_order($id)
     {
+        if (Auth::user()->type !== 'Owner' && !Auth::user()->can('Validate Order')) {
+            return response()->json(['success' => false, 'message' => __('Permission denied.')], 403);
+        }
         $order = ChassisOrder::with('items')->findOrFail($id);
 
         if ($order->status !== 'pending') {
@@ -209,6 +225,9 @@ class ChassisOrderController extends Controller
 
     public function reject($id)
     {
+        if (Auth::user()->type !== 'Owner' && !Auth::user()->can('Validate Order')) {
+            return response()->json(['success' => false, 'message' => __('Permission denied.')], 403);
+        }
         $order = ChassisOrder::with('items')->findOrFail($id);
 
         if ($order->status !== 'pending') {
@@ -280,6 +299,9 @@ class ChassisOrderController extends Controller
 
     public function destroy($id)
     {
+        if (Auth::user()->type !== 'Owner' && !Auth::user()->can('Delete Order')) {
+            return response()->json(['success' => false, 'message' => __('Permission denied.')], 403);
+        }
         $order = ChassisOrder::findOrFail($id);
 
         if ($order->status === 'validated') {

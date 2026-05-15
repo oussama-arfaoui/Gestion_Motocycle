@@ -1,5 +1,8 @@
 @php
-$brand_logo = asset('storage/uploads/brand_image/');
+$brand_logo = rtrim(\App\Models\Utility::get_file('uploads/brand_image/'), '/');
+$canCreate = \Auth::user()->type === 'Owner' || \Auth::user()->can('Create Brand') || \Auth::user()->can('Manage Brands') || \Auth::user()->can('Manage Products');
+$canEdit   = \Auth::user()->type === 'Owner' || \Auth::user()->can('Edit Brand')   || \Auth::user()->can('Manage Brands') || \Auth::user()->can('Manage Products');
+$canDelete = \Auth::user()->type === 'Owner' || \Auth::user()->can('Delete Brand') || \Auth::user()->can('Manage Brands') || \Auth::user()->can('Manage Products');
 @endphp
 @extends('layouts.admin')
 
@@ -17,6 +20,7 @@ $brand_logo = asset('storage/uploads/brand_image/');
     <button class="btn btn-info" onclick="analyzeAllStock()">
         <i class="ti ti-chart-bar me-1"></i> {{ __('Analyser Stock') }}
     </button>
+    @if($canCreate)
     <a href="#" class="btn btn-primary"
        data-ajax-popup="true"
        data-size="md"
@@ -24,104 +28,271 @@ $brand_logo = asset('storage/uploads/brand_image/');
        data-title="{{ __('Ajouter une marque') }}">
         <i class="ti ti-plus me-1"></i> {{ __('Créer une marque') }}
     </a>
+    @endif
 </div>
 @endsection
 
 @section('content')
-<div class="row">
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-header">
-                <h5>{{ __('Gestion des produits par hiérarchie') }}</h5>
-                <small class="text-muted">{{ __('Marque → Modèle → Famille → Numéro de châssis') }}</small>
+<!-- Professional Header with Stats -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+            <div>
+                <h2 class="fw-bold mb-2">{{ __('Catalogue des Marques') }}</h2>
+                <p class="text-muted mb-0">{{ __('Gérez votre catalogue : Marque → Modèle → Famille → Numéro de châssis') }}</p>
             </div>
-            <div class="card-body">
-                <!-- Breadcrumb Navigation -->
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb mb-0" id="breadcrumb-nav">
-                            <li class="breadcrumb-item active" aria-current="page">
-                                <a href="#" data-level="brands" class="breadcrumb-link">{{ __('Marques') }}</a>
-                            </li>
-                        </ol>
-                    </nav>
-                    <button id="back-btn" class="btn btn-outline-secondary btn-sm" onclick="goBack()" style="display: none;">
-                        <i class="ti ti-arrow-left me-1"></i>{{ __('Retour') }}
-                    </button>
-                </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-primary" onclick="analyzeAllStock()">
+                    <i class="ti ti-chart-bar me-1"></i> {{ __('Analyser Stock') }}
+                </button>
+                @if($canCreate)
+                <a href="#" class="btn btn-primary"
+                   data-ajax-popup="true"
+                   data-size="md"
+                   data-url="{{ route('brands.create') }}"
+                   data-title="{{ __('Ajouter une marque') }}">
+                    <i class="ti ti-plus me-1"></i> {{ __('Nouvelle Marque') }}
+                </a>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Stats Cards -->
+<div class="row mb-4">
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="card border-0 shadow-sm bg-gradient-primary text-white h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-white-50 mb-1">{{ __('Marques') }}</h6>
+                        <h3 class="mb-0 fw-bold">{{ $brands->count() }}</h3>
+                    </div>
+                    <div class="text-white-25">
+                        <i class="ti ti-building" style="font-size: 2.5rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="card border-0 shadow-sm bg-gradient-success text-white h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-white-50 mb-1">{{ __('Modèles') }}</h6>
+                        <h3 class="mb-0 fw-bold" id="total-models">-</h3>
+                    </div>
+                    <div class="text-white-25">
+                        <i class="ti ti-car" style="font-size: 2.5rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="card border-0 shadow-sm bg-gradient-info text-white h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-white-50 mb-1">{{ __('Familles') }}</h6>
+                        <h3 class="mb-0 fw-bold" id="total-families">-</h3>
+                    </div>
+                    <div class="text-white-25">
+                        <i class="ti ti-folders" style="font-size: 2.5rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="card border-0 shadow-sm bg-gradient-warning text-white h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-white-50 mb-1">{{ __('Stock Total') }}</h6>
+                        <h3 class="mb-0 fw-bold" id="total-stock">-</h3>
+                    </div>
+                    <div class="text-white-25">
+                        <i class="ti ti-package" style="font-size: 2.5rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Search and Filters -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">{{ __('Recherche rapide') }}</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="ti ti-search text-muted"></i>
+                            </span>
+                            <input type="text" class="form-control border-start-0" id="quickSearch" placeholder="{{ __('Rechercher une marque, modèle, famille...') }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold">{{ __('Filtrer par') }}</label>
+                        <select class="form-select" id="filterType">
+                            <option value="all">{{ __('Tout afficher') }}</option>
+                            <option value="with-stock">{{ __('Avec stock') }}</option>
+                            <option value="without-stock">{{ __('Sans stock') }}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold">{{ __('Trier par') }}</label>
+                        <select class="form-select" id="sortBy">
+                            <option value="name">{{ __('Nom (A-Z)') }}</option>
+                            <option value="name-desc">{{ __('Nom (Z-A)') }}</option>
+                            <option value="stock">{{ __('Stock (croissant)') }}</option>
+                            <option value="stock-desc">{{ __('Stock (décroissant)') }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Navigation Breadcrumb -->
+<div class="row mb-3">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 bg-light rounded px-3 py-2" id="breadcrumb-nav">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <a href="#" data-level="brands" class="breadcrumb-link fw-semibold text-primary">
+                            <i class="ti ti-building me-1"></i>{{ __('Marques') }}
+                        </a>
+                    </li>
+                </ol>
+            </nav>
+            <button id="back-btn" class="btn btn-outline-secondary btn-sm" onclick="goBack()" style="display: none;">
+                <i class="ti ti-arrow-left me-1"></i>{{ __('Retour') }}
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="row">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-0">
                 <!-- Content Container -->
                 <div id="hierarchy-content">
                     <!-- Brands Level -->
                     <div id="brands-level" class="hierarchy-level">
                         @if ($brands->isEmpty())
                             <div class="text-center py-5">
-                                <i class="ti ti-brand text-muted" style="font-size: 4rem;"></i>
-                                <h5 class="mt-3 text-muted">{{ __('Aucune marque trouvée') }}</h5>
-                                <p class="text-muted">{{ __('Commencez par ajouter votre première marque') }}</p>
-                                <a href="#" class="btn btn-primary"
+                                <div class="mb-4">
+                                    <i class="ti ti-building text-muted" style="font-size: 5rem;"></i>
+                                </div>
+                                <h4 class="text-muted mb-2">{{ __('Aucune marque trouvée') }}</h4>
+                                <p class="text-muted mb-4">{{ __('Commencez par ajouter votre première marque pour gérer votre catalogue') }}</p>
+                                @if($canCreate)
+                                <a href="#" class="btn btn-primary btn-lg"
                                    data-ajax-popup="true"
                                    data-url="{{ route('brands.create') }}"
                                    data-title="{{ __('Ajouter une marque') }}">
-                                    <i class="ti ti-plus me-2"></i>{{ __('Ajouter une marque') }}
+                                    <i class="ti ti-plus me-2"></i>{{ __('Ajouter votre première marque') }}
                                 </a>
+                                @endif
                             </div>
                         @else
-                            <div class="list-group">
-                                @foreach ($brands as $brand)
-                                    <div class="list-group-item d-flex justify-content-between align-items-center">
-                                        <div class="d-flex align-items-center">
-                                            @if ($brand->brand_img)
-                                                <img src="{{ $brand_logo }}/{{ $brand->brand_img }}" alt="{{ $brand->name }}" class="me-3" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px;">
-                                            @else
-                                                <div class="me-3 bg-secondary rounded d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                                    <i class="ti ti-brand text-white"></i>
+                            <div class="p-4">
+                                <div class="row g-4" id="brands-grid">
+                                    @foreach ($brands as $brand)
+                                        <div class="col-xl-3 col-lg-4 col-md-6">
+                                            <div class="card border-0 shadow-sm h-100 brand-card" data-brand-id="{{ $brand->id }}">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-start justify-content-between mb-3">
+                                                        <div class="flex-shrink-0">
+                                                            @if ($brand->brand_img)
+                                                                <img src="{{ $brand_logo }}/{{ $brand->brand_img }}" alt="{{ $brand->name }}" 
+                                                                     class="rounded-2" style="width: 64px; height: 64px; object-fit: cover;">
+                                                            @else
+                                                                <div class="bg-primary bg-opacity-10 rounded-2 d-flex align-items-center justify-content-center" 
+                                                                     style="width: 64px; height: 64px;">
+                                                                    <i class="ti ti-building text-primary" style="font-size: 28px;"></i>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                        @if($canEdit || $canDelete)
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-sm btn-light" data-bs-toggle="dropdown">
+                                                                <i class="ti ti-dots-vertical"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                                @if($canEdit)
+                                                                <li>
+                                                                    <a href="#!" class="dropdown-item"
+                                                                       data-url="{{ route('brands.edit', $brand->id) }}"
+                                                                       data-ajax-popup="true"
+                                                                       data-title="{{ __('Modifier la marque') }}">
+                                                                        <i class="ti ti-edit me-2"></i>{{ __('Modifier') }}
+                                                                    </a>
+                                                                </li>
+                                                                @endif
+                                                                @if($canEdit && $canDelete)<li><hr class="dropdown-divider"></li>@endif
+                                                                @if($canDelete)
+                                                                <li>
+                                                                    <a href="#!" class="dropdown-item text-danger bs-pass-para"
+                                                                       data-title="{{ __('Supprimer la marque') }}"
+                                                                       data-confirm="{{ __('Êtes-vous sûr?') }}"
+                                                                       data-text="{{ __('Cette action ne peut pas être annulée. Voulez-vous continuer?') }}"
+                                                                       data-confirm-yes="delete-form-{{ $brand->id }}">
+                                                                        <i class="ti ti-trash me-2"></i>{{ __('Supprimer') }}
+                                                                    </a>
+                                                                </li>
+                                                                @endif
+                                                            </ul>
+                                                        </div>
+                                                        @endif
+                                                    </div>
+                                                    
+                                                    <h5 class="card-title fw-bold mb-1">{{ $brand->name }}</h5>
+                                                    <p class="text-muted small mb-3">{{ __('Marque') }}</p>
+                                                    
+                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                                        <div class="d-flex gap-3">
+                                                            <div class="text-center">
+                                                                <div class="fw-bold text-primary" id="brand-models-{{ $brand->id }}">-</div>
+                                                                <div class="text-muted small">{{ __('Modèles') }}</div>
+                                                            </div>
+                                                            <div class="text-center">
+                                                                <div class="fw-bold text-success" id="brand-stock-{{ $brand->id }}">-</div>
+                                                                <div class="text-muted small">{{ __('Stock') }}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <button class="btn btn-primary w-100 drill-down-btn" 
+                                                            data-level="models"
+                                                            data-brand-id="{{ $brand->id }}"
+                                                            data-brand-name="{{ $brand->name }}"
+                                                            onclick="handleDrillDown(this)">
+                                                        <i class="ti ti-arrow-right me-2"></i>{{ __('Voir les modèles') }}
+                                                    </button>
                                                 </div>
-                                            @endif
-                                            <div>
-                                                <h6 class="mb-0 fw-bold">{{ $brand->name }}</h6>
-                                                <small class="text-muted">{{ __('Marque') }}</small>
                                             </div>
                                         </div>
-                                        <div class="d-flex gap-2">
-                                            <button class="btn btn-sm btn-outline-primary drill-down-btn" 
-                                                    data-level="models"
-                                                    data-brand-id="{{ $brand->id }}"
-                                                    data-brand-name="{{ $brand->name }}"
-                                                    onclick="handleDrillDown(this)">
-                                                <i class="ti ti-arrow-right"></i>
-                                            </button>
-                                            <a href="#!" class="btn btn-sm btn-icon bg-info text-white"
-                                                data-url="{{ route('brands.edit', $brand->id) }}"
-                                                data-ajax-popup="true"
-                                                data-title="{{ __('Modifier la marque') }}"
-                                                data-bs-toggle="tooltip"
-                                                data-bs-placement="top"
-                                                title="{{ __('Edit') }}">
-                                                <i class="ti ti-pencil f-16"></i>
-                                            </a>
-                                            <a href="#!" class="bs-pass-para btn btn-sm btn-icon bg-danger text-white"
-                                                data-title="{{ __('Supprimer la marque') }}"
-                                                data-confirm="{{ __('Êtes-vous sûr?') }}"
-                                                data-text="{{ __('Cette action ne peut pas être annulée. Voulez-vous continuer?') }}"
-                                                data-confirm-yes="delete-form-{{ $brand->id }}"
-                                                data-bs-toggle="tooltip"
-                                                data-bs-placement="top"
-                                                title="{{ __('Delete') }}">
-                                                <i class="ti ti-trash f-16"></i>
-                                            </a>
-                                            {!! Form::open(['method' => 'DELETE', 'route' => ['brands.destroy', $brand->id], 'id' => 'delete-form-' . $brand->id]) !!}
-                                            {!! Form::close() !!}
-                                        </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
                             </div>
                         @endif
                     </div>
 
                     <!-- Models Level (Hidden by default) -->
                     <div id="models-level" class="hierarchy-level" style="display: none;">
-                        <div class="text-center py-3">
+                        <div class="text-center py-5">
                             <div class="spinner-border text-primary" role="status">
                                 <span class="visually-hidden">{{ __('Chargement...') }}</span>
                             </div>
@@ -130,7 +301,7 @@ $brand_logo = asset('storage/uploads/brand_image/');
 
                     <!-- Families Level (Hidden by default) -->
                     <div id="families-level" class="hierarchy-level" style="display: none;">
-                        <div class="text-center py-3">
+                        <div class="text-center py-5">
                             <div class="spinner-border text-primary" role="status">
                                 <span class="visually-hidden">{{ __('Chargement...') }}</span>
                             </div>
@@ -139,7 +310,7 @@ $brand_logo = asset('storage/uploads/brand_image/');
 
                     <!-- Products Level (Hidden by default) -->
                     <div id="products-level" class="hierarchy-level" style="display: none;">
-                        <div class="text-center py-3">
+                        <div class="text-center py-5">
                             <div class="spinner-border text-primary" role="status">
                                 <span class="visually-hidden">{{ __('Chargement...') }}</span>
                             </div>
@@ -1044,7 +1215,7 @@ function loadFamilies(modelId) {
                                 <div class="d-flex align-items-center">
                                     ${family.image ? 
                                         (() => {
-                                            const imagePath = `{{ asset('storage/uploads/family_image') }}/${family.image}`;
+                                            const imagePath = `{{ rtrim(\App\Models\Utility::get_file('uploads/family_image/'), '/') }}/${family.image}`;
                                             console.log('Family image path:', imagePath);
                                             console.log('Family image filename:', family.image);
                                             return `<img src="${imagePath}" alt="${family.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; margin-right: 12px;" onerror="console.error('Image failed to load:', this.src); this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -1345,7 +1516,7 @@ function showAddModal(type, parentId, itemId = null) {
                             document.getElementById('quantity').value = data.family.quantity;
                             if (data.family.image) {
                                 const img = imagePreview.querySelector('img');
-                                img.src = `{{ asset('storage/uploads/family_image') }}/${data.family.image}`;
+                                img.src = `{{ rtrim(\App\Models\Utility::get_file('uploads/family_image/'), '/') }}/${data.family.image}`;
                                 imagePreview.style.display = 'block';
                             }
                         }
@@ -1829,6 +2000,110 @@ function validateBrandImage(input) {
     reader.readAsDataURL(file);
 }
 
+// Load brand statistics
+async function loadBrandStats() {
+    try {
+        const response = await fetch('{{ route('api.brand.stats') }}', {
+            headers: { 'Accept': 'application/json' }
+        });
+        const stats = await response.json();
+        
+        // Update global stats
+        document.getElementById('total-models').textContent = stats.total_models || 0;
+        document.getElementById('total-families').textContent = stats.total_families || 0;
+        document.getElementById('total-stock').textContent = stats.total_stock || 0;
+        
+        // Update individual brand stats
+        if (stats.brands) {
+            stats.brands.forEach(brand => {
+                const modelsEl = document.getElementById(`brand-models-${brand.id}`);
+                const stockEl = document.getElementById(`brand-stock-${brand.id}`);
+                if (modelsEl) modelsEl.textContent = brand.models_count || 0;
+                if (stockEl) stockEl.textContent = brand.total_stock || 0;
+            });
+        }
+    } catch (error) {
+        console.error('Error loading brand stats:', error);
+    }
+}
+
+// Search and filter functionality
+function setupSearchAndFilters() {
+    const searchInput = document.getElementById('quickSearch');
+    const filterSelect = document.getElementById('filterType');
+    const sortSelect = document.getElementById('sortBy');
+    
+    function filterAndSort() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filterType = filterSelect.value;
+        const sortBy = sortSelect.value;
+        
+        const brandCards = document.querySelectorAll('.brand-card');
+        const brandsGrid = document.getElementById('brands-grid');
+        
+        // Convert NodeList to array for sorting
+        const brandsArray = Array.from(brandCards).map(card => {
+            const brandId = card.dataset.brandId;
+            const name = card.querySelector('.card-title').textContent.toLowerCase();
+            const models = parseInt(card.querySelector('[id^="brand-models-"]').textContent) || 0;
+            const stock = parseInt(card.querySelector('[id^="brand-stock-"]').textContent) || 0;
+            
+            return { card, brandId, name, models, stock };
+        });
+        
+        // Filter
+        let filtered = brandsArray.filter(brand => {
+            const matchesSearch = brand.name.includes(searchTerm);
+            
+            if (filterType === 'with-stock') {
+                return matchesSearch && brand.stock > 0;
+            } else if (filterType === 'without-stock') {
+                return matchesSearch && brand.stock === 0;
+            }
+            return matchesSearch;
+        });
+        
+        // Sort
+        filtered.sort((a, b) => {
+            switch (sortBy) {
+                case 'name':
+                    return a.name.localeCompare(b.name);
+                case 'name-desc':
+                    return b.name.localeCompare(a.name);
+                case 'stock':
+                    return a.stock - b.stock;
+                case 'stock-desc':
+                    return b.stock - a.stock;
+                default:
+                    return 0;
+            }
+        });
+        
+        // Re-render
+        brandsGrid.innerHTML = '';
+        filtered.forEach(brand => {
+            brandsGrid.appendChild(brand.card);
+        });
+        
+        // Show empty state if no results
+        if (filtered.length === 0) {
+            brandsGrid.innerHTML = `
+                <div class="col-12">
+                    <div class="text-center py-5">
+                        <i class="ti ti-search text-muted" style="font-size: 3rem;"></i>
+                        <h4 class="text-muted mt-3">{{ __('Aucun résultat trouvé') }}</h4>
+                        <p class="text-muted">{{ __('Essayez de modifier vos critères de recherche') }}</p>
+                    </div>
+                </div>
+            `;
+        }
+    }
+    
+    searchInput.addEventListener('input', filterAndSort);
+    filterSelect.addEventListener('change', filterAndSort);
+    sortSelect.addEventListener('change', filterAndSort);
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Page loaded, setting up plus buttons');
@@ -1845,6 +2120,12 @@ document.addEventListener('DOMContentLoaded', function() {
             handleDrillDown(this);
         };
     });
+    
+    // Load brand statistics
+    loadBrandStats();
+    
+    // Setup search and filters
+    setupSearchAndFilters();
 });
 </script>
 @endpush

@@ -10,6 +10,8 @@ class ChassisOrder extends Model
         'order_number',
         'customer_name',
         'customer_phone',
+        'doc_type',
+        'doc_number',
         'total_price',
         'discount',
         'tva',

@@ -2060,8 +2060,13 @@ class Utility extends Model
                 );
                 return \Storage::disk($storageSetting['storage_setting'])->url($path);
             }
-            return rtrim(config('app.url'), '/') . '/storage/' . $path;
-            // return env('APP_URL').\Storage::disk($storageSetting['storage_setting'])->url($path);
+            // Use current request host so images work regardless of APP_URL setting
+            try {
+                $base = request()->getSchemeAndHttpHost();
+            } catch (\Throwable $e) {
+                $base = rtrim(config('app.url'), '/');
+            }
+            return $base . '/storage/' . $path;
         } catch (\Throwable $th) {
             return '';
         }

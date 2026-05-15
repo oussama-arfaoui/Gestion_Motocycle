@@ -570,6 +570,12 @@
                         <div class="field-name">Téléphone</div>
                         <div class="field-val">{{ $order->customer_phone ?: '—' }}</div>
                     </div>
+                    @if($order->doc_type || $order->doc_number)
+                    <div class="field-block">
+                        <div class="field-name">{{ $order->doc_type ?: 'Document' }}</div>
+                        <div class="field-val" style="font-family:monospace;letter-spacing:.5px;">{{ $order->doc_number ?: '—' }}</div>
+                    </div>
+                    @endif
                 </div>
                 <div class="info-box" style="flex:1;">
                     <span class="box-label">Vendeur</span>

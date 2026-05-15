@@ -145,6 +145,7 @@
                             </a>
                         </li>
                     @endcan
+                    @if(Auth::user()->type == 'Owner' || Auth::user()->can('Manage Role') || Auth::user()->can('Manage User'))
                     <li class="dash-item dash-hasmenu {{ Request::segment(1) == 'users' || Request::segment(1) == 'roles' ? ' active dash-trigger' : 'collapsed' }}">
                         <a href="#!" class="dash-link ">
                             <span class="dash-micon">
@@ -170,6 +171,7 @@
                             @endcan
                         </ul>
                     </li>
+                    @endif
                     @can('Manage Pos')
                         <li class="dash-item {{ Request::segment(1) == 'pos' ? ' active' : 'collapsed' }}">
                             <a href="{{ route('pos.index') }}"
@@ -181,6 +183,7 @@
                             </a>
                         </li>
                     @endcan
+                    @if(Auth::user()->type == 'Owner' || Auth::user()->can('Manage Brands') || Auth::user()->can('Manage Products'))
                     <li class="dash-item {{ Request::segment(1) == 'brands' ? ' active' : 'collapsed' }}">
                         <a href="{{ route('brands.index') }}"
                             class="dash-link {{ request()->is('brands') ? 'active' : '' }}">
@@ -190,6 +193,8 @@
                             <span class="dash-mtext">{{ __('Store') }}</span>
                         </a>
                     </li>
+                    @endif
+                    @if(Auth::user()->type == 'Owner' || Auth::user()->can('Manage Orders') || Auth::user()->can('Show Orders'))
                     <li class="dash-item {{ Request::segment(1) == 'chassis-orders' ? ' active' : 'collapsed' }}">
                         <a href="{{ route('chassis-orders.index') }}"
                             class="dash-link {{ request()->is('chassis-orders*') ? 'active' : '' }}">
@@ -199,6 +204,7 @@
                             <span class="dash-mtext">{{ __('Orders') }}</span>
                         </a>
                     </li>
+                    @endif
                    <!-- @can('Manage Customers')
                         <li
                             class="dash-item {{ Request::segment(1) == 'customer.index' || Request::route()->getName() == 'customer.show' ? ' active dash-trigger ' : 'collapsed' }}">

@@ -58,20 +58,24 @@ class DashboardController extends Controller
             $remote = str_replace('www.', '', $remote);
 
             if ($local != $remote){
-                $domain = CustomDomainRequest::where('status','1')->where('custom_domain',$remote)->first();
-                // If the domain exists
-                if(isset($domain) && !empty($domain)) {
-                    $store = Store::find($domain->store_id);
-                    if($store && $store->enable_domain == 'on' && $store['domain_switch'] == 'on') {
-                        return app('App\Http\Controllers\StoreController')->storeSlug($store->slug);
-                    }
-                } else {
-                    $sub_store = Store::where('subdomain', '=', $remote)->where('enable_subdomain', 'on')->first();
-                    if ($sub_store && $sub_store->enable_subdomain == 'on') {
-                        return app('App\Http\Controllers\StoreController')->storeSlug($sub_store->slug);
+                try {
+                    $domain = CustomDomainRequest::where('status','1')->where('custom_domain',$remote)->first();
+                    // If the domain exists
+                    if(isset($domain) && !empty($domain)) {
+                        $store = Store::find($domain->store_id);
+                        if($store && $store->enable_domain == 'on' && $store['domain_switch'] == 'on') {
+                            return app('App\Http\Controllers\StoreController')->storeSlug($store->slug);
+                        }
                     } else {
-                        return abort('404', 'Not Found');
+                        $sub_store = Store::where('subdomain', '=', $remote)->where('enable_subdomain', 'on')->first();
+                        if ($sub_store && $sub_store->enable_subdomain == 'on') {
+                            return app('App\Http\Controllers\StoreController')->storeSlug($sub_store->slug);
+                        } else {
+                            return abort('404', 'Not Found');
+                        }
                     }
+                } catch (\Exception $e) {
+                    // DB unavailable — fall through to normal auth flow
                 }
             }
 
@@ -164,7 +168,7 @@ class DashboardController extends Controller
                     return view('home', compact('products','saleData', 'store_id', 'totle_sale', 'store', 'orders', 'totle_order', 'newproduct', 'item_id', 'totle_qty', 'chartData', 'new_orders','storage_limit','plan','users'));
                 }
             }else{
-                return redirect()->back()->with('error', __('Permission denied.'));
+                return redirect()->route('profile')->with('error', __('Permission denied.'));
             }
         } else {
             if (!file_exists(storage_path() . "/installed")) {

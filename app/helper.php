@@ -257,8 +257,8 @@ function canCreateStore()
             return true;
         }
 
-        // Count stores created by super admin
-        $totalStores = \App\Models\Store::where('created_by', $creator->id)->count();
+        // Count Owner users (= stores) created by super admin
+        $totalStores = \App\Models\User::where('created_by', $creator->id)->where('type', 'Owner')->count();
 
         // Allow creation only if under the plan limit
         return $totalStores < $plan->max_stores;
@@ -303,7 +303,7 @@ function getSuperAdminStoreCount()
             return 0;
         }
 
-        return \App\Models\Store::where('created_by', $creator->id)->count();
+        return \App\Models\User::where('created_by', $creator->id)->where('type', 'Owner')->count();
         
     } catch (\Exception $e) {
         \Log::error('Error in getSuperAdminStoreCount: ' . $e->getMessage());

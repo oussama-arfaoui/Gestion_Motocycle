@@ -57,19 +57,6 @@
         border-left-color: #dee2e6;
     }
 
-    /* ── Filter tabs ── */
-    .filter-tabs { border-bottom: 2px solid #e9ecef; margin-bottom: 0; }
-    .filter-tabs .nav-link {
-        border: none; border-bottom: 3px solid transparent;
-        padding: 8px 16px; font-size: 13px; font-weight: 600;
-        color: #6c757d; margin-bottom: -2px; border-radius: 0;
-    }
-    .filter-tabs .nav-link.active { color: #e85d04; border-bottom-color: #e85d04; background: none; }
-    .filter-tabs .nav-link:hover:not(.active) { color: #495057; background: #f8f9fa; }
-    .filter-tabs .badge-count {
-        font-size: 10px; padding: 2px 6px; border-radius: 10px;
-        margin-left: 4px; font-weight: 700;
-    }
 
     /* ── Table rows ── */
     .orders-table { border-collapse: separate; border-spacing: 0; }
@@ -268,29 +255,6 @@
                 </div>
             </div>
         </div>
-        {{-- Filter tabs --}}
-        <ul class="nav filter-tabs" id="statusFilterTabs">
-            <li class="nav-item">
-                <a class="nav-link active" href="#" data-filter="all">
-                    Tous <span class="badge-count" style="background:#e9ecef;color:#555;">{{ $stats['total'] }}</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-filter="pending">
-                    En attente <span class="badge-count" style="background:#fef3c7;color:#92600a;">{{ $stats['pending'] }}</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-filter="validated">
-                    Validées <span class="badge-count" style="background:#dcfce7;color:#065f46;">{{ $stats['validated'] }}</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-filter="rejected">
-                    Rejetées <span class="badge-count" style="background:#fee2e2;color:#991b1b;">{{ $stats['rejected'] }}</span>
-                </a>
-            </li>
-        </ul>
     </div>
 
     <div class="card-body p-3">
@@ -318,7 +282,13 @@
                                 @if($order->customer_name)
                                     <div class="fw-semibold">{{ $order->customer_name }}</div>
                                     @if($order->customer_phone)
-                                        <small class="text-muted"><i class="ti ti-phone" style="font-size:10px;"></i> {{ $order->customer_phone }}</small>
+                                        <small class="text-muted d-block"><i class="ti ti-phone" style="font-size:10px;"></i> {{ $order->customer_phone }}</small>
+                                    @endif
+                                    @if($order->doc_type && $order->doc_number)
+                                        <small class="text-muted d-block">
+                                            <span class="badge bg-light text-dark border" style="font-size:10px;">{{ $order->doc_type }}</span>
+                                            {{ $order->doc_number }}
+                                        </small>
                                     @endif
                                 @else
                                     <span class="text-muted">—</span>
@@ -370,10 +340,13 @@
                                         <i class="ti ti-eye"></i>
                                     </button>
                                     @if($order->status == 'pending')
+                                        @if(\Auth::user()->type == 'Owner' || \Auth::user()->can('Manage Orders') || \Auth::user()->can('Edit Order'))
                                         <button class="btn btn-sm btn-outline-warning edit-order-btn"
                                                 data-id="{{ $order->id }}" data-bs-toggle="tooltip" title="{{ __('Modifier') }}">
                                             <i class="ti ti-pencil"></i>
                                         </button>
+                                        @endif
+                                        @if(\Auth::user()->type == 'Owner' || \Auth::user()->can('Manage Orders') || \Auth::user()->can('Validate Order'))
                                         <button class="btn btn-sm btn-outline-success validate-order-btn"
                                                 data-id="{{ $order->id }}" data-bs-toggle="tooltip" title="{{ __('Valider') }}">
                                             <i class="ti ti-check"></i>
@@ -382,6 +355,7 @@
                                                 data-id="{{ $order->id }}" data-bs-toggle="tooltip" title="{{ __('Rejeter') }}">
                                             <i class="ti ti-x"></i>
                                         </button>
+                                        @endif
                                     @endif
                                 </div>
                             </td>
@@ -446,36 +420,19 @@
 <script>
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    // ── Status filter (tabs + stat cards) ──
-    function applyFilter(filter) {
-        document.querySelectorAll('#statusFilterTabs .nav-link').forEach(l => {
-            l.classList.toggle('active', l.dataset.filter === filter);
-        });
-        applyAllFilters();
-    }
-
     // ── Date filter ──
     function applyDateFilter() {
-        applyAllFilters();
-    }
-
-    function applyAllFilters() {
-        const statusFilter = document.querySelector('#statusFilterTabs .nav-link.active')?.dataset.filter || 'all';
         const startDate = document.getElementById('dateFilterStart').value;
         const endDate = document.getElementById('dateFilterEnd').value;
-        
+
         document.querySelectorAll('#orders-table tbody tr.order-row').forEach(row => {
-            // Status filter
-            const statusMatch = statusFilter === 'all' || row.dataset.status === statusFilter;
-            
-            // Date filter
             let dateMatch = true;
             if (startDate || endDate) {
                 const orderDate = row.querySelector('td:nth-child(6) div')?.textContent; // Format: d/m/Y
                 if (orderDate) {
                     const [day, month, year] = orderDate.split('/');
                     const orderDateObj = new Date(`${year}-${month}-${day}`);
-                    
+
                     if (startDate) {
                         const start = new Date(startDate);
                         dateMatch = dateMatch && orderDateObj >= start;
@@ -486,22 +443,10 @@
                     }
                 }
             }
-            
-            row.style.display = (statusMatch && dateMatch) ? '' : 'none';
+
+            row.style.display = dateMatch ? '' : 'none';
         });
     }
-    document.querySelectorAll('#statusFilterTabs .nav-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            applyFilter(this.dataset.filter);
-        });
-    });
-    document.querySelectorAll('.filter-stat').forEach(card => {
-        card.addEventListener('click', function() {
-            applyFilter(this.dataset.filter);
-            document.querySelector('.card.border-0')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-    });
 
     // Date filter event listeners
     document.getElementById('dateFilterStart')?.addEventListener('change', applyDateFilter);
@@ -525,17 +470,21 @@
             .then(r => r.json())
             .then(data => {
                 const order = data.order;
+                const docBadge = order.doc_type
+                    ? `<span class="badge bg-light text-dark border me-1">${order.doc_type}</span>${order.doc_number || ''}`
+                    : '-';
                 let html = `
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <strong>{{ __('N° Commande') }}:</strong> ${order.order_number}<br>
                             <strong>{{ __('Client') }}:</strong> ${order.customer_name || '-'}<br>
-                            <strong>{{ __('Téléphone') }}:</strong> ${order.customer_phone || '-'}
+                            <strong>{{ __('Téléphone') }}:</strong> ${order.customer_phone || '-'}<br>
+                            <strong>{{ __('Document') }}:</strong> ${docBadge}
                         </div>
                         <div class="col-md-6 text-end">
-                            <strong>{{ __('Statut') }}:</strong> 
+                            <strong>{{ __('Statut') }}:</strong>
                             <span class="badge bg-${order.status === 'validated' ? 'success' : (order.status === 'rejected' ? 'danger' : 'warning')}">${order.status}</span><br>
-                            <strong>{{ __('Total') }}:</strong> ${parseFloat(order.total_price).toLocaleString()} <br>
+                            <strong>{{ __('Total') }}:</strong> ${parseFloat(order.total_price).toLocaleString()}<br>
                             <strong>{{ __('Remise') }}:</strong> ${parseFloat(order.discount).toLocaleString()}
                         </div>
                     </div>

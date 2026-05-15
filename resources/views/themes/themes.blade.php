@@ -11,12 +11,19 @@
 @section('content')
     <div class="themes-main-sec">
         {{ Form::open(['route' => ['store.changetheme', $store_settings->id], 'method' => 'POST']) }}
-        <div class="d-flex mb-3 align-items-center justify-content-between">
+        <div class="d-flex mb-3 align-items-center justify-content-between flex-wrap gap-2">
             <h3 class="mb-0">{{ __('Themes') }}</h3>
-            {{ Form::hidden('themefile', null, ['id' => 'themefile']) }}
-            <button type="submit" class="btn  btn-primary"> <i data-feather="check-circle"
-                    class="me-2"></i>{{ __('Save Changes') }}</button>
-
+            <div class="d-flex gap-2 align-items-center">
+                <a href="{{ route('website.settings') }}" class="btn btn-warning d-flex align-items-center gap-1">
+                    <i data-feather="edit-3" class="me-1" style="width:16px;height:16px;"></i>
+                    {{ __('Edit My Website') }}
+                </a>
+                {{ Form::hidden('themefile', null, ['id' => 'themefile']) }}
+                <button type="submit" class="btn btn-primary d-flex align-items-center gap-1">
+                    <i data-feather="check-circle" class="me-1" style="width:16px;height:16px;"></i>
+                    {{ __('Save Changes') }}
+                </button>
+            </div>
         </div>
         <div class="border border-primary rounded p-3">
             <div class="row gy-4 ">

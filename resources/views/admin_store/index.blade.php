@@ -132,6 +132,11 @@
                                                         <i   class="ti ti-trophy f-20"></i>
                                                     </a>
                                                 @endcan
+                                                @if(Auth::user()->type == 'super admin')
+                                                    <a href="#!" data-url="{{ route('plans.edit', $usr->plan) }}" data-size="lg" data-ajax-popup="true" data-title="{{ __('Edit Plan') }}" class="btn btn-sm btn-icon bg-purple text-white me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Modifier le plan') }}">
+                                                        <i class="ti ti-settings f-20"></i>
+                                                    </a>
+                                                @endif
 
                                                 @can('Reset Password')
                                                     <a href="#!" data-url="{{ route('user.reset', \Crypt::encrypt($usr->id)) }}" class="btn btn-sm btn-icon  btn-primary-subtle text-white me-2" data-tooltip="Edit" data-ajax-popup="true" data-title="{{ __('Reset Password') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Reset Password') }}" data-tooltip="View">

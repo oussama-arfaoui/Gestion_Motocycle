@@ -11,6 +11,9 @@ class BrandController extends Controller
     // List all brands
     public function index()
     {
+        if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Manage Brands') && !\Auth::user()->can('Manage Products')) {
+            return redirect()->route('profile')->with('error', __('Permission denied.'));
+        }
         $brands = Brand::with(['categories.variants.chassisNumbers'])->get();
         return view('brand.index', compact('brands'));
     }
@@ -18,12 +21,18 @@ class BrandController extends Controller
     // Show create form
     public function create()
     {
+        if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Create Brand') && !\Auth::user()->can('Manage Products')) {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
         return view('brand.create');
     }
 
 // Store a new brand
 public function store(Request $request)
 {
+    if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Create Brand') && !\Auth::user()->can('Manage Products')) {
+        return redirect()->back()->with('error', __('Permission denied.'));
+    }
     $validator = \Validator::make(
         $request->all(),
         [
@@ -75,6 +84,9 @@ public function store(Request $request)
     // Show edit form
     public function edit($id)
     {
+        if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Edit Brand') && !\Auth::user()->can('Manage Products')) {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
         $brand = Brand::findOrFail($id);
         return view('brand.edit', compact('brand'));
     }
@@ -82,6 +94,9 @@ public function store(Request $request)
   // Update brand
 public function update(Request $request, $id)
 {
+    if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Edit Brand') && !\Auth::user()->can('Manage Products')) {
+        return redirect()->back()->with('error', __('Permission denied.'));
+    }
     $brand = Brand::findOrFail($id);
 
     $request->validate([
@@ -118,10 +133,55 @@ public function update(Request $request, $id)
     // Delete brand
     public function destroy($id)
     {
+        if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Delete Brand') && !\Auth::user()->can('Manage Products')) {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
         $brand = Brand::findOrFail($id);
         $brand->delete();
 
         return redirect()->route('brands.index')->with('success', __('Brand deleted successfully.'));
+    }
+
+    // Get brand statistics for dashboard
+    public function getBrandStats()
+    {
+        $brands = Brand::with(['categories.variants.chassisNumbers'])->get();
+        
+        $totalModels = 0;
+        $totalFamilies = 0;
+        $totalStock = 0;
+        $brandStats = [];
+        
+        foreach ($brands as $brand) {
+            $modelsCount = $brand->categories->count();
+            $familiesCount = $brand->categories->sum(function($category) {
+                return $category->variants->count();
+            });
+            $stockCount = $brand->categories->sum(function($category) {
+                return $category->variants->sum(function($variant) {
+                    return $variant->chassisNumbers->count();
+                });
+            });
+            
+            $totalModels += $modelsCount;
+            $totalFamilies += $familiesCount;
+            $totalStock += $stockCount;
+            
+            $brandStats[] = [
+                'id' => $brand->id,
+                'name' => $brand->name,
+                'models_count' => $modelsCount,
+                'families_count' => $familiesCount,
+                'total_stock' => $stockCount
+            ];
+        }
+        
+        return response()->json([
+            'total_models' => $totalModels,
+            'total_families' => $totalFamilies,
+            'total_stock' => $totalStock,
+            'brands' => $brandStats
+        ]);
     }
 
     // Edit Model (Category)

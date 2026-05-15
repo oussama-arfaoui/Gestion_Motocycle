@@ -202,8 +202,8 @@ $company_logo = \App\Models\Utility::getValByName('company_logo');
                 <div class="col-md-3 col-sm-4 col-12">
                     <div class="card qr-card  h-100 mb-0">
                         <div class="qr-card-inner">
-                            <div class="text-center qr-card-image" style="padding: 10px; background: #fff8f3; border-radius: 12px; border: 3px solid #FF7A00;">
-                                {!! QrCode::generate($store_id['store_url']) !!}
+                            <div class="qr-card-image">
+                                {!! QrCode::size(220)->generate($store_id['store_url']) !!}
                             </div>
                             <div class="qr-card-content">
                                 <a href="#!" class="btn w-100 cp_link d-flex align-items-center justify-content-between" data-link="{{  $store_id['store_url'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Click to copy Store link') }}" style="padding-left: 10px; padding-right: 10px; background: linear-gradient(90deg, #FF7A00, #FF9A00); color: white; border: none; font-weight: 700; box-shadow: 0 4px 12px rgba(255,122,0,0.35);">

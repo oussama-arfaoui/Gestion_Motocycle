@@ -511,14 +511,37 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">{{ __('Type de document') }}</label>
+                            <div class="d-flex gap-3 align-items-center mt-1">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="pay_doc_type" id="doc_cin" value="CIN" checked>
+                                    <label class="form-check-label fw-semibold" for="doc_cin">CIN</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="pay_doc_type" id="doc_rc" value="RC">
+                                    <label class="form-check-label fw-semibold" for="doc_rc">RC</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="pay_doc_type" id="doc_ice" value="ICE">
+                                    <label class="form-check-label fw-semibold" for="doc_ice">ICE</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold" id="pay_doc_label">{{ __('N° CIN') }}</label>
+                            <input type="text" class="form-control" id="pay_doc_number" placeholder="{{ __('Numéro du document') }}">
+                        </div>
+                        <div class="col-md-4">
                             <label class="form-label fw-semibold">{{ __('TVA') }} (%)</label>
                             <div class="input-group">
                                 <input type="number" class="form-control" id="pay_tva" value="0" min="0" max="100" step="0.01" placeholder="0">
                                 <span class="input-group-text">%</span>
                             </div>
                         </div>
-                        <div class="col-md-9">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12">
                             <label class="form-label fw-semibold">{{ __('Commentaire') }}</label>
                             <textarea class="form-control" id="pay_comment" rows="2" placeholder="{{ __('Commentaire sur la commande...') }}"></textarea>
                         </div>
@@ -1819,6 +1842,15 @@
             });
         });
 
+        // ==================== DOC TYPE LABEL UPDATE ====================
+        document.querySelectorAll('input[name="pay_doc_type"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const labels = { CIN: '{{ __("N° CIN") }}', RC: '{{ __("N° RC") }}', ICE: '{{ __("N° ICE") }}' };
+                document.getElementById('pay_doc_label').textContent = labels[this.value] || this.value;
+                document.getElementById('pay_doc_number').placeholder = '{{ __("Numéro du document") }} (' + this.value + ')';
+            });
+        });
+
         // ==================== PAY / CREATE ORDER MODAL ====================
         const payModal = document.getElementById('payOrderModal');
         
@@ -1858,12 +1890,21 @@
                     const rowSubtotal = price * quantity;
                     subtotal += rowSubtotal;
 
-                    html += `<tr>
+                    const rowIdx = subtotal > 0 ? Date.now() + Math.random() : Math.random();
+                    html += `<tr data-row-chassis="${chassisNumber}">
                         <td>${productName}</td>
                         <td><span class="badge bg-info">${chassisNumber}</span></td>
-                        <td class="text-end">${cur} ${price.toFixed(2)}</td>
+                        <td>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text">${cur}</span>
+                                <input type="number" class="form-control pay-price-input"
+                                       value="${price.toFixed(2)}" min="0" step="0.01"
+                                       style="min-width:110px; font-weight:600;"
+                                       placeholder="0.00">
+                            </div>
+                        </td>
                         <td class="text-center">${quantity}</td>
-                        <td class="text-end fw-bold">${cur} ${rowSubtotal.toFixed(2)}</td>
+                        <td class="text-end fw-bold pay-row-subtotal">${cur} ${rowSubtotal.toFixed(2)}</td>
                     </tr>`;
                 });
             } else {
@@ -1874,9 +1915,32 @@
             // Reset form fields
             document.getElementById('pay_tva').value = '0';
             document.getElementById('pay_comment').value = '';
+            document.getElementById('pay_doc_number').value = '';
+            document.getElementById('doc_cin').checked = true;
+            document.getElementById('pay_doc_label').textContent = '{{ __("N° CIN") }}';
             // Store subtotal on modal-body for TVA recalc
             document.querySelector('#payOrderModal .modal-body').dataset.subtotal = subtotal;
             recalcPayTotals(subtotal);
+
+            // Live recalc when any price input changes
+            payBody.querySelectorAll('.pay-price-input').forEach(input => {
+                input.addEventListener('input', function() {
+                    const tr = this.closest('tr');
+                    const qty = parseInt(tr.querySelector('td:nth-child(4)').textContent.trim()) || 1;
+                    const p   = parseFloat(this.value) || 0;
+                    const sub = p * qty;
+                    tr.querySelector('.pay-row-subtotal').textContent = cur + ' ' + sub.toFixed(2);
+                    // Recalc global subtotal from all rows
+                    let newSubtotal = 0;
+                    payBody.querySelectorAll('.pay-price-input').forEach(inp => {
+                        const r = inp.closest('tr');
+                        const q = parseInt(r.querySelector('td:nth-child(4)').textContent.trim()) || 1;
+                        newSubtotal += (parseFloat(inp.value) || 0) * q;
+                    });
+                    document.querySelector('#payOrderModal .modal-body').dataset.subtotal = newSubtotal;
+                    recalcPayTotals(newSubtotal);
+                });
+            });
 
             const modal = new bootstrap.Modal(payModal);
             modal.show();
@@ -1885,29 +1949,28 @@
         // Confirm and create order
         document.getElementById('confirmPayOrder')?.addEventListener('click', function() {
             const btn = this;
-            const cartRows = document.querySelectorAll('#tbody tr[data-chassis-id], #tbody tr[data-product-id]');
-            const items = [];
-            
+
+            // Read prices from the editable inputs inside the modal table
+            const modalRows  = document.querySelectorAll('#payItemsBody tr');
+            const cartRows   = document.querySelectorAll('#tbody tr[data-chassis-id], #tbody tr[data-product-id]');
+            const items      = [];
+            let   rowIdx     = 0;
+
             cartRows.forEach(row => {
                 const chassisId = row.getAttribute('data-chassis-id');
                 const productId = row.getAttribute('data-product-id');
-                const priceCell = row.querySelector('.price');
-                const priceText = priceCell ? priceCell.textContent.trim() : '0';
-                const price = parseFloat(priceText.replace(/[^0-9.]/g, '')) || 0;
-                
+                // Get price from the editable input in the corresponding modal row
+                const modalRow  = modalRows[rowIdx];
+                const priceInput = modalRow ? modalRow.querySelector('.pay-price-input') : null;
+                const price      = priceInput ? (parseFloat(priceInput.value) || 0) : 0;
+                rowIdx++;
+
                 if (chassisId) {
-                    items.push({
-                        chassis_number_id: parseInt(chassisId),
-                        price: price
-                    });
+                    items.push({ chassis_number_id: parseInt(chassisId), price });
                 } else if (productId) {
-                    // For family items, we need to handle differently
                     const variantId = row.getAttribute('data-variant-id');
                     if (variantId) {
-                        items.push({
-                            variant_id: parseInt(variantId),
-                            price: price
-                        });
+                        items.push({ variant_id: parseInt(variantId), price });
                     }
                 }
             });
@@ -1928,14 +1991,16 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 body: JSON.stringify({
-                    customer_name: document.getElementById('pay_customer_name').value,
+                    customer_name:  document.getElementById('pay_customer_name').value,
                     customer_phone: document.getElementById('pay_customer_phone').value,
-                    notes: document.getElementById('pay_notes').value,
-                    comment: document.getElementById('pay_comment').value,
-                    tva: parseFloat(document.getElementById('pay_tva').value) || 0,
-                    discount: parseFloat($('.discount').val()) || 0,
-                    items: items,
-                    session_key: '{{ $lastsegment }}'
+                    notes:          document.getElementById('pay_notes').value,
+                    comment:        document.getElementById('pay_comment').value,
+                    tva:            parseFloat(document.getElementById('pay_tva').value) || 0,
+                    discount:       parseFloat($('.discount').val()) || 0,
+                    doc_type:       document.querySelector('input[name="pay_doc_type"]:checked')?.value || 'CIN',
+                    doc_number:     document.getElementById('pay_doc_number').value,
+                    items:          items,
+                    session_key:    '{{ $lastsegment }}'
                 })
             })
             .then(r => r.json())

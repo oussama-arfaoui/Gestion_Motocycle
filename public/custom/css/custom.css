@@ -1168,6 +1168,9 @@ body.no-scroll{
 .bg-light-green-subtitle{
     background: #9bb958 !important;
 }
+.bg-purple {
+    background: #7c3aed !important;
+}
 /* button color list end */
 
 
@@ -1594,22 +1597,20 @@ body.theme-3 .dataTable-pagination a{
     margin-left: 24px;
 }
 .qr-card .qr-card-image{
-    max-width: 70%;
     width: 100%;
-    position: relative;
-    margin: 0 auto 20px;
-    padding-top: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    padding: 8px 0;
 }
 .qr-card .qr-card-image svg{
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    object-fit: scale-down;
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    max-width: 220px;
+    height: auto;
+    display: block;
 }
- .qr-card-content {
+.qr-card-content {
     gap: 10px;
     position: relative;
 }

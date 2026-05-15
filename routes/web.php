@@ -58,6 +58,7 @@ use App\Http\Controllers\TapPaymentController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\YooKassaController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\WebsiteSettingsController;
 use App\Http\Controllers\ProductVariantController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -189,6 +190,9 @@ Route::group(['middleware' => ['verified']], function () {
     Route::get('/plans', [PlanController::class, 'index'])->name('plans.index')->middleware(['auth', 'XSS']);
     Route::get('settings', [SettingController::class, 'index'])->name('settings');
     Route::get('themes',[themeController::class,'index'])->name('themes.theme')->middleware(['auth','XSS']);
+    Route::get('website-settings', [WebsiteSettingsController::class, 'index'])->name('website.settings')->middleware(['auth', 'XSS']);
+    Route::post('website-settings/save', [WebsiteSettingsController::class, 'save'])->name('website.settings.save')->middleware(['auth', 'XSS']);
+    Route::get('website-settings/get', [WebsiteSettingsController::class, 'getSettings'])->name('website.settings.get')->middleware(['auth', 'XSS']);
     Route::post('pwa-settings/{id}',[StoreController::class,'pwasetting'])->name('setting.pwa')->middleware(['auth','XSS']);
     // Route::resource('store-resource', StoreController::class)->middleware(['auth', 'XSS']);
 
@@ -315,6 +319,7 @@ Route::group(['middleware' => ['verified']], function () {
         Route::get('/models/{modelId}/families', [BrandController::class, 'getFamilies']);
         Route::get('/families/{familyId}/products', [BrandController::class, 'getProducts']);
         Route::get('/stock/analyze', [BrandController::class, 'analyzeAllStock']);
+        Route::get('/api/brand/stats', [BrandController::class, 'getBrandStats'])->name('api.brand.stats');
         
         // 🔹 Edit and Delete routes for hierarchy items
         Route::get('/models/{id}/edit', [BrandController::class, 'editModel'])->name('models.edit');
