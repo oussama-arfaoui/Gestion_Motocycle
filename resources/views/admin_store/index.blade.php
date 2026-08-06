@@ -22,19 +22,16 @@
         <a href="{{ route('store.grid') }}" class="btn btn-sm btn-primary btn-icon" data-bs-toggle="tooltip"
             data-bs-placement="top" title="{{ __('Grid View') }}"><i class="ti ti-grid-dots"></i></a>
         @can('Create Store')
-            @if(canCreateStore())
-                <a href="#" data-size="lg" data-url="{{ route('store-resource.create') }}" data-ajax-popup="true"
-                    data-title="{{ __('Create New Store') }}" class="btn btn-sm btn-primary btn-icon" data-bs-toggle="tooltip"
-                    data-bs-placement="top" title="{{ __('Create') }}"><i class="ti ti-plus"></i></a>
-            @else
-                <a href="{{ route('plans.index') }}" class="btn btn-sm btn-secondary btn-icon disabled" style="opacity:0.6;cursor:not-allowed;" data-bs-toggle="tooltip"
-                    data-bs-placement="top" title="{{ __('Veuillez améliorer votre plan pour créer plus de magasins') }}"><i class="ti ti-lock"></i> {{ __('Créer un magasin') }}</a>
-            @endif
+            <a href="#" data-size="lg" data-url="{{ route('store-resource.create') }}" data-ajax-popup="true"
+                data-title="{{ __('Create New Store') }}" class="btn btn-sm btn-primary btn-icon" data-bs-toggle="tooltip"
+                data-bs-placement="top" title="{{ __('Create') }}"><i class="ti ti-plus"></i></a>
         @endcan
     </div>
 @endsection
 @section('filter')
 @endsection
+
+
 @section('content')
     <div class="row">
         <div class="col-md-12">

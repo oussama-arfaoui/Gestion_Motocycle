@@ -3,8 +3,37 @@
 @php
     $brand_logo_url = \App\Models\Utility::get_file('uploads/brand_image/');
     $category_img_url = \App\Models\Utility::get_file('uploads/product_image/');
-    $variant_img_url = \App\Models\Utility::get_file('uploads/product_variant/');
+    $variant_img_url = \App\Models\Utility::get_file('uploads/family_image/');
     $product_img_url = \App\Models\Utility::get_file('uploads/product/');
+
+    // ── Website Builder settings (saved from /website-settings) ──
+    $ws        = $wsSettings ?? [];
+    $wsHero    = $ws['hero']     ?? [];
+    $wsBrands  = $ws['brands']   ?? [];
+    $wsVideo   = $ws['video']    ?? [];
+    $wsCta     = $ws['cta']      ?? [];
+
+    $heroEnabled   = !array_key_exists('hero', $ws) || !empty($wsHero['enabled']);
+    $brandsEnabled = !array_key_exists('brands', $ws) || !empty($wsBrands['enabled']);
+    $videoEnabled  = !empty($wsVideo['enabled']) && !empty($wsVideo['url']);
+    $ctaEnabled    = !empty($wsCta['enabled']);
+
+    $heroTitle    = !empty($wsHero['title'])    ? $wsHero['title']    : $store->name;
+    $heroSubtitle = !empty($wsHero['subtitle']) ? $wsHero['subtitle'] : ($store->tagline ?? 'Découvrez notre collection de motos premium');
+    $brandsTitle  = !empty($wsBrands['title'])  ? $wsBrands['title']  : 'Nos Marques';
+
+    // Convert a YouTube/Vimeo URL into an embeddable URL
+    $videoEmbed = '';
+    if ($videoEnabled) {
+        $u = $wsVideo['url'];
+        if (preg_match('~(?:youtube\.com/watch\?v=|youtu\.be/|youtube\.com/embed/)([\w-]+)~', $u, $m)) {
+            $videoEmbed = 'https://www.youtube.com/embed/' . $m[1] . (!empty($wsVideo['autoplay']) ? '?autoplay=1&mute=1' : '');
+        } elseif (preg_match('~vimeo\.com/(\d+)~', $u, $m)) {
+            $videoEmbed = 'https://player.vimeo.com/video/' . $m[1] . (!empty($wsVideo['autoplay']) ? '?autoplay=1&muted=1' : '');
+        } else {
+            $videoEmbed = $u;
+        }
+    }
 @endphp
 
 @push('css-page')
@@ -114,17 +143,7 @@
         margin-bottom: 0.5rem;
     }
     
-    .category-badge {
-        display: inline-block;
-        background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
-        color: white;
-        padding: 0.3rem 0.8rem;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        letter-spacing: 0.3px;
-    }
-    
+        
     .product-card {
         background: white;
         border-radius: 12px;
@@ -186,12 +205,7 @@
         margin-bottom: 0.5rem;
     }
     
-    .product-sku {
-        color: #6c757d;
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-    }
-    
+        
     .product-price {
         font-size: 1.5rem;
         font-weight: 800;
@@ -313,20 +327,25 @@
 @section('content')
 <main>
     <!-- Hero Section -->
+    @if($heroEnabled)
     <section class="hero-section" style="position: relative; overflow: hidden;">
         <div style="position: absolute; inset: 0; background: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 20%22><path d=%22M0 20 Q25 0 50 10 Q75 20 100 5 L100 20Z%22 fill=%22rgba(255,255,255,0.08)%22/></svg>') bottom/cover no-repeat;"></div>
         <div class="container" style="position: relative; z-index: 1;">
             <img src="{{ asset('images/mobinardo-logo.png') }}" alt="MOBINARDO" style="max-height: 100px; max-width: 320px; object-fit: contain; margin-bottom: 1.5rem; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.25)) brightness(0) invert(1);">
-            <h1 style="text-shadow: 0 2px 8px rgba(0,0,0,0.2);">{{ $store->name }}</h1>
-            <p style="opacity: 0.95;">{{ $store->tagline ?? 'Découvrez notre collection de motos premium' }}</p>
+            <h1 style="text-shadow: 0 2px 8px rgba(0,0,0,0.2);">{{ $heroTitle }}</h1>
+            <p style="opacity: 0.95;">{{ $heroSubtitle }}</p>
+            @if(!empty($wsHero['cta_text']))
+                <a href="{{ $wsHero['cta_link'] ?: '#brands-section' }}" class="btn-primary-custom" style="margin-top: 1.5rem; background: #fff; color: #FF7A00;">{{ $wsHero['cta_text'] }}</a>
+            @endif
         </div>
     </section>
+    @endif
 
     <!-- Brands Section -->
-    <section class="brands-section" id="brands-section" style="padding: 60px 0; background: var(--light-bg); border-top: 4px solid #FF7A00;">
+    <section class="brands-section" id="brands-section" style="padding: 60px 0; background: var(--light-bg); border-top: 4px solid #FF7A00;{{ $brandsEnabled ? '' : 'display:none;' }}">
         <div class="container">
             <div class="section-title">
-                <h2 style="color: var(--dark-color);">Nos Marques</h2>
+                <h2 style="color: var(--dark-color);">{{ $brandsTitle }}</h2>
                 <p>Choisissez parmi nos marques de motos premium</p>
                 <div style="width: 60px; height: 4px; background: linear-gradient(90deg,#FF7A00,#FFB300); border-radius: 2px; margin: 1rem auto 0;"></div>
             </div>
@@ -380,6 +399,34 @@
             </div>
         </div>
     </section>
+
+    <!-- Video Section -->
+    @if($videoEnabled)
+    <section class="video-section" style="padding: 60px 0;">
+        <div class="container">
+            <div style="position: relative; width: 100%; max-width: 900px; margin: 0 auto; padding-top: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.15);">
+                <div style="position: relative; padding-top: 56.25%;">
+                    <iframe src="{{ $videoEmbed }}" style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <!-- Call To Action Section -->
+    @if($ctaEnabled)
+    <section class="cta-section" style="padding: 70px 0; background: {{ $wsCta['bg_color'] ?? '#f8f9fa' }};">
+        <div class="container" style="text-align: center;">
+            <h2 style="font-size: 2.2rem; font-weight: 800; color: var(--dark-color); margin-bottom: 0.75rem;">{{ $wsCta['title'] ?? 'Ready to get started?' }}</h2>
+            @if(!empty($wsCta['description']))
+                <p style="color: #6c757d; font-size: 1.1rem; max-width: 640px; margin: 0 auto 1.75rem;">{{ $wsCta['description'] }}</p>
+            @endif
+            @if(!empty($wsCta['btn_text']))
+                <a href="{{ $wsCta['btn_link'] ?: '#' }}" class="btn-primary-custom">{{ $wsCta['btn_text'] }}</a>
+            @endif
+        </div>
+    </section>
+    @endif
 </main>
 
 <script>
@@ -419,7 +466,7 @@
                         }
                         <div class="category-card-body">
                             <h4>${cat.name}</h4>
-                            <span class="category-badge">${cat.variants ? cat.variants.length : 0} Variants</span>
+                            <button class="btn-primary-custom" onclick="showProducts(${brandId}, ${cat.id})" style="margin-top: 1rem; font-size: 0.9rem; padding: 0.6rem 1.5rem;">Voir plus</button>
                         </div>
                     </div>
                 `;
@@ -473,9 +520,11 @@
                                 </div>
                                 <div class="product-body">
                                     <h3 class="product-title">${variant.name}</h3>
-                                    <p class="product-sku" style="color:#FF9A00; font-weight:500;">N° Châssis: ${product.SKU}</p>
                                     <div class="product-price">${variant.price} ${product.currency || 'DH'}</div>
-                                    <a href="#" class="btn-primary-custom" onclick="contactUs('${product.SKU}', '${variant.name}'); return false;">Nous Contacter</a>
+                                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                                        <a href="#" class="btn-primary-custom" onclick="contactUs('${product.SKU}', '${variant.name}'); return false;" style="flex: 1; text-align: center; font-size: 0.85rem; padding: 0.6rem 1rem;">Contact Us</a>
+                                        <a href="https://wa.me/212666666666?text=I'm%20interested%20in%20${encodeURIComponent(variant.name)}%20-%20SKU:%20${encodeURIComponent(product.SKU)}" target="_blank" class="btn-primary-custom" style="flex: 1; text-align: center; font-size: 0.85rem; padding: 0.6rem 1rem; background: linear-gradient(90deg, #25D366, #128C7E);">Contact Us on WhatsApp</a>
+                                    </div>
                                 </div>
                             </div>
                         `;

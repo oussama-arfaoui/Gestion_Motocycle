@@ -38,6 +38,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PayfastController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ChassisOrderController;
+use App\Http\Controllers\FinancialFlowController;
+use App\Http\Controllers\CustomerDebtController;
 use App\Http\Controllers\WebhookController;
 use App\Http\Controllers\AiTemplateController;
 use App\Http\Controllers\AuthorizeNetController;
@@ -312,12 +314,18 @@ Route::group(['middleware' => ['verified']], function () {
         Route::delete('product/{id}/delete', [ProductController::class, 'fileDelete'])->name('products.file.delete');
         Route::delete('product/variant/{id}/{product_id}', [ProductController::class, 'VariantDelete'])->name('products.variant.delete');
         
+            // 🔹 Brand Import / Export routes (declared before resource to avoid {brand} conflict)
+        Route::get('brands/export', [BrandController::class, 'exportStock'])->name('brands.export');
+        Route::get('brands/import/template', [BrandController::class, 'downloadTemplate'])->name('brands.template');
+        Route::post('brands/import', [BrandController::class, 'importStock'])->name('brands.import');
+
             // 🔹 Brand CRUD routes
         Route::resource('brands', BrandController::class);
         Route::post('/hierarchy-store', [BrandController::class, 'hierarchyStore'])->name('hierarchy.store');
         Route::get('/brands/{brandId}/models', [BrandController::class, 'getModels']);
         Route::get('/models/{modelId}/families', [BrandController::class, 'getFamilies']);
         Route::get('/families/{familyId}/products', [BrandController::class, 'getProducts']);
+        Route::get('/families/{id}/print', [BrandController::class, 'printLabels'])->name('families.print');
         Route::get('/stock/analyze', [BrandController::class, 'analyzeAllStock']);
         Route::get('/api/brand/stats', [BrandController::class, 'getBrandStats'])->name('api.brand.stats');
         
@@ -764,7 +772,25 @@ Route::middleware(['auth', 'XSS'])->group(function () {
     Route::post('chassis-orders/{id}/validate', [ChassisOrderController::class, 'validate_order'])->name('chassis-orders.validate');
     Route::post('chassis-orders/{id}/reject', [ChassisOrderController::class, 'reject'])->name('chassis-orders.reject');
     Route::get('chassis-orders/{id}/invoice', [ChassisOrderController::class, 'invoice'])->name('chassis-orders.invoice');
+    Route::get('chassis-orders/{id}/invoice-pdf', [ChassisOrderController::class, 'downloadInvoicePdf'])->name('chassis-orders.invoice-pdf');
     Route::post('chassis-orders/{id}/sign', [ChassisOrderController::class, 'sign'])->name('chassis-orders.sign');
+
+    // Customer Debts Routes
+    Route::get('customer-debts', [CustomerDebtController::class, 'index'])->name('customer-debts.index');
+    Route::post('customer-debts', [CustomerDebtController::class, 'store'])->name('customer-debts.store');
+    Route::put('customer-debts/{id}', [CustomerDebtController::class, 'update'])->name('customer-debts.update');
+    Route::delete('customer-debts/{id}', [CustomerDebtController::class, 'destroy'])->name('customer-debts.destroy');
+
+    // Flux Financier Routes
+    Route::get('flux-financier', [FinancialFlowController::class, 'index'])->name('flux-financier.index');
+    Route::post('flux-financier', [FinancialFlowController::class, 'store'])->name('flux-financier.store');
+    Route::get('flux-financier/{id}/edit', [FinancialFlowController::class, 'edit'])->name('flux-financier.edit');
+    Route::put('flux-financier/{id}', [FinancialFlowController::class, 'update'])->name('flux-financier.update');
+    Route::delete('flux-financier/{id}', [FinancialFlowController::class, 'destroy'])->name('flux-financier.destroy');
+    // Catégories du flux financier
+    Route::post('flux-financier/categories', [FinancialFlowController::class, 'storeCategory'])->name('flux-financier.categories.store');
+    Route::put('flux-financier/categories/{id}', [FinancialFlowController::class, 'updateCategory'])->name('flux-financier.categories.update');
+    Route::delete('flux-financier/categories/{id}', [FinancialFlowController::class, 'destroyCategory'])->name('flux-financier.categories.destroy');
     
     //variant
     Route::get('pos-productVariant/{id}/{session}', [ProductController::class, 'productVariant']);

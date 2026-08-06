@@ -53,7 +53,7 @@
                             'Pos' => ['Manage', 'Create'],
                             'Location' => ['Manage', 'Create', 'Delete', 'Edit'],
                             'Products' => ['Manage', 'Create', 'Delete', 'Show', 'Edit'],
-                            'Orders' => ['Manage', 'Show', 'Delete'],
+                            'Orders' => ['Manage', 'Show', 'Delete', 'Edit', 'Validate'],
                             'Store' => ['Manage', 'Create', 'Delete', 'Edit'],
                         ];
 

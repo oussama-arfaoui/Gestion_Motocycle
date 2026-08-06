@@ -1,1 +1,19 @@
 [20-Sep-2025 12:36:11 UTC] PHP Fatal error:  Cannot redeclare App\Models\ProductVariant::category() in /home/mobiyrip/gestion.mobi-nardo.com/app/Models/ProductVariant.php on line 43
+[28-Jul-2026 13:02:38 UTC] PHP Fatal error:  Uncaught Error: Class "ComposerAutoloaderInit7e8c3c14ff33b199b4a0838993eb8423" not found in /home/mobiyrip/gestion.mobi-nardo.com/vendor/autoload.php:22
+Stack trace:
+#0 /home/mobiyrip/gestion.mobi-nardo.com/public/index.php(13): require()
+#1 /home/mobiyrip/gestion.mobi-nardo.com/index.php(21): require_once('/home/mobiyrip/...')
+#2 {main}
+  thrown in /home/mobiyrip/gestion.mobi-nardo.com/vendor/autoload.php on line 22
+[28-Jul-2026 13:02:39 UTC] PHP Fatal error:  Uncaught Error: Class "ComposerAutoloaderInit7e8c3c14ff33b199b4a0838993eb8423" not found in /home/mobiyrip/gestion.mobi-nardo.com/vendor/autoload.php:22
+Stack trace:
+#0 /home/mobiyrip/gestion.mobi-nardo.com/public/index.php(13): require()
+#1 /home/mobiyrip/gestion.mobi-nardo.com/index.php(21): require_once('/home/mobiyrip/...')
+#2 {main}
+  thrown in /home/mobiyrip/gestion.mobi-nardo.com/vendor/autoload.php on line 22
+[28-Jul-2026 13:02:41 UTC] PHP Fatal error:  Uncaught Error: Class "ComposerAutoloaderInit7e8c3c14ff33b199b4a0838993eb8423" not found in /home/mobiyrip/gestion.mobi-nardo.com/vendor/autoload.php:22
+Stack trace:
+#0 /home/mobiyrip/gestion.mobi-nardo.com/public/index.php(13): require()
+#1 /home/mobiyrip/gestion.mobi-nardo.com/index.php(21): require_once('/home/mobiyrip/...')
+#2 {main}
+  thrown in /home/mobiyrip/gestion.mobi-nardo.com/vendor/autoload.php on line 22

@@ -25,7 +25,7 @@
                                 <span class="dash-micon">
                                     <i class="ti ti-home"></i>
                                 </span>
-                                <span class="dash-mtext">{{ __('Dashboard') }}</span>
+                                <span class="dash-mtext">Tableau de bord</span>
                             </a>
                         </li>
                     @endcan
@@ -119,7 +119,7 @@
                                     <i class="ti ti-settings"></i>
                                 </span>
                                 <span class="dash-mtext">
-                                    {{ __('Settings') }}
+                                    Paramètres
                                 </span>
                             </a>
                         </li>
@@ -131,77 +131,133 @@
                             <span class="dash-micon">
                                 <i class="ti ti-home"></i>
                             </span>
-                            <span class="dash-mtext">{{ __('Dashboard') }}</span>
+                            <span class="dash-mtext">Tableau de bord</span>
                         </a>
                     </li>
                     @can('Manage Themes')
-                        <li class="dash-item {{ Request::segment(1) == 'themes' ? ' active' : 'collapsed' }}">
-                            <a href="{{ route('themes.theme') }}"
-                                class="dash-link {{ request()->is('themes') ? 'active' : '' }}">
-                                <span class="dash-micon">
-                                    <i class="ti ti-layout-2"></i>
-                                </span>
-                                <span class="dash-mtext">{{ __('Themes') }}</span>
-                            </a>
-                        </li>
+                    <li class="dash-item {{ Request::segment(1) == 'themes' ? ' active' : 'collapsed' }}">
+                        <a href="{{ route('themes.theme') }}"
+                            class="dash-link {{ request()->is('themes') ? 'active' : '' }}">
+                            <span class="dash-micon">
+                                <i class="ti ti-layout-2"></i>
+                            </span>
+                            <span class="dash-mtext">Thèmes</span>
+                        </a>
+                    </li>
+                    @else
+                    <li class="dash-item menu-disabled collapsed">
+                        <a href="javascript:void(0)" class="dash-link">
+                            <span class="dash-micon">
+                                <i class="ti ti-layout-2"></i>
+                            </span>
+                            <span class="dash-mtext">Thèmes</span>
+                        </a>
+                    </li>
                     @endcan
-                    @if(Auth::user()->type == 'Owner' || Auth::user()->can('Manage Role') || Auth::user()->can('Manage User'))
                     <li class="dash-item dash-hasmenu {{ Request::segment(1) == 'users' || Request::segment(1) == 'roles' ? ' active dash-trigger' : 'collapsed' }}">
                         <a href="#!" class="dash-link ">
                             <span class="dash-micon">
                                 <i class="ti ti-users"></i>
                             </span>
-                            <span class="dash-mtext">{{ __('Staff') }}</span>
+                            <span class="dash-mtext">Personnel</span>
                             <span class="dash-arrow">
                                 <i data-feather="chevron-right"></i>
                             </span>
                         </a>
-                        <ul class="dash-submenu {{ Request::segment(1) == 'roles' || Request::segment(1) == 'roles' ? ' show' : '' }}">
+                        <ul class="dash-submenu {{ Request::segment(1) == 'roles' || Request::segment(1) == 'users' ? ' show' : '' }}">
                             @can('Manage Role')
-                                <li class="dash-item {{ Request::route()->getName() == 'roles' ? ' active' : '' }}">
-                                    <a class="dash-link"
-                                        href="{{ route('roles.index') }}">{{ __('Roles') }}</a>
-                                </li>
+                            <li class="dash-item {{ Request::route()->getName() == 'roles' ? ' active' : '' }}">
+                                <a class="dash-link" href="{{ route('roles.index') }}">{{ __('Roles') }}</a>
+                            </li>
+                            @else
+                            <li class="dash-item menu-disabled">
+                                <a class="dash-link" href="javascript:void(0)">{{ __('Roles') }}</a>
+                            </li>
                             @endcan
                             @can('Manage User')
-                                <li
-                                    class="dash-item {{ Request::segment(1) == 'users.index' || Request::route()->getName() == 'users.show' ? ' active dash-trigger' : 'collapsed' }}">
-                                    <a class="dash-link" href="{{ route('users.index') }}">{{ __('User') }}</a>
-                                </li>
+                            <li class="dash-item {{ Request::segment(1) == 'users' ? ' active' : 'collapsed' }}">
+                                <a class="dash-link" href="{{ route('users.index') }}">{{ __('User') }}</a>
+                            </li>
+                            @else
+                            <li class="dash-item menu-disabled">
+                                <a class="dash-link" href="javascript:void(0)">{{ __('User') }}</a>
+                            </li>
                             @endcan
                         </ul>
                     </li>
-                    @endif
                     @can('Manage Pos')
-                        <li class="dash-item {{ Request::segment(1) == 'pos' ? ' active' : 'collapsed' }}">
-                            <a href="{{ route('pos.index') }}"
-                                class="dash-link {{ request()->is('themes') ? 'active' : '' }}">
-                                <span class="dash-micon">
-                                    <i class="ti ti-layers-difference"></i>
-                                </span>
-                                <span class="dash-mtext">{{ __('POS') }}</span>
-                            </a>
-                        </li>
+                    <li class="dash-item {{ Request::segment(1) == 'pos' ? ' active' : 'collapsed' }}">
+                        <a href="{{ route('pos.index') }}"
+                            class="dash-link {{ request()->is('pos') ? 'active' : '' }}">
+                            <span class="dash-micon">
+                                <i class="ti ti-layers-difference"></i>
+                            </span>
+                            <span class="dash-mtext">Point de vente</span>
+                        </a>
+                    </li>
+                    @else
+                    <li class="dash-item menu-disabled collapsed">
+                        <a href="javascript:void(0)" class="dash-link">
+                            <span class="dash-micon">
+                                <i class="ti ti-layers-difference"></i>
+                            </span>
+                            <span class="dash-mtext">Point de vente</span>
+                        </a>
+                    </li>
                     @endcan
-                    @if(Auth::user()->type == 'Owner' || Auth::user()->can('Manage Brands') || Auth::user()->can('Manage Products'))
+                    {{-- Store/Magasin --}}
+                    @canany(['Manage Brands', 'Manage Products', 'Create Products', 'Edit Products', 'Show Products', 'Delete Products'])
                     <li class="dash-item {{ Request::segment(1) == 'brands' ? ' active' : 'collapsed' }}">
                         <a href="{{ route('brands.index') }}"
-                            class="dash-link {{ request()->is('brands') ? 'active' : '' }}">
+                            class="dash-link {{ request()->is('brands*') ? 'active' : '' }}">
                             <span class="dash-micon">
                                 <i class="ti ti-license"></i>
                             </span>
-                            <span class="dash-mtext">{{ __('Store') }}</span>
+                            <span class="dash-mtext">Stock Magasin</span>
                         </a>
                     </li>
-                    @endif
-                    @if(Auth::user()->type == 'Owner' || Auth::user()->can('Manage Orders') || Auth::user()->can('Show Orders'))
+                    @else
+                    <li class="dash-item menu-disabled collapsed">
+                        <a href="javascript:void(0)" class="dash-link">
+                            <span class="dash-micon">
+                                <i class="ti ti-license"></i>
+                            </span>
+                            <span class="dash-mtext">Stock Magasin</span>
+                        </a>
+                    </li>
+                    @endcanany
+
+                    {{-- Orders --}}
+                    @canany(['Manage Orders', 'Show Orders', 'Delete Orders', 'Edit Orders', 'Validate Orders'])
                     <li class="dash-item {{ Request::segment(1) == 'chassis-orders' ? ' active' : 'collapsed' }}">
                         <a href="{{ route('chassis-orders.index') }}"
                             class="dash-link {{ request()->is('chassis-orders*') ? 'active' : '' }}">
                             <span class="dash-micon">
                                 <i class="ti ti-receipt"></i>
                             </span>
-                            <span class="dash-mtext">{{ __('Orders') }}</span>
+                            <span class="dash-mtext">État des ventes</span>
+                        </a>
+                    </li>
+                    @else
+                    <li class="dash-item menu-disabled collapsed">
+                        <a href="javascript:void(0)" class="dash-link">
+                            <span class="dash-micon">
+                                <i class="ti ti-receipt"></i>
+                            </span>
+                            <span class="dash-mtext">État des ventes</span>
+                        </a>
+                    </li>
+                    @endcanany
+
+                    {{-- Flux Financier --}}
+                    @if(\Auth::user()->type == 'Owner' || \Auth::user()->can('Manage Flux') || \Auth::user()->can('Show Flux'))
+                    <li class="dash-item {{ Request::segment(1) == 'flux-financier' ? ' active' : 'collapsed' }}">
+                        <a href="{{ route('flux-financier.index') }}"
+                            class="dash-link {{ request()->is('flux-financier*') ? 'active' : '' }}">
+                            <span class="dash-micon">
+                                <i class="ti ti-cash-banknote"></i>
+                            </span>
+                            <span class="dash-mtext">Flux Financier</span>
                         </a>
                     </li>
                     @endif
@@ -240,15 +296,22 @@
 
                     @can('Manage Settings')
                     <li class="dash-item dash-hasmenu {{ Request::segment(1) == 'settings' || Request::route()->getName() == 'store.editproducts' ? ' active dash-trigger' : 'collapsed' }}">
-                            <a href="{{ route('settings') }}" class="dash-link {{ request()->is('settings') ? 'active' : '' }}">
-                                <span class="dash-micon">
-                                    <i class="ti ti-settings"></i>
-                                </span>
-                                <span class="dash-mtext">
-                                    {{ __('Settings') }}
-                                </span>
-                            </a>
-                        </li>
+                        <a href="{{ route('settings') }}" class="dash-link {{ request()->is('settings') ? 'active' : '' }}">
+                            <span class="dash-micon">
+                                <i class="ti ti-settings"></i>
+                            </span>
+                            <span class="dash-mtext">Paramètres</span>
+                        </a>
+                    </li>
+                    @else
+                    <li class="dash-item menu-disabled collapsed">
+                        <a href="javascript:void(0)" class="dash-link">
+                            <span class="dash-micon">
+                                <i class="ti ti-settings"></i>
+                            </span>
+                            <span class="dash-mtext">Paramètres</span>
+                        </a>
+                    </li>
                     @endcan
                 @endif
             </ul>

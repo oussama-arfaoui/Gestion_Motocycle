@@ -46,8 +46,21 @@ class ChassisOrder extends Model
 
     public static function generateOrderNumber()
     {
-        $lastOrder = self::orderBy('id', 'desc')->first();
-        $nextId = $lastOrder ? $lastOrder->id + 1 : 1;
-        return 'CO-' . str_pad($nextId, 6, '0', STR_PAD_LEFT);
+        $yearSuffix = now()->format('y');
+        $max = self::maxOrderNumberForYear($yearSuffix);
+        return 'N' . ($max + 1) . '/' . $yearSuffix;
+    }
+
+    private static function maxOrderNumberForYear($yearSuffix)
+    {
+        $yearRegex = '^N([0-9]+)/' . $yearSuffix . '$';
+        $max = self::whereRaw('order_number REGEXP ?', [$yearRegex])->get()
+            ->map(function ($o) use ($yearSuffix) {
+                if (preg_match('/^N([0-9]+)\/' . preg_quote($yearSuffix, '/') . '$/', $o->order_number, $m)) {
+                    return (int) $m[1];
+                }
+                return 0;
+            })->max();
+        return $max ?: 1541;
     }
 }

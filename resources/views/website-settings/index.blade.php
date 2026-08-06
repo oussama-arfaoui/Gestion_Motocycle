@@ -10,7 +10,7 @@
     <li class="breadcrumb-item active" aria-current="page">{{ __('Website Builder') }}</li>
 @endsection
 
-@push('css-page')
+@push('css')
 <style>
 /* ── Google Font ── */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');

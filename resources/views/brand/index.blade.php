@@ -15,23 +15,6 @@ $canDelete = \Auth::user()->type === 'Owner' || \Auth::user()->can('Delete Brand
 <li class="breadcrumb-item active" aria-current="page">{{__('Boutique')}}</li>
 @endsection
 
-@section('action-btn')
-<div class="d-flex gap-2 align-items-center" id="main-add-btn">
-    <button class="btn btn-info" onclick="analyzeAllStock()">
-        <i class="ti ti-chart-bar me-1"></i> {{ __('Analyser Stock') }}
-    </button>
-    @if($canCreate)
-    <a href="#" class="btn btn-primary"
-       data-ajax-popup="true"
-       data-size="md"
-       data-url="{{ route('brands.create') }}"
-       data-title="{{ __('Ajouter une marque') }}">
-        <i class="ti ti-plus me-1"></i> {{ __('Créer une marque') }}
-    </a>
-    @endif
-</div>
-@endsection
-
 @section('content')
 <!-- Professional Header with Stats -->
 <div class="row mb-4">
@@ -41,7 +24,15 @@ $canDelete = \Auth::user()->type === 'Owner' || \Auth::user()->can('Delete Brand
                 <h2 class="fw-bold mb-2">{{ __('Catalogue des Marques') }}</h2>
                 <p class="text-muted mb-0">{{ __('Gérez votre catalogue : Marque → Modèle → Famille → Numéro de châssis') }}</p>
             </div>
-            <div class="d-flex gap-2">
+            <div class="d-flex gap-2 flex-wrap">
+                <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exportStockModal">
+                    <i class="ti ti-file-export me-1"></i> {{ __('Exporter') }}
+                </button>
+                @if($canCreate)
+                <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#importStockModal">
+                    <i class="ti ti-file-import me-1"></i> {{ __('Importer') }}
+                </button>
+                @endif
                 <button class="btn btn-outline-primary" onclick="analyzeAllStock()">
                     <i class="ti ti-chart-bar me-1"></i> {{ __('Analyser Stock') }}
                 </button>
@@ -251,6 +242,8 @@ $canDelete = \Auth::user()->type === 'Owner' || \Auth::user()->can('Delete Brand
                                                                        data-confirm-yes="delete-form-{{ $brand->id }}">
                                                                         <i class="ti ti-trash me-2"></i>{{ __('Supprimer') }}
                                                                     </a>
+                                                                    {!! Form::open(['method' => 'DELETE', 'route' => ['brands.destroy', $brand->id], 'id' => 'delete-form-' . $brand->id]) !!}
+                                                                    {!! Form::close() !!}
                                                                 </li>
                                                                 @endif
                                                             </ul>
@@ -356,6 +349,36 @@ $canDelete = \Auth::user()->type === 'Owner' || \Auth::user()->can('Delete Brand
                         <small class="text-muted">{{ __('Saisissez le prix catalogue de cette famille de produit') }}</small>
                     </div>
 
+                    <div id="trackingTypeField" class="mb-3" style="display: none;">
+                        <label class="form-label fw-semibold">{{ __('Type de suivi des produits') }}</label>
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <div class="form-check border rounded p-2 h-100">
+                                    <input class="form-check-input" type="radio" name="tracking_type" id="tracking_chassis" value="chassis" checked>
+                                    <label class="form-check-label" for="tracking_chassis">
+                                        <strong>{{ __('Numéro de châssis') }}</strong><br>
+                                        <small class="text-muted">{{ __('Unique — ex: moto, chaque pièce a un numéro différent') }}</small>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check border rounded p-2 h-100">
+                                    <input class="form-check-input" type="radio" name="tracking_type" id="tracking_ref" value="ref">
+                                    <label class="form-check-label" for="tracking_ref">
+                                        <strong>{{ __('Référence') }}</strong><br>
+                                        <small class="text-muted">{{ __('Identique — ex: huile, accessoire, même référence pour tous') }}</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="referenceField" class="mb-3" style="display: none;">
+                        <label for="itemReference" class="form-label fw-semibold" id="referenceLabel">{{ __('Référence du produit') }}</label>
+                        <input type="text" class="form-control" id="itemReference" name="reference" placeholder="{{ __('Ex: HUILE-10W40, CASQUE-XL...') }}">
+                        <small class="text-muted" id="referenceHelp">{{ __('Cette référence sera utilisée pour toutes les pièces de cette famille (code-barres / QR).') }}</small>
+                    </div>
+
                     <div id="quantityField" class="mb-3" style="display: none;">
                         <label for="quantity" class="form-label">{{ __('Quantité') }}</label>
                         <input type="number" class="form-control" id="quantity" name="quantity" min="1">
@@ -370,7 +393,7 @@ $canDelete = \Auth::user()->type === 'Owner' || \Auth::user()->can('Delete Brand
                     </div>
                     
                     <div id="chassisField" style="display: none;">
-                        <label class="form-label">{{ __('Numéros de châssis') }}</label>
+                        <label class="form-label" id="chassisFieldLabel">{{ __('Numéros de châssis') }}</label>
                         <div class="mb-3">
                             <div class="btn-group" role="group">
                                 <button type="button" class="btn btn-outline-primary" onclick="showChassisInputs()">
@@ -411,6 +434,86 @@ $canDelete = \Auth::user()->type === 'Owner' || \Auth::user()->can('Delete Brand
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Annuler') }}</button>
                 <button type="button" class="btn btn-primary" onclick="saveItem()">{{ __('Enregistrer') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Print Labels Modal -->
+<div class="modal fade" id="printModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="ti ti-printer me-2"></i>{{ __('Imprimer des étiquettes') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="printFamilyId">
+                <input type="hidden" id="printChassisId">
+                <p class="text-muted small mb-2" id="printContextLabel"></p>
+                <label class="form-label fw-semibold">{{ __('Type d\'impression') }}</label>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <label class="card border w-100 print-template-card text-center p-3 mb-2" style="cursor:pointer;">
+                            <input class="form-check-input d-none" type="radio" name="print_template" value="1" checked>
+                            <i class="ti ti-barcode" style="font-size:2rem;"></i>
+                            <div class="fw-semibold mt-2">{{ __('Modèle 1') }}</div>
+                            <small class="text-muted d-block">{{ __('Code-barres') }}</small>
+                        </label>
+                        <div class="d-flex gap-1 align-items-center justify-content-center">
+                            <input type="number" class="form-control form-control-sm text-center print-w" data-tpl="1" value="50" min="10" max="300" title="{{ __('Largeur (mm)') }}" style="width:64px;">
+                            <span class="text-muted small">×</span>
+                            <input type="number" class="form-control form-control-sm text-center print-h" data-tpl="1" value="25" min="10" max="300" title="{{ __('Hauteur (mm)') }}" style="width:64px;">
+                            <span class="text-muted small">mm</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="card border w-100 print-template-card text-center p-3 mb-2" style="cursor:pointer;">
+                            <input class="form-check-input d-none" type="radio" name="print_template" value="2">
+                            <i class="ti ti-qrcode" style="font-size:2rem;"></i>
+                            <div class="fw-semibold mt-2">{{ __('Modèle 2') }}</div>
+                            <small class="text-muted d-block">{{ __('QR Code') }}</small>
+                        </label>
+                        <div class="d-flex gap-1 align-items-center justify-content-center">
+                            <input type="number" class="form-control form-control-sm text-center print-w" data-tpl="2" value="50" min="10" max="300" title="{{ __('Largeur (mm)') }}" style="width:64px;">
+                            <span class="text-muted small">×</span>
+                            <input type="number" class="form-control form-control-sm text-center print-h" data-tpl="2" value="25" min="10" max="300" title="{{ __('Hauteur (mm)') }}" style="width:64px;">
+                            <span class="text-muted small">mm</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="card border w-100 print-template-card text-center p-3 mb-2" style="cursor:pointer;">
+                            <input class="form-check-input d-none" type="radio" name="print_template" value="3">
+                            <i class="ti ti-layout-grid" style="font-size:2rem;"></i>
+                            <div class="fw-semibold mt-2">{{ __('Modèle 3') }}</div>
+                            <small class="text-muted d-block">{{ __('QR + Code-barres') }}</small>
+                        </label>
+                        <div class="d-flex gap-1 align-items-center justify-content-center">
+                            <input type="number" class="form-control form-control-sm text-center print-w" data-tpl="3" value="58" min="10" max="300" title="{{ __('Largeur (mm)') }}" style="width:64px;">
+                            <span class="text-muted small">×</span>
+                            <input type="number" class="form-control form-control-sm text-center print-h" data-tpl="3" value="40" min="10" max="300" title="{{ __('Hauteur (mm)') }}" style="width:64px;">
+                            <span class="text-muted small">mm</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" name="print_orientation" id="orient_portrait" value="portrait" checked>
+                    <label class="form-check-label" for="orient_portrait">{{ __('Vertical (portrait)') }}</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" name="print_orientation" id="orient_landscape" value="landscape">
+                    <label class="form-check-label" for="orient_landscape">{{ __('Horizontal (paysage)') }}</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="printWithPrice" checked>
+                    <label class="form-check-label" for="printWithPrice">{{ __('Inclure le prix de vente') }}</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Annuler') }}</button>
+                <button type="button" class="btn btn-primary" onclick="doPrint()">
+                    <i class="ti ti-printer me-2"></i>{{ __('Imprimer') }}
+                </button>
             </div>
         </div>
     </div>
@@ -513,14 +616,128 @@ $canDelete = \Auth::user()->type === 'Owner' || \Auth::user()->can('Delete Brand
         </div>
     </div>
 </div>
+
+<!-- Export Stock Modal -->
+<div class="modal fade" id="exportStockModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('brands.export') }}" method="GET">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="ti ti-file-export me-2"></i>{{ __('Exporter le stock') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted small">{{ __('Exporte le stock (Marque → Modèle → Famille → Numéro de châssis). Laissez les dates vides pour tout exporter.') }}</p>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="from_date" class="form-label fw-semibold">{{ __('Date début') }}</label>
+                            <input type="date" class="form-control" id="from_date" name="from_date">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="to_date" class="form-label fw-semibold">{{ __('Date fin') }}</label>
+                            <input type="date" class="form-control" id="to_date" name="to_date">
+                        </div>
+                    </div>
+                    <small class="text-muted d-block mt-2">{{ __('Le filtre s\'applique sur la date des numéros de châssis.') }}</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Annuler') }}</button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="ti ti-download me-1"></i>{{ __('Télécharger (XLSX)') }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@if($canCreate)
+<!-- Import Stock Modal -->
+<div class="modal fade" id="importStockModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('brands.import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="ti ti-file-import me-2"></i>{{ __('Importer le stock') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info d-flex align-items-start gap-2">
+                        <i class="ti ti-info-circle mt-1"></i>
+                        <div>
+                            <div class="fw-semibold mb-1">{{ __('Format attendu') }}</div>
+                            <div class="small mb-2">{{ __('Colonnes : Marque, Modèle, Famille, Numéro de châssis, Date, Lieu (DEPOT / SHOW-ROOM).') }}</div>
+                            <a href="{{ route('brands.template') }}" class="btn btn-sm btn-outline-primary">
+                                <i class="ti ti-download me-1"></i>{{ __('Télécharger le modèle') }}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="import_file" class="form-label fw-semibold">{{ __('Fichier à importer') }} <span class="text-danger">*</span></label>
+                        <input type="file" class="form-control" id="import_file" name="import_file" accept=".xlsx,.xls,.csv" required>
+                        <small class="text-muted">{{ __('Formats acceptés : XLSX, XLS, CSV.') }}</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Annuler') }}</button>
+                    <button type="submit" class="btn btn-info text-white">
+                        <i class="ti ti-upload me-1"></i>{{ __('Importer') }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endif
+
+<!-- Brand image cropper modal -->
+<div class="modal fade" id="brandCropModal" tabindex="-1" aria-labelledby="brandCropModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="brandCropModalLabel">{{ __('Rogner l\'image de la marque') }}</h5>
+                <button type="button" class="btn-close" onclick="cancelBrandCrop()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <div style="max-height:55vh; overflow:hidden;">
+                    <img id="brandCropperImage" src="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="cancelBrandCrop()">{{ __('Annuler') }}</button>
+                <button type="button" class="btn btn-primary" onclick="confirmBrandCrop()">
+                    <i class="ti ti-crop me-1"></i> {{ __('Rogner & Utiliser') }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
+@push('css')
+<link rel="stylesheet" href="{{ asset('custom/libs/cropperjs/cropper.min.css') }}">
+<style>
+    .print-template-card { transition: all 0.15s ease-in-out; }
+    .print-template-card:hover { border-color: #0d6efd !important; }
+    .print-template-card.selected {
+        border-color: #0d6efd !important;
+        box-shadow: 0 0 0 2px rgba(13,110,253,.25);
+        background-color: rgba(13,110,253,.05);
+    }
+    #brandCropperImage { max-width: 100%; display: block; }
+    #brandCropModal .modal-body { max-height: 60vh; overflow: hidden; }
+</style>
+@endpush
+
 @push('script-page')
+<script src="{{ asset('custom/libs/cropperjs/cropper.min.js') }}"></script>
 <script>
 let currentLevel = 'brands';
 let currentBrandId = null;
 let currentModelId = null;
 let currentFamilyId = null;
+let currentFamilyTracking = 'chassis';
 let scannedChassisNumbers = [];
 
 function showNotification(message, type = 'success') {
@@ -1047,7 +1264,7 @@ function goBack() {
             {name: '{{ __("Marques") }}', level: 'brands'}
         ]);
         // Show main add button
-        mainAddBtn.style.display = 'block';
+        if (mainAddBtn) mainAddBtn.style.display = 'block';
     } else if (currentLevel === 'families') {
         // Go back to models
         currentLevel = 'models';
@@ -1058,7 +1275,7 @@ function goBack() {
             {name: '{{ __("Modèles") }}', level: 'models', data: {brandId: currentBrandId}}
         ]);
         // Hide main add button
-        mainAddBtn.style.display = 'none';
+        if (mainAddBtn) mainAddBtn.style.display = 'none';
     } else if (currentLevel === 'products') {
         // Go back to families
         currentLevel = 'families';
@@ -1070,7 +1287,7 @@ function goBack() {
             {name: '{{ __("Familles") }}', level: 'families', data: {modelId: currentModelId}}
         ]);
         // Hide main add button
-        mainAddBtn.style.display = 'none';
+        if (mainAddBtn) mainAddBtn.style.display = 'none';
     }
 }
 
@@ -1088,15 +1305,15 @@ function navigateToLevel(level, data) {
             {name: '{{ __("Marques") }}', level: 'brands'}
         ]);
         // Show main add button
-        mainAddBtn.style.display = 'block';
+        if (mainAddBtn) mainAddBtn.style.display = 'block';
     } else if (level === 'models') {
         loadModels(data.brandId);
         // Hide main add button
-        mainAddBtn.style.display = 'none';
+        if (mainAddBtn) mainAddBtn.style.display = 'none';
     } else if (level === 'families') {
         loadFamilies(data.modelId);
         // Hide main add button
-        mainAddBtn.style.display = 'none';
+        if (mainAddBtn) mainAddBtn.style.display = 'none';
     }
 }
 
@@ -1243,6 +1460,13 @@ function loadFamilies(modelId) {
                                             onclick="handleDrillDown(this)">
                                         <i class="ti ti-arrow-right"></i>
                                     </button>
+                                    <button class="btn btn-sm btn-icon bg-dark text-white" 
+                                            onclick="openPrintModal(${family.id}, null, '${(family.tracking_type || 'chassis')}')"
+                                            data-bs-toggle="tooltip" 
+                                            data-bs-placement="top" 
+                                            title="{{ __('Imprimer') }}">
+                                        <i class="ti ti-printer f-16"></i>
+                                    </button>
                                     <button class="btn btn-sm btn-icon bg-info text-white" 
                                             onclick="editFamily(${family.id})"
                                             data-bs-toggle="tooltip" 
@@ -1295,6 +1519,8 @@ function loadProducts(familyId) {
         .then(response => response.json())
         .then(data => {
             console.log('Products data:', data);
+            currentFamilyTracking = data.tracking_type || 'chassis';
+            const codeLabel = currentFamilyTracking === 'ref' ? '{{ __('Réf') }}' : '{{ __('Numéro de châssis') }}';
             const container = document.getElementById('products-level');
             if (data.products && data.products.length > 0) {
                 // Afficher les compteurs de manière simple
@@ -1320,7 +1546,10 @@ function loadProducts(familyId) {
                     `;
                 }
                 
-                let html = '<div class="mb-3"><button class="btn btn-primary btn-sm" onclick="showAddModal(\'chassis\', ' + familyId + ')"><i class="ti ti-plus me-2"></i>{{ __("Ajouter des numéros de châssis") }}</button></div>';
+                let html = '<div class="mb-3 d-flex gap-2 flex-wrap">';
+                html += '<button class="btn btn-primary btn-sm" onclick="showAddModal(\'chassis\', ' + familyId + ')"><i class="ti ti-plus me-2"></i>{{ __("Ajouter des numéros de châssis") }}</button>';
+                html += '<button class="btn btn-dark btn-sm" onclick="openPrintModal(' + familyId + ', null, \'' + currentFamilyTracking + '\')"><i class="ti ti-printer me-2"></i>{{ __("Imprimer (tout)") }}</button>';
+                html += '</div>';
                 html += countersHtml;
                 html += '<div class="list-group">';
                 data.products.forEach(product => {
@@ -1334,12 +1563,19 @@ function loadProducts(familyId) {
                                         <small class="text-muted">{{ __('Produit') }}</small>
                                     </div>
                                     <div class="ms-3">
-                                        <span class="badge bg-primary me-2">{{ __('Numéro de châssis') }}: ${product.chassis_number}</span>
+                                        <span class="badge bg-primary me-2">${codeLabel}: ${product.chassis_number}</span>
                                         ${product.date ? `<span class="badge bg-secondary me-2">${product.date}</span>` : ''}
                                         ${product.location ? `<span class="badge bg-warning text-dark">${product.location}</span>` : ''}
                                     </div>
                                 </div>
                                 <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-icon bg-dark text-white" 
+                                            onclick="openPrintModal(${familyId}, ${product.id}, '${currentFamilyTracking}')"
+                                            data-bs-toggle="tooltip" 
+                                            data-bs-placement="top" 
+                                            title="{{ __('Imprimer') }}">
+                                        <i class="ti ti-printer f-16"></i>
+                                    </button>
                                     <button class="btn btn-sm btn-icon bg-info text-white" 
                                             data-chassis-id="${product.id}"
                                             data-chassis-number="${encodeURIComponent(product.chassis_number)}"
@@ -1394,7 +1630,7 @@ function handleDrillDown(button) {
     console.log('Button dataset:', button.dataset);
     
     // Hide main add button when drilling down
-    mainAddBtn.style.display = 'none';
+    if (mainAddBtn) mainAddBtn.style.display = 'none';
     
     if (level === 'models') {
         loadModels(button.dataset.brandId);
@@ -1435,6 +1671,10 @@ function showAddModal(type, parentId, itemId = null) {
     document.getElementById('addItemForm').reset();
     document.getElementById('chassisInputsContainer').style.display = 'none';
     document.getElementById('chassisNumbersContainer').innerHTML = '';
+    document.getElementById('trackingTypeField').style.display = 'none';
+    document.getElementById('tracking_chassis').checked = true;
+    document.getElementById('referenceField').style.display = 'none';
+    document.getElementById('itemReference').value = '';
     imagePreview.style.display = 'none';
     
     itemIdField.value = itemId || '';
@@ -1476,6 +1716,10 @@ function showAddModal(type, parentId, itemId = null) {
             quantityField.style.display = 'none';
             imageField.style.display = 'none';
             chassisField.style.display = 'none';
+            // Champ référence (par défaut, héritée par les familles)
+            document.getElementById('referenceField').style.display = 'block';
+            document.getElementById('referenceLabel').textContent = '{{ __("Référence par défaut") }}';
+            document.getElementById('referenceHelp').textContent = '{{ __("Optionnel — héritée par les familles de type « référence » de ce modèle.") }}';
             // Load model data if editing
             if (itemId) {
                 fetch(`/models/${itemId}/edit`, {
@@ -1489,6 +1733,7 @@ function showAddModal(type, parentId, itemId = null) {
                         console.log('Edit model data:', data);
                         if (data.model) {
                             document.getElementById('itemName').value = data.model.name;
+                            document.getElementById('itemReference').value = data.model.reference || '';
                         }
                     })
                     .catch(error => {
@@ -1500,9 +1745,13 @@ function showAddModal(type, parentId, itemId = null) {
         case 'family':
             nameField.style.display = 'block';
             document.getElementById('priceField').style.display = 'block';
+            document.getElementById('trackingTypeField').style.display = 'block';
             quantityField.style.display = 'block';
             imageField.style.display = 'block';
             chassisField.style.display = 'none';
+            // Libellés du champ référence (contexte famille)
+            document.getElementById('referenceLabel').textContent = '{{ __("Référence du produit") }}';
+            document.getElementById('referenceHelp').textContent = '{{ __("Laissez vide pour hériter de la référence du modèle / de la marque.") }}';
             // Load family data if editing
             if (itemId) {
                 fetch(`/families/${itemId}/edit`, {
@@ -1514,6 +1763,14 @@ function showAddModal(type, parentId, itemId = null) {
                             document.getElementById('itemName').value = data.family.name;
                             document.getElementById('itemPrice').value = data.family.price || '';
                             document.getElementById('quantity').value = data.family.quantity;
+                            if ((data.family.tracking_type || 'chassis') === 'ref') {
+                                document.getElementById('tracking_ref').checked = true;
+                                document.getElementById('referenceField').style.display = 'block';
+                            } else {
+                                document.getElementById('tracking_chassis').checked = true;
+                                document.getElementById('referenceField').style.display = 'none';
+                            }
+                            document.getElementById('itemReference').value = data.family.reference || '';
                             if (data.family.image) {
                                 const img = imagePreview.querySelector('img');
                                 img.src = `{{ rtrim(\App\Models\Utility::get_file('uploads/family_image/'), '/') }}/${data.family.image}`;
@@ -1545,6 +1802,13 @@ function showAddModal(type, parentId, itemId = null) {
             quantityField.style.display = 'none';
             imageField.style.display = 'none';
             chassisField.style.display = 'block';
+            // Adapter le libellé selon le type de suivi de la famille
+            const chassisLabel = document.getElementById('chassisFieldLabel');
+            if (chassisLabel) {
+                chassisLabel.textContent = (currentFamilyTracking === 'ref')
+                    ? `{{ __('Références') }}`
+                    : `{{ __('Numéros de châssis') }}`;
+            }
             // Show chassis inputs by default
             showChassisInputs();
             break;
@@ -1560,6 +1824,52 @@ function editModel(id) {
 
 function editFamily(id) {
     showAddModal('family', null, id);
+}
+
+// ---- Impression des étiquettes (QR / code-barres) ----
+function openPrintModal(familyId, chassisId, trackingType) {
+    document.getElementById('printFamilyId').value = familyId;
+    document.getElementById('printChassisId').value = chassisId || '';
+
+    const label = document.getElementById('printContextLabel');
+    if (chassisId) {
+        label.textContent = (trackingType === 'ref')
+            ? `{{ __("Impression d'une seule étiquette (référence sélectionnée)") }}`
+            : `{{ __("Impression d'une seule étiquette (numéro de châssis sélectionné)") }}`;
+    } else if (trackingType === 'ref') {
+        label.textContent = `{{ __("Impression de l'étiquette de référence de cette famille") }}`;
+    } else {
+        label.textContent = `{{ __("Impression de toutes les étiquettes (un ticket par numéro de châssis)") }}`;
+    }
+
+    const modal = new bootstrap.Modal(document.getElementById('printModal'));
+    modal.show();
+}
+
+function doPrint() {
+    const familyId = document.getElementById('printFamilyId').value;
+    const chassisId = document.getElementById('printChassisId').value;
+    const template = document.querySelector('input[name="print_template"]:checked').value;
+    const withPrice = document.getElementById('printWithPrice').checked ? 1 : 0;
+    const orientation = document.querySelector('input[name="print_orientation"]:checked').value;
+    const w = document.querySelector(`.print-w[data-tpl="${template}"]`).value || '';
+    const h = document.querySelector(`.print-h[data-tpl="${template}"]`).value || '';
+
+    if (!familyId) {
+        showNotification(`{{ __("Famille introuvable pour l'impression") }}`, 'danger');
+        return;
+    }
+
+    let url = `/families/${familyId}/print?template=${template}&price=${withPrice}&w=${w}&h=${h}&orientation=${orientation}`;
+    if (chassisId) {
+        url += `&chassis=${chassisId}`;
+    }
+
+    const modalEl = document.getElementById('printModal');
+    const instance = bootstrap.Modal.getInstance(modalEl);
+    if (instance) instance.hide();
+
+    window.open(url, '_blank');
 }
 
 function deleteModel(id) {
@@ -1995,9 +2305,100 @@ function validateBrandImage(input) {
     }
 
     errorDiv.style.display = 'none';
+    // Show a preview immediately without opening the cropper
+    if (preview) preview.src = URL.createObjectURL(file);
+}
+
+// ── Brand image cropping ──
+let brandCropper = null;
+let brandCropTargetInput = null;
+
+function openBrandCropper(input, file) {
+    brandCropTargetInput = input;
+    const cropImg = document.getElementById('brandCropperImage');
     const reader = new FileReader();
-    reader.onload = function(e) { if (preview) preview.src = e.target.result; };
+    reader.onload = function (e) {
+        cropImg.src = e.target.result;
+        const modalEl = document.getElementById('brandCropModal');
+        const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+        modal.show();
+        $(modalEl).off('shown.bs.modal').on('shown.bs.modal', function () {
+            if (brandCropper) {
+                brandCropper.destroy();
+                brandCropper = null;
+            }
+            brandCropper = new Cropper(cropImg, {
+                viewMode: 1,
+                dragMode: 'move',
+                aspectRatio: NaN,
+                autoCropArea: 1,
+                background: false,
+                responsive: true,
+                guides: true,
+            });
+        });
+    };
     reader.readAsDataURL(file);
+}
+
+function cancelBrandCrop() {
+    if (brandCropper) {
+        brandCropper.destroy();
+        brandCropper = null;
+    }
+    if (brandCropTargetInput) {
+        brandCropTargetInput.value = '';
+        brandCropTargetInput = null;
+    }
+    const preview = document.getElementById('brandPreview');
+    if (preview) preview.src = '';
+    const modalEl = document.getElementById('brandCropModal');
+    bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+}
+
+function confirmBrandCrop() {
+    if (!brandCropper || !brandCropTargetInput) return;
+
+    const originalFile = brandCropTargetInput.files[0];
+    const mime = (originalFile && originalFile.type) ? originalFile.type : 'image/jpeg';
+    const ext = originalFile ? (originalFile.name.split('.').pop() || 'jpg') : 'jpg';
+    const canvas = brandCropper.getCroppedCanvas({ imageSmoothingQuality: 'high' });
+
+    function applyCroppedFile(blob, finalMime, finalExt) {
+        const croppedFile = new File([blob], 'brand_' + Date.now() + '.' + finalExt, { type: finalMime });
+
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(croppedFile);
+        brandCropTargetInput.files = dataTransfer.files;
+
+        const preview = document.getElementById('brandPreview');
+        if (preview) preview.src = URL.createObjectURL(croppedFile);
+
+        brandCropper.destroy();
+        brandCropper = null;
+
+        const modalEl = document.getElementById('brandCropModal');
+        bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+    }
+
+    canvas.toBlob(function (blob) {
+        if (blob) {
+            applyCroppedFile(blob, mime, ext);
+            return;
+        }
+        // Fallback for browsers that can't encode the original mime (e.g. webp)
+        canvas.toBlob(function (fallbackBlob) {
+            if (fallbackBlob) {
+                applyCroppedFile(fallbackBlob, 'image/png', 'png');
+            } else {
+                const errorDiv = document.getElementById('brand-img-error');
+                if (errorDiv) {
+                    errorDiv.textContent = "Le rognage a échoué. Réessayez avec une autre image.";
+                    errorDiv.style.display = 'block';
+                }
+            }
+        }, 'image/png');
+    }, mime, 0.92);
 }
 
 // Load brand statistics
@@ -2126,6 +2527,31 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Setup search and filters
     setupSearchAndFilters();
+
+    // Print template card selection highlight
+    function refreshPrintCards() {
+        document.querySelectorAll('input[name="print_template"]').forEach(input => {
+            const card = input.closest('.print-template-card');
+            if (card) card.classList.toggle('selected', input.checked);
+        });
+    }
+    document.querySelectorAll('input[name="print_template"]').forEach(input => {
+        input.addEventListener('change', refreshPrintCards);
+    });
+    const printModalEl = document.getElementById('printModal');
+    if (printModalEl) {
+        printModalEl.addEventListener('shown.bs.modal', refreshPrintCards);
+    }
+
+    // Toggle du champ "Référence" selon le type de suivi
+    document.querySelectorAll('input[name="tracking_type"]').forEach(input => {
+        input.addEventListener('change', function () {
+            const refField = document.getElementById('referenceField');
+            if (refField) {
+                refField.style.display = this.value === 'ref' ? 'block' : 'none';
+            }
+        });
+    });
 });
 </script>
 @endpush

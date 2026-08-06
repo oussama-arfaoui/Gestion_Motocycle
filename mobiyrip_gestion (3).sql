@@ -1,0 +1,4005 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Aug 06, 2026 at 04:17 AM
+-- Server version: 11.4.12-MariaDB-cll-lve-log
+-- PHP Version: 8.4.23
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `mobiyrip_gestion`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_payment_settings`
+--
+
+CREATE TABLE `admin_payment_settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `value` varchar(191) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `admin_payment_settings`
+--
+
+INSERT INTO `admin_payment_settings` (`id`, `name`, `value`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 'currency_symbol', '$', 1, NULL, NULL),
+(2, 'currency', 'USD', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blogs`
+--
+
+CREATE TABLE `blogs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(191) NOT NULL,
+  `blog_cover_image` varchar(191) DEFAULT NULL,
+  `detail` longtext DEFAULT NULL,
+  `store_id` int(11) NOT NULL DEFAULT 0,
+  `created_by` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_socials`
+--
+
+CREATE TABLE `blog_socials` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `enable_social_button` varchar(191) DEFAULT 'off',
+  `enable_email` varchar(191) DEFAULT 'off',
+  `enable_twitter` varchar(191) DEFAULT 'off',
+  `enable_facebook` varchar(191) DEFAULT 'off',
+  `enable_googleplus` varchar(191) DEFAULT 'off',
+  `enable_linkedIn` varchar(191) DEFAULT 'off',
+  `enable_pinterest` varchar(191) DEFAULT 'off',
+  `enable_stumbleupon` varchar(191) DEFAULT 'off',
+  `enable_whatsapp` varchar(191) DEFAULT 'off',
+  `store_id` int(11) NOT NULL DEFAULT 0,
+  `created_by` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `blog_socials`
+--
+
+INSERT INTO `blog_socials` (`id`, `enable_social_button`, `enable_email`, `enable_twitter`, `enable_facebook`, `enable_googleplus`, `enable_linkedIn`, `enable_pinterest`, `enable_stumbleupon`, `enable_whatsapp`, `store_id`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 'on', 'on', 'on', 'on', 'on', 'on', 'on', 'on', 'on', 1, 2, '2025-09-11 21:18:46', '2025-09-11 21:18:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brands`
+--
+
+CREATE TABLE `brands` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `reference` varchar(191) DEFAULT NULL,
+  `brand_img` varchar(191) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `store_id` int(11) NOT NULL DEFAULT 1
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `brands`
+--
+
+INSERT INTO `brands` (`id`, `name`, `reference`, `brand_img`, `created_at`, `updated_at`, `store_id`) VALUES
+(1, 'BECANE', NULL, 'brand-1_1758024988.png', '2025-09-12 03:12:13', '2026-07-23 21:49:28', 1),
+(7, 'DOCKER', NULL, 'brand-4_1758025192.png', '2025-09-16 20:19:52', '2026-07-23 21:49:13', 1),
+(8, 'Ipone', NULL, 'brand-5_1758025229.png', '2025-09-16 20:20:29', '2025-09-16 20:20:29', 1),
+(6, 'KYMCO', NULL, 'brand-3_1758025163.png', '2025-09-16 20:19:23', '2026-07-23 21:50:36', 1),
+(5, 'Cooper', NULL, 'brand-2_1758025145.png', '2025-09-16 20:19:05', '2025-09-16 20:19:05', 1),
+(9, 'Yamaha', NULL, 'brand-6_1758025246.png', '2025-09-16 20:20:46', '2025-09-16 20:20:46', 1),
+(10, 'Motul', NULL, 'brand-7_1758025872.png', '2025-09-16 20:21:11', '2025-09-16 20:31:12', 1),
+(11, 'Sanya', NULL, 'brand-8_1758025896.png', '2025-09-16 20:31:36', '2025-09-16 20:31:36', 1),
+(12, 'yadea', NULL, 'Yadea_Logo.svg_1758026137.png', '2025-09-16 20:35:37', '2025-09-16 20:35:37', 1),
+(13, 'Cimatti', NULL, 'my-store-logo-1585761467_1758027138.png', '2025-09-16 20:52:18', '2025-09-16 20:52:18', 1),
+(14, 'Motard', NULL, 'MTD-WP2_1758027527.png', '2025-09-16 20:58:47', '2025-09-16 20:58:47', 1),
+(15, 'Honda', NULL, 'Honda_Logo.svg_1758027624.png', '2025-09-16 21:00:24', '2025-09-16 21:00:24', 1),
+(16, 'Austin', NULL, 'ASDASDASDASDAS1_1758028499.png', '2025-09-16 21:14:59', '2025-09-16 21:14:59', 1),
+(17, 'Capuccino', NULL, 'bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.u6_1758028621.jpg', '2025-09-16 21:17:01', '2025-09-16 21:17:01', 1),
+(18, 'Becker', NULL, 'l589_1758030370.png', '2025-09-16 21:46:10', '2025-09-16 21:46:10', 1),
+(21, 'REPLAY', NULL, 'WhatsApp Image 2025-09-27 at 14.19.16_2ce9b469_1758979204.jpg', '2025-09-27 17:20:04', '2025-09-27 17:20:04', 1),
+(22, 'JNEN MAROC (Capuccino-Sirocco)', NULL, 'jnen_1784982107.jpg', '2026-07-23 21:48:00', '2026-07-25 16:21:47', 1),
+(23, 'HANWAY', NULL, 'images_1784828931.jpg', '2026-07-23 21:48:51', '2026-07-23 21:48:51', 1),
+(24, 'SYM', NULL, 'images (1)_1784829018.jpg', '2026-07-23 21:50:18', '2026-07-23 21:50:18', 1),
+(25, 'WUBEN', NULL, 'IMG_2379_1784829408.jpeg', '2026-07-23 21:56:48', '2026-07-23 21:56:48', 1),
+(26, 'TROTINATTE', NULL, 'IMG_2380_1784829648.jpeg', '2026-07-23 22:00:48', '2026-07-25 16:26:35', 1),
+(27, 'DAYTONA', NULL, 'Daytona_1784982301.png', '2026-07-23 22:02:52', '2026-07-25 16:25:01', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chassis_numbers`
+--
+
+CREATE TABLE `chassis_numbers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `chassis_number` varchar(191) NOT NULL,
+  `variant_id` bigint(20) UNSIGNED NOT NULL,
+  `date` date DEFAULT NULL,
+  `location` varchar(191) NOT NULL DEFAULT 'DEPOT',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `chassis_numbers`
+--
+
+INSERT INTO `chassis_numbers` (`id`, `chassis_number`, `variant_id`, `date`, `location`, `created_at`, `updated_at`) VALUES
+(4, 'numerodechassis1', 10, NULL, 'DEPOT', '2026-02-21 05:07:06', '2026-02-21 05:07:06'),
+(5, 'numerodechassis12sadsa', 10, NULL, 'DEPOT', '2026-02-21 05:07:06', '2026-02-21 05:07:06'),
+(6, 'numerodechassis132131', 10, NULL, 'DEPOT', '2026-02-21 05:07:06', '2026-02-21 05:07:06'),
+(7, 'LATXCBLY1S1902631', 11, NULL, 'DEPOT', '2026-02-21 18:06:07', '2026-02-21 18:06:07'),
+(8, 'LATXCBLY1S1902663', 11, NULL, 'DEPOT', '2026-02-21 18:06:39', '2026-02-21 18:06:39'),
+(9, 'LATXCBLY1S1902638', 11, NULL, 'DEPOT', '2026-02-21 18:06:50', '2026-02-21 18:06:50'),
+(10, 'LATXCBLY1S1957162', 11, NULL, 'DEPOT', '2026-02-21 18:07:31', '2026-02-21 18:07:31'),
+(11, 'LATXCBLY1S1957163', 11, NULL, 'DEPOT', '2026-02-21 18:08:00', '2026-02-21 18:08:00'),
+(12, 'LATXCBLY1S1957908', 11, NULL, 'DEPOT', '2026-02-21 18:08:22', '2026-02-21 18:08:22'),
+(13, 'LATXCBLY1S1957209', 11, NULL, 'DEPOT', '2026-02-21 18:08:39', '2026-02-21 18:08:39'),
+(14, 'LATXCBLY1S1957822', 11, NULL, 'DEPOT', '2026-02-21 18:08:55', '2026-02-21 18:08:55'),
+(15, 'LATXCBLY1S1957215', 11, NULL, 'DEPOT', '2026-02-21 18:09:14', '2026-02-21 18:09:14'),
+(16, 'LATXCBLY1S1957237', 11, NULL, 'DEPOT', '2026-02-21 18:09:31', '2026-02-21 18:09:31'),
+(17, 'LATXCBLY1S1957942', 11, NULL, 'DEPOT', '2026-02-21 18:09:58', '2026-02-21 18:09:58'),
+(18, 'LATXCBLY1S1953515', 12, NULL, 'DEPOT', '2026-02-21 18:37:29', '2026-02-21 18:37:29'),
+(19, 'LATXCBLY1S1953638', 12, NULL, 'DEPOT', '2026-02-21 18:37:49', '2026-02-21 18:37:49'),
+(20, 'LATXCBLY1S1912516', 12, NULL, 'DEPOT', '2026-02-21 18:38:06', '2026-02-21 18:38:06'),
+(21, 'LATXCBLY1S1918625', 13, NULL, 'DEPOT', '2026-02-21 18:40:24', '2026-02-21 18:40:24'),
+(22, 'LATXCBLY1S1918626', 13, NULL, 'DEPOT', '2026-02-21 18:40:45', '2026-02-21 18:40:45'),
+(23, 'LATXCBLY1S1911374', 14, NULL, 'DEPOT', '2026-02-21 18:44:48', '2026-02-21 18:44:48'),
+(24, 'LATXCBLY1S1911273', 14, NULL, 'DEPOT', '2026-02-21 18:45:32', '2026-02-21 18:45:32'),
+(25, 'LATXCBLY1S191291', 14, NULL, 'DEPOT', '2026-02-21 18:48:40', '2026-02-21 18:48:40'),
+(26, 'LATXCBLY1S1951322', 14, NULL, 'DEPOT', '2026-02-21 18:49:06', '2026-02-21 18:49:06'),
+(27, 'LATXCBLY1S1951342', 14, NULL, 'DEPOT', '2026-02-21 18:49:18', '2026-02-21 18:49:18'),
+(28, 'LATXCBLY1S1951319', 14, NULL, 'DEPOT', '2026-02-21 18:49:30', '2026-02-21 18:49:30'),
+(29, 'LATXCBLY2S1824840', 15, NULL, 'DEPOT', '2026-02-21 19:28:25', '2026-02-21 19:28:25'),
+(30, 'LATXCBLY2S1824864', 15, NULL, 'DEPOT', '2026-02-21 19:28:36', '2026-02-21 19:28:36'),
+(31, 'LATXCBLY2S1824707', 15, NULL, 'DEPOT', '2026-02-21 19:28:51', '2026-02-21 19:28:51'),
+(32, 'LATXCBLY2S1824867', 15, NULL, 'DEPOT', '2026-02-21 19:29:07', '2026-02-21 19:29:07'),
+(33, 'LATXCBLY2S1844869', 16, NULL, 'DEPOT', '2026-02-21 19:32:01', '2026-02-21 19:32:01'),
+(34, 'LATXCBLY2S1844941', 16, NULL, 'DEPOT', '2026-02-21 19:32:27', '2026-02-21 19:32:27'),
+(35, 'LATXCBLY2S1844948', 16, NULL, 'DEPOT', '2026-02-21 19:32:40', '2026-02-21 19:32:40'),
+(36, 'LATXCBLY2S1846327', 17, NULL, 'DEPOT', '2026-02-21 19:34:22', '2026-02-21 19:34:22'),
+(37, 'LATXCBLY2S1869417', 18, NULL, 'DEPOT', '2026-02-21 19:35:26', '2026-02-21 19:35:26'),
+(38, 'LATXCBLY2S1869370', 18, NULL, 'DEPOT', '2026-02-21 19:35:41', '2026-02-21 19:35:41'),
+(39, 'LATXCBLY2S1869381', 18, NULL, 'DEPOT', '2026-02-21 19:37:12', '2026-02-21 19:37:12'),
+(40, '05/02/2026', 18, NULL, 'DEPOT', '2026-02-21 19:37:12', '2026-02-21 19:37:12'),
+(41, 'LATXCBLY2S1935853', 19, NULL, 'DEPOT', '2026-02-21 19:48:04', '2026-02-21 19:48:04'),
+(42, 'LATXCBLY2S1936223', 19, NULL, 'DEPOT', '2026-02-21 19:48:33', '2026-02-21 19:48:33'),
+(43, 'LATXCBLY2S1939329', 19, NULL, 'DEPOT', '2026-02-21 19:48:52', '2026-02-21 19:48:52'),
+(44, 'LATXCBLY2S1936244', 19, NULL, 'DEPOT', '2026-02-21 19:49:42', '2026-02-21 19:49:42'),
+(45, 'LATXCBLY2S1936239', 19, NULL, 'DEPOT', '2026-02-21 19:50:07', '2026-02-21 19:50:07'),
+(46, 'LZRY7FAR1035165', 20, NULL, 'DEPOT', '2026-02-21 19:58:03', '2026-02-21 19:58:03'),
+(47, 'DOCKER MILANO-GRIS/Noir', 20, NULL, 'DEPOT', '2026-02-21 20:03:59', '2026-02-21 20:03:59'),
+(48, 'LRPBA2BORA204318', 21, NULL, 'DEPOT', '2026-02-21 20:09:46', '2026-02-21 20:09:46'),
+(49, 'LRPBA2B9RA204334', 21, NULL, 'DEPOT', '2026-02-21 20:10:25', '2026-02-21 20:10:25'),
+(50, 'LRPBA2B4RA204323', 21, NULL, 'DEPOT', '2026-02-21 20:11:33', '2026-02-21 20:11:33'),
+(51, 'LCS1BKZP5S1427422', 22, NULL, 'DEPOT', '2026-02-21 21:31:14', '2026-02-21 21:31:14'),
+(52, 'LATXCBLP41028842', 23, NULL, 'DEPOT', '2026-02-21 21:33:44', '2026-02-21 21:33:44'),
+(53, 'L5YXGCBD0S1168531', 24, NULL, 'DEPOT', '2026-02-21 21:48:59', '2026-02-21 21:48:59'),
+(54, 'SLFPACBB1ST000393', 26, NULL, 'DEPOT', '2026-02-21 21:56:13', '2026-02-21 21:56:13'),
+(55, 'SLFPACBB8ST001363', 26, NULL, 'DEPOT', '2026-02-21 21:59:21', '2026-02-21 21:59:21'),
+(56, 'SLFPACBB8ST001153', 26, NULL, 'DEPOT', '2026-02-21 22:00:01', '2026-02-21 22:00:01'),
+(58, 'LZR3F2K4R1000991', 27, NULL, 'DEPOT', '2026-02-21 22:03:21', '2026-02-21 22:03:21'),
+(59, 'LZRY3F2L9R1000607', 28, NULL, 'DEPOT', '2026-02-21 22:06:12', '2026-02-21 22:06:12'),
+(60, 'L5YBYCBAXS1160689', 29, NULL, 'DEPOT', '2026-02-21 22:26:46', '2026-02-21 22:26:46'),
+(61, 'L5YBYCBAXS1160588', 29, NULL, 'DEPOT', '2026-02-21 22:29:26', '2026-02-21 22:29:26'),
+(62, 'LZRY3F2E9R1000107', 25, NULL, 'DEPOT', '2026-02-21 22:33:23', '2026-02-21 22:33:23'),
+(63, 'L5YSHCBA4S1146089', 30, NULL, 'DEPOT', '2026-02-21 22:34:57', '2026-02-21 22:34:57'),
+(64, 'test', 32, '2026-04-12', 'DEPOT', '2026-04-18 19:32:08', '2026-04-18 19:32:08'),
+(66, '0655test', 7, '2026-04-24', 'DEPOT', '2026-04-25 12:42:59', '2026-04-25 12:42:59'),
+(67, 'test0354', 7, '2026-04-25', 'SHOW-ROOM', '2026-04-25 12:42:59', '2026-04-25 12:42:59'),
+(71, 'test 1', 32, '2026-05-05', 'SHOW-ROOM', '2026-05-05 19:32:16', '2026-05-05 19:32:16'),
+(72, 'Fhgcgg', 33, '2026-06-13', 'DEPOT', '2026-06-14 00:30:47', '2026-06-14 00:30:47'),
+(74, '5449000061515', 33, '2026-06-27', 'DEPOT', '2026-06-27 19:44:52', '2026-06-27 19:44:52'),
+(75, 'R71XCAL09RMH00173', 37, '2024-09-07', 'DEPOT', '2026-07-23 21:38:30', '2026-07-23 21:38:30'),
+(76, 'R71XCAL08RMH00231', 37, '2024-09-07', 'DEPOT', '2026-07-23 21:38:30', '2026-07-23 21:38:30'),
+(77, 'R71XCAL08RMH00150', 37, '2024-09-07', 'DEPOT', '2026-07-23 21:38:30', '2026-07-23 21:38:30'),
+(78, 'LB405PMG5RC242717', 38, '2025-03-26', 'DEPOT', '2026-07-23 21:38:30', '2026-07-23 21:38:30'),
+(83, 'LZRY3F2K4R1000991', 41, '2026-07-25', 'DEPOT', '2026-07-25 17:20:00', '2026-07-25 17:20:00'),
+(84, '123123123123123', 41, NULL, 'DEPOT', '2026-07-27 13:43:06', '2026-07-27 13:43:06'),
+(85, 'LXMMEAd301SX060453', 42, '2026-01-28', 'DEPOT', '2026-07-28 17:53:59', '2026-07-28 17:53:59'),
+(86, 'LC2U60d050S5405296', 43, '2026-03-19', 'SHOW-ROOM', '2026-07-28 17:53:59', '2026-07-28 17:53:59'),
+(87, 'LB405PMG2SC213780', 44, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(88, 'LB405PMG2SC212984', 44, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(89, 'LB405PMGXSC135183', 44, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(90, 'LB405PMG7SC224631', 45, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(91, 'LB405PMG7SC224936', 45, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(92, 'LB405PMG2SC224665', 45, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(93, 'LB405PMG3SC223105', 45, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(94, 'LB405PMG9SC223707', 45, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(95, 'LB405PMG4SC225526', 45, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(96, 'LB405PMG1SC228447', 45, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(97, 'LB405PMG5SC223462', 45, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(98, 'LB405PMGXSC224977', 45, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(99, 'LB405PMG1SC223748', 45, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(100, 'LB405PMG0SC224714', 45, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(101, 'LB405PMG1SC227217', 45, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(102, 'LB405PMG7TC094450', 46, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(103, 'LB405PMG9TC094904', 46, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(104, 'LB405PMG0TC094418', 46, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(105, 'LB405PMG5TC095001', 46, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(106, 'LB405PMG4TC094437', 46, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(107, 'LB405PMGXTC094538', 46, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(108, 'LB405PMG7TC094996', 46, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(109, 'LB405PMG4TC094731', 46, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(110, 'LB405PMGXSC235977', 46, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(111, 'LB405PMG4SC236039', 46, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(112, 'LB405PMG8SC242278', 47, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(113, 'LB405PMG4SC242455', 47, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(114, 'LB405PMG7SC242160', 47, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(115, 'LB405PMG0SC170217', 48, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(116, 'LB405PMG7SC170358', 48, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(117, 'LB405PMG7SC170215', 48, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(118, 'LB405PMG9SC170331', 48, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(119, 'LB405PMG5SC169855', 49, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(120, 'LB405PMG0SC169861', 50, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(121, 'LB405PMC9RC222161', 51, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(122, 'LB405PMC5RC222173', 52, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(123, 'LB412PMC1SC184444', 53, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(124, 'LB412PMC4SC184311', 53, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(125, 'LXYXCPL00T0763572', 54, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(126, 'LXYXCPL07T0763861', 55, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(127, 'LXYXCPL0XT0764390', 56, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(128, 'LXYXCPL04T0764840', 56, NULL, 'DEPOT', '2026-07-28 17:59:10', '2026-07-28 17:59:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chassis_orders`
+--
+
+CREATE TABLE `chassis_orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_number` varchar(191) NOT NULL,
+  `customer_name` varchar(191) DEFAULT NULL,
+  `customer_phone` varchar(191) DEFAULT NULL,
+  `doc_type` varchar(10) DEFAULT NULL,
+  `doc_number` varchar(100) DEFAULT NULL,
+  `total_price` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `discount` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `tva` decimal(5,2) NOT NULL DEFAULT 0.00,
+  `status` enum('pending','validated','rejected') NOT NULL DEFAULT 'pending',
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `store_id` bigint(20) UNSIGNED NOT NULL,
+  `notes` text DEFAULT NULL,
+  `comment` text DEFAULT NULL,
+  `signature` longtext DEFAULT NULL,
+  `signed_at` timestamp NULL DEFAULT NULL,
+  `signed_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `chassis_orders`
+--
+
+INSERT INTO `chassis_orders` (`id`, `order_number`, `customer_name`, `customer_phone`, `doc_type`, `doc_number`, `total_price`, `discount`, `tva`, `status`, `user_id`, `store_id`, `notes`, `comment`, `signature`, `signed_at`, `signed_by`, `created_at`, `updated_at`) VALUES
+(1375, 'N1061/26', 'RAYANE SALKI', '', 'CIN', 'BW76807', 10200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1061/26\nColor: BLEU\nSheet: 1061,26 C50 FDM BLEU(3)', '', NULL, NULL, NULL, '2026-01-04 05:00:00', '2026-01-04 05:00:00'),
+(1376, 'N1062/26', 'YOUSSEF BOUNAIM', '', 'CIN', 'H392869', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1062/26\nColor: BLEU\nSheet: 1062,26 C50 Rim BLEU (1)', '', NULL, NULL, NULL, '2026-01-04 05:00:00', '2026-01-04 05:00:00'),
+(1377, 'N1066/26', 'MOHAMED AIT FARRA PA', '', 'CIN', '275842', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1066/26\nColor: GRIS\nSheet: 1066,26 C50 rim stiker(5)', '', NULL, NULL, NULL, '2026-01-07 05:00:00', '2026-01-07 05:00:00'),
+(1378, 'N1067/26', 'ISMAIL EL ADRAOUI', '', 'CIN', 'EA172353', 10200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1067/26\nColor: BLEU\nSheet: 1067,26 C50 FDM BLEU(3)', '', NULL, NULL, NULL, '2026-01-08 05:00:00', '2026-01-08 05:00:00'),
+(1379, 'N1069/26', 'OUSSAMA EL MOULHAM', '', 'CIN', 'BK761855', 10200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1069/26\nColor: BLEU\nSheet: 1069,26 C50 FDM BLEU(4)', '', NULL, NULL, NULL, '2026-01-09 05:00:00', '2026-01-09 05:00:00'),
+(1380, 'N1073/26', 'SAIDA EL HOUKSOUS', '', 'CIN', 'HA142248', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1073/26\nColor: Gris Beige\nSheet: 1073,26 BECANEvalenti(3)', '', NULL, NULL, NULL, '2026-01-11 05:00:00', '2026-01-11 05:00:00'),
+(1381, 'N1074/26', 'ZAKARIA BEN KADOUR', '', 'CIN', 'BK530709', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1074/26\nColor: BLEU CH\nSheet: 1074,26 C50 FDM BLEU ch(5)', '', NULL, NULL, NULL, '2026-01-13 05:00:00', '2026-01-13 05:00:00'),
+(1382, 'N1075/26', 'HAMZA MONSEF', '', 'CIN', 'BW46993', 10200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1075/26\nColor: BLEU CH\nSheet: 1075,26 C50 FDM BLEU BAT(1)', '', NULL, NULL, NULL, '2026-01-13 05:00:00', '2026-01-13 05:00:00'),
+(1383, 'N1080/26', 'HAMZA BADDA', '', 'CIN', 'BW35677', 10200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1080/26\nColor: BLEU CH\nSheet: 1080,26 C50 FDM BLEU BAT(2)', '', NULL, NULL, NULL, '2026-01-17 05:00:00', '2026-01-17 05:00:00'),
+(1384, 'N1081/26', 'NABIL BLILLOU', '', 'CIN', 'BK512170', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1081/26\nColor: BLEU CH\nSheet: 1081,26 C50 FDM BLEU BAT(3)', '', NULL, NULL, NULL, '2026-01-18 05:00:00', '2026-01-18 05:00:00'),
+(1385, 'N1083/26', 'ABDELKBIR TAZI', '', 'CIN', 'WA28576', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1083/26\nColor: GRIS MAT\nSheet: 1083,26 KYMCO AGILITY(1)', '', NULL, NULL, NULL, '2026-01-19 05:00:00', '2026-01-19 05:00:00'),
+(1386, 'N1088/26', 'AHMED GUEZAZ', '', 'CIN', 'JB131683', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1088/26\nColor: NOIR\nSheet: 1088,26 KYMCO AGILITY(2)', '', NULL, NULL, NULL, '2026-01-23 05:00:00', '2026-01-23 05:00:00'),
+(1387, 'N1089/26', 'HASSAN NACEUR', '', 'CIN', 'JC494971', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1089/26\nColor: Gris Beige\nSheet: 1089,26 BECANE29(2)', '', NULL, NULL, NULL, '2026-01-23 05:00:00', '2026-01-23 05:00:00'),
+(1388, 'N1093/26', 'ZAKARIA MAZOU', '', 'CIN', 'BW18397', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1093/26\nColor: GRIS NARDO\nSheet: 1093,26 SH DAYTONA  (1)', '', NULL, NULL, NULL, '2026-01-26 05:00:00', '2026-01-26 05:00:00'),
+(1389, 'N1095/26', 'CHOUAIB HAJJAJ', '', 'CIN', 'BW54799', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1095/26\nColor: BLEU BAT\nSheet: 1095,26 C50 FDM BLEU BAT(5)', '', NULL, NULL, NULL, '2026-01-28 05:00:00', '2026-01-28 05:00:00'),
+(1390, 'N1096/26', 'MAINO EQUIPEMENT RC', '', 'CIN', '503811', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1096/26\nColor: GOLD\nSheet: 1096,26 C50 FDM BLEU BAT(6)', '', NULL, NULL, NULL, '2026-01-28 05:00:00', '2026-01-28 05:00:00'),
+(1391, 'N1097/26', 'CHOUAIB KABANI', '', 'CIN', 'BW49263', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1097/26\nColor: BLEU BAT\nSheet: 1097,26 C50 FDM BLEU BAT(7)', '', NULL, NULL, NULL, '2026-01-30 05:00:00', '2026-01-30 05:00:00'),
+(1392, 'N1098/26', '', '', 'CIN', '', 9300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1098/26\nColor: BLEU BAT\nSheet: 1098,26 C50 RIM BLEU BAT(8)', '', NULL, NULL, NULL, '2026-01-31 05:00:00', '2026-01-31 05:00:00'),
+(1393, 'N1099/26', '', '', 'CIN', '', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1099/26\nColor: BLEU BAT\nSheet: 1099,26 C50 RIM BLEU BAT(1)', '', NULL, NULL, NULL, '2026-07-27 14:01:17', '2026-07-27 14:01:17'),
+(1394, 'N1100/26', 'NOURA JAD BJ', '', 'CIN', '387935', 10000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1100/26\nColor: Gris Beige\nSheet: 1100,26 BECANEvalenti(4)', '', NULL, NULL, NULL, '2026-07-27 14:01:17', '2026-07-27 14:01:17'),
+(1395, 'N1101/26', '', '', 'CIN', '', 9300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1101/26\nColor: BLEU BAT\nSheet: 1101,26 C50 RIM BLEU BAT(10)', '', NULL, NULL, NULL, '2026-07-27 14:01:17', '2026-07-27 14:01:17'),
+(1396, 'N1103/26', 'M\'HAMED MHAIMED', '', 'CIN', 'WA4672', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1103/26\nColor: NOIR\nSheet: 1103,26 KYMCO AGILITY(2)', '', NULL, NULL, NULL, '2026-07-27 14:01:17', '2026-07-27 14:01:17'),
+(1397, 'N1105/26', 'RACHID RIAD', '', 'CIN', 'BW86330', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1105/26\nColor: PISTACHE\nSheet: 1105,26 C50 FDM PISTACHE (8)', '', NULL, NULL, NULL, '2026-07-27 14:01:17', '2026-07-27 14:01:17'),
+(1398, 'N1106/26', 'EL MEHDI SAHITE', '', 'CIN', 'BK403718', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1106/26\nColor: BIEGE\nSheet: 1106,26 SH DAYTONA  (2)', '', NULL, NULL, NULL, '2026-07-27 14:01:17', '2026-07-27 14:01:17'),
+(1399, 'N1108/26', 'OMAR BERDAD', '', 'CIN', 'BM20632', 10200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1108/26\nColor: GRIS NARDO\nSheet: 1108,26 C50 FDM GRIS NR BAT(1)', '', NULL, NULL, NULL, '2026-02-08 05:00:00', '2026-02-08 05:00:00'),
+(1400, 'N1110/26', 'BRAHIM AIT TALEB AHMED', '', 'CIN', 'PB102960', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1110/26\nColor: NOIR\nSheet: 1110,26 KYMCO AGILITY(3)', '', NULL, NULL, NULL, '2026-07-27 14:01:18', '2026-07-27 14:01:18'),
+(1401, 'N1111/26', '', '', 'CIN', '', 9000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1111/26\nColor: GRIS\nSheet: 1111,26 C50 DIG (2)', '', NULL, NULL, NULL, '2026-07-27 14:01:18', '2026-07-27 14:01:18'),
+(1402, 'N1112/26', '', '', 'CIN', '', 9000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1112/26\nColor: GRIS\nSheet: 1112,26 C50 DIG (3)', '', NULL, NULL, NULL, '2026-07-27 14:01:18', '2026-07-27 14:01:18'),
+(1403, 'N1113/26', 'KHALID EL-BRYMY', '', 'CIN', 'WA237056', 10200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1113/26\nColor: \nSheet: 1113,26 GAMA N,B  (3)', '', NULL, NULL, NULL, '2026-07-27 14:01:18', '2026-07-27 14:01:18'),
+(1404, 'N1114/26', '', '', 'CIN', '', 9300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1114/26\nColor: GRIS\nSheet: 1114,26 C50 DIG (4)', '', NULL, NULL, NULL, '2026-07-27 14:01:18', '2026-07-27 14:01:18'),
+(1405, 'N1115/26', 'YOUNES BAHAMI', '', 'CIN', 'BW65413', 10200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1115/26\nColor: BLEU BAT\nSheet: 1115,26 C50 FDM BLEU BAT(2)', '', NULL, NULL, NULL, '2026-02-09 05:00:00', '2026-02-09 05:00:00'),
+(1406, 'N1116/26', 'ACHRAF MAJROUH', '', 'CIN', 'BW44754', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1116/26\nColor: BLEU BAT\nSheet: 1116,26 C50 FDM BLEU BAT(3)', '', NULL, NULL, NULL, '2026-02-11 05:00:00', '2026-02-11 05:00:00'),
+(1407, 'N1117/26', 'YOUSSEF LAKHZINE', '', 'CIN', 'BW76681', 10100.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1117/26\nColor: BLEU BAT\nSheet: 1117,26 C50 FDM BLEU BAT(4)', '', NULL, NULL, NULL, '2026-02-11 05:00:00', '2026-02-11 05:00:00'),
+(1408, 'N1118/26', 'EL MEHDI EL MASNAOUI', '', 'CIN', 'MC293304', 10200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1118/26\nColor: GRIS NARDO\nSheet: 1118,26 C50 FDM GRIS NR BAT(2)', '', NULL, NULL, NULL, '2026-02-11 05:00:00', '2026-02-11 05:00:00'),
+(1409, 'N1119/26', 'MOHAMED SADIK', '', 'CIN', 'BK279036', 10250.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1119/26\nColor: GRIS NARDO\nSheet: 1119,26 C50 FDM GRIS NR BAT(3)', '', NULL, NULL, NULL, '2026-02-11 05:00:00', '2026-02-11 05:00:00'),
+(1410, 'N1120/26', 'TY BIKES', '', 'CIN', 'RC610029', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1120/26\nColor: GRIS MAT\nSheet: 1120,26 KYMCO AGILITY(3)', '', NULL, NULL, NULL, '2026-02-12 05:00:00', '2026-02-12 05:00:00'),
+(1411, 'N1121/26', 'MOHAMED-RIDA EL-KHALOUAN', '', 'CIN', 'U208101', 15000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1121/26\nColor: BEIGE\nSheet: 1121,26 BECANESHCBA  (4)', '', NULL, NULL, NULL, '2026-07-27 14:01:19', '2026-07-27 14:01:19'),
+(1412, 'N1122/26', '', '', 'CIN', '', 9000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1122/26\nColor: NOIR MAT\nSheet: 1122,26 C50 DIG (4)', '', NULL, NULL, NULL, '2026-07-27 14:01:20', '2026-07-27 14:01:20'),
+(1413, 'N1123/26', 'HATIM ZARKANE BW', '', 'CIN', '55340', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1123/26\nColor: Noir\nSheet: 1123,26 BECANE33NWR  (12)', '', NULL, NULL, NULL, '2026-02-13 05:00:00', '2026-02-13 05:00:00'),
+(1414, 'N1124/26', 'ABDELMAJID SOROUR', '', 'CIN', 'WA271866', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1124/26\nColor: GOLD\nSheet: 1124,26 C50 FDM GOLD BAT', '', NULL, NULL, NULL, '2026-02-14 05:00:00', '2026-02-14 05:00:00'),
+(1415, 'N1125/26', 'ABDELHAMID OUABAID', '', 'CIN', 'BW33416', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1125/26\nColor: Noir\nSheet: 1125,26 BECANE33NWR  (13)', '', NULL, NULL, NULL, '2026-02-14 05:00:00', '2026-02-14 05:00:00'),
+(1416, 'N1126/26', '', '', 'CIN', '', 9000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1126/26\nColor: NOIR MAT\nSheet: 1126,26 C50 DIG (5)', '', NULL, NULL, NULL, '2026-07-27 14:01:20', '2026-07-27 14:01:20'),
+(1417, 'N1127/26', '', '', 'CIN', '', 9400.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1127/26\nColor: GRIS\nSheet: 1127,26 C50 RIM GRIS (11)', '', NULL, NULL, NULL, '2026-07-27 14:01:20', '2026-07-27 14:01:20'),
+(1418, 'N1129/26', 'ABDELLAH AIT ELMAHDI', '', 'CIN', 'PB286701', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1129/26\nColor: BLEU BAT\nSheet: 1129,26 C50 FDM BLEU BAT(5)', '', NULL, NULL, NULL, '2026-02-16 05:00:00', '2026-02-16 05:00:00'),
+(1419, 'N1130/26', 'ISSAM KARYM', '', 'CIN', 'BW15721', 10200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1130/26\nColor: BLEU BAT\nSheet: 1130,26 C50 FDM BLEU BAT(6)', '', NULL, NULL, NULL, '2026-02-16 05:00:00', '2026-02-16 05:00:00'),
+(1420, 'N1131/26', 'EL MILOUDI EL HASSAK', '', 'CIN', 'BW89724', 10200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1131/26\nColor: BLEU BAT\nSheet: 1131,26 C50 FDM BLEU BAT(6)', '', NULL, NULL, NULL, '2026-02-18 05:00:00', '2026-02-18 05:00:00'),
+(1421, 'N1132/26', 'TARIK FAKIR BK', '', 'CIN', '337251', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1132/26\nColor: GOLD\nSheet: 1132,26 C50 FDM GOLD BAT (2)', '', NULL, NULL, NULL, '2026-02-18 05:00:00', '2026-02-18 05:00:00'),
+(1422, 'N1133/26', '', '', 'CIN', '', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1133/26\nColor: BLEU BAT\nSheet: 1133,26 C50 RIM BLEU BAT(11)', '', NULL, NULL, NULL, '2026-07-27 14:01:21', '2026-07-27 14:01:21'),
+(1423, 'N1134/26', '', '', 'CIN', '', 9400.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1134/26\nColor: GOLD\nSheet: 1134,26 C50 NEW RIM GOLD CH(2)', '', NULL, NULL, NULL, '2026-02-18 05:00:00', '2026-02-18 05:00:00'),
+(1424, 'N1135/26', 'ZAKARIYA MOUDNIB', '', 'CIN', 'WA366391', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1135/26\nColor: GRIS NARDO\nSheet: 1135,26 C50 FDM GRIS NR BAT(4)', '', NULL, NULL, NULL, '2026-02-19 05:00:00', '2026-02-19 05:00:00'),
+(1425, 'N1136/26', 'HICHAM ACHTIOUI', '', 'CIN', 'N518638', 10400.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1136/26\nColor: BLEU BAT\nSheet: 1136,26 C50 FDM BLEU BAT(7)', '', NULL, NULL, NULL, '2026-02-19 05:00:00', '2026-02-19 05:00:00'),
+(1426, 'N1137/26', 'AMINE HADDOUAMAR', '', 'CIN', 'MA61048', 13500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1137/26\nColor: NOIR BRILLANT\nSheet: 1137,26 BECANER9 (2)', '', NULL, NULL, NULL, '2026-02-21 05:00:00', '2026-02-21 05:00:00'),
+(1427, 'N1138/26', '', '', 'CIN', '', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1138/26\nColor: BLEU CH\nSheet: 1138,26 C50 RIM BLEU CH(3)', '', NULL, NULL, NULL, '2026-02-21 05:00:00', '2026-02-21 05:00:00'),
+(1428, 'N1139/26', 'AZZ-EDDINE KADDARI', '', 'CIN', 'BW73198', 10200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1139/26\nColor: GOLD\nSheet: 1139,26 C50 FDM pistach(3)', '', NULL, NULL, NULL, '2026-02-22 05:00:00', '2026-02-22 05:00:00'),
+(1429, 'N1140/26', 'EL MEHDI EL JAOUDI BW', '', 'CIN', '76895', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1140/26\nColor: Noir/Pistch\nSheet: 1140,26 C50 FDM GOLD(7)', '', NULL, NULL, NULL, '2026-02-22 05:00:00', '2026-02-22 05:00:00'),
+(1430, 'N1141/26', '', '', 'CIN', '', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1141/26\nColor: BLEU CH\nSheet: 1141,26 C50 RIM BLEU CH(4)', '', NULL, NULL, NULL, '2026-02-23 05:00:00', '2026-02-23 05:00:00'),
+(1431, 'N1142/26', 'ABDERRAHIM BATAL', '', 'CIN', 'BE669589', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1142/26\nColor: BIEGE\nSheet: 1142,26 SH DAYTONA  (3)', '', NULL, NULL, NULL, '2026-02-23 05:00:00', '2026-02-23 05:00:00'),
+(1432, 'N1143/26', 'OTHMANE BOURGI', '', 'CIN', 'HH242683', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1143/26\nColor: BLEU BAT\nSheet: 1143,26 C50 FDM BLEU BAT(8)', '', NULL, NULL, NULL, '2026-02-24 05:00:00', '2026-02-24 05:00:00'),
+(1433, 'N1144/26', '', '', 'CIN', '', 33000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1144/26\nColor: GRIS\nSheet: 1144,26 SYM MAGIC (1)', '', NULL, NULL, NULL, '2026-02-24 05:00:00', '2026-02-24 05:00:00'),
+(1434, 'N1145/26', 'SAID LIMAZE', '', 'CIN', 'BE766716', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1145/26\nColor: NOIR\nSheet: 1145,26 KYMCO AGILITY(4)', '', NULL, NULL, NULL, '2026-02-25 05:00:00', '2026-02-25 05:00:00'),
+(1435, 'N1146/26', 'ARAFA JABRANE', '', 'CIN', 'BW54795', 13500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1146/26\nColor: GRIS  NARDO\nSheet: 1146,26 BECANER9 (2)', '', NULL, NULL, NULL, '2026-02-25 05:00:00', '2026-02-25 05:00:00'),
+(1436, 'N1147/26', 'ISMAIL CHAFER', '', 'CIN', 'BK527451', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1147/26\nColor: BLEU BAT\nSheet: 1147,26 C50 FDM BLEU BAT(9)', '', NULL, NULL, NULL, '2026-02-25 05:00:00', '2026-02-25 05:00:00'),
+(1437, 'N1148/26', 'YOUSSEF EL-GHAROUADI', '', 'CIN', 'BW64865', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1148/26\nColor: GRIS NARDO\nSheet: 1148,26 C50 FDM GRIS NR BAT(5)', '', NULL, NULL, NULL, '2026-02-26 05:00:00', '2026-02-26 05:00:00'),
+(1438, 'N1150/26', 'YOUNES EL ABBASSI', '', 'CIN', 'BK501883', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1150/26\nColor: NOIR BRILLANT\nSheet: 1150,26 KYMCO AGILITY(1)', '', NULL, NULL, NULL, '2026-02-27 05:00:00', '2026-02-27 05:00:00'),
+(1439, 'N1151/26', '', '', 'CIN', '', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1151/26\nColor: BLEU BAT\nSheet: 1151,26 C50 FD BAT(1)', '', NULL, NULL, NULL, '2026-02-27 05:00:00', '2026-02-27 05:00:00'),
+(1440, 'N1152/26', 'LAHOUCINE KARAMIDRISSI', '', 'CIN', 'N110744', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1152/26\nColor: GRIS MAT\nSheet: 1152,26 KYMCO AGILITY(2)', '', NULL, NULL, NULL, '2026-02-27 05:00:00', '2026-02-27 05:00:00'),
+(1441, 'N1153/26', '', '', 'CIN', '', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1153/26\nColor: GRIS BLEU CH\nSheet: 1153,26 C50 RIM BLEU CH gri (5)', '', NULL, NULL, NULL, '2026-02-28 05:00:00', '2026-02-28 05:00:00'),
+(1442, 'N1154/26', 'FATIMA DIOUANI', '', 'CIN', 'E376308', 16000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1154/26\nColor: BLANC\nSheet: 1154,26 BECANESHCBA  (5)', '', NULL, NULL, NULL, '2026-02-28 05:00:00', '2026-02-28 05:00:00'),
+(1443, 'N1155/26', '', '', 'CIN', '', 9300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1155/26\nColor: BLEU BAT\nSheet: 1155,26 C50 RIM BLEU BAT(3)', '', NULL, NULL, NULL, '2026-03-01 05:00:00', '2026-03-01 05:00:00'),
+(1444, 'N1156/26', '', '', 'CIN', '', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1156/26\nColor: BLEU BAT\nSheet: 1156,26 C50 FD BAT(2)', '', NULL, NULL, NULL, '2026-03-01 05:00:00', '2026-03-01 05:00:00'),
+(1445, 'N1157/26', '', '', 'CIN', '', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1157/26\nColor: BLEU BAT\nSheet: 1157,26 C50 RIM BLEU BAT(6)', '', NULL, NULL, NULL, '2026-03-01 05:00:00', '2026-03-01 05:00:00'),
+(1446, 'N1158/26', '', '', 'CIN', '', 10350.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1158/26\nColor: PISTACH\nSheet: 1158,26 C50 FD PISTACH (1)', '', NULL, NULL, NULL, '2026-03-01 05:00:00', '2026-03-01 05:00:00'),
+(1447, 'N1159/26', '', '', 'CIN', '', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1159/26\nColor: BLEU BAT\nSheet: 1159,26 C50 FD BAT(3)', '', NULL, NULL, NULL, '2026-03-01 05:00:00', '2026-03-01 05:00:00'),
+(1448, 'N1160/26', '', '', 'CIN', '', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1160/26\nColor: BLEU BAT\nSheet: 1160,26 C50 FD BAT(4)', '', NULL, NULL, NULL, '2026-03-01 05:00:00', '2026-03-01 05:00:00'),
+(1449, 'N1162/26', 'KHALIL AARGOUB', '', 'CIN', 'BK197377', 13500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1162/26\nColor: BEIGE MATE\nSheet: 1162,26 BECANER9 (3)', '', NULL, NULL, NULL, '2026-03-03 05:00:00', '2026-03-03 05:00:00'),
+(1450, 'N1163/26', '', '', 'CIN', '', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1163/26\nColor: GRIS\nSheet: 1163,26 C50 GRIS DIG (4)', '', NULL, NULL, NULL, '2026-03-03 05:00:00', '2026-03-03 05:00:00'),
+(1451, 'N1164/26', '', '', 'CIN', '', 9300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1164/26\nColor: BLEU BAT\nSheet: 1164,26 C50 RIM BLEU BAT(4)', '', NULL, NULL, NULL, '2026-03-04 05:00:00', '2026-03-04 05:00:00'),
+(1452, 'N1165/26', 'ABDESSALAM ESSAHRAOUI', '', 'CIN', 'HA73673', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1165/26\nColor: GRIS NARDO\nSheet: 1165,26 SH DAYTONA  (4)', '', NULL, NULL, NULL, '2026-03-04 05:00:00', '2026-03-04 05:00:00'),
+(1453, 'N1166/26', '', '', 'CIN', '', 33000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1166/25\nColor: NOIR BRONZE\nSheet: 1166,26 NHT200(1)', '', NULL, NULL, NULL, '2026-03-04 05:00:00', '2026-03-04 05:00:00'),
+(1454, 'N1167/26', '', '', 'CIN', '', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1167/26\nColor: BLEU BAT\nSheet: 1167,26 C50 RIM BLEU BAT(7)', '', NULL, NULL, NULL, '2026-03-05 05:00:00', '2026-03-05 05:00:00'),
+(1455, 'N1168/26', 'RAHAL ZEHRAOUI', '', 'CIN', 'WA336665', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1168/26\nColor: Noir BRILLANT\nSheet: 1168,26 BECANE33ET ANC(1)', '', NULL, NULL, NULL, '2026-03-05 05:00:00', '2026-03-05 05:00:00'),
+(1456, 'N1169/26', 'AYOUB IASSTEN', '', 'CIN', 'BK516461', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1169/26\nColor: Noir BRILLANT\nSheet: 1169,26 BECANE33ET ANC(2)', '', NULL, NULL, NULL, '2026-03-05 05:00:00', '2026-03-05 05:00:00'),
+(1457, 'N1170/26', 'MOHAMED KANTOUNI', '', 'CIN', 'BW89780', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1170/26\nColor: Noir BRILLANT\nSheet: 1170,26 BECANE33ET ANC(3)', '', NULL, NULL, NULL, '2026-03-05 05:00:00', '2026-03-05 05:00:00'),
+(1458, 'N1171/26', 'SALAHEDDINE JOUMADI', '', 'CIN', 'BW67930', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1171/26\nColor: Noir BRILLANT\nSheet: 1171,26 BECANE33ET ANC(4)', '', NULL, NULL, NULL, '2026-03-05 05:00:00', '2026-03-05 05:00:00'),
+(1459, 'N1172/26', 'MOHAMED EL ALAMI', '', 'CIN', 'BK718795', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1172/26\nColor: Noir BRILLANT\nSheet: 1172,26 BECANE33ET ANC(5)', '', NULL, NULL, NULL, '2026-03-05 05:00:00', '2026-03-05 05:00:00'),
+(1460, 'N1173/26', 'ABDELAZIZ RADDAMAT', '', 'CIN', 'EE760677', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1173/26\nColor: Noir BRILLANT\nSheet: 1173,26 BECANE33ET ANC(6)', '', NULL, NULL, NULL, '2026-03-06 05:00:00', '2026-03-06 05:00:00'),
+(1461, 'N1174/26', 'MOHAMED ETTOUMY', '', 'CIN', 'BW25653', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1174/26\nColor: Noir BRILLANT\nSheet: 1174,26 BECANE33ET ANC(7)', '', NULL, NULL, NULL, '2026-03-06 05:00:00', '2026-03-06 05:00:00'),
+(1462, 'N1175/26', 'MOHAMED AMINE EL HIRCH', '', 'CIN', 'BW69166', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1175/26\nColor: Noir BRILLANT\nSheet: 1175,26 BECANE33ET ANC(8)', '', NULL, NULL, NULL, '2026-03-06 05:00:00', '2026-03-06 05:00:00'),
+(1463, 'N1176/26', 'MERYEME WAHBI', '', 'CIN', 'BA17000', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1176/26\nColor: \nSheet: 1176,26 BEC FLORANCE (5)', '', NULL, NULL, NULL, '2026-04-15 04:00:00', '2026-04-15 04:00:00'),
+(1464, 'N1177/26', 'OUSSAMA DALIL', '', 'CIN', 'BW48074', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1177/26\nColor: Noir BRILLANT\nSheet: 1177,26 BECANE33ET ANC(10)', '', NULL, NULL, NULL, '2026-03-06 05:00:00', '2026-03-06 05:00:00'),
+(1465, 'N1178/26', '', '', 'CIN', '', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1178/26\nColor: BLEU BAT\nSheet: 1178,26 C50 FD BAT(5)', '', NULL, NULL, NULL, '2026-03-06 05:00:00', '2026-03-06 05:00:00'),
+(1466, 'N1180/26', 'YASMINE AND COMPANY', '', 'CIN', 'RC314473', 10000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1180/26\nColor: NOIR MATE\nSheet: 1180,26 BECANE MAGOTTvalenti(1)', '', NULL, NULL, NULL, '2026-03-07 05:00:00', '2026-03-07 05:00:00'),
+(1467, 'N1181/26', 'AYOUB ER-RACHDY', '', 'CIN', 'WA236609', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1181/26\nColor: BEIGE MATE\nSheet: 1181,26 SH DAYTONA  (5)', '', NULL, NULL, NULL, '2026-03-07 05:00:00', '2026-03-07 05:00:00'),
+(1468, 'N1182/26', 'AYOUB AIT BIHI', '', 'CIN', 'BW44647', 10000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1182/26\nColor: NOIR MATE\nSheet: 1182,26 BECANE MAGOTTvalenti(2)', '', NULL, NULL, NULL, '2026-03-07 05:00:00', '2026-03-07 05:00:00'),
+(1469, 'N1183/26', 'ANASS AKLAM', '', 'CIN', 'BW68516', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1183/26\nColor: Noir BRILLANT\nSheet: 1183,26 BECANE33ET ANC(11)', '', NULL, NULL, NULL, '2026-03-07 05:00:00', '2026-03-07 05:00:00'),
+(1470, 'N1184/26', '', '', 'CIN', '', 9400.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1184/26\nColor: BLEU BAT\nSheet: 1184,26 C50 RIM BLEU BAT(5)', '', NULL, NULL, NULL, '2026-03-08 05:00:00', '2026-03-08 05:00:00'),
+(1471, 'N1185/26', 'ALAAEDDINE BEREKHIS', '', 'CIN', 'BW24723', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1185/26\nColor: Noir BRILLANT\nSheet: 1185,26 BECANE33ET ANC(12)', '', NULL, NULL, NULL, '2026-03-08 05:00:00', '2026-03-08 05:00:00'),
+(1472, 'N1186/26', 'EL MEHDI BENALLOU', '', 'CIN', 'BW49600', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1186/26\nColor: Noir BRILLANT\nSheet: 1186,26 BECANE33ET ANC(13)', '', NULL, NULL, NULL, '2026-03-08 05:00:00', '2026-03-08 05:00:00'),
+(1473, 'N1187/26', 'HAMZA AZHARI', '', 'CIN', 'BW35327', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1187/26\nColor: Noir BRILLANT\nSheet: 1187,26 BECANE33ET ANC(14)', '', NULL, NULL, NULL, '2026-03-09 04:00:00', '2026-03-09 04:00:00'),
+(1474, 'N1188/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1188/26\nColor: \nSheet: 1188,26 BECANE33 ET AN (15)', '', NULL, NULL, NULL, '2026-07-27 14:01:29', '2026-07-27 14:01:29'),
+(1475, 'N1190/26', '', '', 'CIN', '', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1190/26\nColor: GRIS BLEU CH\nSheet: 1190,26 C50 RIM BLEUCH GRIS (4)', '', NULL, NULL, NULL, '2026-03-13 04:00:00', '2026-03-13 04:00:00'),
+(1476, 'N1191/26', '', '', 'CIN', '', 9300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1191/26\nColor: BLEU BAT\nSheet: 1191,26 C50 RIM BLEU BAT(8)', '', NULL, NULL, NULL, '2026-03-13 04:00:00', '2026-03-13 04:00:00'),
+(1477, 'N1192/26', '', '', 'CIN', '', 9300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1192/26\nColor: BLEU BAT\nSheet: 1192,26 C50 RIM BLEU BAT(9)', '', NULL, NULL, NULL, '2026-03-13 04:00:00', '2026-03-13 04:00:00'),
+(1478, 'N1193/26', 'ABDERRAZZAK RAFIK', '', 'CIN', 'BK395868', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1193/26\nColor: BLEU BAT\nSheet: 1193,26 C50 FDM BLEU BAT(10)', '', NULL, NULL, NULL, '2026-03-13 04:00:00', '2026-03-13 04:00:00'),
+(1479, 'N1194/26', 'ABDERRAHMANE MACHRAA', '', 'CIN', 'BK667817', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1194/26\nColor: Noir BRILLANT\nSheet: 1194,26 BECANE33ET ANC(16)', '', NULL, NULL, NULL, '2026-03-14 04:00:00', '2026-03-14 04:00:00'),
+(1480, 'N1195/26', '', '', 'CIN', '', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1195/26\nColor: GRIS BLEU CH\nSheet: 1195,26 C50 RIM BLEUCH GRIS (5)', '', NULL, NULL, NULL, '2026-03-14 04:00:00', '2026-03-14 04:00:00'),
+(1481, 'N1196/26', 'ADIL EL MANSOUR', '', 'CIN', 'EB208060', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1196/26\nColor: Noir BRILLANT\nSheet: 1196,26 BECANE33ET ANC(17)', '', NULL, NULL, NULL, '2026-03-15 04:00:00', '2026-03-15 04:00:00'),
+(1482, 'N1197/26', 'MARWANE ADNAN', '', 'CIN', 'WA356205', 10250.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1197/26\nColor: Noir/Pistch\nSheet: 1197,26 C50 FDM pistach(4)', '', NULL, NULL, NULL, '2026-03-15 04:00:00', '2026-03-15 04:00:00'),
+(1483, 'N1198/26', 'AHMED EL GHOUAT', '', 'CIN', 'WA316008', 10250.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1198/26\nColor: Noir/Pistch\nSheet: 1198,26 C50 FDM pistach(5)', '', NULL, NULL, NULL, '2026-03-15 04:00:00', '2026-03-15 04:00:00'),
+(1484, 'N1199/26', 'KAMAL RIZADI', '', 'CIN', 'BW47166', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1199/26\nColor: Noir BRILLANT\nSheet: 1199,26 BECANE33ET ANC(18)', '', NULL, NULL, NULL, '2026-03-16 04:00:00', '2026-03-16 04:00:00'),
+(1485, 'N1200/26', 'REDA TARGHI', '', 'CIN', 'BK747078', 10200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1200/26\nColor: GOLD\nSheet: 1200,26 C50 FDM GOLD(1)', '', NULL, NULL, NULL, '2026-03-15 04:00:00', '2026-03-15 04:00:00'),
+(1486, 'N1201/26', '', '', 'CIN', '', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1201/26\nColor: BLEU CH\nSheet: 1201,26 C50 RIM BLEU CH(5)', '', NULL, NULL, NULL, '2026-03-16 04:00:00', '2026-03-16 04:00:00'),
+(1487, 'N1202/26', 'KAMAL RIZADI', '', 'CIN', 'BW47166', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1202/26\nColor: Noir BRILLANT\nSheet: 1202,26 BECANE33ET ANC(19)', '', NULL, NULL, NULL, '2026-03-15 04:00:00', '2026-03-15 04:00:00'),
+(1488, 'N1203/26', 'ABDELKEBIR KANTARI', '', 'CIN', 'BK508916', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1203/26\nColor: NOIR BRILLANT\nSheet: 1203,26 BECANESH  (1)', '', NULL, NULL, NULL, '2026-03-17 04:00:00', '2026-03-17 04:00:00'),
+(1489, 'N1204/26', 'ABDESSLAM MOHAMMADI', '', 'CIN', 'H143382', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1204/26\nColor: GRIS NARDO\nSheet: 1204,26 BECANESH  (2)', '', NULL, NULL, NULL, '2026-03-17 04:00:00', '2026-03-17 04:00:00'),
+(1490, 'N1205/26', 'MORAD EL GHARBI', '', 'CIN', 'BW81126', 13500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1205/26\nColor: GRIS MAT\nSheet: 1205,26 BECANER9 (1)', '', NULL, NULL, NULL, '2026-03-18 04:00:00', '2026-03-18 04:00:00'),
+(1491, 'N1207/26', '', '', 'CIN', '', 9300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1207/26\nColor: BLEU BAT\nSheet: 1207,26 C50 RIM BLEU BAT(10)', '', NULL, NULL, NULL, '2026-03-18 04:00:00', '2026-03-18 04:00:00'),
+(1492, 'N1208/26', 'YOUNES AIT EL ABBASSIA', '', 'CIN', 'WA188705', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1208/26\nColor: NOIR MATE\nSheet: 1208,26 SH DAYTONA  (6)', '', NULL, NULL, NULL, '2026-03-18 04:00:00', '2026-03-18 04:00:00'),
+(1493, 'N1209/26', 'YOUSSEF EL QAOUBI', '', 'CIN', 'BK252691', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1209/26\nColor: GRIS MAT\nSheet: 1209,26 KYMCO AGILITY(1)', '', NULL, NULL, NULL, '2026-03-19 04:00:00', '2026-03-19 04:00:00'),
+(1494, 'N1210/26', 'ABDERRAHMANE FITRI', '', 'CIN', 'BW37615', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1210/26\nColor: Noir BRILLANT\nSheet: 1210,26 BECANE33ET ANC(20)', '', NULL, NULL, NULL, '2026-03-19 04:00:00', '2026-03-19 04:00:00'),
+(1495, 'N1211/26', 'OTHMAN RITTI', '', 'CIN', 'BW16896', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1211/26\nColor: GRIS MAT\nSheet: 1211,26 KYMCO AGILITY(2)', '', NULL, NULL, NULL, '2026-03-21 04:00:00', '2026-03-21 04:00:00'),
+(1496, 'N1212/26', '', '', 'CIN', '', 10250.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1212/26\nColor: PISTACH\nSheet: 1212,26 C50 FD PISTACH (2)', '', NULL, NULL, NULL, '2026-03-21 04:00:00', '2026-03-21 04:00:00'),
+(1497, 'N1213/26', '', '', 'CIN', '…………………………………………………', 10000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1213/26\nColor: GOLD\nSheet: 1213,26 C50 FDM GOLD(1)', '', NULL, NULL, NULL, '2026-03-21 04:00:00', '2026-03-21 04:00:00'),
+(1498, 'N1214/26', '', '', 'CIN', '…………………………………………………', 10000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1214/26\nColor: PISTACH\nSheet: 1214,26 C50 FDM pistach(1)', '', NULL, NULL, NULL, '2026-03-21 04:00:00', '2026-03-21 04:00:00'),
+(1499, 'N1215/26', '', '', 'CIN', '', 10400.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1215/26\nColor: PISTACH\nSheet: 1215,26 C50 FD PISTACH (1)', '', NULL, NULL, NULL, '2026-03-23 04:00:00', '2026-03-23 04:00:00'),
+(1500, 'N1216/26', '', '', 'CIN', '', 10200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1216/26\nColor: \nSheet: 1216,26 GAMA N,B  (1)', '', NULL, NULL, NULL, '2026-03-23 04:00:00', '2026-03-23 04:00:00'),
+(1501, 'N1217/26', '', '', 'CIN', '', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1217/26\nColor: BLEU BAT\nSheet: 1217,26 C50 RIM BLEU BAT(11)', '', NULL, NULL, NULL, '2026-03-23 04:00:00', '2026-03-23 04:00:00'),
+(1502, 'N1218/26', '', '', 'CIN', '', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1218/26\nColor: PISTACH\nSheet: 1218,26 C50 FD PISTACH (4)', '', NULL, NULL, NULL, '2026-03-23 04:00:00', '2026-03-23 04:00:00'),
+(1503, 'N1219/26', 'JAMAL OUAKRIM', '', 'CIN', 'GG15106', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1219/26\nColor: Noir BRILLANT\nSheet: 1219,26 BECANE33 NR NV  (1)', '', NULL, NULL, NULL, '2026-03-23 04:00:00', '2026-03-23 04:00:00'),
+(1504, 'N1221/26', '', '', 'CIN', '', 9300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1221/26\nColor: BLEU BAT\nSheet: 1221,26 C50 RIM BLEU BAT(12)', '', NULL, NULL, NULL, '2026-03-25 04:00:00', '2026-03-25 04:00:00'),
+(1505, 'N1222/26', 'OTHMANE FAHMI', '', 'CIN', 'BW13565', 20800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1222/26\nColor: GRIS NARDO\nSheet: 1222,26 BECANE ATX  (1)', '', NULL, NULL, NULL, '2026-03-25 04:00:00', '2026-03-25 04:00:00'),
+(1506, 'N1223/26', 'OTHMANE', '', 'CIN', 'CASQUE', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1223/26\nColor: Noir BRILLANT\nSheet: 1223,26 BECANE33 ET ANC  (1)', '', NULL, NULL, NULL, '2026-03-26 04:00:00', '2026-03-26 04:00:00'),
+(1507, 'N1224/26', 'ALI LEGDALI', '', 'CIN', 'W480847', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1224/26\nColor: Noir BRILLANT\nSheet: 1224,26 BECANE33 ET ANC  (2)', '', NULL, NULL, NULL, '2026-03-28 04:00:00', '2026-03-28 04:00:00'),
+(1508, 'N1225/26', 'ACHRAF LASLOU', '', 'CIN', 'BJ458753', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1225/26\nColor: Noir BRILLANT\nSheet: 1225,26 BECANE33 ET ANC  (3)', '', NULL, NULL, NULL, '2026-03-28 04:00:00', '2026-03-28 04:00:00'),
+(1509, 'N1226/26', 'KARIM EL HOUARI', '', 'CIN', 'BW43734', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1226/26\nColor: Noir BRILLANT\nSheet: 1226,26 BECANE33 ET ANC  (4)', '', NULL, NULL, NULL, '2026-03-28 04:00:00', '2026-03-28 04:00:00'),
+(1510, 'N1227/26', 'OSSAMA ZAADANI', '', 'CIN', 'BK727288', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1227/26\nColor: GOLD\nSheet: 1227,26 C50FD GOLD  (8)', '', NULL, NULL, NULL, '2026-03-29 04:00:00', '2026-03-29 04:00:00'),
+(1511, 'N1228/26', 'BRAHIM MOTO', '', 'CIN', 'SBIT', 1000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1228/26\nColor: GRIS MATE\nSheet: 1228,26 BECANEVALENTI S  (3)', '', NULL, NULL, NULL, '2026-03-29 04:00:00', '2026-03-29 04:00:00'),
+(1512, 'N1229/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1229/26\nColor: \nSheet: 1229,26 SH COOPER', '', NULL, NULL, NULL, '2026-07-27 14:01:34', '2026-07-27 14:01:34'),
+(1513, 'N1230/26', 'YOUNES TEZIOUKAT', '', 'CIN', 'BW82612', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1230/26\nColor: Noir BRILLANT\nSheet: 1230,26 BECANE33 ET ANC  (5)', '', NULL, NULL, NULL, '2026-03-30 04:00:00', '2026-03-30 04:00:00'),
+(1514, 'N1231/26', 'SALAHEDDINE BEN ATTAR', '', 'CIN', 'BW21699', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1231/26\nColor: GOLD\nSheet: 1231,26 C50 FDM GOLD(9)', '', NULL, NULL, NULL, '2026-03-30 04:00:00', '2026-03-30 04:00:00'),
+(1515, 'N1232/26', 'HAFID KAAMOUCH', '', 'CIN', 'Y156385', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1232/26\nColor: GRIS NARDO\nSheet: 1232,26  COOPER touring (1)', '', NULL, NULL, NULL, '2026-03-31 04:00:00', '2026-03-31 04:00:00'),
+(1516, 'N1233/26', 'HAMZA ETTAIH', '', 'CIN', 'BK702592', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1233/26\nColor: Noir BRILLANT\nSheet: 1233,26 BECANE33 ET ANC  (6)', '', NULL, NULL, NULL, '2026-03-31 04:00:00', '2026-03-31 04:00:00'),
+(1517, 'N1234/26', 'AZYZ BEN OUAHMANE', '', 'CIN', 'JC520626', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1234/26\nColor: Platinum-or\nSheet: 1234,26 BECANE33 NR NV  (2)', '', NULL, NULL, NULL, '2026-03-31 04:00:00', '2026-03-31 04:00:00'),
+(1518, 'N1235/26', 'ANAS EL HABHABA', '', 'CIN', 'N355406', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1235/26\nColor: GOLD\nSheet: 1235,26 C50 FDM GOLD(2)', '', NULL, NULL, NULL, '2026-04-01 04:00:00', '2026-04-01 04:00:00'),
+(1519, 'N1236/26', 'SOUKAINA BENHAJOU', '', 'CIN', 'BK757714', 14200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1236/26\nColor: NOIR /VERT\nSheet: 1236,26 BECANERVX  (1)', '', NULL, NULL, NULL, '2026-04-01 04:00:00', '2026-04-01 04:00:00'),
+(1520, 'N1237/26', '', '', 'CIN', '', 9000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1237/26\nColor: GRIS\nSheet: 1237,26 C50 GRIS DIG (5)', '', NULL, NULL, NULL, '2026-04-02 04:00:00', '2026-04-02 04:00:00'),
+(1521, 'N1238/26', 'ANASS ASSADI', '', 'CIN', 'WA350080', 10250.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1238/26\nColor: GOLD\nSheet: 1238,26 C50 FDM GOLD(3)', '', NULL, NULL, NULL, '2026-04-02 04:00:00', '2026-04-02 04:00:00'),
+(1522, 'N1239/26', 'OTHMANE EL FELLAH', '', 'CIN', 'BW17025', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1239/26\nColor: Noir BRILLANT\nSheet: 1239,26 BECANE33 ET ANC  (7)', '', NULL, NULL, NULL, '2026-04-02 04:00:00', '2026-04-02 04:00:00'),
+(1523, 'N1240/26', 'ABDELHAMID KADDI', '', 'CIN', 'BA4408', 12200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1240/26\nColor: Noir BRILLANT\nSheet: 1240,26 BECANESUPER CUB  (2)', '', NULL, NULL, NULL, '2026-04-03 04:00:00', '2026-04-03 04:00:00'),
+(1524, 'N1241/26', 'MOHAMED MANNANE', '', 'CIN', 'BW2293', 20300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1241/26\nColor: GRIS NARDO\nSheet: 1241,26 SYM STNEW Gris (1)', '', NULL, NULL, NULL, '2026-04-03 04:00:00', '2026-04-03 04:00:00'),
+(1525, 'N1242/26', 'SOUFIANE JADDAR', '', 'CIN', 'BK528299', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1242/26\nColor: GOLD\nSheet: 1242,26 C50 FDM GOLD(4)', '', NULL, NULL, NULL, '2026-04-04 04:00:00', '2026-04-04 04:00:00'),
+(1526, 'N1243/26', 'EL MEHDI EZZAHAF', '', 'CIN', 'BW61507', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1243/26\nColor: Noir BRILLANT\nSheet: 1243,26 BECANE33 ET ANC  (8)', '', NULL, NULL, NULL, '2026-04-04 04:00:00', '2026-04-04 04:00:00'),
+(1527, 'N1244/26', '', '', 'CIN', '', 9250.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1244/26\nColor: BLEU\nSheet: 1244,26 C50 NEW RIM BLEU BAT(1)', '', NULL, NULL, NULL, '2026-04-04 04:00:00', '2026-04-04 04:00:00'),
+(1528, 'N1245/26', '', '', 'CIN', '', 9300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1245/26\nColor: BLEU\nSheet: 1245,26 C50 NEW RIM BLEU BAT(2)', '', NULL, NULL, NULL, '2026-04-05 04:00:00', '2026-04-05 04:00:00'),
+(1529, 'N1246/26', 'EL MEHDI BENALI', '', 'CIN', 'BW58755', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1246/26\nColor: Noir BRILLANT\nSheet: 1246,26 BECANE33 ET ANC  (9)', '', NULL, NULL, NULL, '2026-04-05 04:00:00', '2026-04-05 04:00:00'),
+(1530, 'N1247/26', '', '', 'CIN', '', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1247/26\nColor: BLEU\nSheet: 1247,26 C50 NEW RIM BLEU BAT(3)', '', NULL, NULL, NULL, '2026-04-05 04:00:00', '2026-04-05 04:00:00'),
+(1531, 'N1249/26', 'MERYEM CHAHBI', '', 'CIN', 'BK700227', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1249/26\nColor: NOIR BRILLANT\nSheet: 1249,26 KYMCO AGILITY(1)', '', NULL, NULL, NULL, '2026-04-06 04:00:00', '2026-04-06 04:00:00'),
+(1532, 'N1250/26', '', '', 'CIN', '', 29900.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1250/26\nColor: NOIR\nSheet: 1250,26 DOCKER RT200(1)', '', NULL, NULL, NULL, '2026-04-06 04:00:00', '2026-04-06 04:00:00'),
+(1533, 'N1251/26', '', '', 'CIN', '', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1251/26\nColor: PISTACH\nSheet: 1251,26 C50 FD PISTACH (2)', '', NULL, NULL, NULL, '2026-04-06 04:00:00', '2026-04-06 04:00:00'),
+(1534, 'N1252/26', 'OTHMANE', '', 'CIN', 'CASQUE', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1252/26\nColor: Noir BRILLANT\nSheet: 1252,26 BECANE33 ET ANC  (10)', '', NULL, NULL, NULL, '2026-04-07 04:00:00', '2026-04-07 04:00:00'),
+(1535, 'N1254/26', 'MALAK BELHADI', '', 'CIN', 'BW57031', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1254/26\nColor: OR CHAMPAGNE\nSheet: 1254,26 BECANEVALENTI S  (4)', '', NULL, NULL, NULL, '2026-04-08 04:00:00', '2026-04-08 04:00:00'),
+(1536, 'N1255/26', '', '', 'CIN', '', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1255/26\nColor: PISTACH\nSheet: 1255,26 C50 FD PISTACH (5)', '', NULL, NULL, NULL, '2026-04-09 04:00:00', '2026-04-09 04:00:00'),
+(1537, 'N1256/26', '', '', 'CIN', '', 9000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1256/26\nColor: GRIS\nSheet: 1256,26 C50 GRIS DIG (1)', '', NULL, NULL, NULL, '2026-04-09 04:00:00', '2026-04-09 04:00:00'),
+(1538, 'N1257/26', 'YOUSSEF GHARGAOUI', '', 'CIN', 'BK672963', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1257/26\nColor: NOIR BRILLANT\nSheet: 1257,26 SH DAYTONA  (8)', '', NULL, NULL, NULL, '2026-04-10 04:00:00', '2026-04-10 04:00:00'),
+(1539, 'N1258/26', 'SMAIL NAJI-IDRISSI', '', 'CIN', 'WB210908', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1258/26\nColor: GOLD\nSheet: 1258,26 C50 FDM GOLD(5)', '', NULL, NULL, NULL, '2026-04-10 04:00:00', '2026-04-10 04:00:00'),
+(1540, 'N1259/26', '', '', 'CIN', '', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1259/26\nColor: BLEU\nSheet: 1259,26 C50 NEW RIM BLEU BAT(4)', '', NULL, NULL, NULL, '2026-04-10 04:00:00', '2026-04-10 04:00:00'),
+(1541, 'N1260/26', 'ABDERRAHIM EL BOUKHARI', '', 'CIN', 'BW38605', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1260/26\nColor: Noir BRILLANT\nSheet: 1260,26 BECANE33 ET ANC  (11)', '', NULL, NULL, NULL, '2026-04-10 04:00:00', '2026-04-10 04:00:00'),
+(1542, 'N1261/26', 'OUSSAMA MOTAMID', '', 'CIN', 'ZT369918', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1261/26\nColor: GRIS NARDO\nSheet: 1261,26 VESPUCCI   (1)', '', NULL, NULL, NULL, '2026-04-10 04:00:00', '2026-04-10 04:00:00'),
+(1543, 'N1262/26', '', '', 'CIN', '', 10700.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1262/26\nColor: PISTACH\nSheet: 1262,26 C50 FD PISTACH (3)', '', NULL, NULL, NULL, '2026-04-11 04:00:00', '2026-04-11 04:00:00'),
+(1544, 'N1263/26', 'ZAKARIA HESSANI', '', 'CIN', 'BH625181', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1263/26\nColor: NOIR MAT\nSheet: 1263,26 BECANESH  (1)', '', NULL, NULL, NULL, '2026-04-11 04:00:00', '2026-04-11 04:00:00'),
+(1545, 'N1264/26', '', '', 'CIN', '', 9100.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1264/26\nColor: GRIS\nSheet: 1264,26 C50 GRIS DIG (2)', '', NULL, NULL, NULL, '2026-04-11 04:00:00', '2026-04-11 04:00:00'),
+(1546, 'N1265/26', 'MOUHCINE EL BADRAOUI', '', 'CIN', 'BK365549', 10800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1265/26\nColor: GOLD\nSheet: 1265,26 C50 FDM GOLD(2)', '', NULL, NULL, NULL, '2026-04-12 04:00:00', '2026-04-12 04:00:00'),
+(1547, 'N1266/26', 'MOSTAFA ZERHMANE', '', 'CIN', 'BW28126', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1266/26\nColor: Noir BRILLANT\nSheet: 1266,26 BECANE33 ET ANC  (12)', '', NULL, NULL, NULL, '2026-04-12 04:00:00', '2026-04-12 04:00:00'),
+(1548, 'N1267/26', 'NABIL LAMTOUKAR', '', 'CIN', 'BH268700', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1267/26\nColor: BLEU MAGIC\nSheet: 1267,26 BECANESH  (2)', '', NULL, NULL, NULL, '2026-04-13 04:00:00', '2026-04-13 04:00:00'),
+(1549, 'N1268/26', 'FATIMA SARIDI', '', 'CIN', 'BK199168', 10700.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1268/26\nColor: GOLD\nSheet: 1268,26 C50 FDM GOLD(3)', '', NULL, NULL, NULL, '2026-04-13 04:00:00', '2026-04-13 04:00:00'),
+(1550, 'N1269/26', '', '', 'CIN', '', 9100.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1269/26\nColor: GRIS\nSheet: 1269,26 C50 GRIS DIG (3)', '', NULL, NULL, NULL, '2026-04-13 04:00:00', '2026-04-13 04:00:00'),
+(1551, 'N1270/26', 'MOURAD ZAADANI', '', 'CIN', 'BK341156', 10700.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1270/26\nColor: GOLD\nSheet: 1270,26 C50 FDM GOLD(4)', '', NULL, NULL, NULL, '2026-04-14 04:00:00', '2026-04-14 04:00:00'),
+(1552, 'N1271/26', 'HAMZA ERRAGOUBA', '', 'CIN', 'BW56406', 10700.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1271/26\nColor: GOLD\nSheet: 1271,26 C50 FDM GOLD(5)', '', NULL, NULL, NULL, '2026-04-14 04:00:00', '2026-04-14 04:00:00'),
+(1553, 'N1272/26', 'NAOUAL SBAI', '', 'CIN', 'BK214782', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1272/26\nColor: Noir BRILLANT\nSheet: 1272,26 BECANE33 NR  (1)', '', NULL, NULL, NULL, '2026-04-15 04:00:00', '2026-04-15 04:00:00'),
+(1554, 'N1273/26', '', '', 'CIN', '', 9400.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1273/26\nColor: BLEU\nSheet: 1273,26 C50 NEW RIM BLEU BAT(5)', '', NULL, NULL, NULL, '2026-04-15 04:00:00', '2026-04-15 04:00:00'),
+(1555, 'N1274/26', 'SAID GARDA', '', 'CIN', 'BE26006', 10700.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1274/26\nColor: GOLD\nSheet: 1274,26 C50 FDM GOLD(6)', '', NULL, NULL, NULL, '2026-04-15 04:00:00', '2026-04-15 04:00:00'),
+(1556, 'N1275/26', 'ISMAIL ERROUK', '', 'CIN', 'BW8973', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1275/26\nColor: NOIR BRILLANT\nSheet: 1275,26 KYMCO AGILITY(2)', '', NULL, NULL, NULL, '2026-04-15 04:00:00', '2026-04-15 04:00:00'),
+(1557, 'N1277/26', 'RIAD EL WARAK', '', 'CIN', 'BW54669', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1277/26\nColor: Noir BRILLANT\nSheet: 1277,26 BECANE33 ET ANC  (13)', '', NULL, NULL, NULL, '2026-04-16 04:00:00', '2026-04-16 04:00:00'),
+(1558, 'N1278/26', '', '', 'CIN', '', 9000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1278/26\nColor: BLEU\nSheet: 1278,26 C50 NEW RIM BLEU BAT(6)', '', NULL, NULL, NULL, '2026-04-16 04:00:00', '2026-04-16 04:00:00'),
+(1559, 'N1279/26', 'ISMAIL TAMADOUALTE', '', 'CIN', 'IE53155', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1279/26\nColor: GRIS BEIGE\nSheet: 1279,26 BECANESH  (3)', '', NULL, NULL, NULL, '2026-04-16 04:00:00', '2026-04-16 04:00:00'),
+(1560, 'N1280/26', 'SAID OUSSOUS', '', 'CIN', 'JH92077', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1280/26\nColor: Noir BRILLANT\nSheet: 1280,26 BECANE33 ET ANC  (14)', '', NULL, NULL, NULL, '2026-04-17 04:00:00', '2026-04-17 04:00:00'),
+(1561, 'N1281/26', 'TARIK SALHANI', '', 'CIN', 'BW67177', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1281/26\nColor: Noir BRILLANT\nSheet: 1281,26 BECANE33 ET ANC  (15)', '', NULL, NULL, NULL, '2026-04-17 04:00:00', '2026-04-17 04:00:00'),
+(1562, 'N1282/26', 'HASSAN MAHJOUBI', '', 'CIN', 'BW46054', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1282/26\nColor: Noir BRILLANT\nSheet: 1282,26 BECANE33 ET ANC  (16)', '', NULL, NULL, NULL, '2026-04-17 04:00:00', '2026-04-17 04:00:00'),
+(1563, 'N1284/26', 'ALAA ESSAMMAN', '', 'CIN', 'BW8306', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1284/26\nColor: Noir BRILLANT\nSheet: 1284,26 BECANE33 ET ANC  (17)', '', NULL, NULL, NULL, '2026-04-17 04:00:00', '2026-04-17 04:00:00'),
+(1564, 'N1285/26', 'MOHAMED DAAJI', '', 'CIN', 'BW35165', 10700.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1285/26\nColor: GOLD\nSheet: 1285,26 C50 FDM GOLD(7)', '', NULL, NULL, NULL, '2026-04-18 04:00:00', '2026-04-18 04:00:00'),
+(1565, 'N1286/26', 'MOHAMED ES-SOLI', '', 'CIN', 'BK298835', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1286/26\nColor: Noir BRILLANT\nSheet: 1286,26 BECANE33 ET ANC  (18)', '', NULL, NULL, NULL, '2026-04-18 04:00:00', '2026-04-18 04:00:00'),
+(1566, 'N1289/26', 'OTHMANE GARDA', '', 'CIN', 'BW67913', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1289/26\nColor: Noir BRILLANT\nSheet: 1289,26 BECANE33 ET ANC  (19)', '', NULL, NULL, NULL, '2026-04-19 04:00:00', '2026-04-19 04:00:00'),
+(1567, 'N1290/26', '', '', 'CIN', '', 9300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1290/26\nColor: BLEU\nSheet: 1290,26 C50 NEW RIM BLEU BAT(7)', '', NULL, NULL, NULL, '2026-04-19 04:00:00', '2026-04-19 04:00:00'),
+(1568, 'N1291/26', 'MOUNIR GHOUMRISS', '', 'CIN', 'MC299955', 10900.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1291/26\nColor: GOLD\nSheet: 1291,26 C50 FDM GOLD(8)', '', NULL, NULL, NULL, '2026-04-20 04:00:00', '2026-04-20 04:00:00'),
+(1569, 'N1292/26', 'AHMED OUAHOU', '', 'CIN', 'PB221164', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1292/26\nColor: ROUGE CH\nSheet: 1292,26 C50 NEW RIM ROUGE CH(5)', '', NULL, NULL, NULL, '2026-04-20 04:00:00', '2026-04-20 04:00:00'),
+(1570, 'N1293/26', 'AHMED BADREDINE', '', 'CIN', 'BJ219908', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1293/26\nColor: GRIS MAT\nSheet: 1293,26 KYMCO AGILITY(2)', '', NULL, NULL, NULL, '2026-04-20 04:00:00', '2026-04-20 04:00:00'),
+(1571, 'N1294/26', 'SAAD KOUSSAIM', '', 'CIN', 'BW12604', 9300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1294/26\nColor: BLEU CH\nSheet: 1294,26 C50 NEW RIM BLEU CH(1', '', NULL, NULL, NULL, '2026-04-20 04:00:00', '2026-04-20 04:00:00'),
+(1572, 'N1295/26', 'HADDAOUI LAMAACHI', '', 'CIN', 'BK68681', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1295/26\nColor: Noir BRILLANT\nSheet: 1295,26 BECANE33 NR  (2)', '', NULL, NULL, NULL, '2026-04-21 04:00:00', '2026-04-21 04:00:00'),
+(1573, 'N1296/26', '', '', 'CIN', '', 10800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1296/26\nColor: PISTACH\nSheet: 1296,26 C50 FD PISTACH (4)', '', NULL, NULL, NULL, '2026-04-21 04:00:00', '2026-04-21 04:00:00'),
+(1574, 'N1297/26', 'ZOUHAIR REHIOUI', '', 'CIN', 'BW55991', 10800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1297/26\nColor: GOLD\nSheet: 1297,26 C50 FDM GOLD(9)', '', NULL, NULL, NULL, '2026-04-21 04:00:00', '2026-04-21 04:00:00'),
+(1575, 'N1298/26', 'RADOUANE LECHHEB', '', 'CIN', 'Y273262', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1298/26\nColor: NOIR BRILLIANT\nSheet: 1298,26 BECANESH  (4)', '', NULL, NULL, NULL, '2026-04-24 04:00:00', '2026-04-24 04:00:00'),
+(1576, 'N1299/26', 'MOUAD GOUCHGACHE', '', 'CIN', 'BW68653', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1299/26\nColor: Noir BRILLANT\nSheet: 1299,26 BECANE33 ET ANC  (1)', '', NULL, NULL, NULL, '2026-04-24 04:00:00', '2026-04-24 04:00:00'),
+(1577, 'N1301/26', 'MOUNIR MANSOURI', '', 'CIN', 'PP806651', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1301/26\nColor: GRIS MATE\nSheet: 1301,26 BECANEVALENTI S  (1)', '', NULL, NULL, NULL, '2026-04-25 04:00:00', '2026-04-25 04:00:00'),
+(1578, 'N1302/26', 'ABDELJALIL JELOUANE', '', 'CIN', 'BK519654', 10800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1302/26\nColor: GOLD\nSheet: 1302,26 C50 FDM GOLD(10)', '', NULL, NULL, NULL, '2026-04-25 04:00:00', '2026-04-25 04:00:00'),
+(1579, 'N1303/26', 'MOHAMED MSAHLY', '', 'CIN', 'BW37796', 9300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1303/26\nColor: BLEU CH\nSheet: 1303,26 C50 NEW RIM BLEU CH(1)', '', NULL, NULL, NULL, '2026-04-25 04:00:00', '2026-04-25 04:00:00'),
+(1580, 'N1304/26', 'YASSINE AMANE', '', 'CIN', 'BW66174', 9300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1304/26\nColor: BLEU CH\nSheet: 1304,26 C50 NEW RIM BLEU CH (2)', '', NULL, NULL, NULL, '2026-04-26 04:00:00', '2026-04-26 04:00:00'),
+(1581, 'N1305/26', 'ABDELALI FATIH', '', 'CIN', 'BW60132', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1305/26\nColor: Noir BRILLANT\nSheet: 1305,26 BECANE33 NR  (3)', '', NULL, NULL, NULL, '2026-04-26 04:00:00', '2026-04-26 04:00:00'),
+(1582, 'N1306/26', 'HAMZA IHYA', '', 'CIN', 'EB216551', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1306/26\nColor: Noir BRILLANT\nSheet: 1306,26 BECANE33 ET ANC  (2)', '', NULL, NULL, NULL, '2026-04-27 04:00:00', '2026-04-27 04:00:00'),
+(1583, 'N1307/26', '', '', 'CIN', '', 10800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1307/26\nColor: PISTACH\nSheet: 1307,26 C50 FD PISTACH (5)', '', NULL, NULL, NULL, '2026-04-28 04:00:00', '2026-04-28 04:00:00'),
+(1584, 'N1308/26', 'BILAL ERRAZY', '', 'CIN', 'M703308', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1308/26\nColor: Noir BRILLANT\nSheet: 1308,26 BECANE33 ET ANC  (3)', '', NULL, NULL, NULL, '2026-04-28 04:00:00', '2026-04-28 04:00:00'),
+(1585, 'N1309/26', 'ABDELALI ABOUSSAAD', '', 'CIN', 'BW52480', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1309/26\nColor: Noir BRILLANT\nSheet: 1309,26 BECANE33 NR  (4)', '', NULL, NULL, NULL, '2026-04-30 04:00:00', '2026-04-30 04:00:00');
+INSERT INTO `chassis_orders` (`id`, `order_number`, `customer_name`, `customer_phone`, `doc_type`, `doc_number`, `total_price`, `discount`, `tva`, `status`, `user_id`, `store_id`, `notes`, `comment`, `signature`, `signed_at`, `signed_by`, `created_at`, `updated_at`) VALUES
+(1586, 'N1310/26', 'YOUSSEF EZZOURI', '', 'CIN', 'BK403824', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1310/26\nColor: ROUGE CH\nSheet: 1310,26 C50 NEW RIM ROUGE CH(1)', '', NULL, NULL, NULL, '2026-04-30 04:00:00', '2026-04-30 04:00:00'),
+(1587, 'N1311/26', 'LAHCEN EL-KHLIFI', '', 'CIN', 'JC404972', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1311/26\nColor: GRIS NARDO\nSheet: 1311,26 SH DAYTONA  (9)', '', NULL, NULL, NULL, '2026-05-01 04:00:00', '2026-05-01 04:00:00'),
+(1588, 'N1312/26', 'IBRAHIM RANIM', '', 'CIN', 'BF40676', 12800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1312/26\nColor: Noir BRILLANT\nSheet: 1312,26 BECANE33 ET ANC  (4)', '', NULL, NULL, NULL, '2026-05-01 04:00:00', '2026-05-01 04:00:00'),
+(1589, 'N1313/26', 'ADAM SAKOUK', '', 'CIN', 'AE333534', 10800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1313/26\nColor: GOLD\nSheet: 1313,26 C50 FDM GOLD BAT (10)', '', NULL, NULL, NULL, '2026-05-01 04:00:00', '2026-05-01 04:00:00'),
+(1590, 'N1314/26', '', '', 'CIN', '', 9500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1314/26\nColor: GRIS\nSheet: 1314,26 C50 GRIS DIG (4)', '', NULL, NULL, NULL, '2026-05-01 04:00:00', '2026-05-01 04:00:00'),
+(1591, 'N1316/26', 'AYOUB EL HAJJI', '', 'CIN', 'H496431', 20300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1316/26\nColor: NOIR MATTE\nSheet: 1316,26 QJ TX200 (1)', '', NULL, NULL, NULL, '2026-05-04 04:00:00', '2026-05-04 04:00:00'),
+(1592, 'N1317/26', 'ANOUAR CHAHBOUNI', '', 'CIN', 'ZT178506', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1317/26\nColor: GRIS NARDO\nSheet: 1317,26 SH DAYTONA  (10)', '', NULL, NULL, NULL, '2026-05-04 04:00:00', '2026-05-04 04:00:00'),
+(1593, 'N1318/26', 'IMANE MAOUSSOU', '', 'CIN', 'EE602961', 20600.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1318/26\nColor: GRIS NARDO\nSheet: 1318,26 BECANEXADV (1)', '', NULL, NULL, NULL, '2026-05-05 04:00:00', '2026-05-05 04:00:00'),
+(1594, 'N1319/26', 'SOUFIANE BENGHANOU', '', 'CIN', 'BK260495', 12700.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1319/26\nColor: Noir BRILLANT\nSheet: 1319,26 BECANE33 ET ANC  (5)', '', NULL, NULL, NULL, '2026-05-06 04:00:00', '2026-05-06 04:00:00'),
+(1595, 'N1321/26', 'ABDELALI SADIK', '', 'CIN', 'BK514205', 9400.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1321/26\nColor: BLEU BAT\nSheet: 1321,26 C50 NEW RIM BLEU BAT(1)', '', NULL, NULL, NULL, '2026-05-07 04:00:00', '2026-05-07 04:00:00'),
+(1596, 'N1322/26', 'AHMED IDAROUICH', '', 'CIN', 'BE528079', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1322/26\nColor: \nSheet: 1322,26 GAMA N,B  (4)', '', NULL, NULL, NULL, '2026-05-08 04:00:00', '2026-05-08 04:00:00'),
+(1597, 'N1323/26', 'YOUNES MOURCHID', '', 'CIN', 'BW21806', 9400.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1323/26\nColor: BLEU CH\nSheet: 1323,26 C50 NEW RIM BLEU CH (3)', '', NULL, NULL, NULL, '2026-05-08 04:00:00', '2026-05-08 04:00:00'),
+(1598, 'N1325/26', 'SAID EL MEKKAOUI', '', 'CIN', 'GA137437', 12900.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1325/26\nColor: NOIR BRILLIANT\nSheet: 1325,26 BECANE SH  (5)', '', NULL, NULL, NULL, '2026-05-08 04:00:00', '2026-05-08 04:00:00'),
+(1599, 'N1326/26', 'ABDESSADEK SAIDI', '', 'CIN', 'BW80025', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1326/26\nColor: Noir BRILLANT\nSheet: 1326,26 BECANE33 NR  (5)', '', NULL, NULL, NULL, '2026-05-08 04:00:00', '2026-05-08 04:00:00'),
+(1600, 'N1327/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1327/26\nColor: \nSheet: 1327,26 BEC FLORANCE (1)', '', NULL, NULL, NULL, '2026-07-27 14:01:46', '2026-07-27 14:01:46'),
+(1601, 'N1328/26', 'MOHAMED SEMRANE', '', 'CIN', 'BW77655', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1328/26\nColor: NOIR BRILLANT\nSheet: 1328,26 KYMCO AGILITY(1)', '', NULL, NULL, NULL, '2026-05-09 04:00:00', '2026-05-09 04:00:00'),
+(1602, 'N1329/26', 'ACHRAF BACHAR', '', 'CIN', 'BK508790', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1329/26\nColor: NOIR  BRILLANT\nSheet: 1329,26 BECANEVALENTI S  (2)', '', NULL, NULL, NULL, '2026-05-09 04:00:00', '2026-05-09 04:00:00'),
+(1603, 'N1330/26', 'LAHOUCINE AIT LAHCEN', '', 'CIN', 'BW55376', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1330/26\nColor: MARON MATT\nSheet: 1330,26 BECANE33 NR NV   (3)', '', NULL, NULL, NULL, '2026-05-11 04:00:00', '2026-05-11 04:00:00'),
+(1604, 'N1331/26', 'YASSINE ESRAIDI', '', 'CIN', 'EA207692', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1331/26\nColor: BLEU CH\nSheet: 1331,26 C50 NEW RIM BLEU CH (3)', '', NULL, NULL, NULL, '2026-05-11 04:00:00', '2026-05-11 04:00:00'),
+(1605, 'N1332/26', 'MOHAMED FAKSY', '', 'CIN', 'BK44756', 9100.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1332/26\nColor: DIGITAL MATT\nSheet: 1332,26 C50 DIGITAL MATT (1)', '', NULL, NULL, NULL, '2026-05-11 04:00:00', '2026-05-11 04:00:00'),
+(1606, 'N1333/26', 'YOUSSEF LAADIMI', '', 'CIN', 'BH610465', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1333/26\nColor: NOIR BRILLANT\nSheet: 1333,26 KYMCO AGILITY(2)', '', NULL, NULL, NULL, '2026-05-13 04:00:00', '2026-05-13 04:00:00'),
+(1607, 'N1334/26', 'HAFIDA ENNAJI', '', 'CIN', 'BK401793', 24000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1334/26\nColor: NOIR MATE\nSheet: 1334,26 BECANEXADV200 (1)', '', NULL, NULL, NULL, '2026-05-13 04:00:00', '2026-05-13 04:00:00'),
+(1608, 'N1335/26', '', '', 'CIN', '', 9500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1335/26\nColor: BLEU\nSheet: 1335,26 C50 NEW RIM BLEU BAT(8)', '', NULL, NULL, NULL, '2026-05-17 04:00:00', '2026-05-17 04:00:00'),
+(1609, 'N1336/26', 'RACHID EL MOUJAHID', '', 'CIN', 'WA288017', 12700.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1336/26\nColor: Noir BRILLANT\nSheet: 1336,26 BECANE33 ET ANC  (6)', '', NULL, NULL, NULL, '2026-05-17 04:00:00', '2026-05-17 04:00:00'),
+(1610, 'N1337/26', '', '', 'CIN', '', 9200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1337/26\nColor: GRIS\nSheet: 1337,26 C50 GRIS DIG (5)', '', NULL, NULL, NULL, '2026-05-18 04:00:00', '2026-05-18 04:00:00'),
+(1611, 'N1339/26', 'RABII RAMY', '', 'CIN', 'BL82222', 12700.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1339/26\nColor: Noir BRILLANT\nSheet: 1339,26 BECANE33 MK (1)', '', NULL, NULL, NULL, '2026-05-19 04:00:00', '2026-05-19 04:00:00'),
+(1612, 'N1340/26', 'BTP BUILDING MANAGEMENT SARL', '', 'CIN', 'RC573113', 12700.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1340/26\nColor: BEIGE MAT\nSheet: 1340,26 SH DAYTONA  (11)', '', NULL, NULL, NULL, '2026-05-19 04:00:00', '2026-05-19 04:00:00'),
+(1613, 'N1341/26', 'YOUSSEF EL ALLAM', '', 'CIN', 'CD300854', 12700.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1341/26\nColor: GRIS NARDO\nSheet: 1341,26 SH DAYTONA  (12)', '', NULL, NULL, NULL, '2026-05-19 04:00:00', '2026-05-19 04:00:00'),
+(1614, 'N1342/26', 'ABDELTIF HARAKAT', '', 'CIN', 'BH365517', 9500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1342/26\nColor: Noir\nSheet: 1342,26 Cooper RS (5)', '', NULL, NULL, NULL, '2026-05-19 04:00:00', '2026-05-19 04:00:00'),
+(1615, 'N1343/26', 'SAAD ZAHARI', '', 'CIN', 'BW72779', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1343/26\nColor: Noir BRILLANT\nSheet: 1343,26 BECANE33 NR  (6)', '', NULL, NULL, NULL, '2026-05-21 04:00:00', '2026-05-21 04:00:00'),
+(1616, 'N1344/26', 'RIAD MERABET', '', 'CIN', 'PS810218', 25000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1344/26\nColor: GRIS NARDO\nSheet: 1344,26 BECANEXADV200 (2)', '', NULL, NULL, NULL, '2026-05-21 04:00:00', '2026-05-21 04:00:00'),
+(1617, 'N1345/26', 'ISSAM AMAKRANE', '', 'CIN', 'BW61588', 9500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1345/26\nColor: BLEU CH\nSheet: 1345,26 C50 NEW RIM BLEU CH (3)', '', NULL, NULL, NULL, '2026-05-21 04:00:00', '2026-05-21 04:00:00'),
+(1618, 'N1346/26', 'OUSSAMA MAKHLOUFI', '', 'CIN', 'BW17701', 9500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1346/26\nColor: BLEU BAT\nSheet: 1346,26 C50 NEW RIM BLEU BAT(2)', '', NULL, NULL, NULL, '2026-05-21 04:00:00', '2026-05-21 04:00:00'),
+(1619, 'N1347/26', 'MOUAAD EZZAID', '', 'CIN', 'BW32369', 9500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1347/26\nColor: BLEU BAT\nSheet: 1347,26 C50 NEW RIM BLEU BAT(3)', '', NULL, NULL, NULL, '2026-05-21 04:00:00', '2026-05-21 04:00:00'),
+(1620, 'N1348/26', 'JEAN PAUL BARNABE SENE', '', 'CIN', 'BW05088N', 12700.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1348/26\nColor: BRONZE MATT\nSheet: 1348,26 SH DAYTONA  (13)', '', NULL, NULL, NULL, '2026-05-22 04:00:00', '2026-05-22 04:00:00'),
+(1621, 'N1349/26', 'IMAD ASSID', '', 'CIN', 'BK518368', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1349/26\nColor: NOIR BRILLANT\nSheet: 1349,26 KYMCO AGILITY(2)', '', NULL, NULL, NULL, '2026-05-23 04:00:00', '2026-05-23 04:00:00'),
+(1622, 'N1350/26', '', '', 'CIN', '', 33000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1350/25\nColor: NOIR BRONZE\nSheet: 1350,26 NHT200(1)', '', NULL, NULL, NULL, '2026-05-23 04:00:00', '2026-05-23 04:00:00'),
+(1623, 'N1351/26', 'HAMZA OMARI', '', 'CIN', 'MC327440', 9500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1351/26\nColor: BLEU BAT\nSheet: 1351,26 C50 NEW RIM BLEU BAT(4)', '', NULL, NULL, NULL, '2026-05-23 04:00:00', '2026-05-23 04:00:00'),
+(1624, 'N1352/26', 'HOUCINE ABOUSSAID', '', 'CIN', 'J291881', 13500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1352/26\nColor: GRIS BEIGE\nSheet: 1352,26 BECANER9 (2)', '', NULL, NULL, NULL, '2026-05-23 04:00:00', '2026-05-23 04:00:00'),
+(1625, 'N1353/26', 'ABDOULAZIZ DIENG', '', 'CIN', 'BW04861S', 12800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1353/26\nColor: Noir BRILLANT\nSheet: 1353,26 BECANE33 MK (2)', '', NULL, NULL, NULL, '2026-05-23 04:00:00', '2026-05-23 04:00:00'),
+(1626, 'N1354/26', 'OUSSAMA BELLAANAYA BW', '', 'CIN', '67020', 17500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1354/26\nColor: Gris Nardo\nSheet: 1354,26 SYM SUNPHONY S(1)', '', NULL, NULL, NULL, '2026-05-25 04:00:00', '2026-05-25 04:00:00'),
+(1627, 'N1355/26', 'ABDELMAJID BOUMLIK', '', 'CIN', 'JC42151', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1355/26\nColor: \nSheet: 1355,26 GAMA N,B ( 1)', '', NULL, NULL, NULL, '2026-05-25 04:00:00', '2026-05-25 04:00:00'),
+(1628, 'N1356/26', 'MONDE D\'USINAGE RC', '', 'CIN', '311805', 25000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1356/26\nColor: GRIS BEIGE\nSheet: 1356,26 BECANEXADV200 (3)', '', NULL, NULL, NULL, '2026-05-25 04:00:00', '2026-05-25 04:00:00'),
+(1629, 'N1357/26', 'YOUSSEF NOUSAIR', '', 'CIN', 'BK193153', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1357/26\nColor: NOIR\nSheet: 1357,26 BECANE29(3)', '', NULL, NULL, NULL, '2026-05-25 04:00:00', '2026-05-25 04:00:00'),
+(1630, 'N1358/26', 'HAMZA RIZKI', '', 'CIN', 'BW94061', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1358/26\nColor: Noir BRILLANT\nSheet: 1358,26 BECANE33 NR  (1)', '', NULL, NULL, NULL, '2026-05-26 04:00:00', '2026-05-26 04:00:00'),
+(1631, 'N1359/26', 'ABDELLAH BOUDIH', '', 'CIN', 'BW2491', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1359/26\nColor: Noir BRILLANT\nSheet: 1359,26 BECANE33 NR  (2)', '', NULL, NULL, NULL, '2026-05-26 04:00:00', '2026-05-26 04:00:00'),
+(1632, 'N1360/26', 'MOHAMED SAHNOUN', '', 'CIN', 'AD175269', 12700.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1360/26\nColor: NOIR BRILLANT\nSheet: 1360,26 SH DAYTONA  (14)', '', NULL, NULL, NULL, '2026-05-26 04:00:00', '2026-05-26 04:00:00'),
+(1633, 'N1361/26', 'AYOUB EL MAATAOUI', '', 'CIN', 'BK294621', 9500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1361/26\nColor: ROUGE CH\nSheet: 1361,26 C50 NEW RIM ROUGE CH(2)', '', NULL, NULL, NULL, '2026-05-29 04:00:00', '2026-05-29 04:00:00'),
+(1634, 'N1362/26', 'ILYAS BAKHTA', '', 'CIN', 'BB267499', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1362/26\nColor: Noir BRILLANT\nSheet: 1362,26 BECANESUPER CUB127  (1)', '', NULL, NULL, NULL, '2026-05-30 04:00:00', '2026-05-30 04:00:00'),
+(1635, 'N1363/26', 'SAID ASSOUAN', '', 'CIN', 'BW34927', 12800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1363/26\nColor: Noir BRILLANT\nSheet: 1363,26 BECANE33 NR  (3)', '', NULL, NULL, NULL, '2026-05-31 04:00:00', '2026-05-31 04:00:00'),
+(1636, 'N1364/26', 'SOUFIANE GOURIRANE', '', 'CIN', 'BW83097', 12800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1364/26\nColor: Noir BRILLANT\nSheet: 1364,26 BECANE33 NR  (4)', '', NULL, NULL, NULL, '2026-05-31 04:00:00', '2026-05-31 04:00:00'),
+(1637, 'N1365/26', 'EL MAHDI ALLOUCH', '', 'CIN', 'BW64570', 12800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1365/26\nColor: Noir BRILLANT\nSheet: 1365,26 BECANE33 NR  (5)', '', NULL, NULL, NULL, '2026-06-01 04:00:00', '2026-06-01 04:00:00'),
+(1638, 'N1366/26', '', '', 'CIN', '', 33000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1366/25\nColor: NOIR MAT\nSheet: 1366,26 NHT200(1)', '', NULL, NULL, NULL, '2026-06-01 04:00:00', '2026-06-01 04:00:00'),
+(1639, 'N1367/26', 'ISMAIL TAWRY', '', 'CIN', 'BK647787', 9600.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1367/26\nColor: DIGITAL MATT\nSheet: 1367,26 C50 DIGITAL MATT (2)', '', NULL, NULL, NULL, '2026-06-01 04:00:00', '2026-06-01 04:00:00'),
+(1640, 'N1368/26', 'FATIMA MOUKHTABIR', '', 'CIN', 'BL57788', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1368/26\nColor: GRIS BEIGE\nSheet: 1368,26 BECANE VALENTI   (1)', '', NULL, NULL, NULL, '2026-06-02 04:00:00', '2026-06-02 04:00:00'),
+(1641, 'N1370/26', 'ABDELLAH BENAZIZ', '', 'CIN', 'BW37177', 12800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1370/26\nColor: Noir BRILLANT\nSheet: 1370,26 BECANE33 NR  (6)', '', NULL, NULL, NULL, '2026-06-02 04:00:00', '2026-06-02 04:00:00'),
+(1642, 'N1371/26', 'SAID EZZOUAOUI', '', 'CIN', 'HA144139', 9500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1371/26\nColor: BLEU CH\nSheet: 1371,26 C50 NEW RIM BLEU CH (4)', '', NULL, NULL, NULL, '2026-06-03 04:00:00', '2026-06-03 04:00:00'),
+(1643, 'N1372/26', 'ABDELHADI LAOUINATE', '', 'CIN', 'M612878', 9500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1372/26\nColor: ROUGE CH\nSheet: 1372,26 C50 NEW RIM ROUGE CH(3)', '', NULL, NULL, NULL, '2026-06-03 04:00:00', '2026-06-03 04:00:00'),
+(1644, 'N1373/26', 'HIBA MOJAHID', '', 'CIN', 'BW73918', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1373/26\nColor: NOIR BRILLANT\nSheet: 1373,26 BECANE VALENTI   (2)', '', NULL, NULL, NULL, '2026-06-03 04:00:00', '2026-06-03 04:00:00'),
+(1645, 'N1375/26', 'CHAOUKI SOUMMAN', '', 'CIN', 'BW53714', 9500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1375/26\nColor: ROUGE CH\nSheet: 1375,26 C50 NEW RIM ROUGE CH(4)', '', NULL, NULL, NULL, '2026-06-03 04:00:00', '2026-06-03 04:00:00'),
+(1646, 'N1378/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1378/26\nColor: \nSheet: 1378,26 BEC FLORANCE (2)', '', NULL, NULL, NULL, '2026-07-27 14:01:52', '2026-07-27 14:01:52'),
+(1647, 'N1379/26', 'AL HAMD CAPITAL RC', '', 'CIN', '563521', 9800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1379/26\nColor: BLEU CH\nSheet: 1379,26 C50 NEW RIM BLEU CH (4)', '', NULL, NULL, NULL, '2026-06-04 04:00:00', '2026-06-04 04:00:00'),
+(1648, 'N1380/26', 'LAHCEN LOUBANE', '', 'CIN', 'BE792490', 12700.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1380/26\nColor: NOIR BRILLANT\nSheet: 1380,26 SH DAYTONA  (15)', '', NULL, NULL, NULL, '2026-06-05 04:00:00', '2026-06-05 04:00:00'),
+(1649, 'N1381/26', 'MOHAMED JAOULAL', '', 'CIN', 'BK52528', 9800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1381/26\nColor: BLEU CH\nSheet: 1381,26 C50 NEW RIM BLEU CH (1)', '', NULL, NULL, NULL, '2026-06-05 04:00:00', '2026-06-05 04:00:00'),
+(1650, 'N1382/26', 'SAFIETOU DIAGNE', '', 'CIN', 'BW06288N', 12700.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1382/26\nColor: NOIR MATT\nSheet: 1382,26 SH DAYTONA  (16)', '', NULL, NULL, NULL, '2026-06-05 04:00:00', '2026-06-05 04:00:00'),
+(1651, 'N1383/26', 'SAID ID AHMED JB', '', 'CIN', '183450', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1383/26\nColor: NOIR BRILLANT\nSheet: 1383,26 KYMCO AGILITY(3)', '', NULL, NULL, NULL, '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1652, 'N1384/26', 'OTHMANE FILIESSE', '', 'CIN', 'BL166656', 17500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1384/26\nColor: NOIR\nSheet: 1384,26 SYM SUNPHONY S(1)', '', NULL, NULL, NULL, '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1653, 'N1385/26', 'FADOUA EL OUARDI', '', 'CIN', 'BW24301', 10000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1385/26\nColor: NOIR MATT\nSheet: 1385,26 SIROCCO X(1)', '', NULL, NULL, NULL, '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1654, 'N1386/26', 'MOHAMED IDBLAL', '', 'CIN', 'BW78695', 12800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1386/26\nColor: Noir BRILLANT\nSheet: 1386,26 BECANE33 MK (3)', '', NULL, NULL, NULL, '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1655, 'N1387/26', 'AYA LAAUIJA', '', 'CIN', 'BW46174', 9000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1387/26\nColor: Gris METAL\nSheet: 1387,26 BECANEvalenti(5)', '', NULL, NULL, NULL, '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1656, 'N1388/26', 'MOHAMMED SAHIL', '', 'CIN', 'W500881', 9500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1388/26\nColor: DIGITAL MATT\nSheet: 1388,26 C50 DIGITAL MATT (3)', '', NULL, NULL, NULL, '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1657, 'N1389/26', 'BADREDDINE MESKELINDI', '', 'CIN', 'BK779947', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1389/26\nColor: BLEU BAT\nSheet: 1389,26 C50 FD BLEU  (1)', '', NULL, NULL, NULL, '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1658, 'N1390/26', 'YASSINE MECHBAL', '', 'CIN', 'WA323549', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1390/26\nColor: PISTACHE BAT\nSheet: 1390,26 C50 FD PISTACH (1)', '', NULL, NULL, NULL, '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1659, 'N1391/26', 'ENWAOUI TARIK', '', 'CIN', 'WA342057', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1391/26\nColor: BLEU BAT\nSheet: 1391,26 C50 FD BLEU  (2)', '', NULL, NULL, NULL, '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1660, 'N1392/26', 'BIHI EL MOUDDEN', '', 'CIN', 'WA60988', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1392/26\nColor: NOIR\nSheet: 1392,26 DOCKER MILANO(1)', '', NULL, NULL, NULL, '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1661, 'N1393/26', 'ABDELKRIM HAMDOUNE', '', 'CIN', 'B573769', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1393/26\nColor: GRIS MAT\nSheet: 1393,26 KYMCO AGILITY(4)', '', NULL, NULL, NULL, '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1662, 'N1394/26', 'YASSIN RAHMOUNE', '', 'CIN', 'BK523268', 9800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1394/26\nColor: BLEU CH\nSheet: 1394,26 C50 NEW RIM BLEU CH (2)', '', NULL, NULL, NULL, '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1663, 'N1395/26', 'SAID EL HAIKI', '', 'CIN', 'GM164564', 9800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1395/26\nColor: BLEU CH\nSheet: 1395,26 C50 NEW RIM BLEU CH (5)', '', NULL, NULL, NULL, '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1664, 'N1396/26', 'MOHAMED CHERGAN', '', 'CIN', 'WA292477', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1396/26\nColor: GRIS NARDO\nSheet: 1396,26 C50 FD GRIS NARDO  (1)', '', NULL, NULL, NULL, '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1665, 'N1397/26', 'MOURAD HAJJOUBI', '', 'CIN', 'WA190706', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1397/26\nColor: NOIR\nSheet: 1397,26 C100', '', NULL, NULL, NULL, '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1666, 'N1398/26', 'MOHAMED DAMINE EL HOUARI', '', 'CIN', 'BK684617', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1398/26\nColor: GRIS NARDO\nSheet: 1398,26 C50 FD GRIS NARDO  (2)', '', NULL, NULL, NULL, '2026-06-07 04:00:00', '2026-06-07 04:00:00'),
+(1667, 'N1399/26', 'SAAD HAMID', '', 'CIN', 'BK667137', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1399/26\nColor: GRIS NARDO\nSheet: 1399,26 C50 FD GRIS NARDO  (3)', '', NULL, NULL, NULL, '2026-06-07 04:00:00', '2026-06-07 04:00:00'),
+(1668, 'N1400/26', 'HASSANE AZHARI', '', 'CIN', 'BH300567', 12700.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1400/26\nColor: Noir BRILLANT\nSheet: 1400,26 BECANE33 ET ANC  (7)', '', NULL, NULL, NULL, '2026-06-07 04:00:00', '2026-06-07 04:00:00'),
+(1669, 'N1401/26', 'OTHMANE CHAKIK', '', 'CIN', 'BW10898', 15400.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1401/26\nColor: GRIS FONCE\nSheet: 1401,26 MIRO (1)', '', NULL, NULL, NULL, '2026-06-08 04:00:00', '2026-06-08 04:00:00'),
+(1670, 'N1402/26', 'AYMEN BENAMARA', '', 'CIN', 'BW79477', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1402/26\nColor: BLEU BAT\nSheet: 1402,26 C50 FD BLEU  (3)', '', NULL, NULL, NULL, '2026-06-08 04:00:00', '2026-06-08 04:00:00'),
+(1671, 'N1403/26', 'MUSTAPHA EL GHICHA', '', 'CIN', 'WB150433', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1403/26\nColor: BLEU BAT\nSheet: 1403,26 C50 FD BLEU  (4)', '', NULL, NULL, NULL, '2026-06-08 04:00:00', '2026-06-08 04:00:00'),
+(1672, 'N1404/26', 'YOUSSEF HIMAME', '', 'CIN', 'BK501858', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1404/26\nColor: Noir BRILLANT\nSheet: 1404,26 BECANE33 MK (4)', '', NULL, NULL, NULL, '2026-06-09 04:00:00', '2026-06-09 04:00:00'),
+(1673, 'N1405/26', 'IMAD BADRE', '', 'CIN', 'BW65894', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1405/26\nColor: BLEU BAT\nSheet: 1405,26 C50 FD BLEU  (5)', '', NULL, NULL, NULL, '2026-06-09 04:00:00', '2026-06-09 04:00:00'),
+(1674, 'N1406/26', 'ABDERRAHIM MALLAH', '', 'CIN', 'B220264', 12800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1406/26\nColor: Noir BRILLANT\nSheet: 1406,26 BECANE33 ET ANC  (8)', '', NULL, NULL, NULL, '2026-06-09 04:00:00', '2026-06-09 04:00:00'),
+(1675, 'N1407/26', 'ABDELAZIZ JAWAR', '', 'CIN', 'BK78583', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1407/26\nColor: BLEU BAT\nSheet: 1407,26 C50 FD BLEU  (6)', '', NULL, NULL, NULL, '2026-06-09 04:00:00', '2026-06-09 04:00:00'),
+(1676, 'N1408/26', 'BRAHIM SAFIR', '', 'CIN', 'PA262130', 12000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1408/26\nColor: NOIR MATT\nSheet: 1408,26 SH DAYTONA  (17)', '', NULL, NULL, NULL, '2026-06-09 04:00:00', '2026-06-09 04:00:00'),
+(1677, 'N1409/26', 'MILOUDA BASSOU', '', 'CIN', 'HH168229', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1409/26\nColor: BLEU BAT\nSheet: 1409,26 C50 FD BLEU  (7)', '', NULL, NULL, NULL, '2026-06-09 04:00:00', '2026-06-09 04:00:00'),
+(1678, 'N1410/26', 'AYMAN ACHTOUBA', '', 'CIN', 'BW76948', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1410/26\nColor: GRIS NARDO\nSheet: 1410,26 C50 FD GRIS NARDO  (4)', '', NULL, NULL, NULL, '2026-06-10 04:00:00', '2026-06-10 04:00:00'),
+(1679, 'N1411/26', 'MOHAMED MAKHKH', '', 'CIN', 'BW84784', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1411/26\nColor: BLEU BAT\nSheet: 1411,26 C50 FD BLEU  (8)', '', NULL, NULL, NULL, '2026-06-10 04:00:00', '2026-06-10 04:00:00'),
+(1680, 'N1412/26', 'YASSINE ZAKANI', '', 'CIN', 'BW12698', 12900.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1412/26\nColor: Noir BRILLANT\nSheet: 1412,26 BECANE33 ET ANC  (9)', '', NULL, NULL, NULL, '2026-06-10 04:00:00', '2026-06-10 04:00:00'),
+(1681, 'N1413/26', 'AYOUB CHEMAKHI', '', 'CIN', 'BK706988', 9600.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1413/26\nColor: DIGITAL MATT\nSheet: 1413,26 C50 DIGITAL MATT (4)', '', NULL, NULL, NULL, '2026-06-11 04:00:00', '2026-06-11 04:00:00'),
+(1682, 'N1414/26', 'ZAHIR OUICHAH', '', 'CIN', 'IE49642', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1414/26\nColor: VERT MAT\nSheet: 1414,26 BECANE33 NR NV   (4)', '', NULL, NULL, NULL, '2026-06-11 04:00:00', '2026-06-11 04:00:00'),
+(1683, 'N1415/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1415/26\nColor: \nSheet: 1415,26 BEC FLORANCE (3)', '', NULL, NULL, NULL, '2026-07-27 14:01:57', '2026-07-27 14:01:57'),
+(1684, 'N1416/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1416/26\nColor: \nSheet: 1416,26 BEC FLORANCE (4)', '', NULL, NULL, NULL, '2026-07-27 14:01:57', '2026-07-27 14:01:57'),
+(1685, 'N1418/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1418/26\nColor: \nSheet: 1418,26 BEC FLORANCE (1)', '', NULL, NULL, NULL, '2026-07-27 14:01:57', '2026-07-27 14:01:57'),
+(1686, 'N1419/26', 'MOUHCINE ES.SAMENE', '', 'CIN', 'BW29827', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1419/26\nColor: Noir BRILLANT\nSheet: 1419,26 BECANE33 ET ANC  (11)', '', NULL, NULL, NULL, '2026-06-13 04:00:00', '2026-06-13 04:00:00'),
+(1687, 'N1420/26', 'MUSTAPHA EL TARGHI', '', 'CIN', 'BW77803', 12900.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1420/26\nColor: Noir BRILLANT\nSheet: 1420,26 BECANE33 ET ANC  (12)', '', NULL, NULL, NULL, '2026-06-13 04:00:00', '2026-06-13 04:00:00'),
+(1688, 'N1421/26', 'ISMAIL DAOUI WA', '', 'CIN', '318890', 9800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1421/26\nColor: BLEU CH\nSheet: 1421,26 C50 NEW RIM BLEU CH (3)', '', NULL, NULL, NULL, '2026-06-14 04:00:00', '2026-06-14 04:00:00'),
+(1689, 'N1422/26', 'DRISS LAHDYI', '', 'CIN', 'WA258439', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1422/26\nColor: BLEU BAT\nSheet: 1422,26 C50 FD BLEU  (9)', '', NULL, NULL, NULL, '2026-06-15 04:00:00', '2026-06-15 04:00:00'),
+(1690, 'N1423/26', 'HAMID MOUKID', '', 'CIN', 'BW72863', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1423/26\nColor: NOIR\nSheet: 1423,26 C100 (1)', '', NULL, NULL, NULL, '2026-06-15 04:00:00', '2026-06-15 04:00:00'),
+(1691, 'N1424/26', 'YASSINE FADEL', '', 'CIN', 'BK738806', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1424/26\nColor: BLEU BAT\nSheet: 1424,26 C50 FD BLEU  (10)', '', NULL, NULL, NULL, '2026-06-15 04:00:00', '2026-06-15 04:00:00'),
+(1692, 'N1425/26', 'AMINE EL GHALBI', '', 'CIN', 'BW73532', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1425/26\nColor: BLEU BAT\nSheet: 1425,26 C50 FD BLEU  (11)', '', NULL, NULL, NULL, '2026-06-15 04:00:00', '2026-06-15 04:00:00'),
+(1693, 'N1426/26', '', '', 'CIN', '', 9600.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1426/26\nColor: BLEU BAT\nSheet: 1426,26 C50 RIM BLEU BAT(15)', '', NULL, NULL, NULL, '2026-06-15 04:00:00', '2026-06-15 04:00:00'),
+(1694, 'N1427/26', 'HAMZA ANOIR ELYAKINE', '', 'CIN', 'EA198773', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1427/26\nColor: Noir BRILLANT\nSheet: 1427,26 BECANE33 ET ANC  (13)', '', NULL, NULL, NULL, '2026-06-15 04:00:00', '2026-06-15 04:00:00'),
+(1695, 'N1428/26', 'WORK TECH MAROC RC', '', 'CIN', '472893', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1428/26\nColor: Noir BRILLANT\nSheet: 1428,26 BECANE33 ET ANC  (14)', '', NULL, NULL, NULL, '2026-06-15 04:00:00', '2026-06-15 04:00:00'),
+(1696, 'N1429/26', 'LAHCEN TAJANI', '', 'CIN', 'HH2583', 16000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1429/26\nColor: GRIS\nSheet: 1429,26 BECANE NEYMAR(1)', '', NULL, NULL, NULL, '2026-06-16 04:00:00', '2026-06-16 04:00:00'),
+(1697, 'N1430/26', 'ILYASS MOUMNI', '', 'CIN', 'BW49045', 10000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1430/26\nColor: BLEU BAT\nSheet: 1430,26 C50 NEW RIM BLEU BAT(5)', '', NULL, NULL, NULL, '2026-06-16 04:00:00', '2026-06-16 04:00:00'),
+(1698, 'N1431/26', 'SIPITEX', '', 'CIN', 'RC115013', 9500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1431/26\nColor: BLEU CH\nSheet: 1431,26 C50 NEW RIM BLEU CH (1)', '', NULL, NULL, NULL, '2026-06-16 04:00:00', '2026-06-16 04:00:00'),
+(1699, 'N1432/26', 'ABDELALI M\'HINDAT', '', 'CIN', 'BK680999', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1432/26\nColor: Noir BRILLANT\nSheet: 1432,26 BECANESUPER CUB127  (2)', '', NULL, NULL, NULL, '2026-06-17 04:00:00', '2026-06-17 04:00:00'),
+(1700, 'N1433/26', 'MOHAMMED TAOUFIK', '', 'CIN', 'BL97947', 12000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1433/26\nColor: NOIR MATT\nSheet: 1433,26 SH DAYTONA  (18)', '', NULL, NULL, NULL, '2026-06-17 04:00:00', '2026-06-17 04:00:00'),
+(1701, 'N1434/26', 'AYMAN LACHAB', '', 'CIN', 'BW81959', 9800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1434/26\nColor: BLEU BAT\nSheet: 1434,26 C50 NEW RIM BLEU BAT(5)', '', NULL, NULL, NULL, '2026-06-17 04:00:00', '2026-06-17 04:00:00'),
+(1702, 'N1435/26', 'KARIM DAWAN', '', 'CIN', 'BK686909', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1435/26\nColor: Noir BRILLANT\nSheet: 1435,26 BECANE33 ET ANC OR (1)', '', NULL, NULL, NULL, '2026-06-17 04:00:00', '2026-06-17 04:00:00'),
+(1703, 'N1436/26', 'LAHBIB FAKRAN', '', 'CIN', 'IE21872', 9800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1436/26\nColor: BLEU CH\nSheet: 1436,26 C50 NEW RIM BLEU CH (5)', '', NULL, NULL, NULL, '2026-06-17 04:00:00', '2026-06-17 04:00:00'),
+(1704, 'N1437/26', 'REDOUANE BENAICHA', '', 'CIN', 'WA97434', 12000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1437/26\nColor: NOIR MATT\nSheet: 1437,26 SH DAYTONA  (19)', '', NULL, NULL, NULL, '2026-06-17 04:00:00', '2026-06-17 04:00:00'),
+(1705, 'N1438/26', 'AYOUB ADERDOR', '', 'CIN', 'EC83758', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1438/26\nColor: BLEU BAT\nSheet: 1438,26 C50 FD BLEU BAT  (1)', '', NULL, NULL, NULL, '2026-06-18 04:00:00', '2026-06-18 04:00:00'),
+(1706, 'N1439/26', 'LHOUSSAINE AKOURROU', '', 'CIN', 'EB204305', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1439/26\nColor: PISTACHE BAT\nSheet: 1439,26 C50 FD PISTACH (2)', '', NULL, NULL, NULL, '2026-06-18 04:00:00', '2026-06-18 04:00:00'),
+(1707, 'N1440/26', 'EL HOUCINE AIT LAHOUSSAINE', '', 'CIN', 'JC584137', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1440/26\nColor: BLEU BAT\nSheet: 1440,26 C50 FD BLEU BAT  (2)', '', NULL, NULL, NULL, '2026-06-18 04:00:00', '2026-06-18 04:00:00'),
+(1708, 'N1441/26', 'ABDELHAK GAADA', '', 'CIN', 'BE19895', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1441/26\nColor: GRIS BEIGE\nSheet: 1441,26 BECANE29(4)', '', NULL, NULL, NULL, '2026-06-19 04:00:00', '2026-06-19 04:00:00'),
+(1709, 'N1442/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1442/26\nColor: \nSheet: 1442,26 BEC FLORANCE (2)', '', NULL, NULL, NULL, '2026-07-27 14:02:00', '2026-07-27 14:02:00'),
+(1710, 'N1443/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1443/26\nColor: \nSheet: 1443,26 BEC FLORANCE (5)', '', NULL, NULL, NULL, '2026-07-27 14:02:01', '2026-07-27 14:02:01'),
+(1711, 'N1444/26', 'ADAM TALBI', '', 'CIN', 'BW90957', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1444/26\nColor: Noir BRILLANT\nSheet: 1444,26 BECANE33 MK (5)', '', NULL, NULL, NULL, '2026-06-20 04:00:00', '2026-06-20 04:00:00'),
+(1712, 'N1445/26', 'OTHMANE BENJJI', '', 'CIN', 'BK695929', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1445/26\nColor: NOIR\nSheet: 1445,26 C100 (2)', '', NULL, NULL, NULL, '2026-06-20 04:00:00', '2026-06-20 04:00:00'),
+(1713, 'N1446/26', 'AYOUB EL KHAFIF', '', 'CIN', 'BK374813', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1446/26\nColor: GRIS NARDO BAT\nSheet: 1446,26 C50 FD GRIS NARDO BT(1)', '', NULL, NULL, NULL, '2026-06-20 04:00:00', '2026-06-20 04:00:00'),
+(1714, 'N1448/26', 'ABDELOUAHED EL MANSOURI', '', 'CIN', 'MC262400', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1448/26\nColor: BLEU BAT\nSheet: 1448,26 C50 FD BLEU  (12)', '', NULL, NULL, NULL, '2026-06-20 04:00:00', '2026-06-20 04:00:00'),
+(1715, 'N1449/26', 'ILYAS JAM BW', '', 'CIN', '94442', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1449/26\nColor: Noir BRILLANT\nSheet: 1449,26 BECANE33 ET ANC  (15)', '', NULL, NULL, NULL, '2026-06-21 04:00:00', '2026-06-21 04:00:00'),
+(1716, 'N1450/26', 'ABDELLAH YAFID', '', 'CIN', 'BW92555', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1450/26\nColor: Noir BRILLANT\nSheet: 1450,26 BECANE33 MK (6)', '', NULL, NULL, NULL, '2026-06-21 04:00:00', '2026-06-21 04:00:00'),
+(1717, 'N1451/26', 'ABDELLAH AIT BRAHIM', '', 'CIN', 'BK518281', 9800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1451/26\nColor: BLEU CH\nSheet: 1451,26 C50 NEW RIM BLEU CH (4)', '', NULL, NULL, NULL, '2026-06-22 04:00:00', '2026-06-22 04:00:00'),
+(1718, 'N1452/26', 'MOHAMED SABIR', '', 'CIN', 'BH651910', 9300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1452/26\nColor: DIGITAL MATT\nSheet: 1452,26 C50 DIGITAL MATT (5)', '', NULL, NULL, NULL, '2026-06-22 04:00:00', '2026-06-22 04:00:00'),
+(1719, 'N1454/26', 'SALAHEDDINE DAJJI', '', 'CIN', 'BK659019', 25000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1454/26\nColor: GRIS MATTE\nSheet: 1454,26 BECANE XADV200 (5)', '', NULL, NULL, NULL, '2026-06-22 04:00:00', '2026-06-22 04:00:00'),
+(1720, 'N1455/26', 'AYMANE ARFAOUI ZEGZOUTI', '', 'CIN', 'BW86275', 12500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1455/26\nColor: Noir BRILLANT\nSheet: 1455,26 BECANESUPER CUB127  (3)', '', NULL, NULL, NULL, '2026-06-23 04:00:00', '2026-06-23 04:00:00'),
+(1721, 'N1456/26', 'ROTACO SARL', '', 'CIN', 'RC104483', 13300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1456/26\nColor: GRIS BEIGE\nSheet: 1456,26 BECANER9 (1)', '', NULL, NULL, NULL, '2026-06-25 04:00:00', '2026-06-25 04:00:00'),
+(1722, 'N1457/26', 'ANAS FAHMI', '', 'CIN', 'BK678236', 12000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1457/26\nColor: NOIR MATT\nSheet: 1457,26 SH DAYTONA  (20)', '', NULL, NULL, NULL, '2026-06-25 04:00:00', '2026-06-25 04:00:00'),
+(1723, 'N1458/26', 'LARBI ANNIBA', '', 'CIN', 'BW44812', 13200.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1458/26\nColor: Noir BRILLANT\nSheet: 1458,26 BECANE33 NR  (7)', '', NULL, NULL, NULL, '2026-06-26 04:00:00', '2026-06-26 04:00:00'),
+(1724, 'N1460/26', 'AYMAN MAZZOU', '', 'CIN', 'BW88255', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1460/26\nColor: GRIS NARDO BAT\nSheet: 1460,26 C50 FD GRIS NARDO BT(2)', '', NULL, NULL, NULL, '2026-06-28 04:00:00', '2026-06-28 04:00:00'),
+(1725, 'N1461/26', 'OTHMANE DAWAT', '', 'CIN', 'BK504757', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1461/26\nColor: GRIS NARDO BAT\nSheet: 1461,26 C50 FD GRIS NARDO BT(3)', '', NULL, NULL, NULL, '2026-06-28 04:00:00', '2026-06-28 04:00:00'),
+(1726, 'N1462/26', 'ABDELAZIZ MHIRIJA', '', 'CIN', 'BJ29218', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1462/26\nColor: Noir BRILLANT\nSheet: 1462,26 BECANE33 NR  (7)', '', NULL, NULL, NULL, '2026-06-28 04:00:00', '2026-06-28 04:00:00'),
+(1727, 'N1463/26', 'LAHCEN EL BOUBAKRI', '', 'CIN', 'PB88064', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1463/26\nColor: GRIS NARDO BAT\nSheet: 1463,26 C50 FD GRIS NARDO BT(4)', '', NULL, NULL, NULL, '2026-06-29 04:00:00', '2026-06-29 04:00:00'),
+(1728, 'N1464/26', 'BELGACEM BOUBKAIR', '', 'CIN', 'BW7029', 9800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1464/26\nColor: BLEU CH\nSheet: 1464,26 C50 NEW RIM BLEU CH (5)', '', NULL, NULL, NULL, '2026-06-29 04:00:00', '2026-06-29 04:00:00'),
+(1729, 'N1465/26', 'IMAD TRIMACH', '', 'CIN', 'BE864542', 9800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1465/26\nColor: DIGITAL MATT\nSheet: 1465,26 C50 DIGITAL MATT (1)', '', NULL, NULL, NULL, '2026-06-29 04:00:00', '2026-06-29 04:00:00'),
+(1730, 'N1466/26', 'BRAHIM ANAJAR', '', 'CIN', 'BH623687', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1466/26\nColor: BLEU BAT\nSheet: 1466,26 C50 FD BLEU BAT  (3)', '', NULL, NULL, NULL, '2026-06-29 04:00:00', '2026-06-29 04:00:00'),
+(1731, 'N1467/26', 'NAOUFAL ELHAMI', '', 'CIN', 'BW33658', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1467/26\nColor: BLEU BAT\nSheet: 1467,26 C50 FD BLEU BAT  (4)', '', NULL, NULL, NULL, '2026-06-30 04:00:00', '2026-06-30 04:00:00'),
+(1732, 'N1468/26', 'ZAYNAB CHAJAY', '', 'CIN', 'JT54759', 9800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1468/26\nColor: DIGITAL MATT\nSheet: 1468,26 C50 DIGITAL MATT (2)', '', NULL, NULL, NULL, '2026-06-30 04:00:00', '2026-06-30 04:00:00'),
+(1733, 'N1469/26', 'MBAREK WAHMANE', '', 'CIN', 'BK526159', 9500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1469/26\nColor: NOIR\nSheet: 1469,26 SIROCCO X(1)', '', NULL, NULL, NULL, '2026-06-30 04:00:00', '2026-06-30 04:00:00'),
+(1734, 'N1470/26', '', '', 'CIN', '', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1470/26\nColor: ROUGE CH\nSheet: 1470,26 C50 NEW RIM ROUGE CH(1)', '', NULL, NULL, NULL, '2026-07-01 04:00:00', '2026-07-01 04:00:00'),
+(1735, 'N1471/26', 'PROCHI MAG', '', 'CIN', 'RC44829', 17500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1471/26\nColor: GRIS NARDO\nSheet: 1471,26 SYM STNEW Gris (1)', '', NULL, NULL, NULL, '2026-07-01 04:00:00', '2026-07-01 04:00:00'),
+(1736, 'N1472/26', 'TAHA EL FIL', '', 'CIN', 'BW61687', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1472/26\nColor: Noir BRILLANT\nSheet: 1472,26 BECANE33 NR  (8)', '', NULL, NULL, NULL, '2026-07-02 04:00:00', '2026-07-02 04:00:00'),
+(1737, 'N1473/26', 'OTHMAN AIT EL MOUDEN', '', 'CIN', 'BK517491', 13500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1473/26\nColor: GRIS NARDO\nSheet: 1473,26 WUBEN XMA  (1)', '', NULL, NULL, NULL, '2026-07-02 04:00:00', '2026-07-02 04:00:00'),
+(1738, 'N1474/26', 'RIDA EL HASNAOUI', '', 'CIN', 'JM103865', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1474/26\nColor: BLEU BAT\nSheet: 1474,26 C50 FD BLEU BAT  (5)', '', NULL, NULL, NULL, '2026-07-02 04:00:00', '2026-07-02 04:00:00'),
+(1739, 'N1475/26', 'PHARMACIE YANIS', '', 'CIN', 'RC416037', 13500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1475/26\nColor: NOIR MATE\nSheet: 1475,26 WUBEN XMA  (2)', '', NULL, NULL, NULL, '2026-07-03 04:00:00', '2026-07-03 04:00:00'),
+(1740, 'N1476/26', 'AYOUB EL MASSOUDI', '', 'CIN', 'BK684647', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1476/26\nColor: Noir BRILLANT\nSheet: 1476,26 BECANE33 ET ANC  (16)', '', NULL, NULL, NULL, '2026-07-03 04:00:00', '2026-07-03 04:00:00'),
+(1741, 'N1477/26', 'HICHAM BOUJBAR', '', 'CIN', 'BK276180', 12000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1477/26\nColor: NOIR BRILLANT\nSheet: 1477,26 SH DAYTONA  (1)', '', NULL, NULL, NULL, '2026-07-04 04:00:00', '2026-07-04 04:00:00'),
+(1742, 'N1478/26', 'AMINE BOUMAZZOUGH', '', 'CIN', 'BW63990', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1478/26\nColor: Noir BRILLANT\nSheet: 1478,26 BECANE33 ET ANC OR (2)', '', NULL, NULL, NULL, '2026-07-04 04:00:00', '2026-07-04 04:00:00'),
+(1743, 'N1479/26', 'AYOUB DRISSI', '', 'CIN', 'BM13400', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1479/26\nColor: Noir BRILLANT\nSheet: 1479,26 BECANE33 ET ANC  (17)', '', NULL, NULL, NULL, '2026-07-05 04:00:00', '2026-07-05 04:00:00'),
+(1744, 'N1480/26', 'ZAKARIA ERRAFII', '', 'CIN', 'BK701300', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1480/26\nColor: BLEU BAT\nSheet: 1480,26 C50 FD BLEU BAT  (6)', '', NULL, NULL, NULL, '2026-07-05 04:00:00', '2026-07-05 04:00:00'),
+(1745, 'N1481/26', 'WASSIM ANWIBA', '', 'CIN', 'BW54638', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1481/26\nColor: Noir BRILLANT\nSheet: 1481,26 BECANE33 ET ANC OR  (3)', '', NULL, NULL, NULL, '2026-07-05 04:00:00', '2026-07-05 04:00:00'),
+(1746, 'N1482/26', 'CHAFIK LOTFI', '', 'CIN', 'BK765791', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1482/26\nColor: BLEU BAT\nSheet: 1482,26 C50 FD BLEU BAT  (7)', '', NULL, NULL, NULL, '2026-07-06 04:00:00', '2026-07-06 04:00:00'),
+(1747, 'N1483/26', '', '', 'CIN', '', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1483/26\nColor: ROUGE CH\nSheet: 1483,26 C50 FD ROUGE BAT (2)', '', NULL, NULL, NULL, '2026-07-06 04:00:00', '2026-07-06 04:00:00'),
+(1748, 'N1485/26', 'SAID ID BRAHIM', '', 'CIN', 'JC591527', 16000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1485/26\nColor: GRIS MATE\nSheet: 1485,26 SH BECANE 50(1)', '', NULL, NULL, NULL, '2026-07-06 04:00:00', '2026-07-06 04:00:00'),
+(1749, 'N1487/26', 'YASSINE EL LOUZI', '', 'CIN', 'WA341974', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1487/26\nColor: Noir BRILLANT\nSheet: 1487,26 BECANE33 ET ANC OR  (4)', '', NULL, NULL, NULL, '2026-07-07 04:00:00', '2026-07-07 04:00:00'),
+(1750, 'N1488/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1488/26\nColor: \nSheet: 1488,26 BEC FLORANCE (6)', '', NULL, NULL, NULL, '2026-07-27 14:02:06', '2026-07-27 14:02:06'),
+(1751, 'N1489/26', 'ZOUHAIR JALDA', '', 'CIN', 'LB235899', 12250.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1489/26\nColor: GRIS BEIGE\nSheet: 1489,26 BECANE29(5)', '', NULL, NULL, NULL, '2026-07-07 04:00:00', '2026-07-07 04:00:00'),
+(1752, 'N1490/26', 'YOUSSEF EL MANSOURI', '', 'CIN', 'MC205901', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1490/26\nColor: PISTACHE BAT\nSheet: 1490,26 C50 FD PISTACH (3)', '', NULL, NULL, NULL, '2026-07-08 04:00:00', '2026-07-08 04:00:00'),
+(1753, 'N1491/26', 'YOUNES EL MAJDOULY', '', 'CIN', 'IE23508', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1491/26\nColor: BLEU BAT\nSheet: 1491,26 C50 FD BLEU BAT  (8)', '', NULL, NULL, NULL, '2026-07-09 04:00:00', '2026-07-09 04:00:00'),
+(1754, 'N1492/26', 'ABDERRAZZAK LASFAR', '', 'CIN', 'BK252615', 10300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1492/26\nColor: \nSheet: 1492,26 GAMA N,B (1)', '', NULL, NULL, NULL, '2026-07-09 04:00:00', '2026-07-09 04:00:00'),
+(1755, 'N1493/26', '', '', 'CIN', '', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1493/26\nColor: ROUGE BAT\nSheet: 1493,26 C50 FD ROUGE BAT (4)', '', NULL, NULL, NULL, '2026-07-09 04:00:00', '2026-07-09 04:00:00'),
+(1756, 'N1495/26', 'ABDENNABI TAHIRI', '', 'CIN', 'BK381113', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1495/26\nColor: PISTACHE BAT\nSheet: 1495,26 C50 FD PISTACH (4)', '', NULL, NULL, NULL, '2026-07-10 04:00:00', '2026-07-10 04:00:00'),
+(1757, 'N1496/26', 'YOUSSEF EL OUARDI', '', 'CIN', 'BW58568', 12800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1496/26\nColor: Noir BRILLANT\nSheet: 1496,26 BECANE33 ET ANC OR  (5)', '', NULL, NULL, NULL, '2026-07-10 04:00:00', '2026-07-10 04:00:00'),
+(1758, 'N1497/26', 'ABDELHAK EL BOUCHTI', '', 'CIN', 'BW3247', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1497/26\nColor: NOIR  BRILLANT\nSheet: 1497,26 BECANEVALENTI S  (5)', '', NULL, NULL, NULL, '2026-07-10 04:00:00', '2026-07-10 04:00:00'),
+(1759, 'N1498/26', 'NOUR EDDINE DIBICH', '', 'CIN', 'BW69016', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1498/26\nColor: BLEU BAT\nSheet: 1498,26 C50 FD BLEU BAT  (9)', '', NULL, NULL, NULL, '2026-07-10 04:00:00', '2026-07-10 04:00:00'),
+(1760, 'N1499/26', 'MOHAMED MOTAYA EA', '', 'CIN', '231128', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1499/26\nColor: Noir BRILLANT\nSheet: 1499,26 BECANE33 MK  (7)', '', NULL, NULL, NULL, '2026-07-10 04:00:00', '2026-07-10 04:00:00'),
+(1761, 'N1500/26', 'AMJAD LAASRI HA', '', 'CIN', '212287', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1500/26\nColor: Noir BRILLANT\nSheet: 1500,26 BECANE33 ET ANC OR (6)', '', NULL, NULL, NULL, '2026-07-10 04:00:00', '2026-07-10 04:00:00'),
+(1762, 'N1501/26', 'BRAHIM RAGBA', '', 'CIN', 'BE650367', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1501/26\nColor: BLEU BAT\nSheet: 1501,26 C50 FD BLEU BAT  (10)', '', NULL, NULL, NULL, '2026-07-11 04:00:00', '2026-07-11 04:00:00'),
+(1763, 'N1502/26', 'ISMAIL ARROUF', '', 'CIN', 'BW74400', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1502/26\nColor: Noir BRILLANT\nSheet: 1502,26 BECANE33  NR (9)', '', NULL, NULL, NULL, '2026-07-11 04:00:00', '2026-07-11 04:00:00'),
+(1764, 'N1503/26', 'AMINE EL MKARFAL BL', '', 'CIN', '102063', 9800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1503/26\nColor: ROUGE CH\nSheet: 1503,26 C50 NEW RIM ROUGE CH(4)', '', NULL, NULL, NULL, '2026-07-11 04:00:00', '2026-07-11 04:00:00'),
+(1765, 'N1504/26', 'AYOUB ANAJAR', '', 'CIN', 'BW77271', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1504/26\nColor: Noir BRILLANT\nSheet: 1504,26 BECANE33 ET ANC OR  (7)', '', NULL, NULL, NULL, '2026-07-11 04:00:00', '2026-07-11 04:00:00'),
+(1766, 'N1505/26', 'IMANE LARZA', '', 'CIN', 'BE797753', 14500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1505/26\nColor: NOIR /ROUGE\nSheet: 1505,26 BECANERVX  (2)', '', NULL, NULL, NULL, '2026-07-11 04:00:00', '2026-07-11 04:00:00'),
+(1767, 'N1507/26', 'MUSTAPHA BOUBARI', '', 'CIN', 'IC65957', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1507/26\nColor: BLEU BAT\nSheet: 1507,26 C50 FD BLEU BAT (11)', '', NULL, NULL, NULL, '2026-07-12 04:00:00', '2026-07-12 04:00:00'),
+(1768, 'N1508/26', 'MOHAMED EL MRABET', '', 'CIN', 'BL181545', 9800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1508/26\nColor: BLEU CH\nSheet: 1508,26 C50 NEW RIM BLEU CH (6)', '', NULL, NULL, NULL, '2026-07-13 04:00:00', '2026-07-13 04:00:00'),
+(1769, 'N1509/26', 'YOUSSEF TAISSIRE', '', 'CIN', 'BF19635', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1509/26\nColor: BLEU BAT\nSheet: 1509,26 C50 FD BLEU BAT  (12)', '', NULL, NULL, NULL, '2026-07-13 04:00:00', '2026-07-13 04:00:00'),
+(1770, 'N1511/26', 'HASSAN EL ADRAOUI', '', 'CIN', 'BJ363398', 16300.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1511/26\nColor: BLANC\nSheet: 1511,26 SH BECANE 50(2)', '', NULL, NULL, NULL, '2026-07-13 04:00:00', '2026-07-13 04:00:00'),
+(1771, 'N1512/26', 'FAISSAL HAJJAJI', '', 'CIN', 'WA151087', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1512/26\nColor: GRIS MAT\nSheet: 1512,26 KYMCO AGILITY(1)', '', NULL, NULL, NULL, '2026-07-13 04:00:00', '2026-07-13 04:00:00'),
+(1772, 'N1513/26', 'SOUHAIB JOUA', '', 'CIN', 'BW90497', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1513/26\nColor: BLEU BAT\nSheet: 1513,26 C50 FD BLEU BAT  (13)', '', NULL, NULL, NULL, '2026-07-14 04:00:00', '2026-07-14 04:00:00'),
+(1773, 'N1514/26', 'MOHAMED SAMI', '', 'CIN', 'BW55865', 16000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1514/26\nColor: VERT\nSheet: 1514,26 BECANE NEYMAR (1)', '', NULL, NULL, NULL, '2026-07-14 04:00:00', '2026-07-14 04:00:00'),
+(1774, 'N1516/26', 'ABDERRAHMANE CHAKROUN', '', 'CIN', 'BW55937', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1516/26\nColor: Noir BRILLANT\nSheet: 1516,26 BECANE33 ET ANC OR  (8)', '', NULL, NULL, NULL, '2026-07-14 04:00:00', '2026-07-14 04:00:00'),
+(1775, 'N1517/26', 'IMAD DOUIEB', '', 'CIN', 'BE868146', 19500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1517/26\nColor: Gris NARDO\nSheet: 1517,26 BECANE XMAX125  (1)', '', NULL, NULL, NULL, '2026-07-14 04:00:00', '2026-07-14 04:00:00'),
+(1776, 'N1518/26', 'OMAR GOUFRA BK', '', 'CIN', '303271', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1518/26\nColor: BLEU BAT\nSheet: 1518,26 C50 FD BLEU BAT  (14)', '', NULL, NULL, NULL, '2026-07-15 04:00:00', '2026-07-15 04:00:00'),
+(1777, 'N1519/26', 'ABDERRAHMAN CHERGAOUI', '', 'CIN', 'H301949', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1519/26\nColor: BLEU BAT\nSheet: 1519,26 C50 FD BLEU BAT  (14)', '', NULL, NULL, NULL, '2026-07-15 04:00:00', '2026-07-15 04:00:00'),
+(1778, 'N1520/26', 'YASSINE EL ADROUJI', '', 'CIN', 'BK528204', 17500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1520/26\nColor: GRIS NARDO\nSheet: 1520,26 SYM SUNPHONY S(1)', '', NULL, NULL, NULL, '2026-07-15 04:00:00', '2026-07-15 04:00:00'),
+(1779, 'N1521/26', 'SALAHEDDINE DAKKAOUI', '', 'CIN', 'BK510393', 9800.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1521/26\nColor: BLEU CH\nSheet: 1521,26 C50 NEW RIM BLEU CH (7)', '', NULL, NULL, NULL, '2026-07-15 04:00:00', '2026-07-15 04:00:00'),
+(1780, 'N1522/26', 'YOUSSEF MOUNIR', '', 'CIN', 'WA335993', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1522/26\nColor: BLEU BAT\nSheet: 1522,26 C50 FD BLEU BATNFC  (1)', '', NULL, NULL, NULL, '2026-07-16 04:00:00', '2026-07-16 04:00:00'),
+(1781, 'N1523/26', 'AMINA JAMALI', '', 'CIN', 'BW39107', 9500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1523/26\nColor: GRIS NARDO\nSheet: 1523,26 SIROCCO X(2)', '', NULL, NULL, NULL, '2026-07-16 04:00:00', '2026-07-16 04:00:00'),
+(1782, 'N1524/26', 'BRAHIM BASTA', '', 'CIN', 'BK502689', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1524/26\nColor: GRIS MAT\nSheet: 1524,26 KYMCO AGILITY(3)', '', NULL, NULL, NULL, '2026-07-17 04:00:00', '2026-07-17 04:00:00'),
+(1783, 'N1525/26', 'RIAD MERABET', '', 'CIN', 'PS810218', 20000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1525/26\nColor: GRIS NARDO\nSheet: 1525,26 SH BECANE125(1)', '', NULL, NULL, NULL, '2026-07-17 04:00:00', '2026-07-17 04:00:00'),
+(1784, 'N1526/26', 'SAID MAHDAR', '', 'CIN', 'BK650871', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1526/26\nColor: BLEU BAT\nSheet: 1526,26 C50 FD BLEU BATNFC  (2)', '', NULL, NULL, NULL, '2026-07-17 04:00:00', '2026-07-17 04:00:00'),
+(1785, 'N1527/26', 'NAOUFAL CHARI', '', 'CIN', 'BK529551', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1527/26\nColor: GRIS NARDO BAT\nSheet: 1527,26 C50FD GRIS BATNFC  (1)', '', NULL, NULL, NULL, '2026-07-18 04:00:00', '2026-07-18 04:00:00'),
+(1786, 'N1528/26', 'MOHAMED RADOUH', '', 'CIN', 'W393588', 12000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1528/26\nColor: NOIR BRILLANT\nSheet: 1528,26 SH DAYTONA  (2)', '', NULL, NULL, NULL, '2026-07-18 04:00:00', '2026-07-18 04:00:00'),
+(1787, 'N1529/26', 'SAID AHMAME', '', 'CIN', 'BW61412', 12900.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1529/26\nColor: Noir BRILLANT\nSheet: 1529,26 BECANE33 ET ANC OR  (1)', '', NULL, NULL, NULL, '2026-07-18 04:00:00', '2026-07-18 04:00:00'),
+(1788, 'N1530/26', 'ZINEB LAHMAMA', '', 'CIN', 'BW57730', 10500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1530/26\nColor: GRIS NARDO\nSheet: 1530,26 BECANEVALENTI S  (3)', '', NULL, NULL, NULL, '2026-07-18 04:00:00', '2026-07-18 04:00:00'),
+(1789, 'N1531/26', 'MHAMED EL MAATAOUI', '', 'CIN', 'WA109647', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1531/26\nColor: GRIS NARDO\nSheet: 1531,26 C50 FD GRIS BATNFC  (2)', '', NULL, NULL, NULL, '2026-07-20 04:00:00', '2026-07-20 04:00:00'),
+(1790, 'N1533/26', 'MOURAD RAFYA', '', 'CIN', 'BK608930', 10000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1533/26\nColor: BLEU\nSheet: 1533,26 C50 NEWRIM BLEUBTNFC(1)', '', NULL, NULL, NULL, '2026-07-20 04:00:00', '2026-07-20 04:00:00'),
+(1791, 'N1534/26', 'AZZ-EDDINE KADDARI', '', 'CIN', 'BW73198', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1534/26\nColor: GRIS NARDO\nSheet: 1534,26 C50 FD GRIS NARDO  (5)', '', NULL, NULL, NULL, '2026-07-20 04:00:00', '2026-07-20 04:00:00');
+INSERT INTO `chassis_orders` (`id`, `order_number`, `customer_name`, `customer_phone`, `doc_type`, `doc_number`, `total_price`, `discount`, `tva`, `status`, `user_id`, `store_id`, `notes`, `comment`, `signature`, `signed_at`, `signed_by`, `created_at`, `updated_at`) VALUES
+(1792, 'N1535/26', 'KHALID HANACH', '', 'CIN', 'BE98935', 15500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1535/26\nColor: NOIR\nSheet: 1535,26 KYMCO AGILITY(1)', '', NULL, NULL, NULL, '2026-07-21 04:00:00', '2026-07-21 04:00:00'),
+(1793, 'N1536/26', 'SAID EL HAMIDY', '', 'CIN', 'BW48863', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1536/26\nColor: GRIS NARDO\nSheet: 1536,26 C50 FD GRIS BATNFC  (3)', '', NULL, NULL, NULL, '2026-07-21 04:00:00', '2026-07-21 04:00:00'),
+(1794, 'N1537/26', '', '', 'CIN', '', 11000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1537/26\nColor: ROUGE BAT\nSheet: 1537,26 C50 FD ROUGE BAT (5)', '', NULL, NULL, NULL, '2026-07-21 04:00:00', '2026-07-21 04:00:00'),
+(1795, 'N1538/26', 'KHADIJA EL HAKIMY', '', 'CIN', 'BK192704', 13500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1538/26\nColor: NOIR BRILLANT\nSheet: 1538,26 BECANER9 (3)', '', NULL, NULL, NULL, '2026-07-21 04:00:00', '2026-07-21 04:00:00'),
+(1796, 'N1539/26', 'KHALIL ABOUBACHA', '', 'CIN', 'BW67472', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1539/26\nColor: Noir BRILLANT\nSheet: 1539,26 BECANE33 ET ANC OR  (2)', '', NULL, NULL, NULL, '2026-07-22 04:00:00', '2026-07-22 04:00:00'),
+(1797, 'N1540/26', 'MALAK BELHADI', '', 'CIN', 'BW57031', 16500.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1540/26\nColor: GRIS BEIGE\nSheet: 1540,26 SH BECANE 50(3)', '', NULL, NULL, NULL, '2026-07-22 04:00:00', '2026-07-22 04:00:00'),
+(1798, 'N1541/26', 'IMANE MAHIR', '', 'CIN', 'BE774514', 13000.00, 0.00, 20.00, 'validated', 1, 1, 'Invoice: 1541/26\nColor: Noir BRILLANT\nSheet: 1541,26 BECANE33 ET ANC  (18)', '', NULL, NULL, NULL, '2026-07-23 04:00:00', '2026-07-23 04:00:00'),
+(1799, 'N1060/26', 'ARBI TAMINE', '', 'CIN', 'BW70912', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-08-03 23:04:14'),
+(1800, 'N1063/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1801, 'N1064/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1802, 'N1065/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1803, 'N1068/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1804, 'N1070/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1805, 'N1071/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1806, 'N1072/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1807, 'N1076/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1808, 'N1077/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1809, 'N1078/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1810, 'N1079/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1811, 'N1082/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1812, 'N1084/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1813, 'N1085/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1814, 'N1086/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1815, 'N1087/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1816, 'N1090/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1817, 'N1091/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1818, 'N1092/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1819, 'N1094/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1820, 'N1102/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1821, 'N1104/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1822, 'N1107/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1823, 'N1109/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1824, 'N1128/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1825, 'N1149/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1826, 'N1161/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1827, 'N1179/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1828, 'N1189/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1829, 'N1206/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1830, 'N1220/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1831, 'N1248/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1832, 'N1253/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1833, 'N1276/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1834, 'N1283/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1835, 'N1287/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1836, 'N1288/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1837, 'N1300/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1838, 'N1315/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1839, 'N1320/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1840, 'N1324/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1841, 'N1338/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1842, 'N1369/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1843, 'N1374/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1844, 'N1376/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1845, 'N1377/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1846, 'N1417/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1847, 'N1447/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1848, 'N1453/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1849, 'N1459/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1850, 'N1484/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1851, 'N1486/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1852, 'N1494/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1853, 'N1506/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1854, 'N1510/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1855, 'N1515/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1856, 'N1532/26', '', '', 'CIN', '', 0.00, 0.00, 20.00, 'pending', 1, 1, 'Commande manquante - à compléter', '', NULL, NULL, NULL, '2026-07-27 14:02:12', '2026-07-27 14:02:12'),
+(1857, 'N1542/26', 'OTHMAN', '066321921912', 'CIN', 'cd64545', 2816.67, 0.00, 20.00, 'validated', 2, 1, NULL, NULL, NULL, NULL, NULL, '2026-07-28 18:22:47', '2026-07-28 18:24:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chassis_order_items`
+--
+
+CREATE TABLE `chassis_order_items` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `chassis_order_id` bigint(20) UNSIGNED NOT NULL,
+  `chassis_number_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `variant_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `chassis_number` varchar(191) NOT NULL,
+  `model_name` varchar(191) DEFAULT NULL,
+  `family_name` varchar(191) DEFAULT NULL,
+  `brand_name` varchar(191) DEFAULT NULL,
+  `price` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `location` varchar(191) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `chassis_order_items`
+--
+
+INSERT INTO `chassis_order_items` (`id`, `chassis_order_id`, `chassis_number_id`, `variant_id`, `chassis_number`, `model_name`, `family_name`, `brand_name`, `price`, `location`, `created_at`, `updated_at`) VALUES
+(1375, 1375, NULL, NULL, 'LATXCBLY2S1845779', 'Cyclomoteur doker super C50', 'BLEU', '', 8500.00, '', '2026-01-04 05:00:00', '2026-01-04 05:00:00'),
+(1376, 1376, NULL, NULL, 'LATXCBLY1S1956903', 'Cyclomoteur doker super C50', 'BLEU', '', 7666.67, '', '2026-01-04 05:00:00', '2026-01-04 05:00:00'),
+(1377, 1377, NULL, NULL, 'LATXCBLY1S1956282', 'Cyclomoteur doker super C50', 'GRIS', '', 7666.67, '', '2026-01-07 05:00:00', '2026-01-07 05:00:00'),
+(1378, 1378, NULL, NULL, 'LATXCBLY2S1845809', 'Cyclomoteur doker super C50', 'BLEU', '', 8500.00, '', '2026-01-08 05:00:00', '2026-01-08 05:00:00'),
+(1379, 1379, NULL, NULL, 'LATXCBLY2S1845892', 'Cyclomoteur doker super C50', 'BLEU', '', 8500.00, '', '2026-01-09 05:00:00', '2026-01-09 05:00:00'),
+(1380, 1380, NULL, NULL, 'L5YXGCBD0S1168450', 'Cyclomoteur Becane Valenti', 'Gris Beige', '', 8750.00, '', '2026-01-11 05:00:00', '2026-01-11 05:00:00'),
+(1381, 1381, NULL, NULL, 'LATXCBLY2S1827250', 'Cyclomoteur doker super C50', 'BLEU CH', '', 8583.33, '', '2026-01-13 05:00:00', '2026-01-13 05:00:00'),
+(1382, 1382, NULL, NULL, 'LATXCBLY2S1865605', 'Cyclomoteur doker super C50', 'BLEU CH', '', 8500.00, '', '2026-01-13 05:00:00', '2026-01-13 05:00:00'),
+(1383, 1383, NULL, NULL, 'LATXCBLY2S1865683', 'Cyclomoteur doker super C50', 'BLEU CH', '', 8500.00, '', '2026-01-17 05:00:00', '2026-01-17 05:00:00'),
+(1384, 1384, NULL, NULL, 'LATXCBLY2S1865628', 'Cyclomoteur doker super C50', 'BLEU CH', '', 8583.33, '', '2026-01-18 05:00:00', '2026-01-18 05:00:00'),
+(1385, 1385, NULL, NULL, '', 'SCOOTER KYMCO', 'GRIS MAT', '', 13750.00, '', '2026-01-19 05:00:00', '2026-01-19 05:00:00'),
+(1386, 1386, NULL, NULL, '', 'SCOOTER KYMCO', 'NOIR', '', 13750.00, '', '2026-01-23 05:00:00', '2026-01-23 05:00:00'),
+(1387, 1387, NULL, NULL, 'LB405PUH9SC088849', 'Cyclomoteur Becane 29', 'Gris Beige', '', 10416.67, '', '2026-01-23 05:00:00', '2026-01-23 05:00:00'),
+(1388, 1388, NULL, NULL, 'LKXXCBPA7S1018903', 'Cyclomoteur Daytona SH Sport', 'GRIS NARDO', '', 10416.67, '', '2026-01-26 05:00:00', '2026-01-26 05:00:00'),
+(1389, 1389, NULL, NULL, 'LATXCBLY2S185602', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8583.33, '', '2026-01-28 05:00:00', '2026-01-28 05:00:00'),
+(1390, 1390, NULL, NULL, 'LATXCBLY2S1824614', 'Cyclomoteur doker super C50', 'GOLD', '', 8583.33, '', '2026-01-28 05:00:00', '2026-01-28 05:00:00'),
+(1391, 1391, NULL, NULL, 'LATXCBLY2S1865593', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8583.33, '', '2026-01-30 05:00:00', '2026-01-30 05:00:00'),
+(1392, 1392, NULL, NULL, 'LATXCBLY1S1961911', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7750.00, '', '2026-01-31 05:00:00', '2026-01-31 05:00:00'),
+(1393, 1393, NULL, NULL, 'LATXCBLY1S1958484', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7666.67, '', '2026-07-27 14:01:17', '2026-07-27 14:01:17'),
+(1394, 1394, NULL, NULL, 'L5YXGCBD3S1168507', 'Cyclomoteur Becane Valenti', 'Gris Beige', '', 8333.33, '', '2026-07-27 14:01:17', '2026-07-27 14:01:17'),
+(1395, 1395, NULL, NULL, 'LATXCBLY1S1957778', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7750.00, '', '2026-07-27 14:01:17', '2026-07-27 14:01:17'),
+(1396, 1396, NULL, NULL, '', 'SCOOTER KYMCO', 'NOIR', '', 13750.00, '', '2026-07-27 14:01:17', '2026-07-27 14:01:17'),
+(1397, 1397, NULL, NULL, 'LATXCBLY2S1844957', 'Cyclomoteur doker super C50', 'PISTACHE', '', 8583.33, '', '2026-07-27 14:01:17', '2026-07-27 14:01:17'),
+(1398, 1398, NULL, NULL, 'LKXXCBPA5S1018625', 'Cyclomoteur Daytona SH Sport', 'BIEGE', '', 10416.67, '', '2026-07-27 14:01:17', '2026-07-27 14:01:17'),
+(1399, 1399, NULL, NULL, 'LATXCBLY2S1846257', 'Cyclomoteur doker super C50', 'GRIS NARDO', '', 8500.00, '', '2026-02-08 05:00:00', '2026-02-08 05:00:00'),
+(1400, 1400, NULL, NULL, '', 'SCOOTER KYMCO', 'NOIR', '', 13750.00, '', '2026-07-27 14:01:18', '2026-07-27 14:01:18'),
+(1401, 1401, NULL, NULL, 'LATXCBLY1S1942698', 'Cyclomoteur doker super C50', 'GRIS', '', 7500.00, '', '2026-07-27 14:01:18', '2026-07-27 14:01:18'),
+(1402, 1402, NULL, NULL, 'LATXCBLY1S1942745', 'Cyclomoteur doker super C50', 'GRIS', '', 7500.00, '', '2026-07-27 14:01:18', '2026-07-27 14:01:18'),
+(1403, 1403, NULL, NULL, 'LRYDXBLB6P0219128', 'Cyclomoteur doker Gama 48', '', '', 8500.00, '', '2026-07-27 14:01:18', '2026-07-27 14:01:18'),
+(1404, 1404, NULL, NULL, 'LATXCBLY1S1914695', 'Cyclomoteur doker super C50', 'GRIS', '', 7750.00, '', '2026-07-27 14:01:18', '2026-07-27 14:01:18'),
+(1405, 1405, NULL, NULL, 'LATXCBLY2S1869420', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8500.00, '', '2026-02-09 05:00:00', '2026-02-09 05:00:00'),
+(1406, 1406, NULL, NULL, 'LATXCBLY2S1869399', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8583.33, '', '2026-02-11 05:00:00', '2026-02-11 05:00:00'),
+(1407, 1407, NULL, NULL, 'LATXCBLY2S1869390', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8416.67, '', '2026-02-11 05:00:00', '2026-02-11 05:00:00'),
+(1408, 1408, NULL, NULL, 'LATXCBLY2S1846302', 'Cyclomoteur doker super C50', 'GRIS NARDO', '', 8500.00, '', '2026-02-11 05:00:00', '2026-02-11 05:00:00'),
+(1409, 1409, NULL, NULL, 'LATXCBLY2S1846232', 'Cyclomoteur doker super C50', 'GRIS NARDO', '', 8541.67, '', '2026-02-11 05:00:00', '2026-02-11 05:00:00'),
+(1410, 1410, NULL, NULL, '', 'SCOOTER KYMCO', 'GRIS MAT', '', 13750.00, '', '2026-02-12 05:00:00', '2026-02-12 05:00:00'),
+(1411, 1411, NULL, NULL, 'L5YSHCBA8S1146175', 'Cyclomoteur  HY SH Becane', 'BEIGE', '', 12500.00, '', '2026-07-27 14:01:19', '2026-07-27 14:01:19'),
+(1412, 1412, NULL, NULL, 'LATXCBLY1S1943873', 'Cyclomoteur doker super C50', 'NOIR MAT', '', 7500.00, '', '2026-07-27 14:01:20', '2026-07-27 14:01:20'),
+(1413, 1413, NULL, NULL, 'LB405PMG6RC242693', 'Cyclomoteur  rebero Becane', 'Noir', '', 10416.67, '', '2026-02-13 05:00:00', '2026-02-13 05:00:00'),
+(1414, 1414, NULL, NULL, 'LATXCBLY2S1824647', 'Cyclomoteur doker super C50', 'GOLD', '', 8750.00, '', '2026-02-14 05:00:00', '2026-02-14 05:00:00'),
+(1415, 1415, NULL, NULL, 'LB405PMG7RC242640', 'Cyclomoteur  rebero Becane', 'Noir', '', 10416.67, '', '2026-02-14 05:00:00', '2026-02-14 05:00:00'),
+(1416, 1416, NULL, NULL, 'LATXCBLY1S1943882', 'Cyclomoteur doker super C50', 'NOIR MAT', '', 7500.00, '', '2026-07-27 14:01:20', '2026-07-27 14:01:20'),
+(1417, 1417, NULL, NULL, 'LATXCBLY1S1902667', 'Cyclomoteur doker super C50', 'GRIS', '', 7833.33, '', '2026-07-27 14:01:20', '2026-07-27 14:01:20'),
+(1418, 1418, NULL, NULL, 'LATXCBLY2S1869397', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8750.00, '', '2026-02-16 05:00:00', '2026-02-16 05:00:00'),
+(1419, 1419, NULL, NULL, 'LATXCBLY2S1869374', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8500.00, '', '2026-02-16 05:00:00', '2026-02-16 05:00:00'),
+(1420, 1420, NULL, NULL, 'LATXCBLY2S1869367', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8500.00, '', '2026-02-18 05:00:00', '2026-02-18 05:00:00'),
+(1421, 1421, NULL, NULL, 'LATXCBLY2S1824605', 'Cyclomoteur doker super C50', 'GOLD', '', 8750.00, '', '2026-02-18 05:00:00', '2026-02-18 05:00:00'),
+(1422, 1422, NULL, NULL, 'LATXCBLY1S1957960', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7666.67, '', '2026-07-27 14:01:21', '2026-07-27 14:01:21'),
+(1423, 1423, NULL, NULL, 'LATXCBLY1S1918626', 'Cyclomoteur doker super C50', 'GOLD', '', 7833.33, '', '2026-02-18 05:00:00', '2026-02-18 05:00:00'),
+(1424, 1424, NULL, NULL, 'LATXCBLY2S1846349', 'Cyclomoteur doker super C50', 'GRIS NARDO', '', 8583.33, '', '2026-02-19 05:00:00', '2026-02-19 05:00:00'),
+(1425, 1425, NULL, NULL, 'LATXCBLY2S1869383', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8666.67, '', '2026-02-19 05:00:00', '2026-02-19 05:00:00'),
+(1426, 1426, NULL, NULL, 'L5YBRCBAXS1167932', 'Cyclomoteur   Becane R9', 'NOIR BRILLANT', '', 11250.00, '', '2026-02-21 05:00:00', '2026-02-21 05:00:00'),
+(1427, 1427, NULL, NULL, 'LATXCBLY1S1S1912516', 'Cyclomoteur doker super C50', 'BLEU CH', '', 7666.67, '', '2026-02-21 05:00:00', '2026-02-21 05:00:00'),
+(1428, 1428, NULL, NULL, 'LATXCBLY2S1844941', 'Cyclomoteur doker super C50', 'GOLD', '', 8500.00, '', '2026-02-22 05:00:00', '2026-02-22 05:00:00'),
+(1429, 1429, NULL, NULL, 'LATXCBLY2S1824867', 'Cyclomoteur doker super C50', 'Noir/Pistch', '', 8583.33, '', '2026-02-22 05:00:00', '2026-02-22 05:00:00'),
+(1430, 1430, NULL, NULL, 'LATXCBLY1S1S1953515', 'Cyclomoteur doker super C50', 'BLEU CH', '', 7666.67, '', '2026-02-23 05:00:00', '2026-02-23 05:00:00'),
+(1431, 1431, NULL, NULL, 'LKXXCBPA1S1018637', 'Cyclomoteur Daytona SH Sport', 'BIEGE', '', 10416.67, '', '2026-02-23 05:00:00', '2026-02-23 05:00:00'),
+(1432, 1432, NULL, NULL, 'LATXCBLY2S1869381', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8583.33, '', '2026-02-24 05:00:00', '2026-02-24 05:00:00'),
+(1433, 1433, NULL, NULL, 'LXMWGA301SX064546', 'Cyclomoteur Sym MAGIC', 'GRIS', '', 27500.00, '', '2026-02-24 05:00:00', '2026-02-24 05:00:00'),
+(1434, 1434, NULL, NULL, '', 'SCOOTER KYMCO', 'NOIR', '', 13750.00, '', '2026-02-25 05:00:00', '2026-02-25 05:00:00'),
+(1435, 1435, NULL, NULL, 'L5YBRCBAXS1167574', 'Cyclomoteur   Becane R9', 'GRIS  NARDO', '', 11250.00, '', '2026-02-25 05:00:00', '2026-02-25 05:00:00'),
+(1436, 1436, NULL, NULL, 'LATXCBLY2S1869370', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8583.33, '', '2026-02-25 05:00:00', '2026-02-25 05:00:00'),
+(1437, 1437, NULL, NULL, 'LATXCBLY2S1846327', 'Cyclomoteur doker super C50', 'GRIS NARDO', '', 8583.33, '', '2026-02-26 05:00:00', '2026-02-26 05:00:00'),
+(1438, 1438, NULL, NULL, '', 'SCOOTER KYMCO', 'NOIR BRILLANT', '', 13750.00, '', '2026-02-27 05:00:00', '2026-02-27 05:00:00'),
+(1439, 1439, NULL, NULL, 'LATXCBLY2S1845929', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8583.33, '', '2026-02-27 05:00:00', '2026-02-27 05:00:00'),
+(1440, 1440, NULL, NULL, '', 'SCOOTER KYMCO', 'GRIS MAT', '', 13750.00, '', '2026-02-27 05:00:00', '2026-02-27 05:00:00'),
+(1441, 1441, NULL, NULL, 'LATXCBLY1S1902631', 'Cyclomoteur doker super C50', 'GRIS BLEU CH', '', 7666.67, '', '2026-02-28 05:00:00', '2026-02-28 05:00:00'),
+(1442, 1442, NULL, NULL, 'L5YSHCBA4S1146089', 'Cyclomoteur  HY SH Becane', 'BLANC', '', 13333.33, '', '2026-02-28 05:00:00', '2026-02-28 05:00:00'),
+(1443, 1443, NULL, NULL, 'LATXCBLY1S1958487', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7750.00, '', '2026-03-01 05:00:00', '2026-03-01 05:00:00'),
+(1444, 1444, NULL, NULL, 'LATXCBLY2S1845989', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8750.00, '', '2026-03-01 05:00:00', '2026-03-01 05:00:00'),
+(1445, 1445, NULL, NULL, 'LATXCBLY1S1957162', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7666.67, '', '2026-03-01 05:00:00', '2026-03-01 05:00:00'),
+(1446, 1446, NULL, NULL, 'LATXCBLY2S1870436', 'Cyclomoteur doker super C50', 'PISTACH', '', 8625.00, '', '2026-03-01 05:00:00', '2026-03-01 05:00:00'),
+(1447, 1447, NULL, NULL, 'LATXCBLY2S1846051', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8750.00, '', '2026-03-01 05:00:00', '2026-03-01 05:00:00'),
+(1448, 1448, NULL, NULL, 'LATXCBLY2S1845995', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8750.00, '', '2026-03-01 05:00:00', '2026-03-01 05:00:00'),
+(1449, 1449, NULL, NULL, 'L5YBRCBAXS1167669', 'Cyclomoteur   Becane R9', 'BEIGE MATE', '', 11250.00, '', '2026-03-03 05:00:00', '2026-03-03 05:00:00'),
+(1450, 1450, NULL, NULL, 'LATXCBLY1S1942721', 'Cyclomoteur doker super C50', 'GRIS', '', 7666.67, '', '2026-03-03 05:00:00', '2026-03-03 05:00:00'),
+(1451, 1451, NULL, NULL, 'LATXCBLY1S1958389', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7750.00, '', '2026-03-04 05:00:00', '2026-03-04 05:00:00'),
+(1452, 1452, NULL, NULL, 'LKXXCBPA9S1018594', 'Cyclomoteur Daytona SH Sport', 'GRIS NARDO', '', 10416.67, '', '2026-03-04 05:00:00', '2026-03-04 05:00:00'),
+(1453, 1453, NULL, NULL, 'LXMMGB501SXB31665', 'Cyclomoteur Sym NHT 200', 'NOIR BRONZE', '', 27500.00, '', '2026-03-04 05:00:00', '2026-03-04 05:00:00'),
+(1454, 1454, NULL, NULL, 'LATXCBLY1S1957908', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7666.67, '', '2026-03-05 05:00:00', '2026-03-05 05:00:00'),
+(1455, 1455, NULL, NULL, 'LB405PMG1SC211518', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-05 05:00:00', '2026-03-05 05:00:00'),
+(1456, 1456, NULL, NULL, 'LB405PMG9SC211265', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-05 05:00:00', '2026-03-05 05:00:00'),
+(1457, 1457, NULL, NULL, 'LB405PMG5SC211294', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-05 05:00:00', '2026-03-05 05:00:00'),
+(1458, 1458, NULL, NULL, 'LB405PMG9SC211198', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-05 05:00:00', '2026-03-05 05:00:00'),
+(1459, 1459, NULL, NULL, 'LB405PMG8SC211077', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-05 05:00:00', '2026-03-05 05:00:00'),
+(1460, 1460, NULL, NULL, 'LB405PMG6SC211207', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-06 05:00:00', '2026-03-06 05:00:00'),
+(1461, 1461, NULL, NULL, 'LB405PMG8SC211239', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-06 05:00:00', '2026-03-06 05:00:00'),
+(1462, 1462, NULL, NULL, 'LB405PMG5SC211182', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-06 05:00:00', '2026-03-06 05:00:00'),
+(1463, 1463, NULL, NULL, 'SLFPACBB82ST001181', 'Cyclomoteur Becane florance', '', '', 10833.33, '', '2026-04-15 04:00:00', '2026-04-15 04:00:00'),
+(1464, 1464, NULL, NULL, 'LB405PMG4SC211268', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-06 05:00:00', '2026-03-06 05:00:00'),
+(1465, 1465, NULL, NULL, 'LATXCBLY2S1845937', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8750.00, '', '2026-03-06 05:00:00', '2026-03-06 05:00:00'),
+(1466, 1466, NULL, NULL, 'LFETCBP45S1901315', 'Cyclomoteur  MAGOTI Valenti', 'NOIR MATE', '', 8333.33, '', '2026-03-07 05:00:00', '2026-03-07 05:00:00'),
+(1467, 1467, NULL, NULL, 'LKXXCBPA2S1018632', 'Cyclomoteur Daytona SH Sport', 'BEIGE MATE', '', 10416.67, '', '2026-03-07 05:00:00', '2026-03-07 05:00:00'),
+(1468, 1468, NULL, NULL, 'LFETCBP41S1901408', 'Cyclomoteur  MAGOTI Valenti', 'NOIR MATE', '', 8333.33, '', '2026-03-07 05:00:00', '2026-03-07 05:00:00'),
+(1469, 1469, NULL, NULL, 'LB405PMG5SC211201', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-07 05:00:00', '2026-03-07 05:00:00'),
+(1470, 1470, NULL, NULL, 'LATXCBLY1S1958494', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7833.33, '', '2026-03-08 05:00:00', '2026-03-08 05:00:00'),
+(1471, 1471, NULL, NULL, 'LB405PMG4SC211318', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-08 05:00:00', '2026-03-08 05:00:00'),
+(1472, 1472, NULL, NULL, 'LB405PMG5SC211226', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-08 05:00:00', '2026-03-08 05:00:00'),
+(1473, 1473, NULL, NULL, 'LB405PMG4SC211237', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-09 04:00:00', '2026-03-09 04:00:00'),
+(1474, 1474, NULL, NULL, '', '', '', '', 0.00, '', '2026-07-27 14:01:29', '2026-07-27 14:01:29'),
+(1475, 1475, NULL, NULL, 'LATXCBLY1S1902663', 'Cyclomoteur doker super C50', 'GRIS BLEU CH', '', 7666.67, '', '2026-03-13 04:00:00', '2026-03-13 04:00:00'),
+(1476, 1476, NULL, NULL, 'LATXCBLY1S1957822', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7750.00, '', '2026-03-13 04:00:00', '2026-03-13 04:00:00'),
+(1477, 1477, NULL, NULL, 'LATXCBLY1S1957942', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7750.00, '', '2026-03-13 04:00:00', '2026-03-13 04:00:00'),
+(1478, 1478, NULL, NULL, 'LATXCBLY2S1869417', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8750.00, '', '2026-03-13 04:00:00', '2026-03-13 04:00:00'),
+(1479, 1479, NULL, NULL, 'LB405PMG7SC211488', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-14 04:00:00', '2026-03-14 04:00:00'),
+(1480, 1480, NULL, NULL, 'LATXCBLY1S1902638', 'Cyclomoteur doker super C50', 'GRIS BLEU CH', '', 7666.67, '', '2026-03-14 04:00:00', '2026-03-14 04:00:00'),
+(1481, 1481, NULL, NULL, 'LB405PMG4SC211075', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-15 04:00:00', '2026-03-15 04:00:00'),
+(1482, 1482, NULL, NULL, 'LATXCBLY2S1844948', 'Cyclomoteur doker super C50', 'Noir/Pistch', '', 8541.67, '', '2026-03-15 04:00:00', '2026-03-15 04:00:00'),
+(1483, 1483, NULL, NULL, 'LATXCBLY2S1844869', 'Cyclomoteur doker super C50', 'Noir/Pistch', '', 8541.67, '', '2026-03-15 04:00:00', '2026-03-15 04:00:00'),
+(1484, 1484, NULL, NULL, 'LB405PMG4SC211223', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-16 04:00:00', '2026-03-16 04:00:00'),
+(1485, 1485, NULL, NULL, 'LATXCBLY2S1870265', 'Cyclomoteur doker super C50', 'GOLD', '', 8500.00, '', '2026-03-15 04:00:00', '2026-03-15 04:00:00'),
+(1486, 1486, NULL, NULL, 'LATXCBLY1S1953638', 'Cyclomoteur doker super C50', 'BLEU CH', '', 7666.67, '', '2026-03-16 04:00:00', '2026-03-16 04:00:00'),
+(1487, 1487, NULL, NULL, 'LB405PMG3SC211276', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-15 04:00:00', '2026-03-15 04:00:00'),
+(1488, 1488, NULL, NULL, 'LB405P3F1SC197712', 'Cyclomoteur  HY SH Becane', 'NOIR BRILLANT', '', 10416.67, '', '2026-03-17 04:00:00', '2026-03-17 04:00:00'),
+(1489, 1489, NULL, NULL, 'LB405P3F2SC196942', 'Cyclomoteur  HY SH Becane', 'GRIS NARDO', '', 10416.67, '', '2026-03-17 04:00:00', '2026-03-17 04:00:00'),
+(1490, 1490, NULL, NULL, 'L5YBRCBA1T1152060', 'Cyclomoteur   Becane R9', 'GRIS MAT', '', 11250.00, '', '2026-03-18 04:00:00', '2026-03-18 04:00:00'),
+(1491, 1491, NULL, NULL, 'LATXCBLY1S1957237', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7750.00, '', '2026-03-18 04:00:00', '2026-03-18 04:00:00'),
+(1492, 1492, NULL, NULL, 'LKXXCBPA3S1018669', 'Cyclomoteur Daytona SH Sport', 'NOIR MATE', '', 10416.67, '', '2026-03-18 04:00:00', '2026-03-18 04:00:00'),
+(1493, 1493, NULL, NULL, '', 'SCOOTER KYMCO', 'GRIS MAT', '', 13750.00, '', '2026-03-19 04:00:00', '2026-03-19 04:00:00'),
+(1494, 1494, NULL, NULL, 'LB405PMG8SC211502', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-19 04:00:00', '2026-03-19 04:00:00'),
+(1495, 1495, NULL, NULL, '', 'SCOOTER KYMCO', 'GRIS MAT', '', 13750.00, '', '2026-03-21 04:00:00', '2026-03-21 04:00:00'),
+(1496, 1496, NULL, NULL, 'LATXCBLY2S1870583', 'Cyclomoteur doker super C50', 'PISTACH', '', 8541.67, '', '2026-03-21 04:00:00', '2026-03-21 04:00:00'),
+(1497, 1497, NULL, NULL, 'LATXCBLY2S1845285', 'Cyclomoteur doker super C50', 'GOLD', '', 8333.33, '', '2026-03-21 04:00:00', '2026-03-21 04:00:00'),
+(1498, 1498, NULL, NULL, 'LATXCBLY2S1870616', 'Cyclomoteur doker super C50', 'PISTACH', '', 8333.33, '', '2026-03-21 04:00:00', '2026-03-21 04:00:00'),
+(1499, 1499, NULL, NULL, 'LATXCBLY2S1870526', 'Cyclomoteur doker super C50', 'PISTACH', '', 8666.67, '', '2026-03-23 04:00:00', '2026-03-23 04:00:00'),
+(1500, 1500, NULL, NULL, 'LRYDXBLB9P0219320', 'Cyclomoteur docker Gama 48', '', '', 8500.00, '', '2026-03-23 04:00:00', '2026-03-23 04:00:00'),
+(1501, 1501, NULL, NULL, 'LATXCBLY1S1957163', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7666.67, '', '2026-03-23 04:00:00', '2026-03-23 04:00:00'),
+(1502, 1502, NULL, NULL, 'LATXCBLY2S1870386', 'Cyclomoteur doker super C50', 'PISTACH', '', 8583.33, '', '2026-03-23 04:00:00', '2026-03-23 04:00:00'),
+(1503, 1503, NULL, NULL, 'LB405PMG3SC169840', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-23 04:00:00', '2026-03-23 04:00:00'),
+(1504, 1504, NULL, NULL, 'LATXCBLY1S1957215', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7750.00, '', '2026-03-25 04:00:00', '2026-03-25 04:00:00'),
+(1505, 1505, NULL, NULL, 'LXYJDJL02T0689102', 'Cyclomoteur   Becane  ATX125', 'GRIS NARDO', '', 17333.33, '', '2026-03-25 04:00:00', '2026-03-25 04:00:00'),
+(1506, 1506, NULL, NULL, 'LB405PMGXSC227832', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-26 04:00:00', '2026-03-26 04:00:00'),
+(1507, 1507, NULL, NULL, 'LB405PMG0SC227595', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-28 04:00:00', '2026-03-28 04:00:00'),
+(1508, 1508, NULL, NULL, 'LB405PMG2SC227842', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-28 04:00:00', '2026-03-28 04:00:00'),
+(1509, 1509, NULL, NULL, 'LB405PMG0SC227211', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-28 04:00:00', '2026-03-28 04:00:00'),
+(1510, 1510, NULL, NULL, 'LATXCBLY2S1824707', 'Cyclomoteur doker super C50', 'GOLD', '', 8750.00, '', '2026-03-29 04:00:00', '2026-03-29 04:00:00'),
+(1511, 1511, NULL, NULL, 'LFETCBP44S1901516', 'Cyclomoteur  MAGOTI Valenti', 'GRIS MATE', '', 833.33, '', '2026-03-29 04:00:00', '2026-03-29 04:00:00'),
+(1512, 1512, NULL, NULL, '', 'Vingt deux mille  dirhameTTC', '', '', 0.00, '', '2026-07-27 14:01:34', '2026-07-27 14:01:34'),
+(1513, 1513, NULL, NULL, 'LB405PMG8SC227764', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-30 04:00:00', '2026-03-30 04:00:00'),
+(1514, 1514, NULL, NULL, 'LATXCBLY2S1824864', 'Cyclomoteur doker super C50', 'GOLD', '', 8583.33, '', '2026-03-30 04:00:00', '2026-03-30 04:00:00'),
+(1515, 1515, NULL, NULL, 'HODCL4LU9SX131995', 'Cyclomoteur  Cooper Touring', 'GRIS NARDO', '', 10833.33, '', '2026-03-31 04:00:00', '2026-03-31 04:00:00'),
+(1516, 1516, NULL, NULL, 'LB405PMG7SC227304', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-03-31 04:00:00', '2026-03-31 04:00:00'),
+(1517, 1517, NULL, NULL, 'LB405PMG9SC169888', 'Cyclomoteur  rebero Becane', 'Platinum-or', '', 10833.33, '', '2026-03-31 04:00:00', '2026-03-31 04:00:00'),
+(1518, 1518, NULL, NULL, 'LATXCBLY2S1870318', 'Cyclomoteur doker super C50', 'GOLD', '', 8583.33, '', '2026-04-01 04:00:00', '2026-04-01 04:00:00'),
+(1519, 1519, NULL, NULL, 'LXYPCBLO8R7300031', 'Cyclomoteur   Becane  RVX', 'NOIR /VERT', '', 11833.33, '', '2026-04-01 04:00:00', '2026-04-01 04:00:00'),
+(1520, 1520, NULL, NULL, 'LATXCBLY1S1942673', 'Cyclomoteur doker super C50', 'GRIS', '', 7500.00, '', '2026-04-02 04:00:00', '2026-04-02 04:00:00'),
+(1521, 1521, NULL, NULL, 'LATXCBLY2S1870302', 'Cyclomoteur doker super C50', 'GOLD', '', 8541.67, '', '2026-04-02 04:00:00', '2026-04-02 04:00:00'),
+(1522, 1522, NULL, NULL, 'LB405PMG3SC227509', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-04-02 04:00:00', '2026-04-02 04:00:00'),
+(1523, 1523, NULL, NULL, 'LB412PMC1SC184508', 'Cyclomoteur  Becane super cub', 'Noir BRILLANT', '', 10166.67, '', '2026-04-03 04:00:00', '2026-04-03 04:00:00'),
+(1524, 1524, NULL, NULL, '', 'SCOOTER SYMPHST 49CC', 'GRIS NARDO', '', 16916.67, '', '2026-04-03 04:00:00', '2026-04-03 04:00:00'),
+(1525, 1525, NULL, NULL, 'LATXCBLY2S1870246', 'Cyclomoteur doker super C50', 'GOLD', '', 8750.00, '', '2026-04-04 04:00:00', '2026-04-04 04:00:00'),
+(1526, 1526, NULL, NULL, 'LB405PMGXSC226874', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-04-04 04:00:00', '2026-04-04 04:00:00'),
+(1527, 1527, NULL, NULL, 'LATXCBLY1S1971473', 'Cyclomoteur doker super C50', 'BLEU', '', 7708.33, '', '2026-04-04 04:00:00', '2026-04-04 04:00:00'),
+(1528, 1528, NULL, NULL, 'LATXCBLY1S1971396', 'Cyclomoteur doker super C50', 'BLEU', '', 7750.00, '', '2026-04-05 04:00:00', '2026-04-05 04:00:00'),
+(1529, 1529, NULL, NULL, 'LB405PMG0SC228018', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-04-05 04:00:00', '2026-04-05 04:00:00'),
+(1530, 1530, NULL, NULL, 'LATXCBLY1S1971282', 'Cyclomoteur doker super C50', 'BLEU', '', 7666.67, '', '2026-04-05 04:00:00', '2026-04-05 04:00:00'),
+(1531, 1531, NULL, NULL, '', 'SCOOTER KYMCO', 'NOIR BRILLANT', '', 13750.00, '', '2026-04-06 04:00:00', '2026-04-06 04:00:00'),
+(1532, 1532, NULL, NULL, 'LATPDMLY1S1077438', 'Cyclomoteur doker R200', 'NOIR', '', 24916.67, '', '2026-04-06 04:00:00', '2026-04-06 04:00:00'),
+(1533, 1533, NULL, NULL, 'LATXCBLY2S1870516', 'Cyclomoteur doker super C50', 'PISTACH', '', 8750.00, '', '2026-04-06 04:00:00', '2026-04-06 04:00:00'),
+(1534, 1534, NULL, NULL, 'LB405PMG3SC227249', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-04-07 04:00:00', '2026-04-07 04:00:00'),
+(1535, 1535, NULL, NULL, 'LFETCBP46S1901615', 'Cyclomoteur  MAGOTTI Valenti S', 'OR CHAMPAGNE', '', 8750.00, '', '2026-04-08 04:00:00', '2026-04-08 04:00:00'),
+(1536, 1536, NULL, NULL, 'LATXCBLY2S1870563', 'Cyclomoteur doker super C50', 'PISTACH', '', 8750.00, '', '2026-04-09 04:00:00', '2026-04-09 04:00:00'),
+(1537, 1537, NULL, NULL, 'LATXCBLY1S1959546', 'Cyclomoteur doker super C50', 'GRIS', '', 7500.00, '', '2026-04-09 04:00:00', '2026-04-09 04:00:00'),
+(1538, 1538, NULL, NULL, 'LKXXCBPA5S1018642', 'Cyclomoteur Daytona SH Sport', 'NOIR BRILLANT', '', 10416.67, '', '2026-04-10 04:00:00', '2026-04-10 04:00:00'),
+(1539, 1539, NULL, NULL, 'LATXCBLY2S1870317', 'Cyclomoteur doker super C50', 'GOLD', '', 8750.00, '', '2026-04-10 04:00:00', '2026-04-10 04:00:00'),
+(1540, 1540, NULL, NULL, 'LATXCBLY1S1971298', 'Cyclomoteur doker super C50', 'BLEU', '', 7666.67, '', '2026-04-10 04:00:00', '2026-04-10 04:00:00'),
+(1541, 1541, NULL, NULL, 'LB405PMG5SC227835', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-04-10 04:00:00', '2026-04-10 04:00:00'),
+(1542, 1542, NULL, NULL, 'LFETCBPX0S1302994', 'Cyclomoteur  MAGOTTI Vespucci', 'GRIS NARDO', '', 10416.67, '', '2026-04-10 04:00:00', '2026-04-10 04:00:00'),
+(1543, 1543, NULL, NULL, 'LATXCBLY2S1870532', 'Cyclomoteur doker super C50', 'PISTACH', '', 8916.67, '', '2026-04-11 04:00:00', '2026-04-11 04:00:00'),
+(1544, 1544, NULL, NULL, 'LB405P3F7SC199478', 'Cyclomoteur  HY SH Becane', 'NOIR MAT', '', 10416.67, '', '2026-04-11 04:00:00', '2026-04-11 04:00:00'),
+(1545, 1545, NULL, NULL, 'LATXCBLY1S1959407', 'Cyclomoteur doker super C50', 'GRIS', '', 7583.33, '', '2026-04-11 04:00:00', '2026-04-11 04:00:00'),
+(1546, 1546, NULL, NULL, 'LATXCBLY2S1845267', 'Cyclomoteur doker super C50', 'GOLD', '', 9000.00, '', '2026-04-12 04:00:00', '2026-04-12 04:00:00'),
+(1547, 1547, NULL, NULL, 'LB405PMG2SC227792', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-04-12 04:00:00', '2026-04-12 04:00:00'),
+(1548, 1548, NULL, NULL, 'LB405P3F0SC198771', 'Cyclomoteur  HY SH Becane', 'BLEU MAGIC', '', 10416.67, '', '2026-04-13 04:00:00', '2026-04-13 04:00:00'),
+(1549, 1549, NULL, NULL, 'LATXCBLY2S1845312', 'Cyclomoteur doker super C50', 'GOLD', '', 8916.67, '', '2026-04-13 04:00:00', '2026-04-13 04:00:00'),
+(1550, 1550, NULL, NULL, 'LATXCBLY1S1959538', 'Cyclomoteur doker super C50', 'GRIS', '', 7583.33, '', '2026-04-13 04:00:00', '2026-04-13 04:00:00'),
+(1551, 1551, NULL, NULL, 'LATXCBLY2S1845271', 'Cyclomoteur doker super C50', 'GOLD', '', 8916.67, '', '2026-04-14 04:00:00', '2026-04-14 04:00:00'),
+(1552, 1552, NULL, NULL, 'LATXCBLY2S1845304', 'Cyclomoteur doker super C50', 'GOLD', '', 8916.67, '', '2026-04-14 04:00:00', '2026-04-14 04:00:00'),
+(1553, 1553, NULL, NULL, 'LB405PMG1SC214015', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10416.67, '', '2026-04-15 04:00:00', '2026-04-15 04:00:00'),
+(1554, 1554, NULL, NULL, 'LATXCBLY1S1971299', 'Cyclomoteur doker super C50', 'BLEU', '', 7833.33, '', '2026-04-15 04:00:00', '2026-04-15 04:00:00'),
+(1555, 1555, NULL, NULL, 'LATXCBLY2S1845233', 'Cyclomoteur doker super C50', 'GOLD', '', 8916.67, '', '2026-04-15 04:00:00', '2026-04-15 04:00:00'),
+(1556, 1556, NULL, NULL, '', 'SCOOTER KYMCO', 'NOIR BRILLANT', '', 13750.00, '', '2026-04-15 04:00:00', '2026-04-15 04:00:00'),
+(1557, 1557, NULL, NULL, 'LB405PMG6SC227214', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-04-16 04:00:00', '2026-04-16 04:00:00'),
+(1558, 1558, NULL, NULL, 'LATXCBLY1S1971492', 'Cyclomoteur doker super C50', 'BLEU', '', 7500.00, '', '2026-04-16 04:00:00', '2026-04-16 04:00:00'),
+(1559, 1559, NULL, NULL, 'LB405P3F3SC198215', 'Cyclomoteur  HY SH Becane', 'GRIS BEIGE', '', 10416.67, '', '2026-04-16 04:00:00', '2026-04-16 04:00:00'),
+(1560, 1560, NULL, NULL, 'LB405PMGXSC227720', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-04-17 04:00:00', '2026-04-17 04:00:00'),
+(1561, 1561, NULL, NULL, 'LB405PMG8SC227196', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-04-17 04:00:00', '2026-04-17 04:00:00'),
+(1562, 1562, NULL, NULL, 'LB405PMG0SC227788', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-04-17 04:00:00', '2026-04-17 04:00:00'),
+(1563, 1563, NULL, NULL, 'LB405PMG3SC227851', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-04-17 04:00:00', '2026-04-17 04:00:00'),
+(1564, 1564, NULL, NULL, 'LATXCBLY2S1845275', 'Cyclomoteur doker super C50', 'GOLD', '', 8916.67, '', '2026-04-18 04:00:00', '2026-04-18 04:00:00'),
+(1565, 1565, NULL, NULL, 'LB405PMG1SC227234', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-04-18 04:00:00', '2026-04-18 04:00:00'),
+(1566, 1566, NULL, NULL, 'LB405PMG8SC227294', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-04-19 04:00:00', '2026-04-19 04:00:00'),
+(1567, 1567, NULL, NULL, 'LATXCBLY1S1971472', 'Cyclomoteur doker super C50', 'BLEU', '', 7750.00, '', '2026-04-19 04:00:00', '2026-04-19 04:00:00'),
+(1568, 1568, NULL, NULL, 'LATXCBLY2S1845263', 'Cyclomoteur doker super C50', 'GOLD', '', 9083.33, '', '2026-04-20 04:00:00', '2026-04-20 04:00:00'),
+(1569, 1569, NULL, NULL, 'LATXCBLY1S1911374', 'Cyclomoteur doker super C50', 'ROUGE CH', '', 7666.67, '', '2026-04-20 04:00:00', '2026-04-20 04:00:00'),
+(1570, 1570, NULL, NULL, '', 'SCOOTER KYMCO', 'GRIS MAT', '', 13750.00, '', '2026-04-20 04:00:00', '2026-04-20 04:00:00'),
+(1571, 1571, NULL, NULL, 'LATXCBLY1S1936943', 'Cyclomoteur doker super C50', 'BLEU CH', '', 7750.00, '', '2026-04-20 04:00:00', '2026-04-20 04:00:00'),
+(1572, 1572, NULL, NULL, 'LB405PMGXSC213557', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10416.67, '', '2026-04-21 04:00:00', '2026-04-21 04:00:00'),
+(1573, 1573, NULL, NULL, 'LATXCBLY2S1870618', 'Cyclomoteur doker super C50', 'PISTACH', '', 9000.00, '', '2026-04-21 04:00:00', '2026-04-21 04:00:00'),
+(1574, 1574, NULL, NULL, 'LATXCBLY2S1845293', 'Cyclomoteur doker super C50', 'GOLD', '', 9000.00, '', '2026-04-21 04:00:00', '2026-04-21 04:00:00'),
+(1575, 1575, NULL, NULL, 'LB405P3F0SC199192', 'Cyclomoteur  HY SH Becane', 'NOIR BRILLIANT', '', 10416.67, '', '2026-04-24 04:00:00', '2026-04-24 04:00:00'),
+(1576, 1576, NULL, NULL, 'LB405PMG2SC227548', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-04-24 04:00:00', '2026-04-24 04:00:00'),
+(1577, 1577, NULL, NULL, 'LFETCBP48S1B00834', 'Cyclomoteur  MAGOTTI Valenti S', 'GRIS MATE', '', 8750.00, '', '2026-04-25 04:00:00', '2026-04-25 04:00:00'),
+(1578, 1578, NULL, NULL, 'LATXCBLY2S1845300', 'Cyclomoteur doker super C50', 'GOLD', '', 9000.00, '', '2026-04-25 04:00:00', '2026-04-25 04:00:00'),
+(1579, 1579, NULL, NULL, 'LATXCBLY1S1971129', 'Cyclomoteur doker super C50', 'BLEU CH', '', 7750.00, '', '2026-04-25 04:00:00', '2026-04-25 04:00:00'),
+(1580, 1580, NULL, NULL, 'LATXCBLY1S1936971', 'Cyclomoteur doker super C50', 'BLEU CH', '', 7750.00, '', '2026-04-26 04:00:00', '2026-04-26 04:00:00'),
+(1581, 1581, NULL, NULL, 'LB405PMG0SC213910', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10416.67, '', '2026-04-26 04:00:00', '2026-04-26 04:00:00'),
+(1582, 1582, NULL, NULL, 'LB405PMG0SC227516', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-04-27 04:00:00', '2026-04-27 04:00:00'),
+(1583, 1583, NULL, NULL, 'LATXCBLY2S1870344', 'Cyclomoteur doker super C50', 'PISTACH', '', 9000.00, '', '2026-04-28 04:00:00', '2026-04-28 04:00:00'),
+(1584, 1584, NULL, NULL, 'LB405PMG8SC226954', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-04-28 04:00:00', '2026-04-28 04:00:00'),
+(1585, 1585, NULL, NULL, 'LB405PMG9SC214022', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10416.67, '', '2026-04-30 04:00:00', '2026-04-30 04:00:00'),
+(1586, 1586, NULL, NULL, 'LATXCBLY1S1911319', 'Cyclomoteur doker super C50', 'ROUGE CH', '', 7666.67, '', '2026-04-30 04:00:00', '2026-04-30 04:00:00'),
+(1587, 1587, NULL, NULL, 'LKXXCBPAXS1018927', 'Cyclomoteur Daytona SH Sport', 'GRIS NARDO', '', 10416.67, '', '2026-05-01 04:00:00', '2026-05-01 04:00:00'),
+(1588, 1588, NULL, NULL, 'LB405PMG8SC228610', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10666.67, '', '2026-05-01 04:00:00', '2026-05-01 04:00:00'),
+(1589, 1589, NULL, NULL, 'LATXCBLY2S1824840', 'Cyclomoteur doker super C50', 'GOLD', '', 9000.00, '', '2026-05-01 04:00:00', '2026-05-01 04:00:00'),
+(1590, 1590, NULL, NULL, 'LATXCBLY1S1959501', 'Cyclomoteur doker super C50', 'GRIS', '', 7916.67, '', '2026-05-01 04:00:00', '2026-05-01 04:00:00'),
+(1591, 1591, NULL, NULL, 'LBBM01004TBJ09233', 'Cyclomoteur  QJTX200', 'NOIR MATTE', '', 16916.67, '', '2026-05-04 04:00:00', '2026-05-04 04:00:00'),
+(1592, 1592, NULL, NULL, 'LKXXCBPA5S1018608', 'Cyclomoteur Daytona SH Sport', 'GRIS NARDO', '', 10416.67, '', '2026-05-04 04:00:00', '2026-05-04 04:00:00'),
+(1593, 1593, NULL, NULL, 'L5YTDJAD6T1152445', 'Cyclomoteur   Becane X ADV', 'GRIS NARDO', '', 17166.67, '', '2026-05-05 04:00:00', '2026-05-05 04:00:00'),
+(1594, 1594, NULL, NULL, 'LB405PMG0SC228536', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10583.33, '', '2026-05-06 04:00:00', '2026-05-06 04:00:00'),
+(1595, 1595, NULL, NULL, 'LATXCBLY1S1971371', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7833.33, '', '2026-05-07 04:00:00', '2026-05-07 04:00:00'),
+(1596, 1596, NULL, NULL, 'LRYDXBLB8P0219292', 'Cyclomoteur doker Gama 48', '', '', 8583.33, '', '2026-05-08 04:00:00', '2026-05-08 04:00:00'),
+(1597, 1597, NULL, NULL, 'LATXCBLY1S1971163', 'Cyclomoteur doker super C50', 'BLEU CH', '', 7833.33, '', '2026-05-08 04:00:00', '2026-05-08 04:00:00'),
+(1598, 1598, NULL, NULL, 'LB405P3F2SC198514', 'Cyclomoteur  HY SH Becane', 'NOIR BRILLIANT', '', 10750.00, '', '2026-05-08 04:00:00', '2026-05-08 04:00:00'),
+(1599, 1599, NULL, NULL, 'LB405PMG6SC214043', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10416.67, '', '2026-05-08 04:00:00', '2026-05-08 04:00:00'),
+(1600, 1600, NULL, NULL, '', 'Couleur NOIR MATE', '', '', 0.00, '', '2026-07-27 14:01:46', '2026-07-27 14:01:46'),
+(1601, 1601, NULL, NULL, '', 'SCOOTER KYMCO', 'NOIR BRILLANT', '', 13750.00, '', '2026-05-09 04:00:00', '2026-05-09 04:00:00'),
+(1602, 1602, NULL, NULL, 'LFETCBP49S1B00504', 'Cyclomoteur  MAGOTTI Valenti S', 'NOIR  BRILLANT', '', 8750.00, '', '2026-05-09 04:00:00', '2026-05-09 04:00:00'),
+(1603, 1603, NULL, NULL, 'LB405PMG2SC169845', 'Cyclomoteur  rebero Becane', 'MARON MATT', '', 10416.67, '', '2026-05-11 04:00:00', '2026-05-11 04:00:00'),
+(1604, 1604, NULL, NULL, 'LATXCBLY1S1971133', 'Cyclomoteur doker super C50', 'BLEU CH', '', 7666.67, '', '2026-05-11 04:00:00', '2026-05-11 04:00:00'),
+(1605, 1605, NULL, NULL, 'LATXCBLY1S1967542', 'Cyclomoteur doker super C50', 'DIGITAL MATT', '', 7583.33, '', '2026-05-11 04:00:00', '2026-05-11 04:00:00'),
+(1606, 1606, NULL, NULL, '', 'SCOOTER KYMCO', 'NOIR BRILLANT', '', 13750.00, '', '2026-05-13 04:00:00', '2026-05-13 04:00:00'),
+(1607, 1607, NULL, NULL, 'LFETDLPE0S1B01567', 'Cyclomoteur   Becane X ADV200', 'NOIR MATE', '', 20000.00, '', '2026-05-13 04:00:00', '2026-05-13 04:00:00'),
+(1608, 1608, NULL, NULL, 'LATXCBLY1S1971281', 'Cyclomoteur doker super C50', 'BLEU', '', 7916.67, '', '2026-05-17 04:00:00', '2026-05-17 04:00:00'),
+(1609, 1609, NULL, NULL, 'LB405PMG8SC228557', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10583.33, '', '2026-05-17 04:00:00', '2026-05-17 04:00:00'),
+(1610, 1610, NULL, NULL, 'LATXCBLY1S1959454', 'Cyclomoteur doker super C50', 'GRIS', '', 7666.67, '', '2026-05-18 04:00:00', '2026-05-18 04:00:00'),
+(1611, 1611, NULL, NULL, 'LB405PMG5SC240844', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10583.33, '', '2026-05-19 04:00:00', '2026-05-19 04:00:00'),
+(1612, 1612, NULL, NULL, 'LKXXCBPA9S1018630', 'Cyclomoteur Daytona SH Sport', 'BEIGE MAT', '', 10583.33, '', '2026-05-19 04:00:00', '2026-05-19 04:00:00'),
+(1613, 1613, NULL, NULL, 'LKXXCBPA5S1018916', 'Cyclomoteur Daytona SH Sport', 'GRIS NARDO', '', 10583.33, '', '2026-05-19 04:00:00', '2026-05-19 04:00:00'),
+(1614, 1614, NULL, NULL, 'LTZ5CBLK2R2411599', 'Cyclomoteur Cooper RS Becane', 'Noir', '', 7916.67, '', '2026-05-19 04:00:00', '2026-05-19 04:00:00'),
+(1615, 1615, NULL, NULL, 'LB405PMG6SC214365', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10416.67, '', '2026-05-21 04:00:00', '2026-05-21 04:00:00'),
+(1616, 1616, NULL, NULL, 'LFETDLPE2S1B01327', 'Cyclomoteur   Becane X ADV200', 'GRIS NARDO', '', 20833.33, '', '2026-05-21 04:00:00', '2026-05-21 04:00:00'),
+(1617, 1617, NULL, NULL, 'LATXCBLY1S1936907', 'Cyclomoteur doker super C50', 'BLEU CH', '', 7916.67, '', '2026-05-21 04:00:00', '2026-05-21 04:00:00'),
+(1618, 1618, NULL, NULL, 'LATXCBLY1S1971240', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7916.67, '', '2026-05-21 04:00:00', '2026-05-21 04:00:00'),
+(1619, 1619, NULL, NULL, 'LATXCBLY1S1971380', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7916.67, '', '2026-05-21 04:00:00', '2026-05-21 04:00:00'),
+(1620, 1620, NULL, NULL, 'LKXXCBPA1S1018623', 'Cyclomoteur Daytona SH Sport', 'BRONZE MATT', '', 10583.33, '', '2026-05-22 04:00:00', '2026-05-22 04:00:00'),
+(1621, 1621, NULL, NULL, '', 'SCOOTER KYMCO', 'NOIR BRILLANT', '', 13750.00, '', '2026-05-23 04:00:00', '2026-05-23 04:00:00'),
+(1622, 1622, NULL, NULL, 'LXMMGB501SXB64877', 'Cyclomoteur Sym NHT 200', 'NOIR BRONZE', '', 27500.00, '', '2026-05-23 04:00:00', '2026-05-23 04:00:00'),
+(1623, 1623, NULL, NULL, 'LATXCBLY1S1971370', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 7916.67, '', '2026-05-23 04:00:00', '2026-05-23 04:00:00'),
+(1624, 1624, NULL, NULL, 'L5YBRCBA9T1152209', 'Cyclomoteur   Becane R9', 'GRIS BEIGE', '', 11250.00, '', '2026-05-23 04:00:00', '2026-05-23 04:00:00'),
+(1625, 1625, NULL, NULL, 'LB405PMG5SC242254', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10666.67, '', '2026-05-23 04:00:00', '2026-05-23 04:00:00'),
+(1626, 1626, NULL, NULL, 'LXMAY05WXSX642871', 'Cyclomoteur Sym Sunphony S', 'Gris Nardo', '', 14583.33, '', '2026-05-25 04:00:00', '2026-05-25 04:00:00'),
+(1627, 1627, NULL, NULL, 'LRYDXBLB1P0219294', 'Cyclomoteur doker Gama 48', '', '', 8583.33, '', '2026-05-25 04:00:00', '2026-05-25 04:00:00'),
+(1628, 1628, NULL, NULL, 'LFETDLPE3S1B01000', 'Cyclomoteur   Becane X ADV200', 'GRIS BEIGE', '', 20833.33, '', '2026-05-25 04:00:00', '2026-05-25 04:00:00'),
+(1629, 1629, NULL, NULL, 'LB405PUH6SC088128', 'Cyclomoteur Becane 29', 'NOIR', '', 10416.67, '', '2026-05-25 04:00:00', '2026-05-25 04:00:00'),
+(1630, 1630, NULL, NULL, 'LB405PMG2SC213472', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10416.67, '', '2026-05-26 04:00:00', '2026-05-26 04:00:00'),
+(1631, 1631, NULL, NULL, 'LB405PMG1SC215228', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10416.67, '', '2026-05-26 04:00:00', '2026-05-26 04:00:00'),
+(1632, 1632, NULL, NULL, 'LKXXCBPA9S1018644', 'Cyclomoteur Daytona SH Sport', 'NOIR BRILLANT', '', 10583.33, '', '2026-05-26 04:00:00', '2026-05-26 04:00:00'),
+(1633, 1633, NULL, NULL, 'LATXCBLY1S1911342', 'Cyclomoteur doker super C50', 'ROUGE CH', '', 7916.67, '', '2026-05-29 04:00:00', '2026-05-29 04:00:00'),
+(1634, 1634, NULL, NULL, 'LB412PMC0SC184354', 'Cyclomoteur  Becane super cub 127', 'Noir BRILLANT', '', 10416.67, '', '2026-05-30 04:00:00', '2026-05-30 04:00:00'),
+(1635, 1635, NULL, NULL, 'LB405PMG1SC215231', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10666.67, '', '2026-05-31 04:00:00', '2026-05-31 04:00:00'),
+(1636, 1636, NULL, NULL, 'LB405PMG4SC213022', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10666.67, '', '2026-05-31 04:00:00', '2026-05-31 04:00:00'),
+(1637, 1637, NULL, NULL, 'LB405PMG7SC213483', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10666.67, '', '2026-06-01 04:00:00', '2026-06-01 04:00:00'),
+(1638, 1638, NULL, NULL, 'LXMMGB501SXB31333', 'Cyclomoteur Sym NHT 200', 'NOIR MAT', '', 27500.00, '', '2026-06-01 04:00:00', '2026-06-01 04:00:00'),
+(1639, 1639, NULL, NULL, 'LATXCBLY1S1967533', 'Cyclomoteur doker super C50', 'DIGITAL MATT', '', 8000.00, '', '2026-06-01 04:00:00', '2026-06-01 04:00:00'),
+(1640, 1640, NULL, NULL, 'L5YXGCBD7T1177437', 'Cyclomoteur  BECANE Valenti', 'GRIS BEIGE', '', 8750.00, '', '2026-06-02 04:00:00', '2026-06-02 04:00:00'),
+(1641, 1641, NULL, NULL, 'LB405PMG8SC215243', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10666.67, '', '2026-06-02 04:00:00', '2026-06-02 04:00:00'),
+(1642, 1642, NULL, NULL, 'LATXCBLY1S1971134', 'Cyclomoteur doker super C50', 'BLEU CH', '', 7916.67, '', '2026-06-03 04:00:00', '2026-06-03 04:00:00'),
+(1643, 1643, NULL, NULL, 'LATXCBLY1S1911322', 'Cyclomoteur doker super C50', 'ROUGE CH', '', 7916.67, '', '2026-06-03 04:00:00', '2026-06-03 04:00:00'),
+(1644, 1644, NULL, NULL, 'L5YXGCBD1T1177532', 'Cyclomoteur  BECANE Valenti', 'NOIR BRILLANT', '', 8750.00, '', '2026-06-03 04:00:00', '2026-06-03 04:00:00'),
+(1645, 1645, NULL, NULL, 'LATXCBLY1S1911291', 'Cyclomoteur doker super C50', 'ROUGE CH', '', 7916.67, '', '2026-06-03 04:00:00', '2026-06-03 04:00:00'),
+(1646, 1646, NULL, NULL, '', 'Couleur GRIS NARDO', '', '', 0.00, '', '2026-07-27 14:01:52', '2026-07-27 14:01:52'),
+(1647, 1647, NULL, NULL, 'LATXCBLY1S1936958', 'Cyclomoteur doker super C50', 'BLEU CH', '', 8166.67, '', '2026-06-04 04:00:00', '2026-06-04 04:00:00'),
+(1648, 1648, NULL, NULL, 'LKXXCBPAXS1018667', 'Cyclomoteur Daytona SH Sport', 'NOIR BRILLANT', '', 10583.33, '', '2026-06-05 04:00:00', '2026-06-05 04:00:00'),
+(1649, 1649, NULL, NULL, 'LATXCBLY1S1938935', 'Cyclomoteur doker super C50', 'BLEU CH', '', 8166.67, '', '2026-06-05 04:00:00', '2026-06-05 04:00:00'),
+(1650, 1650, NULL, NULL, 'LKXXCBPAXS1018989', 'Cyclomoteur Daytona SH Sport', 'NOIR MATT', '', 10583.33, '', '2026-06-05 04:00:00', '2026-06-05 04:00:00'),
+(1651, 1651, NULL, NULL, '', 'SCOOTER KYMCO', 'NOIR BRILLANT', '', 13750.00, '', '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1652, 1652, NULL, NULL, 'LXMAY05WXSX642840', 'Cyclomoteur Sym Sunphony S', 'NOIR', '', 14583.33, '', '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1653, 1653, NULL, NULL, 'LZRGOF200T1001176', 'Cyclomoteur SIROCCO X', 'NOIR MATT', '', 8333.33, '', '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1654, 1654, NULL, NULL, 'LB405PMG5SC242089', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10666.67, '', '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1655, 1655, NULL, NULL, 'L5YXGCBD0S1168531', 'Cyclomoteur Becane Valenti', 'Gris METAL', '', 7500.00, '', '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1656, 1656, NULL, NULL, 'LATXCBLY1S1967574', 'Cyclomoteur doker super C50', 'DIGITAL MATT', '', 7916.67, '', '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1657, 1657, NULL, NULL, 'LATXCBLY2T1803290', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1658, 1658, NULL, NULL, 'LATXCBLY2T1804021', 'Cyclomoteur doker super C50', 'PISTACHE BAT', '', 9166.67, '', '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1659, 1659, NULL, NULL, 'LATXCBLY2T1803520', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1660, 1660, NULL, NULL, 'LZRY7F2F4R1035165', 'Cyclomoteur doker MILANO', 'NOIR', '', 9166.67, '', '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1661, 1661, NULL, NULL, '', 'SCOOTER KYMCO', 'GRIS MAT', '', 13750.00, '', '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1662, 1662, NULL, NULL, 'LATXCBLY1S1938924', 'Cyclomoteur doker super C50', 'BLEU CH', '', 8166.67, '', '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1663, 1663, NULL, NULL, 'LATXCBLY1S1936981', 'Cyclomoteur doker super C50', 'BLEU CH', '', 8166.67, '', '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1664, 1664, NULL, NULL, 'LATXCBLY2T1804183', 'Cyclomoteur doker super C50', 'GRIS NARDO', '', 9166.67, '', '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1665, 1665, NULL, NULL, 'LATXCGLY3S1075226', 'Cyclomoteur C100', 'NOIR', '', 9166.67, '', '2026-06-06 04:00:00', '2026-06-06 04:00:00'),
+(1666, 1666, NULL, NULL, 'LATXCBLY2T1804176', 'Cyclomoteur doker super C50', 'GRIS NARDO', '', 9166.67, '', '2026-06-07 04:00:00', '2026-06-07 04:00:00'),
+(1667, 1667, NULL, NULL, 'LATXCBLY2T1804162', 'Cyclomoteur doker super C50', 'GRIS NARDO', '', 9166.67, '', '2026-06-07 04:00:00', '2026-06-07 04:00:00'),
+(1668, 1668, NULL, NULL, 'LB405PMG1SC227525', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10583.33, '', '2026-06-07 04:00:00', '2026-06-07 04:00:00'),
+(1669, 1669, NULL, NULL, 'L5YBYCBA4S1160588', 'Cyclomoteur  BECANEMIRO 50', 'GRIS FONCE', '', 12833.33, '', '2026-06-08 04:00:00', '2026-06-08 04:00:00'),
+(1670, 1670, NULL, NULL, 'LATXCBLY2T1803558', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-06-08 04:00:00', '2026-06-08 04:00:00'),
+(1671, 1671, NULL, NULL, 'LATXCBLY2T1803582', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-06-08 04:00:00', '2026-06-08 04:00:00'),
+(1672, 1672, NULL, NULL, 'LB405PMG0SC241559', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-06-09 04:00:00', '2026-06-09 04:00:00'),
+(1673, 1673, NULL, NULL, 'LATXCBLY2T1803478', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-06-09 04:00:00', '2026-06-09 04:00:00'),
+(1674, 1674, NULL, NULL, 'LB405PMG4SC227602', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10666.67, '', '2026-06-09 04:00:00', '2026-06-09 04:00:00'),
+(1675, 1675, NULL, NULL, 'LATXCBLY2T1803547', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-06-09 04:00:00', '2026-06-09 04:00:00'),
+(1676, 1676, NULL, NULL, 'LKXXCBPA3S1018672', 'Cyclomoteur Daytona SH Sport', 'NOIR MATT', '', 10000.00, '', '2026-06-09 04:00:00', '2026-06-09 04:00:00'),
+(1677, 1677, NULL, NULL, 'LATXCBLY2T1803618', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-06-09 04:00:00', '2026-06-09 04:00:00'),
+(1678, 1678, NULL, NULL, 'LATXCBLY2T1804161', 'Cyclomoteur doker super C50', 'GRIS NARDO', '', 9166.67, '', '2026-06-10 04:00:00', '2026-06-10 04:00:00'),
+(1679, 1679, NULL, NULL, 'LATXCBLY2T1803543', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-06-10 04:00:00', '2026-06-10 04:00:00'),
+(1680, 1680, NULL, NULL, 'LB405PMG8SC228008', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10750.00, '', '2026-06-10 04:00:00', '2026-06-10 04:00:00'),
+(1681, 1681, NULL, NULL, 'LATXCBLY1S1967510', 'Cyclomoteur doker super C50', 'DIGITAL MATT', '', 8000.00, '', '2026-06-11 04:00:00', '2026-06-11 04:00:00'),
+(1682, 1682, NULL, NULL, 'LB405PMG4SC170303', 'Cyclomoteur  rebero Becane', 'VERT MAT', '', 10416.67, '', '2026-06-11 04:00:00', '2026-06-11 04:00:00'),
+(1683, 1683, NULL, NULL, '', 'Couleur GRIS BRILLANT', '', '', 0.00, '', '2026-07-27 14:01:57', '2026-07-27 14:01:57'),
+(1684, 1684, NULL, NULL, '', 'Couleur GRIS BEIGE', '', '', 0.00, '', '2026-07-27 14:01:57', '2026-07-27 14:01:57'),
+(1685, 1685, NULL, NULL, '', 'Couleur GRIS BRILLANT', '', '', 0.00, '', '2026-07-27 14:01:57', '2026-07-27 14:01:57'),
+(1686, 1686, NULL, NULL, 'LB405PMG7SC228016', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-06-13 04:00:00', '2026-06-13 04:00:00'),
+(1687, 1687, NULL, NULL, 'LB405PMG1SC228500', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10750.00, '', '2026-06-13 04:00:00', '2026-06-13 04:00:00'),
+(1688, 1688, NULL, NULL, 'LATXCBLY1S1939469', 'Cyclomoteur doker super C50', 'BLEU CH', '', 8166.67, '', '2026-06-14 04:00:00', '2026-06-14 04:00:00'),
+(1689, 1689, NULL, NULL, 'LATXCBLY2T1803568', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-06-15 04:00:00', '2026-06-15 04:00:00'),
+(1690, 1690, NULL, NULL, 'LATXCGLY5S1070285', 'Cyclomoteur C100', 'NOIR', '', 9166.67, '', '2026-06-15 04:00:00', '2026-06-15 04:00:00'),
+(1691, 1691, NULL, NULL, 'LATXCBLY2T1803360', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-06-15 04:00:00', '2026-06-15 04:00:00'),
+(1692, 1692, NULL, NULL, 'LATXCBLY2T1803076', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-06-15 04:00:00', '2026-06-15 04:00:00'),
+(1693, 1693, NULL, NULL, 'LATXCBLY1S1957209', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8000.00, '', '2026-06-15 04:00:00', '2026-06-15 04:00:00'),
+(1694, 1694, NULL, NULL, 'LB405PMG2SC227565', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-06-15 04:00:00', '2026-06-15 04:00:00'),
+(1695, 1695, NULL, NULL, 'LB405PMG9SC227644', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-06-15 04:00:00', '2026-06-15 04:00:00'),
+(1696, 1696, NULL, NULL, 'LUAHPBB34R1000581', 'Cyclomoteur  Becane NEYMAR', 'GRIS', '', 13333.33, '', '2026-06-16 04:00:00', '2026-06-16 04:00:00'),
+(1697, 1697, NULL, NULL, 'LATXCBLY1S1971241', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8333.33, '', '2026-06-16 04:00:00', '2026-06-16 04:00:00'),
+(1698, 1698, NULL, NULL, 'LATXCBLY1S1912157', 'Cyclomoteur doker super C50', 'BLEU CH', '', 7916.67, '', '2026-06-16 04:00:00', '2026-06-16 04:00:00'),
+(1699, 1699, NULL, NULL, 'LB412PMC3SC184283', 'Cyclomoteur  Becane super cub 127', 'Noir BRILLANT', '', 10416.67, '', '2026-06-17 04:00:00', '2026-06-17 04:00:00'),
+(1700, 1700, NULL, NULL, 'LKXXCBPA0S1018645', 'Cyclomoteur Daytona SH Sport', 'NOIR MATT', '', 10000.00, '', '2026-06-17 04:00:00', '2026-06-17 04:00:00'),
+(1701, 1701, NULL, NULL, 'LATXCBLY1S1971493', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 8166.67, '', '2026-06-17 04:00:00', '2026-06-17 04:00:00'),
+(1702, 1702, NULL, NULL, 'LB405PMG8SC235962', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-06-17 04:00:00', '2026-06-17 04:00:00'),
+(1703, 1703, NULL, NULL, 'LATXCBLY1S1971155', 'Cyclomoteur doker super C50', 'BLEU CH', '', 8166.67, '', '2026-06-17 04:00:00', '2026-06-17 04:00:00'),
+(1704, 1704, NULL, NULL, 'LKXXCBPA5S1018673', 'Cyclomoteur Daytona SH Sport', 'NOIR MATT', '', 10000.00, '', '2026-06-17 04:00:00', '2026-06-17 04:00:00'),
+(1705, 1705, NULL, NULL, 'LATXCBLY2T1809032', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-06-18 04:00:00', '2026-06-18 04:00:00'),
+(1706, 1706, NULL, NULL, 'LATXCBLY2T1803965', 'Cyclomoteur doker super C50', 'PISTACHE BAT', '', 9166.67, '', '2026-06-18 04:00:00', '2026-06-18 04:00:00'),
+(1707, 1707, NULL, NULL, 'LATXCBLY2T1809142', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-06-18 04:00:00', '2026-06-18 04:00:00');
+INSERT INTO `chassis_order_items` (`id`, `chassis_order_id`, `chassis_number_id`, `variant_id`, `chassis_number`, `model_name`, `family_name`, `brand_name`, `price`, `location`, `created_at`, `updated_at`) VALUES
+(1708, 1708, NULL, NULL, 'LB405PUH9SC077768', 'Cyclomoteur Becane 29', 'GRIS BEIGE', '', 10416.67, '', '2026-06-19 04:00:00', '2026-06-19 04:00:00'),
+(1709, 1709, NULL, NULL, '', 'Couleur GRIS NARDO', '', '', 0.00, '', '2026-07-27 14:02:00', '2026-07-27 14:02:00'),
+(1710, 1710, NULL, NULL, '', 'Couleur BLEU CHATE', '', '', 0.00, '', '2026-07-27 14:02:01', '2026-07-27 14:02:01'),
+(1711, 1711, NULL, NULL, 'LB405PMG0SC241576', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-06-20 04:00:00', '2026-06-20 04:00:00'),
+(1712, 1712, NULL, NULL, 'LATXCGLY1S1070137', 'Cyclomoteur C100', 'NOIR', '', 9166.67, '', '2026-06-20 04:00:00', '2026-06-20 04:00:00'),
+(1713, 1713, NULL, NULL, 'LATXCBLY2T1810469', 'Cyclomoteur doker super C50', 'GRIS NARDO BAT', '', 9166.67, '', '2026-06-20 04:00:00', '2026-06-20 04:00:00'),
+(1714, 1714, NULL, NULL, 'LATXCBLY2T1803603', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-06-20 04:00:00', '2026-06-20 04:00:00'),
+(1715, 1715, NULL, NULL, 'LB405PMG2SC227503', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-06-21 04:00:00', '2026-06-21 04:00:00'),
+(1716, 1716, NULL, NULL, 'LB405PMG0SC242209', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-06-21 04:00:00', '2026-06-21 04:00:00'),
+(1717, 1717, NULL, NULL, 'LATXCBLY1S1939524', 'Cyclomoteur doker super C50', 'BLEU CH', '', 8166.67, '', '2026-06-22 04:00:00', '2026-06-22 04:00:00'),
+(1718, 1718, NULL, NULL, 'LATXCBLY1S1967539', 'Cyclomoteur doker super C50', 'DIGITAL MATT', '', 7750.00, '', '2026-06-22 04:00:00', '2026-06-22 04:00:00'),
+(1719, 1719, NULL, NULL, 'LFETDLPE5S1B01127', 'Cyclomoteur   Becane X ADV200', 'GRIS MATTE', '', 20833.33, '', '2026-06-22 04:00:00', '2026-06-22 04:00:00'),
+(1720, 1720, NULL, NULL, 'LB412PMC6SC184388', 'Cyclomoteur  Becane super cub 127', 'Noir BRILLANT', '', 10416.67, '', '2026-06-23 04:00:00', '2026-06-23 04:00:00'),
+(1721, 1721, NULL, NULL, 'L5YBRCBA9S1127454', 'Cyclomoteur   Becane R9', 'GRIS BEIGE', '', 11083.33, '', '2026-06-25 04:00:00', '2026-06-25 04:00:00'),
+(1722, 1722, NULL, NULL, 'LKXXCBPA1S1018671', 'Cyclomoteur Daytona SH Sport', 'NOIR MATT', '', 10000.00, '', '2026-06-25 04:00:00', '2026-06-25 04:00:00'),
+(1723, 1723, NULL, NULL, 'LB405PMG6SC213863', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 11000.00, '', '2026-06-26 04:00:00', '2026-06-26 04:00:00'),
+(1724, 1724, NULL, NULL, 'LATXCBLY2T1810403', 'Cyclomoteur doker super C50', 'GRIS NARDO BAT', '', 9166.67, '', '2026-06-28 04:00:00', '2026-06-28 04:00:00'),
+(1725, 1725, NULL, NULL, 'LATXCBLY2T1810231', 'Cyclomoteur doker super C50', 'GRIS NARDO BAT', '', 9166.67, '', '2026-06-28 04:00:00', '2026-06-28 04:00:00'),
+(1726, 1726, NULL, NULL, 'LB405PMGXSC213526', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-06-28 04:00:00', '2026-06-28 04:00:00'),
+(1727, 1727, NULL, NULL, 'LATXCBLY2T1810464', 'Cyclomoteur doker super C50', 'GRIS NARDO BAT', '', 9166.67, '', '2026-06-29 04:00:00', '2026-06-29 04:00:00'),
+(1728, 1728, NULL, NULL, 'LATXCBLY1S1939218', 'Cyclomoteur doker super C50', 'BLEU CH', '', 8166.67, '', '2026-06-29 04:00:00', '2026-06-29 04:00:00'),
+(1729, 1729, NULL, NULL, 'LATXCBLY1T1902498', 'Cyclomoteur doker super C50', 'DIGITAL MATT', '', 8166.67, '', '2026-06-29 04:00:00', '2026-06-29 04:00:00'),
+(1730, 1730, NULL, NULL, 'LATXCBLY2T1809066', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-06-29 04:00:00', '2026-06-29 04:00:00'),
+(1731, 1731, NULL, NULL, 'LATXCBLY2T1809154', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-06-30 04:00:00', '2026-06-30 04:00:00'),
+(1732, 1732, NULL, NULL, 'LATXCBLY1T1902475', 'Cyclomoteur doker super C50', 'DIGITAL MATT', '', 8166.67, '', '2026-06-30 04:00:00', '2026-06-30 04:00:00'),
+(1733, 1733, NULL, NULL, 'LZRGOF201T1001249', 'Cyclomoteur SIROCCO X', 'NOIR', '', 7916.67, '', '2026-06-30 04:00:00', '2026-06-30 04:00:00'),
+(1734, 1734, NULL, NULL, 'LATXCBLY2T1804408', 'Cyclomoteur doker super C50', 'ROUGE CH', '', 9166.67, '', '2026-07-01 04:00:00', '2026-07-01 04:00:00'),
+(1735, 1735, NULL, NULL, '', 'SCOOTER SYMPHST 49CC', 'GRIS NARDO', '', 14583.33, '', '2026-07-01 04:00:00', '2026-07-01 04:00:00'),
+(1736, 1736, NULL, NULL, 'LB405PMG1SC213026', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-07-02 04:00:00', '2026-07-02 04:00:00'),
+(1737, 1737, NULL, NULL, 'LXDTCBP08S1201356', 'Cyclomoteur  WUBEN XMA', 'GRIS NARDO', '', 11250.00, '', '2026-07-02 04:00:00', '2026-07-02 04:00:00'),
+(1738, 1738, NULL, NULL, 'LATXCBLY2T1809015', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-07-02 04:00:00', '2026-07-02 04:00:00'),
+(1739, 1739, NULL, NULL, 'LXDTCBP00S1201402', 'Cyclomoteur  WUBEN XMA', 'NOIR MATE', '', 11250.00, '', '2026-07-03 04:00:00', '2026-07-03 04:00:00'),
+(1740, 1740, NULL, NULL, 'LB405PMGXSC227605', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-07-03 04:00:00', '2026-07-03 04:00:00'),
+(1741, 1741, NULL, NULL, 'LKXXCBPA7T1000502', 'Cyclomoteur Daytona SH Sport', 'NOIR BRILLANT', '', 10000.00, '', '2026-07-04 04:00:00', '2026-07-04 04:00:00'),
+(1742, 1742, NULL, NULL, 'LB405PMG0SC235163', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-07-04 04:00:00', '2026-07-04 04:00:00'),
+(1743, 1743, NULL, NULL, 'LB405PMG9SC227529', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-07-05 04:00:00', '2026-07-05 04:00:00'),
+(1744, 1744, NULL, NULL, 'LATXCBLY2T1809133', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-07-05 04:00:00', '2026-07-05 04:00:00'),
+(1745, 1745, NULL, NULL, 'LB405PMG8SC236027', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-07-05 04:00:00', '2026-07-05 04:00:00'),
+(1746, 1746, NULL, NULL, 'LATXCBLY2T1809135', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-07-06 04:00:00', '2026-07-06 04:00:00'),
+(1747, 1747, NULL, NULL, 'LATXCBLY2T1804430', 'Cyclomoteur doker super C50', 'ROUGE CH', '', 9166.67, '', '2026-07-06 04:00:00', '2026-07-06 04:00:00'),
+(1748, 1748, NULL, NULL, 'L5YSHCBA9T1188145', 'Cyclomoteur  SH BECANE 50', 'GRIS MATE', '', 13333.33, '', '2026-07-06 04:00:00', '2026-07-06 04:00:00'),
+(1749, 1749, NULL, NULL, 'LB405PMG5SC236101', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-07-07 04:00:00', '2026-07-07 04:00:00'),
+(1750, 1750, NULL, NULL, '', 'Couleur GRIS NARDO', '', '', 0.00, '', '2026-07-27 14:02:06', '2026-07-27 14:02:06'),
+(1751, 1751, NULL, NULL, 'LB405PUH1SC088764', 'Cyclomoteur Becane 29', 'GRIS BEIGE', '', 10208.33, '', '2026-07-07 04:00:00', '2026-07-07 04:00:00'),
+(1752, 1752, NULL, NULL, 'LATXCBLY2T1804014', 'Cyclomoteur doker super C50', 'PISTACHE BAT', '', 9166.67, '', '2026-07-08 04:00:00', '2026-07-08 04:00:00'),
+(1753, 1753, NULL, NULL, 'LATXCBLY2T1809176', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-07-09 04:00:00', '2026-07-09 04:00:00'),
+(1754, 1754, NULL, NULL, 'LRYDXBLB7P0219316', 'Cyclomoteur doker Gama 48', '', '', 8583.33, '', '2026-07-09 04:00:00', '2026-07-09 04:00:00'),
+(1755, 1755, NULL, NULL, 'LATXCBLY2T1804404', 'Cyclomoteur doker super C50', 'ROUGE BAT', '', 9166.67, '', '2026-07-09 04:00:00', '2026-07-09 04:00:00'),
+(1756, 1756, NULL, NULL, 'LATXCBLY2T1803999', 'Cyclomoteur doker super C50', 'PISTACHE BAT', '', 9166.67, '', '2026-07-10 04:00:00', '2026-07-10 04:00:00'),
+(1757, 1757, NULL, NULL, 'LB405PMGXSC235042', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10666.67, '', '2026-07-10 04:00:00', '2026-07-10 04:00:00'),
+(1758, 1758, NULL, NULL, 'LFETCBP46S1901422', 'Cyclomoteur  MAGOTTI Valenti S', 'NOIR  BRILLANT', '', 8750.00, '', '2026-07-10 04:00:00', '2026-07-10 04:00:00'),
+(1759, 1759, NULL, NULL, 'LATXCBLY2T1809171', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-07-10 04:00:00', '2026-07-10 04:00:00'),
+(1760, 1760, NULL, NULL, 'LB405PMG2SC242177', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-07-10 04:00:00', '2026-07-10 04:00:00'),
+(1761, 1761, NULL, NULL, 'LB405PMG4SC235621', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-07-10 04:00:00', '2026-07-10 04:00:00'),
+(1762, 1762, NULL, NULL, 'LATXCBLY2T1809160', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-07-11 04:00:00', '2026-07-11 04:00:00'),
+(1763, 1763, NULL, NULL, 'LB405PMG0SC215351', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-07-11 04:00:00', '2026-07-11 04:00:00'),
+(1764, 1764, NULL, NULL, 'LATXCBLY1S1911273', 'Cyclomoteur doker super C50', 'ROUGE CH', '', 8166.67, '', '2026-07-11 04:00:00', '2026-07-11 04:00:00'),
+(1765, 1765, NULL, NULL, 'LB405PMG9SC235338', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-07-11 04:00:00', '2026-07-11 04:00:00'),
+(1766, 1766, NULL, NULL, 'LXYPCBLO8R7300322', 'Cyclomoteur   Becane  RVX', 'NOIR /ROUGE', '', 12083.33, '', '2026-07-11 04:00:00', '2026-07-11 04:00:00'),
+(1767, 1767, NULL, NULL, 'LATXCBLY2T1809156', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-07-12 04:00:00', '2026-07-12 04:00:00'),
+(1768, 1768, NULL, NULL, 'LATXCBLY1S1939488', 'Cyclomoteur doker super C50', 'BLEU CH', '', 8166.67, '', '2026-07-13 04:00:00', '2026-07-13 04:00:00'),
+(1769, 1769, NULL, NULL, 'LATXCBLY2T1809175', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-07-13 04:00:00', '2026-07-13 04:00:00'),
+(1770, 1770, NULL, NULL, 'L5YSHCBAXT1188526', 'Cyclomoteur  SH BECANE 50', 'BLANC', '', 13583.33, '', '2026-07-13 04:00:00', '2026-07-13 04:00:00'),
+(1771, 1771, NULL, NULL, '', 'SCOOTER KYMCO', 'GRIS MAT', '', 13750.00, '', '2026-07-13 04:00:00', '2026-07-13 04:00:00'),
+(1772, 1772, NULL, NULL, 'LATXCBLY2T1803042', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-07-14 04:00:00', '2026-07-14 04:00:00'),
+(1773, 1773, NULL, NULL, 'LUAHPBB30R1000335', 'Cyclomoteur  Becane NEYMAR', 'VERT', '', 13333.33, '', '2026-07-14 04:00:00', '2026-07-14 04:00:00'),
+(1774, 1774, NULL, NULL, 'LB405PMG2SC235665', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-07-14 04:00:00', '2026-07-14 04:00:00'),
+(1775, 1775, NULL, NULL, 'LFETCJP93T1202465', 'Cyclomoteur XMAX125 Becane', 'Gris NARDO', '', 16250.00, '', '2026-07-14 04:00:00', '2026-07-14 04:00:00'),
+(1776, 1776, NULL, NULL, 'LATXCBLY2T1809158', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-07-15 04:00:00', '2026-07-15 04:00:00'),
+(1777, 1777, NULL, NULL, 'LATXCBLY2T1803506', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-07-15 04:00:00', '2026-07-15 04:00:00'),
+(1778, 1778, NULL, NULL, 'LXMAY05WXTX627289', 'Cyclomoteur Sym Sunphony S', 'GRIS NARDO', '', 14583.33, '', '2026-07-15 04:00:00', '2026-07-15 04:00:00'),
+(1779, 1779, NULL, NULL, 'LATXCBLY1S1939464', 'Cyclomoteur doker super C50', 'BLEU CH', '', 8166.67, '', '2026-07-15 04:00:00', '2026-07-15 04:00:00'),
+(1780, 1780, NULL, NULL, 'LATXCBLY2T1814300', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-07-16 04:00:00', '2026-07-16 04:00:00'),
+(1781, 1781, NULL, NULL, 'LZRGOF207T1001028', 'Cyclomoteur SIROCCO X', 'GRIS NARDO', '', 7916.67, '', '2026-07-16 04:00:00', '2026-07-16 04:00:00'),
+(1782, 1782, NULL, NULL, '', 'SCOOTER KYMCO', 'GRIS MAT', '', 13750.00, '', '2026-07-17 04:00:00', '2026-07-17 04:00:00'),
+(1783, 1783, NULL, NULL, 'L5YSHDJA2T1187023', 'Cyclomoteur  SH BECANE125', 'GRIS NARDO', '', 16666.67, '', '2026-07-17 04:00:00', '2026-07-17 04:00:00'),
+(1784, 1784, NULL, NULL, 'LATXCBLY2T1814301', 'Cyclomoteur doker super C50', 'BLEU BAT', '', 9166.67, '', '2026-07-17 04:00:00', '2026-07-17 04:00:00'),
+(1785, 1785, NULL, NULL, 'LATXCBLY2T1813552', 'Cyclomoteur doker super C50', 'GRIS NARDO BAT', '', 9166.67, '', '2026-07-18 04:00:00', '2026-07-18 04:00:00'),
+(1786, 1786, NULL, NULL, 'LKXXCBPA8T1000489', 'Cyclomoteur Daytona SH Sport', 'NOIR BRILLANT', '', 10000.00, '', '2026-07-18 04:00:00', '2026-07-18 04:00:00'),
+(1787, 1787, NULL, NULL, 'LB405PMG8TC094909', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10750.00, '', '2026-07-18 04:00:00', '2026-07-18 04:00:00'),
+(1788, 1788, NULL, NULL, 'LFETCBP41S1B00156', 'Cyclomoteur  MAGOTTI Valenti S', 'GRIS NARDO', '', 8750.00, '', '2026-07-18 04:00:00', '2026-07-18 04:00:00'),
+(1789, 1789, NULL, NULL, 'LATXCBLY2T1813698', 'Cyclomoteur doker super C50', 'GRIS NARDO', '', 9166.67, '', '2026-07-20 04:00:00', '2026-07-20 04:00:00'),
+(1790, 1790, NULL, NULL, 'LATXCBLY1T1916099', 'Cyclomoteur doker super C50', 'BLEU', '', 8333.33, '', '2026-07-20 04:00:00', '2026-07-20 04:00:00'),
+(1791, 1791, NULL, NULL, 'LATXCBLY2T1804058', 'Cyclomoteur doker super C50', 'GRIS NARDO', '', 9166.67, '', '2026-07-20 04:00:00', '2026-07-20 04:00:00'),
+(1792, 1792, NULL, NULL, '', 'SCOOTER KYMCO', 'NOIR', '', 12916.67, '', '2026-07-21 04:00:00', '2026-07-21 04:00:00'),
+(1793, 1793, NULL, NULL, 'LATXCBLY2T1813533', 'Cyclomoteur doker super C50', 'GRIS NARDO', '', 9166.67, '', '2026-07-21 04:00:00', '2026-07-21 04:00:00'),
+(1794, 1794, NULL, NULL, 'LATXCBLY2T1804421', 'Cyclomoteur doker super C50', 'ROUGE BAT', '', 9166.67, '', '2026-07-21 04:00:00', '2026-07-21 04:00:00'),
+(1795, 1795, NULL, NULL, 'L5YBRCBA7T1167582', 'Cyclomoteur   Becane R9', 'NOIR BRILLANT', '', 11250.00, '', '2026-07-21 04:00:00', '2026-07-21 04:00:00'),
+(1796, 1796, NULL, NULL, 'LB405PMG3TC094350', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-07-22 04:00:00', '2026-07-22 04:00:00'),
+(1797, 1797, NULL, NULL, 'L5YSHCBA9T1188081', 'Cyclomoteur  SH BECANE 50', 'GRIS BEIGE', '', 13750.00, '', '2026-07-22 04:00:00', '2026-07-22 04:00:00'),
+(1798, 1798, NULL, NULL, 'LB405PMG7SC228503', 'Cyclomoteur  rebero Becane', 'Noir BRILLANT', '', 10833.33, '', '2026-07-23 04:00:00', '2026-07-23 04:00:00'),
+(1799, 1857, 130, 40, 's232wdadsa', 'TROTINETTE MAX WHEEL M2', 'TROTINETTE MAX WHEEL M2', 'TROTINATTE', 2816.67, 'DEPOT', '2026-07-28 18:22:47', '2026-07-28 18:24:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `coupons`
+--
+
+CREATE TABLE `coupons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `code` varchar(191) NOT NULL,
+  `discount` double NOT NULL DEFAULT 0,
+  `limit` int(11) NOT NULL DEFAULT 0,
+  `description` text DEFAULT NULL,
+  `is_active` int(11) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) DEFAULT NULL,
+  `email` varchar(191) DEFAULT NULL,
+  `phone_number` varchar(191) DEFAULT NULL,
+  `password` varchar(191) DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `store_id` varchar(191) DEFAULT NULL,
+  `avatar` varchar(191) DEFAULT NULL,
+  `lang` varchar(191) NOT NULL DEFAULT 'en',
+  `products_id` varchar(191) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_debts`
+--
+
+CREATE TABLE `customer_debts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `customer_name` varchar(191) DEFAULT NULL,
+  `customer_phone` varchar(191) DEFAULT NULL,
+  `doc_type` varchar(10) DEFAULT NULL,
+  `doc_number` varchar(100) DEFAULT NULL,
+  `total_amount` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `paid_amount` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `remaining_amount` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `notes` text DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `store_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `custom_domain_requests`
+--
+
+CREATE TABLE `custom_domain_requests` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `store_id` int(11) NOT NULL DEFAULT 0,
+  `custom_domain` varchar(191) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `email_templates`
+--
+
+CREATE TABLE `email_templates` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `from` varchar(191) DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `email_templates`
+--
+
+INSERT INTO `email_templates` (`id`, `name`, `from`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 'Order Created', 'gestion.mobi-nardo.com', 1, '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(2, 'Status Change', 'gestion.mobi-nardo.com', 1, '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(3, 'Order Created For Owner', 'gestion.mobi-nardo.com', 1, '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(4, 'Owner And Store Created', 'gestion.mobi-nardo.com', 1, '2025-09-11 21:18:46', '2025-09-11 21:18:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `email_template_langs`
+--
+
+CREATE TABLE `email_template_langs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `parent_id` int(11) NOT NULL,
+  `lang` varchar(100) NOT NULL,
+  `subject` varchar(191) NOT NULL,
+  `content` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `email_template_langs`
+--
+
+INSERT INTO `email_template_langs` (`id`, `parent_id`, `lang`, `subject`, `content`, `created_at`, `updated_at`) VALUES
+(1, 1, 'ar', 'Order Complete', '<p>مرحبا ،</p><p>مرحبا بك في {app_name}.</p><p>مرحبا ، {order_name} ، شكرا للتسوق</p><p>قمنا باستلام طلب الشراء الخاص بك ، سيتم الاتصال بك قريبا !</p><p>شكرا ،</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(2, 1, 'zh', 'Order Complete', '<p>您好，</p><p>欢迎来到 {app_name}。</p><p>您好，{order_name}，感谢您的购物</p><p>我们已收到您的购买请求，我们很快就会与您联系！</p><p>谢谢，</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(3, 1, 'da', 'Order Complete', '<p>Hej, &nbsp;</p><p>Velkommen til {app_name}.</p><p>Hej, {order_name}, tak for at Shopping</p><p>Vi har modtaget din købsanmodning.</p><p>Tak,</p><p>{app_navn}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(4, 1, 'de', 'Order Complete', '<p>Hello, &nbsp;</p><p>Willkommen bei {app_name}.</p><p>Hi, {order_name}, Vielen Dank für Shopping</p><p>Wir haben Ihre Kaufanforderung erhalten, wir werden in Kürze in Kontakt sein!</p><p>Danke,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(5, 1, 'en', 'Order Complete', '<p>Hello,&nbsp;</p><p>Welcome to {app_name}.</p><p>Hi, {order_name}, Thank you for Shopping</p><p>We received your purchase request, we\'ll be in touch shortly!</p><p>Thanks,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(6, 1, 'es', 'Order Complete', '<p>Hola, &nbsp;</p><p>Bienvenido a {app_name}.</p><p>Hi, {order_name}, Thank you for Shopping</p><p>Recibimos su solicitud de compra, ¡estaremos en contacto en breve!</p><p>Gracias,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(7, 1, 'fr', 'Order Complete', '<p>Bonjour, &nbsp;</p><p>Bienvenue dans {app_name}.</p><p>Hi, {order_name}, Thank you for Shopping</p><p>We reçus your purchase request, we \'ll be in touch incess!</p><p>Thanks,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(8, 1, 'he', 'Order Complete', '<p>שלום,&nbsp;</p><p>ברוך הבא ל{app_name}.</p><p>היי, {order_name}, תודה על הקניות</p><p>קיבלנו את בקשת הרכישה שלך, ניצור קשר בקרוב!</p><p>תודה,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(9, 1, 'pt', 'Order Complete', '<p>NAVE ÓRICA-Тутутутугальстугальский (app_name}).</p><p>Hi, {order_name}, пасссский</p><p>польстугальский потугальский (португальский), \"скортугальский\".</p><p>nome_do_appсссский!</p><p>{app_name}</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(10, 1, 'it', 'Order Complete', '<p>Ciao, &nbsp;</p><p>Benvenuti in {app_name}.</p><p>Ciao, {order_name}, Grazie per Shopping</p><p>Abbiamo ricevuto la tua richiesta di acquisto, noi \\ saremo in contatto a breve!</p><p>Grazie,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(11, 1, 'ja', 'Order Complete', '<p>こんにちは &nbsp;</p><p>{app_name}へようこそ。</p></p><p><p>こんにちは、 {order_name}、お客様の購買要求書をお受け取りいただき、すぐにご連絡いたします。</p><p>ありがとうございます。</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(12, 1, 'nl', 'Order Complete', '<p>Hallo, &nbsp;</p><p>Welkom bij {app_name}.</p><p>Hallo, {order_name}, Dank u voor Winkelen</p><p>We hebben uw aankoopaanvraag ontvangen, we zijn binnenkort in contact!</p><p>Bedankt,</p><p>{ app_name }</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(13, 1, 'pl', 'Order Complete', '<p>Hello, &nbsp;</p><p>Witamy w aplikacji {app_name}.</p><p>Hi, {order_name}, Dziękujemy za zakupy</p><p>Otrzymamy Twój wniosek o zakup, wkrótce będziemy w kontakcie!</p><p>Dzięki,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(14, 1, 'ru', 'Order Complete', '<p>Здравствуйте, &nbsp;</p><p>Вас приветствует {app_name}.</p><p>Hi, {order_name}, Спасибо за Шоппинг</p><p>Мы получили ваш запрос на покупку, мы \\ скоро свяжемся!</p><p>Спасибо,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(15, 1, 'tr', 'Order Complete', '<p>Merhaba,&nbsp;</p><p>{app_name}\'e hoş geldiniz.</p><p>Merhaba {order_name}, Alışveriş için teşekkür ederiz</p><p>Satın alma talebinizi aldık, kısa süre içinde sizinle iletişime geçeceğiz!</p><p>Teşekkürler,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(16, 1, 'pt-br', 'Order Complete', '<p>NAVE ÓRICA-Тутутутугальстугальский (app_name}).</p><p>Hi, {order_name}, пасссский</p><p>польстугальский потугальский (португальский), \"скортугальский\".</p><p>nome_do_appсссский!</p><p>{app_name}</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(17, 2, 'ar', 'Order Status', '<p> مرحبًا ، </p> <p> مرحبًا بك في {app_name}. </p> <p> طلبك هو {order_status}! </p> <p> مرحبًا {order_name} ، شكرًا لك على التسوق </p> <p> شكرًا ، </ p> <p> {app_name} </p> <p> {order_url} </p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(18, 2, 'zh', 'Order Status', '<p>您好，</p><p>欢迎来到 {app_name}。</p><p>您的订单是 {order_status}！</p><p>您好{order_name}，感谢您的购物</p><p>谢谢，</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(19, 2, 'da', 'Order Status', '<p>Hej, &nbsp;</p><p>Velkommen til {app_name}.</p><p>Din ordre er {order_status}!</p><p>Hej {order_navn}, Tak for at Shopping</p><p>Tak,</p><p>{app_navn}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(20, 2, 'de', 'Order Status', '<p>Hello, &nbsp;</p><p>Willkommen bei {app_name}.</p><p>Ihre Bestellung lautet {order_status}!</p><p>Hi {order_name}, Danke für Shopping</p><p>Danke,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(21, 2, 'en', 'Order Status', '<p>Hello,&nbsp;</p><p>Welcome to {app_name}.</p><p>Your Order is {order_status}!</p><p>Hi {order_name}, Thank you for Shopping</p><p>Thanks,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(22, 2, 'es', 'Order Status', '<p>Hola, &nbsp;</p><p>Bienvenido a {app_name}.</p><p>Your Order is {order_status}!</p><p>Hi {order_name}, Thank you for Shopping</p><p>Thanks,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(23, 2, 'fr', 'Order Status', '<p>Bonjour, &nbsp;</p><p>Bienvenue dans {app_name}.</p><p>Votre commande est {order_status} !</p><p>Hi {order_name}, Thank you for Shopping</p><p>Thanks,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(24, 2, 'he', 'Order Status', '<p>שלום,&nbsp;</p><p>ברוך הבא ל {app_name}.</p><p>ההזמנה שלך היא {order_status}!</p><p>היי {order_name}, תודה על הקניות</p><p>תודה,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(25, 2, 'pt', 'Order Status', '<p>SHOPPING CENTER-Тутутутугальстугальский (app_name}).</p><p>nomeia альстугальский (order_status}!</p><p>Hi {order_name}, Obrigado por Shopping</p><p>Obrigado,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(26, 2, 'it', 'Order Status', '<p>Ciao, &nbsp;</p><p>Benvenuti in {app_name}.</p><p>Il tuo ordine è {order_status}!</p><p>Ciao {order_name}, Grazie per Shopping</p><p>Grazie,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(27, 2, 'ja', 'Order Status', '<p>Ciao, &nbsp;</p><p>Benvenuti in {app_name}.</p><p>Il tuo ordine è {order_status}!</p><p>Ciao {order_name}, Grazie per Shopping</p><p>Grazie,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(28, 2, 'nl', 'Order Status', '<p>Hallo, &nbsp;</p><p>Welkom bij {app_name}.</p><p>Uw bestelling is {order_status}!</p><p>Hi {order_name}, Dank u voor Winkelen</p><p>Bedankt,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(29, 2, 'pl', 'Order Status', '<p>Hello, &nbsp;</p><p>Witamy w aplikacji {app_name}.</p><p>Twoje zamówienie to {order_status}!</p><p>Hi {order_name}, Dziękujemy za zakupy</p><p>Thanks,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(30, 2, 'ru', 'Order Status', '<p>Здравствуйте, &nbsp;</p><p>Вас приветствует {app_name}.</p><p>Ваш заказ-{order_status}!</p><p>Hi {order_name}, Thank you for Shopping</p><p>Thanks,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(31, 2, 'tr', 'Order Status', '<p>Merhaba,&nbsp;</p><p>{app_name}\'e hoş geldiniz.</p><p>Siparişiniz {order_status}!</p><p>Merhaba {order_name}, Alışveriş için teşekkürler </p><p>Teşekkürler,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(32, 2, 'pt-br', 'Order Status', '<p>SHOPPING CENTER-Тутутутугальстугальский (app_name}).</p><p>nomeia альстугальский (order_status}!</p><p>Hi {order_name}, Obrigado por Shopping</p><p>Obrigado,</p><p>{app_name}</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(33, 3, 'ar', 'Order Detail', '<p> مرحبًا ، </ p> <p> عزيزي {owner_name}. </p> <p> هذا أمر تأكيد {order_id} ضعه على <span style = \\\"font-size: 1rem؛\\\"> {order_date}. </span> </p> <p> شكرًا ، </ p> <p> {order_url} </p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(34, 3, 'zh', 'Order Detail', '<p>您好，</p><p>尊敬的{owner_name}。</p><p>这是确认订单 {order_id}，地点为<span style=\\\"font-size: 1rem;\\\" >{order_date}。</span></p><p>谢谢，</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(35, 3, 'da', 'Order Detail', '<p>Hej </p><p>Kære {owner_name}.</p><p>Dette er ordrebekræftelse {order_id} sted på <span style=\\\"font-size: 1rem;\\\">{order_date}. </span></p><p>Tak,</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(36, 3, 'de', 'Order Detail', '<p>Hallo, </p><p>Sehr geehrter {owner_name}.</p><p>Dies ist die Auftragsbestätigung {order_id}, die am <span style=\\\"font-size: 1rem;\\\">{order_date} aufgegeben wurde. </span></p><p>Danke,</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(37, 3, 'en', 'Order Detail', '<p>Hello,&nbsp;</p><p>Dear {owner_name}.</p><p>This is Confirmation Order {order_id} place on&nbsp;<span style=\\\"font-size: 1rem;\\\">{order_date}.</span></p><p>Thanks,</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(38, 3, 'es', 'Order Detail', '<p> Hola, </p> <p> Estimado {owner_name}. </p> <p> Este es el lugar de la orden de confirmación {order_id} en <span style = \\\"font-size: 1rem;\\\"> {order_date}. </span> </p> <p> Gracias, </p> <p> {order_url} </p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(39, 3, 'fr', 'Order Detail', '<p>Bonjour, </p><p>Cher {owner_name}.</p><p>Ceci est la commande de confirmation {order_id} passée le <span style=\\\"font-size: 1rem;\\\">{order_date}. </span></p><p>Merci,</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(40, 3, 'he', 'Order Detail', '<p>שלום,&nbsp;</p><p>יָקָר {owner_name}.</p><p>זהו צו אישור {order_id} מקום על&nbsp;<span style=\\\"font-size: 1rem;\\\">{order_date}.</span></p><p>תודה,</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(41, 3, 'pt', 'Order Detail', '<p> Térica-Dicas de Cadeia Pública de Тутутугальский (owner_name}). </p> <p> Тугальстугальстугальский (order_id} ний <span style = \\\" font-size: 1rem; \\ \"> {order_date}. </span> </p> <p> nome_do_chave de vida, </p> <p> {order_url} </p> <p> {order_url}', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(42, 3, 'it', 'Order Detail', '<p>Ciao, </p><p>Gentile {owner_name}.</p><p>Questo è l\'ordine di conferma {order_id} effettuato su <span style=\\\"font-size: 1rem;\\\">{order_date}. </span></p><p>Grazie,</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(43, 3, 'ja', 'Order Detail', '<p>こんにちは、</ p> <p>親愛なる{owner_name}。</ p> <p>これは、<span style = \\\"font-size：1rem;\\\"> {order_date}の確認注文{order_id}の場所です。 </ span> </ p> <p>ありがとうございます</ p> <p> {order_url} </ p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(44, 3, 'nl', 'Order Detail', '<p>Hallo, </p><p>Beste {owner_name}.</p><p>Dit is de bevestigingsopdracht {order_id} die is geplaatst op <span style=\\\"font-size: 1rem;\\\">{order_date}. </span></p><p>Bedankt,</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(45, 3, 'pl', 'Order Detail', '<p>Witaj, </p><p>Drogi {owner_name}.</p><p>To jest potwierdzenie zamówienia {order_id} złożone na <span style=\\\"font-size: 1rem;\\\">{order_date}. </span></p><p>Dzięki,</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(46, 3, 'ru', 'Order Detail', '<p> Здравствуйте, </p> <p> Уважаемый {owner_name}. </p> <p> Это подтверждение заказа {order_id} на <span style = \\\"font-size: 1rem;\\\"> {order_date}. </span> </p> <p> Спасибо, </p> <p> {order_url} </p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(47, 3, 'tr', 'Order Detail', '<p>Merhaba,&nbsp;</p><p>Sevgili {owner_name}.</p><p>Bu, {order_id} siparişinin&nbsp;<span style=\\\"font-size: 1rem;\\\" üzerindeki Onay Siparişi yeridir. >{order_date}.</span></p><p>Teşekkürler,</p><p>{order_url}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(48, 3, 'pt-br', 'Order Detail', '<p> Térica-Dicas de Cadeia Pública de Тутутугальский (owner_name}). </p> <p> Тугальстугальстугальский (order_id} ний <span style = \\\" font-size: 1rem; \\ \"> {order_date}. </span> </p> <p> nome_do_chave de vida, </p> <p> {order_url} </p> <p> {order_url}', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(49, 4, 'ar', 'Owner And Store Detail', '<p>مرحبًا,<b> {owner_name} </b>!</p> <p>مرحبًا بك في التطبيق الخاص بنا تفاصيل تسجيل الدخول الخاصة بـ <b> {app_name}</b> هو <br></p> <p><b>البريد الإلكتروني   : </b>{owner_email}</p> <p><b>كلمة المرور   : </b>{owner_password}</p> <p><b>عنوان url للتطبيق    : </b>{app_url}</p> <p><b>عنوان URL للمتجر: </b>{store_url}</p> <p>شكرا لتواصلك معنا،</p> <p>{app_name}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(50, 4, 'da', 'Owner And Store Detail', '<p>Hej,<b> {owner_name} </b>!</p> <p>Velkommen til vores app, hvor du kan logge ind <b> {app_name}</b> er <br></p> <p><b>E-mail   : </b>{owner_email}</p> <p><b>Adgangskode : </b>{owner_password}</p> <p><b>App url    : </b>{app_url}</p> <p><b>Butiks-url: </b>{store_url}</p> <p> Tak fordi du tog kontakt med os,</p> <p>{app_name}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(51, 4, 'de', 'Owner And Store Detail', '<p>Hallo,<b> {owner_name} </b>!</p> <p>Willkommen in unserer App für Ihre Login-Daten <b> {app_name}</b> ist <br></p> <p><b>Email   : </b>{owner_email}</p> <p><b>Passwort   : </b>{owner_password}</p> <p><b> App-URL    : </b>{app_url}</p> <p><b>Shop-URL: </b>{store_url}</p> <p>Danke, dass Sie sich mit uns verbunden haben,</p> <p>{app_name}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(52, 4, 'en', 'Owner And Store Detail', '<p>Hello,<b> {owner_name} </b>!</p> <p>Welcome to our app yore login detail for <b> {app_name}</b> is <br></p> <p><b>Email   : </b>{owner_email}</p> <p><b>Password   : </b>{owner_password}</p> <p><b>App url    : </b>{app_url}</p> <p><b>Store url    : </b>{store_url}</p> <p>Thank you for connecting with us,</p> <p>{app_name}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(53, 4, 'es', 'Owner And Store Detail', '<p>Hola,<b> {owner_name} </b>!</p> <p>Bienvenido a nuestra aplicación antaño detalles de inicio de sesión para <b> {app_name}</b> es <br></p> <p><b>Correo electrónico   : </b>{owner_email}</p> <p><b>Clave   : </b>{owner_password}</p> <p><b>URL de la aplicación  : </b>{app_url}</p> <p><b>URL de la tienda: </b>{store_url}</p> <p>Gracias por conectar con nosotras,</p> <p>{app_name}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(54, 4, 'fr', 'Owner And Store Detail', '<p>Bonjour,<b> {owner_name} </b>!</p> <p>Bienvenue sur notre application autrefois les informations de connexion pour <b> {app_name}</b> est <br></p> <p><b>E-mail   : </b>{owner_email}</p> <p><b>Mot de passe   : </b>{owner_password}</p> <p><b>URL de l\'application   : </b>{app_url}</p> <p><b>URL du magasin : </b>{store_url}</p> <p>Merci de nous avoir contacté,</p> <p>{app_name}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(55, 4, 'it', 'Owner And Store Detail', '<p>Ciao,<b> {owner_name} </b>!</p> <p>Benvenuto nella nostra app per i tuoi dati di accesso <b> {app_name}</b> è <br></p> <p><b>E-mail   : </b>{owner_email}</p> <p><b>Parola d\'ordine   : </b>{owner_password}</p> <p><b>URL dell\'app    : </b>{app_url}</p> <p><b>URL del negozio: </b>{store_url}</p> <p>Grazie per esserti connesso con noi,</p> <p>{app_name}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(56, 4, 'ja', 'Owner And Store Detail', '<p>こんにちは,<b> {owner_name} </b>!</p> <p>私たちのアプリのyoreログインの詳細へようこそ <b> {app_name}</b> は <br></p> <p><b>Eメール   : </b>{owner_email}</p> <p><b>パスワード   : </b>{owner_password}</p> <p><b>アプリのURL    : </b>{app_url}</p> <p><b>ストアの URL : </b>{store_url}</p> <p>ご連絡ありがとうございます,</p> <p>{app_name}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(57, 4, 'nl', 'Owner And Store Detail', '<p>Hallo,<b> {owner_name} </b>!</p> <p>Welkom bij de inloggegevens van onze app voor: <b> {app_name}</b> is <br></p> <p><b>E-mail   : </b>{owner_email}</p> <p><b>Wachtwoord   : </b>{owner_password}</p> <p><b>App-URL    : </b>{app_url}</p> <p><b>Winkel-URL: </b>{winkel_url</p> <p>Bedankt voor het contact met ons,</p> <p>{app_name}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(58, 4, 'pl', 'Owner And Store Detail', '<p>Witam,<b> {owner_name} </b>!</p> <p>Witamy w naszej aplikacji yore dane logowania do <b> {app_name}</b> jest <br></p> <p><b>E-mail   : </b>{owner_email}</p> <p><b>Hasło   : </b>{owner_password}</p> <p><b>URL aplikacji    : </b>{app_url}</p> <p><b>Adres sklepu: </b>{store_url}</p> <p>Dziękujemy za kontakt z nami,</p> <p>{app_name}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(59, 4, 'ru', 'Owner And Store Detail', '<p>Привет,<b> {owner_name} </b>!</p> <p>Добро пожаловать в наше приложение. <b> {app_name}</b> является <br></p> <p><b>Эл. адрес   : </b>{owner_email}</p> <p><b>Пароль   : </b>{owner_password}</p> <p><b>URL приложения    : </b>{app_url}</p> <p><b>URL-адрес магазина: </b>{store_url}</p> <p>Спасибо, что связались с нами,</p> <p>{app_name}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(60, 4, 'pt', 'Owner And Store Detail', '<p>Olá,<b> {owner_name} </b>!</p> <p>Bem-vindo ao nosso aplicativo antigo detalhe de login para <b> {app_name}</b> é <br></p> <p><b>E-mail   : </b>{owner_email}</p> <p><b>Senha   : </b>{owner_password}</p> <p><b>URL do aplicativo    : </b>{app_url}</p> <p><b>URL da loja: </b>{store_url}</p> <p>Obrigado por conectar com a gente,</p> <p>{app_name}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(61, 4, 'tr', 'Owner And Store Detail', '<p>Merhaba,<b> {owner_name} </b>!</p> <p>Uygulamamıza hoş geldiniz, eski <b> {app_name}</b> için giriş ayrıntısı <br></p> <p><b>E-posta : </b>{owner_email}</p> <p><b>Şifre : </b>{owner_password}</p> <p><b>Uygulama url : </b>{app_url}</p> <p><b>Mağaza URL si : </b>{store_url}</p> <p>Bizimle bağlantı kurduğunuz için teşekkür ederiz,</p> <p>{app_name}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(62, 4, 'he', 'Owner And Store Detail', '<p>שלום,<b> {owner_name} </b>!</p> <p>ברוך הבא לאפליקציה שלנו, פרטי ההתחברות של <b> {app_name}</b> הוא <br></p> <p><b>דוא\"ל: </b>{owner_email}</p> <p><b>סיסמה: </b>{owner_password}</p> <p><b>כתובת אתר של אפליקציה: </b>{app_url}</p> <p><b>כתובת אתר של חנות: </b>{store_url}</p> <p>תודה שהתחברת אלינו,</p> <p>{app_name}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(63, 4, 'zh', 'Owner And Store Detail', '<p>您好，<b> {owner_name} </b>！</p> <p>欢迎使用我们的应用，<b> {app_name}</b> 的登录详细信息是<br></p> <p><b>电子邮件：</b>{owner_email}</p> <p><b>密码：</b>{owner_password}</p> <p><b>应用程序网址：</b>{app_url}</p> <p><b>商店网址：</b>{store_url}</p> <p>感谢您与我们联系，</p> <p>{app_name}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(64, 4, 'pt-br', 'Owner And Store Detail', '<p>Olá,<b> {owner_name} </b>!</p> <p>Bem-vindo ao nosso aplicativo antigo detalhe de login para <b> {app_name}</b> é <br></p> <p><b>E-mail   : </b>{owner_email}</p> <p><b>Senha   : </b>{owner_password}</p> <p><b>URL do aplicativo    : </b>{app_url}</p> <p><b>URL da loja: </b>{store_url}</p> <p>Obrigado por conectar com a gente,</p> <p>{app_name}</p>', '2025-09-11 21:18:46', '2025-09-11 21:18:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `express_checkout`
+--
+
+CREATE TABLE `express_checkout` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `variant_name` varchar(191) DEFAULT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` varchar(191) NOT NULL,
+  `url` varchar(191) NOT NULL,
+  `store_id` varchar(191) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `financial_flows`
+--
+
+CREATE TABLE `financial_flows` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `date` date NOT NULL,
+  `designation` varchar(191) NOT NULL,
+  `flow_category_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `type` varchar(20) NOT NULL DEFAULT 'recette',
+  `payment_mode` varchar(50) DEFAULT NULL,
+  `amount` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `reference` varchar(191) DEFAULT NULL,
+  `source` varchar(20) NOT NULL DEFAULT 'manual',
+  `chassis_order_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `chassis_order_item_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `purchase_price` decimal(12,2) DEFAULT NULL,
+  `sale_price` decimal(12,2) DEFAULT NULL,
+  `store_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `notes` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `flow_categories`
+--
+
+CREATE TABLE `flow_categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `type` varchar(20) NOT NULL DEFAULT 'recette',
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `flow_categories`
+--
+
+INSERT INTO `flow_categories` (`id`, `name`, `type`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 'Accessoire', 'recette', 1, '2026-06-14 19:51:35', '2026-06-14 19:51:35'),
+(2, 'Recette huile', 'recette', 1, '2026-06-14 19:51:35', '2026-06-14 19:51:35'),
+(3, 'Recette main d\'oeuvre huile', 'recette', 1, '2026-06-14 19:51:35', '2026-06-14 19:51:35'),
+(4, 'Recette main d\'oeuvre reparation moto', 'recette', 1, '2026-06-14 19:51:35', '2026-06-14 19:51:35'),
+(5, 'Recette piece de rechange', 'recette', 1, '2026-06-14 19:51:35', '2026-06-14 19:51:35'),
+(6, 'Casque', 'recette', 1, '2026-06-14 19:51:35', '2026-06-14 19:51:35'),
+(7, 'Recette complementaire NR', 'recette', 1, '2026-06-14 19:51:35', '2026-06-14 19:51:35'),
+(8, 'Vente produit', 'recette', 1, '2026-06-14 19:51:35', '2026-06-14 19:51:35'),
+(9, 'Depense ouvrier', 'depense', 1, '2026-06-14 19:51:35', '2026-06-14 19:51:35'),
+(10, 'Depenses', 'depense', 1, '2026-06-14 19:51:35', '2026-06-14 19:51:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `join_us`
+--
+
+CREATE TABLE `join_us` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `email` varchar(191) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `landing_page_settings`
+--
+
+CREATE TABLE `landing_page_settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `value` longtext DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `landing_page_settings`
+--
+
+INSERT INTO `landing_page_settings` (`id`, `name`, `value`, `created_at`, `updated_at`) VALUES
+(1, 'topbar_status', 'on', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(2, 'topbar_notification_msg', '70% Special Offer. Don’t Miss it. The offer ends in 72 hours.', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(3, 'menubar_status', 'on', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(4, 'menubar_page', '[{\"menubar_page_name\": \"About Us\",\"template_name\": \"page_content\",\"page_url\": \"\",\"menubar_page_contant\": \"Welcome to the Storego website. By accessing this website, you agree to comply with and be bound by the following terms and conditions of use. If you disagree with any part of these terms, please do not use our website. The content of the pages of this website is for your general information and use only. It is subject to change without notice. This website uses cookies to monitor browsing preferences. If you do allow cookies to be used, personal information may be stored by us for use by third parties. Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness, or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors, and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law. Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services, or information available through this website meet your specific requirements. This website contains material that is owned by or licensed to us. This material includes, but is not limited to, the design, layout, look, appearance, and graphics. Reproduction is prohibited other than in accordance with the copyright notice, which forms part of these terms and conditions. Unauthorized use of this website may give rise to a claim for damages and\\/or be a criminal offense. From time to time, this website may also include links to other websites. These links are provided for your convenience to provide further information. They do not signify that we endorse the website(s). We have no responsibility for the content of the linked website(s\",\"page_slug\": \"about_us\",\"header\": \"on\",\"footer\": \"on\",\"login\": \"on\"},{\"menubar_page_name\": \"Terms and Conditions\",\"template_name\": \"page_content\",\"page_url\": \"\",\"menubar_page_contant\": \"Welcome to the Storego website. By accessing this website, you agree to comply with and be bound by the following terms and conditions of use. If you disagree with any part of these terms, please do not use our website.\\r\\n\\r\\nThe content of the pages of this website is for your general information and use only. It is subject to change without notice.\\r\\n\\r\\nThis website uses cookies to monitor browsing preferences. If you do allow cookies to be used, personal information may be stored by us for use by third parties.\\r\\n\\r\\nNeither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness, or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors, and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.\\r\\n\\r\\nYour use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services, or information available through this website meet your specific requirements.\\r\\n\\r\\nThis website contains material that is owned by or licensed to us. This material includes, but is not limited to, the design, layout, look, appearance, and graphics. Reproduction is prohibited other than in accordance with the copyright notice, which forms part of these terms and conditions.\\r\\n\\r\\nUnauthorized use of this website may give rise to a claim for damages and\\/or be a criminal offense.\\r\\n\\r\\nFrom time to time, this website may also include links to other websites. These links are provided for your convenience to provide further information. They do not signify that we endorse the website(s). We have no responsibility for the content of the linked website(s).\",\"page_slug\": \"terms_and_conditions\",\"header\": \"off\",\"footer\": \"on\",\"login\": \"on\"},{\"menubar_page_name\": \"Privacy Policy\",\"template_name\": \"page_content\",\"page_url\": \"\",\"menubar_page_contant\": \"Introduction: An overview of the privacy policy, including the purpose and scope of the policy. Information Collection: Details about the types of information collected from users\\/customers, such as personal information (name, address, email), device information, usage data, and any other relevant data. Data Usage: An explanation of how the collected data will be used, including providing services, improving products, personalization, analytics, and any other legitimate business purposes. Data Sharing: Information about whether and how the company shares user data with third parties, such as partners, service providers, or affiliates, along with the purposes of such sharing. Data Security: Details about the measures taken to protect user data from unauthorized access, loss, or misuse, including encryption, secure protocols, access controls, and data breach notification procedures. User Choices: Information on the choices available to users regarding the collection, use, and sharing of their personal data, including opt-out mechanisms and account settings. Cookies and Tracking Technologies: Explanation of the use of cookies, web beacons, and similar technologies for tracking user activity and collecting information for analytics and advertising purposes. Third-Party Links: Clarification that the companys website or services may contain links to third-party websites or services and that the privacy policy does not extend to those external sites. Data Retention: Details about the retention period for user data and how long it will be stored by the company. Legal Basis and Compliance: Information about the legal basis for processing personal data, compliance with applicable data protection laws, and the rights of users under relevant privacy regulations (e.g., GDPR, CCPA). Updates to the Privacy Policy: Notification that the privacy policy may be updated from time to time, and how users will be informed of any material changes. Contact Information: How users can contact the company regarding privacy-related concerns or inquiries.\",\"page_slug\": \"privacy_policy\",\"header\": \"off\",\"footer\": \"on\",\"login\": \"on\"}]', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(5, 'site_logo', 'site_logo.png', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(6, 'site_description', 'We build modern web tools to help you jump-start your daily business work.', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(7, 'home_status', 'on', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(8, 'home_offer_text', '70% Special Offer', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(9, 'home_title', 'Home', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(10, 'home_heading', 'StoreGo SaaS Online Store Builder', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(11, 'home_description', 'Use these awesome forms to login or create new account in your project for free.', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(12, 'home_trusted_by', '1000+ Customer', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(13, 'home_live_demo_link', 'https://demo.workdo.io/storego-saas/login', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(14, 'home_buy_now_link', 'https://codecanyon.net/item/storego-saas-online-store-builder/31116337', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(15, 'home_banner', 'home_banner.png', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(16, 'home_logo', 'home_logo.png,home_logo.png,home_logo.png,home_logo.png,home_logo.png,home_logo.png,home_logo.png', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(17, 'feature_status', 'on', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(18, 'feature_title', 'Features', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(19, 'feature_heading', 'StoreGo SaaS Online Store Builder', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(20, 'feature_description', 'Use these awesome forms to login or create new account in your project for free. Use these awesome forms to login or create new account in your project for free.', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(21, 'feature_buy_now_link', 'https://codecanyon.net/item/storego-saas-online-store-builder/31116337', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(22, 'feature_of_features', '[{\"feature_logo\":\"1688011614-feature_logo.png\",\"feature_heading\":\"Feature\",\"feature_description\":\"<p>Use these awesome forms to login or create new account in your project for free.Use these awesome forms to login or create new account in your project for free.<\\/p>\"},{\"feature_logo\":\"1688011268-feature_logo.png\",\"feature_heading\":\"Support\",\"feature_description\":\"<p>Use these awesome forms to login or create new account in your project for free.Use these awesome forms to login or create new account in your project for free.<\\/p>\"},{\"feature_logo\":\"1688011285-feature_logo.png\",\"feature_heading\":\"Integration\",\"feature_description\":\"<p>Use these awesome forms to login or create new account in your project for free.Use these awesome forms to login or create new account in your project for free.<\\/p>\"}]', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(23, 'highlight_feature_heading', 'StoreGo SaaS Online Store Builder', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(24, 'highlight_feature_description', 'Use these awesome forms to login or create new account in your project for free.', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(25, 'highlight_feature_image', 'highlight_feature_image.png', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(26, 'other_features', '[{\"other_features_image\":\"1688014543-other_features_image.png\",\"other_features_heading\":\"StoreGo SaaS Online Store Builder\",\"other_featured_description\":\"<p>Use these awesome forms to login or create new account in your project for free.<\\/p>\",\"other_feature_buy_now_link\":\"https:\\/\\/codecanyon.net\\/item\\/storego-saas-online-store-builder\\/31116337\"},{\"other_features_image\":\"1688014582-other_features_image.png\",\"other_features_heading\":\"StoreGo SaaS Online Store Builder\",\"other_featured_description\":\"<p>Use these awesome forms to login or create new account in your project for free.<\\/p>\",\"other_feature_buy_now_link\":\"https:\\/\\/codecanyon.net\\/item\\/storego-saas-online-store-builder\\/31116337\"},{\"other_features_image\":\"1688013007-other_features_image.png\",\"other_features_heading\":\"StoreGo SaaS Online Store Builder\",\"other_featured_description\":\"<p>Use these awesome forms to login or create new account in your project for free.<\\/p>\",\"other_feature_buy_now_link\":\"https:\\/\\/codecanyon.net\\/item\\/storego-saas-online-store-builder\\/31116337\"},{\"other_features_image\":\"1688354824-other_features_image.png\",\"other_features_heading\":\"StoreGo SaaS Online Store Builder\",\"other_featured_description\":\"<p>Use these awesome forms to login or create new account in your project for free.<\\/p>\",\"other_feature_buy_now_link\":\"https:\\/\\/codecanyon.net\\/item\\/storego-saas-online-store-builder\\/31116337\"}]', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(27, 'discover_status', 'on', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(28, 'discover_heading', 'StoreGo SaaS Online Store Builder', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(29, 'discover_description', 'Use these awesome forms to login or create new account in your project for free.', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(30, 'discover_live_demo_link', 'https://demo.workdo.io/storego-saas/login', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(31, 'discover_buy_now_link', 'https://codecanyon.net/item/storego-saas-online-store-builder/31116337', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(32, 'discover_of_features', '[{\"discover_logo\":\"1688011434-discover_logo.png\",\"discover_heading\":\"Feature\",\"discover_description\":\"<p>Use these awesome forms to login or create new account in your project for free.Use these awesome forms to login or create new account in your project for free.<\\/p>\"},{\"discover_logo\":\"1688011321-discover_logo.png\",\"discover_heading\":\"Feature\",\"discover_description\":\"<p>Use these awesome forms to login or create new account in your project for free.Use these awesome forms to login or create new account in your project for free.<\\/p>\"},{\"discover_logo\":\"1688011340-discover_logo.png\",\"discover_heading\":\"Feature\",\"discover_description\":\"<p>Use these awesome forms to login or create new account in your project for free.Use these awesome forms to login or create new account in your project for free.<\\/p>\"},{\"discover_logo\":\"1688011348-discover_logo.png\",\"discover_heading\":\"Feature\",\"discover_description\":\"<p>Use these awesome forms to login or create new account in your project for free.Use these awesome forms to login or create new account in your project for free.<\\/p>\"},{\"discover_logo\":\"1688011358-discover_logo.png\",\"discover_heading\":\"Feature\",\"discover_description\":\"<p>Use these awesome forms to login or create new account in your project for free.Use these awesome forms to login or create new account in your project for free.<\\/p>\"},{\"discover_logo\":\"1688011369-discover_logo.png\",\"discover_heading\":\"Feature\",\"discover_description\":\"<p>Use these awesome forms to login or create new account in your project for free.Use these awesome forms to login or create new account in your project for free.<\\/p>\"},{\"discover_logo\":\"1688011378-discover_logo.png\",\"discover_heading\":\"Feature\",\"discover_description\":\"<p>Use these awesome forms to login or create new account in your project for free.Use these awesome forms to login or create new account in your project for free.<\\/p>\"},{\"discover_logo\":\"1688011386-discover_logo.png\",\"discover_heading\":\"Feature\",\"discover_description\":\"<p>Use these awesome forms to login or create new account in your project for free.Use these awesome forms to login or create new account in your project for free.<\\/p>\"}]', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(33, 'screenshots_status', 'on', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(34, 'screenshots_heading', 'StoreGo SaaS Online Store Builder', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(35, 'screenshots_description', 'Use these awesome forms to login or create new account in your project for free.', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(36, 'screenshots', '[{\"screenshots\":\"1688360824-screenshots.png\",\"screenshots_heading\":\"Products\"},{\"screenshots\":\"1688360831-screenshots.png\",\"screenshots_heading\":\"product View\"},{\"screenshots\":\"1688360835-screenshots.png\",\"screenshots_heading\":\"Brand Settings\"},{\"screenshots\":\"1688360841-screenshots.png\",\"screenshots_heading\":\"Overview\"},{\"screenshots\":\"1688360845-screenshots.png\",\"screenshots_heading\":\"Shipping\"},{\"screenshots\":\"1688360850-screenshots.png\",\"screenshots_heading\":\"Themes\"}]', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(37, 'plan_status', 'on', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(38, 'plan_title', 'Plan', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(39, 'plan_heading', 'Online Store Builder System', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(40, 'plan_description', 'Use these awesome forms to login or create new account in your project for free.', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(41, 'faq_status', 'on', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(42, 'faq_title', 'Faq', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(43, 'faq_heading', 'StoreGo SaaS Online Store Builder', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(44, 'faq_description', 'Use these awesome forms to login or create new account in your project for free.', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(45, 'faqs', '[{\"faq_questions\":\"#What does \\\"Theme\\/Package Installation\\\" mean?\",\"faq_answer\":\"For an easy-to-install theme\\/package, we have included step-by-step detailed documentation (in English). However, if it is not done perfectly, please feel free to contact the support team at support@workdo.io\"},{\"faq_questions\":\"#What does \\\"Theme\\/Package Installation\\\" mean?\",\"faq_answer\":\"For an easy-to-install theme\\/package, we have included step-by-step detailed documentation (in English). However, if it is not done perfectly, please feel free to contact the support team at support@workdo.io\"},{\"faq_questions\":\"#What does \\\"Lifetime updates\\\" mean?\",\"faq_answer\":\"For an easy-to-install theme\\/package, we have included step-by-step detailed documentation (in English). However, if it is not done perfectly, please feel free to contact the support team at support@workdo.io\"},{\"faq_questions\":\"#What does \\\"Lifetime updates\\\" mean?\",\"faq_answer\":\"For an easy-to-install theme\\/package, we have included step-by-step detailed documentation (in English). However, if it is not done perfectly, please feel free to contact the support team at support@workdo.io\"},{\"faq_questions\":\"# What does \\\"6 months of support\\\" mean?\",\"faq_answer\":\"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa\\r\\n                                    nesciunt\\r\\n                                    laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt\\r\\n                                    sapiente ea\\r\\n                                    proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven heard of them accusamus labore sustainable VHS.\"},{\"faq_questions\":\"# What does \\\"6 months of support\\\" mean?\",\"faq_answer\":\"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa\\r\\n                                    nesciunt\\r\\n                                    laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt\\r\\n                                    sapiente ea\\r\\n                                    proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven heard of them accusamus labore sustainable VHS.\"}]', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(46, 'testimonials_status', 'on', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(47, 'testimonials_heading', 'From our Clients', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(48, 'testimonials_description', 'Use these awesome forms to login or create new account in your project for free.', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(49, 'testimonials_long_description', 'WorkDo seCommerce package offers you a “sales-ready.”secure online store. The package puts all the key pieces together, from design to payment processing. This gives you a headstart in your eCommerce venture. Every store is built using a reliable PHP framework -laravel. Thisspeeds up the development process while increasing the store’s security and performance.Additionally, thanks to the accompanying mobile app, you and your team can manage the store on the go. What’s more, because the app works both for you and your customers, you can use it to reach a wider audience.And, unlike popular eCommerce platforms, it doesn’t bind you to any terms and conditions or recurring fees. You get to choose where you host it or which payment gateway you use. Lastly, you getcomplete control over the looks of the store. And if it lacks any functionalities that you need, just reach out, and let’s discuss customization possibilities', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(50, 'testimonials', '[{\"testimonials_user_avtar\":\"1688037601-testimonials_user_avtar.jpg\",\"testimonials_title\":\"Tbistone\",\"testimonials_description\":\"Very quick customer support, installing this application on my machine locally, within 5 minutes of creating a ticket, the developer was able to fix the issue I had within 10 minutes. EXCELLENT! Thank you very much\",\"testimonials_user\":\"Chordsnstrings\",\"testimonials_designation\":\"from codecanyon\",\"testimonials_star\":\"4\"},{\"testimonials_user_avtar\":\"1688037608-testimonials_user_avtar.png\",\"testimonials_title\":\"Tbistone\",\"testimonials_description\":\"Very quick customer support, installing this application on my machine locally, within 5 minutes of creating a ticket, the developer was able to fix the issue I had within 10 minutes. EXCELLENT! Thank you very much\",\"testimonials_user\":\"Chordsnstrings\",\"testimonials_designation\":\"from codecanyon\",\"testimonials_star\":\"4\"},{\"testimonials_user_avtar\":\"1688037657-testimonials_user_avtar.jpg\",\"testimonials_title\":\"Tbistone\",\"testimonials_description\":\"Very quick customer support, installing this application on my machine locally, within 5 minutes of creating a ticket, the developer was able to fix the issue I had within 10 minutes. EXCELLENT! Thank you very much\",\"testimonials_user\":\"Chordsnstrings\",\"testimonials_designation\":\"from codecanyon\",\"testimonials_star\":\"4\"}]', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(51, 'footer_status', 'on', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(52, 'joinus_status', 'on', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(53, 'joinus_heading', 'Join Our Community', '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(54, 'joinus_description', 'We build modern web tools to help you jump-start your daily business work.', '2025-09-11 21:18:47', '2025-09-11 21:18:47');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `languages`
+--
+
+CREATE TABLE `languages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `code` varchar(191) NOT NULL,
+  `fullName` varchar(191) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `languages`
+--
+
+INSERT INTO `languages` (`id`, `code`, `fullName`, `created_at`, `updated_at`) VALUES
+(1, 'ar', 'Arabic', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(2, 'zh', 'Chinese', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(3, 'da', 'Danish', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(4, 'de', 'German', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(5, 'en', 'English', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(6, 'es', 'Spanish', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(7, 'fr', 'French', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(8, 'he', 'Hebrew', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(9, 'it', 'Italian', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(10, 'ja', 'Japanese', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(11, 'nl', 'Dutch', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(12, 'pl', 'Polish', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(13, 'pt', 'Portuguese', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(14, 'ru', 'Russian', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(15, 'tr', 'Turkish', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(16, 'pt-br', 'Portuguese(Brazil)', '2025-09-11 21:18:46', '2025-09-11 21:18:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `locations`
+--
+
+CREATE TABLE `locations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `store_id` int(11) NOT NULL DEFAULT 0,
+  `created_by` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(191) NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_resets_table', 1),
+(3, '2019_08_16_144239_create_plans_table', 1),
+(4, '2019_08_19_000000_create_failed_jobs_table', 1),
+(5, '2019_09_28_102009_create_settings_table', 1),
+(6, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(7, '2020_04_12_095629_create_coupons_table', 1),
+(8, '2020_04_12_120749_create_user_coupons_table', 1),
+(9, '2020_05_02_075614_create_email_templates_table', 1),
+(10, '2020_05_02_075630_create_email_template_langs_table', 1),
+(11, '2020_05_02_075647_create_user_email_templates_table', 1),
+(12, '2020_05_21_065337_create_permission_tables', 1),
+(13, '2021_02_02_085506_create_stores_table', 1),
+(14, '2021_02_02_094240_create_user_stores_table', 1),
+(15, '2021_02_03_093659_create_product_categories_table', 1),
+(16, '2021_02_03_110342_create_product_taxes_table', 1),
+(17, '2021_02_03_112228_create_shippings_table', 1),
+(18, '2021_02_04_034943_create_products_table', 1),
+(19, '2021_02_06_042547_create_subscriptions_table', 1),
+(20, '2021_02_08_063716_create_product_images_table', 1),
+(21, '2021_02_13_053126_create_orders_table', 1),
+(22, '2021_02_15_071203_create_user_details_table', 1),
+(23, '2021_02_17_070453_create_rattings_table', 1),
+(24, '2021_02_26_061007_create_visits_table', 1),
+(25, '2021_03_04_110817_create_plan_orders_table', 1),
+(26, '2021_03_23_094310_create_product_variant_options_table', 1),
+(27, '2021_04_03_063418_create_locations_table', 1),
+(28, '2021_04_07_070019_create_page_options_table', 1),
+(29, '2021_04_08_043538_create_blogs_table', 1),
+(30, '2021_04_10_034521_create_product_coupons_table', 1),
+(31, '2021_04_15_121323_create_blog_socials_table', 1),
+(32, '2021_06_03_101323_create_admin_payment_settings', 1),
+(33, '2021_06_25_041037_create_custom_massage_table', 1),
+(34, '2021_07_07_084829_create_store_theme_settings_table', 1),
+(35, '2021_11_17_115318_create_plan_requests_table', 1),
+(36, '2022_01_10_052633_create__customers_table', 1),
+(37, '2022_01_10_092146_create_purchased_products_table', 1),
+(38, '2022_07_08_044639_create_store_payment_settings', 1),
+(39, '2023_04_03_072342_create_pixel_fields_table', 1),
+(40, '2023_05_25_062348_create_webhooks_table', 1),
+(41, '2023_05_30_064523_create_express_checkout_table', 1),
+(42, '2023_06_05_043450_create_landing_page_settings_table', 1),
+(43, '2023_06_06_041522_create_template_table', 1),
+(44, '2023_06_10_114031_create_join_us_table', 1),
+(45, '2023_06_27_113741_create_languages_table', 1),
+(46, '2023_12_11_110313_add_is_active_to_users_table', 1),
+(47, '2024_01_27_032719_add_trial_plan_to_users_table', 1),
+(48, '2024_01_27_032746_add_trial_to_plans_table', 1),
+(49, '2024_01_29_101219_add_is_refund_to_plan_orders_table', 1),
+(50, '2024_03_27_035105_create_custom_domain_requests_table', 1),
+(51, '2024_04_02_041405_create_referral_settings_table', 1),
+(52, '2024_04_02_042152_add_referral_code_to_users_table', 1),
+(53, '2024_04_02_043233_create_referral_transactions_table', 1),
+(54, '2024_04_02_043258_create_transaction_orders_table', 1),
+(56, '2025_01_21_120927_create_testimonials_table', 2),
+(57, '2026_01_11_120310_create_chassis_numbers_table', 3),
+(58, '2026_03_01_151648_create_chassis_orders_table', 4),
+(59, '2026_02_22_222940_add_time_and_location_to_chassis_numbers_table', 5),
+(60, '2026_04_25_000001_add_tva_comment_to_chassis_orders', 6),
+(61, '2026_04_26_000001_add_signature_to_chassis_orders', 6),
+(62, '2026_05_12_000001_add_doc_fields_to_chassis_orders', 7),
+(63, '2026_05_15_000001_add_brands_orders_permissions', 8),
+(64, '2026_06_02_000001_create_brands_table', 9),
+(65, '2026_06_02_000002_create_product_variants_table', 9),
+(66, '2026_06_02_000003_add_brand_and_parent_to_product_categories_table', 9),
+(67, '2026_06_03_000001_add_validate_orders_permission', 9),
+(68, '2026_06_14_000001_add_tracking_type_to_product_variants_table', 10),
+(69, '2026_06_14_000002_add_flux_financier_permissions', 11),
+(70, '2026_06_14_000003_create_flow_categories_table', 11),
+(71, '2026_06_14_000004_create_financial_flows_table', 11),
+(72, '2026_06_14_000005_add_reference_to_product_variants_table', 11),
+(73, '2026_06_14_000006_add_reference_to_brands_and_categories', 11),
+(74, '2026_07_25_000001_fix_orders_permissions', 12),
+(75, '2026_07_27_000001_make_chassis_order_item_ids_nullable', 13),
+(76, '2026_07_27_012510_make_chassis_order_item_ids_nullable', 13),
+(77, '2026_07_27_000002_create_customer_debts_table', 14);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `model_has_permissions`
+--
+
+CREATE TABLE `model_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(191) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `model_has_roles`
+--
+
+CREATE TABLE `model_has_roles` (
+  `role_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(191) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `model_has_roles`
+--
+
+INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
+(1, 'App\\Models\\User', 1),
+(2, 'App\\Models\\User', 2),
+(5, 'App\\Models\\User', 3),
+(5, 'App\\Models\\User', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` varchar(100) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `card_number` varchar(10) DEFAULT NULL,
+  `card_exp_month` varchar(10) DEFAULT NULL,
+  `card_exp_year` varchar(10) DEFAULT NULL,
+  `user_address_id` varchar(191) DEFAULT NULL,
+  `product_id` varchar(191) DEFAULT '0',
+  `price` double DEFAULT NULL,
+  `coupon` longtext DEFAULT NULL,
+  `coupon_json` longtext DEFAULT NULL,
+  `discount_price` varchar(191) DEFAULT NULL,
+  `plan_name` varchar(191) DEFAULT NULL,
+  `plan_id` varchar(191) DEFAULT NULL,
+  `product` longtext DEFAULT NULL,
+  `price_currency` varchar(10) NOT NULL,
+  `txn_id` varchar(100) NOT NULL,
+  `payment_type` varchar(100) NOT NULL,
+  `payment_status` varchar(100) NOT NULL,
+  `status` varchar(100) DEFAULT NULL,
+  `phone` varchar(100) DEFAULT NULL,
+  `receipt` varchar(191) DEFAULT NULL,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `subscription_id` varchar(100) DEFAULT NULL,
+  `payer_id` varchar(100) DEFAULT NULL,
+  `shipping_data` longtext DEFAULT NULL,
+  `customer_id` varchar(191) DEFAULT NULL,
+  `created_by` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `order_id`, `name`, `email`, `card_number`, `card_exp_month`, `card_exp_year`, `user_address_id`, `product_id`, `price`, `coupon`, `coupon_json`, `discount_price`, `plan_name`, `plan_id`, `product`, `price_currency`, `txn_id`, `payment_type`, `payment_status`, `status`, `phone`, `receipt`, `user_id`, `subscription_id`, `payer_id`, `shipping_data`, `customer_id`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, '1757620797', 'walk-in-customer', '', '', '', '', '', '2', 0, '', '', '0', NULL, NULL, '{\"1757620783\":{\"product_id\":2,\"product_name\":\"Honda 125i\",\"image\":\"download_1757619198.jpg\",\"quantity\":1,\"price\":\"50000\",\"id\":\"2\",\"downloadable_prodcut\":\"\",\"tax\":[],\"subtotal\":\"50000\",\"originalquantity\":213,\"variant_id\":0}}', 'MAD', '', 'Point de point', 'approved', 'pending', NULL, '', 1, NULL, NULL, '', '', 0, '2025-09-11 23:59:57', '2025-09-11 23:59:57');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `page_options`
+--
+
+CREATE TABLE `page_options` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `slug` varchar(191) NOT NULL,
+  `enable_page_header` varchar(191) DEFAULT NULL,
+  `enable_page_footer` varchar(191) DEFAULT NULL,
+  `contents` longtext DEFAULT NULL,
+  `store_id` int(11) NOT NULL DEFAULT 0,
+  `created_by` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(191) NOT NULL,
+  `token` varchar(191) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `guard_name` varchar(191) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'Manage Dashboard', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(2, 'Manage Store Analytics', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(3, 'Manage User', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(4, 'Create User', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(5, 'Edit User', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(6, 'Delete User', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(7, 'Manage Role', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(8, 'Create Role', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(9, 'Delete Role', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(10, 'Edit Role', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(11, 'Manage Orders', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(12, 'Show Orders', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(13, 'Delete Orders', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(14, 'Manage Products', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(15, 'Create Products', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(16, 'Delete Products', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(17, 'Show Products', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(18, 'Edit Products', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(19, 'Create Variants', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(20, 'Edit Variants', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(21, 'Delete Variants', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(22, 'Manage Product category', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(23, 'Create Product category', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(24, 'Delete Product category', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(25, 'Edit Product category', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(26, 'Manage Product Tax', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(27, 'Create Product Tax', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(28, 'Create Ratting', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(29, 'Delete Product Tax', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(30, 'Edit Product Tax', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(31, 'Edit Ratting', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(32, 'Delete Ratting', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(33, 'Manage Product Coupan', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(34, 'Create Product Coupan', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(35, 'Show Product Coupan', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(36, 'Delete Product Coupan', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(37, 'Edit Product Coupan', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(38, 'Manage Subscriber', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(39, 'Create Subscriber', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(40, 'Delete Subscriber', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(41, 'Manage Location', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(42, 'Create Location', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(43, 'Delete Location', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(44, 'Edit Location', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(45, 'Manage Shipping', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(46, 'Create Shipping', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(47, 'Delete Shipping', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(48, 'Edit Shipping', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(49, 'Manage Custom Page', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(50, 'Create Custom Page', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(51, 'Delete Custom Page', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(52, 'Edit Custom Page', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(53, 'Manage Blog', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(54, 'Create Blog', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(55, 'Delete Blog', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(56, 'Edit Blog', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(57, 'Manage Customers', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(58, 'Show Customers', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(59, 'Manage Settings', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(60, 'Manage Change Store', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(61, 'Manage Language', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(62, 'Create Language', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(63, 'Delete Language', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(64, 'Manage Store', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(65, 'Create Store', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(66, 'Delete Store', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(67, 'Edit Store', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(68, 'Reset Password', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(69, 'Upgrade Plans', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(70, 'Manage Coupans', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(71, 'Create Coupans', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(72, 'Delete Coupans', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(73, 'Edit Coupans', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(74, 'Show Coupans', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(75, 'Manage Plans', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(76, 'Create Plans', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(77, 'Edit Plans', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(78, 'Manage Email Template', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(79, 'Edit Email Template', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(80, 'Manage Plan Order', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(81, 'Manage Plan Request', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(82, 'Manage Pos', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(83, 'Create Pos', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(84, 'Manage Themes', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(85, 'Edit Themes', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(86, 'Manage Testimonial', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(87, 'Create Testimonial', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(88, 'Edit Testimonial', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(89, 'Delete Testimonial', 'web', '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(90, 'Manage Brands', 'web', '2026-05-15 17:45:53', '2026-05-15 17:45:53'),
+(91, 'Create Brand', 'web', '2026-05-15 17:45:53', '2026-05-15 17:45:53'),
+(92, 'Edit Brand', 'web', '2026-05-15 17:45:53', '2026-05-15 17:45:53'),
+(93, 'Delete Brand', 'web', '2026-05-15 17:45:53', '2026-05-15 17:45:53'),
+(94, 'Create Order', 'web', '2026-05-15 17:45:53', '2026-05-15 17:45:53'),
+(95, 'Edit Order', 'web', '2026-05-15 17:45:53', '2026-05-15 17:45:53'),
+(96, 'Delete Order', 'web', '2026-05-15 17:45:53', '2026-05-15 17:45:53'),
+(97, 'Validate Order', 'web', '2026-05-15 17:45:53', '2026-05-15 17:45:53'),
+(98, 'Validate Orders', 'web', '2026-05-24 13:13:43', '2026-05-24 13:13:43'),
+(102, 'Show Flux', 'web', '2026-06-14 19:51:35', '2026-06-14 19:51:35'),
+(101, 'Manage Flux', 'web', '2026-06-14 19:51:35', '2026-06-14 19:51:35'),
+(103, 'Create Flux', 'web', '2026-06-14 19:51:35', '2026-06-14 19:51:35'),
+(104, 'Edit Flux', 'web', '2026-06-14 19:51:35', '2026-06-14 19:51:35'),
+(105, 'Delete Flux', 'web', '2026-06-14 19:51:35', '2026-06-14 19:51:35'),
+(106, 'Edit Orders', 'web', '2026-07-25 15:11:16', '2026-07-25 15:11:16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(191) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pixel_fields`
+--
+
+CREATE TABLE `pixel_fields` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `platform` varchar(191) DEFAULT NULL,
+  `pixel_id` varchar(191) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `plans`
+--
+
+CREATE TABLE `plans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `price` decimal(30,2) DEFAULT 0.00,
+  `duration` varchar(100) DEFAULT NULL,
+  `max_stores` int(11) NOT NULL DEFAULT 0,
+  `max_products` int(11) NOT NULL DEFAULT 0,
+  `max_users` int(11) NOT NULL,
+  `storage_limit` double NOT NULL,
+  `enable_custdomain` varchar(191) NOT NULL DEFAULT 'off',
+  `additional_page` varchar(191) DEFAULT NULL,
+  `blog` varchar(191) DEFAULT NULL,
+  `shipping_method` varchar(191) DEFAULT NULL,
+  `trial` varchar(191) NOT NULL DEFAULT 'off',
+  `trial_days` varchar(191) DEFAULT NULL,
+  `is_active` int(11) NOT NULL DEFAULT 1,
+  `enable_chatgpt` varchar(191) NOT NULL DEFAULT 'off',
+  `enable_custsubdomain` varchar(191) NOT NULL DEFAULT 'off',
+  `image` varchar(191) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `pwa_store` varchar(191) NOT NULL DEFAULT 'off',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `plans`
+--
+
+INSERT INTO `plans` (`id`, `name`, `price`, `duration`, `max_stores`, `max_products`, `max_users`, `storage_limit`, `enable_custdomain`, `additional_page`, `blog`, `shipping_method`, `trial`, `trial_days`, `is_active`, `enable_chatgpt`, `enable_custsubdomain`, `image`, `description`, `pwa_store`, `created_at`, `updated_at`) VALUES
+(1, 'Free Plan', 0.00, 'Lifetime', 1, 5, 5, 1024, 'on', 'on', 'on', 'on', 'off', NULL, 1, 'on', 'on', 'free_plan.png', 'For companies that need a robust full-featured time tracker.', 'on', '2025-09-11 21:18:47', '2026-05-24 12:35:10'),
+(2, 'PLAN A', 50.00, 'Month', 1, 10, 7, 947, 'on', 'on', 'on', 'on', 'off', NULL, 1, 'on', 'on', NULL, NULL, 'on', '2026-05-24 11:53:33', '2026-05-24 12:33:21');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `plan_orders`
+--
+
+CREATE TABLE `plan_orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` varchar(100) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `card_number` varchar(10) DEFAULT NULL,
+  `card_exp_month` varchar(10) DEFAULT NULL,
+  `card_exp_year` varchar(10) DEFAULT NULL,
+  `plan_name` varchar(100) NOT NULL,
+  `plan_id` int(11) NOT NULL,
+  `price` double DEFAULT NULL,
+  `coupon` varchar(191) DEFAULT NULL,
+  `coupon_json` text DEFAULT NULL,
+  `discount_price` text DEFAULT NULL,
+  `price_currency` varchar(10) NOT NULL,
+  `txn_id` varchar(100) NOT NULL,
+  `payment_status` varchar(100) NOT NULL,
+  `receipt` varchar(191) DEFAULT NULL,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `is_refund` int(11) NOT NULL DEFAULT 0,
+  `store_id` int(11) NOT NULL DEFAULT 0,
+  `payment_type` varchar(191) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `plan_requests`
+--
+
+CREATE TABLE `plan_requests` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `plan_id` int(11) NOT NULL,
+  `duration` varchar(20) NOT NULL DEFAULT 'monthly',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `variant_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `SKU` varchar(191) NOT NULL,
+  `price` double DEFAULT NULL,
+  `image` varchar(191) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `store_id` int(11) NOT NULL DEFAULT 1,
+  `product_display` varchar(10) NOT NULL DEFAULT 'on'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `variant_id`, `name`, `SKU`, `price`, `image`, `created_at`, `updated_at`, `store_id`, `product_display`) VALUES
+(2, 2, 'C50 CHLADA GREEN', '12321HDSAHAS', 12000, 'Screenshot 2025-09-20 102029_1758360078.png', '2025-09-20 13:21:18', '2025-09-20 13:21:18', 1, 'on'),
+(3, 3, 'C50 DIGITAL', 'L1TXCBLY2S1827420', 9200, 'WhatsApp Image 2025-09-27 at 14.26.00_ce4d9776_1758979757.jpg', '2025-09-27 17:29:17', '2025-09-27 17:29:17', 1, 'on'),
+(4, 3, 'C50 DIGITAL NOIR', 'L23SADNNASDNASND', 9200, 'WhatsApp Image 2025-09-27 at 14.26.00_ce4d9776_1758979796.jpg', '2025-09-27 17:29:56', '2025-09-27 17:30:23', 1, 'on'),
+(5, 4, 'C50 NEW-RIM 23 BT NOIR', 'LOSADO123AMDSAD12', 9500, 'WhatsApp Image 2025-09-27 at 14.32.18_7a471241_1758980040.jpg', '2025-09-27 17:34:00', '2025-09-27 17:34:00', 1, 'on'),
+(6, 4, 'C50 NEW-RIM 23 BT BLEU', '123SAD21HDSAHAS', 9500, 'WhatsApp Image 2025-09-27 at 14.32.18_7a471241_1758980068.jpg', '2025-09-27 17:34:28', '2025-09-27 17:34:28', 1, 'on'),
+(7, 5, 'DOCKER C50 FDM 23 BT /BLEU', 'LB405', 10500, 'WhatsApp Image 2025-09-27 at 15.02.30_0a9c5714_1758982353.jpg', '2025-09-27 18:12:33', '2025-09-27 18:12:33', 1, 'on');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_categories`
+--
+
+CREATE TABLE `product_categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `parent_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `name` varchar(191) NOT NULL,
+  `reference` varchar(191) DEFAULT NULL,
+  `categorie_img` varchar(191) DEFAULT NULL,
+  `store_id` int(11) NOT NULL DEFAULT 0,
+  `brand_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_by` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product_categories`
+--
+
+INSERT INTO `product_categories` (`id`, `parent_id`, `name`, `reference`, `categorie_img`, `store_id`, `brand_id`, `created_by`, `created_at`, `updated_at`) VALUES
+(36, NULL, 'NEO CUB', NULL, NULL, 0, 1, 0, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(32, NULL, 'Agility', NULL, NULL, 0, 29, 0, '2026-07-28 17:53:59', '2026-07-28 17:53:59'),
+(33, NULL, 'RIBEIRO', NULL, NULL, 0, 1, 0, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(34, NULL, 'SUPER CUB 300', NULL, NULL, 0, 1, 0, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(35, NULL, 'SPRING X', NULL, NULL, 0, 1, 0, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(29, NULL, 'TROTINETTE MAX WHEEL M2', NULL, NULL, 0, 26, 0, '2026-07-23 22:22:35', '2026-07-23 22:22:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_coupons`
+--
+
+CREATE TABLE `product_coupons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `code` varchar(191) NOT NULL,
+  `enable_flat` varchar(191) DEFAULT 'off',
+  `discount` double NOT NULL DEFAULT 0,
+  `flat_discount` double DEFAULT 0,
+  `limit` int(11) NOT NULL DEFAULT 0,
+  `description` text DEFAULT NULL,
+  `store_id` int(11) NOT NULL DEFAULT 0,
+  `created_by` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_images`
+--
+
+CREATE TABLE `product_images` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_images` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_taxes`
+--
+
+CREATE TABLE `product_taxes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `rate` double NOT NULL,
+  `store_id` int(11) NOT NULL DEFAULT 0,
+  `created_by` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_variants`
+--
+
+CREATE TABLE `product_variants` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `price` double NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 0,
+  `image` varchar(191) DEFAULT NULL,
+  `tracking_type` varchar(20) NOT NULL DEFAULT 'chassis',
+  `reference` varchar(191) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `product_variants`
+--
+
+INSERT INTO `product_variants` (`id`, `category_id`, `name`, `price`, `quantity`, `image`, `tracking_type`, `reference`, `created_at`, `updated_at`) VALUES
+(3, 2, 'C50 DIGITAL', 29258, 10, 'WhatsApp Image 2025-09-27 at 14.26.00_ce4d9776_1758979587.jpg', 'chassis', NULL, '2025-09-27 17:26:27', '2026-04-25 13:02:40'),
+(4, 2, 'C50 NEW-RIM 23 BT', 16028, 10, 'WhatsApp Image 2025-09-27 at 14.32.18_7a471241_1758979983.jpg', 'chassis', NULL, '2025-09-27 17:33:03', '2026-04-25 13:02:40'),
+(5, 2, 'DOCKER C50 FDM 23 BT /BLEU', 43875, 10, 'WhatsApp Image 2025-09-27 at 15.17.31_a21a01e5_1758982759.jpg', 'chassis', NULL, '2025-09-27 18:09:53', '2026-04-25 13:02:40'),
+(6, 2, 'C50 New Rim CH', 44588, 10, 'Capture d\'écran 2024-02-15 121156_1767522964.png', 'chassis', NULL, '2026-01-04 15:36:04', '2026-04-25 13:02:40'),
+(45, 33, '33*AC TB BLEU', 0, 0, NULL, 'chassis', NULL, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(44, 33, '33 AC NR TB BLEU', 0, 0, NULL, 'chassis', NULL, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(43, 32, 'KYMCO NOIR', 0, 1, NULL, 'chassis', NULL, '2026-07-28 17:53:59', '2026-07-28 17:53:59'),
+(42, 31, 'SYM NHX 125 GRIS MAT', 0, 1, NULL, 'chassis', NULL, '2026-07-28 17:53:59', '2026-07-28 17:53:59'),
+(11, 6, 'Bleu BAT', 70246, 10, NULL, 'chassis', NULL, '2026-02-21 18:04:29', '2026-04-25 13:02:40'),
+(12, 9, 'C50 Bleu 22 CH', 60739, 3, NULL, 'chassis', NULL, '2026-02-21 18:36:35', '2026-04-25 13:02:40'),
+(13, 9, 'C50 Gold 22 CH', 34725, 2, NULL, 'chassis', NULL, '2026-02-21 18:39:32', '2026-04-25 13:02:40'),
+(14, 9, 'C50 Rouge  22 CH', 43734, 6, NULL, 'chassis', NULL, '2026-02-21 18:44:03', '2026-04-25 13:02:40'),
+(15, 10, 'C50 FDM BRONZE 23-BAT', 20916, 4, NULL, 'chassis', NULL, '2026-02-21 19:26:40', '2026-04-25 13:02:40'),
+(16, 10, 'C50 FDM PISTACH 23-BAT', 62038, 3, NULL, 'chassis', NULL, '2026-02-21 19:31:09', '2026-04-25 13:02:40'),
+(17, 10, 'C50 FDM NARDO 23-BAT', 40625, 1, NULL, 'chassis', NULL, '2026-02-21 19:33:48', '2026-04-25 13:02:40'),
+(18, 10, 'C50 FDM BLEU 23-BAT', 55285, 4, NULL, 'chassis', NULL, '2026-02-21 19:35:07', '2026-04-25 13:02:40'),
+(19, 6, 'C50 NOIR-BLEU STIKER 2025', 72263, 5, NULL, 'chassis', NULL, '2026-02-21 19:47:21', '2026-04-25 13:02:40'),
+(20, 11, 'Docker CRUZER', 20417, 2, NULL, 'chassis', NULL, '2026-02-21 19:52:58', '2026-04-25 13:02:40'),
+(21, 12, 'DOCKER TANK-50 Rouge/Noir', 59337, 3, NULL, 'chassis', NULL, '2026-02-21 20:07:59', '2026-04-25 13:02:40'),
+(22, 13, 'Docker Triporteur DR 2-Bleu', 76319, 1, NULL, 'chassis', NULL, '2026-02-21 21:28:28', '2026-04-25 13:02:40'),
+(23, 14, 'C50 FIRE BLEU-CH 22', 40770, 1, NULL, 'chassis', NULL, '2026-02-21 21:33:12', '2026-04-25 13:02:40'),
+(24, 16, 'BECANE VALENTI', 38288, 1, NULL, 'chassis', NULL, '2026-02-21 21:36:40', '2026-04-25 13:02:40'),
+(25, 16, 'BECANE MATTEO', 66652, 1, NULL, 'chassis', NULL, '2026-02-21 21:37:07', '2026-04-25 13:02:40'),
+(26, 16, 'BECANE SUPER FLORENCE', 58313, 3, NULL, 'chassis', NULL, '2026-02-21 21:38:31', '2026-04-25 13:02:40'),
+(27, 16, 'BECANE VESTA', 42114, 1, NULL, 'chassis', NULL, '2026-02-21 21:39:31', '2026-07-23 22:27:57'),
+(28, 16, 'BECANE TORINO', 66757, 1, NULL, 'chassis', NULL, '2026-02-21 21:41:25', '2026-04-25 13:02:40'),
+(29, 16, 'BECANE MIRO', 18871, 2, NULL, 'chassis', NULL, '2026-02-21 21:42:49', '2026-04-25 13:02:40'),
+(30, 16, 'BECANE SH', 72155, 1, NULL, 'chassis', NULL, '2026-02-21 21:43:33', '2026-04-25 13:02:40'),
+(31, 16, 'BECANE R9', 69941, 3, NULL, 'chassis', NULL, '2026-02-21 21:43:58', '2026-04-25 13:02:40'),
+(32, 23, 'test', 65320, 9, NULL, 'chassis', NULL, '2026-04-18 19:07:37', '2026-05-05 19:32:16'),
+(33, 5, 'test', 0, 18, NULL, 'chassis', NULL, '2026-04-25 14:12:36', '2026-07-25 16:05:46'),
+(34, 23, 'test222222', 0, 2, NULL, 'chassis', NULL, '2026-04-25 14:22:19', '2026-04-25 14:22:19'),
+(35, 24, 'testino', 5000, -2, NULL, 'chassis', NULL, '2026-04-25 14:33:30', '2026-04-25 15:52:46'),
+(36, 25, '10W-40 SEMI', 0, 10, NULL, 'ref', '37001423050076', '2026-06-14 19:55:01', '2026-06-14 19:55:01'),
+(37, 26, 'BECANE  NEO CUB', 0, 0, NULL, 'chassis', NULL, '2026-07-23 21:38:30', '2026-07-23 21:38:30'),
+(38, 27, 'BECANE 33 *1COUSSIN NV', 0, 0, NULL, 'chassis', NULL, '2026-07-23 21:38:30', '2026-07-23 21:38:30'),
+(39, 28, 'BECANE VESTA', 0, 0, NULL, 'chassis', NULL, '2026-07-23 21:38:30', '2026-07-23 21:38:30'),
+(40, 29, 'TROTINETTE MAX WHEEL M2', 0, 0, NULL, 'chassis', NULL, '2026-07-23 22:23:27', '2026-07-28 18:13:25'),
+(41, 30, 'Becane vesta', 12500, -1, NULL, 'chassis', NULL, '2026-07-25 17:13:35', '2026-07-27 13:43:13'),
+(46, 33, '33*AC TB ORONGE', 0, 0, NULL, 'chassis', NULL, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(47, 33, '33 MK NW NOIR', 0, 0, NULL, 'chassis', NULL, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(48, 33, '33 MK NW VERT MAT', 0, 0, NULL, 'chassis', NULL, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(49, 33, '34 MK NW BRONZE MAT', 0, 0, NULL, 'chassis', NULL, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(50, 33, '35 MK NW BRONZE MAT', 0, 0, NULL, 'chassis', NULL, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(51, 34, 'CUB 50 CC NOIR', 0, 0, NULL, 'chassis', NULL, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(52, 34, 'CUB 50 CC BEIGE', 0, 0, NULL, 'chassis', NULL, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(53, 34, 'CUB 127 CC NOIR', 0, 0, NULL, 'chassis', NULL, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(54, 35, 'SPRING X 50CC NOIR BRION', 0, 0, NULL, 'chassis', NULL, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(55, 35, 'SPRING X 50CC NOIR MATE', 0, 0, NULL, 'chassis', NULL, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(56, 35, 'SPRING X 50CC NARDO', 0, 0, NULL, 'chassis', NULL, '2026-07-28 17:59:10', '2026-07-28 17:59:10'),
+(57, 36, 'NEO CUB 50 CC NARDO', 0, 0, NULL, 'chassis', NULL, '2026-07-28 17:59:10', '2026-07-28 17:59:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_variant_options`
+--
+
+CREATE TABLE `product_variant_options` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` int(11) NOT NULL DEFAULT 0,
+  `name` varchar(191) DEFAULT NULL,
+  `price` double DEFAULT 0,
+  `quantity` int(11) NOT NULL DEFAULT 0,
+  `created_by` int(11) NOT NULL DEFAULT 0,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchased_products`
+--
+
+CREATE TABLE `purchased_products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `purchased_products`
+--
+
+INSERT INTO `purchased_products` (`id`, `customer_id`, `product_id`, `order_id`, `created_at`, `updated_at`) VALUES
+(1, 0, 2, 1, '2025-09-11 23:59:57', '2025-09-11 23:59:57');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rattings`
+--
+
+CREATE TABLE `rattings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `slug` varchar(191) NOT NULL,
+  `product_id` varchar(191) NOT NULL,
+  `name` varchar(191) DEFAULT NULL,
+  `title` varchar(191) DEFAULT NULL,
+  `rating_view` varchar(191) NOT NULL DEFAULT 'on',
+  `ratting` varchar(191) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `referral_settings`
+--
+
+CREATE TABLE `referral_settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `percentage` int(11) NOT NULL,
+  `minimum_threshold_amount` int(11) NOT NULL,
+  `is_enable` int(11) NOT NULL DEFAULT 0,
+  `guideline` longtext NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `referral_transactions`
+--
+
+CREATE TABLE `referral_transactions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` int(11) NOT NULL,
+  `plan_id` int(11) NOT NULL,
+  `plan_price` decimal(30,2) NOT NULL DEFAULT 0.00,
+  `commission` int(11) NOT NULL,
+  `referral_code` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `referral_transaction_orders`
+--
+
+CREATE TABLE `referral_transaction_orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `req_amount` decimal(30,2) NOT NULL DEFAULT 0.00,
+  `req_user_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
+  `date` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `guard_name` varchar(191) NOT NULL,
+  `created_by` int(11) NOT NULL DEFAULT 0,
+  `store_id` varchar(191) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_by`, `store_id`, `created_at`, `updated_at`) VALUES
+(1, 'super admin', 'web', 0, NULL, '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(2, 'Owner', 'web', 1, NULL, '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(3, 'test', 'web', 2, '1', '2026-04-24 18:46:42', '2026-04-24 18:46:42'),
+(4, 'test111', 'web', 2, '1', '2026-04-24 18:49:55', '2026-04-24 18:49:55'),
+(5, 'TEST reda', 'web', 2, '1', '2026-04-24 18:54:22', '2026-04-24 18:54:22'),
+(6, 'Owner', 'web', 0, NULL, '2026-06-03 00:11:17', '2026-06-03 00:11:17');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role_has_permissions`
+--
+
+CREATE TABLE `role_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `role_has_permissions`
+--
+
+INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
+(1, 1),
+(1, 2),
+(1, 5),
+(2, 2),
+(3, 2),
+(3, 5),
+(4, 2),
+(4, 5),
+(5, 2),
+(5, 5),
+(6, 2),
+(6, 5),
+(7, 2),
+(7, 5),
+(8, 2),
+(8, 5),
+(9, 2),
+(9, 5),
+(10, 2),
+(10, 5),
+(11, 2),
+(11, 5),
+(12, 2),
+(12, 5),
+(13, 2),
+(13, 5),
+(14, 2),
+(14, 5),
+(15, 2),
+(15, 5),
+(16, 2),
+(16, 5),
+(17, 2),
+(17, 5),
+(18, 2),
+(18, 5),
+(19, 2),
+(20, 2),
+(21, 2),
+(22, 2),
+(23, 2),
+(24, 2),
+(25, 2),
+(26, 2),
+(27, 2),
+(28, 2),
+(29, 2),
+(30, 2),
+(31, 2),
+(32, 2),
+(33, 2),
+(34, 2),
+(35, 2),
+(36, 2),
+(37, 2),
+(38, 2),
+(39, 2),
+(40, 2),
+(41, 2),
+(41, 5),
+(42, 2),
+(42, 5),
+(43, 2),
+(43, 5),
+(44, 2),
+(44, 5),
+(45, 2),
+(46, 2),
+(47, 2),
+(48, 2),
+(49, 2),
+(50, 2),
+(51, 2),
+(52, 2),
+(53, 2),
+(54, 2),
+(55, 2),
+(56, 2),
+(57, 2),
+(58, 2),
+(59, 1),
+(59, 2),
+(60, 2),
+(61, 1),
+(62, 1),
+(63, 1),
+(64, 1),
+(64, 2),
+(64, 5),
+(65, 1),
+(65, 2),
+(65, 5),
+(66, 1),
+(67, 1),
+(68, 1),
+(68, 2),
+(69, 1),
+(70, 1),
+(71, 1),
+(72, 1),
+(73, 1),
+(74, 1),
+(75, 1),
+(75, 2),
+(76, 1),
+(77, 1),
+(78, 1),
+(79, 1),
+(80, 1),
+(81, 1),
+(82, 2),
+(82, 5),
+(83, 2),
+(83, 5),
+(84, 2),
+(84, 5),
+(85, 2),
+(85, 5),
+(86, 2),
+(87, 2),
+(88, 2),
+(89, 2),
+(90, 2),
+(91, 2),
+(92, 2),
+(93, 2),
+(94, 2),
+(95, 2),
+(96, 2),
+(97, 2),
+(98, 2),
+(98, 5),
+(101, 2),
+(102, 2),
+(103, 2),
+(104, 2),
+(105, 2),
+(106, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `value` text DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `name`, `value`, `created_by`, `store_id`, `created_at`, `updated_at`) VALUES
+(1, 'local_storage_validation', 'jpg,jpeg,png,xlsx,xls,csv,pdf', 1, 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(2, 'wasabi_storage_validation', 'jpg,jpeg,png,xlsx,xls,csv,pdf', 1, 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(3, 's3_storage_validation', 'jpg,jpeg,png,xlsx,xls,csv,pdf', 1, 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(4, 'local_storage_max_upload_size', '2048000', 1, 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(5, 'wasabi_max_upload_size', '2048000', 1, 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(6, 's3_max_upload_size', '2048000', 1, 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(7, 'storage_setting', 'local', 1, 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(8, 'title_text', NULL, 1, 0, NULL, NULL),
+(9, 'footer_text', NULL, 1, 0, NULL, NULL),
+(10, 'default_language', 'en', 1, 0, NULL, NULL),
+(11, 'currency_symbol', NULL, 1, 0, NULL, NULL),
+(12, 'currency', NULL, 1, 0, NULL, NULL),
+(13, 'display_landing_page', 'off', 1, 0, NULL, NULL),
+(14, 'signup_button', 'on', 1, 0, NULL, NULL),
+(15, 'email_verification', 'on', 1, 0, NULL, NULL),
+(16, 'color', '#ff6500', 1, 0, NULL, NULL),
+(17, 'color_flag', 'true', 1, 0, NULL, NULL),
+(18, 'cust_theme_bg', 'on', 1, 0, NULL, NULL),
+(19, 'cust_darklayout', 'off', 1, 0, NULL, NULL),
+(20, 'SITE_RTL', 'off', 1, 0, NULL, NULL),
+(21, 'SITE_RTL', 'off', 2, 1, NULL, NULL),
+(22, 'site_date_format', 'M j, Y', 2, 1, NULL, NULL),
+(23, 'site_time_format', 'g:i A', 2, 1, NULL, NULL),
+(24, 'timezone', 'Africa/Casablanca', 2, 1, NULL, NULL),
+(25, 'color', '#ff6500', 2, 1, NULL, NULL),
+(26, 'custom_color', '#ff6500', 2, 1, NULL, NULL),
+(27, 'color_flag', 'true', 2, 1, NULL, NULL),
+(28, 'cust_theme_bg', 'on', 2, 1, NULL, NULL),
+(29, 'cust_darklayout', 'off', 2, 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shippings`
+--
+
+CREATE TABLE `shippings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `price` varchar(191) NOT NULL,
+  `location_id` varchar(191) NOT NULL DEFAULT '0',
+  `store_id` int(11) NOT NULL DEFAULT 0,
+  `created_by` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stores`
+--
+
+CREATE TABLE `stores` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `email` varchar(191) DEFAULT NULL,
+  `store_theme` varchar(191) DEFAULT NULL,
+  `theme_dir` varchar(191) DEFAULT NULL,
+  `domains` varchar(191) DEFAULT NULL,
+  `domain_switch` varchar(191) NOT NULL DEFAULT 'off',
+  `enable_domain` varchar(191) NOT NULL DEFAULT 'off',
+  `content` text DEFAULT NULL,
+  `item_variable` varchar(191) DEFAULT NULL,
+  `enable_storelink` varchar(191) NOT NULL DEFAULT 'on',
+  `enable_subdomain` varchar(191) DEFAULT NULL,
+  `subdomain` varchar(191) DEFAULT NULL,
+  `about` longtext DEFAULT NULL,
+  `tagline` varchar(191) DEFAULT NULL,
+  `slug` varchar(191) DEFAULT NULL,
+  `lang` varchar(5) NOT NULL DEFAULT 'en',
+  `storejs` text DEFAULT NULL,
+  `currency` varchar(191) NOT NULL DEFAULT '$',
+  `currency_code` varchar(191) NOT NULL DEFAULT 'USD',
+  `currency_symbol_position` varchar(191) DEFAULT 'pre',
+  `currency_symbol_space` varchar(191) DEFAULT 'without',
+  `google_analytic` varchar(191) DEFAULT NULL,
+  `fbpixel_code` varchar(191) DEFAULT NULL,
+  `metaimage` varchar(191) DEFAULT NULL,
+  `metakeyword` varchar(191) DEFAULT NULL,
+  `metadesc` varchar(191) DEFAULT NULL,
+  `decimal_number` int(11) NOT NULL DEFAULT 2,
+  `enable_rating` varchar(191) NOT NULL DEFAULT 'on',
+  `enable_shipping` varchar(191) NOT NULL DEFAULT 'on',
+  `address` varchar(191) DEFAULT NULL,
+  `city` varchar(191) DEFAULT NULL,
+  `state` varchar(191) DEFAULT NULL,
+  `zipcode` varchar(191) DEFAULT NULL,
+  `country` varchar(191) DEFAULT NULL,
+  `logo` varchar(191) DEFAULT NULL,
+  `invoice_logo` varchar(191) DEFAULT NULL,
+  `blog_enable` varchar(191) NOT NULL DEFAULT 'on',
+  `is_twilio_enabled` varchar(225) DEFAULT NULL,
+  `twilio_sid` text DEFAULT NULL,
+  `twilio_token` text DEFAULT NULL,
+  `twilio_from` text DEFAULT NULL,
+  `notification_number` text NOT NULL,
+  `is_stripe_enabled` varchar(191) NOT NULL DEFAULT 'off',
+  `stripe_key` text DEFAULT NULL,
+  `stripe_secret` text DEFAULT NULL,
+  `is_paypal_enabled` varchar(191) NOT NULL DEFAULT 'off',
+  `paypal_mode` text DEFAULT NULL,
+  `paypal_client_id` text DEFAULT NULL,
+  `paypal_secret_key` text DEFAULT NULL,
+  `mail_driver` text DEFAULT NULL,
+  `mail_host` text DEFAULT NULL,
+  `mail_port` text DEFAULT NULL,
+  `mail_username` text DEFAULT NULL,
+  `mail_password` text DEFAULT NULL,
+  `mail_encryption` text DEFAULT NULL,
+  `mail_from_address` text DEFAULT NULL,
+  `mail_from_name` text DEFAULT NULL,
+  `is_store_enabled` int(11) NOT NULL DEFAULT 1,
+  `is_checkout_login_required` varchar(191) NOT NULL DEFAULT 'on',
+  `is_active` int(11) NOT NULL DEFAULT 1,
+  `created_by` int(11) NOT NULL DEFAULT 0,
+  `enable_whatsapp` varchar(191) NOT NULL DEFAULT 'off',
+  `whatsapp_number` varchar(191) DEFAULT NULL,
+  `enable_telegram` varchar(191) DEFAULT NULL,
+  `telegrambot` varchar(191) DEFAULT NULL,
+  `telegramchatid` varchar(191) DEFAULT NULL,
+  `enable_cod` varchar(191) NOT NULL DEFAULT 'off',
+  `enable_bank` varchar(191) NOT NULL DEFAULT 'off',
+  `bank_number` varchar(191) DEFAULT NULL,
+  `enable_pwa_store` varchar(191) NOT NULL DEFAULT 'off',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `stores`
+--
+
+INSERT INTO `stores` (`id`, `name`, `email`, `store_theme`, `theme_dir`, `domains`, `domain_switch`, `enable_domain`, `content`, `item_variable`, `enable_storelink`, `enable_subdomain`, `subdomain`, `about`, `tagline`, `slug`, `lang`, `storejs`, `currency`, `currency_code`, `currency_symbol_position`, `currency_symbol_space`, `google_analytic`, `fbpixel_code`, `metaimage`, `metakeyword`, `metadesc`, `decimal_number`, `enable_rating`, `enable_shipping`, `address`, `city`, `state`, `zipcode`, `country`, `logo`, `invoice_logo`, `blog_enable`, `is_twilio_enabled`, `twilio_sid`, `twilio_token`, `twilio_from`, `notification_number`, `is_stripe_enabled`, `stripe_key`, `stripe_secret`, `is_paypal_enabled`, `paypal_mode`, `paypal_client_id`, `paypal_secret_key`, `mail_driver`, `mail_host`, `mail_port`, `mail_username`, `mail_password`, `mail_encryption`, `mail_from_address`, `mail_from_name`, `is_store_enabled`, `is_checkout_login_required`, `is_active`, `created_by`, `enable_whatsapp`, `whatsapp_number`, `enable_telegram`, `telegrambot`, `telegramchatid`, `enable_cod`, `enable_bank`, `bank_number`, `enable_pwa_store`, `created_at`, `updated_at`) VALUES
+(1, 'mobi-nardo', 'admin@mobi-nardo.com', 'theme10-v1', 'theme10', NULL, 'off', 'off', 'Hi,\n        *Welcome to* {store_name},\n        Your order is confirmed & your order no. is {order_no}\n        Your order detail is:\n        Name : {customer_name}\n        Address : {billing_address} {billing_city} , {shipping_address} {shipping_city}\n        ~~~~~~~~~~~~~~~~\n        {item_variable}\n        ~~~~~~~~~~~~~~~~\n        Qty Total : {qty_total}\n        Sub Total : {sub_total}\n        Discount Price : {discount_amount}\n        Shipping Price : {shipping_amount}\n        Tax : {total_tax}\n        Total : {final_total}\n        ~~~~~~~~~~~~~~~~~~\n        To collect the order you need to show the receipt at the counter.\n        Thanks {store_name}\n        ', '{sku} : {quantity} x {product_name} - {variant_name} + {item_tax} = {item_total}', 'on', 'off', NULL, NULL, NULL, 'my-store', 'en', NULL, 'DH', 'MAD', 'post', 'with', NULL, NULL, NULL, NULL, NULL, 2, 'off', 'off', NULL, NULL, NULL, NULL, NULL, 'favicon_1757619426.png', 'invoice_logo_1.png', 'off', NULL, NULL, NULL, NULL, '', 'off', NULL, NULL, 'off', 'sandbox', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'off', 1, 2, 'off', '', 'off', '', '', 'off', 'off', NULL, 'off', '2025-09-11 21:18:46', '2025-09-12 00:13:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `store_payment_settings`
+--
+
+CREATE TABLE `store_payment_settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `value` varchar(191) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `store_payment_settings`
+--
+
+INSERT INTO `store_payment_settings` (`id`, `name`, `value`, `store_id`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 'is_stripe_enabled', 'off', 1, 2, NULL, NULL),
+(2, 'is_paypal_enabled', 'off', 1, 2, NULL, NULL),
+(3, 'is_paystack_enabled', 'off', 1, 2, NULL, NULL),
+(4, 'is_flutterwave_enabled', 'off', 1, 2, NULL, NULL),
+(5, 'is_razorpay_enabled', 'off', 1, 2, NULL, NULL),
+(6, 'is_paytm_enabled', 'off', 1, 2, NULL, NULL),
+(7, 'is_mercado_enabled', 'off', 1, 2, NULL, NULL),
+(8, 'is_mollie_enabled', 'off', 1, 2, NULL, NULL),
+(9, 'is_skrill_enabled', 'off', 1, 2, NULL, NULL),
+(10, 'is_coingate_enabled', 'off', 1, 2, NULL, NULL),
+(11, 'is_paymentwall_enabled', 'off', 1, 2, NULL, NULL),
+(12, 'enable_telegram', 'off', 1, 2, NULL, NULL),
+(13, 'is_toyyibpay_enabled', 'off', 1, 2, NULL, NULL),
+(14, 'is_payfast_enabled', 'off', 1, 2, NULL, NULL),
+(15, 'is_iyzipay_enabled', 'off', 1, 2, NULL, NULL),
+(16, 'is_paytab_enabled', 'off', 1, 2, NULL, NULL),
+(17, 'is_benefit_enabled', 'off', 1, 2, NULL, NULL),
+(18, 'is_cashfree_enabled', 'off', 1, 2, NULL, NULL),
+(19, 'is_aamarpay_enabled', 'off', 1, 2, NULL, NULL),
+(20, 'is_paytr_enabled', 'off', 1, 2, NULL, NULL),
+(21, 'is_yookassa_enabled', 'off', 1, 2, NULL, NULL),
+(22, 'is_midtrans_enabled', 'off', 1, 2, NULL, NULL),
+(23, 'is_xendit_enabled', 'off', 1, 2, NULL, NULL),
+(24, 'is_nepalste_enabled', 'off', 1, 2, NULL, NULL),
+(25, 'is_paiementpro_enabled', 'off', 1, 2, NULL, NULL),
+(26, 'is_fedapay_enabled', 'off', 1, 2, NULL, NULL),
+(27, 'is_payhere_enabled', 'off', 1, 2, NULL, NULL),
+(28, 'is_cinetpay_enabled', 'off', 1, 2, NULL, NULL),
+(29, 'is_tap_enabled', 'off', 1, 2, NULL, NULL),
+(30, 'is_authorizenet_enabled', 'off', 1, 2, NULL, NULL),
+(31, 'is_khalti_enabled', 'off', 1, 2, NULL, NULL),
+(32, 'is_ozow_enabled', 'off', 1, 2, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `store_theme_settings`
+--
+
+CREATE TABLE `store_theme_settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL COMMENT 'name/pagename',
+  `value` text DEFAULT NULL COMMENT 'value/json_value',
+  `type` varchar(191) DEFAULT NULL,
+  `store_id` int(11) NOT NULL,
+  `theme_name` varchar(191) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `store_theme_settings`
+--
+
+INSERT INTO `store_theme_settings` (`id`, `name`, `value`, `type`, `store_id`, `theme_name`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 'dashboard', '{\"0\":{\"section_enable\":\"off\",\"section_name\":\"Home-Header\",\"section_slug\":\"homepage-header\",\"array_type\":\"inner-list\",\"loop_number\":\"1\",\"inner-list\":[{\"field_name\":\"Title\",\"field_slug\":\"homepage-header-title\",\"field_help_text\":\"Please add title text here\",\"field_default_text\":\"Style Sur Deux Roues: Accessoires Sign\\u00e9s Mobi Nardo\",\"field_type\":\"text\"},{\"field_name\":\"Sub text\",\"field_slug\":\"homepage-sub-text\",\"field_help_text\":\"Please add sub text here\",\"field_default_text\":\"Mobi Nardo propose une large gamme de v\\u00e9los, gadgets et accessoires de mobilit\\u00e9 pour toute la famille. Qualit\\u00e9, choix et service client exceptionnel sont au rendez-vous pour des d\\u00e9placements en toute s\\u00e9curit\\u00e9 et style.\",\"field_type\":\"text area\"},{\"field_name\":\"Button\",\"field_slug\":\"homepage-header-button\",\"field_help_text\":\"Please add button text here\",\"field_default_text\":\"Shop Now\",\"field_type\":\"text\"},{\"field_name\":\"Background Image\",\"field_slug\":\"homepage-header-bg-image\",\"field_help_text\":null,\"field_default_text\":\"theme10\\/header\\/background-22509111757612282.png\",\"field_type\":\"photo upload\",\"field_prev_text\":\"theme10\\/header\\/background-22509111757612282.png\"},{\"field_name\":\"Right Background Image\",\"field_slug\":\"homepage-header-right-bg-image\",\"field_help_text\":null,\"field_default_text\":\"theme10\\/header\\/cta_image2509111757612282.png\",\"field_type\":\"photo upload\",\"field_prev_text\":\"theme10\\/header\\/cta_image2509111757612282.png\"}]},\"7\":{\"section_name\":\"Home-Email-Subscriber\",\"section_slug\":\"homepage-email-subscriber\",\"array_type\":\"inner-list\",\"loop_number\":\"1\",\"section_enable\":\"off\",\"inner-list\":[{\"field_name\":\"Subscriber Title\",\"field_slug\":\"homepage-subscriber-title\",\"field_help_text\":\"Please add title here\",\"field_default_text\":\"Subscribe to us and stay up to date with the information\",\"field_type\":\"text area\"},{\"field_name\":\"Button Text\",\"field_slug\":\"homepage-subscriber-button\",\"field_help_text\":\"Please add button text here\",\"field_default_text\":\"Subscribe\",\"field_type\":\"text\"}]},\"3\":{\"section_name\":\"Home-Categories\",\"section_slug\":\"homepage-categories\",\"array_type\":\"inner-list\",\"loop_number\":\"1\",\"section_enable\":\"off\",\"inner-list\":[{\"field_name\":\"Title\",\"field_slug\":\"homepage-categories-title\",\"field_help_text\":\"Please add title text here\",\"field_default_text\":\"Categories\",\"field_type\":\"text\"},{\"field_name\":\"Description\",\"field_slug\":\"homepage-categories-description\",\"field_help_text\":\"Please add description text here\",\"field_default_text\":\"Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.\",\"field_type\":\"text area\"},{\"field_name\":\"Button\",\"field_slug\":\"homepage-categories-button\",\"field_help_text\":\"Please add button text here\",\"field_default_text\":\"Go To Shop\",\"field_type\":\"text\"}]},\"5\":{\"section_enable\":\"off\",\"section_name\":\"Home-Testimonial\",\"section_slug\":\"homepage-testimonial\",\"array_type\":\"inner-list\",\"loop_number\":\"1\",\"inner-list\":[{\"field_name\":\"Main Heading\",\"field_slug\":\"homepage-testimonial-heading\",\"field_help_text\":\"Please add heading text here\",\"field_default_text\":\"Testimonials\",\"field_type\":\"text\"}]},\"6\":{\"section_name\":\"Home-Brand-Logo\",\"section_slug\":\"homepage-brand-logo\",\"array_type\":\"inner-list\",\"loop_number\":\"1\",\"section_enable\":\"off\",\"inner-list\":[{\"field_name\":\"Brand Logo\",\"field_slug\":\"homepage-brand-logo-input\",\"field_help_text\":null,\"field_default_text\":\"theme10\\/footer\\/brand_logo.jpg\",\"field_type\":\"multi file upload\"},{\"field_name\":\"Title\",\"field_slug\":\"homepage-header-title\",\"field_help_text\":\"Please add title text here\",\"field_default_text\":\"Meet our social media\",\"field_type\":\"text\"},{\"field_name\":\"Sub text\",\"field_slug\":\"homepage-sub-text\",\"field_help_text\":\"Please add sub text here\",\"field_default_text\":\"Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.\",\"field_type\":\"text area\"}]},\"1\":{\"section_name\":\"Latest-Category\",\"section_slug\":\"homepage-latest-category\",\"array_type\":\"inner-list\",\"loop_number\":\"1\",\"section_enable\":\"on\",\"inner-list\":[{\"field_name\":\"Title\",\"field_slug\":\"homepage-header-title\",\"field_help_text\":\"Please add title text here\",\"field_default_text\":\"Check The Latest Categories\",\"field_type\":\"text\"},{\"field_name\":\"Sub text\",\"field_slug\":\"homepage-sub-text\",\"field_help_text\":\"Please add sub text here\",\"field_default_text\":\"Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.\",\"field_type\":\"text area\"},{\"field_name\":\"Button\",\"field_slug\":\"homepage-header-button\",\"field_help_text\":\"Please add button text here\",\"field_default_text\":\"GO TO SHOP\",\"field_type\":\"text\"}]},\"2\":{\"section_name\":\"Latest-Products\",\"section_slug\":\"homepage-latest-products\",\"array_type\":\"inner-list\",\"loop_number\":\"1\",\"section_enable\":\"off\",\"inner-list\":[{\"field_name\":\"Title\",\"field_slug\":\"homepage-header-title\",\"field_help_text\":\"Please add title text here\",\"field_default_text\":\"Introducing Our Latest Arrivals\",\"field_type\":\"text\"},{\"field_name\":\"Sub text\",\"field_slug\":\"homepage-sub-text\",\"field_help_text\":\"Please add sub text here\",\"field_default_text\":\"Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.\",\"field_type\":\"text area\"},{\"field_name\":\"Button\",\"field_slug\":\"homepage-header-button\",\"field_help_text\":\"Please add button text here\",\"field_default_text\":\"Go To Shop\",\"field_type\":\"text\"},{\"field_name\":\"Background Text\",\"field_slug\":\"homepage-category-bg-text\",\"field_help_text\":\"Please add background text here\",\"field_default_text\":\"Trusted forever\",\"field_type\":\"text\"},{\"field_name\":\"Category Background Image\",\"field_slug\":\"homepage-category-bg-image\",\"field_help_text\":null,\"field_default_text\":\"theme10\\/header\\/latest_pro_backimg.png\",\"field_type\":\"photo upload\",\"field_prev_text\":\"theme10\\/header\\/latest_pro_backimg.png\"}]},\"4\":{\"section_name\":\"Top-Purchased\",\"section_slug\":\"banner-image\",\"array_type\":\"inner-list\",\"loop_number\":\"1\",\"section_enable\":\"off\",\"inner-list\":[{\"field_name\":\"Title\",\"field_slug\":\"homepage-header-title\",\"field_help_text\":\"Please add title text here\",\"field_default_text\":\"Most Purchased Product\",\"field_type\":\"text\"},{\"field_name\":\"Sub text\",\"field_slug\":\"homepage-sub-text\",\"field_help_text\":\"Please add sub text here\",\"field_default_text\":\"There is only that moment and the incredible certainty that everything under the sun has been written by one hand only.\",\"field_type\":\"text area\"},{\"field_name\":\"Button Text\",\"field_slug\":\"homepage-subscriber-button\",\"field_help_text\":\"Please add button text here\",\"field_default_text\":\"Go To Shop\",\"field_type\":\"text\"},{\"field_name\":\"Background Image\",\"field_slug\":\"homepage-purchased-bg-image\",\"field_help_text\":null,\"field_default_text\":\"theme10\\/header\\/purchased-banner.png\",\"field_type\":\"photo upload\",\"field_prev_text\":\"theme10\\/header\\/purchased-banner.png\"}]},\"8\":{\"section_enable\":\"off\",\"section_name\":\"Home-Footer-1\",\"section_slug\":\"homepage-footer-1\",\"array_type\":\"inner-list\",\"loop_number\":\"1\",\"inner-list\":[{\"field_name\":\"Footer Logo\",\"field_slug\":\"homepage-footer-logo\",\"field_help_text\":null,\"field_default_text\":\"theme10\\/header\\/footer10.png\",\"field_type\":\"photo upload\",\"field_prev_text\":\"theme10\\/header\\/footer10.png\"},{\"field_name\":\"Footer Description\",\"field_slug\":\"footer-description\",\"field_help_text\":\"Please add sub text here\",\"field_default_text\":\"Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.\",\"field_type\":\"text area\"}]},\"9\":{\"section_name\":\"Home-Footer-1\",\"section_slug\":\"homepage-footer-1\",\"array_type\":\"inner-list\",\"loop_number\":\"1\",\"inner-list\":[{\"field_name\":\"Enable Quick Link 1\",\"field_slug\":\"homepage-quick-link-enable\",\"field_help_text\":null,\"field_default_text\":\"off\",\"field_type\":\"checkbox\"},{\"field_name\":\"Footer Quick Link Header Name 1\",\"field_slug\":\"homepage-footer-header-quick-link-name-1\",\"field_help_text\":null,\"field_default_text\":\"STORE\",\"field_type\":\"text\"}]},\"10\":{\"section_name\":\"Home-Footer-1\",\"section_slug\":\"homepage-footer-1\",\"array_type\":\"multi-inner-list\",\"loop_number\":\"4\",\"inner-list\":[{\"field_name\":\"Quick Link\",\"field_slug\":\"homepage-header-quick-link-name-1\",\"field_help_text\":\"Please add link name here\",\"field_default_text\":\"Accessories\",\"field_type\":\"text\"},{\"field_name\":\"Quick Link Url\",\"field_slug\":\"homepage-header-quick-link-1\",\"field_help_text\":\"Please add link here\",\"field_default_text\":\"#\",\"field_type\":\"text\"}],\"homepage-header-quick-link-name-1\":[\"Accessories\",\"Accessories\",\"Accessories\",\"Accessories\"],\"homepage-header-quick-link-1\":[\"#\",\"#\",\"#\",\"#\"]},\"11\":{\"section_name\":\"Home-Footer-1\",\"section_slug\":\"homepage-footer-1\",\"array_type\":\"inner-list\",\"loop_number\":\"1\",\"inner-list\":[{\"field_name\":\"Enable Quick Link 2\",\"field_slug\":\"homepage-quick-link-enable\",\"field_help_text\":null,\"field_default_text\":\"off\",\"field_type\":\"checkbox\"},{\"field_name\":\"Footer Quick Link Header Name 2\",\"field_slug\":\"homepage-footer-header-quick-link-name-2\",\"field_help_text\":null,\"field_default_text\":\"ABOUT\",\"field_type\":\"text\"}]},\"12\":{\"section_name\":\"Home-Footer-1\",\"section_slug\":\"homepage-footer-1\",\"array_type\":\"multi-inner-list\",\"loop_number\":\"4\",\"inner-list\":[{\"field_name\":\"Quick Link\",\"field_slug\":\"homepage-header-quick-link-name-2\",\"field_help_text\":\"Please add link name here\",\"field_default_text\":\"About us\",\"field_type\":\"text\"},{\"field_name\":\"Quick Link Url\",\"field_slug\":\"homepage-header-quick-link-2\",\"field_help_text\":\"Please add link here\",\"field_default_text\":\"#\",\"field_type\":\"text\"}],\"homepage-header-quick-link-name-2\":[\"About us\",\"About us\",\"About us\",\"About us\"],\"homepage-header-quick-link-2\":[\"#\",\"#\",\"#\",\"#\"]},\"13\":{\"section_name\":\"Home-Footer-1\",\"section_slug\":\"homepage-footer-1\",\"array_type\":\"inner-list\",\"loop_number\":\"1\",\"inner-list\":[{\"field_name\":\"Enable Quick Link 3\",\"field_slug\":\"homepage-quick-link-enable\",\"field_help_text\":null,\"field_default_text\":\"off\",\"field_type\":\"checkbox\"},{\"field_name\":\"Footer Quick Link Header Name 3\",\"field_slug\":\"homepage-footer-header-quick-link-name-3\",\"field_help_text\":null,\"field_default_text\":\"ORDERS\",\"field_type\":\"text\"}]},\"14\":{\"section_name\":\"Home-Footer-1\",\"section_slug\":\"homepage-footer-1\",\"array_type\":\"multi-inner-list\",\"loop_number\":\"4\",\"inner-list\":[{\"field_name\":\"Quick Link\",\"field_slug\":\"homepage-header-quick-link-name-3\",\"field_help_text\":\"Please add link name here\",\"field_default_text\":\"Status\",\"field_type\":\"text\"},{\"field_name\":\"Quick Link Url\",\"field_slug\":\"homepage-header-quick-link-3\",\"field_help_text\":\"Please add link here\",\"field_default_text\":\"#\",\"field_type\":\"text\"}],\"homepage-header-quick-link-name-3\":[\"Status\",\"Status\",\"Status\",\"Status\"],\"homepage-header-quick-link-3\":[\"#\",\"#\",\"#\",\"#\"]},\"15\":{\"section_enable\":\"on\",\"section_name\":\"Home-Footer-2\",\"section_slug\":\"home-footer-2\",\"array_type\":\"inner-list\",\"loop_number\":\"1\",\"inner-list\":[{\"field_name\":\"Footer Note\",\"field_slug\":\"homepage-footer-2-note\",\"field_help_text\":\"Please add footer note here\",\"field_default_text\":null,\"field_type\":\"text\"}]},\"16\":{\"section_name\":\"Home-Footer-2\",\"section_slug\":\"home-footer-2\",\"array_type\":\"multi-inner-list\",\"loop_number\":\"4\",\"inner-list\":[{\"field_name\":\"Social Link Icon\",\"field_slug\":\"homepage-footer-2-social-icon\",\"field_help_text\":\"Please click here to find font... fontawesome.com\",\"field_default_text\":\"<i class=\'fab fa-youtube\'><\\/i>\",\"field_type\":\"text\"},{\"field_name\":\"Social Link\",\"field_slug\":\"homepage-footer-2-social-link\",\"field_help_text\":\"Please add social link here\",\"field_default_text\":\"https:\\/\\/www.youtube.com\\/\",\"field_type\":\"text\"}],\"homepage-footer-2-social-icon\":[\"<i class=\'fab fa-youtube\'><\\/i>\",\"<i class=\'fab fa-youtube\'><\\/i>\",\"<i class=\'fab fa-youtube\'><\\/i>\",\"<i class=\'fab fa-youtube\'><\\/i>\"],\"homepage-footer-2-social-link\":[\"https:\\/\\/www.youtube.com\\/\",\"https:\\/\\/www.youtube.com\\/\",\"https:\\/\\/www.youtube.com\\/\",\"https:\\/\\/www.youtube.com\\/\"]},\"17\":{\"section_name\":\"Home-Footer-2\",\"section_slug\":\"home-footer-2\",\"array_type\":\"inner-list\",\"loop_number\":\"1\",\"inner-list\":[{\"field_name\":\"Store Custom JS\",\"field_slug\":\"homepage-footer-2-custom-js\",\"field_help_text\":\"Please add custom js here\",\"field_default_text\":\"console.log(\'Hello World!\');\",\"field_type\":\"text area\"}]}}', NULL, 1, 'theme10', 2, '2025-09-11 21:38:02', '2025-09-12 00:16:58'),
+(2, 'enable_top_bar', 'off', NULL, 1, 'theme10', 2, '2025-09-11 21:38:02', '2025-09-11 23:26:41'),
+(3, 'top_bar_title', 'FREE SHIPPING world wide for all orders over $199', NULL, 1, 'theme10', 2, '2025-09-11 21:38:02', '2025-09-11 21:38:02'),
+(4, 'top_bar_number', '(212) 308-1220', NULL, 1, 'theme10', 2, '2025-09-11 21:38:02', '2025-09-11 21:38:02'),
+(5, 'top_bar_whatsapp', 'https://wa.me/', NULL, 1, 'theme10', 2, '2025-09-11 21:38:02', '2025-09-11 21:38:02'),
+(6, 'top_bar_instagram', 'https://instagram.com/', NULL, 1, 'theme10', 2, '2025-09-11 21:38:02', '2025-09-11 21:38:02'),
+(7, 'top_bar_twitter', 'https://twitter.com/', NULL, 1, 'theme10', 2, '2025-09-11 21:38:02', '2025-09-11 21:38:02'),
+(8, 'top_bar_messenger', 'https://messenger.com/', NULL, 1, 'theme10', 2, '2025-09-11 21:38:02', '2025-09-11 21:38:02');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscriptions`
+--
+
+CREATE TABLE `subscriptions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `email` varchar(191) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `template`
+--
+
+CREATE TABLE `template` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `template_name` varchar(191) NOT NULL,
+  `prompt` text NOT NULL,
+  `module` varchar(191) NOT NULL,
+  `field_json` text NOT NULL,
+  `is_tone` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `template`
+--
+
+INSERT INTO `template` (`id`, `template_name`, `prompt`, `module`, `field_json`, `is_tone`, `created_at`, `updated_at`) VALUES
+(1, 'name', '\"Create creative product names:  ##description## \\n\\nSeed words: ##keywords## \\n\\n\" in comma seprate and no number', 'products', '{\"field\":[{\"label\":\"Seed words\",\"placeholder\":\"e.g.  fast, healthy, compact\",\"field_type\":\"text_box\",\"field_name\":\"keywords\"},{\"label\":\"Product Description\",\"placeholder\":\"e.g. Provide product details\",\"field_type\":\"textarea\",\"field_name\":\"description\"}]}', 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(2, 'description', 'Write a long creative product description for: ##title##', 'products', '{\"field\":[{\"label\":\"Product name\",\"placeholder\":\"e.g. VR, Honda\",\"field_type\":\"text_box\",\"field_name\":\"title\"},{\"label\":\"Audience\",\"placeholder\":\"e.g. Women, Aliens\",\"field_type\":\"text_box\",\"field_name\":\"audience\"},{\"label\":\"Product Description\",\"placeholder\":\"e.g. VR is an innovative device that can allow you to be part of virtual world\",\"field_type\":\"textarea\",\"field_name\":\"description\"}]}', 1, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(3, 'specification', 'Write a long creative product Specification for: ##title## \\n\\nTarget audience is: ##audience## \\n\\nUse this description: ##description## \\n\\nTone of generated text must be:\\n ##tone_language## \\n\\n', 'products', '{\"field\":[{\"label\":\"Product name\",\"placeholder\":\"e.g. VR, Honda\",\"field_type\":\"text_box\",\"field_name\":\"title\"},{\"label\":\"Audience\",\"placeholder\":\"e.g. Women, Aliens\",\"field_type\":\"text_box\",\"field_name\":\"audience\"},{\"label\":\"Product Description\",\"placeholder\":\"e.g. VR is an innovative device that can allow you to be part of virtual world\",\"field_type\":\"textarea\",\"field_name\":\"description\"}]}', 1, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(4, 'detail', 'Write a long creative product detaion for: ##title## \\n\\nUse this description: ##description## \\n\\nTone of generated text must be:\\n ##tone_language## \\n\\n', 'products', '{\"field\":[{\"label\":\"Product name\",\"placeholder\":\"e.g. VR, Honda\",\"field_type\":\"text_box\",\"field_name\":\"title\"},{\"label\":\"Product Description\",\"placeholder\":\"e.g. VR is an innovative device that can allow you to be part of virtual world\",\"field_type\":\"textarea\",\"field_name\":\"description\"}]}', 1, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(5, 'name', 'give catchy only name of category  for : ##keywords##  without icon or emojis', 'category', '{\"field\":[{\"label\":\"Seed words\",\"placeholder\":\"e.g.  fast, healthy, compact\",\"field_type\":\"text_box\",\"field_name\":\"keywords\"}]}', 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(6, 'name', 'give 1 catchy only name of Offer or discount Coupon  for : ##keywords## ', 'coupan', '{\"field\":[{\"label\":\"Seed words\",\"placeholder\":\"e.g.  fast, healthy, compact\",\"field_type\":\"text_box\",\"field_name\":\"keywords\"}]}', 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(7, 'name', 'I am starting a #### shipping service and need a unique name that reflects style, efficiency, and reliability. Can you help me come up with some creative options?', 'shipping', '{\"field\":[{\"label\":\"What do want to ship? \",\"placeholder\":\"e.g.  Cloth, Electronics,\",\"field_type\":\"text_box\",\"field_name\":\"keywords\"}]}', 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(8, 'name', 'please suggest only name for advance level or extraordinary page  which i can use in my \"##description##\" website', 'custom page', '{\"field\":[{\"label\":\"Describe your website \",\"placeholder\":\"e.g. Describe your website details \",\"field_type\":\"textarea\",\"field_name\":\"description\"}]}', 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(9, 'contents', 'please generate content for \"##title##\" page  which i can use in my \"##description##\"\\n\\nTone of generated text must be:\\n ##tone_language## \\n\\n website', 'custom page', '{\"field\":[{\"label\":\"What is your Page title?\",\"placeholder\":\"e.g. Outstanding achievements,contact us\",\"field_type\":\"text_box\",\"field_name\":\"title\"},{\"label\":\"Describe your website \",\"placeholder\":\"e.g. Describe your website details \",\"field_type\":\"textarea\",\"field_name\":\"description\"}]}', 1, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(10, 'title', 'Generate blog titles for:\\n\\n ##description## \\n\\n', 'blog', '{\"field\":[{\"label\":\"What is your blog post is about?\",\"placeholder\":\"e.g. Describe your blog post\",\"field_type\":\"textarea\",\"field_name\":\"description\"}]}', 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(11, 'detail', '\"please generate detailed blog for this title :##description##\\n\\nTone of generated text must be:\\n ##tone_language## \\n\\n for your business with intro & conclusion\"', 'blog', '{\"field\":[{\"label\":\"What is your blog post is about?\",\"placeholder\":\"e.g. Describe your blog post\",\"field_type\":\"textarea\",\"field_name\":\"description\"}]}', 1, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(12, 'name', 'please suggest subscription plan  name  for this  :  ##description##  for my business', 'plan', '{\"field\":[{\"label\":\"What is your plan about?\",\"placeholder\":\"e.g. Describe your plan details \",\"field_type\":\"textarea\",\"field_name\":\"description\"}]}', 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(13, 'description', 'please suggest subscription plan  description  for this  :  \"##title##\\n\\nTone of generated text must be:\\n ##tone_language## \\n\\n  for my business', 'plan', '{\"field\":[{\"label\":\"What is your plan title?\",\"placeholder\":\"e.g. Pro Resller,Exclusive Access\",\"field_type\":\"text_box\",\"field_name\":\"title\"}]}', 1, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(14, 'cookie_title', 'please suggest me cookie title for this ##description## website   which i can use in my website cookie', 'cookie', '{\"field\":[{\"label\":\"Website name or info\",\"placeholder\":\"e.g. example website \",\"field_type\":\"textarea\",\"field_name\":\"title\"}]}', 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(15, 'strictly_cookie_title', 'please suggest me only Strictly Cookie Title for this ##description##  website which i can use in my website cookie', 'cookie', '{\"field\":[{\"label\":\"Website name or info\",\"placeholder\":\"e.g. example website \",\"field_type\":\"textarea\",\"field_name\":\"title\"}]}', 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(16, 'cookie_description', 'please suggest me  Cookie description for this cookie title \"##title##\"\\n\\nTone of generated text must be:\\n ##tone_language## \\n\\n   which i can use in my website cookie', 'cookie', '{\"field\":[{\"label\":\"Cookie Title \",\"placeholder\":\"e.g. example website \",\"field_type\":\"text_box\",\"field_name\":\"title\"}]}', 1, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(17, 'strictly_cookie_description', 'please suggest me Strictly Cookie description for this Strictly cookie title \"##title## \"\\n\\nTone of generated text must be:\\n ##tone_language## \\n\\n   which i can use in my website cookie', 'cookie', '{\"field\":[{\"label\":\"Strictly Cookie Title \",\"placeholder\":\"e.g. example website \",\"field_type\":\"text_box\",\"field_name\":\"title\"}]}', 1, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(18, 'more_information_description', 'I need assistance in crafting compelling content for my ##web_name##\\n\\nTone of generated text must be:\\n ##tone_language## \\n\\n website Contact Us page of my website. The page should provide relevant information to users, encourage them to reach out for inquiries, support, and feedback, and reflect the unique value proposition of my business.', 'cookie', '{\"field\":[{\"label\":\"Websit Name\",\"placeholder\":\"e.g. example website \",\"field_type\":\"text_box\",\"field_name\":\"web_name\"}]}', 1, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(19, 'metadesc', '\"Write SEO meta description for:\\n\\n ##description## \\n\\nWebsite name is:\\n ##title## \\n\\nSeed words:\\n ##keywords## \\n\\nTone of generated text must be:\\n ##tone_language## \\n\\n\"', 'meta', '{\"field\":[{\"label\":\"Website Name\",\"placeholder\":\"e.g. Amazon, Google\",\"field_type\":\"text_box\",\"field_name\":\"title\"},{\"label\":\"Website Description\",\"placeholder\":\"e.g. Describe what your website or business do\",\"field_type\":\"textarea\",\"field_name\":\"description\"},{\"label\":\"Keywords\",\"placeholder\":\"e.g.  cloud services, databases\",\"field_type\":\"text_box\",\"field_name\":\"keywords\"}]}', 1, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(20, 'metakeyword', '\"Write SEO meta title for:\\n\\n ##description## \\n\\nWebsite name is:\\n ##title## \\n\\nSeed words:\\n ##keywords## \\n\\n\"', 'meta', '{\"field\":[{\"label\":\"Website Name\",\"placeholder\":\"e.g. Amazon, Google\",\"field_type\":\"text_box\",\"field_name\":\"title\"},{\"label\":\"Website Description\",\"placeholder\":\"e.g. Describe what your website or business do\",\"field_type\":\"textarea\",\"field_name\":\"description\"},{\"label\":\"Keywords\",\"placeholder\":\"e.g.  cloud services, databases\",\"field_type\":\"text_box\",\"field_name\":\"keywords\"}]}', 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47'),
+(21, 'store_name', '\"Create creative Store names: ##description## \\n\\nSeed words: ##keywords## \\n\\n\"', 'store', '{\"field\":[{\"label\":\"Seed words\",\"placeholder\":\"e.g.  Store\",\"field_type\":\"text_box\",\"field_name\":\"keywords\"},{\"label\":\"Store Description\",\"placeholder\":\"e.g. Store product details\",\"field_type\":\"textarea\",\"field_name\":\"description\"}]}', 0, '2025-09-11 21:18:47', '2025-09-11 21:18:47');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `testimonials`
+--
+
+CREATE TABLE `testimonials` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(191) NOT NULL,
+  `sub_title` varchar(191) NOT NULL,
+  `description` longtext DEFAULT NULL,
+  `image` varchar(191) DEFAULT NULL,
+  `ratting` varchar(191) DEFAULT NULL,
+  `store_id` int(11) NOT NULL DEFAULT 0,
+  `created_by` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `email` varchar(191) NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(191) DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `lang` varchar(191) DEFAULT NULL,
+  `current_store` int(11) DEFAULT NULL,
+  `avatar` varchar(191) DEFAULT NULL,
+  `type` varchar(20) NOT NULL DEFAULT 'user',
+  `plan` int(11) NOT NULL DEFAULT 1,
+  `plan_expire_date` date DEFAULT NULL,
+  `requested_plan` int(11) NOT NULL DEFAULT 0,
+  `trial_plan` int(11) NOT NULL DEFAULT 0,
+  `trial_expire_date` date DEFAULT NULL,
+  `storage_limit` double NOT NULL DEFAULT 0,
+  `created_by` int(11) NOT NULL DEFAULT 0,
+  `mode` varchar(191) NOT NULL DEFAULT 'light',
+  `plan_is_active` int(11) NOT NULL DEFAULT 1,
+  `is_active` int(11) NOT NULL DEFAULT 1,
+  `is_enable_login` int(11) NOT NULL DEFAULT 1,
+  `referral_code` int(11) NOT NULL DEFAULT 0,
+  `used_referral_code` int(11) NOT NULL DEFAULT 0,
+  `commission_amount` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `lang`, `current_store`, `avatar`, `type`, `plan`, `plan_expire_date`, `requested_plan`, `trial_plan`, `trial_expire_date`, `storage_limit`, `created_by`, `mode`, `plan_is_active`, `is_active`, `is_enable_login`, `referral_code`, `used_referral_code`, `commission_amount`, `created_at`, `updated_at`) VALUES
+(1, 'Super Admin', 'superadmin@example.com', '2025-09-11 21:18:46', '$2y$10$vGeK1g.YiQumt6.LvpRvcOHJ6azzPb9yGJutSit63crTXJVKH0ckO', NULL, 'en', NULL, NULL, 'super admin', 1, NULL, 0, 0, NULL, 0, 0, 'light', 1, 1, 1, 0, 0, 0, '2025-09-11 21:18:46', '2026-05-24 11:35:44'),
+(2, 'ishack', 'admin@mobi-nardo.com', '2025-09-11 21:18:46', '$2y$10$qe0FOri0uv3zOw9tNraDp.0LAuuBW5E23ipAT05vMGns88S4NVT1O', NULL, 'fr', 1, NULL, 'Owner', 1, NULL, 0, 0, NULL, 21.55, 1, 'light', 1, 1, 1, 637431, 0, 0, '2025-09-11 21:18:46', '2026-07-28 18:05:32'),
+(3, 'TEST reda', 'testreda@mobi-nardo.com', '2026-05-15 17:50:24', '$2y$10$Chgf.wAdiIsH6lO4.bzl1ebAFNENR.jpbSwBHpGleV23BXYRBY30W', NULL, 'fr', 1, NULL, 'TEST reda', 1, NULL, 0, 0, NULL, 0, 2, 'light', 1, 1, 1, 0, 0, 0, '2026-05-15 17:50:24', '2026-07-25 14:32:21'),
+(4, 'test', 'testreda2@mobi-nardo.com', '2026-05-23 18:54:24', '$2y$10$dxBndk.fXfQe9QmV9.ExBenFlIPLo4HXYmgc679u9EGCllOPWmeeO', NULL, 'fr', 1, NULL, 'TEST reda', 1, NULL, 0, 0, NULL, 0, 2, 'light', 1, 1, 1, 0, 0, 0, '2026-05-23 18:54:24', '2026-06-03 03:53:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_coupons`
+--
+
+CREATE TABLE `user_coupons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user` int(11) NOT NULL,
+  `coupon` int(11) NOT NULL,
+  `order` varchar(191) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_details`
+--
+
+CREATE TABLE `user_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `store_id` varchar(191) NOT NULL,
+  `customer_id` varchar(191) DEFAULT NULL,
+  `name` varchar(191) NOT NULL,
+  `last_name` varchar(191) NOT NULL,
+  `phone` varchar(191) NOT NULL,
+  `email` varchar(191) NOT NULL,
+  `billing_address` varchar(191) NOT NULL,
+  `billing_country` varchar(191) NOT NULL,
+  `billing_city` varchar(191) NOT NULL,
+  `billing_postalcode` varchar(191) NOT NULL,
+  `shipping_address` varchar(191) DEFAULT NULL,
+  `custom_field_title_1` varchar(191) DEFAULT NULL,
+  `custom_field_title_2` varchar(191) DEFAULT NULL,
+  `custom_field_title_3` varchar(191) DEFAULT NULL,
+  `custom_field_title_4` varchar(191) DEFAULT NULL,
+  `shipping_country` varchar(191) DEFAULT NULL,
+  `shipping_city` varchar(191) DEFAULT NULL,
+  `shipping_postalcode` varchar(191) DEFAULT NULL,
+  `location_id` int(11) NOT NULL DEFAULT 0,
+  `shipping_id` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_email_templates`
+--
+
+CREATE TABLE `user_email_templates` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `template_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `is_active` int(11) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user_email_templates`
+--
+
+INSERT INTO `user_email_templates` (`id`, `template_id`, `user_id`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(2, 2, 1, 1, '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(3, 3, 1, 1, '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(4, 4, 1, 1, '2025-09-11 21:18:46', '2025-09-11 21:18:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_stores`
+--
+
+CREATE TABLE `user_stores` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `permission` text NOT NULL,
+  `is_active` int(11) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user_stores`
+--
+
+INSERT INTO `user_stores` (`id`, `user_id`, `store_id`, `permission`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, 'Owner', 1, '2025-09-11 21:18:46', '2025-09-11 21:18:46'),
+(2, 5, 2, 'Owner', 1, '2026-06-12 15:18:22', '2026-06-12 15:18:22'),
+(3, 6, 3, 'Owner', 1, '2026-06-21 11:53:30', '2026-06-21 11:53:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visitor`
+--
+
+CREATE TABLE `visitor` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `method` varchar(191) DEFAULT NULL,
+  `request` mediumtext DEFAULT NULL,
+  `url` mediumtext DEFAULT NULL,
+  `referer` mediumtext DEFAULT NULL,
+  `languages` text DEFAULT NULL,
+  `useragent` text DEFAULT NULL,
+  `headers` text DEFAULT NULL,
+  `device` text DEFAULT NULL,
+  `platform` text DEFAULT NULL,
+  `browser` text DEFAULT NULL,
+  `ip` varchar(45) DEFAULT NULL,
+  `slug` text DEFAULT NULL,
+  `visitable_type` varchar(191) DEFAULT NULL,
+  `visitable_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `visitor_type` varchar(191) DEFAULT NULL,
+  `visitor_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `visitor`
+--
+
+INSERT INTO `visitor` (`id`, `method`, `request`, `url`, `referer`, `languages`, `useragent`, `headers`, `device`, `platform`, `browser`, `ip`, `slug`, `visitable_type`, `visitable_id`, `visitor_type`, `visitor_id`, `created_at`, `updated_at`) VALUES
+(1, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"en-US,en;q=0.9\"],\"cookie\":[\"storego_saas_session=eyJpdiI6IkErMXFiQmFLUEZ6QzNQOGp4ejdZT2c9PSIsInZhbHVlIjoiUU1zQUFYSjNMMWdtMDNPUXQ1Umt3SVd4UW15RkVEdy85K3N0QXRVNTRWd3JCcXQ3T2RneURRcFE5MGF2dUFtUzlZYnQxUXcrQWxudWdHSHhyd2c2L3pQdk81b25lNFBJQ1ZNQlBqeTBTZFZ1ejZTeDQwTm93Ykozc09sWVpTZk54MWFISUI4OGRrTk5WZ0Vaa2c3RXZQaHhhVUdRdGhJVlNsQm9OdmhEbmc5M0daaWpvaCtFR2NDSXViWDNYL0JYL29KLzRxWVkvenIyOXZHUk94Z0RTV2tCRmVPWFhzclBFZUxndmFkVVN6MW9idGduYlhlZzdoSDAvVzBzd3FralZ0QlY4c3E5QitTZzdVMi9tZ0RTQ2pVTXRzMjQzKzFmSmN2MUpxVWlQSHA5Zk4wS1FGZUZpNDN3WWsrWEhCd3A1Q0ZUMFhJT1RoUXlCbEh0VEF2SnVrNUFJejFEdE5TWEZwRXZKUHZHUFEyNHVtWnIxSlBNUXlOV2ZyV3FkejllMmpqdHZYNmhub09NYk04MFdxV05wUFpkaEh3NWRwanVvaGtpRmRvY1RuZ1MzTWFlTUgzTTRHcnhPcS9lcnFQb09iYkt1ODZHSlMya3ArNzlaanZNV1BhM0NYZE1Oc3VLbzBVTzJ3YzlLdURLL0JPaXRKaXFtODNBNHVLbm5Mem8iLCJtYWMiOiI5MmY4ZGY0N2JjZjBiMmM4MzIyOWMyMWVhYTQ4ZWQ2MGY3YTkwYzAxOTI3YjNiNWJlNjAxYmI3MWUxMzQ5ODcxIiwidGFnIjoiIn0%3D; cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6IjJBd0JHQlllNVUvZ1RCZHNISm9QNEE9PSIsInZhbHVlIjoiZHJEdEFadmhpVlpRODNWTVBWZGIxL2hCc2dHcS9PVjQyMlArM2xNcjFrTXl0ODRxbDE4WEpDM0VoTW55Tk03NFdlS0c4aGpzbCs4Sm51S1RrY1R4VmROMlkwblBhL3ZQbTU2c0VUM0YxWGxCcDNVb2hCM0FWUnFXTzZla2FlNW9DSDlHb3Q1dWkyRmNBTXFTTXczTEtRS01aMHRVSDFwL0ZGUm56MkVvandmNGREc2RraXM1TjgrNEFMZkhHVVpEQyt3V09iczJzbTRCNkhqNXJHQXN0ZmFHWC9vT1htT0dtbEVWcC9VZkV5dHUzMFdrbGVMdnN1L2FacTBPTlRPdDZKbjQ1bDdpb1lVN2tGS25kSzB3ZFZGSUcwdlF5V2hUU0lvend4M21LSDVYWFpWMUZDN01KV2VEM0svY0IxZHF3eUI4Zk9UbFphN0h2dy9DalVrZi9CbUZRZE00Y2czeVUreE5FMzJyaHYxMTlHa1ZkWFhsUHNLT1E2SWZVdy9jTTQrMXBoeHFvQ2FpYW4xeUwvc2FsZGZxc2RyL0FLMXhYMW5OdjN5Q1NsVW1OSVhlUGxjVFhxeWxUUXV3R2xJcEZpNEt1ZDJaNTZRRm43V3JpUERjaFY5YVVPRTUvcjRvSGNHY3hQQk1zNmR5Si90c3ZsVytsclhvN3hZaktCU2MiLCJtYWMiOiI0ZWI4NzhiNzljZjE0NTM4MWFmMDYxM2MwM2E1MGRiMGZhMzM2N2JiNDE5NWZiMDg4ZTNhZjc4NmQwMDAwNjVjIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IkxmK3Zpck5WT1p1SHN4VXJteTZwWWc9PSIsInZhbHVlIjoiWFc1S29CYlRQQ2JHNlIwSnBiZFl2ZXFBVDlqK2RleWlaRHEvckhZTnBIUjJ5NjFOUFFNelIxR2xBczY4LzlUVi9JRkZyalpwZHhwSHFtTzdmUEtRZ1grZHk2TGxGSXoxc2Z3OXpYSjVUeXdzUU5rc2w3cUc3aWZERUZ0cnVtbnBsNGNzbmlWVW8zN3ZmanVveXFZTEhJamxaL3pQempZOHNWbk8rYW1PWEluUVNDcjZxZWNhUEZXMzNEdGVCYWtpWksvQ1RmZ3NadW5uRC9nMEtYeldtNWZaLzNvNW8zdWJwR2pNU3NzWFR5VUdhUW1qbTBiTzdUZFozS1BKT0hsYnlyRnA4YVFLdHJnaFllSGhiQkU2cGNQM3BIbzVzOHV6VzJnZjlJWnhvdnN4SWJtQmozYVJwVGdpQ2YrZGNUdzE0aWUvcDZYajdQWFp0aGt3QzRKKzdRUnJxOEFtYWtvcjRDT3Fybk5ieDFUWmtZKyszeVZncHZReWJnbGpHdWFoRGMrRGpBT2JucXhLWXhBSVBFRFJVZnMvRVZFWVUxb3RTOVM5aGhsRm5CSFlZMjJheWcrZkhFWW5KK2ROZUdPSTBzYXZJV0dpQ1VWVlpVZjZsK2tWd291Y3FDWFpBdkkwbloxWE9qZlk1SCt0WnFVRVU2aXJJMDZQSXFDaTB0cTciLCJtYWMiOiIyNDMyOTFiN2U2OWExNzIyM2FmNTkwNWUyMTFkM2FhNjBkMjA2MWVmMDg4YTA4NzA5MDQwNWRlNmM4NDJjOTJiIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/139.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"41.143.21.10\"],\"sec-ch-ua\":[\"\\\"Not;A=Brand\\\";v=\\\"99\\\", \\\"Google Chrome\\\";v=\\\"139\\\", \\\"Chromium\\\";v=\\\"139\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"none\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-user\":[\"?1\"],\"sec-fetch-dest\":[\"document\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '41.143.21.10', 'my-store', NULL, NULL, 'App\\Models\\User', 2, '2025-09-11 21:28:21', '2025-09-11 21:28:21'),
+(2, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"en-US,en;q=0.9\"],\"cookie\":[\"storego_saas_session=eyJpdiI6IkErMXFiQmFLUEZ6QzNQOGp4ejdZT2c9PSIsInZhbHVlIjoiUU1zQUFYSjNMMWdtMDNPUXQ1Umt3SVd4UW15RkVEdy85K3N0QXRVNTRWd3JCcXQ3T2RneURRcFE5MGF2dUFtUzlZYnQxUXcrQWxudWdHSHhyd2c2L3pQdk81b25lNFBJQ1ZNQlBqeTBTZFZ1ejZTeDQwTm93Ykozc09sWVpTZk54MWFISUI4OGRrTk5WZ0Vaa2c3RXZQaHhhVUdRdGhJVlNsQm9OdmhEbmc5M0daaWpvaCtFR2NDSXViWDNYL0JYL29KLzRxWVkvenIyOXZHUk94Z0RTV2tCRmVPWFhzclBFZUxndmFkVVN6MW9idGduYlhlZzdoSDAvVzBzd3FralZ0QlY4c3E5QitTZzdVMi9tZ0RTQ2pVTXRzMjQzKzFmSmN2MUpxVWlQSHA5Zk4wS1FGZUZpNDN3WWsrWEhCd3A1Q0ZUMFhJT1RoUXlCbEh0VEF2SnVrNUFJejFEdE5TWEZwRXZKUHZHUFEyNHVtWnIxSlBNUXlOV2ZyV3FkejllMmpqdHZYNmhub09NYk04MFdxV05wUFpkaEh3NWRwanVvaGtpRmRvY1RuZ1MzTWFlTUgzTTRHcnhPcS9lcnFQb09iYkt1ODZHSlMya3ArNzlaanZNV1BhM0NYZE1Oc3VLbzBVTzJ3YzlLdURLL0JPaXRKaXFtODNBNHVLbm5Mem8iLCJtYWMiOiI5MmY4ZGY0N2JjZjBiMmM4MzIyOWMyMWVhYTQ4ZWQ2MGY3YTkwYzAxOTI3YjNiNWJlNjAxYmI3MWUxMzQ5ODcxIiwidGFnIjoiIn0%3D; cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6IktKM2tEUUxERFRwV1JLWnNJQmVmcGc9PSIsInZhbHVlIjoiSDN5MFJ2em1malBGNjY5L1ZPakYwMVhqMURyVndYZDd4RFNnN21zOGYyaTBRL1B3SUJMR0IyRCtYNzcvN3pnY2RFTGdtcXdNdEgreXN1TkgxcVFPYVdTaENTdlAvRDRmb1pFdFZ3U3ZTRWNsbzFlNnJEdnhjV0E0cUNHYVdzcEQrNHNHYmZLWEZBZW9RMnUxcCtncnhBekMxRFJBU1IxS3FHaWdPTU5oQlRxL0ZRbm1yNDJYQ1F5TFhicFhET0hzVnlKOXIrMXpnRFZUQXUySnVjZVJERFdLZXRDZ29MdG1rY0VEOXFwN0VKQjJlaXpBS1RDZUhrV0VyYU4wanhHNU02NVlPUnE5dTN3aWJkSlVDc2hTWWZ4RjRXNUlkemNqVWxFT25FK0FvamJKRmFLelhFcjgwemhmbUw0dm4ycHBkRU9JWDVVR3cwVG5jSFdVS3RsZGJnTWVVc3RRNlNQTFgveUw4QjhUbkNaYWpLaUtsZzdRTkJZd1VmdFNXcDBScVZhQUxhMFozOHFvdFo3QS95OEc2WnRCV3p0cmdLSWxmRVIwTWVJVjNUb2NKT2IyVUdMc3NEbjk1dHV1clFkdnBnREJST0xudkVqd3ZpYVltbVVoT1dUd0hTa3dMRG0xeEozRXQ5RkhXQWV0TTY1d0xnUTJiK0tseDhhUlc1VVQiLCJtYWMiOiI3OTY1NGI4NzE4MzQzNzBlMGJlOTE2YzQzYWMwN2E3ZjVkY2FhYmJiMDQ5ODVmOTI4NTMyZjBiNWZhYzA1MzFlIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IkJCdUFxalFyYzdYSm9vL2xjT2liK1E9PSIsInZhbHVlIjoibTVuK3A5ZDN3d2kyZ0tnQmVDd2paczU4dWZDMTRKdFZMRUE4Y0ZHV256OTFvTDFmNm9IcGR3QU5YcTJ1UWdTdE1hd0M1VWs3OERiOWJCMEFkdTZnYlBSVUk4TTZLWXZkUWp5VFJsV2lScDZXYlI3MTREMlRBSktRY01CSjlxNUxXVHRTcHJoY045WWR3cUxGdVNaaEU2Mjg4aUlUN21zMEFESGZDNDM5VUtIVXozbWZpMmYvT2FOV0FHNDBjcDRhNm9weDVYWTVaWE9IaXo4d25MN1RnNnhzMlRrMUdLZE1jOHZSZk1seWFneFFjYXVyN3QxcmZJZ2kzTmtMMDdxSEVic2NsWlM1c05nQXl5UzhNdkg0K1Jka1BiZDNBZUhvcVh3QUZjS0Z4QjY2VlJJVGR2VVFoekZzcXlFNXlEbWMrVjdWZTVLbWY3VzUza2U0YVc0T3dqWlowQTR0dE11NWV0cFdQTGUzcjRIdllTSEhGN3BIOTBpaGRmTk1wMDd1TDVYeDNPcnZmamp1TWd2WUwvT1ZkTnlCeEJ2MlV3UGRocU05NURSUlRkUERQNTBvcW9OQ3k0dHk4V2ZHVGxYYUNSd3psK0tiYktYVUdQMlVrM2pydVZ6c2E3WFozNitFMGFXVzFkZWx4dXF5VEwya09RWTBxdkgzSVlZT2dvNDMiLCJtYWMiOiJhYjkxYzczODQwZDJkMzQ1NGRjYzBmYjI4NmIzY2RiZWRhNWI3N2I2NjFiMTEwYWVhODFkNmNiNjM2YjA2MDEyIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/139.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"41.143.21.10\"],\"sec-ch-ua\":[\"\\\"Not;A=Brand\\\";v=\\\"99\\\", \\\"Google Chrome\\\";v=\\\"139\\\", \\\"Chromium\\\";v=\\\"139\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"none\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-user\":[\"?1\"],\"sec-fetch-dest\":[\"document\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '41.143.21.10', 'my-store', NULL, NULL, 'App\\Models\\User', 2, '2025-09-11 21:31:39', '2025-09-11 21:31:39'),
+(3, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"en-US,en;q=0.9\"],\"cookie\":[\"storego_saas_session=eyJpdiI6IkErMXFiQmFLUEZ6QzNQOGp4ejdZT2c9PSIsInZhbHVlIjoiUU1zQUFYSjNMMWdtMDNPUXQ1Umt3SVd4UW15RkVEdy85K3N0QXRVNTRWd3JCcXQ3T2RneURRcFE5MGF2dUFtUzlZYnQxUXcrQWxudWdHSHhyd2c2L3pQdk81b25lNFBJQ1ZNQlBqeTBTZFZ1ejZTeDQwTm93Ykozc09sWVpTZk54MWFISUI4OGRrTk5WZ0Vaa2c3RXZQaHhhVUdRdGhJVlNsQm9OdmhEbmc5M0daaWpvaCtFR2NDSXViWDNYL0JYL29KLzRxWVkvenIyOXZHUk94Z0RTV2tCRmVPWFhzclBFZUxndmFkVVN6MW9idGduYlhlZzdoSDAvVzBzd3FralZ0QlY4c3E5QitTZzdVMi9tZ0RTQ2pVTXRzMjQzKzFmSmN2MUpxVWlQSHA5Zk4wS1FGZUZpNDN3WWsrWEhCd3A1Q0ZUMFhJT1RoUXlCbEh0VEF2SnVrNUFJejFEdE5TWEZwRXZKUHZHUFEyNHVtWnIxSlBNUXlOV2ZyV3FkejllMmpqdHZYNmhub09NYk04MFdxV05wUFpkaEh3NWRwanVvaGtpRmRvY1RuZ1MzTWFlTUgzTTRHcnhPcS9lcnFQb09iYkt1ODZHSlMya3ArNzlaanZNV1BhM0NYZE1Oc3VLbzBVTzJ3YzlLdURLL0JPaXRKaXFtODNBNHVLbm5Mem8iLCJtYWMiOiI5MmY4ZGY0N2JjZjBiMmM4MzIyOWMyMWVhYTQ4ZWQ2MGY3YTkwYzAxOTI3YjNiNWJlNjAxYmI3MWUxMzQ5ODcxIiwidGFnIjoiIn0%3D; cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6ImJuOWE3Y2pVRjNVNVNPN056aHd1ZkE9PSIsInZhbHVlIjoiSmNmVENUWHQ2LzZBSU1JUldUT2R4c1Uvek5jS2diWG0zSEh1K0JaNm9MRGJ5QzYwU241ZWMvbUYwKzJLVTc2TXQ3WjZwT3prV3ZEc3gvejAyc2hCbys4a1lBdHk3b3JEQTZtODVaUEtjMWs2VXQ2WXdwdXVNbk9KYnc1ejdZeE9UK1RLZVA1YmE1NEppM3l0eU1DQXl5ckpGNVNXYUNPcnUydEVTOTNFR25tMVpieVBZdW9lc3V2RjZ1SFM0TG1FL2dDbFV0R0NrRTJlTWMzVU04TUxKZXJNRW9vTXZsRDl3V0F3bk1ZUGRxWk1MaVBDNDUrU2dndEdrcU0xaEIzMURuMks1QkVJQ1FTaW1meWJXVGtKaDN6NGhZdWdLSlZvekJ5V3lIdDFRc1VYRDFCWEhHbkV2QlF4ajQveldaS0I0OE9tWFkwZ1IzaEhITG85Vm90emZ4SEE0MFBVK1dBM2RlQWRyd08rWW5NbkJCaWlDdlNRWHR5eHQ5MHBZa0IrQ015Mnp2OWlJVVZqenpaaFk1M003MEJmdyttYmg4dHh1WGx3bEJOL1k0UERuamtHakxlbjJNeFZQWndnc01TSUtWQzZDUU9VUm9FeVhaT21ES3NPN1IzMGg4S01NWnJnUjVOSEVuRHRDRWRrTHlMUnltaXNJMWJxeWpXd1g5RjAiLCJtYWMiOiI4ODgyNTdkMTJmODk1Yjg1Y2EyN2MzYzM4MTBmMzcxZDk0ZDk3NTFhODE3OGUyZTdhYzg1ZGRhNmYwOWZiYTNkIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6Ik5WR00xVWgzVk8rN3E1b2d2SVZRMlE9PSIsInZhbHVlIjoiSzAyRG1pNHl1d29aOEhKb2d1bVB0ZXV6UUdzc3ZOeTNkb2RrQ1NwMHBKMGJ6em8rSXBKYTlhK1hFUGxqZUR3aTk4SldQTWY2WTFSSkN1Vi9NaTBYeVhya0JNb2wzOG03VURTNVR4MElqRmRDVlEzQnNTa2NqemVkdFhRQ1FoUzFnQ3Q5YWdScmZDbnAwVUxjK1B2VFpiVEZzaUZLcXdvaDVyb2FlVkRVaE13MDRWWkR5VUJYRlJGVjlaOUNXUmVFcU1xMitZRFc2NWtVcXE4ODNXbEo4VjFwdGVpUmx6aTIvODMzeTYxaGZGV3NmQWV2dWpGTUtSeTUvQ0NPWFZneVhsRUpwNGk4RkdqM3BpMS9jVVdjMWN5K051dWpsN0FlS0pRZjZXcjBJcXoxVzFmTGE5MDRkaTNPTFNCOHJFQ1ZpamM2MGtKeVNMaGJoWENYWEQzSVFwTTBNU05UZ1ZjaDk0NmN5TXpReVZLWm4xWkkvWmtRTE9JUWRqdUFPMjljbHo4WkRlM2t3K1JBWTNpMHdVMHp5U1k2WTdvNVUyZlY2RFM5ZkEvT0JSd3hDUzczNHFPNWdPU3NVUFFBbWl1UkdBM280N3d0RmtFdDdveXQ0V0lDRytDZHdMZnZWWngxQWVpVTVycWRTanRWUW4rcllyMzVWNFNWdkxaemoyTGMiLCJtYWMiOiJiNTdjNDc3YWVmYjllZmUyZjI5YWMxZDgzYTE1ZGFkNzQ2OGQ0MWNmYjk2NjhhOWM0YWYxNzZlY2MyNDBhYjFmIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/139.0.0.0 Safari\\/537.36\"],\"cache-control\":[\"max-age=0\"],\"x-forwarded-for\":[\"41.143.21.10\"],\"sec-ch-ua\":[\"\\\"Not;A=Brand\\\";v=\\\"99\\\", \\\"Google Chrome\\\";v=\\\"139\\\", \\\"Chromium\\\";v=\\\"139\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"none\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-user\":[\"?1\"],\"sec-fetch-dest\":[\"document\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '41.143.21.10', 'my-store', NULL, NULL, 'App\\Models\\User', 2, '2025-09-11 21:37:30', '2025-09-11 21:37:30'),
+(4, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"en-US,en;q=0.9\"],\"cookie\":[\"storego_saas_session=eyJpdiI6IkErMXFiQmFLUEZ6QzNQOGp4ejdZT2c9PSIsInZhbHVlIjoiUU1zQUFYSjNMMWdtMDNPUXQ1Umt3SVd4UW15RkVEdy85K3N0QXRVNTRWd3JCcXQ3T2RneURRcFE5MGF2dUFtUzlZYnQxUXcrQWxudWdHSHhyd2c2L3pQdk81b25lNFBJQ1ZNQlBqeTBTZFZ1ejZTeDQwTm93Ykozc09sWVpTZk54MWFISUI4OGRrTk5WZ0Vaa2c3RXZQaHhhVUdRdGhJVlNsQm9OdmhEbmc5M0daaWpvaCtFR2NDSXViWDNYL0JYL29KLzRxWVkvenIyOXZHUk94Z0RTV2tCRmVPWFhzclBFZUxndmFkVVN6MW9idGduYlhlZzdoSDAvVzBzd3FralZ0QlY4c3E5QitTZzdVMi9tZ0RTQ2pVTXRzMjQzKzFmSmN2MUpxVWlQSHA5Zk4wS1FGZUZpNDN3WWsrWEhCd3A1Q0ZUMFhJT1RoUXlCbEh0VEF2SnVrNUFJejFEdE5TWEZwRXZKUHZHUFEyNHVtWnIxSlBNUXlOV2ZyV3FkejllMmpqdHZYNmhub09NYk04MFdxV05wUFpkaEh3NWRwanVvaGtpRmRvY1RuZ1MzTWFlTUgzTTRHcnhPcS9lcnFQb09iYkt1ODZHSlMya3ArNzlaanZNV1BhM0NYZE1Oc3VLbzBVTzJ3YzlLdURLL0JPaXRKaXFtODNBNHVLbm5Mem8iLCJtYWMiOiI5MmY4ZGY0N2JjZjBiMmM4MzIyOWMyMWVhYTQ4ZWQ2MGY3YTkwYzAxOTI3YjNiNWJlNjAxYmI3MWUxMzQ5ODcxIiwidGFnIjoiIn0%3D; cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6Im9xcUlaYWgxRFAxai9RVWdoNGJGSUE9PSIsInZhbHVlIjoieHREZHdSWnNkNlcwWTk0SUFHZ2dwdlJ1b090TE1HN3l3U29vS2M4aUpMTS9oR2UxMXEvTWg1S3A1aFVMeElPbjlWQ0ljaDJNZXhGcjRUa0JubktaTkkwVUVPVHJkR3NwSE41eFVydGVxVTZyekVpdk9CelRnWm0rYWhrRGloRExVTVZ2OGpsZ2d4R1JRU3I0ZFp0WkMvUldNUDJrSTBsYlB6VW8zOGxzMGlWSnRSUzRxb2VVZlc4eXpxV1AxNWdoVHFyV0lPSFA5dlZpZ3lsOGNUQ0Qyem4yWU80RVQvRHlkaXlnVkczbWVYcU5DKzdwNmN2WVlyVnZMMzk1dzBYS0p3SlJIMk5kWWpPWGl5cUlPL0dyenpiMzltUWtKUkI5R05VeFZUNjF5RnB2SEtZM3JJYW52RjhZTFlrYjh1S1dISGpxM2hWSlpXOURCdysrZmUzUDFMT0Q4amttMUJiZEovb05rTXRSeXBPUFJ4VU5RalowK2tuM0g5c01iZWs3ODZHRHlFNDdnazJNdXlEK216aXRBeHZ0N1hoNlBjV0JnejBiK3liM3lqcHRLWEtPMTJOUVRRbE9uMG4yOFYyYVBwR2VrRWp4UmxBMG5nTll6ck90Tm1aMVR4WjY4Yy9xS0VESkkvL09DWHA5SFd0M0lCUks4T1JrQVhEcCttMFYiLCJtYWMiOiI2NDEwMTM3ZjhhMzdlYzc0MTQxNjE0M2ZhMDBmMjI2NTRkYWRlMTAxNzMyYjg4ZjU0OWVhYzY1NjAyMGU1Yjg2IiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IllsWngycVlUeWFvRFQzZllMK1EwK1E9PSIsInZhbHVlIjoiY2lvc0paT0owQ3ZlMWJRU0NXb0x1cUxsb3NUR0VHRUtkUHN4VzErZFFITDdRczQzZmdyT2dmYnVHN095QnJ6SFZ1Rm1zckZSb0ZsOHdTSmJRc1Z5R0krYlM1TDdUMDloN2pxUHVNSnV2V3BMQnlGcFZnQXhMaldlSlRwU1lPRS9lanFtcEw5VE96NngvU1grQmtzU3ZYVG5zZjVhU3FqYkpqOHZCb0ZMNEh4TkVMbU4zSE1kdVFKeTRWcXRQVGN6SE1xZnFhK3lRWkpnc2Z2NTA3OXNCS1FIQUdkbjYzVVlsUytpdzNLNWVyZzV2WGtWTUlZdXVhbkhlWmgyaThoVmhzbm1sZlVybFM1ZVhHTU5qUnMzaXhGbHdla0FZeEZTSUVSVzhoNTFJRHpCUG9GdkswblN0eW1WT0tBdS8yU2Q0WDYyNnRvT0l4RHZRZjhZS1dGL2JJTi9oWGxJcXdOeFZ0MnR6eE5jOC9LK1N1VXd0WGN6Yi9hOE0yYW5odjcxbndPZkF2UzhHTjJyWHdTV1ZZa3F5dk9hMmo2ZXlRNUUrK0hTU0oxTGtJSXV4ZmkvQVFHU1N1Q05UVEZGNFZZaFZveC9UWXhQSGxhZ0gxVkI5VW4vRks4TEZSQ1lwemRnSnhYUitENC9tTmFkQ0NQWjFTdjRvK01vOHE0MWNBeXAiLCJtYWMiOiJjMzI0NThhY2JhNDRjNmRjN2QzYzJkYmEwY2U4NGI2MzdmYzViMTM2YTY5YmU5NzBkZGZlMmU1MzE0MGE0OTkzIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/139.0.0.0 Safari\\/537.36\"],\"cache-control\":[\"max-age=0\"],\"x-forwarded-for\":[\"41.143.21.10\"],\"sec-ch-ua\":[\"\\\"Not;A=Brand\\\";v=\\\"99\\\", \\\"Google Chrome\\\";v=\\\"139\\\", \\\"Chromium\\\";v=\\\"139\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"none\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-user\":[\"?1\"],\"sec-fetch-dest\":[\"document\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '41.143.21.10', 'my-store', NULL, NULL, 'App\\Models\\User', 2, '2025-09-11 21:39:01', '2025-09-11 21:39:01'),
+(5, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://gestion.mobi-nardo.com/store/my-store', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"en-US,en;q=0.9\"],\"cookie\":[\"storego_saas_session=eyJpdiI6IkErMXFiQmFLUEZ6QzNQOGp4ejdZT2c9PSIsInZhbHVlIjoiUU1zQUFYSjNMMWdtMDNPUXQ1Umt3SVd4UW15RkVEdy85K3N0QXRVNTRWd3JCcXQ3T2RneURRcFE5MGF2dUFtUzlZYnQxUXcrQWxudWdHSHhyd2c2L3pQdk81b25lNFBJQ1ZNQlBqeTBTZFZ1ejZTeDQwTm93Ykozc09sWVpTZk54MWFISUI4OGRrTk5WZ0Vaa2c3RXZQaHhhVUdRdGhJVlNsQm9OdmhEbmc5M0daaWpvaCtFR2NDSXViWDNYL0JYL29KLzRxWVkvenIyOXZHUk94Z0RTV2tCRmVPWFhzclBFZUxndmFkVVN6MW9idGduYlhlZzdoSDAvVzBzd3FralZ0QlY4c3E5QitTZzdVMi9tZ0RTQ2pVTXRzMjQzKzFmSmN2MUpxVWlQSHA5Zk4wS1FGZUZpNDN3WWsrWEhCd3A1Q0ZUMFhJT1RoUXlCbEh0VEF2SnVrNUFJejFEdE5TWEZwRXZKUHZHUFEyNHVtWnIxSlBNUXlOV2ZyV3FkejllMmpqdHZYNmhub09NYk04MFdxV05wUFpkaEh3NWRwanVvaGtpRmRvY1RuZ1MzTWFlTUgzTTRHcnhPcS9lcnFQb09iYkt1ODZHSlMya3ArNzlaanZNV1BhM0NYZE1Oc3VLbzBVTzJ3YzlLdURLL0JPaXRKaXFtODNBNHVLbm5Mem8iLCJtYWMiOiI5MmY4ZGY0N2JjZjBiMmM4MzIyOWMyMWVhYTQ4ZWQ2MGY3YTkwYzAxOTI3YjNiNWJlNjAxYmI3MWUxMzQ5ODcxIiwidGFnIjoiIn0%3D; cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6Ik9iQVRDd3dYbTk5VC83ZGRVdS9tc1E9PSIsInZhbHVlIjoibW5VOXRlSEFicTYyd0xOVmI5bTRkcEdlblFVY29wb0tFQUJTZlZRQkd0djlpemcrY2JJWTdsTDhleG5FL0M1b3pWS0xVRENFLzkzMkxKN09yVjhSd2JxOUxmem1meDE2d1dBa29pUlpXb3BxUFU3dkVzbGtzMHJmZG9OMXR1RVFiSHVEa3NJa3I2R3YwZzhFWlNtRnkzLzJzRXV6SmVqWWxzZ2Q4VjJLcE53bkNyTUZlaFkwOURJV0dFWlc2Z1ZqMnlNTTJWOHZsUzdRK0U0L3dhYVd0TGJYZ3VCNmhKRlovTWpSNDBWUEhWaHFVdG1peC9OOVU4R1IwTXlhTEwzc3BPL2xla21Yb0tVb3d0MERSMVRkMHRZdlQ4dXFNSS94WGVrMDRzczFnd3FocE1MQWFiSitBajg0QmVxSTZrampkbTNRN2I3TmNsUnRuZnVGUExjQXVlemxBRFhRZFFBa29lOGw5blFpVEhubGl1SEtjQmxwVU41c1FxaGV1Rks3TFh3TUpCaG1uTVdsQnI1RkxVR2R3U1kwYkc0U2IyNHdsR3YxQzFMblYvamVZRWlHb3Y4N2poaDRCZHFUOEVseHZWYlM0bDNzaWNFVHo1dDJuNVYwN3Y1eUFVcFNYYTV3SEYvaGZkMHduQlRtQU5pYTBWcHBzMityZFZLWlFWeHIiLCJtYWMiOiI1NjE1OWI2OGViN2FhNWM1NjAzYTYxNTE5MmQyZDMwMjllNzZkYmY3NjdkYmE0MmU5YjM0NWE1MWI2NTg4MDdjIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6Ik9OZlNnOVkyMzBSMWJadGtHeGtVY2c9PSIsInZhbHVlIjoiVVRhVlBQV1VqclNya1dGdEZOQlFzYVphNzd1Nm5OcnNQNVYraGV4dG9yMWF2NHJNaUNReDlISjh5WUt6a1VPMWpOdkRRSTh6YzR2ZFFYNXFGT2o5YnhzQkdES3hvcTVERFhlTEg3dnBpR0pOeFhNOHpZYStDMjZzTXJxem9BREduUDdTZFlFL3JBcXRxd2ZHL0RDNWFRRUxUZ1A5dmQrWk9JdGtTOER2cDJDU1pzSVo0dU9JV1RvYVo1bXBPcnBzZmpsd0xpSmRaNitZSEJJbWpNcW1EZzc4VTNJS3VSMW5maEJNTkFVd3RKNXNBWVMvRzhLcW1Tb0R3bHpJc29IK1lHdmRKVlBsUGZNNTBwWUVqZUZmMUduV29pcE1QeTlIYXdEMDByVkRQaDJESTZqTDAxeGtMbHIyR3JXei80WGpZLzFoM04rNEJCYkRYekxuTWlTZWNGcnhtTnErVEllVnVtbGpmMGoxMW05K2JFSFBVNWkvU0VrRlBFbUZnalQvVWZRVUZiT09aeHVOMjFPS1IyeFZ1MjJ6SlVOMUJIL0w4YzV0dXNaQW44Qnd4V0d4VUdvQ21MSDd4UHJRRGhHc0JFazFERDlsalZ2TTVRa0w0WFBmNTdVL3FiR0JaQ0pJK3hxcXNrdEx5NU83NlhES3FuVTVkalZnK3V0RHo0MGoiLCJtYWMiOiJkNjRhNjIyYTcwYzMzNThiZTI4ODhjZjgyNDU1OTUxYWM3ZjM1ZmVlNzFkNzYyNmI2MGMzMThmOGI3ZDBjZjhjIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/gestion.mobi-nardo.com\\/store\\/my-store\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/139.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"41.143.21.10\"],\"sec-ch-ua\":[\"\\\"Not;A=Brand\\\";v=\\\"99\\\", \\\"Google Chrome\\\";v=\\\"139\\\", \\\"Chromium\\\";v=\\\"139\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-origin\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-user\":[\"?1\"],\"sec-fetch-dest\":[\"document\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '41.143.21.10', 'my-store', NULL, NULL, 'App\\Models\\User', 2, '2025-09-11 21:41:22', '2025-09-11 21:41:22'),
+(6, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://gestion.mobi-nardo.com/store/my-store', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"en-US,en;q=0.9\"],\"cookie\":[\"storego_saas_session=eyJpdiI6IkErMXFiQmFLUEZ6QzNQOGp4ejdZT2c9PSIsInZhbHVlIjoiUU1zQUFYSjNMMWdtMDNPUXQ1Umt3SVd4UW15RkVEdy85K3N0QXRVNTRWd3JCcXQ3T2RneURRcFE5MGF2dUFtUzlZYnQxUXcrQWxudWdHSHhyd2c2L3pQdk81b25lNFBJQ1ZNQlBqeTBTZFZ1ejZTeDQwTm93Ykozc09sWVpTZk54MWFISUI4OGRrTk5WZ0Vaa2c3RXZQaHhhVUdRdGhJVlNsQm9OdmhEbmc5M0daaWpvaCtFR2NDSXViWDNYL0JYL29KLzRxWVkvenIyOXZHUk94Z0RTV2tCRmVPWFhzclBFZUxndmFkVVN6MW9idGduYlhlZzdoSDAvVzBzd3FralZ0QlY4c3E5QitTZzdVMi9tZ0RTQ2pVTXRzMjQzKzFmSmN2MUpxVWlQSHA5Zk4wS1FGZUZpNDN3WWsrWEhCd3A1Q0ZUMFhJT1RoUXlCbEh0VEF2SnVrNUFJejFEdE5TWEZwRXZKUHZHUFEyNHVtWnIxSlBNUXlOV2ZyV3FkejllMmpqdHZYNmhub09NYk04MFdxV05wUFpkaEh3NWRwanVvaGtpRmRvY1RuZ1MzTWFlTUgzTTRHcnhPcS9lcnFQb09iYkt1ODZHSlMya3ArNzlaanZNV1BhM0NYZE1Oc3VLbzBVTzJ3YzlLdURLL0JPaXRKaXFtODNBNHVLbm5Mem8iLCJtYWMiOiI5MmY4ZGY0N2JjZjBiMmM4MzIyOWMyMWVhYTQ4ZWQ2MGY3YTkwYzAxOTI3YjNiNWJlNjAxYmI3MWUxMzQ5ODcxIiwidGFnIjoiIn0%3D; cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6Ik9iQVRDd3dYbTk5VC83ZGRVdS9tc1E9PSIsInZhbHVlIjoibW5VOXRlSEFicTYyd0xOVmI5bTRkcEdlblFVY29wb0tFQUJTZlZRQkd0djlpemcrY2JJWTdsTDhleG5FL0M1b3pWS0xVRENFLzkzMkxKN09yVjhSd2JxOUxmem1meDE2d1dBa29pUlpXb3BxUFU3dkVzbGtzMHJmZG9OMXR1RVFiSHVEa3NJa3I2R3YwZzhFWlNtRnkzLzJzRXV6SmVqWWxzZ2Q4VjJLcE53bkNyTUZlaFkwOURJV0dFWlc2Z1ZqMnlNTTJWOHZsUzdRK0U0L3dhYVd0TGJYZ3VCNmhKRlovTWpSNDBWUEhWaHFVdG1peC9OOVU4R1IwTXlhTEwzc3BPL2xla21Yb0tVb3d0MERSMVRkMHRZdlQ4dXFNSS94WGVrMDRzczFnd3FocE1MQWFiSitBajg0QmVxSTZrampkbTNRN2I3TmNsUnRuZnVGUExjQXVlemxBRFhRZFFBa29lOGw5blFpVEhubGl1SEtjQmxwVU41c1FxaGV1Rks3TFh3TUpCaG1uTVdsQnI1RkxVR2R3U1kwYkc0U2IyNHdsR3YxQzFMblYvamVZRWlHb3Y4N2poaDRCZHFUOEVseHZWYlM0bDNzaWNFVHo1dDJuNVYwN3Y1eUFVcFNYYTV3SEYvaGZkMHduQlRtQU5pYTBWcHBzMityZFZLWlFWeHIiLCJtYWMiOiI1NjE1OWI2OGViN2FhNWM1NjAzYTYxNTE5MmQyZDMwMjllNzZkYmY3NjdkYmE0MmU5YjM0NWE1MWI2NTg4MDdjIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6Ik9OZlNnOVkyMzBSMWJadGtHeGtVY2c9PSIsInZhbHVlIjoiVVRhVlBQV1VqclNya1dGdEZOQlFzYVphNzd1Nm5OcnNQNVYraGV4dG9yMWF2NHJNaUNReDlISjh5WUt6a1VPMWpOdkRRSTh6YzR2ZFFYNXFGT2o5YnhzQkdES3hvcTVERFhlTEg3dnBpR0pOeFhNOHpZYStDMjZzTXJxem9BREduUDdTZFlFL3JBcXRxd2ZHL0RDNWFRRUxUZ1A5dmQrWk9JdGtTOER2cDJDU1pzSVo0dU9JV1RvYVo1bXBPcnBzZmpsd0xpSmRaNitZSEJJbWpNcW1EZzc4VTNJS3VSMW5maEJNTkFVd3RKNXNBWVMvRzhLcW1Tb0R3bHpJc29IK1lHdmRKVlBsUGZNNTBwWUVqZUZmMUduV29pcE1QeTlIYXdEMDByVkRQaDJESTZqTDAxeGtMbHIyR3JXei80WGpZLzFoM04rNEJCYkRYekxuTWlTZWNGcnhtTnErVEllVnVtbGpmMGoxMW05K2JFSFBVNWkvU0VrRlBFbUZnalQvVWZRVUZiT09aeHVOMjFPS1IyeFZ1MjJ6SlVOMUJIL0w4YzV0dXNaQW44Qnd4V0d4VUdvQ21MSDd4UHJRRGhHc0JFazFERDlsalZ2TTVRa0w0WFBmNTdVL3FiR0JaQ0pJK3hxcXNrdEx5NU83NlhES3FuVTVkalZnK3V0RHo0MGoiLCJtYWMiOiJkNjRhNjIyYTcwYzMzNThiZTI4ODhjZjgyNDU1OTUxYWM3ZjM1ZmVlNzFkNzYyNmI2MGMzMThmOGI3ZDBjZjhjIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/gestion.mobi-nardo.com\\/store\\/my-store\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/139.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"160.166.9.9\"],\"sec-ch-ua\":[\"\\\"Not;A=Brand\\\";v=\\\"99\\\", \\\"Google Chrome\\\";v=\\\"139\\\", \\\"Chromium\\\";v=\\\"139\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-origin\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-user\":[\"?1\"],\"sec-fetch-dest\":[\"document\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '160.166.9.9', 'my-store', NULL, NULL, 'App\\Models\\User', 2, '2025-09-11 23:01:48', '2025-09-11 23:01:48'),
+(7, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://gestion.mobi-nardo.com/store/my-store', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"en-US,en;q=0.9\"],\"cookie\":[\"cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6Ijh1cUhaUmg2QVBNQ3h4c0daMDJheWc9PSIsInZhbHVlIjoiWjRKUDFsZWNnRWoyeXpqLzA2WHJFdTBzRmNYMHJmZVpEZ2luejNkYlhMR3lieEE3dW5VYzZQaGNqdGdiTVlzVjc5VlB2Wmw0MWVnWFlaVjhNdUlPdEZUQ3BIRFdqa3p5UDNWakVhYlo0ZkpXb0U4U0FqYUMvNEVScHpKVnB3YTVwUVJjMmRJNkZxemdhRWU5TGNWdFJ4dGdDVmlGK1RPRTFoOGJMOWdWVW4wbi9EK0o1ZVlRNGVCamZqeHp0MEpOb2MzcjhrU3dKYXp5a2lSMWNmUUM0MDJzV0J3UGVESmR6WGt1dE93aVUzVWZKandqaTdrTVhGd0wyYkRIckpqbVBkWkFJR1RVTXpRTW12MGlxcW5tUUxhWHI0V3AzNWMrS3JPR3FaeUZLU0hlcTl1ekFJdDk4d240dDAwcHJyREYxY3M2R0NvWEd1MzF3TFJyRVdTMUJiWHRGd2JmcVV6ZnlDZ1VJL0V4Q2x2TVIwN3IyZTZaNXgzVlhZMTdkUW1jT2V0K25yVm9jV1VnK0EwVG51Wmo3NzdEV09HVE5yVXhuT2JmNVZRSTFWZEJzVkhobC9haUZRM2Jwem01RkVEL0lJWjhza0o1Sjc0ZUwvS09LeUFRNVkwSi9SK2dMV3JmVjBFS2VTOVNTTkxKUG1xVGpnQllUL2s2Qm9sZWNPNDkiLCJtYWMiOiI1N2QyNDNmOTdhNzBlMDE3YTRjYjBmMDkxMGQwYTJlMWY3YWUxMDNiZjViNGQ1ODViMWUzOGRjMjZlZGI0NDFhIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6ImtyQmhkdVV1SzVaT1BsV2ExMHNSRUE9PSIsInZhbHVlIjoieXZ1WitVQXJHNkVpWGhSVzZYUE9oVE9EMko5ZkVMMmhvR1VZL2V5RFE1QUM3UEROeFJLMDBld0xpMUJlQlUwaCtWd251M2xZRHdYOUkvR0lxanZVc1RSeUFUVzdpWWVzSEl4K0lvNlVNMitlY2NuTFZJc1BVM0ZsblNmYi9ITmYzOEdSdTRFam1ZOUpuSWQxRU5GZnFwSWRLU2xoL3N5cDFJVDdRbzZlODExRHY0ZkRta3kxVURYcERXT09aOFFtQlN4QXh6TlBTbzJkVGZwVzhiSUdoWDV6VUNUamh0cEdhK2tYUnZobVVHRU1iQzcrdktKK04zWmttVE1EaTc2bFczeHo0MjA4NDUxbEo3NVlxL0xlT05rY2swRUVPcmdGVWxGbVdTUHQwRWNGL0M2MXhJa0JMdFJtenl2bERhUGY5NERnMWQ3alE0UVFPS2Rua1ovOTdoYW9pRzgrM3pSbnMzYUJOQ2Z0SnVoTlFyMzZtN2cvRHdoTzFqbmJxTFFTTW5MUVNzaGRBTnNNellxNElmTm9ZUnk3bjBHbldTeG91SzArczRzVEFpWGxHNzJWNkljMk15TlJZdmsybEFDV2xsbm5aSnlSeHBSdHVUSHEwK3ZIVXlZUFZUWkpGQmFoNW9wUytVNWdmcTkwR1p0S1pJaDZmckhWVitZbEJHN28iLCJtYWMiOiJlOWU0ZTQwNTk1MmMwZGUzYmZhZmI4NjM1Y2ViN2IyZjIwYWM4NmMwMjA1MWU3MWU4ZjlmYTg3ZmFiNWQ1NTZkIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/gestion.mobi-nardo.com\\/store\\/my-store\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/139.0.0.0 Safari\\/537.36\"],\"cache-control\":[\"max-age=0\"],\"x-forwarded-for\":[\"160.166.9.9\"],\"sec-ch-ua\":[\"\\\"Not;A=Brand\\\";v=\\\"99\\\", \\\"Google Chrome\\\";v=\\\"139\\\", \\\"Chromium\\\";v=\\\"139\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-origin\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-user\":[\"?1\"],\"sec-fetch-dest\":[\"document\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '160.166.9.9', 'my-store', NULL, NULL, 'App\\Models\\User', 2, '2025-09-11 23:20:00', '2025-09-11 23:20:00'),
+(8, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_6_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/140.0.7339.101 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,*\\/*;q=0.8\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"accept-language\":[\"en-GB,en-US;q=0.9,en;q=0.8\"],\"cookie\":[\"XSRF-TOKEN=eyJpdiI6InllWnA2MFhnRWpWMmN2cXV1SFkyUGc9PSIsInZhbHVlIjoiQTg3OHdCbFFxQVlFakFDQnliZzN1REsyZ2J3TndjMzJZUHlaRjNtclpod3ZQbTc0SW1nRFE3bU5PeldSaEpvcFVHU1hWcWZ2K0wzUSsyalpuUkNnTUZxMkx4bGs4THcycDlhRG5Mc09TVWpkZlNjeGw2K0VJWUNWSW13QnpDRnBoNmo5TUtReTBsVDA4SHplUkxDSnhlaHpWT2ZVU3Nac1ZRSUJtSlo0WFJ2c0lPQ2ZhNG9TYTNjQ1AzY29NcnErdnJjSkp4NnNJdXhNb1JVaDB0NUdQVS8rVjlCd2FkTEFKWVVBUk9pWkdLNTlFazk3NDVtT1pOcVlyVHBaNm9GbEJhVy9zWm5SazVmellWdWRlVmRVSXJ5UzVsT3ZZMGEwcm9IcEdwQ2Fvd3NqSDlQSUpZQ1NxenREcUFyekVjUzhvbnBOZVozUjdMNGI3eXcyYVhra0xnTDFkSEt6b3E0NFV2SnFEdFFUK0poaXc5TkQyM2RLUHJ4U1RzdlBxaUFzZHZzVFRIOFBSVjNjTTlSWDJDbGpMQS9janNyMEp6MC9FTW53Q2YrQlp2akxWc0JWNmV4b3A2MFRhQU5yczM2TUc1bmxaOHIvRnBlaXhSNU1lK0w3Wjg5NnczVEdoRm16Z1NneVZyTzNUVUU1Z3pHa01Dd2kxVmp1b0NMSTFyeUciLCJtYWMiOiJhYzE5NTI3ZmVjNzEzMjkxYWNhZmE4ZGIxY2I2MWZhZTEzNzRmZGQ4YmMxY2Y3NjQ1ZWRiMjQ2MWM2ODk5Mjg5IiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6ImdOb0xXMFBEb2hXbGJPdm9BNU55WGc9PSIsInZhbHVlIjoiRGo3VHdwRDhIOTNoRkdsRTAveXNza2MrWHo2TVFKblB0N2RhaitQMTB6ZFFaU3VLT2R0eldHTmlnSGtXSVdhSzhkYXlrTGd6UklXKzNoMC9PWjdMM21PWG0yZFlHeW9rUDhmcldoSFBPaUVUNCtFVFJBeXp1K3RzUU1KNkVibXVjK0NscSs5dnNoNTExMGtBcFZYQy9UVm5LS3lSU05tYlNSQkZmeDhxejB5QmNSc1UyMWRyTnEvbTUxSUNlOWNJZWkrLytmRDRzTnZPa0QxbnJNbjlWazY5RXEzc0xWMmM3ZlNEdHRpb0tFRjJJcFpaUWl2RHkxZFlOcmZlbGtkTllVV09FUC9NN3NmYlo3dHJ2OW9ScWxmeWkwZ0dYb1A0OFFTL3N3SDVBODJNWTFWRytjd0Z1R1JDYk1OZ0VxcUZILzZGYU1uNlBTelhjRHYzQjVtRnVWZkpOU0Q0T0tDa2hXanpVVVpVLzVOSjhObVdOam9lWGZvU1RLaHhWZVhiWDhud3ROb1J5eHo3WjVDcEtjbGhvZGlBQkgyUUI4R2J5Z2lrQ1lhVXlZbUVGMmEvTjg1Y0lCKytvaVczMnFSZ2pYMUxKU0dKYlFlSWNQd2lMNUE5dCt5bkRBRVdiSWFtSGxRWEkvMHIxR2hkeHpBVlpCbU1ZOGpRTkU0T2ZPaDYiLCJtYWMiOiI4YWE2ZDI2MTIzZjQwOGQ2MzcxMTNlOTkyYjZkNDNlNTBhZWVjNmZiMzg3Nzg0NWM4ZjE3Y2ViYzVjODgwMmZlIiwidGFnIjoiIn0%3D; cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 18_6_2 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) CriOS\\/140.0.7339.101 Mobile\\/15E148 Safari\\/604.1\"],\"x-forwarded-for\":[\"160.166.9.9\"],\"sec-fetch-site\":[\"none\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"document\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Chrome', '160.166.9.9', 'my-store', NULL, NULL, 'App\\Models\\User', 2, '2025-09-11 23:49:19', '2025-09-11 23:49:19'),
+(9, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://gestion.mobi-nardo.com/store/my-store/categorie', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"en-US,en;q=0.9\"],\"cookie\":[\"cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6InduUit0bkpqbTdYeE5MNjVMYWFFVXc9PSIsInZhbHVlIjoiWHJ2WjJpQzd4UjhZb1FkeUtxMzV5Z1dya2w5UUg1Mlg3RU1GNW16UmdwRXN2SEtnbWdGa2dLWjg2bXlWTC9mV0JwTHVXUGh0V1VTVVBFNnJpT1krTTRYc3JVYnZpeUwwYXYxd3ZSTCtSZmVJN0w4VUZOQmdDME8zSElvcGpseFpYMzM3OUZtcmM5WHhIME9qcmt4cEw5VlF5WjIvZldudlJkTHNGOS9pbnY1cnlic0FvNGZvN3o1STkvTnpGaUZYMFFKZ0IrRVBlUERWNUV4SjJZY29oNE5lR0NZeDkxSnZXQXZZY0lNSWVyc01qRC8ySGs0QnJXL3dGazQrZHEvZ2FKbVRDRElPeVpsYWt2c1d2Q3IwcDNLTWRhZ0tXY2JxeFlVV3RZMm5NREtlTWU3ZnVjVE5rK3YveHhCZGZaNWxjNk5JeTB2QmFvOXljZUVMOW9YSW1USFA3d1VoNkQ1VlRlVFZBZ0duaUZrNkJBN211WmQ2dk1QblhKUlViWU9UOVVsblVPWTV5WXhHZG9uV0NMQjI1Y0VmQ1EwVTlUSXpSQlJXM0hkaFZZMHp1aGprQW5McWttZElwWitSeDJBZWJqVkpJcWlDekNiMlhYcGJLUVhqVVA4NlZ0Z0pFMUZHa3l4N3VYa3lyb1RvbTd6bm5QUjVWMndjWkV3SmJWbTEiLCJtYWMiOiI1ZWEyM2IzNzZmYjAwNmZiN2I4MWFjMTdiMjUyMDFkZTYyMDljZjIzZjc3ZWE5YTlhOGI3NDZmNTMyMDIwMWY4IiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IlFWUVJQVC92bUFWUEozTStlVXU3dnc9PSIsInZhbHVlIjoiSDB5YitJMm5PS3VPZGN6YXl5aVNmR2Q1aFE4MnQrcy9MUGZyN0ExbVVGTmZJSk1qOHM5bisxb3RJK0x6UnhyRW5wUXpRWC9CM1kvcDhKbFRjNUltRDU3ZG93cmJub2lLQys0b2w3T3JCTFVMQ3hpdk5nbU94WjUxOGl3K29BZXpuaUlKWFVRNW9wcXVjZ2RyemJWdWZ0aVVlWGlBTzRGM2lwR3NOVUUxOVZwN2dmbThyUVk0SjFRZDVhc1l2bmlPd0l6eitjSnBaODFCalAxanRLYXJaQWZDVUFCVTdLM1hXajROSmhpcS9UQ3JEUFNvRnV0ZGkrYUFBck9ib21VWjFvODNwTDloUkRpdENCay9HeXpDUEhVQVNSRjZyeUVwd0FSVVFQUC9YUmFBOVl2a01LY1hyRmVWUUFkOEs4SE5ZaTNIbUFSOVo4VGYzRTQ5OWpjYTNEQU5GaU44cVFqeWNvMXliWGhuYmZVNzRGTFZrQitHTWVHZjlndi96aXV5Nm5MdXJQYys1MWhIbFBtVUJpYmZkaTE0TzN4S1JuNExhWlp5eFQ0YkRDMlV0M2luWms4R0Y0RnhhOXN4dm1UYWhFdEtBdXNZWVNDaC9RN2U5eVRVb2N1d0gvT1F6ZTJuZDYvR2s4d1p5Q0RKWnZ6NlFaOXlnbFJUT3pPRnQ0NE4iLCJtYWMiOiIyY2Q1NTA0MzE5ZTYyMjVjZTI3MTg4YjUyNGY2MDU3NzMxMzE3NzllYWIzY2M0ZjcyYzVjNzQzODhhN2YzY2Q2IiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/gestion.mobi-nardo.com\\/store\\/my-store\\/categorie\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/139.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"160.166.9.9\"],\"sec-ch-ua\":[\"\\\"Not;A=Brand\\\";v=\\\"99\\\", \\\"Google Chrome\\\";v=\\\"139\\\", \\\"Chromium\\\";v=\\\"139\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-origin\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-user\":[\"?1\"],\"sec-fetch-dest\":[\"document\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '160.166.9.9', 'my-store', NULL, NULL, 'App\\Models\\User', 2, '2025-09-12 00:09:55', '2025-09-12 00:09:55'),
+(10, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_6_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/140.0.7339.101 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,*\\/*;q=0.8\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"accept-language\":[\"en-GB,en-US;q=0.9,en;q=0.8\"],\"cookie\":[\"XSRF-TOKEN=eyJpdiI6IjNNam1ia0M4bU1POU83M0JHYmk5Smc9PSIsInZhbHVlIjoiZnN0Zjg2amRpRTF3NDBMY3lPcUFxTXpBMzN3VmwzYm9FVGY1cUZaWnRlRjlHYTBnNFdhNEdDOWtuZjNpT004R3JQSUkraTZEcjFZbndqSEs4WVZzVGU0eS9HOCtlODdhdzZGS1g3RUNKclc1Z253S3dpL0JoRnlzdmdZRW0vZ0FtazgyKzFQOExtd2hLM3BDaW5VbmN4bTBzUHRINDZMUGhycVhDVmI4WWI5ZXVCTzdXakxsbDdaQWlNaDdGODNvZ2Q3SkV5Wjdrb3N1bkRqNnR3RXYvQXBZcGZrOE9uUkNQWEhwR0o5S1hzYkpkZnFqNkpnKzMvMmdTNm9LeXBoRWJwdFhzbnAwTjFaSVMwclBPNHc0OFNhTTJwL3YzVnhvWFIyUjYzdGQ1LzdvcElPOEdoclRNcVVmb09wVHgrbmZBT0F1OWlIU2p0ZnlZMlVrQzVVOGZ1aTRvUkd1N0t1ZG9YejZxeFdMN2xmeFpWa1dVZHJVTjRqRlV6akdOSm83eG00djZUdFd0dC9Xc0s0SzZaZVZTaVE2L25BQkFmY2lTOW0rZnFpUlNqcEpydnFPTThNeWZnb2JBOHdXNXRIc2FZUngyU0VMTUhYeVQ1STI0VnZHVkUyYkQrWHByc1ppNG14WDhralJsUTZYNEJoSU9WU3hYcGdkcjluZHd0NFYiLCJtYWMiOiI0ZjE4ODRhNzMwN2ZiNDg5OTcxZmFiN2ZmN2VjYzJmMjJhMmRmNGFmNjllZWQ4MmUyYTg5NGIwOTVmNWE0MzM1IiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IklrOGIwYW8zeTFxcVN5UkpFMlZvSUE9PSIsInZhbHVlIjoiWVdyZDVTMUtKZmVoM0RPL1M4YnBlYVI5TUVwVXpyZlJtdTZMUGwrdGhLSU9tWWE4WnljVjVYbnRzU3B2dGVoM0dpck1NUHAxaUppUTZWNGM3Mm1jeTdDakhNeEJiRWJvdFd4R2VpbFZiSkZ6NnNWczl4N3ViQ0t3MFU2aHlEV3VhMzVPMlQwZGdaSWt0M0pqOXJSbXdMd2I2MVZFSGFBQjBMWEVUbDhSVHR6bzdLQWFDaXAyUWJzOUtJRXRRbjhhd21HWEtLRHZLTjN6dFdwejJDYmpZdGFNSUxWZkd1Tk15QVdKN1lRRHdHQUZOYXdIcXB5UDRjeWszWVBsN0hNQ0lJa3RUczRCMWFWTXhwR3NTWFlTZCtxeHlKTkMzR2ZDRVQ5UnUwUmYvT082Z1lMQXRpRjRaME9OZ0ZYeEppK3YveStzMHZFZCtVdlFDMCtIMlRkaDIzRHBpcUpXQTNBZ2NvYWwwcTdwOURMU2dYSEYzbVN5Sk1la01xRFZMeG92SUx2QWlRdFdQZVJlVzY1OFBrL1Q2VWgzRkVyN2RpaXg1QkY2aHg4dnZCZkdGSVphYnZ6L3djQlNuRkxJWVRtZ0FyaXh0ZUtwa216VkIrY21ma3orNW1EMXpid3NkaU43SXJ0T1psZFdpUjBNTmV0TTA2bk9SV3dWbTQ1TEJvcWoiLCJtYWMiOiI1ZGE1NjgzMDgxODUxZGViMjAzNzRiOWJlZGMyYTQ2MzQzMzFhNWNlNmQ5ZTdhZDc4MzFlMzk2OTUxOGI3ODJhIiwidGFnIjoiIn0%3D; cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 18_6_2 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) CriOS\\/140.0.7339.101 Mobile\\/15E148 Safari\\/604.1\"],\"x-forwarded-for\":[\"160.166.9.9\"],\"sec-fetch-site\":[\"none\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"document\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Chrome', '160.166.9.9', 'my-store', NULL, NULL, 'App\\Models\\User', 2, '2025-09-12 00:18:59', '2025-09-12 00:18:59'),
+(11, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', '{\"accept\":[\"text\\/html,text\\/plain,text\\/xml,text\\/*,application\\/xml,application\\/xhtml+xml,application\\/rss+xml,application\\/atom+xml,application\\/rdf+xml,application\\/php,application\\/x-php,application\\/x-httpd-php\"],\"accept-encoding\":[\"br,gzip\"],\"accept-language\":[\"en\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; MJ12bot\\/v1.4.8; http:\\/\\/mj12bot.com\\/)\"],\"x-forwarded-for\":[\"54.37.252.46\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '54.37.252.46', 'my-store', NULL, NULL, NULL, NULL, '2025-09-14 21:39:30', '2025-09-14 21:39:30'),
+(12, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', '{\"accept\":[\"text\\/html,text\\/plain,text\\/xml,text\\/*,application\\/xml,application\\/xhtml+xml,application\\/rss+xml,application\\/atom+xml,application\\/rdf+xml,application\\/php,application\\/x-php,application\\/x-httpd-php\"],\"accept-encoding\":[\"br,gzip\"],\"accept-language\":[\"en\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; MJ12bot\\/v1.4.8; http:\\/\\/mj12bot.com\\/)\"],\"x-forwarded-for\":[\"54.37.252.46\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '54.37.252.46', 'my-store', NULL, NULL, NULL, NULL, '2025-09-14 21:39:30', '2025-09-14 21:39:30'),
+(13, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"en-US,en;q=0.9\"],\"cookie\":[\"cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6InJmV2VrQzA3YTloRkdiZERycjZERkE9PSIsInZhbHVlIjoieG1JakNPYjFzWVlQNDUvMmdwOUV0R2htRjZQcjVRYlozOWduZDlpVGZ5ejh0b3JyYlFYbHB4dGZpTzd3aDJBN2tpN2FUUEpmcE9iQnZpdWNBd2F1MFJtdk5MZmppZnNtNTlxVXdkY2xxN0plSGFJVzFXaDVIbVdVbnVMUjdET0NianJSU0l4aE5sbW5wSWd3NGpmK2pROThiRGN4aEpCRlJ2clh2a3BtRVhjREhxV3lxZ2Fvd3VnYzljYlJnT1Z4N2M1ZDdvbTlGaHhRcW5EeklEd2NhOFRxMi8wR1FIb1ZpdXBKcWtpSElmTXNFUGlsNUpVQ2NFMDBudm9aaWdLbzlsY3ppbDEwLzZ6Uis4aHY0UUJidVdZdStFMXhqUFQyMnphRStWTXErTExVZmw0QVhraDJwSXNXVWNSM1Zvem81cUVBenByWlJsNTFCaC81NlBsRXBPWnpYelRHNzBBa0hVblI0SVJtelA2a05wUE15emJFeVlzV1ZpVThvamQwZDNiaUxrRVFUbnNMbjBiU29walJDNGp4SkVSN0xSLzNFQ0VtRFIyWlpnOW8zZ0FoV29xMVpFQ0k5RERKTlV4NUc2MThTeUt6ZzRQRmkyamFpVGpib1NLcGEvTHplNXpIdnFrbUFXUS9GZTBCSnRmM2dtekZBd2hjTzl6WUZrcU8iLCJtYWMiOiI2N2VkYzJlNjBjMmNiMWMxY2QxYTNkNjczOWUyZjhjOWU0NDcwNjkyMmVjMzA3ZThkZjY4YTcxZTc4MTQyODAxIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6InI3U1I1eXhJanJ6R1h6VnV2MnFieEE9PSIsInZhbHVlIjoidWdpMTczMjZDU2Y0NDNEMDhOdjI1UVdFNmVxZXNYblh4MHVybDI1dEtXMmRTOXptN2RzekJkOFR6VUZKK1RJK1hhcUwxK0Q5NXRpUVUwVjhFVmxHWHNleVVzdklOdjFoOTlxMGFvYnlLcGFJZnNUeWdPdlFlbmdjdkh4YXEwR1VNRzBBOTNsRm1iTE9yZ0Q4bytuMjgzWVBZMS94Q1BIWHZQUiszaVo1NFVUNDUxYitLc0VYWWlNYXZpek5GWVhiZktuc3hIdzlhRlJySWEweFBxU0hYWjVRQnExaFVaaVZXV3NRSUhCbEFETkwwQUtMalAyb3VEY2hicTZwbnJRVlA2ZTV5ZXFHd0NreWdNU3E3aXRiRVY4MEVTYitZdmNWbkxJMFcvcXphcFM1VDVxQ2hEM3U1aGV3a0xsZ3JaOUpOZ3lld0ZiQTlKTk9yWXViZk9seHlNYXJYclo1dWpMTHZCU0NJV3V1R25DbExlZEQyNXh4Z2FRb3d3dnlvQlZtUS9LUFFDVE5zNk1yWmViemxZWHI3VHQ0dTNYV2JDK0czbFV6cjBxc3hOakdYZ2RyaG5Ldyt3eHQwNW05OXRUQjNnN1BuZ1IyVWZ0T2VZdFhKVUNzUTFLOGZ6SXB0M3hrNWUreWk3clRteXRCYjFxMGdVd2VqZm14ODk4anpDVlIiLCJtYWMiOiI2ZDRkMTVmNzVlMTI0NTZhMjU5YmYzZjU1YzFjZDkzNjM0ZDEzMzY3MDhlYzg5YzgwNTg1ZDExODc5NjUyYzljIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/140.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"105.157.237.248\"],\"sec-ch-ua\":[\"\\\"Chromium\\\";v=\\\"140\\\", \\\"Not=A?Brand\\\";v=\\\"24\\\", \\\"Google Chrome\\\";v=\\\"140\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"none\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-user\":[\"?1\"],\"sec-fetch-dest\":[\"document\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '105.157.237.248', 'my-store', NULL, NULL, 'App\\Models\\User', 2, '2025-09-20 13:22:12', '2025-09-20 13:22:12'),
+(14, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://www.google.com/', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/www.google.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/139.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"197.230.59.4\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-ch-ua\":[\"\\\"Chromium\\\";v=\\\"139\\\", \\\"Not:A-Brand\\\";v=\\\"99\\\", \\\"Google Chrome\\\";v=\\\"139\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"sec-fetch-site\":[\"none\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-user\":[\"?1\"],\"sec-fetch-dest\":[\"document\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '197.230.59.4', 'my-store', NULL, NULL, NULL, NULL, '2025-09-20 13:22:17', '2025-09-20 13:22:17'),
+(15, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://www.google.com/', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/www.google.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/139.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"197.230.59.4\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-ch-ua\":[\"\\\"Chromium\\\";v=\\\"139\\\", \\\"Not:A-Brand\\\";v=\\\"99\\\", \\\"Google Chrome\\\";v=\\\"139\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"sec-fetch-site\":[\"none\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-user\":[\"?1\"],\"sec-fetch-dest\":[\"document\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '197.230.59.4', 'my-store', NULL, NULL, NULL, NULL, '2025-09-20 13:22:17', '2025-09-20 13:22:17'),
+(16, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"en-US,en;q=0.9\"],\"cookie\":[\"cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6IjBhaGpMM1dZdE9hdVB4QXRTalpxZUE9PSIsInZhbHVlIjoiUm9TbFZNZ2xIcjFaa1RMcXh0Z2pralNOd0dIMzlhQzltMmlZd2ZYUEJ0UkxmMERtV2JtdTBXdDRqaUdkTVZ1clhKTVZtUFVWdTRZWVVxZXhsaUFEUmVtTmVqU0V5KzBZRzlJQmIxcFB5ZXZBcitLQUREaWM4eUpxcUl1YXJaRkcxR2kvQ3dWWjV1UklObEkrN3NzQmlKaXllUndud084bGxDTmpZdHRQRk9FeXNKWnpRSGozOGd0OUZMR1NPWW5Ic0czTy9UbzhXd2ZMVURVSFhQMERTUHA2RFB1N25OM3hJMVFScm56ekEydmhpZ2orQ3lpQURsbUNkOEJRZHhWRzNESlZFQXg4MGl5QmtkYmVuVkNUZ1FBa0s4M2ZhR1pzbmR2SzlYL1E0ejQ0MHREWWVXOHM3dm9NNWlpS1FVUlZtM1J2K2NnQktHd2U2cEZSNGZuR2VldGRqa1lORllGRG0wQmpqTS9Iek1OUTROczhhbldDV241Y2huTkhQYWtnMXlCM1UzT0lWSnNNYXQwZUQ0T2xJTWo0ajUyYzhnNkpJYmgvQVB6ZGlOd2RvM3d5cmRxRDB1d1FhclA4SGZLalhoNzlRZ2V6a1VMZnUvZE1VSTBONjNibk1XRWlsQ3N2SXdUK1dwN3JSemdDMnV3VGRub3BXZ2tUSEg4YzIyNC8iLCJtYWMiOiIwNmNhMjYxNmY3NjViMGIzZmRhODg2NjAxOTNjOWQxMjQzNTdmMmNkYWVmYzI1ZGIzOGJhYzJiMGFjYTkyNmM4IiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IkJTeFJoRGsramxtTHhOY1U0Sldvc1E9PSIsInZhbHVlIjoiUG94QWVjbmkrckdOZGlTMC9lQ05Qam91N2xTakMzeVFrVUxqampIaFJYaHpFYUR1YjVyd3lORjNtdXRwVnhPUjVQRFpQQzdBQ01IcHBHWjhNSHdQUUVyTU9Yb1BjMmhIT3NUSm5DVS8wZFg3M2JvTnl5V3p4Zm55VzQ2U0ZEb0VITU5pbktCVmQ5UGFNVVFMY21TTUhmTDdpU0VUTUVGNG5ZTkFtLy80L0xDSktVVER5RzdaWjY0aGpwOFVjT05hM3JFMEhoVnFudjhVWjR1Szk3aHpWYVhsWkJBKzZXckM3OGt6UlR6QVJrSUg3SC9uWjhkMkJETkMwN2JBVjJlRldYa05PM2FnbVNIVEN4emRtdWZaQTlxTVJOWHlXRGNBNmR5ei9XREtNaTk1eXJ4bzJ4ck95TVBQOERveWlLOTEvT2RSNjRSeWNicmlQczI2Mi9tcTE2TnpVUmFQWUhGZ3U0RkZncHhtSHhVRVo3NFlkL2hES1BEME1wTzFOQ2JBU0xURXdkeUNQM25vRWFSUHd3MUdSYzFxMFFlc1M2SjJnTGZnMnFlajAvVVAxVXJvaDlnMWFHMXdVYkVnd0V4ZFdrR1R6T0UwbVp0R09iZkZ4MU9Ed3lsOE5YRVNuMytnRkNMcG5kVjkyaDdPRTFua3JOMG1PMkFDMlpQdkRqZVMiLCJtYWMiOiIzZmQ0YTdiMzIxYThjZTE3YTZmMGY2NjIzMmI2NGVhZjYyODNiYzEyODg1OTliNmM2YTdiYTNhZmRmNjYxM2IyIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/140.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"105.157.237.248\"],\"sec-ch-ua\":[\"\\\"Chromium\\\";v=\\\"140\\\", \\\"Not=A?Brand\\\";v=\\\"24\\\", \\\"Google Chrome\\\";v=\\\"140\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"none\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-user\":[\"?1\"],\"sec-fetch-dest\":[\"document\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '105.157.237.248', 'my-store', NULL, NULL, 'App\\Models\\User', 2, '2025-09-20 13:35:14', '2025-09-20 13:35:14'),
+(17, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"54.39.0.94\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '54.39.0.94', 'my-store', NULL, NULL, NULL, NULL, '2025-10-03 03:25:48', '2025-10-03 03:25:48'),
+(18, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"51.222.95.227\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '51.222.95.227', 'my-store', NULL, NULL, NULL, NULL, '2025-10-09 10:32:16', '2025-10-09 10:32:16'),
+(19, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"142.44.233.159\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '142.44.233.159', 'my-store', NULL, NULL, NULL, NULL, '2025-10-15 22:16:35', '2025-10-15 22:16:35');
+INSERT INTO `visitor` (`id`, `method`, `request`, `url`, `referer`, `languages`, `useragent`, `headers`, `device`, `platform`, `browser`, `ip`, `slug`, `visitable_type`, `visitable_id`, `visitor_type`, `visitor_id`, `created_at`, `updated_at`) VALUES
+(20, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; SemrushBot/7~bl; +http://www.semrush.com/bot.html)', '{\"accept\":[\"text\\/html, application\\/rss+xml, application\\/atom+xml, text\\/xml, text\\/rss+xml, application\\/xhtml+xml\"],\"accept-encoding\":[\"gzip,deflate\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; SemrushBot\\/7~bl; +http:\\/\\/www.semrush.com\\/bot.html)\"],\"x-forwarded-for\":[\"185.191.171.3\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '185.191.171.3', 'my-store', NULL, NULL, NULL, NULL, '2025-10-18 08:06:07', '2025-10-18 08:06:07'),
+(21, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"54.38.147.35\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '54.38.147.35', 'my-store', NULL, NULL, NULL, NULL, '2025-10-22 03:04:22', '2025-10-22 03:04:22'),
+(22, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"54.38.147.254\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '54.38.147.254', 'my-store', NULL, NULL, NULL, NULL, '2025-10-22 13:06:43', '2025-10-22 13:06:43'),
+(23, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; GPTBot/1.2; +https://openai.com/gptbot)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, br, deflate\"],\"cookie\":[\"XSRF-TOKEN=eyJpdiI6IlluTzA3MVdOVzdsSG8zd3lSa1ovSnc9PSIsInZhbHVlIjoiaHM4V3NId1MvclhZUndjczhWQlFHUk12V1NDMUZWa05vKzc4Qms2Z1M3eEF0MTZLYUlLT29WNk53UE4xRndpR3BkYnR1UE9FaWhOWkR4TzRFWWhIMTBrSzMzU2JqUitEQmtHbXZIRnQ2MEZuRldEcUZoeVlwZFlqUHdTNmtnWEQzUnJ3cTBkTjhodnFCbHZTOVlmaStaZmJhTzg4Tm5rVDY3SlFyckZDKzBTbUMydGMvY3N3Snh2MXczMkhhZit0eFRXQ0gvV2pmZWZpYWpLL2ZjN0p6OTc2RjRUMUVnMmZnd1N1cWE5Zmt0QVN1T3JsZHo0WXJNUm9uQmZHOGlqMU10L0pvc1M0azRYMkNvM280dzNEN2poN0gvTDJ1Yk1yaW0rWGlHSko1eDVkTEVNeVpHaStLRk9TTWJPWjZibVAxUUpsaVM3RnNLWWJXenIyQUVVR0RHY05yQnJaY0N5a0hLTVVUMkQyWVNTQlo2ZXQyZVhFY0pSK1dkbzZYSUJJU09RcWsyMHg5RER1dUlBRG5jcUpUYXZOL0J3cnJ0M2ZyMEtITzQ4RGZURmdTbmdCZHpCUE51K1MvUXNNcmRBWmdSd3N1RWFkSWdMUlkrOFk4MWJtVDFOc3QvcnJMMFZzWWRXVWVVREhGc21BblpMaGxGRS91RU9Zdit4NW93NjAiLCJtYWMiOiJjNTE3YjgyNTFiNzZhOTZiZjQ5YzkxZjFiOTZkMTYyYzFlZDc1NzgyNDQ5YjAzMjE5NTdmZGZiYTYwMDEwZmVjIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IlRMQXpqMDZJdHhMYXBWMGs4YzNkVnc9PSIsInZhbHVlIjoiZitBUE40dkFVcmRhR3hhM0JsMkxDWGZWZGpsWWxPbnpUVDdRWXJzejhUWllSRSt5d3hDZkNoM1NSays5dUVyUElubk5KQ3NySUtRSDdXQ0RPcUlEb2dzdjZXRHgvQ0tGUDV3c1JyaWZiR1dwVDBsVkxwRnBKMkNBemd3QzMzTHZrKzRlZ2RMNkhCYncxV1Y0OEYrSFdXelhaYWtqNkZkM29UcG9YcldIZVdYdkQzZU1YRGZQSk1KcU95eExmVG9EMTYzK2JJN2pFbzdycEYwMytLTnJuY3lnMFJmMDdKazJXVmxnWFNjaFgzc1pFMnBVQ3ppM0wwRHhTT3FwQjVRWXY0Vm53MlE4dmlIVlZ2M1VaTEFNUGNad0t2M1lKTWdubFJPVUM3dE16WWRjTHlERE1lY3lJdTJJcEh6eU9JM1MrSVRrbEV3WkdkRVljT3ExTVdwaXlwblBCVlN3a1VUYzREV3RmeE5MNnAyOTBiLys2SnQ0QjJxb3YwQWo1bUM0N04zNWx2NmJGMVdDYktVQ0ZaU3JSaVF5eTI0bXU3MmpMLzBYZlRPZC9oeWdYaXdMVnVHUGU4OG11azFqbVRkcnhJSDNYLzlucmZqRE9mTkhYVkhrM21LV21iZkFsOW9KYW1RV0tUbzFycUhreksvYzVQLzRKS2lPL0xPczhDYy8iLCJtYWMiOiJhZDZmNDAzZWE3MDkwYTA1MWUxYTMwN2IxZmUyZTEzNmRkNmZiMjNkMjI0OTk0YmNmNjBiNDE1OTY3MTJmNjIzIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; GPTBot\\/1.2; +https:\\/\\/openai.com\\/gptbot)\"],\"x-forwarded-for\":[\"20.171.207.92\"],\"x-openai-host-hash\":[\"841027007\"],\"from\":[\"gptbot(at)openai.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '20.171.207.92', 'my-store', NULL, NULL, NULL, NULL, '2025-10-27 16:51:21', '2025-10-27 16:51:21'),
+(24, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"51.195.183.63\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '51.195.183.63', 'my-store', NULL, NULL, NULL, NULL, '2025-10-28 17:17:47', '2025-10-28 17:17:47'),
+(25, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; GPTBot/1.2; +https://openai.com/gptbot)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, br, deflate\"],\"cookie\":[\"gestionmobi_nardocom_session=eyJpdiI6ImFRZlVhN1RKbFE0ektsaWlIcmVXdVE9PSIsInZhbHVlIjoiUThNZnR5RjNGV21VNzM1aDVsWTMxaHFzZXdwSGF3eGNocjJDdnBXYTltaUJIWFhCNGpqeWxQa2lSZ0ZYZ3h3RnAxaS9hQ3Y0R0sweHRhMWt0cnFCOW9CSGNtOFZ2ekZNeDlHUGpiK2ZXbGFxKzlIcVhHZEdRbks0a0Z0RnpwRElFbkZiMHFJaTNiaG5BaTV3eEtUaWJ6OW5wcmxWcXA1QmpCUFVHb2R2TTdLMjZIb3hwenB6ckZFOTZPZWpWUXZ3eHFaVXYvSG9YbmdIcjkrcllOaG9HZ29BR3FZU1VEUG1JSmExWmJuUUJNTDl0NjhoTEJHT3lKSjlxRjZ6UzF0TTV0VHFzbmxpdkgrQzBjaXMxc0t5dUlnZDJYZjFPdDV6d0pXbi9BOTBtYzBWb0JVMXJ6SS91WEJTVUlhekttTzhnYXFnOFFoWDZhWWoxOTRkcjRheUZnQXFJQ1hiNHU0R1J6VjhvMzRVYi8zQTBCckJDV2VYRms5Q0xnUFV4OVRWMHdiYkRHeE9TSVhtSTZIZ3dRWFovVEM0YlFLQW5iU0NIbHJ0d3UyRysxa09RSzZKck92NUZKcjErbkRxd0c5UXdIN1F2YW8vYmRCRDNVb0xPSTNvdnhNN2JCNVpNN3dMcXozSXZocmNRN2IraHVxVkk5Z3BxUUhWS3A5M3d1dk8iLCJtYWMiOiJkZTcxNzI5YWQzZjBmNGQ3MDVjYjRmYTZjNjIxNjYzYjhmNGY3MzZmYjJiNDNlOGY1ZDVkNDI3OWU0ZjlkM2Y0IiwidGFnIjoiIn0%3D; XSRF-TOKEN=eyJpdiI6IlFvamhRTDNUNmRhMUZsakdNc2lvTkE9PSIsInZhbHVlIjoielBycnB3cFBReVhLRFBmd2J2Zit6YW0vM1V4YkRWTk5pM1lya09nVlVmbXY3V1hmMFRQMzRvMFBhOTNTeUtXUjdrRkl2RnJhd29vaHNxZWdldVgxTHJMWERiM28wSmE2UHRPaDhLekgvSHgrcDBZSzA4Q0FWQUdMNjJxU3pkcDJFeHM0TG9ra0IzcmJ4dFRRWTNORzh2TFBQTms4OVRJVFV3YVlQNHBUc3NSclgzdmY3R3Q0ZmxSTlMwSXlycWxCQ09xWkxidG9uU3hVMWxmdzk4QjdmOGhYYVVHU21vc1VNZURoM0pQSmZnLzRZR09vdG9HSkphYnZUa0h4aXgvSGk2aEw1VVZGYUplKzJ3ZTlqSGc4czJSVXpoeEFNYzNZbnhxNkJFTzE2enB1TGx6V3ZPWC9qVENXeVRZZ2lCUU5RM29Nb2ZQUVg4MEpvN0FRcUplTUR2ZTIyVmJxYzlybXFmZEJpWkp5QzI0KzkydWpEZ1Y2OFFNZEMvOCtveFB0SzJWbVV4WmlINGF5SnFZQkFZUUZxUG41R2x2NjRxMHIxcHcySkJjRXU0MUhocTZ5dHB0ZGFSSGpLZUtrZ2l3Ky85TTRDNEtEU2hVSklLc2hmc1hIdXFzdXBmT2FTSksyTkNCSW4yVkZMa3FkT1FKREdOcVRhdXVCUmFPajhEZWQiLCJtYWMiOiJlNjM1ZGEwYzhhNmViZGE3YjUzYzg4NjM4ZWQwMDcxYTlhYzYzZWI0Y2JmZGYwM2JhNjkwMGE4MWQxZTRiMDdlIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; GPTBot\\/1.2; +https:\\/\\/openai.com\\/gptbot)\"],\"x-forwarded-for\":[\"74.7.227.157\"],\"x-openai-host-hash\":[\"841027007\"],\"from\":[\"gptbot(at)openai.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '74.7.227.157', 'my-store', NULL, NULL, NULL, NULL, '2025-10-31 15:28:37', '2025-10-31 15:28:37'),
+(26, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"198.244.226.164\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '198.244.226.164', 'my-store', NULL, NULL, NULL, NULL, '2025-11-05 08:44:50', '2025-11-05 08:44:50'),
+(27, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"54.38.147.199\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '54.38.147.199', 'my-store', NULL, NULL, NULL, NULL, '2025-11-05 16:43:04', '2025-11-05 16:43:04'),
+(28, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"198.244.240.179\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '198.244.240.179', 'my-store', NULL, NULL, NULL, NULL, '2025-11-06 00:05:17', '2025-11-06 00:05:17'),
+(29, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"51.195.183.254\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '51.195.183.254', 'my-store', NULL, NULL, NULL, NULL, '2025-11-06 14:46:05', '2025-11-06 14:46:05'),
+(30, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"167.114.139.140\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '167.114.139.140', 'my-store', NULL, NULL, NULL, NULL, '2025-11-07 00:43:44', '2025-11-07 00:43:44'),
+(31, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"142.44.220.87\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '142.44.220.87', 'my-store', NULL, NULL, NULL, NULL, '2025-11-07 07:10:27', '2025-11-07 07:10:27'),
+(32, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"15.235.27.13\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '15.235.27.13', 'my-store', NULL, NULL, NULL, NULL, '2025-11-13 13:31:49', '2025-11-13 13:31:49'),
+(33, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; SemrushBot/7~bl; +http://www.semrush.com/bot.html)', '{\"accept\":[\"text\\/html, application\\/rss+xml, application\\/atom+xml, text\\/xml, text\\/rss+xml, application\\/xhtml+xml\"],\"accept-encoding\":[\"gzip,deflate\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; SemrushBot\\/7~bl; +http:\\/\\/www.semrush.com\\/bot.html)\"],\"x-forwarded-for\":[\"185.191.171.16\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '185.191.171.16', 'my-store', NULL, NULL, NULL, NULL, '2025-11-17 09:03:08', '2025-11-17 09:03:08'),
+(34, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"51.222.168.176\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '51.222.168.176', 'my-store', NULL, NULL, NULL, NULL, '2025-11-19 19:30:31', '2025-11-19 19:30:31'),
+(35, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"43.153.48.240\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '43.153.48.240', 'my-store', NULL, NULL, NULL, NULL, '2025-11-23 02:21:53', '2025-11-23 02:21:53'),
+(36, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"142.44.225.255\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '142.44.225.255', 'my-store', NULL, NULL, NULL, NULL, '2025-11-25 20:34:20', '2025-11-25 20:34:20'),
+(37, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"167.114.139.104\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '167.114.139.104', 'my-store', NULL, NULL, NULL, NULL, '2025-12-02 01:09:20', '2025-12-02 01:09:20'),
+(38, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"49.51.52.250\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '49.51.52.250', 'my-store', NULL, NULL, NULL, NULL, '2025-12-02 23:53:36', '2025-12-02 23:53:36'),
+(39, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', '{\"accept\":[\"text\\/html,text\\/plain,text\\/xml,text\\/*,application\\/xml,application\\/xhtml+xml,application\\/rss+xml,application\\/atom+xml,application\\/rdf+xml,application\\/php,application\\/x-php,application\\/x-httpd-php\"],\"accept-encoding\":[\"br\"],\"accept-language\":[\"en\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; MJ12bot\\/v1.4.8; http:\\/\\/mj12bot.com\\/)\"],\"x-forwarded-for\":[\"95.91.110.210\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '95.91.110.210', 'my-store', NULL, NULL, NULL, NULL, '2025-12-04 03:04:35', '2025-12-04 03:04:35'),
+(40, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"170.106.163.84\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '170.106.163.84', 'my-store', NULL, NULL, NULL, NULL, '2025-12-08 02:40:52', '2025-12-08 02:40:52'),
+(41, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"148.113.130.77\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '148.113.130.77', 'my-store', NULL, NULL, NULL, NULL, '2025-12-08 04:03:23', '2025-12-08 04:03:23'),
+(42, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'panscient.com', '{\"accept\":[\"text\\/*, text\\/html\"],\"accept-encoding\":[\"gzip, deflate\"],\"accept-language\":[\"en\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"panscient.com\"],\"x-forwarded-for\":[\"84.239.45.146\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', '', '84.239.45.146', 'my-store', NULL, NULL, NULL, NULL, '2025-12-08 16:33:51', '2025-12-08 16:33:51'),
+(43, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'panscient.com', '{\"accept\":[\"text\\/*, text\\/html\"],\"accept-encoding\":[\"gzip, deflate\"],\"accept-language\":[\"en\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"panscient.com\"],\"x-forwarded-for\":[\"84.239.45.146\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', '', '84.239.45.146', 'my-store', NULL, NULL, NULL, NULL, '2025-12-08 16:34:15', '2025-12-08 16:34:15'),
+(44, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'panscient.com', '{\"accept\":[\"text\\/*, text\\/html\"],\"accept-encoding\":[\"gzip, deflate\"],\"accept-language\":[\"en\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"panscient.com\"],\"x-forwarded-for\":[\"84.239.45.146\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', '', '84.239.45.146', 'my-store', NULL, NULL, NULL, NULL, '2025-12-08 16:34:20', '2025-12-08 16:34:20'),
+(45, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"43.130.9.111\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '43.130.9.111', 'my-store', NULL, NULL, NULL, NULL, '2025-12-10 17:41:15', '2025-12-10 17:41:15'),
+(46, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"142.44.233.203\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '142.44.233.203', 'my-store', NULL, NULL, NULL, NULL, '2025-12-14 01:59:51', '2025-12-14 01:59:51'),
+(47, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; SemrushBot/7~bl; +http://www.semrush.com/bot.html)', '{\"accept\":[\"text\\/html, application\\/rss+xml, application\\/atom+xml, text\\/xml, text\\/rss+xml, application\\/xhtml+xml\"],\"accept-encoding\":[\"gzip,deflate\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; SemrushBot\\/7~bl; +http:\\/\\/www.semrush.com\\/bot.html)\"],\"x-forwarded-for\":[\"85.208.96.196\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '85.208.96.196', 'my-store', NULL, NULL, NULL, NULL, '2025-12-15 00:12:07', '2025-12-15 00:12:07'),
+(48, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; GPTBot/1.3; +https://openai.com/gptbot)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, br, deflate\"],\"cookie\":[\"XSRF-TOKEN=eyJpdiI6IlpCcVNuR0xDWlY2TjRlQnpNZVZvOUE9PSIsInZhbHVlIjoiWHJyZkNsS3RGL05TaFFLWXB3eTh3UksvbXc5OTlqQi9UWm0vRlB5KzZlTlJpWVYrMEhDMnhSR0xBdkQ4QnAxL1lyTVV6WlJEaVhxQ1lUeGJ6VHQ4UnowOTExcFoyVHJORjFCTzZTNkhHa2c3TkVMbXlDL1VYSHBXaEVkSk5rNUZ2NHJwalFwTzg2TGJIQmhzZHJJalhZOU8wOSszUGZaYjY5TzR5bWxHVkk5dVZHaDdVMjYvVExoYXFmOXJORXBhRStIeXVhZk5BaWN1azQxcUgzTUdudVJlRzZQbEl3alk5UlZIUU9YbmZGR29KbE9BcjBqRGtwd0hla2JLTVBZQzgxQmJGb2tQZE5OM0ViUlBFUktQVDZmVjFSSWFCK3FBVEhZcEJFVFM4Y0NMeFdjUG8rV29FbmhuMlhlanBoTDM4OTZRWVNlSjdJS2JKcjhpOGxWTjRhUm9RTCtTVTJZcmloK2gvK2dSSHhYZXBONDZ5MmpBQjVReXYyK0pqb2x2MktwYzcwSm91NmlDOHdGNnQzUU1Jc3hqeDRybXUvQS81WVBCNDloY0lEVWRsMHp0Mkx3K0VRR1pmeExFV0xTdXp6VHR2ZEc0bndWOXNvZXY0bTRqdDg0ZlNRVm0va2tNcUtBN2JYYlJiUFNVcWZkc211OHZOcmVOQStkZVlYeUEiLCJtYWMiOiIyNzUxOTE5MjQ0ZjFjOGYxMWQ5NWU5YTg1MjQ1MzY4ZmNkNGY4ZTNjM2MzMTkzYjAwNDYzMmI0ZDk3NGFhZjc4IiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6InBWMUFsaW5UUkk2SGhZeWU3VXhaVUE9PSIsInZhbHVlIjoiTlhSNHdXQWsxZzNvUjNZdzNXa2xZb0ZiLzdKWWRxNGFteWJFL295M3UxNjgvcGVnVUpYdjZyeWpRbkgwMGx4b0lTVHl2QjZPUjY4L09vOEpuMlZwSjRkaTg0ZzkrRVFCT1plR2ZJcnEraWNndXlkL2tkREZTS290Sy9Tbm9GWkpHVmRxZktiVEpUWkZsYXBtcVlzcGhCdTdESHhCMzg3MnJKM0RSRjJha1c4eXdKSmpVZzRIY2FhQU4wWWt4KzE5d3pmaVlOQzdCZTV5eXh2bjdWS3BWMHJzVnl2Wlh3UC9ieE5DWnEwd3c1eTVIb29pS2RHbC8yYjVVN0dvcHB4UkQ2dFRWc2t1cDBZZERCY0oxMTA4a3RvQlV1REZzcUE5S05YTGVGeUtFYk1lQzVrUDdZQ3VDUGUzUVA3VmNuRS9BL3diK0VzaE1nRVdHWEdqRlQ5T0NDRzNsOWh1ODlsckJ3dWNSY096NVBpalNqZ3M2M1pwSUREUFo1alN0VC9xNXdZdmRBZDJzOEZRNk9OdFQ1a2d5eVFwU3h3cmVaSy9LWGRxdTVXOHpZSXk1WW5adFQ1S2hsakQxWHRjRHFuNUhmSkxydmg0TmVOWXBrTitvbnppV3RhZGhWUzhrbXV4VmdQeGs1RHgyZkNtSkFDaDkzcmlRcFVoZnBOdmJJcHAiLCJtYWMiOiJmMWY2OWVkNDY3ZjUxMWI5ODA0ZTFkMGQwZDYxYTdlYzgyNzVhZDczNDZkYTUxMDcwYWY2NzM1MGRmYWMxZTBlIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; GPTBot\\/1.3; +https:\\/\\/openai.com\\/gptbot)\"],\"x-forwarded-for\":[\"74.7.227.52\"],\"x-openai-host-hash\":[\"841027007\"],\"from\":[\"gptbot(at)openai.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '74.7.227.52', 'my-store', NULL, NULL, NULL, NULL, '2025-12-15 01:55:13', '2025-12-15 01:55:13'),
+(49, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"142.44.228.172\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '142.44.228.172', 'my-store', NULL, NULL, NULL, NULL, '2025-12-20 02:16:42', '2025-12-20 02:16:42'),
+(50, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"43.159.138.217\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '43.159.138.217', 'my-store', NULL, NULL, NULL, NULL, '2025-12-20 08:00:06', '2025-12-20 08:00:06'),
+(51, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"54.39.6.172\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '54.39.6.172', 'my-store', NULL, NULL, NULL, NULL, '2025-12-26 07:12:11', '2025-12-26 07:12:11'),
+(52, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"54.39.203.9\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '54.39.203.9', 'my-store', NULL, NULL, NULL, NULL, '2026-01-01 05:58:24', '2026-01-01 05:58:24'),
+(53, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"43.155.157.239\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '43.155.157.239', 'my-store', NULL, NULL, NULL, NULL, '2026-01-03 09:24:28', '2026-01-03 09:24:28'),
+(54, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"142.44.220.51\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '142.44.220.51', 'my-store', NULL, NULL, NULL, NULL, '2026-01-07 01:56:45', '2026-01-07 01:56:45'),
+(55, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', '{\"accept\":[\"text\\/html,text\\/plain,text\\/xml,text\\/*,application\\/xml,application\\/xhtml+xml,application\\/rss+xml,application\\/atom+xml,application\\/rdf+xml,application\\/php,application\\/x-php,application\\/x-httpd-php\"],\"accept-encoding\":[\"br,gzip\"],\"accept-language\":[\"en\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; MJ12bot\\/v1.4.8; http:\\/\\/mj12bot.com\\/)\"],\"x-forwarded-for\":[\"81.167.26.57\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '81.167.26.57', 'my-store', NULL, NULL, NULL, NULL, '2026-02-22 04:33:20', '2026-02-22 04:33:20'),
+(56, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"deflate, gzip, br, zstd\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; AhrefsBot\\/7.0; +http:\\/\\/ahrefs.com\\/robot\\/)\"],\"x-forwarded-for\":[\"54.39.210.113\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '54.39.210.113', 'my-store', NULL, NULL, NULL, NULL, '2026-02-23 02:53:01', '2026-02-23 02:53:01'),
+(57, 'GET', '[]', 'http://192.168.1.69:8000/store/my-store', NULL, '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0', '{\"host\":[\"192.168.1.69:8000\"],\"connection\":[\"keep-alive\"],\"upgrade-insecure-requests\":[\"1\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/148.0.0.0 Safari\\/537.36 Edg\\/148.0.0.0\"],\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate\"],\"accept-language\":[\"en-US,en;q=0.9\"]}', '', 'Windows', 'Edge', '192.168.1.69', 'my-store', NULL, NULL, NULL, NULL, '2026-05-12 19:32:50', '2026-05-12 19:32:50'),
+(58, 'GET', '[]', 'http://192.168.1.69:8000/store/my-store', 'http://192.168.1.69:8000/store/my-store', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0', '{\"host\":[\"192.168.1.69:8000\"],\"connection\":[\"keep-alive\"],\"upgrade-insecure-requests\":[\"1\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/148.0.0.0 Safari\\/537.36 Edg\\/148.0.0.0\"],\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"referer\":[\"http:\\/\\/192.168.1.69:8000\\/store\\/my-store\"],\"accept-encoding\":[\"gzip, deflate\"],\"accept-language\":[\"en-US,en;q=0.9\"],\"cookie\":[\"cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6IlZsUTdJTG1yN0xJS3k1UW5wUGF3RGc9PSIsInZhbHVlIjoielo4VkRMSThXdmRmT2ZWdFBydmR2dW4rL3JjOWNUWXNVek9tazByYmJsTGNQOVJKbUtLYisxc0VGWG1RcXQ3N2tpUDltUkRkUTZ1aklNWGs2dEhHT29tNmxTNDhvR2ZqWGFhUStCb3BrcFFXV3FSWm80WDRZYUNNeEZnUENTOFZ3U2R3cWlwK2VzdVVneHN6TUtzcE5jUWhBNkg3ZTNFZlE5UXB3elRmSENxejl4Ni9COVhndGMzSWtWY1JnRGxCVW85cE05WjdyeTYyQ3RWeEp4OUh5ZldtNWVBMU5yNW0xNnovOUlEenBiZkhqa3c1VjhpN0pzOFhRTm1QZm9VdUVmUVFRU0tIUkY2RW4xNStHYWZUSktaTDcrZDBsZWxRMEh3Z0FGV2RRdVVuYUVuQ0NqK0tBd1N4YzZ2dS9zOGxCL20wY1IvandHWFlIeXhkalJQZFJPNWY0am05T3dwMUthYlFQdmVMTDhnRXVGc2JMMGROcUo5TG9VZ2hGbTVOU1JqZWN2ZGF3dEpWR2krUitKdlltVTBWZE5uV2JjeW8wTlBPYkJEc0hEM1JvSElmZkdYSC9lQ0YxR2FxaDBVRXZhaVlVejNPOU8wcU4xYnBEZTFXeVdYUEliSEVRR0pJV0FKLzM3TFZDaVgreHM1bDRwYkJOTzR4YU5sZWh5S0wiLCJtYWMiOiJjMDQ1ZGJkNmMxODRmZmZlZDQ3YzBhODA0ZGUzMDlkYjUyNmIzN2JjZTNjOTU1NjE1YzVmMjJlMWY0ZWUxMWM2IiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IjZWYWhxN2hzSSsrQm9ZU2xrbkNrRnc9PSIsInZhbHVlIjoia1M3aW9ORlh0QjQ5d05MNWdkZE53SWliMW93MDhsMGhJSGxNS3JtRHMwcUdjenpLUlBCQks0T3A4SUhUWm1JU3l6dklDb2NhL0FMWGNadmVXUk9jYUFVSURJcGYvNis4UDFleVFPd3cyaktRMmZKYSszRzEwMjk0cCtEd0xhMHJ5Z2MzNDhoY3lRd1JnbmJzbGYzc0kyZ1o4dEk1b1pmbmhleDlRekYvYTQra01XR3JiSU90cnhhc1REK2Jld3NTVGJOMzBFc0h1NUdtN2V5Vk1nRWw0emd3dFVIaHY5VUQ2RlMvYmtKMzdHbjAxaWV5YWh6eTYydmZIYk5QNHorQjFkWEJteWJkekhSSVpWZDBlbTIrWEhmNTl0cTBBR25qVHRram9QemZZUUpBWTNkWnQ5VmZqMmpKQ05RSzZZaE8xY2V2bGlDTWtSS3NOUmdxbm9CNE1xUWpDOWdTMyttUWc1bG51Smt5TVhiR1haU3ErczFjY2s2THBjMUdRa3hYeklLUHVvWDVjRWxzNTREM1hZSzIwcU9BWjJIRlFQUmZVZzJheFZNVkcxb2NaVWFzNzg0UDZkaDNiaG51dm5CZDl3Q3dxcnlPeStyU3ZqNTNSdTd3eUhGNDFjTGszZEhhb3B4dm9mUzdzMW16a1ZwT2xqck84bUEvSllnakdhUnMiLCJtYWMiOiJjZWU3ODdhOGM1NzE4OWZmOTllN2QwYWZjMjg5MDJjM2IzODk5MDE0ODZhOGJlZTc0YzRhMmRmODI1NDIzM2NhIiwidGFnIjoiIn0%3D\"]}', '', 'Windows', 'Edge', '192.168.1.69', 'my-store', NULL, NULL, NULL, NULL, '2026-05-12 19:34:38', '2026-05-12 19:34:38'),
+(59, 'GET', '[]', 'http://192.168.1.69:8000/store/my-store', 'http://127.0.0.1:8000/', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0', '{\"host\":[\"192.168.1.69:8000\"],\"connection\":[\"keep-alive\"],\"upgrade-insecure-requests\":[\"1\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/148.0.0.0 Safari\\/537.36 Edg\\/148.0.0.0\"],\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"referer\":[\"http:\\/\\/127.0.0.1:8000\\/\"],\"accept-encoding\":[\"gzip, deflate\"],\"accept-language\":[\"en-US,en;q=0.9\"]}', '', 'Windows', 'Edge', '192.168.1.69', 'my-store', NULL, NULL, NULL, NULL, '2026-05-12 20:14:32', '2026-05-12 20:14:32'),
+(60, 'GET', '[]', 'http://192.168.1.69:8000/store/my-store', 'http://127.0.0.1:8000/', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0', '{\"host\":[\"192.168.1.69:8000\"],\"connection\":[\"keep-alive\"],\"upgrade-insecure-requests\":[\"1\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/148.0.0.0 Safari\\/537.36 Edg\\/148.0.0.0\"],\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"referer\":[\"http:\\/\\/127.0.0.1:8000\\/\"],\"accept-encoding\":[\"gzip, deflate\"],\"accept-language\":[\"en-US,en;q=0.9\"]}', '', 'Windows', 'Edge', '192.168.1.69', 'my-store', NULL, NULL, NULL, NULL, '2026-05-12 20:16:19', '2026-05-12 20:16:19'),
+(61, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"52.167.144.156\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '52.167.144.156', 'my-store', NULL, NULL, NULL, NULL, '2026-06-03 18:52:12', '2026-06-03 18:52:12'),
+(62, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,*\\/*;q=0.8\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"accept-language\":[\"en-GB,en-US;q=0.9,en;q=0.8\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/17.4.1 Mobile\\/15E148 Safari\\/604.1\"],\"x-forwarded-for\":[\"105.190.199.119\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-dest\":[\"iframe\"],\"sec-fetch-mode\":[\"navigate\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '105.190.199.119', 'my-store', NULL, NULL, NULL, NULL, '2026-06-05 02:24:54', '2026-06-05 02:24:54'),
+(63, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,*\\/*;q=0.8\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"accept-language\":[\"en-GB,en-US;q=0.9,en;q=0.8\"],\"cookie\":[\"XSRF-TOKEN=eyJpdiI6IlBwQUVFNURMS2ZoY0ZURlYwZnk0VWc9PSIsInZhbHVlIjoiMzA5aE9tc1VCdnZPQlJWT2ZldUtaYzluL05VQ2hUVE5YZ3ZleUNxRnp4RzdRb1RXVGdZNUpYR2UxZ0U1S3VURmQvTnFKVitVWW14VmxNQ0ZQM2JLOUpIMFNTOXRQU0dYejhWQmdIWU9aNW0zaWlwY0gyOHV3anBGYlRTUUVaNy9wM3Y5SWlDOWF4Q1I2d3lZSHBwZUZDSmtkVlVHTFMvZGhDT250bjlXc3BKOGxNdWNvY0gwdThnRHJKMkxFRnpDZHlOM3VCN2I1dWI1WFNrSkxLMlVEWFhldGtsV0dpMjROVVRVb3prOGpaNFozcW5VSjJmeFJkUTNJeWVNcFlUVE9hQ3FYTGJidURSb1RmamtjSUNlQWNKZEIvMC9ZZnI3Y1AxQTNyMW9QWHBDd2UzRDBxaXpyaW51MGlXbDU0QmdlclRjRkoxQ2cxejRKTllSeDdVTHppWlhvN0lGM2x3NEtmdHBQejM4YWdYMEpweFpSN3dsaS9qT21YSWU5Yk12QXEyME1HaExiMkI5dzRBaUdteHRRVVliazJZUFFvU09mdXI2bkxaMkpzNlZPL1JBR2w1N0lYcnRuZlVBZ2VXMVVhNjVlRlpXSHlEcG5VN202YkhOak9NWVR2SEU4Rk81VEtHQ3drMGloVjh5dGppY0U0bUlSL2lORnJsS0pFQU0iLCJtYWMiOiJiMmM1YTYzNDM5ODcyYThjNjI5ZWYyZjFmOGFkMzY2NzVhM2ExNjQ4MDc0ZjFjZDA5MmMwZTUxMGQ5M2Y2ODA1IiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6ImJxSjBlOVE2blVNS2t5dlVralFaWVE9PSIsInZhbHVlIjoidWwvcytQSGxMTHZvcWZ5QUZwakcwUjJweTZBc0lNSXdMWE1IK3ZXbmxHa2dyZmZMTTljdUpkT2dQSHFIL1ozOVM5b09TbTNOb1d4SjdEWFJzWlpEQ3hUaU1wOVJqMEVXTHZ2L1h3RGJVSGdVSVE0djFsTHRvMzY2N2dEYzFrM3V3MGJ3MFlGcTVTTlZZTWZPSWh1eE5Gdjk0Ym05WDBuMVVMSkJzb3RNSFdBVnNITkhGNiszSDhVWHZ1Vi9JTmhuRWhUdE9hZUowMEZnbVJHSk9SOHRCcE5zWURHcUkwc1o5b1VobjRROVlOdzZkQWFQZ0FReG9aaG5NVzlYaldQd005VWYzeFBmMjlYdDBTS1BUSjlzK2ZVTFcvTmlodkl2aTR6Y0R2UmN4a2ZzYm5wYkM5cnRpVFJXdDZJdlhsbzZmZE9ic3VFUFloODNDZnF2cFdZa0dBY3MwWUttbWZyem5US0svTG9jSlpBZ1ZHYnRZenh6R21UL3lTWmxkWmtoUjdwbHQrUlpYbmZoMnpTYlZzckFkcTVIM3VSTzFHdXhzVVZHc1V6N0ZtMHhvcmVQTXhYMzcvd3pCMmxQU1VmWGQ5aU5GS2toaGhLMi94T1Q5YUlIRjRjbDM4Ty9mcEExTXZmNWlGME1xMTNCNkVsc0IzdUNrcnhST0sxVUFHVEoiLCJtYWMiOiJhMTliNmFjYjM4ZDVjNzBmNmUzNjBiMDE2MTdhNjNjODQwNjYxZDc3Njg4NzRlZGI1ZjFlZGQzMGM3MTJkYjYxIiwidGFnIjoiIn0%3D; cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/17.4.1 Mobile\\/15E148 Safari\\/604.1\"],\"x-forwarded-for\":[\"105.190.199.119\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-dest\":[\"iframe\"],\"sec-fetch-mode\":[\"navigate\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '105.190.199.119', 'my-store', NULL, NULL, NULL, NULL, '2026-06-05 02:25:41', '2026-06-05 02:25:41'),
+(64, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"43.153.35.128\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '43.153.35.128', 'my-store', NULL, NULL, NULL, NULL, '2026-06-05 21:43:18', '2026-06-05 21:43:18'),
+(65, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; SemrushBot/7~bl; +http://www.semrush.com/bot.html)', '{\"accept\":[\"text\\/html, application\\/rss+xml, application\\/atom+xml, text\\/xml, text\\/rss+xml, application\\/xhtml+xml\"],\"accept-encoding\":[\"gzip,deflate\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; SemrushBot\\/7~bl; +http:\\/\\/www.semrush.com\\/bot.html)\"],\"x-forwarded-for\":[\"85.208.96.197\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '85.208.96.197', 'my-store', NULL, NULL, NULL, NULL, '2026-06-07 15:15:37', '2026-06-07 15:15:37'),
+(66, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'panscient.com', '{\"accept\":[\"text\\/*, text\\/html\"],\"accept-encoding\":[\"gzip, deflate\"],\"accept-language\":[\"en\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"panscient.com\"],\"x-forwarded-for\":[\"158.173.25.68\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', '', '158.173.25.68', 'my-store', NULL, NULL, NULL, NULL, '2026-06-07 16:11:59', '2026-06-07 16:11:59'),
+(67, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'panscient.com', '{\"accept\":[\"text\\/*, text\\/html\"],\"accept-encoding\":[\"gzip, deflate\"],\"accept-language\":[\"en\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"panscient.com\"],\"x-forwarded-for\":[\"158.173.25.68\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', '', '158.173.25.68', 'my-store', NULL, NULL, NULL, NULL, '2026-06-07 16:12:11', '2026-06-07 16:12:11'),
+(68, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"40.77.167.48\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '40.77.167.48', 'my-store', NULL, NULL, NULL, NULL, '2026-06-08 02:17:10', '2026-06-08 02:17:10'),
+(69, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"52.167.144.20\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '52.167.144.20', 'my-store', NULL, NULL, NULL, NULL, '2026-06-09 16:32:57', '2026-06-09 16:32:57'),
+(70, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"52.167.144.158\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '52.167.144.158', 'my-store', NULL, NULL, NULL, NULL, '2026-06-09 19:13:13', '2026-06-09 19:13:13'),
+(71, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"43.157.179.227\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '43.157.179.227', 'my-store', NULL, NULL, NULL, NULL, '2026-06-12 14:52:42', '2026-06-12 14:52:42'),
+(72, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; ClaudeBot/1.0; +claudebot@anthropic.com)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, br, zstd, deflate\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; ClaudeBot\\/1.0; +claudebot@anthropic.com)\"],\"x-forwarded-for\":[\"216.73.216.26\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '216.73.216.26', 'my-store', NULL, NULL, NULL, NULL, '2026-06-13 13:55:37', '2026-06-13 13:55:37'),
+(73, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"207.46.13.141\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '207.46.13.141', 'my-store', NULL, NULL, NULL, NULL, '2026-06-14 22:51:15', '2026-06-14 22:51:15'),
+(74, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"157.55.39.61\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '157.55.39.61', 'my-store', NULL, NULL, NULL, NULL, '2026-06-17 12:56:33', '2026-06-17 12:56:33'),
+(75, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"40.77.167.151\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '40.77.167.151', 'my-store', NULL, NULL, NULL, NULL, '2026-06-18 03:43:58', '2026-06-18 03:43:58');
+INSERT INTO `visitor` (`id`, `method`, `request`, `url`, `referer`, `languages`, `useragent`, `headers`, `device`, `platform`, `browser`, `ip`, `slug`, `visitable_type`, `visitable_id`, `visitor_type`, `visitor_id`, `created_at`, `updated_at`) VALUES
+(76, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Mobile Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Linux; Android 10; K) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/149.0.0.0 Mobile Safari\\/537.36\"],\"x-forwarded-for\":[\"105.136.132.141\"],\"sec-ch-ua\":[\"\\\"Google Chrome\\\";v=\\\"149\\\", \\\"Chromium\\\";v=\\\"149\\\", \\\"Not)A;Brand\\\";v=\\\"24\\\"\"],\"sec-ch-ua-mobile\":[\"?1\"],\"sec-ch-ua-platform\":[\"\\\"Android\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Linux', 'Chrome', '105.136.132.141', 'my-store', NULL, NULL, NULL, NULL, '2026-06-18 16:09:29', '2026-06-18 16:09:29'),
+(77, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Mobile Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6\"],\"cookie\":[\"cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6IklxQ21scGpzRnFJSVlSdVdYZ1Fvcnc9PSIsInZhbHVlIjoiUFptcXVPanFzUjg5bkVMc3FXYS9vbGJTVzVmeFBjeTlicmcrbjNwYnJEdUN0T0sySlFZa3FGdXVtRnNRMWVBVVRmMmdZNE04ZFFJcHdwMjR2RTZ0Y0ZRSzd2WFIwaXZYZzVoOFlSTWRFT0hFWmp0SlZ3NHlDTWtnRWFLU0ZQWUxUeHc5VWNma29yOHQyWFdqMDJJcDVEbHIyT09EaVlTdWRSK1RhSnBaa0pjL0RtdmJMNm8zU2E5elVwdHRHWFJxRWZ5b3RydnR6eEdicVEvQjJpQmxJVDc2NGM3ODNyTTQyUlRBRlNtK2Z0Zm9UQlFFZCtGTzEzWkoxa25VZll0bFRaQWI2eU85UWcvcC94THJIb1VkR0N3cE40bzJyMHJWTm1Nc0dSVGh2RVREZnppaEhia2RXdndjSkw0L0FCK1l2Q3VWdmNQZk9sUFN1ejY3ZXFwWU1oWFNlZHZJV2pJa29ieit1YURIUDhQRXFNR0d5V0UrZmo5SXJZK2RxZ0R4cUg2TEZzeGRYRU5xTExiTGE0eUhmY1NwaU82RlErVkhjYldocHBFNGVqKzEzZlNSY2FFYVBLOVNua2pDSDdkZks0SmgzOWFYWnEzSEMzMkd1THlkTGpFbkd3T2dmNUhCS2xuQWhTcWQ4dy9yU0lCbE1OeVNXREdZbTBKTmxHUnQiLCJtYWMiOiI5M2JmYWE5MmI5OTJhM2VkMmE3ZGYzYTUyMTEzOGQzOGYzYmZiOTUwOTQyZTE4NGM2Yzg0ZTgwZDIxMGUxMDk2IiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6InNFQlNLTm9FeXVEMXRmTG4yY1k4Q0E9PSIsInZhbHVlIjoianVIcjlVa0lqMmlyM3RVZXplU3FQQmhMRmE3NEh6K25YTEZHdjVrbU9oYmt1aXRGZ2x0dW9KY3A0enNJV1ZQVTBGRlY0U3NBd0dYYjVvekFyd2tRN1U4V29jWlkzNDV6ejhxbzQwdi8vc0VqTmRUZi9FR2hFQlRVcU5ZRDVtOVN4eTl4YXlHK1QydllMRjlBa2kvZDMwaHJ4MHZOVmZrb0UvZXVWUEVJTkQ1bHhsUDJmT0Q5S3MxNDY4TE91a3RrV3dRNkFsVFhRLzdpVXJTNlhOVXNqdTUxS0xMUUxOUXkwcDNocWhURmUrQWZPeWd4ZXlZZTZQQVJnNVBqWHJ5Y2o5eUpkRmYwMldoZFV3L1dDZmEydldHVktWTjZjQXR3RVlNeUpSSVAyeG9QeEVGWm84aGMxMkRoRzBOeXMwOVRIcUhxOUhIUkJlN1lHVU4wRCtsMEpONVVPeG9Yb2tQYWFMSitHL2MrUDd3QitrTmo3ZkhBQUpDWUlwVG85UmZzWFFySjhpTkh2Zy81MURjeTE5dVY4TitkTFlsaXFKaWV3MHJISmhPeDFzL29ISW05RTc3TjBIMVpFeEpyYU9BREM3Mnp6WkFtQUVnaDA1TjNGQ0ZGZG1wQnJrcGlWWmQ2YkkwZ0ZHRWxWdmh1aUlmU0laUTBnN0o1ODJGVjdyRzAiLCJtYWMiOiI2NTBmYmRhMTNmMmRjZTA1MTVkMmU1NGU4NjM2N2U5NTU4Yjg3NDEzMzI1MzIyOTc3MDQ0Y2E0ZDU0MjhlYWI5IiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Linux; Android 10; K) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/149.0.0.0 Mobile Safari\\/537.36\"],\"x-forwarded-for\":[\"105.136.132.141\"],\"sec-ch-ua\":[\"\\\"Google Chrome\\\";v=\\\"149\\\", \\\"Chromium\\\";v=\\\"149\\\", \\\"Not)A;Brand\\\";v=\\\"24\\\"\"],\"sec-ch-ua-mobile\":[\"?1\"],\"sec-ch-ua-platform\":[\"\\\"Android\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Linux', 'Chrome', '105.136.132.141', 'my-store', NULL, NULL, NULL, NULL, '2026-06-18 16:10:39', '2026-06-18 16:10:39'),
+(78, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Mobile Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6\"],\"cookie\":[\"cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6Iit4a1M1ZWFNVWVvRmZiZ3lFVmNTU3c9PSIsInZhbHVlIjoiakhRODRBV1BZR3VnWWlPMXg3Mk9vZTd6b0l5aVpueXJUNjA2eHRzTmo2YkdtM1ZjMHZJR3Z0K1NtcG5acGVWOC9PMzJOQXlBdGlBNVUzNDZ4ZlZIbmdmYmluQnQ5OEZSYlpUdUVrbzY3cXZhaWVjU3VWRjNOMytiQ0l2b1ZVK2U5emlwWXhzdDc4Q3RlN2RDbnFlcytsSWg1MS9GcUdMZGQyTFRGZDRqTmlDTDgvWm9FTE8ySzhlaW9JdVZMa0dBa0xkeDByeXFuRERsOEMwdmRaZ2hZL0h0Q1JQMXNVS0tPOENMMzRMbExZUXVXS1BXT0daWExaMW9QaW0zWkJzRE85NVpSSXpMZFRmVVhhUUQyRmtpZ1NMMjdzeU1hSjRWaU5HL1dBTlJuR21yQUdGZW5zZEw2Uzc0NnFLUTNBbFdhU0k4WmtIdUFHUm9nbnM4RVpudW5pZnp3VFFEQzZqNURzRGhhZ1ErQXNGMWEvWmtJZTMyRitTbjJ4Tmhza2dJS2VxeEd5T3lWWmc3WW5CQ3hHbERvQUZUbitHTkYxakViMUlXUnl6MHpPLzZyMnB5d3JFRjRtRzJPazBaL2FnKzlqbmNDeHMvRGs3OTRKeDF2ay9KOGM5aUNvM09hVkhFa1dHZEdqcTdVMmtBUVBqbEZhV1k4TXh2eWdRYVR5bGQiLCJtYWMiOiIzNTJjZGViZTQxYTU4NjNjMzNlY2VlYzYxNDA0MDkyY2EwNjg5MDliYWM2OWNkZWE0NjQwOTcwYmJmMGQxMTlhIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IkV3aFZtYUpTcUd5UFFPSFhxZEJiQ2c9PSIsInZhbHVlIjoiYkcyaGpBaUZuSWtRK3NoQWJOcnZWVnJlV0l6SUhpZ213M2g3ZXRtYmFPa00zTmxyT283NGZkWTdKUEJYMVNwcmh6b1JXdjhjbU5xdDNGNTcvNURwOUd2L1ljT3ZISTF0TUtuR1NrdVhQaU1RWEJiSGREN2tDZmQyT3Y5eTdGUzJtbnVPdkZNOHNEeHBtM1puWmg1LzRwTDV2enZGdUlIUFFza0NhZ0pyRG13eGwxRVRoeWRBWnBqVmFraGdiS25BTUxtNlJpcXNmdzRqS0dFQWpHbGxHVkhPMXhLZ0pXaldSVGNHKzR2Ukw5NjNOU01FUENFRlVLbFplaWlxYml6MUxqV284MnN0eEN5ZGZqWCtSalpTV21zTThBS04vUlU2eEZrV0xVUG82NktPcUNva3BSMTg4M3NNL0tSNHF5cFpFa0Z5Vi9BU2puei8zcjlnNHB1YmEvQzFmVU9GYzgyMVpPUkhXd2xBVHVRZlhYdGFic0ZhU2toY2gvQlV5SVZjRHBmeXZxNDZMUDk1ZWxDTEs0Rk51QktQcjZyZ2hWRGdadjBzRkhYSHB1cjQvMTJBSmhJbW1TZjMvOHFmTTR3NjFlVm5oeFgxTU9VWlFWYWxtRkJxK1VwdHdocklrWllCL0ZEUUE2MVcrVFlWcks4aWNWekNQYm1GV2J3Y0huS0giLCJtYWMiOiI1YWY0Nzc3NjdhYzFmMGNkNDQzMjczYjk2MjU2ZTFhMTg5ZTVhOWFjOTk0ZjI0ZmVhYWFjYjdhYzRjY2U2NjFlIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Linux; Android 10; K) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/149.0.0.0 Mobile Safari\\/537.36\"],\"x-forwarded-for\":[\"105.136.132.141\"],\"sec-ch-ua\":[\"\\\"Google Chrome\\\";v=\\\"149\\\", \\\"Chromium\\\";v=\\\"149\\\", \\\"Not)A;Brand\\\";v=\\\"24\\\"\"],\"sec-ch-ua-mobile\":[\"?1\"],\"sec-ch-ua-platform\":[\"\\\"Android\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Linux', 'Chrome', '105.136.132.141', 'my-store', NULL, NULL, NULL, NULL, '2026-06-18 16:11:54', '2026-06-18 16:11:54'),
+(79, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Mobile Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6\"],\"cookie\":[\"cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6Im5WQ3VrM2VudFQwaVd2N3hhY2ZpTnc9PSIsInZhbHVlIjoiU1VpL2FyZ2VtOW55b0UrV09nazNvNm16S01YL1B6Sjh2a0g5Wi85MURxdTl2eXZyWjdUcVZwYXA5ZnFNN3RwNHpSNmhTME5rZTdmTEljMzd2VTE1Q0dueit1aVRCRFExVEVsK1JCWFdwSHlzZmZlYWVSeWtzcUU4UXQ1SERoMmIzOUI3MERqK1RSZDNIMmxjZWtyRjdKaUVUbmYyQ0tSM29pTFRRNmNsM1ZhNTVHRzdaRnVsYXROUXlmVmtyam9IbFIybzQxdmFlbTd2Nzg2bUNOZjM3Zm9sKzBUWDZSbEQvRmtCTVgrTWUva1FJcHBOSUtIcGVNQTJyM3dsMm9YNHAveFlkY2hTUGZMejFFbnk3akVqc3liMkhrNGFFdFUzY0VxWFdpNnRDeHI0RWdoY0dRZ2pZSmFhV1h5a2NPY0NaS3lid1VhbnY5WlZUREJQNFY4MFNyQ0ZySjBTQzdvbHNOcXBXcHFTMWFpanhRMFBUWmtzeUM5Wlh1a3ZRNysyWmxTd2M5dWQwUmlDSnNGVUJQZkR3L0lKeWUvTUZ4YWV2Mjl4aTVSQ2RkZTI5SUlQR3dGS2VDakVsa0ttYk9qaDl0QytYSWRvMFhXZjNoclpzVXZLL0c2d0VIZERtOXliSW1yT2JyUlcxNm1aUEdscWhXNGRucEtTTEhiU1VTMlYiLCJtYWMiOiJmZDQ3ZWUxNGFjNDYyODM5YjRlYmZkMGQyOTMxYTFkNDRiNjlkYjM1NzQ1Yjk3ZmUzZDI4ZWViYTYzMjVhYmYzIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IkJwNWtPb3RtTXJPbWllaGNnd1FnYmc9PSIsInZhbHVlIjoieUFxN2ZWREVqTkhTd2l0WCtlZElDQW1MZG90bGQ5VEl4Wm9nV0ZYVG1rcjZQbmtvMG9XMmFqSTBVMSszSU1icitzNXpxdzZiM0syTUlSUkpnaG5rM3UzOWgvQjhIcm9kbXZOSVkvSVVXanIyazBGTDBXZmlReExROHNuMUluZFFpNklTMWE1MjcyWXlGNDhiakhVRDlOalprSXZPckZMRGhRVEpwdmk5MWJQN2NPaXpMdC9GNXYxVkxjbE5ERkN2RXZ3ci9pS0FYbFFGQVMzdHdqN0xQRk9rYkRtMHFQUUJpRFlicllzamE0UGpkZzBuR0NoWGdjOWJHTzV3MVZRVUhXUXpGRGo0Z1YvOWcvSERTc09VdnQ0ZXRLc1FRWkdKNklxYWMweE1pSm1MNFNacFJ3amhaR3hMb1ZSYmtrZUlMQUJWZzNHUmJaSlNzSnJDMnErRWI0MFBMaXdDKzJUMVRncXlNbkVNclpLeW5telFRbmUwYlNURTN2M3NtSW1VbHoxVHVtWGMzTFE0V3d3VzFCdDYvZmNIM3V5Q3ZCOHd2MGtYT05EVTRxd2l4R0FWTWRham4vTTlQSzlnYy8zbzRZUUZmbVFJRndQR3lnYWVzRi80R0NuRmJjOXZzbThLbHR1RUpGd1gxcmpPWmoxRmZndDNxajRPc0RWSlBOMEoiLCJtYWMiOiJhNTFjNmRhOGUzNjJkNGJlZmE2M2I0NjZiNzQ3OTIxYzg1NmY5NGE5MDcwODY5NmY4NzcwNDJjZGQ3MjM2YzYyIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Linux; Android 10; K) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/149.0.0.0 Mobile Safari\\/537.36\"],\"x-forwarded-for\":[\"105.136.132.141\"],\"sec-ch-ua\":[\"\\\"Google Chrome\\\";v=\\\"149\\\", \\\"Chromium\\\";v=\\\"149\\\", \\\"Not)A;Brand\\\";v=\\\"24\\\"\"],\"sec-ch-ua-mobile\":[\"?1\"],\"sec-ch-ua-platform\":[\"\\\"Android\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Linux', 'Chrome', '105.136.132.141', 'my-store', NULL, NULL, NULL, NULL, '2026-06-18 16:15:18', '2026-06-18 16:15:18'),
+(80, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"43.135.211.148\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '43.135.211.148', 'my-store', NULL, NULL, NULL, NULL, '2026-06-19 02:53:05', '2026-06-19 02:53:05'),
+(81, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com', '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; GPTBot/1.4; +https://openai.com/gptbot)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, br, deflate\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; GPTBot\\/1.4; +https:\\/\\/openai.com\\/gptbot)\"],\"x-forwarded-for\":[\"74.7.241.34\"],\"x-openai-host-hash\":[\"841027007\"],\"from\":[\"gptbot(at)openai.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '74.7.241.34', 'my-store', NULL, NULL, NULL, NULL, '2026-06-19 07:21:54', '2026-06-19 07:21:54'),
+(82, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"207.46.13.87\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '207.46.13.87', 'my-store', NULL, NULL, NULL, NULL, '2026-06-22 20:29:36', '2026-06-22 20:29:36'),
+(83, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"157.55.39.192\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '157.55.39.192', 'my-store', NULL, NULL, NULL, NULL, '2026-06-22 22:40:40', '2026-06-22 22:40:40'),
+(84, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"52.167.144.193\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '52.167.144.193', 'my-store', NULL, NULL, NULL, NULL, '2026-06-24 13:08:22', '2026-06-24 13:08:22'),
+(85, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,*\\/*;q=0.8\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"accept-language\":[\"en-GB,en-US;q=0.9,en;q=0.8\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/26.2 Mobile\\/15E148 Safari\\/604.1\"],\"x-forwarded-for\":[\"160.178.132.215\"],\"sec-fetch-dest\":[\"iframe\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '160.178.132.215', 'my-store', NULL, NULL, NULL, NULL, '2026-06-25 01:34:14', '2026-06-25 01:34:14'),
+(86, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,*\\/*;q=0.8\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"accept-language\":[\"en-GB,en-US;q=0.9,en;q=0.8\"],\"cookie\":[\"cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; XSRF-TOKEN=eyJpdiI6IldOUDJxYmhEcjhxbGM4S2ZvZWJib2c9PSIsInZhbHVlIjoiZkJSTjJMWjFla0xUamc0RjVsOUMrMTlORTFjQm1GQTkvUWhRSmkxbkhMVlFtNjhsZllSRjhaRE1yS3hpQ1ZjQ0RmMlA0OGRvZkdDSTN4TUFwczVSTXQ3SHYrL1dvejFlbVdCU0Z0ZVYrWFJpLzlmMXp1TzhYeGE3bkI1WG8vKy9nRVljOFFZYzRkSVdoMGNySVExNkM2WisvYXo2WlArOFdjQWptcXVPTU5LdVBuSGpQbnorZWhWSUFEOWdEOE4wUktZcVNaUGJvN3ppKzBtaHlXZHFlbHBBNExIQTFoQ2w2OWpHT2tSL2Z5TER2VCs4azFWSGRMMHJheWVNcDVGck54RXFvQ2hURVhaVVpjblBueVNteVZGbUNZVGRiWHE2aUdUQkNkTCtaMjdEMXhUYnBzbzBaUkZPV3pzWVM1N2hjN2dtWE1GSHJLdUtFUXhocGFQSlZmUy9leHN2T0RHeE0yQUhkdS9oa292M1RINUFYZTNmSUdSWVN3S2xaQnltZy9vSkRSTmNQcUpUWXlYUkRYYzJiTW5wYU5DZitZdDNFVy9tWTdRUmpscndDUDJTVk5FVkFnaXc3MDFZdEJoclB1ZktMMmxJN21KaWt5NjdxSlFDcUk2OXh0TEtmQ0hkMis0MGpKYzlENjFPVGp0dFdFVFdoT2tVRVowR05YaUoiLCJtYWMiOiJhZTkyZTY5Y2M2MTA2NDUyMzJkMDVkNDVjNjlmNTY2ZTNhNGNhNzIyYzEyODJjOGIxZjZjYjQ2ZjcxZWJjMzFkIiwidGFnIjoiIn0%3D; cookie_consent_logged=1; gestionmobi_nardocom_session=eyJpdiI6Ikl2TnpxWUw1dnl3TVVEMithSmZuc3c9PSIsInZhbHVlIjoiZVNpOWxpa3dKWnV2Yk4raWszanFGNDZMTk5HdXRkQkphMG9hSjFoZ2Z5WFRXT1dYVkJycG1JcjYreU1KZWx1NHdqNjQvZ3BLa21TMDIrb2FYZHVxRWdkMEs5S0tnNkdDMmt5ejdjMHMwWXU4NFdPOFRXSnZEK2RjblRiZWZPck8yT2YrWmk2MHNHTERIUnlRTUlHYU9qU2UzSGFGRGtMWGhtUVNMNmZndHdQbWFQVVdZZFJEZzQvS0tuTDRWM05CVVNGUE52TG9OMzNhc3lLWThMVDhoUVF5NnJRWnY0ejBsazNIekhCL2M1cVhlOEpWejNpRUtpYmtYcHpWcFo2bU0zbjhBc3NqcTNZY0dPOXFmNElQdHJGTE96TFFGV0ZsRmFjOG9WdjVLckFPY2o2UXhudWVrQXZZZVpUMTVOMm5xZ0Z6dWVTb1NuM3duejRtdmRmU2FXK3dVWk13d3ovSHhlSUlOYmw2RmJrRU1YdFNGMUxuaHl4UFptZ1VNWTZKWDBkcTZOVG10ZkM4eXNlc09TaVlnZFBRcFZ3V2ZmYk82d3J3QjRCVWQzcWZHbENOellsVGF6ZVpydVRxL3JQS3h3V0pxSzZkazFKWDdmeGRSZFdlSTZRSlJ4TmhnT015blVlU3ZCRGVuUk4za2RPQ2hTNWpQVUV2SjRRV2lvZlMiLCJtYWMiOiJhYmI2YWRmMGVjMjQ4Mzk5YzYzYjE4ZWEzNjZlMTNlNzQzZDUxMDc0ODY4OTU2OTQxZGY0ZTBkNzI0NjQyYWEwIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/26.2 Mobile\\/15E148 Safari\\/604.1\"],\"x-forwarded-for\":[\"160.178.132.215\"],\"sec-fetch-dest\":[\"iframe\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '160.178.132.215', 'my-store', NULL, NULL, NULL, NULL, '2026-06-25 01:34:21', '2026-06-25 01:34:21'),
+(87, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"43.156.36.169\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '43.156.36.169', 'my-store', NULL, NULL, NULL, NULL, '2026-06-26 03:17:46', '2026-06-26 03:17:46'),
+(88, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"52.167.144.228\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '52.167.144.228', 'my-store', NULL, NULL, NULL, NULL, '2026-06-26 04:52:57', '2026-06-26 04:52:57'),
+(89, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/136.0.0.0 Safari/537.36 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/136.0.0.0 Safari\\/537.36 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"52.167.144.197\"],\"upgrade-insecure-requests\":[\"1\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '52.167.144.197', 'my-store', NULL, NULL, NULL, NULL, '2026-06-28 15:31:38', '2026-06-28 15:31:38'),
+(90, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"52.167.144.233\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '52.167.144.233', 'my-store', NULL, NULL, NULL, NULL, '2026-06-28 19:27:50', '2026-06-28 19:27:50'),
+(91, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"40.77.167.51\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '40.77.167.51', 'my-store', NULL, NULL, NULL, NULL, '2026-06-30 07:53:21', '2026-06-30 07:53:21'),
+(92, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr,fr-FR;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/149.0.0.0 Safari\\/537.36 Edg\\/149.0.0.0\"],\"x-forwarded-for\":[\"160.176.118.12\"],\"sec-ch-ua\":[\"\\\"Microsoft Edge\\\";v=\\\"149\\\", \\\"Chromium\\\";v=\\\"149\\\", \\\"Not)A;Brand\\\";v=\\\"24\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Edge', '160.176.118.12', 'my-store', NULL, NULL, NULL, NULL, '2026-07-01 18:13:38', '2026-07-01 18:13:38'),
+(93, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"40.77.167.26\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '40.77.167.26', 'my-store', NULL, NULL, NULL, NULL, '2026-07-01 20:44:23', '2026-07-01 20:44:23'),
+(94, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"43.166.142.76\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '43.166.142.76', 'my-store', NULL, NULL, NULL, NULL, '2026-07-03 01:38:36', '2026-07-03 01:38:36'),
+(95, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://www.mobi-nardo.com/', '[]', 'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.7871.46 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"accept-language\":[\"en-US\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/www.mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Linux; Android 6.0.1; Nexus 5X Build\\/MMB29P) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/150.0.7871.46 Mobile Safari\\/537.36 (compatible; Googlebot\\/2.1; +http:\\/\\/www.google.com\\/bot.html)\"],\"x-forwarded-for\":[\"66.249.73.65\"],\"upgrade-insecure-requests\":[\"1\"],\"from\":[\"googlebot(at)googlebot.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'Nexus', 'Linux', 'Chrome', '66.249.73.65', 'my-store', NULL, NULL, NULL, NULL, '2026-07-04 12:31:23', '2026-07-04 12:31:23'),
+(96, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"40.77.167.241\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '40.77.167.241', 'my-store', NULL, NULL, NULL, NULL, '2026-07-04 16:18:35', '2026-07-04 16:18:35'),
+(97, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; SemrushBot/7~bl; +http://www.semrush.com/bot.html)', '{\"accept\":[\"text\\/html, application\\/rss+xml, application\\/atom+xml, text\\/xml, text\\/rss+xml, application\\/xhtml+xml\"],\"accept-encoding\":[\"gzip,deflate\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; SemrushBot\\/7~bl; +http:\\/\\/www.semrush.com\\/bot.html)\"],\"x-forwarded-for\":[\"85.208.96.195\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '85.208.96.195', 'my-store', NULL, NULL, NULL, NULL, '2026-07-05 01:31:34', '2026-07-05 01:31:34'),
+(98, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Mobile Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"ar-MA,ar;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Linux; Android 10; K) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/149.0.0.0 Mobile Safari\\/537.36\"],\"x-forwarded-for\":[\"197.146.109.84\"],\"sec-ch-ua\":[\"\\\"Google Chrome\\\";v=\\\"149\\\", \\\"Chromium\\\";v=\\\"149\\\", \\\"Not)A;Brand\\\";v=\\\"24\\\"\"],\"sec-ch-ua-mobile\":[\"?1\"],\"sec-ch-ua-platform\":[\"\\\"Android\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Linux', 'Chrome', '197.146.109.84', 'my-store', NULL, NULL, NULL, NULL, '2026-07-06 04:11:59', '2026-07-06 04:11:59'),
+(99, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"ar-MA,ar;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5\"],\"cookie\":[\"cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6IlRvaFcyZGxWSjZ0ZUZXY1M0TkpMc1E9PSIsInZhbHVlIjoiamF0VDg5YWFMYkoxQXU4ZHhLNnROeVVrdFRyeEIzblV2Qm5HdVNHOEdHYVFYT2c1UVBpdHREbXBLNW1TeXRUM2huWWJhOFRTUk1rMDY2QmFVQzJGYnphQXd1T3E4aDlQVjFaTGhSMUxtM3dQZ1d6Z0UrblIxRjVGeWRvbFdKdDJ6Vm9wZ05USDZVWmR6dkFycnE0cEJFT0JjSTdYQ2YvbWhwbFFRQUFsWjhlYit4aGR5Y2N6TkZOWi9ka2V0Vk0rYzl0MEF1b05qa2VXVk9JYzR0QURtTi81WVFJUTNTeG5ZOW5vanAyN0k2MFN5bnV1cU1xY0NTeVMrbG1IdjdvaE9KTndiSDZySWZrQm5uZE84cmlqU3hrYWJYVWo5MFY5Nk1UZUlxQ3pveklsZExyL2srSTRONkZBVjNpMWVMUHRHd2JpZXNzL1pWNmNYMXEzYi8xZUh2NG9UWUJNbCtIdmdlVDZyRE5IS1NMTnJJQkdOVVFTTDRaVU9PZGpLaHBXOGhhNTJtZlBYOHNuQmh2R1NxR1FDUUNQWVlFQ293YTRvQUlkaWhLdTNGVlhzZ0RqSnFIcjZ0R3RlRkNoZFl2TDR4anJrS2ZmQW02bE1uT254bXNDcGFJYTRNRlZhSU8xcU1LMDhtczZIc3EzT0RpMmdlZHIzR0V5dmZCZnl0SVoiLCJtYWMiOiIyMzVjNTZmYmQ3YTVhNDFmODI5NTZkZWYzNjhjMmEwMjIxMDI3ZGU2NGI3MjRlMDdlZjQ1ZjUxOWM0MDlmMWYzIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IkxSb1RLaWxONHU0TVVBWFNCRU41Wmc9PSIsInZhbHVlIjoiZyt0N3VtM21pOUQzRHREN3MyYStFOTUvMVE0Y2JCMG1nUkUrcHBnY2RETjdmbDNPakkrNEF6ZjVYVmtOZkNpamdNS090ZFRUVURKNzlYNkE3RDNlOFNlOWFDREN6d2xnaW5LTmd2bllTb2NpNUhZMmNTT1VWMW1tbHl4V1RGWllmZFZkdDRUN3Y5UkxUZDdLRGIzcFMydE8xbTAxemxOK2svSEdrbUJheXhHMEh0Ums0ZHFTbXRXMEhDUEFrQ043SU5KNWhBRHVSQjN6dGxRREphYThUVzJFa1B0a1AyTVVvRldMRU1Ga3dLckVxY1hBaDJNVUNFNWlLUWhNeGtEZTFabzRFVU9KZUV5RTNNWUZiNjBrb05NRUU1R2gvdUk5aUpSZm9mc0NFd0dYUWJDOVYxR1c3UllhN3FNSHRTZ0hhcjRscUJSMThHL2dTMEJTc2FjSndyRkpqOEJYMkdSTUswZ2xtV3VabEJ1NWNiY2lhend6WG1wRzg2UnFWalcwTHNlVUN6ak1XL0c0RmsyaU9jMDdrU1hHei9wREtPQjY2c2k2SGdXLzBtbmIwbTJzK2t5cWd4VFppNWdTY2pDdTFIOUpzamp4YWsvUnEvdng1SGZLaUNGU3VFY0Rrd2huc2wyK2gvQ2JxcGJzMFZwTXV3b3JOL3RXckJ6Uzc2SjUiLCJtYWMiOiIyM2Q2ZDg2MDI0OTg2MWFiYjc5ZGQxNTg0MDk5ZDg5ZDc4ZmIyZGZjOGExYzZhMDc3YWMwNDM4ZDUzODQyMGM1IiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (X11; Linux x86_64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/149.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"197.146.109.84\"],\"sec-ch-ua\":[\"\\\"Google Chrome\\\";v=\\\"149\\\", \\\"Chromium\\\";v=\\\"149\\\", \\\"Not)A;Brand\\\";v=\\\"24\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Linux\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Linux', 'Chrome', '197.146.109.84', 'my-store', NULL, NULL, NULL, NULL, '2026-07-06 04:13:02', '2026-07-06 04:13:02'),
+(100, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"ar-MA,ar;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5\"],\"cookie\":[\"cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6IncreEF3QS9rdXMySzFtbkZySld5eGc9PSIsInZhbHVlIjoiNzVCR21MdWs4eStuQzZoTDZ6TFdTYlllMldlRHlWTnhsencvczlKYUhOSUg3bnZXTXVOVUF6c2VnelFodHRhZXh5MmdJVkU0cHY1c0ZlOVJnampTdTJWMXFaSFphRXc5bVFGU3RKNHZNeERCQ3NTeHo2Y3BucjBKa2p5TDNXS3pETDJsS1RDaFdyVEc5ME55aVJaQlJkcDBEWnpQM1g1elJ2MjdoVGkzMkU1NzBKUWRnVXMvL0Mya3Q4ZU5XZGlBSStYdmxCZngrYTZFL0FCVGdDQlVoUWJSTThjenZpM25aTWV4L3Z1KzBJQXpRdms3UUlsSjdJZWwxYWV3Um5BUE9kWGcxSDBETmtneHJ3Rm4zdEZ0NHRUUzczVWY0WGxDMTFmc3FTdVg4LzBHR21mazhERGJTTWJFRmF1UXJ0MVNtd09jVXlYUnhONXExUFZ6V3FQWWppOHhPbFRxKy9jaG5reGZyOW9VYjVML0hCUXROM1JWa2hKN2FKdXZjeXVTMWpGcmR3SDhwRjdvdEltN1BsNXh5bjMrWk9FUm1LUDltZUdmd0ZaakkvcnFQN0tYb1Byczc5bXVMZzZiS0JXb0x5OWFZTkFjNTU4ckpVVXZHLzVKaVgyaFQrc1VkY1RObDJXME5SVEtXRWV1YzlKdGEzVmlNdmJpSXlBK1BXbFAiLCJtYWMiOiJlMmI3ZGJmMWU2MTY5YzIyYzZhYzFkNzc2NTRmOTZmYTE4NGMwYmJkNjk2ODQwZTdkODQ4ZTFmZDYzMTdhNmIzIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6ImZiVTdVQ0tuMTBYNzB4dVdSbkV6WlE9PSIsInZhbHVlIjoiRGhsNGpsajhsL1E2dFhNMWhVQ1JkNDNBOUdpUERXcUh5TzMwYkg4bC9qd3lZcUJaRVFFMzhkVnh0ZVN0cmE0b28xOGpKamRPYzRZS3EzdXF3NG5BbUJ3WGpIQUZKbTFmRTZibHlJK2d2eWRHWTk2SzhyenJYbWN1MzROMzh5SVVkaUhWUVZ2MXphbmRaVWVGTnZqWnBsNzcvNk5tZkwyTzhZUm5TZ0lXMWR1OUhVODlwUE4yL3FySWVGMUhQd1BkY0Vhd2RXcjdLRDFrV2dabzQ5ZEtXNU9ZeVBFTW1hNlFGVUlGMFdtVW00YWs2QWk3b0g0bUFuOGVWSXhVYWZwS0xDelE2bEwyak5aalFVTUxZWGNQZ2I0bVdCOFNIeU9UUDI4QjQyZzJhWFpnL0pBS3dtY2R6b3ZVZHlKNzJoRWwxQ3c5OGt4by8rQTRtU0w4N21WVlF4YXdFUGNKMUE4Z0g5SmdBWThKVlhjZXArUjFLMlAwM3dEN2g4dURIdExPL0N2ckdKQ2xLN3dCUVNjYlpEZDRzai8zOCtZUHJtVVVXcklmNW4rcHp5Mll5ZTlYR0dsUVZrZjJzQmlsV1MvaGEvMjFjWGRhVitwbTgxYTdWb2pKRGFuZ0RYNDl6Z21CcHZ3bHhlMHkzdU0waG5mRmoxc3dhUEtIR3cvTHBrSWwiLCJtYWMiOiJiNzMyYzUyZTI5OThmYjM0YWZhMmRmYTU2ZTQ0MWNjMGUwMWNkY2VhY2RiNGUxOWNkMDU1OTQxYWM5MjdhMzFhIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (X11; Linux x86_64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/149.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"197.146.109.84\"],\"sec-ch-ua\":[\"\\\"Google Chrome\\\";v=\\\"149\\\", \\\"Chromium\\\";v=\\\"149\\\", \\\"Not)A;Brand\\\";v=\\\"24\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Linux\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Linux', 'Chrome', '197.146.109.84', 'my-store', NULL, NULL, NULL, NULL, '2026-07-06 04:13:07', '2026-07-06 04:13:07'),
+(101, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"ar-MA,ar;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5\"],\"cookie\":[\"cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6Ijdyd1hsaEhXOTQrYzV5L29hcTN4dGc9PSIsInZhbHVlIjoiQWhFNUlzcWNHU1FadnkramVkRkc0bUhDZVJUYVB6dGpWMzhscnlJelhSNVdyQjhoNjZUd2w4VXR5U3BXVDNMZWNyczdvSWMzTDM4SnhGK2R5c3pnSUNueCtQSGp0VjlzaU5ndUpxMGJORzJNc0VoeFM5MUNZRWoxeU5JL28yeUpobkZ0RmtYZDRWeUUwL2FxQ2tZZGlkenFYSm1VYkx4VlRLaTkvMHpEczVuWVM5dkg5aWd5blNGY1ZXZTg1citFUnJSMkhLdmp3MklzQ3BlMEp0ZUJRcGNWNzVtMTczeUpVVFVSWEZrL0h0M2QwczNMaHpVemRqRGxpMC9leTBRWUZPSUpqb0hDZXFvZVVMYTBNMFV5R2lqUEdFWFRqaHBtV1ZaQTRJVys5cGxyM29ETVJhbFFJazFEVmZoYkQ3WjdMc1FZOG9GQ1JlMTMvaS9xNU0yT2tLa2RaWFJYZzFjNzBhOHpLZkRKd3NoYkdOSEtrcUx1N2xwajc5M2ozU0xwTlJrK1luekFwenVRcW5xZ0J3TzVBay9oYldVY2htTmJpc1JoQytidEpQdE5pQ0U4Rkt6M0JoeHNZYml5M0tDMEhYQlpabDB4RDhBcWh3NDhMMkZGTUV6VDBIQXpUQ0l2cHVsR2loWEhGVFhVTCtvZ2FMcktOS1oyOFhJeDhCUGoiLCJtYWMiOiI0ODlhNzhiN2IwNTNmNTQwYWY2OWU3ZjE4MTAyZWI5ZDYxNjA4ZjIzZWY1YWI3YzM2Mjg1MDQ2ZTY2NzQ5ZjMyIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IlcwR1BOUEdCSWlWQXVNTnZER2hkR1E9PSIsInZhbHVlIjoiaDFVUFZOYnhES1hVTU95QWhMMndBbVBCb1dJNGVEbWZGaWJ0MFFkR0xMY1NQQ1RwVDNJaG5xa0VYY2c0ZmJkRWd3TnVEaGtNOElOek9HZnVKWnBZSVhsZTRYWkN3dzdROFd3UWV5YWQzbUw1LzJsOVdIRWViL2FvNkNtTm1FaHJ1d2ZQNStjSzA1a1JHeTBsM0kxeEdpUXdCalNpcmRzbERVaVN2dktWcEU2TFBFSHJCTFhRcDdUSnRzeXZiaFBNcGVWUStlODVjdDVEYjRpUld2YkRXTFUzS05wd0VQczJ0cmZBTkwyTk9ZYlFvaEFpUnNuUFpzbXJOTmR5WXJSZ0xsNytoTTN4N0w1N1NpRjllK3lBM3N1a1RIOGlONFZXc3NscERHdVJ5dTRLbVZoVjlyKzR4MXdWQ2xmRGd4LzYyZnV3a1ZnRGQxeHJ5S0RsaUpXNldONVJxc2Jla0lJZ25GSXVMbjlEdk5LVURYSEIrcG1mdWZkcUEyQWwxUW8wVEI2TkZqVmpXbDRCRVRMWEs1eVZwaTU5S2FoVUErTTAvdSs2MUROMVBNRHFQR1E1ekRWWS8wTzEzd1IxeTdNdjEyLzExSmFEVWhxeDkwUzVMeGhTemRJOEhTcWJTdnhNZ2xWZk1hbG42YVZPaVhGWTRaNGxlTS93aEJOOUpvbnkiLCJtYWMiOiJkYTQ4Zjk4MjM2ZWU3YWY3YWU1NzFmNzZkZDY5OGViNjViYzAxOGNlMjgxMWM1MDEyMTAzNjNjMDljNzI1ZjdjIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (X11; Linux x86_64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/149.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"197.146.109.84\"],\"sec-ch-ua\":[\"\\\"Google Chrome\\\";v=\\\"149\\\", \\\"Chromium\\\";v=\\\"149\\\", \\\"Not)A;Brand\\\";v=\\\"24\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Linux\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Linux', 'Chrome', '197.146.109.84', 'my-store', NULL, NULL, NULL, NULL, '2026-07-06 04:14:53', '2026-07-06 04:14:53'),
+(102, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"ar-MA,ar;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5\"],\"cookie\":[\"cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1; XSRF-TOKEN=eyJpdiI6IjRWSGVUNVJ2ZytDRUk1NE9oQy9Fa1E9PSIsInZhbHVlIjoieXlaWFl0YmVOYkdCTWFveHNZclRzZUlUb3FsRXFtWkFBUGJ6M2dFODU5eG9vZVM5cDM3eE1rYUprMzJSQXBabzVFbHh5bytNU0V6UFVJMVRnWHNlUVZld2R4Z2Y3RjBockpUbXg2Y2p2RTkwbHhrb2VHSnJZMTF5TmE1TVBLTTVlNG1LOE04NEJTMG44RTJRb3RRWGtuVzRuR2g5MGQ2TGV1LzhZaHlUNFVqMjhZamFidVFwTkl1Q0pjUzVhbGJscnQ0ejMrZDROTmdZTmwvZVdDVFFoRTJuN2RKNGhTQjFnUW1WaU00N3JuWUV1amorbFBuNThnTkV1RXVxQWV3ZzA3Y0N5dmN4RTVYdEJFYm80ZXlBdDFLVjNGdkJzakNyYWdhWHl5amYydFpJenJhTzZiVE9ERTNMRHBka21XMmIzakxRWVJIMEZNM2FmR0lMYkM0MEx6NGNVUGg3alZGWTVua2t2ZkxTNVNUNkQxWkhZaVp0SVJhVC9CSVNzUEM4d3hHSjNpQjdpb0Q4MkVmdW5wSnludVJjUFZjTnVrbVZteHN4S2N0cXpXcjR6SERTY3l3NkFYcFVpcEM1VVpMMWNGTkJpV3lWdTZsK3Zxc2FOYjVZelpFTTI3M1g3akk0NmlHQTdobUdSbzQxSGkxWFVmZnJCWEU3bEtEWnJ1d2QiLCJtYWMiOiI5MGEyNGVlNmU3NWM2OTRmZTEzNTkyN2M1NDYwMTExYjI1MjY0NTNmNGE5ZjhkMGYwMmUxOGEyODM4Y2YwNGZhIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IklPYlo0ZEdNOGFzTmpzc2ZTRHRLWFE9PSIsInZhbHVlIjoiK2hMODdzRU9CbXVBR0ZYSXNGZzJJY3hpQVRma3N1aWU5b1JIR2Z3enEzRXY1QVpYbE85MUcreitsMTA4QW9pSlArQm1MY05iUnBJbDNOV2VGbHpRQyt5NVhROENrSHlSOVhrVkJpNHgydTlIVTVTQ3RZM2hPZHNHUlNYak1BTi9FMHlEVUFpaFZ5dnpRRUtGR3puZlN3dWZ5QWFvS0ZpSnI1RzFTTzFoWmlYTHgvVVA5cjhUQWRhczlFaDAyb0d1TFNpRkYyQlJFdG5hYk9sTDlweDZqbHBEcktDSzBnaUZITnlRRGViZWJoNnZ1dU1NSitmbzZ5NENNQjI0eVVuMGFVY2ZobWkrZ0lueXNTeHhXeVJ5VFlmUVJyOHJvYktrQTVnQXdnRXBkZzg2Z2NPdVlGc3gxSXdVcTlzNHFWUEZldW9LNHh4WmMvM3BtMDF3OXh5MkVXUHpHZG0ybnc4alQyWUNmb2RjTDM4VjFScVY4V1VWbkY5L0s5N2hPT2wvSkZjQjYvam5VNGw1Mi9EWXRuZVAyTjdqZjY0WGVqMXFEUEdLN0xHWkhNcS9YWDlKZXpVT2lGcWlqdUxrajVzTlQwZC82RitIaGRHeXVaandxTUR0OHJOTllwL2RMT2VtdzVmUEdyZTFtczIyQVZySkYydzlaTlVyNG1kblBUT3UiLCJtYWMiOiI3NDVkYzE5OGU4YzE3YmVlOTQxNGZiOWYxMzBmYWM2MTJmMDMxYjIyNzgwMWQxOGNkMzE5MDQ3ODBiODhkOWFjIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (X11; Linux x86_64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/149.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"197.146.109.84\"],\"sec-ch-ua\":[\"\\\"Google Chrome\\\";v=\\\"149\\\", \\\"Chromium\\\";v=\\\"149\\\", \\\"Not)A;Brand\\\";v=\\\"24\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Linux\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Linux', 'Chrome', '197.146.109.84', 'my-store', NULL, NULL, NULL, NULL, '2026-07-06 04:15:12', '2026-07-06 04:15:12'),
+(103, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,*\\/*;q=0.8\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr-FR,fr;q=0.9\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/26.5 Mobile\\/15E148 Safari\\/604.1\"],\"x-forwarded-for\":[\"105.157.38.66\"],\"sec-fetch-dest\":[\"iframe\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '105.157.38.66', 'my-store', NULL, NULL, NULL, NULL, '2026-07-08 11:38:48', '2026-07-08 11:38:48'),
+(104, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,*\\/*;q=0.8\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr-FR,fr;q=0.9\"],\"cookie\":[\"XSRF-TOKEN=eyJpdiI6IkJ3VjAwa1BDMmM0UjV3QnFzZWJKOEE9PSIsInZhbHVlIjoiU3pxUDlUU0gzRnhsVHUvTmZyV0paYW5uSTBsbzNEOWIydXhWaUtnK1d4ZUlqRjI1UVV4S3g4M0Nlb0tTMlVjUW5zcGE3NG51M2RyNDg4aHNVVWhCN1JTUjZBZEhmSFZxRDRBY0toRnZUQTlZaExHOGJ1clJNdk1jL0RVMXlaOFVLYkNYNWIwRDA4eTY2b0tyTXBqZWpkWlFWSS9ZdU1xODFOOGsrZVBnc3lQWnpRaU13YVQrTmtNcTFjUFlHRDY2TU5Xb1BPVGM1S2tHWldWMG9JOGxzTy83VytxRDlPY21aelFtcGN6QkxYNUZEMnNEdjluckJiUUdXbDNwTnNyc3NKZHkzQk9iUW4xS2xFM1JZR2hEaEZPSjQxM2oxYVFBOGNkRzk5WU1KUmhmWllZZldKT3RMZVV3UlVraXNSUUw3dlFLYy8vOTdXZFdlWUN3RVk1cHFSZlpLdVpCeHlweFpQNWlnUVV4a3pVbVphb21oNFN1TUhuMXIrRWFoN2F6SzlIdjFkbXZoZnFrUXdTY05NcFlwZVBoZ3J6cmZ1ZzZkckJBNmNJTThCb1gwb2hTd3FBQjdlclNWbDZwUy81UDVwMlcxMWhJejBUellxQnM1czE4WUZiL3BGUHdSV2VyU0dMNzljYnY1clJIZW1XemRuSVlDS2Q1UkRWZTVySm4iLCJtYWMiOiJkYzZhN2RiYTgwZTI1YzAzNGM1ZDQxNGU3ZjNkYTZlNzgyNzliOTY5NjU3N2ZhMTkyNmU5NTE5M2Y4NmFlMGQxIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6InhoNGdsTDZzeGxzQ0IyUjJmSmhoekE9PSIsInZhbHVlIjoidUtXdUpmZ2g0ajdiSFo2YUZXektiQjlvYWhCS1N1U0tKLytQWmxDRkhBQjJuK1U1VVUyUWQwRllkNlVNajlkQXUvMHhUNGFUZndNT1lWQkIvNjZpMDFJaVNaaS9pS25FTUFFTGsyVlBiRnJ6MThUSTdOUndRR2hwS3BLcFB3OGsycm90T0dRS0JJSnJxUXV4N3NJQzNZN3lnS0RSRm1md0g2Smd1aHR5VWM5Z1ZtYU9NWm1pT2dIUUlxVTZaRHJETGgwbUxvVGVTMStYYmlnMjFkVnFIUEEwSFRHUGtodGNSZk43bW51VGw5am1YempqV3g0RlRMRXRxb1haRjJkQjZSQmhlMzlkUTZ3SmF0VEVQUktyd080dTFGTlV0Mk9MQmpKaHlxMVlGNW9GRTU2WDFwbW1laFNmSG9SS0pFaXVDbVdENGRYdXZSNnF0NDVRdUNZWmJRQXJBWGdSWGJqOFEvWmJaQnNUYkRzWUR4eTBrVHFzVlBNcXg4cVZCR1dnNnpiQmp1Rk5CNVUweDhqbk54bzJSV1doRzkwU29Ueitwekc4RVpQUWNmMWpWOTdlZDZOeDcyNkswN0pmSnRHL1p3d0pKZit1MW1lYzNWZk94dTRoaWo0OForZ2g1bi9ieWRQUzFUd1VwYVJHMytaOHhtRHVSYW9kTXZHbkFJZ3EiLCJtYWMiOiI1OWIzNmMxODA4MDE3MTAzN2NhMTVlNDNlNjRjZjU5ZTZiYzk3N2Q2ZjZjZTI1ZjMzNzFlMjc4ZWE5Mjk5ZjFhIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/26.5 Mobile\\/15E148 Safari\\/604.1\"],\"x-forwarded-for\":[\"105.157.38.66\"],\"sec-fetch-dest\":[\"iframe\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '105.157.38.66', 'my-store', NULL, NULL, NULL, NULL, '2026-07-08 11:38:57', '2026-07-08 11:38:57'),
+(105, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"101.33.55.204\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '101.33.55.204', 'my-store', NULL, NULL, NULL, NULL, '2026-07-10 03:30:29', '2026-07-10 03:30:29'),
+(106, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"52.167.144.142\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '52.167.144.142', 'my-store', NULL, NULL, NULL, NULL, '2026-07-10 10:56:35', '2026-07-10 10:56:35');
+INSERT INTO `visitor` (`id`, `method`, `request`, `url`, `referer`, `languages`, `useragent`, `headers`, `device`, `platform`, `browser`, `ip`, `slug`, `visitable_type`, `visitable_id`, `visitor_type`, `visitor_id`, `created_at`, `updated_at`) VALUES
+(107, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"43.159.135.203\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '43.159.135.203', 'my-store', NULL, NULL, NULL, NULL, '2026-07-11 09:20:49', '2026-07-11 09:20:49'),
+(108, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 26_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) GSA/428.4.939275213 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,*\\/*;q=0.8\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr-FR,fr;q=0.9\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 26_5_1 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) GSA\\/428.4.939275213 Mobile\\/15E148 Safari\\/604.1\"],\"x-forwarded-for\":[\"41.141.178.214\"],\"sec-fetch-dest\":[\"iframe\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '41.141.178.214', 'my-store', NULL, NULL, NULL, NULL, '2026-07-13 02:28:01', '2026-07-13 02:28:01'),
+(109, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"52.167.144.216\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '52.167.144.216', 'my-store', NULL, NULL, NULL, NULL, '2026-07-13 03:35:32', '2026-07-13 03:35:32'),
+(110, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 26_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) GSA/428.4.939275213 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,*\\/*;q=0.8\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr-FR,fr;q=0.9\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 26_5_1 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) GSA\\/428.4.939275213 Mobile\\/15E148 Safari\\/604.1\"],\"x-forwarded-for\":[\"41.141.178.214\"],\"sec-fetch-dest\":[\"iframe\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '41.141.178.214', 'my-store', NULL, NULL, NULL, NULL, '2026-07-13 06:27:46', '2026-07-13 06:27:46'),
+(111, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"40.77.167.41\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '40.77.167.41', 'my-store', NULL, NULL, NULL, NULL, '2026-07-14 00:14:14', '2026-07-14 00:14:14'),
+(112, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"52.167.144.195\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '52.167.144.195', 'my-store', NULL, NULL, NULL, NULL, '2026-07-14 23:12:47', '2026-07-14 23:12:47'),
+(113, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"52.167.144.176\"],\"from\":[\"bingbot(at)microsoft.com\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '52.167.144.176', 'my-store', NULL, NULL, NULL, NULL, '2026-07-15 08:04:44', '2026-07-15 08:04:44'),
+(114, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"170.106.65.93\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '170.106.65.93', 'my-store', NULL, NULL, NULL, NULL, '2026-07-16 09:02:25', '2026-07-16 09:02:25'),
+(115, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"101.33.55.204\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '101.33.55.204', 'my-store', NULL, NULL, NULL, NULL, '2026-07-16 16:30:53', '2026-07-16 16:30:53'),
+(116, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"170.106.161.78\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '170.106.161.78', 'my-store', NULL, NULL, NULL, NULL, '2026-07-17 21:41:36', '2026-07-17 21:41:36'),
+(117, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr-FR,fr;q=0.9,ar-MA;q=0.8,ar;q=0.7,en-US;q=0.6,en;q=0.5\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/150.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"105.158.48.195\"],\"sec-ch-ua\":[\"\\\"Not;A=Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"150\\\", \\\"Google Chrome\\\";v=\\\"150\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '105.158.48.195', 'my-store', NULL, NULL, NULL, NULL, '2026-07-18 18:41:27', '2026-07-18 18:41:27'),
+(118, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr-FR,fr;q=0.9,ar-MA;q=0.8,ar;q=0.7,en-US;q=0.6,en;q=0.5\"],\"cookie\":[\"XSRF-TOKEN=eyJpdiI6IjJoS1dINWRaSlRLR2cyS2lxWWVqWUE9PSIsInZhbHVlIjoiUVJYTXR2cDc5NUVudnVtbk1VejFMZVJTNFl2UFJZckFZSklUR3dlUE5ralVJMUMwcHBRaGhqS3NPbFNpa05pVStKd1ZyTXZPQUwrb0R6YTNGdlFlMk0ydlhVYjRlaFE5S1NSdFFhNXhVQUE3RXA1N1dyd3R1YnM4N2pBUkJVTU5GUWQ3MmFaQkRLc28vUUJybklZUU9qR205bDZ5Yy9PR3IvS3ptZU0xYk9TY2tpM2ZxbFFtUVpsUEMvaG5kSVJud25ld0xMdVlKaEQrb252dklvVVZTR3Y0YlRZYWw0RXcza0swdE92akRpZXd4V1dWNVNzMW9tYkFUUHRUL0x4N0xES1lUeGk3VldrTWpib2JrR2FjeHZtZHJVVHZROFZZSmJOQ21aWjZmalpFM0ZNRmp6ZzIxM3pnUlhya1NaVTM3R256TWovU0kxWkVLMGhIQ3JTOFNUOTUwekJJODd4aXJySVFCc2ordzZpRnlKN1lGZWEwaEYzNmtyYjRZVlFzdjN1R2hpZVNuSC9VcmIwN1dIZmV5RmswNThNV3V4NjBJSHhqUEowQjFlWUVWeURoN3FBWGlQZ2ZYTi8wWGR5UStUTVpXcVRzOW04eTQ5UnBnNWJ3R2F2dXF3ZVJhOTIyOUx0VlUyM2UxK1l1dDNKb3RuTVA1Q1p1OUNTR093OGgiLCJtYWMiOiIzMDI2MmUzYWVlOGI3OGFjZWI3OTYwNDk1YTRjNTY1Zjc2NzNjODFjNzNlZGY1ZmI5YzI3NTQ1OGYxOTc3NzIyIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IlZyMWVPWDZscDRPdXA5ZUx0ckZHTEE9PSIsInZhbHVlIjoiVkg4WmtHTXVVUWVlVmpoeWE1ZmFMbWhPcmNCOGZXNFdLN2k5ZGhzWkFJTUNxcE5QTDVHWERUQTBta2taRGc0TlE1K1o4dTNGUDRBVWFJVTJVS0UySkNwU2lhVnlqZVRsc2pXTjFrODB0MW9tZUZtSGtuRDBlTk5BeTN0TnRod05qMnRXTmVDQ3dvQ3lJcXdCaHZyQlhHbzJ0dWFMS3krK1F2QVUwWUF2dm9rZjZOWGlITDBVbEliQ1hJRzhCMXM4Y2ViK0JBNGNWNWd6cUNjN3QvUnZRYmJCcW9tSEl3YnpqNzlUUDh0ZWZtUUlPbTRIRDRzck5yRXlsdTl2YVZROW5zSk1KeVNONFBhdFc0R3M4MitPbDdWb0lIOHNDTVdkSTdqTGNUSnZRK2FkK09kZndMWEMyVEUySGJDSmx1NkoybmF3UVV4TVFHb2gyZng4ZW4vSzJmazc1ZVdWN2htYWdkRWh0NjJLV2hkL1RJL0hNYW9JUGkxWWVxUDhJam9oWWx3SDUweEx1OWdrWWVxbW00Um96SC9yOFRDVE16TEZpQitkaFpGYWlhb2thNFhZSFZ1K3RlSldhY3JuRkUwUVY3ckE1WnFOeHFVanRqL3dTbGc1T1FXdkNJbmxHZmV0YVlRRGdwU3NFWE05SWhLNHpwUnFqbEhoUWo4MUVCeEwiLCJtYWMiOiIwZDkyNGEwNGI0MzgyNzlhMzcwMjgxNjIwZDBlOGJhZTg4ZTgyMmFkZDE3NmUyNzllYzM4MTY3MzAxNmJlMTRlIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/150.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"105.158.48.195\"],\"sec-ch-ua\":[\"\\\"Not;A=Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"150\\\", \\\"Google Chrome\\\";v=\\\"150\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '105.158.48.195', 'my-store', NULL, NULL, NULL, NULL, '2026-07-18 18:41:41', '2026-07-18 18:41:41'),
+(119, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr-FR,fr;q=0.9,ar-MA;q=0.8,ar;q=0.7,en-US;q=0.6,en;q=0.5\"],\"cookie\":[\"XSRF-TOKEN=eyJpdiI6InJKR1JwY1d0dkZCUGFDLzU1ZTNKRWc9PSIsInZhbHVlIjoieGJaWkVDem55UjFWdGRxc0NRUEtNMndRL1RQbFRyRzZBVVNPTWFST3phT09GZlBROFBnN29NN1VKYXYvOUxHdGwzZWQyNk11S1VYRjFaNWE5UnV6eHl4NVhJUWpkdmh1VXMyQlJLYndvSWt5azJJcW9QeDROUEo0NnZlY2dxRzB6SkhhRStLUklwQnUvWTFxMGJYaWZvTk9YbzVZcU9iY0lXTzY3SVV0SEcwOGtIZ25HcCtnWlA2VURwTmxUMjFXMEpTbm10bUNPTjFmUjFBYjNiQWVtaTlDQnIyRzF0bFVRNzRLbjVSM29KVUlEbmprZjU2Z0pDODRCRlVHY0w5MW8rdDZOYWpRTVdLN2RoSEZHQlBRaE91OS9sT2NYZm1tSmlhUldQRk40R3JSQXNtdWpnSVpuUnNtMnNWdGZGeE13UUZNcitHNTNFWUc2NXQzMlloQ1FQVzQ0RVpsZnZqbXQ3Nkd3SFVacHArYSsrVjdxSGZKcStYQnVka2Y0amFVMkphMWRmbktIR0I4YVl1VVBXQXJXM1BqUFdEMGtZT09ROHYvaGVSeHpGakNHUFRhb3pYcU9mRVdDM2RaS2VDSmdiczF2QWFWL05LbkhuaTQwb3duNGVwaXdtUENhZHc0bnZXYzhnZFdUTTVJR2ZLVDNNa2I3d0xFdmtOK0VLQWQiLCJtYWMiOiJmMWIxYWVlY2NiOGM0MDk5ZmIxMzdjOTIxY2EwNmE3N2M0Yjg2ZmVjNjdhYzc3ODdhNWYwN2E0MWE1MzNkNDQ5IiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IjJJOUlzeUI1WndxYnlhUml5TmNmS1E9PSIsInZhbHVlIjoia0RuZWVvL1RoM0s2MUZPamZZVjVsblZFVG4xQWdQYXM3T09pazVKNzh2TEE1UVpULzJlY0hQaGVCL09MZ3hSVnk3UWc0QXRPelZGa1RjbzR5ckp4bVVVWEs2N0lvdXZtaC9LOHBPSEpaQUJoMDVsdkJpVVhjYnhQQ3lINGdPTWcyL2xxR1dOUlcyS0p0U2RUc0YrQkhaY0t3ek03U2xHeWo2YnJqbmQ1cmpDeW9GbFJPRzJCWGV6cUk5QUVMbTAySWxWTW9PbWlyb0IvTUk5WDJIYlpNUC93V0dCYXJmZWtYYnV0NDM5UDRsYXJwc1BCZ1JyYzFVbUhIZWRZUnNCRkpEb29ibUxqTElORmFucThRai9hZnhlK0Jtam12SWhFK042bWZQVFJkanhXUDFBVzF3d01ydWZxbENPeG5mY2Mrd29ZNHF4Rk5VbWtHc2hSZHJicjc0bnE2NUdFdVBpOFpYOVF0VUhyMGFmN1RLdlV4ZmEwRmVtZ2I3aXFVSXl4ZmNhaHYyT2xsWGZhYStOS3hyRko3Umw2Y204c09EZXFxTzNLbHB6Sk1hZXVGN2NPMVlab09pMzMyRzJnTGh6UUk4eTZYajRyOWp4K3puZUdxV0RuR3E5K0kxR2kzN2swbkdqZFFmZUlQMzhTSGFjRDhFbGJRRWRmK2VZTEtMdkUiLCJtYWMiOiIxNTdkNDE4YjVmYTk1N2JlMjg0NGEzYzMwMmZiOTBkNmE5YWE2YWFiMDc3NGNjMDNjYWU3NjMxNTlkOTM3MjllIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/150.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"105.158.48.195\"],\"sec-ch-ua\":[\"\\\"Not;A=Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"150\\\", \\\"Google Chrome\\\";v=\\\"150\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '105.158.48.195', 'my-store', NULL, NULL, NULL, NULL, '2026-07-18 18:41:48', '2026-07-18 18:41:48'),
+(120, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr-FR,fr;q=0.9,ar-MA;q=0.8,ar;q=0.7,en-US;q=0.6,en;q=0.5\"],\"cookie\":[\"XSRF-TOKEN=eyJpdiI6IjhLQWFyUUJKRTdZTCswemJTKzdTdnc9PSIsInZhbHVlIjoibHdoM3dNNk4rUGJzT2hrVk5KWUFCYkxvdm5zTFRkbTZWK2RNV2JPRkIyY25peTE4WUZYaTNTclJPbmVvR0RzQU5Gem1ZNkNKRkFYZTZscHJ6LzQ2VWRCNUl5UlhqcXVMSlhCYnZhMkxFR3dKbjVjWnlWVlIzVDlTc1hSeVZOb3diWlhiL25CWUtMQ1hqaFZkd2xXTVppTVAvSHpYM1Y1QS91cDdRVnRhMEZDU3NmWFpCMmhGUGxMU29YVGR3bFBMZldKTFdqRWRYSWU2UmdFTGQ2aGluaW9NNVlkMGJSZHVWYytYN1RzbmFCS0xESjVKd3QwK295ZHg2a2hXNklza0txUERaQ3NhZzdXbVNFclJwWTV5RGxnU2RlbWFFaGlRNklVWStsUnBSd2ZEV2x3cDY3NmRVQkpuYkFUdEdVdFdsRzNLUHFwZTc1MU5CL3daYU9hTlg2TUNkVWdsNVRyV0QyUVI3U3N3WHRIQlJRY3lmTGNZMHZjUTRqamlsRlBQMVJTYnZ0b2pFRlpncTMvUWE2bXhKRmJvU2hrU0pWSUZwcHp1YUQ5OXY1c1N1Z25nT0t6eitBeitQbVlxbHppUHZvZFN3OGRmakZmN3pyWHVSWm9NU1FqOVhySWs2OFR0VmlSMUxQMzU4ZDBlallOVGhLOVNhWHF5NkVOdVc4aWoiLCJtYWMiOiIzZTc0ZDZhODQ1OTFkYzY4YmEzMjg4NDI4NjYwYWY5ZTg2YTdjYjJjYWZmMTA1OWJhMWZiZWQ5NGRmMWU4Y2E1IiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6InFDb3hNdmRrak5vaG8rMkhlQkN1Nnc9PSIsInZhbHVlIjoiamU4MGoxZ2I3NHE5TFNiekFlUWNFUVNKZElja3FKUU4xc2FEZnE4Y01jQmlFc0Urdm5lZ1dWTzhYSHhja21QUXdXcitTdTVRSWlLRUpTNUtXSUdITjRqdkhsTkVtZHBpRStZQmtDeEZEVURha0lXaGNGMm1IQkdKcGRhSE5jNDBibEFlTlhJSjZIbnNCN2JjU0IwREtkcTZ6eWhFTWdYc0EreGw1N2UxNWgxK0o2QXF2Y0ZwLytpeFhyVWhUbmN6aldkdjViOER6THNUZStzOXgxMDNEMXRmTU0vZC9FR21HbjA5bExDQUhIWC9kOHZBRE85YnYyUERVM054bjJnMm1hSklJV2NzWkFPcVBXd2czd1hUcldxNEYrOUZTa1NCbFZaL1VHVVlMendmZzZ4TjR2ZXVFYUNzMyt6WWJROENsYUk4blo2WmZIZ25YSVVncnk4dzZpNlVCVDJqY2hGSDMxQmhDV0YwOTZUNDY1c01ITkkzaHlYMm54bWMyYXNhT0VJazQ3QTdROGg3aGp4b3QxOWs4R3k4VENLY2ltdTV5Wk9NN2twMWZKempKUHkyOURkL2p2V2FGT2dVamNyQ3dNaWZRbFhjakh4LzRKMHYwbjVBOWdZd3hIRWtQSndCNjBzZG84UTNaRUZ2SkZqd1lvTUxjZ1luQ3V1azlqeGciLCJtYWMiOiJmMzU1NWJkMzQwNzRiZGI3MDNjNzRiZmNlYjExZGUxNDc3MmVlN2E3OTVlYzdlZDg1MjVkNzczZGNmZWE4MjFhIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/150.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"105.158.48.195\"],\"sec-ch-ua\":[\"\\\"Not;A=Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"150\\\", \\\"Google Chrome\\\";v=\\\"150\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '105.158.48.195', 'my-store', NULL, NULL, NULL, NULL, '2026-07-18 18:42:04', '2026-07-18 18:42:04'),
+(121, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"43.130.174.37\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '43.130.174.37', 'my-store', NULL, NULL, NULL, NULL, '2026-07-25 02:12:00', '2026-07-25 02:12:00'),
+(122, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"en,fr-FR;q=0.9,fr;q=0.8,en-US;q=0.7,ar;q=0.6\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/150.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"41.92.101.115\"],\"sec-ch-ua\":[\"\\\"Not;A=Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"150\\\", \\\"Google Chrome\\\";v=\\\"150\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '41.92.101.115', 'my-store', NULL, NULL, NULL, NULL, '2026-07-27 01:47:58', '2026-07-27 01:47:58'),
+(123, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"en,fr-FR;q=0.9,fr;q=0.8,en-US;q=0.7,ar;q=0.6\"],\"cookie\":[\"XSRF-TOKEN=eyJpdiI6IjAyNkJTN01pQlpucU4weWNrdG5qM2c9PSIsInZhbHVlIjoiZTRicElkNndPTTlmY3MzbXhsUVgzSGZnMjdxejZMTWprMzdSUDg2RngzUWs1WlhwbWRGYUlVclc0a3VKQmhaUTVKOW13QVdUbll0WFdJQndiNWxuN0RFSXZDT2ptYzFnZFhXVXd0UDd6aGVOZzUrYnBrdzRsSy94dUtPNW9uMUlHcngyWDNJRFRPSVFDT2lyRDRTUSs5OGFTd2ROVnU2V0pRYWQ0SVVLMzJPUnlqU3VUVE1sRDA4M1hyRWJmRmtDNDBVQ3lLaDlxR0VKNkdiQUEvSXpRV29iM1p4eFVJSGlkTzhMNGFDTktvVFV6dFA1RGtwY0NEWFZaekphRG10ZlA0c2FVd3VjRzQ0TmdwbEpBakxCUzFkV2RrNDdCQkpnM3ZsN1NJaEg1MFFHS0pNVkRsMkttR0E2L3RFdExUT1kwN0RFdm5TSXpDcnlpMjU0cGgrQjl5UnlMZ3RMcVhwdDh5cUZMdmw5TFdVY3hRV1p4eVJ5eVlIUTVPL2t3SjRHOVNjQWtmYjIvK0h1cE9CSGtxaTFmQW4xQ1JxcXpnYTl5ejZoUEJXUjlCZUN0WEJ1eXlFcEl2V09HMkNLeVNITVJHOUx0NzQvc0pDNUtkc2RoYlA4emdQalRjbGZGMXZ3RDluRmJrZFM3cUJ4UjBxUENqM3ZaYW1mZ2wwWTJDUUkiLCJtYWMiOiJkODQwZDQxZDE5YzM1ZmRjZTM0YmUzMGJiYWI3NjI5YTQ4NGE0MDNmODg2NWY0NWFkNTVhNWQ5ZTE4NzI2MzU1IiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6InU2a0EvVHliVlRRYWd2S0J3Y1hiQUE9PSIsInZhbHVlIjoiR0JmQzdzRGFYVGU5UVNVMmV3UndTbFhGNHROTU9NSHVCdkY3N3A1OEpzL2lOc0ZseW1mYkF3eGU5aC9JWFN2YVh6RnpsWnQwS21EUXpKNzQ4R3MwbW83L0NjVGtyNVk5UjYyT3RObDlaQ05vdFltZDVQbmM2djkzVnNLbnVwdGpqZ3d5Q1Bvd0h6bnNtSTJxRnA1OUdsNlpLa0JkU2NzV1JOQ3Z0cHFqYTM1RmIvZ3Bnb1QvS1cyeGdZZEdrN0FreUkxem5YOERmM0c5eXhSeHhWdU8rSzBBUDBJRVFkenlXemVHU2YwRzZQUHVvamFDMW93R0lrbmw5SS9VN2twWjNjN21pK1Z3RzE5L2o1N2JLTUhqQ3pNKzlVVGY4c1A2Rmh6SnpLVGhYdVpzR091ckpKQ2xoZ1M0ZFFhZ3Q2Q256cU5NbCszWWtRMmFKeERZZm5jeEEra200K1MxK0xSdGZjTWt2NGpKUHkrZ2lsU2Z4eUdrSGlHNzQ4bXd2d3N3UHY0T2E2Q1pGeVJDMGdnNTQ0RllPNmE1aDlET2UreldqV21CNldRUnN2UUpBYmpXSHlxaTBQOUE5SEl1cUo4UXU0cGNTS3ZVdFRrTHhBMXZWYlcrYjZxd3gxMDl6aGJZNElkS0gyNnZ3OVlMQ25VU0puQ2ZZVUpnVVlzN0lhZHYiLCJtYWMiOiI5NzUzZWEwZDFhYjJjNDg2M2E0ZGQ4ZjhiYWQ2YWRlNTY2MDFlMjA4MjllYTJkOTAyZTM3YzJmZGViZTg4MjZlIiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/150.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"41.92.101.115\"],\"sec-ch-ua\":[\"\\\"Not;A=Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"150\\\", \\\"Google Chrome\\\";v=\\\"150\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '41.92.101.115', 'my-store', NULL, NULL, NULL, NULL, '2026-07-27 01:48:06', '2026-07-27 01:48:06'),
+(124, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"en,fr-FR;q=0.9,fr;q=0.8,en-US;q=0.7,ar;q=0.6\"],\"cookie\":[\"XSRF-TOKEN=eyJpdiI6InF0MFRDN3RPL0Y1OUoyd1BDWUpQcmc9PSIsInZhbHVlIjoiSjlOcDdKRWRhZk9hWlU5ZVhZMlhzWTJkN2VjZmdXOElPR3kxU3ZiaGF6QXMvcmNqcy9GeE5KaUl6Rng3S1FtQ2lFL2F5ZG9Wd0xyVkMwVCtoS1dOU1JXY24zRG1WTFIzS3Z2ZzgvdXBlUlRETFAwandabEdIRlJLTmNRbS9qK2x1WkNsdW1sR21tdGNGaGdGN3pUNXZiSlZZWlZ0VU9GWEJtOXRBSkYyTjJEanI5dEdXUmZLenRMeU1FWE5DL2NvZlVMWWZ1RU1HNnFHcDNLWm9OZEc3eVdJcmtHQ1NCWEYrYUdPclZMc1lMQUgzTDlNVTJDd1pBYmVtbVlnaVh4Y2RRclN6TEJFRGZpQzA4VUtWMmlmeEROcVJKcFZyVGJvSDVLelFQWjlkemlna1kybzR0aWxhMUE0MjlCc2tia0dmaXhtSkNhM0RZRmJEU0NVcmRVS3E0S0M2YWkyaEV3QTc3ekk1VzFZZzY4VkZoZDlFMmY1ZENCUXBKSVdibnBtL05XQ0xoTkI5cUgvbHB2TlNGTlZzY2tVUTFyc1FvL2crUloweStMSkhVRVN3ZXdCZUc0Uk1JL2Q3YVEyWFlHNU5FQUQvZUtSSmNOckU1SXdTSjFaZGZyQlBUVm00TUttK2tQOTlBMzJSUzUyTkNrcjJzOUo2RzdTa0FDeGNyZFoiLCJtYWMiOiIyZWE1MjZhMTk5ZTY2M2Y2YmZhY2JiZjVhMmRjMzU2YzAzMTNlY2Q1ZTE1NTgyZDQ5NjM0ZWRlNzQ2OTE3ZTUyIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6InFQSDFTdzJSVkhFeWhKckROUHZoSWc9PSIsInZhbHVlIjoiRVFIamZ5NHcraTc4MW5PT25DQm4xMWRyeXpJVXJXMmc5dDVhVkx2ZDBGWUdkR0xES3dMZEtuK1kwNGtIQ3J5Q2dBY1pzTXVMUndXTHRLWW5PNHZpb1BoU0ZXZ3lmMXRXWUVrUzVEVjJJd2YxTnZkSytwZDAxM1hrVG1wZzAzbnRSaUpTZ0JQeDBEbVFWUTUwTVRKdkRrRW52bUZacmNXaTArZmhLYW9Fa2U3WFhqVTdRQ3p4QW1SYmZtN1BWMnJrV25KQjNTT3ZneVJTeVBJUDJWWjlyYmpFb0JjdW5PRmJZczMzKzBNMEo0bVVNU3BZNmRxOVJ2b2VxcFlXblVjaFhMR243VjVGT1dyaG1IRVpQanJsNkpXYTNkVlBPeXdqekt4UlRrRVFtL2U1aVc5SnYxN1ZqV29jVDhkbHBaRjhleUU5ZXRnKzN6MUV0WDBBcllHc1Aybk5ndUJSRG1VMXIyZ2V1VEMyTGlZemo1eGs4NjlmaEQwSDBkc2M1Z1l1UVpsZVhrcllsOVQ4T0NmUzVibGNuRDJiMWJyNkpHREQxRmxORDZTRzJhS2p6MEtJM2ppR1ljQk9NNGcrQ2lnT2VKcGdSNE0rS1poMFhDNGhmb3FqcmdocDlpNC9hM2FoR1RWZms4eGRRMUpuYlFoMFZQK2VCVWJOVENqUzg4WjAiLCJtYWMiOiI0YWQ0YjQ0MzUxZTc3ODVmNTEwZjdjMDY0ZTI5Yzk1ODAyYzNiZDVhMmVjOGUzYzQxZmNlZTA0ZTg3YmEzMGY3IiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/150.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"41.92.101.115\"],\"sec-ch-ua\":[\"\\\"Not;A=Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"150\\\", \\\"Google Chrome\\\";v=\\\"150\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '41.92.101.115', 'my-store', NULL, NULL, NULL, NULL, '2026-07-27 01:48:11', '2026-07-27 01:48:11'),
+(125, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"en,fr-FR;q=0.9,fr;q=0.8,en-US;q=0.7,ar;q=0.6\"],\"cookie\":[\"XSRF-TOKEN=eyJpdiI6IkpWb1NnYnkvdVZaOVllbnE3UHc5bUE9PSIsInZhbHVlIjoiV3dVbTZVNmpHcGwrTGJXYktnV3g5aXRoTFI4STg4TGZwaTJSdEZkd1dJVXJWL1FvWGFtYzdkUjZ6UVU2NWIvcVFyL1RxZS9KbkozYVJ1N3ZvbEhqaE9DV3ZmWGNFN3pDai9pYUZ4R0NjSE9GRUROblJmWllMckJFamFJTEU4cFlyR1BWZE83UWhYY1psSFJVQUcxckZaZXZ1UEdxMVV4TVJzTjlLQ3VHREZaa2ovSzdTNTFWUHphYm4yTWNKYkU4c2l0eUpsWTFjemxOSzFkTU1pdi9rcnkrWG1pbWRtRHQ2UTk3aTk0UGdQVEROamhNTWpsL0wreDZsQWo1WEFVT29QT3l5S0R1SjNvV0tKRFdYM1VReHNnQnNRaG04NUt0NjdSTkpIQm9BQ2tvT1ZBSkZZanN1RktnTE95UFhWbEZMRVhORzZvVGtDbU4vOWJkSzBFR0hRR3p1c0I2SVpUR0JCUElFTFRXeEFCYWlVd1NhZzFzWE1hVlNqOG1oZGFjVVRBR3VMMVdWcUpxRTZMNWo3V1hpRlhoNFdvMWtZV0cvallhL0lxbUVjNHBzL3cySWFKNk1XYTVEUldoKzg3cnlHN0R2aG56MzNjc0pRRzdwcWh5QnM4VnBrbEtTcE40K2oyRXZDM2FJQVg0T3hSR3ZCdDNJQ2dFMEw3NnM2T1oiLCJtYWMiOiJhOTJlZTM4MzY1NjgzNWUxNTNjNGI5ZjdjNTkwOWU0Y2M2NjgwZmY3NmQ5NzY4Yzc2MjRlMjQzYWQ3OWRiODY2IiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6Ik43bi9lK1RPOW5VNDZBSDlDaXNLRFE9PSIsInZhbHVlIjoiMjZrc3RUaW55Mlcybkw1ZmNtNG1HSVBRS3oxSlZTaHVqSTZ1ZkgyNU54cVlXck1VV095Qko2c3E0N1hUd3NiWFhNK2xVMGhraFJpcXJFR0hQYVhzK2hBNmpWT1l0em5uZnJqRkUyZHgzRE11b2lwZlJJS05nRDJ1U2dhbXNuUzhPTHIzSGU2bFRjQTd1c1J0SUNBU0lHejFxSVVxOGtWUkZwUFJUYjNORU96UXB1OGRXai9PNlVKR1RWdEJNSWhOS2hMRThTRDV2K0M2di9DZDlmclRPbXpEdVVqWkk5T3kvU1h2V1BFMDFmbWk1ZWhJWWVrL2tJcGJ2Ly9XL0R1VWdzRGgvcmliWm9qYWhBN2M3bWxpV3k1QnVUeTZha2hlclJVM3VYTmViMHVDd29DUlZQQTN6cVMxMTFmYUxvZTZlckpIYVFsUUl4RTYxSWhlVXNmMW9DWmE5dGN5ZGVIVWd5U1hlUDM3QnYraWhvL1diV2g5UFh1Y0ZRT2lwajJ5aFI0ekQ5R3BMbWNOL0Q3WFg4cG1tVkpXYkhrQ0pYMklzaVR3d1hpRWlZVkFxWFlYMmd5eVg4Y2dwRUVreWhmT1FJYldxMTMvaytXb0N4UUpWQU43UHBRaXNWdzVvMVZiYW1qWXQ1djJ0dmpjb3BoNXhlZU9RK1psOG5HR2ZuREgiLCJtYWMiOiIyNTAzMDE0ZmZhYmUzMGJjOTMxZjRlMjE3MmM4NGMxMmFjZDJjY2EwMGQwNDNjNWVhMzBiYWRjMjcwOTQzM2I4IiwidGFnIjoiIn0%3D\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/150.0.0.0 Safari\\/537.36\"],\"x-forwarded-for\":[\"41.92.101.115\"],\"sec-ch-ua\":[\"\\\"Not;A=Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"150\\\", \\\"Google Chrome\\\";v=\\\"150\\\"\"],\"sec-ch-ua-mobile\":[\"?0\"],\"sec-ch-ua-platform\":[\"\\\"Windows\\\"\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-site\":[\"same-site\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-dest\":[\"iframe\"],\"priority\":[\"u=0, i\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Chrome', '41.92.101.115', 'my-store', NULL, NULL, NULL, NULL, '2026-07-27 01:48:23', '2026-07-27 01:48:23'),
+(126, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; ClaudeBot/1.0; +claudebot@anthropic.com)', '{\"accept\":[\"*\\/*\"],\"accept-encoding\":[\"gzip, br, zstd, deflate\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; ClaudeBot\\/1.0; +claudebot@anthropic.com)\"],\"x-forwarded-for\":[\"216.73.217.8\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '216.73.217.8', 'my-store', NULL, NULL, NULL, NULL, '2026-07-28 21:09:16', '2026-07-28 21:09:16'),
+(127, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/136.0.0.0 Safari/537.36 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/136.0.0.0 Safari\\/537.36 AppleWebKit\\/537.36 (KHTML, like Gecko; compatible; bingbot\\/2.0; +http:\\/\\/www.bing.com\\/bingbot.htm) Chrome\\/116.0.1938.76 Safari\\/537.36\"],\"x-forwarded-for\":[\"207.46.13.116\"],\"from\":[\"bingbot(at)microsoft.com\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Chrome', '207.46.13.116', 'my-store', NULL, NULL, NULL, NULL, '2026-07-29 06:39:17', '2026-07-29 06:39:17'),
+(128, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,image\\/avif,image\\/webp,image\\/apng,*\\/*;q=0.8,application\\/signed-exchange;v=b3;q=0.7\"],\"accept-encoding\":[\"gzip\"],\"accept-language\":[\"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"pragma\":[\"no-cache\"],\"user-agent\":[\"Mozilla\\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/13.0.3 Mobile\\/15E148 Safari\\/604.1\"],\"cache-control\":[\"no-cache\"],\"x-forwarded-for\":[\"43.165.65.117\"],\"upgrade-insecure-requests\":[\"1\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'iPhone', 'OS X', 'Safari', '43.165.65.117', 'my-store', NULL, NULL, NULL, NULL, '2026-07-30 20:33:47', '2026-07-30 20:33:47'),
+(129, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://www.mobi-nardo.com/', '[]', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15 (Applebot/0.1; +http://www.apple.com/go/applebot)', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,*\\/*;q=0.8\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"accept-language\":[\"en-US,en;q=0.90\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/www.mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/17.4 Safari\\/605.1.15 (Applebot\\/0.1; +http:\\/\\/www.apple.com\\/go\\/applebot)\"],\"x-forwarded-for\":[\"17.241.219.57\"],\"sec-fetch-dest\":[\"iframe\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-site\":[\"same-site\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'Macintosh', 'OS X', 'Safari', '17.241.219.57', 'my-store', NULL, NULL, NULL, NULL, '2026-07-31 07:50:10', '2026-07-31 07:50:10'),
+(130, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15 (Applebot/0.1; +http://www.apple.com/go/applebot)', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,*\\/*;q=0.8\"],\"accept-encoding\":[\"gzip, deflate, br\"],\"accept-language\":[\"en-US,en;q=0.90\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\\/605.1.15 (KHTML, like Gecko) Version\\/17.4 Safari\\/605.1.15 (Applebot\\/0.1; +http:\\/\\/www.apple.com\\/go\\/applebot)\"],\"x-forwarded-for\":[\"17.246.23.76\"],\"sec-fetch-dest\":[\"iframe\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-site\":[\"same-site\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', 'Macintosh', 'OS X', 'Safari', '17.246.23.76', 'my-store', NULL, NULL, NULL, NULL, '2026-07-31 07:55:26', '2026-07-31 07:55:26'),
+(131, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', '{\"accept\":[\"text\\/html,text\\/plain,text\\/xml,text\\/*,application\\/xml,application\\/xhtml+xml,application\\/rss+xml,application\\/atom+xml,application\\/rdf+xml,application\\/php,application\\/x-php,application\\/x-httpd-php\"],\"accept-encoding\":[\"br,gzip\"],\"accept-language\":[\"en\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; MJ12bot\\/v1.4.8; http:\\/\\/mj12bot.com\\/)\"],\"x-forwarded-for\":[\"75.119.155.172\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '75.119.155.172', 'my-store', NULL, NULL, NULL, NULL, '2026-08-01 12:49:39', '2026-08-01 12:49:39'),
+(132, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:151.0) Gecko/20100101 Firefox/151.0', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,*\\/*;q=0.8\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64; rv:151.0) Gecko\\/20100101 Firefox\\/151.0\"],\"x-forwarded-for\":[\"196.117.107.187\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-dest\":[\"iframe\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-site\":[\"same-site\"],\"priority\":[\"u=4\"],\"te\":[\"trailers\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Firefox', '196.117.107.187', 'my-store', NULL, NULL, NULL, NULL, '2026-08-01 13:54:25', '2026-08-01 13:54:25'),
+(133, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://gestion.mobi-nardo.com/store/my-store', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:151.0) Gecko/20100101 Firefox/151.0', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,*\\/*;q=0.8\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7\"],\"cookie\":[\"XSRF-TOKEN=eyJpdiI6Ik1XTDErcUVSVHB1YVBicjA0aVhJaGc9PSIsInZhbHVlIjoiamRuejJvamkvZmh3bkp0QjZyMnl5amJvN29xekdwVmtWWVAwUTBLaHU3YzhJbldjSlFkRjMxc0s5cWVTNWRobjdnUk1lWmhMS25ZNGJCTlhsZGxMSFFYQzdqWERaanE4RWhYRDFYd254QVZ4S1I3b0ZhRTQ3Yko2L2NUU0FEWDQ2Zm9JR0M3SUJlQ0QzbHF0R252eXJNSkg2c2t0bHhhM21LK3RGZzN5STdZS2VEOU9RNzVndXdNK1VXK3g4dW1ranVyUjR5QVBEWVZyclRXaWx3UGp6OVVRWDRaaWVYMm9MRlg1blBOVlZBWjRNZ2U5MU5abnBFWEh0d1FmQXNDU1RTeTFmSzU1bXMyQVdTbUs1MXlIUHM5YTRNb21rejhsVnVrMzhIa0ovaVYyOHEyTmM0UFJLR1U2QTArR25XRmRxNVp6dHpoSEFEVnRsMzd0K0RxRmM1RndtZmNyUEJlZ2VEakhucmM4MkRNTlpYejQyOFp4MEVyQ25RRUNWNEhIcVFjVUlob3J4ZEtaYUxNKzN5VUl3Z2tjVksxQUVqOGJRL0VLTUZwSkg2MnFybFY1VzFIdFZKMDJiYWtSelVlcW94RXBwdkx0NVFadmFXc0ExVzU0M1pNNU5tV2JPUG1vSWkzSmpxNW52aHh4MXpDOEZqcFhzYk01RGZ4YUcxRE8iLCJtYWMiOiI5YWJlODZmNWFiZmNhYjliNzE0ODM4NjFlZGY4MzllYzgxYjRkMjBkODY5Y2RjMDRhNTdkYTNkZDEzMzFmODg3IiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6ImZYWGh4V2JSZ0JVYldGTHRLSWtielE9PSIsInZhbHVlIjoiMGVNaCtjeVdhS0lGQnhybEJCOXBsUkJWZWo1MXdFWGVoUktVYzg1Vk9VVHRnUERjWitLZUtvTFFMUWU3eFZuU1QwVjJRQldDV2c5YWxUWmtSZUtxaWZVVEwwYTJLc2tTQjl3RGRKY1M0SjQ4QnQweFZLOWJzVGExODIvVk9zR092bEhuOEtCUVd6QkxpVHVmekZXOGRseldnQklmUWlzbVZsbXgyNVZqM1grRHpua1lPUDhpZXg0cDZGZEYvZFpGeEFIU3p1Vlo1Vkd1TXpUM0RLWTZ5dzkxdyt4NjZ4SElKMEFPS0pVWnhnRUt3bUpLOXFOalBTbXJQOGJoaFc0RkJRT2dnblhXMkF3RjdXVzAxQzcyU1NqSDA1aDJRSm5RbjZKdzg5WGcvWVZIVS8rZDUxVGRDa05Uem5INGF4aThjeEsyOGs5aDZSQUk1TFhSVVhCL2NYVktZNXpNUC9WRWUraW5yQm9ZaHRCeHpSdzlDWlFQN2dtME9yeVBBVUZuSnV1Z3VXNll0cjRLbUpETnNTWHl0SU9ocURuMXF2RnF4WGFDL2ZIckF5OXRMTUxQVWVkTk0rUGVRM1pvL0F1MVk2SGMxNGxuZXczQUJTM3QvaVJtNGNaaG4xWFZtZ3VWdGp5Q1FkT2xuYVZiTS9mVWo3ckZ1ME93QWh4SUN6VG8iLCJtYWMiOiJlMGIxYTZhZTgyOGY3ODhmNjRhM2Q1ZGVkN2VlNWMzODYwMjA2ZGYwNjQ1YWYzZTIyOWQxZWI1M2ZlM2VmYjY4IiwidGFnIjoiIn0%3D; cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/gestion.mobi-nardo.com\\/store\\/my-store\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64; rv:151.0) Gecko\\/20100101 Firefox\\/151.0\"],\"x-forwarded-for\":[\"196.117.107.187\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-dest\":[\"iframe\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-site\":[\"same-origin\"],\"sec-fetch-user\":[\"?1\"],\"priority\":[\"u=4\"],\"te\":[\"trailers\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Firefox', '196.117.107.187', 'my-store', NULL, NULL, NULL, NULL, '2026-08-01 13:57:21', '2026-08-01 13:57:21'),
+(134, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:151.0) Gecko/20100101 Firefox/151.0', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,*\\/*;q=0.8\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7\"],\"cookie\":[\"XSRF-TOKEN=eyJpdiI6IlFCQTVDSlZXRlhucUYyeUN6ajY2MHc9PSIsInZhbHVlIjoibUxyNzJjOUhCYW1VdzIrZ2kreENFR0R2cU1aV1FVbEJvOE80RHh0Y2h2dmxNMjVKVktoUjBQcmJHVS9sMVJaZGZyTzVpTGd1UldEQkp4b0FFUTJCTHBzdmU4Zkh2QU5TaDliSGNoQjMvaUMwODNwQ2ZBMGxqWVBUQnRXSWNkVm9sNjBYdWMraG5sYU9FaFRrbmQ4RnFjTDBXMndHTmNXa3ViUUJHWE96ZUNVYUFhWWV0SjdaRVdLZ29vTW05TXNoaVpKcVMzQ05PYWhFUWVsb2l6NTFKam9MblpaOVpBSGNxaXJHcjRseW9YdWt6aFYyVTRKMHZxSEVWbnZiVTZqVWZNcWtpZktXK3pkR3lpbGljL1h5eFc4NVgvVEE0Z3RwbzhnK1lVS0dpcVhiMnd1MUpDcG1leVBmQU84ak5OaFVLUGZiTkJnTTR5M3RxUWVGc21GVlZYaHo4WENKRllxYjRldVNscVBxTmFtb25XTm5hTSt1YnJkbE84OUJYZThrVExPKytuTDhkYW5pak0reVR2d3dRNEVtbUVKU2dReit2d3BKL1NNMHpVL1VaSk8rUGdndXQ3Z3VuRGxocnExMUFaQmtVQjhBVEtud3hQWlpoME8rVytnY0NpMS9CK1NuaFhZdG93ZHZDWll5aTY4amI4aU5tdVMrNW1td1lnZ20iLCJtYWMiOiJmNDkxNTU0ZGUwMDNhMDllMzFkZjcyODMzM2YwN2FhZDM3MTJhYTljZjFhMGE3MzgyOWFhMmM1ZTc2MTI3YzdhIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IlFHc0JhWUJYRXE1WmoranhJd2k1cHc9PSIsInZhbHVlIjoib1MzYTBySWNnM0R4Rzl4YUNBcGZNb09TdkNETk90OGJNMVNjUmdZWkUwK0lqWGkxbGZ0NDhGUFdhZFNncjJ2QVpPQVh5OHhZVmpENG5MWXJWSW9IbUZVcFFqQzV1VGhZK1IzOFhlMGFubnE3Ylp6bEhlQ253SDFuYkJTeVV3RWlSUUxrZFc1S21TZ0FlY05SVnFLa3U4c2pGZytHWE54U3dVZ2pPSndGVzQ1OUl4dkI5blNJc2JISEVKb0VWSkVTM2FZd1hXWXZWSUxmd05YMGsxWHMwSTZFZFlXNUptK1o5a3JJUytMdG5lNzVaZXV6S20ybzRIZEpOQ1hJc1ZWRE4wMENQU1hONitNYkhEeGRxN3NZMllnM2F2T1llYUMwS2JrNXZnRWxaTnlMdjJYaU8yZVRSd2FTMFpSOTdNVmt3ZVpvZTM1S3ZKM0xSa3RDenBKTkovOWh2NUhmVjZmYWNucHVnQS9LRzg3NnZ5NFdXLzJYYi9PTzJPYUF5VkZNcTlRN3VySmZrcUpzSVIyQXNIcTJ4VHNlT1g4OEc1QmdVbnFaQUwwTGVFVW8xbkI5akdvMWVxaGd1Q2JUWkg2WXpMVXAzM3NqTDhFYi9ycmcvVjVSYVc2TC9hSC9sL2ZLZCttZVpqZ0wwZGdwQTJvUnNEUW5IZGZ5TDBvS3J0TUMiLCJtYWMiOiJlY2M3YjNiYzk2NWNlMWFhZTU4ZDk0NGZkNDU2MDY2Mjc3ZmUxYmJmN2NiMGIwMzhiMGNjNDFiODk2NGE3ZDMwIiwidGFnIjoiIn0%3D; cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64; rv:151.0) Gecko\\/20100101 Firefox\\/151.0\"],\"x-forwarded-for\":[\"196.117.107.187\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-dest\":[\"iframe\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-site\":[\"same-site\"],\"priority\":[\"u=4\"],\"te\":[\"trailers\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Firefox', '196.117.107.187', 'my-store', NULL, NULL, NULL, NULL, '2026-08-01 14:27:19', '2026-08-01 14:27:19'),
+(135, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', 'https://mobi-nardo.com/', '[]', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:151.0) Gecko/20100101 Firefox/151.0', '{\"accept\":[\"text\\/html,application\\/xhtml+xml,application\\/xml;q=0.9,*\\/*;q=0.8\"],\"accept-encoding\":[\"gzip, deflate, br, zstd\"],\"accept-language\":[\"fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7\"],\"cookie\":[\"XSRF-TOKEN=eyJpdiI6IjFnanNUQjBMU0VtTldmNjdqTmgzaEE9PSIsInZhbHVlIjoiKzZmUEtRdzBobU52NHA4SnpQcUZPZmdsdWo5WUs1RHFxeEhad0xpWlJCakZkLzNLMUFKMDFnUEJ1NFp6YzBicmRWWXEvN0orLzk0MlRaUTFYbXE5TURFY2xGOXJhYlFJNTUrOUpJeGk3bEllaGJxTldvazh6MmdnQUt0M3orU3ZjSUYyN0xOSStXbUxrTUZzL1oyeUJzS1FLbHdEQUJMMW5qYmcwYXEwMmp0YVlqdFlHL0NWTnE2OTZ4U1U0VDVvZ3M2cDIyWm9XMDRvRTQrTklNTEw3TjB4b1dXWmsrcE5BellYYkEyUGVEa2xPTVN0U3hLYk9YZVJWQkR0ZVIydVB3dmt4L2pQNi9XT3VGalJWOHMzdlNVdXdOUm5HcEJtazZMSHZ2RXZFSE5XYjhtSHh4Y2FaSHZ4REl3RzJtV0x5bmIySWVFK2Z5S1kvc0xIZnpMcitlTWVBMGlDQzRGdlJ5Z1RCZXVEYlR2aUJYZENmc3VCVlBWK2pHTmdEbUNjVEhuaXF5bWYxZG1PdUJSQzhSM1MzdjlwaytSV29JbEUxVytWUEsyRm5wTFpIYUl1YTVmMEJNZ0x1N0R2cGs0NnU2MmJBdEE5Rk1pQ3h0YnRCNjhoZ3RBbG5CdTVqTFY2MTlTZFVpUVRhSW03QjgrWTRwUHg5OEpzL3hzVDV6U2MiLCJtYWMiOiI2MmMyOTU0YTIzYTA5OTU5Yzc4MjFjYjI5YjZmMThmZjE5MTAwY2U2NWIxMDA0OTQ1NTczYWMyYjQyZmI2N2ZiIiwidGFnIjoiIn0%3D; gestionmobi_nardocom_session=eyJpdiI6IllXM1J3Ymx4d1NuRkFXMnI1STVRc3c9PSIsInZhbHVlIjoiZWgxUDY1TldBS3ZwZ1JUaE1PbjBKdUZDbVZVMVB6UzNHdjdROTJMejVPL0NJU1o2Sm8wWVVLWHp1NDl1NXlYM0lXaEZjMjkvRGUwSEtIa3ZkK2JVYko2S3JKSUhMaEJDOWpJWExVM3Q4MlhzNjVaU1VJR0JFV3NUZFIxcGk4U3lzRktCR2N6bEE0MFdXa2F3RFlMcjRwQ0E3ZHQ4M0N4akxRSXJxeFNranRTeXIyVWlQTzRQTW9kb3R4RytDWXJrNzhaYytpY05ROFhnalJKdzRSZUhjcDh6cndQSXA0eDVLSnlDdDREZ2s2RWVQVjQxSmxnZ2dTNGdkWnRmMmZCYy92TUNzZ2lVRmk0c0ZTQlVUSmpJczlXU1VmRTNxUVliWW1ldTMvQjFBeGRNNWd6bjBOdEtOL1hUb29qMmNUMDVlYmcxUlBpdTk4dnF5Yi9iaFoxWHNzbnVFa3Zpam01US9iMGxxNnZDZ2ZTNmoraGpnN0tqT2czckszM1kxaFlCYitCcnprTExOdzJUTlVTajV0TzlEaWFmRWcxeGM4QkVHVVU1ZEE1SVhlODBZYVh0ZktweXBEZnJBRllFL2VsWGs4dGJSemk4Q25DbjJkc3hvVCtWQ1BlSm0xN0hObHVLbTlTeVU2U3ExVXdpN08yMXBKRHdGVzJFU0lwK1lHMnUiLCJtYWMiOiI4ZjQ0NjAzZWI1ODkyYWY2Zjg3YTUwODBiM2MyN2JiMjY0ZTU3NzMwMThkZGM3NjM5OTU2ZDhmMWZjMzVjMGM0IiwidGFnIjoiIn0%3D; cc_cookie={\\\"level\\\":[\\\"necessary\\\"],\\\"revision\\\":0,\\\"data\\\":null,\\\"rfc_cookie\\\":false}; cookie_consent_logged=1\"],\"host\":[\"gestion.mobi-nardo.com\"],\"referer\":[\"https:\\/\\/mobi-nardo.com\\/\"],\"user-agent\":[\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64; rv:151.0) Gecko\\/20100101 Firefox\\/151.0\"],\"x-forwarded-for\":[\"196.117.107.187\"],\"upgrade-insecure-requests\":[\"1\"],\"sec-fetch-dest\":[\"iframe\"],\"sec-fetch-mode\":[\"navigate\"],\"sec-fetch-site\":[\"same-site\"],\"priority\":[\"u=4\"],\"te\":[\"trailers\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', 'Windows', 'Firefox', '196.117.107.187', 'my-store', NULL, NULL, NULL, NULL, '2026-08-01 14:33:58', '2026-08-01 14:33:58'),
+(136, 'GET', '[]', 'https://gestion.mobi-nardo.com/store/my-store', NULL, '[]', 'Mozilla/5.0 (compatible; SemrushBot/7~bl; +http://www.semrush.com/bot.html)', '{\"accept\":[\"text\\/html, application\\/rss+xml, application\\/atom+xml, text\\/xml, text\\/rss+xml, application\\/xhtml+xml\"],\"accept-encoding\":[\"gzip,deflate\"],\"host\":[\"gestion.mobi-nardo.com\"],\"user-agent\":[\"Mozilla\\/5.0 (compatible; SemrushBot\\/7~bl; +http:\\/\\/www.semrush.com\\/bot.html)\"],\"x-forwarded-for\":[\"85.208.96.197\"],\"x-forwarded-proto\":[\"https\"],\"x-https\":[\"on\"]}', '', '', 'Mozilla', '85.208.96.197', 'my-store', NULL, NULL, NULL, NULL, '2026-08-02 07:44:09', '2026-08-02 07:44:09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `webhooks`
+--
+
+CREATE TABLE `webhooks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `module` longtext NOT NULL,
+  `method` text NOT NULL,
+  `url` text NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin_payment_settings`
+--
+ALTER TABLE `admin_payment_settings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `admin_payment_settings_name_created_by_unique` (`name`,`created_by`);
+
+--
+-- Indexes for table `blogs`
+--
+ALTER TABLE `blogs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `blog_socials`
+--
+ALTER TABLE `blog_socials`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `brands`
+--
+ALTER TABLE `brands`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `chassis_numbers`
+--
+ALTER TABLE `chassis_numbers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `chassis_numbers_chassis_number_unique` (`chassis_number`),
+  ADD KEY `chassis_numbers_chassis_number_index` (`chassis_number`),
+  ADD KEY `chassis_numbers_variant_id_index` (`variant_id`);
+
+--
+-- Indexes for table `chassis_orders`
+--
+ALTER TABLE `chassis_orders`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `chassis_orders_order_number_unique` (`order_number`);
+
+--
+-- Indexes for table `chassis_order_items`
+--
+ALTER TABLE `chassis_order_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `chassis_order_items_chassis_order_id_index` (`chassis_order_id`),
+  ADD KEY `chassis_order_items_chassis_number_id_index` (`chassis_number_id`),
+  ADD KEY `chassis_order_items_variant_id_index` (`variant_id`);
+
+--
+-- Indexes for table `coupons`
+--
+ALTER TABLE `coupons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `customer_debts`
+--
+ALTER TABLE `customer_debts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `custom_domain_requests`
+--
+ALTER TABLE `custom_domain_requests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `email_templates`
+--
+ALTER TABLE `email_templates`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `email_template_langs`
+--
+ALTER TABLE `email_template_langs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `express_checkout`
+--
+ALTER TABLE `express_checkout`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `financial_flows`
+--
+ALTER TABLE `financial_flows`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `financial_flows_flow_category_id_index` (`flow_category_id`),
+  ADD KEY `financial_flows_chassis_order_id_index` (`chassis_order_id`),
+  ADD KEY `financial_flows_date_index` (`date`),
+  ADD KEY `financial_flows_type_index` (`type`);
+
+--
+-- Indexes for table `flow_categories`
+--
+ALTER TABLE `flow_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `join_us`
+--
+ALTER TABLE `join_us`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `join_us_email_unique` (`email`);
+
+--
+-- Indexes for table `landing_page_settings`
+--
+ALTER TABLE `landing_page_settings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `landing_page_settings_name_unique` (`name`);
+
+--
+-- Indexes for table `languages`
+--
+ALTER TABLE `languages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `locations`
+--
+ALTER TABLE `locations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `model_has_permissions`
+--
+ALTER TABLE `model_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indexes for table `model_has_roles`
+--
+ALTER TABLE `model_has_roles`
+  ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `page_options`
+--
+ALTER TABLE `page_options`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `pixel_fields`
+--
+ALTER TABLE `pixel_fields`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `plans`
+--
+ALTER TABLE `plans`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `plans_name_unique` (`name`);
+
+--
+-- Indexes for table `plan_orders`
+--
+ALTER TABLE `plan_orders`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `plan_orders_order_id_unique` (`order_id`);
+
+--
+-- Indexes for table `plan_requests`
+--
+ALTER TABLE `plan_requests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `SKU` (`SKU`);
+
+--
+-- Indexes for table `product_categories`
+--
+ALTER TABLE `product_categories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_parent_category` (`parent_id`),
+  ADD KEY `fk_brand_category` (`brand_id`);
+
+--
+-- Indexes for table `product_coupons`
+--
+ALTER TABLE `product_coupons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_images`
+--
+ALTER TABLE `product_images`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_taxes`
+--
+ALTER TABLE `product_taxes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_variants`
+--
+ALTER TABLE `product_variants`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_variant_options`
+--
+ALTER TABLE `product_variant_options`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchased_products`
+--
+ALTER TABLE `purchased_products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rattings`
+--
+ALTER TABLE `rattings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `referral_settings`
+--
+ALTER TABLE `referral_settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `referral_transactions`
+--
+ALTER TABLE `referral_transactions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `referral_transaction_orders`
+--
+ALTER TABLE `referral_transaction_orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `role_has_permissions`
+--
+ALTER TABLE `role_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`role_id`),
+  ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `settings_name_store_id_created_by_unique` (`name`,`store_id`,`created_by`);
+
+--
+-- Indexes for table `shippings`
+--
+ALTER TABLE `shippings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `stores`
+--
+ALTER TABLE `stores`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `store_payment_settings`
+--
+ALTER TABLE `store_payment_settings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `store_payment_settings_name_store_id_created_by_unique` (`name`,`store_id`,`created_by`);
+
+--
+-- Indexes for table `store_theme_settings`
+--
+ALTER TABLE `store_theme_settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `subscriptions`
+--
+ALTER TABLE `subscriptions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `template`
+--
+ALTER TABLE `template`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- Indexes for table `user_coupons`
+--
+ALTER TABLE `user_coupons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_details`
+--
+ALTER TABLE `user_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_email_templates`
+--
+ALTER TABLE `user_email_templates`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_stores`
+--
+ALTER TABLE `user_stores`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `visitor`
+--
+ALTER TABLE `visitor`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `visitor_visitable_type_visitable_id_index` (`visitable_type`,`visitable_id`),
+  ADD KEY `visitor_visitor_type_visitor_id_index` (`visitor_type`,`visitor_id`);
+
+--
+-- Indexes for table `webhooks`
+--
+ALTER TABLE `webhooks`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin_payment_settings`
+--
+ALTER TABLE `admin_payment_settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `blogs`
+--
+ALTER TABLE `blogs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `blog_socials`
+--
+ALTER TABLE `blog_socials`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `brands`
+--
+ALTER TABLE `brands`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `chassis_numbers`
+--
+ALTER TABLE `chassis_numbers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+
+--
+-- AUTO_INCREMENT for table `chassis_orders`
+--
+ALTER TABLE `chassis_orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1858;
+
+--
+-- AUTO_INCREMENT for table `chassis_order_items`
+--
+ALTER TABLE `chassis_order_items`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1800;
+
+--
+-- AUTO_INCREMENT for table `coupons`
+--
+ALTER TABLE `coupons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `customer_debts`
+--
+ALTER TABLE `customer_debts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `custom_domain_requests`
+--
+ALTER TABLE `custom_domain_requests`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `email_templates`
+--
+ALTER TABLE `email_templates`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `email_template_langs`
+--
+ALTER TABLE `email_template_langs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+
+--
+-- AUTO_INCREMENT for table `express_checkout`
+--
+ALTER TABLE `express_checkout`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `financial_flows`
+--
+ALTER TABLE `financial_flows`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `flow_categories`
+--
+ALTER TABLE `flow_categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `join_us`
+--
+ALTER TABLE `join_us`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `landing_page_settings`
+--
+ALTER TABLE `landing_page_settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT for table `languages`
+--
+ALTER TABLE `languages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `locations`
+--
+ALTER TABLE `locations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `page_options`
+--
+ALTER TABLE `page_options`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pixel_fields`
+--
+ALTER TABLE `pixel_fields`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `plans`
+--
+ALTER TABLE `plans`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `plan_orders`
+--
+ALTER TABLE `plan_orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `plan_requests`
+--
+ALTER TABLE `plan_requests`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `product_categories`
+--
+ALTER TABLE `product_categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT for table `product_coupons`
+--
+ALTER TABLE `product_coupons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_images`
+--
+ALTER TABLE `product_images`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `product_taxes`
+--
+ALTER TABLE `product_taxes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_variants`
+--
+ALTER TABLE `product_variants`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+
+--
+-- AUTO_INCREMENT for table `product_variant_options`
+--
+ALTER TABLE `product_variant_options`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `purchased_products`
+--
+ALTER TABLE `purchased_products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `rattings`
+--
+ALTER TABLE `rattings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `referral_settings`
+--
+ALTER TABLE `referral_settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `referral_transactions`
+--
+ALTER TABLE `referral_transactions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `referral_transaction_orders`
+--
+ALTER TABLE `referral_transaction_orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `shippings`
+--
+ALTER TABLE `shippings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `stores`
+--
+ALTER TABLE `stores`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `store_payment_settings`
+--
+ALTER TABLE `store_payment_settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `store_theme_settings`
+--
+ALTER TABLE `store_theme_settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `subscriptions`
+--
+ALTER TABLE `subscriptions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `template`
+--
+ALTER TABLE `template`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `user_coupons`
+--
+ALTER TABLE `user_coupons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user_details`
+--
+ALTER TABLE `user_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user_email_templates`
+--
+ALTER TABLE `user_email_templates`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `user_stores`
+--
+ALTER TABLE `user_stores`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `visitor`
+--
+ALTER TABLE `visitor`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+
+--
+-- AUTO_INCREMENT for table `webhooks`
+--
+ALTER TABLE `webhooks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

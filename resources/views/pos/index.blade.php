@@ -104,6 +104,33 @@
                 </div>
             </div>
         </div>
+
+        <!-- Customer Debts Summary Card -->
+        <div class="card mb-4 border-0 shadow-sm" style="border-radius: 12px;">
+            <div class="card-body py-3">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bg-warning bg-opacity-10 text-warning rounded d-flex align-items-center justify-content-center" style="width:48px;height:48px;">
+                            <i class="ti ti-wallet fs-4"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-0 fw-bold">{{ __('Crédit client') }}</h6>
+                            <small class="text-muted">{{ __('Personnes qui doivent de l\'argent') }}</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="text-end">
+                            <div class="text-muted small">{{ __('Reste à payer') }}</div>
+                            <div class="fw-bold fs-5 text-danger" id="debtSummaryRemaining">0,00 MAD</div>
+                        </div>
+                        <button type="button" class="btn btn-warning" id="openDebtManagerBtn">
+                            <i class="ti ti-list me-1"></i>{{ __('Voir / Gérer') }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <?php $lastsegment = 'pos'; ?>
 
         <div class="mt-2 row row-gap pdp-sop-card">
@@ -575,12 +602,144 @@
                             </tfoot>
                         </table>
                     </div>
+
+                    <!-- Crédit client in Pay Modal -->
+                    <div class="card mt-3 border-warning">
+                        <div class="card-header bg-warning bg-opacity-10 d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0 fw-bold"><i class="ti ti-wallet me-2"></i>{{ __('Crédit client') }}</h6>
+                            <button type="button" class="btn btn-sm btn-outline-warning" id="reloadPayModalDebts">{{ __('Actualiser') }}</button>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label class="form-label small text-muted">{{ __('Total TTC') }}</label>
+                                    <input type="number" class="form-control" id="pay_credit_total" value="0" min="0" step="0.01" readonly>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label small text-muted">{{ __('Payé maintenant') }}</label>
+                                    <input type="number" class="form-control" id="pay_credit_paid" value="0" min="0" step="0.01" placeholder="0.00">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label small text-muted">{{ __('Reste') }}</label>
+                                    <input type="number" class="form-control" id="pay_credit_remaining" value="0" min="0" step="0.01" readonly>
+                                </div>
+                            </div>
+                            <div class="small text-muted mb-2">
+                                <i class="ti ti-info-circle me-1"></i>{{ __('Le reste sera enregistré comme dette client après la création de la commande.') }}
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover mb-0" id="payModalDebtsTable">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>{{ __('Client') }}</th>
+                                            <th>{{ __('Document') }}</th>
+                                            <th>{{ __('Commande / Produit') }}</th>
+                                            <th class="text-end">{{ __('Payé') }}</th>
+                                            <th class="text-end">{{ __('Reste') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot>
+                                        <tr class="table-warning">
+                                            <th colspan="4" class="text-end">{{ __('Total reste dû') }}</th>
+                                            <th class="text-end" id="payModalDebtsTotal">0,00</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div id="payModalNoDebts" class="p-3 text-muted text-center small" style="display:none;">
+                                {{ __('Aucune créance enregistrée.') }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Annuler') }}</button>
                     <button type="button" class="btn btn-success" id="confirmPayOrder">
                         <i class="ti ti-check me-1"></i>{{ __('Confirmer et créer la commande') }}
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Debts Manager Modal -->
+    <div class="modal fade" id="debtManagerModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title"><i class="ti ti-wallet me-2"></i>{{ __('Crédit client') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" id="debt_customer_name" placeholder="{{ __('Nom du client') }}">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" id="debt_customer_phone" placeholder="{{ __('Téléphone') }}">
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-select" id="debt_doc_type">
+                                <option value="CIN">CIN</option>
+                                <option value="RC">RC</option>
+                                <option value="ICE">ICE</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" id="debt_doc_number" placeholder="{{ __('N° doc') }}">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="number" class="form-control" id="debt_total_amount" placeholder="{{ __('Montant total') }}" min="0" step="0.01">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <input type="number" class="form-control" id="debt_paid_amount" placeholder="{{ __('Montant payé') }}" min="0" step="0.01">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="debt_order_info" placeholder="{{ __('Commande / Produit') }}">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="debt_notes" placeholder="{{ __('Notes') }}">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-12 text-end">
+                            <button type="button" class="btn btn-success" id="addDebtBtn">
+                                <i class="ti ti-plus me-1"></i>{{ __('Ajouter') }}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>{{ __('Client') }}</th>
+                                    <th>{{ __('Document') }}</th>
+                                    <th>{{ __('Commande / Produit') }}</th>
+                                    <th>{{ __('Total') }}</th>
+                                    <th>{{ __('Payé') }}</th>
+                                    <th>{{ __('Reste') }}</th>
+                                    <th>{{ __('Notes') }}</th>
+                                    <th class="text-end">{{ __('Actions') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody id="debtsTableBody"></tbody>
+                            <tfoot>
+                                <tr class="table-warning">
+                                    <th colspan="3">{{ __('Totaux') }}</th>
+                                    <th id="debtsTotalTotal">0</th>
+                                    <th id="debtsTotalPaid">0</th>
+                                    <th id="debtsTotalRemaining">0</th>
+                                    <th colspan="2"></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Fermer') }}</button>
                 </div>
             </div>
         </div>
@@ -1864,12 +2023,25 @@
             document.getElementById('payTvaPercent').textContent         = tva;
             document.getElementById('payTvaAmountDisplay').textContent   = cur + ' ' + tvaAmount.toFixed(2);
             document.getElementById('payTotalDisplay').textContent       = cur + ' ' + total.toFixed(2);
+            updatePayCreditInputs();
+        }
+
+        function updatePayCreditInputs() {
+            const totalText = document.getElementById('payTotalDisplay').textContent || '0';
+            const total = parseFloat(totalText.replace(/[^0-9.,]/g, '').replace(',', '.')) || 0;
+            const paidInput = document.getElementById('pay_credit_paid');
+            const paid = parseFloat(paidInput?.value) || 0;
+            const remaining = Math.max(0, total - paid);
+            document.getElementById('pay_credit_total').value = total.toFixed(2);
+            document.getElementById('pay_credit_remaining').value = remaining.toFixed(2);
         }
 
         document.getElementById('pay_tva')?.addEventListener('input', function() {
             const subtotal = parseFloat(this.closest('.modal-body')?.dataset.subtotal || 0);
             recalcPayTotals(subtotal);
         });
+
+        document.getElementById('pay_credit_paid')?.addEventListener('input', updatePayCreditInputs);
 
         document.getElementById('openPayModal')?.addEventListener('click', function() {
             const cartRows = document.querySelectorAll('#tbody tr[data-chassis-id], #tbody tr[data-product-id]');
@@ -1916,6 +2088,7 @@
             document.getElementById('pay_tva').value = '0';
             document.getElementById('pay_comment').value = '';
             document.getElementById('pay_doc_number').value = '';
+            document.getElementById('pay_credit_paid').value = '0';
             document.getElementById('doc_cin').checked = true;
             document.getElementById('pay_doc_label').textContent = '{{ __("N° CIN") }}';
             // Store subtotal on modal-body for TVA recalc
@@ -2006,13 +2179,41 @@
             .then(r => r.json())
             .then(data => {
                 if (data.success) {
-                    bootstrap.Modal.getInstance(payModal).hide();
-                    show_toastr('Success', data.message, 'success');
-                    setTimeout(() => location.reload(), 1200);
+                    const remaining = parseFloat(document.getElementById('pay_credit_remaining').value) || 0;
+                    if (remaining > 0 && data.order) {
+                        const total = parseFloat(document.getElementById('pay_credit_total').value) || 0;
+                        const paid = parseFloat(document.getElementById('pay_credit_paid').value) || 0;
+                        return fetch('/customer-debts', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            body: JSON.stringify({
+                                customer_name: document.getElementById('pay_customer_name').value,
+                                customer_phone: document.getElementById('pay_customer_phone').value,
+                                doc_type: document.querySelector('input[name="pay_doc_type"]:checked')?.value || 'CIN',
+                                doc_number: document.getElementById('pay_doc_number').value,
+                                total_amount: total,
+                                paid_amount: paid,
+                                order_info: data.order.order_number || ('POS #' + data.order.id),
+                                notes: document.getElementById('pay_notes').value
+                            })
+                        }).then(() => data);
+                    }
+                    return data;
                 } else {
                     show_toastr('{{ __("Error") }}', data.message, 'error');
                     btn.disabled = false;
                     btn.innerHTML = '<i class="ti ti-check me-1"></i>{{ __("Confirmer et créer la commande") }}';
+                }
+            })
+            .then(data => {
+                if (data && data.success) {
+                    bootstrap.Modal.getInstance(payModal).hide();
+                    show_toastr('Success', data.message, 'success');
+                    setTimeout(() => location.reload(), 1200);
                 }
             })
             .catch(err => {
@@ -2021,6 +2222,197 @@
                 btn.disabled = false;
                 btn.innerHTML = '<i class="ti ti-check me-1"></i>{{ __("Confirmer et créer la commande") }}';
             });
+        });
+
+        // ── Customer Debts ──
+        function formatCurrencyDebt(value) {
+            const num = parseFloat(value) || 0;
+            return num.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' MAD';
+        }
+
+        function loadDebtsSummary() {
+            fetch('/customer-debts')
+                .then(r => r.json())
+                .then(data => {
+                    const el = document.getElementById('debtSummaryRemaining');
+                    if (el) el.textContent = formatCurrencyDebt(data.total_remaining);
+                });
+        }
+        loadDebtsSummary();
+
+        function renderDebtsTable(debts, totalPaid, totalRemaining, totalTotal) {
+            const tbody = document.getElementById('debtsTableBody');
+            document.getElementById('debtsTotalPaid').textContent = formatCurrencyDebt(totalPaid);
+            document.getElementById('debtsTotalRemaining').textContent = formatCurrencyDebt(totalRemaining);
+            document.getElementById('debtsTotalTotal').textContent = formatCurrencyDebt(totalTotal);
+
+            if (!debts.length) {
+                tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted">{{ __("Aucune créance") }}</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = debts.map(d => `
+                <tr data-debt-id="${d.id}">
+                    <td>
+                        <div class="fw-semibold">${(d.customer_name || '-')}</div>
+                        <small class="text-muted">${(d.customer_phone || '')}</small>
+                    </td>
+                    <td><small>${(d.doc_type || '')}</small> ${(d.doc_number || '')}</td>
+                    <td><small class="text-muted">${(d.order_info || '')}</small></td>
+                    <td class="text-end">${formatCurrencyDebt(d.total_amount)}</td>
+                    <td class="text-end">
+                        <input type="number" class="form-control form-control-sm debt-paid-input text-end"
+                               value="${parseFloat(d.paid_amount).toFixed(2)}" min="0" step="0.01">
+                    </td>
+                    <td class="text-end fw-bold text-danger debt-remaining">${formatCurrencyDebt(d.remaining_amount)}</td>
+                    <td><input type="text" class="form-control form-control-sm debt-notes-input" value="${(d.notes || '')}"></td>
+                    <td class="text-end">
+                        <button class="btn btn-sm btn-primary save-debt-btn me-1"><i class="ti ti-check"></i></button>
+                        <button class="btn btn-sm btn-danger delete-debt-btn"><i class="ti ti-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+
+            tbody.querySelectorAll('.save-debt-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tr = this.closest('tr');
+                    const id = tr.dataset.debtId;
+                    fetch(`/customer-debts/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        body: JSON.stringify({
+                            paid_amount: parseFloat(tr.querySelector('.debt-paid-input').value) || 0,
+                            notes: tr.querySelector('.debt-notes-input').value
+                        })
+                    })
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.success) {
+                            show_toastr('Success', '{{ __("Créance mise à jour") }}', 'success');
+                            loadDebtsForManager();
+                            loadDebtsSummary();
+                            loadPayModalDebts();
+                        } else {
+                            show_toastr('Error', data.message || '{{ __("Erreur") }}', 'error');
+                        }
+                    });
+                });
+            });
+
+            tbody.querySelectorAll('.delete-debt-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (!confirm('{{ __("Êtes-vous sûr de vouloir supprimer cette créance ?") }}')) return;
+                    const id = this.closest('tr').dataset.debtId;
+                    fetch(`/customer-debts/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    })
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.success) {
+                            show_toastr('Success', '{{ __("Créance supprimée") }}', 'success');
+                            loadDebtsForManager();
+                            loadDebtsSummary();
+                            loadPayModalDebts();
+                        }
+                    });
+                });
+            });
+        }
+
+        function loadDebtsForManager() {
+            fetch('/customer-debts')
+                .then(r => r.json())
+                .then(data => {
+                    renderDebtsTable(data.debts, data.total_paid, data.total_remaining, data.debts.reduce((s, d) => s + parseFloat(d.total_amount), 0));
+                });
+        }
+
+        document.getElementById('openDebtManagerBtn')?.addEventListener('click', function() {
+            loadDebtsForManager();
+            const modal = new bootstrap.Modal(document.getElementById('debtManagerModal'));
+            modal.show();
+        });
+
+        document.getElementById('addDebtBtn')?.addEventListener('click', function() {
+            const payload = {
+                customer_name: document.getElementById('debt_customer_name').value,
+                customer_phone: document.getElementById('debt_customer_phone').value,
+                doc_type: document.getElementById('debt_doc_type').value,
+                doc_number: document.getElementById('debt_doc_number').value,
+                total_amount: parseFloat(document.getElementById('debt_total_amount').value) || 0,
+                paid_amount: parseFloat(document.getElementById('debt_paid_amount').value) || 0,
+                order_info: document.getElementById('debt_order_info').value,
+                notes: document.getElementById('debt_notes').value
+            };
+            fetch('/customer-debts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    show_toastr('Success', '{{ __("Créance ajoutée") }}', 'success');
+                    document.getElementById('debt_customer_name').value = '';
+                    document.getElementById('debt_customer_phone').value = '';
+                    document.getElementById('debt_doc_number').value = '';
+                    document.getElementById('debt_total_amount').value = '';
+                    document.getElementById('debt_paid_amount').value = '';
+                    document.getElementById('debt_order_info').value = '';
+                    document.getElementById('debt_notes').value = '';
+                    loadDebtsForManager();
+                    loadDebtsSummary();
+                    loadPayModalDebts();
+                } else {
+                    show_toastr('Error', data.message || '{{ __("Erreur") }}', 'error');
+                }
+            });
+        });
+
+        function loadPayModalDebts() {
+            fetch('/customer-debts')
+                .then(r => r.json())
+                .then(data => {
+                    const tbody = document.querySelector('#payModalDebtsTable tbody');
+                    const noDebts = document.getElementById('payModalNoDebts');
+                    if (data.debts && data.debts.length) {
+                        if (noDebts) noDebts.style.display = 'none';
+                        tbody.innerHTML = data.debts.map(d => `
+                            <tr>
+                                <td>${(d.customer_name || '-')}</td>
+                                <td><small>${(d.doc_type || '')}</small> ${(d.doc_number || '')}</td>
+                                <td><small class="text-muted">${(d.order_info || '')}</small></td>
+                                <td class="text-end">${formatCurrencyDebt(d.paid_amount)}</td>
+                                <td class="text-end fw-bold text-danger">${formatCurrencyDebt(d.remaining_amount)}</td>
+                            </tr>
+                        `).join('');
+                        document.getElementById('payModalDebtsTotal').textContent = formatCurrencyDebt(data.total_remaining);
+                    } else {
+                        tbody.innerHTML = '';
+                        if (noDebts) noDebts.style.display = 'block';
+                        document.getElementById('payModalDebtsTotal').textContent = formatCurrencyDebt(0);
+                    }
+                });
+        }
+
+        document.getElementById('openPayModal')?.addEventListener('click', function() {
+            loadPayModalDebts();
+        });
+        document.getElementById('reloadPayModalDebts')?.addEventListener('click', function() {
+            loadPayModalDebts();
         });
 
     </script>

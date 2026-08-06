@@ -47,5 +47,6 @@ return [
         Anand\LaravelPaytmWallet\PaytmWalletServiceProvider::class,
         Shetabit\Visitor\Provider\VisitorServiceProvider::class,
         // Paytabscom\Laravel_paytabs\PaypageServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
         /* End */
 ];

@@ -284,6 +284,7 @@ class PosController extends Controller
                             'code' => 200,
                             'success' => __('Payment completed successfully!'),
                             'order_id' => \Crypt::encrypt($pos->id),
+                            'order' => $pos,
                         ]
                     );
                     $order_email = $pos->email;

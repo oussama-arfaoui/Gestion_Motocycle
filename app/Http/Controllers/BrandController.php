@@ -4,14 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Utility;
+use App\Models\ProductCategorie;
+use App\Models\ProductVariant;
+use App\Models\ChassisNumber;
+use App\Exports\StockExport;
+use App\Exports\StockTemplateExport;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
 
 class BrandController extends Controller
 {
     // List all brands
     public function index()
     {
-        if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Manage Brands') && !\Auth::user()->can('Manage Products')) {
+        if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Manage Brands') && !\Auth::user()->can('Manage Products') && !\Auth::user()->can('Create Products') && !\Auth::user()->can('Edit Products') && !\Auth::user()->can('Show Products')) {
             return redirect()->route('profile')->with('error', __('Permission denied.'));
         }
         $brands = Brand::with(['categories.variants.chassisNumbers'])->get();
@@ -21,7 +29,7 @@ class BrandController extends Controller
     // Show create form
     public function create()
     {
-        if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Create Brand') && !\Auth::user()->can('Manage Products')) {
+        if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Create Brand') && !\Auth::user()->can('Manage Products') && !\Auth::user()->can('Create Products')) {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
         return view('brand.create');
@@ -30,7 +38,7 @@ class BrandController extends Controller
 // Store a new brand
 public function store(Request $request)
 {
-    if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Create Brand') && !\Auth::user()->can('Manage Products')) {
+    if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Create Brand') && !\Auth::user()->can('Manage Products') && !\Auth::user()->can('Create Products')) {
         return redirect()->back()->with('error', __('Permission denied.'));
     }
     $validator = \Validator::make(
@@ -72,6 +80,7 @@ public function store(Request $request)
 
     $brand = new Brand();
     $brand->name = $request->name;
+    $brand->reference = $request->input('reference');
     if (!empty($fileNameToStores)) {
         // Store only the filename
         $brand->brand_img = $fileNameToStores;
@@ -84,7 +93,7 @@ public function store(Request $request)
     // Show edit form
     public function edit($id)
     {
-        if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Edit Brand') && !\Auth::user()->can('Manage Products')) {
+        if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Edit Brand') && !\Auth::user()->can('Manage Products') && !\Auth::user()->can('Edit Products')) {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
         $brand = Brand::findOrFail($id);
@@ -94,7 +103,7 @@ public function store(Request $request)
   // Update brand
 public function update(Request $request, $id)
 {
-    if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Edit Brand') && !\Auth::user()->can('Manage Products')) {
+    if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Edit Brand') && !\Auth::user()->can('Manage Products') && !\Auth::user()->can('Edit Products')) {
         return redirect()->back()->with('error', __('Permission denied.'));
     }
     $brand = Brand::findOrFail($id);
@@ -125,6 +134,7 @@ public function update(Request $request, $id)
     }
 
     $brand->name = $request->name;
+    $brand->reference = $request->input('reference');
     $brand->save();
 
     return redirect()->route('brands.index')->with('success', __('Brand updated successfully.'));
@@ -133,7 +143,7 @@ public function update(Request $request, $id)
     // Delete brand
     public function destroy($id)
     {
-        if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Delete Brand') && !\Auth::user()->can('Manage Products')) {
+        if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Delete Brand') && !\Auth::user()->can('Manage Products') && !\Auth::user()->can('Delete Products')) {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
         $brand = Brand::findOrFail($id);
@@ -210,6 +220,7 @@ public function update(Request $request, $id)
             }
 
             $model->name = $request->name;
+            $model->reference = $request->input('reference');
             $model->save();
 
             return response()->json(['success' => true, 'message' => __('Model updated successfully.')]);
@@ -284,6 +295,15 @@ public function update(Request $request, $id)
             if ($request->has('price')) {
                 $family->price = (float)$request->input('price', 0);
             }
+            if (in_array($request->input('tracking_type'), ['chassis', 'ref'])) {
+                $family->tracking_type = $request->input('tracking_type');
+            }
+            // Référence : utilisée uniquement pour les familles de type "ref"
+            if (($family->tracking_type ?? 'chassis') === 'ref') {
+                $family->reference = $request->input('reference');
+            } else {
+                $family->reference = null;
+            }
             $family->quantity = $request->quantity ?? $family->quantity ?? 0;
             $family->save();
 
@@ -322,6 +342,7 @@ public function update(Request $request, $id)
 
                     $category = new \App\Models\ProductCategorie();
                     $category->name = $request->name;
+                    $category->reference = $request->input('reference');
                     $category->brand_id = $parentId;
                     $category->save();
 
@@ -347,6 +368,8 @@ public function update(Request $request, $id)
                     $variant->price = (float)($request->input('price', 0));
                     $variant->quantity = $request->quantity;
                     $variant->category_id = $parentId;
+                    $variant->tracking_type = in_array($request->input('tracking_type'), ['chassis', 'ref']) ? $request->input('tracking_type') : 'chassis';
+                    $variant->reference = $variant->tracking_type === 'ref' ? $request->input('reference') : null;
                     
                     // Handle image upload
                     if ($request->hasFile('image')) {
@@ -390,16 +413,48 @@ public function update(Request $request, $id)
 
                     $variant = \App\Models\ProductVariant::findOrFail($parentId);
 
+                    // Si la famille est suivie par numéro de châssis, chaque numéro doit être unique.
+                    // Pour une famille de type "référence", les doublons sont autorisés.
+                    $isUnique = ($variant->tracking_type ?? 'chassis') === 'chassis';
+
+                    if ($isUnique) {
+                        $submitted = array_map(function ($c) {
+                            return trim($c['number']);
+                        }, $request->chassis_numbers);
+
+                        // Doublons dans la saisie elle-même
+                        $duplicatesInBatch = array_diff_assoc($submitted, array_unique($submitted));
+                        if (!empty($duplicatesInBatch)) {
+                            return response()->json([
+                                'success' => false,
+                                'message' => __('Numéro de châssis en double dans la saisie : ') . implode(', ', array_unique($duplicatesInBatch)),
+                            ], 422);
+                        }
+
+                        // Doublons déjà présents pour cette famille
+                        $existing = \App\Models\ChassisNumber::where('variant_id', $variant->id)
+                            ->whereIn('chassis_number', $submitted)
+                            ->pluck('chassis_number')
+                            ->all();
+                        if (!empty($existing)) {
+                            return response()->json([
+                                'success' => false,
+                                'message' => __('Ce numéro de châssis existe déjà : ') . implode(', ', $existing),
+                            ], 422);
+                        }
+                    }
+
                     foreach ($request->chassis_numbers as $chassisData) {
                         $chassis = new \App\Models\ChassisNumber();
-                        $chassis->chassis_number = $chassisData['number'];
+                        $chassis->chassis_number = trim($chassisData['number']);
                         $chassis->variant_id = $variant->id;
                         $chassis->date = isset($chassisData['date']) ? $chassisData['date'] : null;
                         $chassis->location = isset($chassisData['location']) ? $chassisData['location'] : 'DEPOT';
                         $chassis->save();
                     }
 
-                    return response()->json(['success' => true, 'message' => __('Chassis numbers added successfully.')]);
+                    $label = $isUnique ? __('Numéros de châssis ajoutés avec succès.') : __('Références ajoutées avec succès.');
+                    return response()->json(['success' => true, 'message' => $label]);
 
                 default:
                     return response()->json(['success' => false, 'message' => __('Action non valide')], 400);
@@ -475,7 +530,90 @@ public function update(Request $request, $id)
             'showroom' => $showroom
         ];
 
-        return response()->json(['products' => $products, 'counters' => $counters]);
+        return response()->json([
+            'products' => $products,
+            'counters' => $counters,
+            'tracking_type' => $variant->tracking_type ?? 'chassis',
+            'family_name' => $variant->name,
+        ]);
+    }
+
+    // Page d'impression des étiquettes (QR / code-barres) pour une famille
+    public function printLabels(Request $request, $id)
+    {
+        $family = \App\Models\ProductVariant::with(['category.brand', 'chassisNumbers'])->findOrFail($id);
+
+        $template  = (int) $request->get('template', 1);
+        if (!in_array($template, [1, 2, 3])) {
+            $template = 1;
+        }
+        $withPrice = $request->boolean('price', true);
+        $chassisId = $request->get('chassis');
+
+        // Dimensions par défaut (mm) par modèle, surchargées par la requête
+        $defaults = [
+            1 => ['w' => 50, 'h' => 25],
+            2 => ['w' => 50, 'h' => 25],
+            3 => ['w' => 58, 'h' => 40],
+        ];
+        $w = (float) $request->get('w', $defaults[$template]['w']);
+        $h = (float) $request->get('h', $defaults[$template]['h']);
+        if ($w < 10 || $w > 300) { $w = $defaults[$template]['w']; }
+        if ($h < 10 || $h > 300) { $h = $defaults[$template]['h']; }
+
+        // Orientation : on garantit le sens demandé en réarrangeant largeur/hauteur
+        $orientation = $request->get('orientation', 'portrait') === 'landscape' ? 'landscape' : 'portrait';
+        if ($orientation === 'portrait' && $w > $h) {
+            [$w, $h] = [$h, $w];
+        } elseif ($orientation === 'landscape' && $h > $w) {
+            [$w, $h] = [$h, $w];
+        }
+        $labelWidth  = $w . 'mm';
+        $labelHeight = $h . 'mm';
+
+        $brand = optional(optional($family->category)->brand)->name ?? '';
+        $model = optional($family->category)->name ?? '';
+        $trackingType = $family->tracking_type ?? 'chassis';
+        $codeLabel = $trackingType === 'ref' ? __('Réf') : __('N° Châssis');
+
+        // Construire la liste des valeurs à imprimer
+        if ($trackingType === 'ref') {
+            // Référence héritée : famille -> modèle -> marque
+            $inheritedRef = $family->reference
+                ?: (optional($family->category)->reference
+                    ?: optional(optional($family->category)->brand)->reference);
+
+            if (!empty($inheritedRef)) {
+                $values = collect([$inheritedRef]);
+            } else {
+                $values = $family->chassisNumbers->pluck('chassis_number')->filter()->unique()->values();
+                if ($values->isEmpty()) {
+                    $values = collect([$family->name]);
+                }
+            }
+        } else {
+            $chassis = $family->chassisNumbers;
+            if ($chassisId) {
+                $chassis = $chassis->where('id', $chassisId);
+            }
+            $values = $chassis->pluck('chassis_number')->filter()->values();
+            if ($values->isEmpty()) {
+                $values = collect([$family->name]);
+            }
+        }
+
+        return view('brand.print', [
+            'family'       => $family,
+            'brand'        => $brand,
+            'model'        => $model,
+            'template'     => $template,
+            'withPrice'    => $withPrice,
+            'values'       => $values,
+            'codeLabel'    => $codeLabel,
+            'trackingType' => $trackingType,
+            'labelWidth'   => $labelWidth,
+            'labelHeight'  => $labelHeight,
+        ]);
     }
     
     // Analyser tout le stock par emplacement
@@ -621,5 +759,251 @@ public function update(Request $request, $id)
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => __('Error deleting chassis: ') . $e->getMessage()], 500);
         }
+    }
+
+    // ==================== Import / Export ====================
+
+    // Export the stock (Marque → Modèle → Famille → Numéro de châssis) with optional date range
+    public function exportStock(Request $request)
+    {
+        if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Manage Brands') && !\Auth::user()->can('Manage Products') && !\Auth::user()->can('Show Products')) {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
+
+        $from = $request->input('from_date');
+        $to   = $request->input('to_date');
+
+        $name = 'Stock_Moto_' . date('Y-m-d_His') . '.xlsx';
+
+        return Excel::download(new StockExport($from, $to), $name);
+    }
+
+    // Download an empty import template with example rows
+    public function downloadTemplate()
+    {
+        if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Manage Brands') && !\Auth::user()->can('Manage Products') && !\Auth::user()->can('Create Products')) {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
+
+        return Excel::download(new StockTemplateExport(), 'Modele_Import_Stock.xlsx');
+    }
+
+    // Import the stock from an xlsx/csv file following the template
+    public function importStock(Request $request)
+    {
+        if (\Auth::user()->type !== 'Owner' && !\Auth::user()->can('Manage Brands') && !\Auth::user()->can('Manage Products') && !\Auth::user()->can('Create Products')) {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
+
+        $validator = \Validator::make($request->all(), [
+            'import_file' => 'required|file|mimes:xlsx,xls,csv,txt',
+        ], [
+            'import_file.mimes' => __('Format non accepté ! Utilisez un fichier XLSX, XLS ou CSV.'),
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', $validator->getMessageBag()->first());
+        }
+
+        try {
+            $sheets = Excel::toArray([], $request->file('import_file'));
+            $rows   = $sheets[0] ?? [];
+
+            if (empty($rows)) {
+                return redirect()->back()->with('error', __('Le fichier est vide.'));
+            }
+
+            // Locate the header row and build a column index map
+            $colMap     = null;
+            $startIndex = 0;
+            foreach ($rows as $index => $row) {
+                $map = $this->mapHeaderColumns($row);
+                if ($map !== null) {
+                    $colMap     = $map;
+                    $startIndex = $index + 1;
+                    break;
+                }
+            }
+
+            if ($colMap === null || !isset($colMap['chassis'])) {
+                return redirect()->back()->with('error', __('En-têtes introuvables. Utilisez le modèle fourni (Marque, Modèle, Famille, Numéro de châssis).'));
+            }
+
+            $imported       = 0;
+            $skipped        = 0;
+            $touchedVariants = [];
+
+            for ($i = $startIndex; $i < count($rows); $i++) {
+                $row = $rows[$i];
+
+                $brandName  = isset($colMap['marque']) ? trim((string) ($row[$colMap['marque']] ?? '')) : '';
+                $modelName  = isset($colMap['modele']) ? trim((string) ($row[$colMap['modele']] ?? '')) : '';
+                $familyName = isset($colMap['famille']) ? trim((string) ($row[$colMap['famille']] ?? '')) : '';
+                $chassisNo  = trim((string) ($row[$colMap['chassis']] ?? ''));
+                $rawDate    = isset($colMap['date']) ? ($row[$colMap['date']] ?? null) : null;
+                $rawLieu    = isset($colMap['lieu']) ? trim((string) ($row[$colMap['lieu']] ?? '')) : '';
+
+                // A row is only useful if it has at least a chassis number and a brand/model/family
+                if ($chassisNo === '' || ($brandName === '' && $modelName === '' && $familyName === '')) {
+                    $skipped++;
+                    continue;
+                }
+
+                $brandName  = $brandName !== '' ? $brandName : 'Non assigné';
+                $modelName  = $modelName !== '' ? $modelName : 'Non assigné';
+                $familyName = $familyName !== '' ? $familyName : 'Non assigné';
+
+                $brand = $this->firstOrCreateCaseInsensitive(
+                    Brand::class,
+                    ['name' => $brandName],
+                    ['name' => $brandName, 'brand_img' => 'default.jpg']
+                );
+
+                $category = $this->firstOrCreateCaseInsensitive(
+                    ProductCategorie::class,
+                    ['name' => $modelName, 'brand_id' => $brand->id],
+                    ['name' => $modelName, 'brand_id' => $brand->id]
+                );
+
+                $variant = $this->firstOrCreateCaseInsensitive(
+                    ProductVariant::class,
+                    ['name' => $familyName, 'category_id' => $category->id],
+                    ['name' => $familyName, 'category_id' => $category->id, 'price' => 0, 'quantity' => 0]
+                );
+
+                $chassis = ChassisNumber::where('chassis_number', $chassisNo)
+                    ->where('variant_id', $variant->id)
+                    ->first();
+
+                if (!$chassis) {
+                    $chassis = new ChassisNumber();
+                    $chassis->chassis_number = $chassisNo;
+                    $chassis->variant_id     = $variant->id;
+                }
+
+                $chassis->date     = $this->parseImportDate($rawDate);
+                $chassis->location = $this->normalizeLocation($rawLieu);
+                $chassis->save();
+
+                $touchedVariants[$variant->id] = true;
+                $imported++;
+            }
+
+            // Keep variant quantities consistent with the number of chassis
+            foreach (array_keys($touchedVariants) as $variantId) {
+                $variant = ProductVariant::find($variantId);
+                if ($variant) {
+                    $count = $variant->chassisNumbers()->count();
+                    if ($count > ($variant->quantity ?? 0)) {
+                        $variant->quantity = $count;
+                        $variant->save();
+                    }
+                }
+            }
+
+            $message = __(':imported numéro(s) de châssis importé(s).', ['imported' => $imported]);
+            if ($skipped > 0) {
+                $message .= ' ' . __(':skipped ligne(s) ignorée(s) (doublons ou incomplètes).', ['skipped' => $skipped]);
+            }
+
+            return redirect()->route('brands.index')->with('success', $message);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', __('Erreur lors de l\'import: ') . $e->getMessage());
+        }
+    }
+
+    // Build a column-index map from a potential header row, or null if not a header
+    private function mapHeaderColumns(array $row)
+    {
+        $map = [];
+        foreach ($row as $index => $value) {
+            $key = $this->normalizeHeader((string) $value);
+            if ($key === '') {
+                continue;
+            }
+            if (\Illuminate\Support\Str::contains($key, 'marque')) {
+                $map['marque'] = $index;
+            } elseif (\Illuminate\Support\Str::contains($key, 'modele')) {
+                $map['modele'] = $index;
+            } elseif (\Illuminate\Support\Str::contains($key, 'famille') || \Illuminate\Support\Str::contains($key, 'designation')) {
+                $map['famille'] = $index;
+            } elseif (\Illuminate\Support\Str::contains($key, 'chassis') || \Illuminate\Support\Str::contains($key, 'numero')) {
+                $map['chassis'] = $index;
+            } elseif (\Illuminate\Support\Str::contains($key, 'date')) {
+                $map['date'] = $index;
+            } elseif (\Illuminate\Support\Str::contains($key, 'lieu') || \Illuminate\Support\Str::contains($key, 'location') || \Illuminate\Support\Str::contains($key, 'emplacement')) {
+                $map['lieu'] = $index;
+            }
+        }
+
+        // Consider it a valid header only if it identifies the chassis column
+        return isset($map['chassis']) ? $map : null;
+    }
+
+    // Normalize a header label: lowercase, strip accents and non-letters
+    private function normalizeHeader(string $value): string
+    {
+        $value = mb_strtolower(trim($value));
+        $value = strtr($value, [
+            'à' => 'a', 'â' => 'a', 'ä' => 'a',
+            'é' => 'e', 'è' => 'e', 'ê' => 'e', 'ë' => 'e',
+            'î' => 'i', 'ï' => 'i',
+            'ô' => 'o', 'ö' => 'o',
+            'û' => 'u', 'ù' => 'u', 'ü' => 'u',
+            'ç' => 'c',
+        ]);
+        return preg_replace('/[^a-z]/', '', $value);
+    }
+
+    // Parse a date coming from Excel (serial number or string) into Y-m-d or null
+    private function parseImportDate($value)
+    {
+        if ($value === null || $value === '') {
+            return null;
+        }
+
+        if (is_numeric($value)) {
+            try {
+                return ExcelDate::excelToDateTimeObject((float) $value)->format('Y-m-d');
+            } catch (\Exception $e) {
+                // fall through to string parsing
+            }
+        }
+
+        try {
+            return Carbon::parse($value)->format('Y-m-d');
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    // Normalize the location to DEPOT or SHOW-ROOM (default DEPOT)
+    private function normalizeLocation($value): string
+    {
+        $key = $this->normalizeHeader((string) $value);
+        if (\Illuminate\Support\Str::contains($key, 'showroom') || \Illuminate\Support\Str::contains($key, 'show')) {
+            return 'SHOW-ROOM';
+        }
+        return 'DEPOT';
+    }
+
+    // Case-insensitive first-or-create for import records (BECANE == BECAne)
+    private function firstOrCreateCaseInsensitive($modelClass, array $match, array $create = [])
+    {
+        $query = $modelClass::query();
+        foreach ($match as $key => $value) {
+            if (is_string($value)) {
+                $query->whereRaw('LOWER(' . $key . ') = ?', [mb_strtolower($value)]);
+            } else {
+                $query->where($key, $value);
+            }
+        }
+
+        $instance = $query->first();
+        if ($instance) {
+            return $instance;
+        }
+
+        return $modelClass::create($create);
     }
 }

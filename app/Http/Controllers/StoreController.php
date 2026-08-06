@@ -136,7 +136,14 @@ public function storeSlug($slug)
     // Image base URLs
     $brand_logo_url      = Utility::get_file('uploads/brand_image/');
     $category_img_url    = Utility::get_file('uploads/product_image/');
-    $variant_img_url     = Utility::get_file('uploads/product_variant/');
+    $variant_img_url     = Utility::get_file('uploads/family_image/');
+
+    // Website Builder settings (saved from /website-settings)
+    $wsRow = StoreThemeSettings::where('store_id', $store->id)
+        ->where('theme_name', 'website_editor')
+        ->where('name', 'settings')
+        ->first();
+    $wsSettings = $wsRow ? json_decode($wsRow->value, true) : [];
 
     // Cart / wishlist
     $cart       = session()->get($slug, []);
@@ -161,7 +168,8 @@ public function storeSlug($slug)
         'total_item',
         'wishlist',
         'page_slug_urls',
-        'blog'
+        'blog',
+        'wsSettings'
     ));
 }
     public function index()

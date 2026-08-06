@@ -6,6 +6,11 @@
             {{ Form::text('name', null, ['class'=>'form-control','required'=>'required']) }}
         </div>
         <div class="form-group">
+            {{ Form::label('reference', __('Référence par défaut'), ['class'=>'form-label']) }}
+            {{ Form::text('reference', null, ['class'=>'form-control','placeholder'=>__('Optionnel — héritée par les modèles/familles')]) }}
+            <small class="text-muted">{{ __('Utilisée comme référence par défaut pour les produits de type « référence » de cette marque.') }}</small>
+        </div>
+        <div class="form-group">
             <label for="brand_img" class="form-label">{{ __('Upload Brand Image') }}</label>
             <small class="d-block text-muted mb-1"><strong>Formats acceptés :</strong> JPG, JPEG, PNG, WEBP &nbsp;|&nbsp; <strong>Max :</strong> 2MB</small>
             <input type="file" name="brand_img" id="brand_img" class="form-control"

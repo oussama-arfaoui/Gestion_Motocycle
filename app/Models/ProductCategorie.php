@@ -8,6 +8,7 @@ class ProductCategorie extends Model
 {
     protected $fillable = [
         'name',
+        'reference',
         'parent_id',
         'brand_id',
         'categorie_img',

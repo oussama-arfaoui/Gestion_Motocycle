@@ -10,19 +10,26 @@ use App\Models\Utility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ChassisOrderController extends Controller
 {
     public function index()
     {
-        if (Auth::user()->type !== 'Owner' && !Auth::user()->can('Manage Orders') && !Auth::user()->can('Show Orders')) {
+        if (Auth::user()->type !== 'Owner'
+            && !Auth::user()->can('Manage Orders')
+            && !Auth::user()->can('Show Orders')
+            && !Auth::user()->can('Edit Orders')
+            && !Auth::user()->can('Delete Orders')
+            && !Auth::user()->can('Validate Orders')
+        ) {
             return redirect()->route('profile')->with('error', __('Permission denied.'));
         }
         $storeId = Auth::user()->current_store;
 
         $orders = ChassisOrder::with('items')
             ->where('store_id', $storeId)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('order_number', 'desc')
             ->get();
 
         $stats = [
@@ -139,7 +146,11 @@ class ChassisOrderController extends Controller
 
     public function update(Request $request, $id)
     {
-        if (Auth::user()->type !== 'Owner' && !Auth::user()->can('Edit Order')) {
+        if (Auth::user()->type !== 'Owner'
+            && !Auth::user()->can('Edit Orders')
+            && !Auth::user()->can('Manage Orders')
+            && !Auth::user()->can('Validate Orders')
+        ) {
             return response()->json(['success' => false, 'message' => __('Permission denied.')], 403);
         }
         $request->validate([
@@ -150,15 +161,24 @@ class ChassisOrderController extends Controller
             'items' => 'sometimes|array',
             'items.*.id' => 'sometimes|integer',
             'items.*.price' => 'required|numeric|min:0',
+            'items.*.chassis_number' => 'nullable|string|max:191',
+            'items.*.family_name' => 'nullable|string|max:191',
+            'deleted_item_ids' => 'sometimes|array',
+            'deleted_item_ids.*' => 'integer',
         ]);
 
         $order = ChassisOrder::findOrFail($id);
 
+        // Validated orders can only be edited with the configured PIN.
         if ($order->status !== 'pending') {
-            return response()->json([
-                'success' => false,
-                'message' => __('Seules les commandes en attente peuvent être modifiées'),
-            ], 400);
+            $pin = $request->input('pin');
+            $expectedPin = env('CHASSIS_EDIT_PIN', '1234');
+            if (empty($pin) || (string)$pin !== (string)$expectedPin) {
+                return response()->json([
+                    'success' => false,
+                    'message' => __('Code PIN incorrect ou manquant.'),
+                ], 403);
+            }
         }
 
         DB::beginTransaction();
@@ -166,22 +186,52 @@ class ChassisOrderController extends Controller
             $order->update([
                 'customer_name' => $request->customer_name ?? $order->customer_name,
                 'customer_phone' => $request->customer_phone ?? $order->customer_phone,
+                'doc_type' => $request->has('doc_type') ? $request->doc_type : $order->doc_type,
+                'doc_number' => $request->has('doc_number') ? $request->doc_number : $order->doc_number,
                 'discount' => $request->discount ?? $order->discount,
                 'notes' => $request->notes ?? $order->notes,
             ]);
 
+            $canEditItemDetails = $order->status === 'pending';
+
+            // Deleting items and adding new lines is only allowed while the order is still pending.
+            if ($canEditItemDetails && $request->has('deleted_item_ids')) {
+                ChassisOrderItem::where('chassis_order_id', $order->id)
+                    ->whereIn('id', $request->deleted_item_ids)
+                    ->delete();
+            }
+
             if ($request->has('items')) {
-                $totalPrice = 0;
                 foreach ($request->items as $item) {
                     if (isset($item['id'])) {
                         $orderItem = ChassisOrderItem::find($item['id']);
                         if ($orderItem && $orderItem->chassis_order_id == $order->id) {
-                            $orderItem->update(['price' => $item['price']]);
+                            $itemData = ['price' => $item['price']];
+                            // Chassis number and family can only be edited while the order is still pending.
+                            if ($canEditItemDetails) {
+                                if (isset($item['chassis_number']) && $item['chassis_number'] !== '') {
+                                    $itemData['chassis_number'] = $item['chassis_number'];
+                                }
+                                if (isset($item['family_name']) && $item['family_name'] !== '') {
+                                    $itemData['family_name'] = $item['family_name'];
+                                }
+                            }
+                            $orderItem->update($itemData);
                         }
+                    } elseif ($canEditItemDetails) {
+                        // New line added in the edit modal (only allowed for pending orders).
+                        ChassisOrderItem::create([
+                            'chassis_order_id' => $order->id,
+                            'chassis_number' => $item['chassis_number'] ?? null,
+                            'family_name' => $item['family_name'] ?? null,
+                            'price' => $item['price'],
+                        ]);
                     }
-                    $totalPrice += $item['price'];
                 }
-                $order->update(['total_price' => $totalPrice]);
+            }
+
+            if ($request->has('items') || $request->has('deleted_item_ids')) {
+                $order->update(['total_price' => $order->items()->sum('price')]);
             }
 
             DB::commit();
@@ -202,7 +252,7 @@ class ChassisOrderController extends Controller
 
     public function validate_order($id)
     {
-        if (Auth::user()->type !== 'Owner' && !Auth::user()->can('Validate Order')) {
+        if (Auth::user()->type !== 'Owner' && !Auth::user()->can('Validate Orders')) {
             return response()->json(['success' => false, 'message' => __('Permission denied.')], 403);
         }
         $order = ChassisOrder::with('items')->findOrFail($id);
@@ -225,7 +275,7 @@ class ChassisOrderController extends Controller
 
     public function reject($id)
     {
-        if (Auth::user()->type !== 'Owner' && !Auth::user()->can('Validate Order')) {
+        if (Auth::user()->type !== 'Owner' && !Auth::user()->can('Validate Orders')) {
             return response()->json(['success' => false, 'message' => __('Permission denied.')], 403);
         }
         $order = ChassisOrder::with('items')->findOrFail($id);
@@ -276,8 +326,42 @@ class ChassisOrderController extends Controller
     public function invoice($id)
     {
         $order = ChassisOrder::with(['items', 'signer'])->findOrFail($id);
+
+        $canSeeInvoice = in_array(Auth::user()->type, ['super admin', 'admin', 'Owner'])
+            || Auth::user()->can('Validate Orders');
+
+        if (!$canSeeInvoice || $order->status !== 'validated') {
+            return redirect()->route('chassis-orders.index')->with('error', __('Permission denied.'));
+        }
+
         $store = \App\Models\Store::find(Auth::user()->current_store);
         return view('chassis_orders.invoice', compact('order', 'store'));
+    }
+
+    public function downloadInvoicePdf(Request $request, $id)
+    {
+        $order = ChassisOrder::with(['items', 'signer'])->findOrFail($id);
+
+        $canSeeInvoice = in_array(Auth::user()->type, ['super admin', 'admin', 'Owner'])
+            || Auth::user()->can('Validate Orders');
+
+        if (!$canSeeInvoice || $order->status !== 'validated') {
+            return redirect()->route('chassis-orders.index')->with('error', __('Permission denied.'));
+        }
+
+        $store = \App\Models\Store::find(Auth::user()->current_store);
+        $isPdf = true;
+
+        $pdf = Pdf::loadView('chassis_orders.invoice', compact('order', 'store', 'isPdf'))
+            ->setPaper('a4', 'portrait')
+            ->setOptions([
+                'isRemoteEnabled'      => true,
+                'isHtml5ParserEnabled' => true,
+            ]);
+
+        $filename = 'Facture-' . str_replace('/', '-', $order->order_number) . '.pdf';
+
+        return $pdf->download($filename);
     }
 
     public function sign(Request $request, $id)
@@ -299,7 +383,7 @@ class ChassisOrderController extends Controller
 
     public function destroy($id)
     {
-        if (Auth::user()->type !== 'Owner' && !Auth::user()->can('Delete Order')) {
+        if (Auth::user()->type !== 'Owner' && !Auth::user()->can('Delete Orders')) {
             return response()->json(['success' => false, 'message' => __('Permission denied.')], 403);
         }
         $order = ChassisOrder::findOrFail($id);

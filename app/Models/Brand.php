@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Brand extends Model
 {
-    protected $fillable = ['name', 'brand_img'];
+    protected $fillable = ['name', 'brand_img', 'reference'];
 
     // Brand has many categories (models)
     public function categories()

@@ -231,23 +231,22 @@ function canCreateStore()
             return false;
         }
 
-        // Get the super admin (creator)
-        $creator = null;
+        // Find the super admin by traversing created_by chain
         if ($user->type == 'super admin') {
-            $creator = $user;
+            $superAdmin = $user;
+        } elseif ($user->type == 'Owner') {
+            $superAdmin = \App\Models\User::find($user->created_by);
         } else {
-            $creatorId = $user->creatorId();
-            if ($creatorId) {
-                $creator = \App\Models\User::find($creatorId);
-            }
+            $owner = \App\Models\User::find($user->created_by);
+            $superAdmin = $owner ? \App\Models\User::find($owner->created_by) : null;
         }
 
-        if (!$creator || $creator->type != 'super admin') {
-            return false;
+        if (!$superAdmin || $superAdmin->type != 'super admin') {
+            return true; // Allow by default if no super admin found
         }
 
         // Get the plan's max_stores limit
-        $plan = \App\Models\Plan::find($creator->plan);
+        $plan = \App\Models\Plan::find($superAdmin->plan);
         if (!$plan) {
             return true; // No plan found, allow by default
         }
@@ -258,7 +257,7 @@ function canCreateStore()
         }
 
         // Count Owner users (= stores) created by super admin
-        $totalStores = \App\Models\User::where('created_by', $creator->id)->where('type', 'Owner')->count();
+        $totalStores = \App\Models\User::where('created_by', $superAdmin->id)->where('type', 'Owner')->count();
 
         // Allow creation only if under the plan limit
         return $totalStores < $plan->max_stores;
@@ -278,6 +277,37 @@ function getStoreCreationMessage()
 }
 
 /**
+ * Get the plan's max_stores limit for the current user (from their creator's plan).
+ * Returns -1 for unlimited, 0+ for the actual limit.
+ */
+function getPlanMaxStores()
+{
+    try {
+        $user = \Auth::user();
+        if (!$user) return 0;
+
+        // Find the super admin
+        if ($user->type == 'super admin') {
+            $superAdmin = $user;
+        } elseif ($user->type == 'Owner') {
+            // Owner's creator is the super admin (stored in created_by)
+            $superAdmin = \App\Models\User::find($user->created_by);
+        } else {
+            // For other user types, find their Owner first, then the super admin
+            $owner = \App\Models\User::find($user->created_by);
+            $superAdmin = $owner ? \App\Models\User::find($owner->created_by) : null;
+        }
+
+        if (!$superAdmin || $superAdmin->type != 'super admin') return 0;
+
+        $plan = \App\Models\Plan::find($superAdmin->plan);
+        return $plan ? (int) $plan->max_stores : -1;
+    } catch (\Exception $e) {
+        return -1;
+    }
+}
+
+/**
  * Get the current super admin's store count
  */
 function getSuperAdminStoreCount()
@@ -288,22 +318,21 @@ function getSuperAdminStoreCount()
             return 0;
         }
 
-        // Get the super admin (creator)
-        $creator = null;
+        // Find the super admin by traversing created_by chain
         if ($user->type == 'super admin') {
-            $creator = $user;
+            $superAdmin = $user;
+        } elseif ($user->type == 'Owner') {
+            $superAdmin = \App\Models\User::find($user->created_by);
         } else {
-            $creatorId = $user->creatorId();
-            if ($creatorId) {
-                $creator = \App\Models\User::find($creatorId);
-            }
+            $owner = \App\Models\User::find($user->created_by);
+            $superAdmin = $owner ? \App\Models\User::find($owner->created_by) : null;
         }
 
-        if (!$creator || $creator->type != 'super admin') {
+        if (!$superAdmin || $superAdmin->type != 'super admin') {
             return 0;
         }
 
-        return \App\Models\User::where('created_by', $creator->id)->where('type', 'Owner')->count();
+        return \App\Models\User::where('created_by', $superAdmin->id)->where('type', 'Owner')->count();
         
     } catch (\Exception $e) {
         \Log::error('Error in getSuperAdminStoreCount: ' . $e->getMessage());

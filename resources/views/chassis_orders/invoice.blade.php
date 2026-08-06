@@ -9,13 +9,14 @@
 
         :root {
             --primary: #1a1a2e;
-            --accent: #e85d04;
+            --accent: #f4791e;
             --accent2: #f48c06;
             --light: #f8f9fa;
             --border: #dee2e6;
             --text: #212529;
             --muted: #6c757d;
             --white: #ffffff;
+            --cream: #f4efe4;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,23 +24,24 @@
         body {
             font-family: 'Inter', 'Segoe UI', sans-serif;
             background: #f0f2f5;
-            color: var(--text);
+            color: #212529;
             font-size: 13px;
             line-height: 1.5;
         }
 
-        /* ── Print button ── */
-        .no-print {
-            text-align: right;
+        /* ── Print / PDF buttons ── */
+        .print-button-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
             padding: 16px 40px;
-            background: var(--primary);
+            background: #1a1a2e;
         }
-        .btn-print {
+        .btn-print, .btn-download {
             display: inline-flex;
             align-items: center;
             gap: 8px;
             padding: 10px 24px;
-            background: var(--accent);
             color: #fff;
             border: none;
             border-radius: 6px;
@@ -48,81 +50,51 @@
             cursor: pointer;
             letter-spacing: .3px;
             transition: background .2s;
+            text-decoration: none;
         }
-        .btn-print:hover { background: var(--accent2); }
+        .btn-print { background: #f4791e; }
+        .btn-print:hover { background: #f48c06; }
+        .btn-download { background: #198754; }
+        .btn-download:hover { background: #157347; }
 
         /* ── Page wrapper ── */
         .page {
             max-width: 860px;
             margin: 24px auto;
-            background: var(--white);
+            background: #ffffff;
             box-shadow: 0 4px 30px rgba(0,0,0,.12);
             border-radius: 4px;
             overflow: hidden;
         }
 
-        /* ── TOP HEADER band ── */
-        .top-band {
-            background: #ffffff;
+        /* ── TOP HEADER ── */
+        .inv-header {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 28px 40px 20px;
-            position: relative;
-            border-top: 5px solid var(--accent);
-            border-bottom: 3px solid #f0f0f0;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 36px 40px 0;
         }
-        .top-band::after {
-            content: '';
-            position: absolute;
-            bottom: -3px; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent2), var(--primary));
-        }
-        .store-logo-header {
-            height: 72px;
-            width: auto;
-            object-fit: contain;
-            margin-bottom: 10px;
-            filter: brightness(0) invert(1);
-        }
+        .inv-header-left { max-width: 60%; }
         .mobinardo-logo {
-            height: 90px;
+            height: 60px;
             width: auto;
             object-fit: contain;
+            display: block;
+            margin-bottom: 14px;
         }
-        .company-tagline {
-            font-size: 11px;
-            color: #888;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 6px;
-        }
-        /* ── Invoice ref bottom-right ── */
-        .invoice-ref-bottom {
-            text-align: right;
-        }
-        .invoice-ref-bottom .ref-label {
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--muted);
-            margin-bottom: 4px;
-        }
-        .invoice-ref-bottom .ref-number {
-            font-size: 20px;
+        .company-block { font-size: 12.5px; color: #212529; line-height: 1.75; }
+        .company-block .company-name {
             font-weight: 800;
-            color: var(--primary);
-            font-family: monospace;
-            letter-spacing: 1px;
+            font-size: 13.5px;
+            letter-spacing: .3px;
         }
-        .invoice-ref-bottom .ref-date {
-            font-size: 12px;
-            color: var(--muted);
-            margin-top: 4px;
+        .inv-header-right { text-align: right; white-space: nowrap; padding-top: 8px; }
+        .inv-header-right .facture-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #212529;
         }
+        .inv-header-right .facture-title b { font-weight: 800; }
         /* ── Electronic Signature ── */
         .sig-section {
             margin-top: 28px;
@@ -132,7 +104,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--muted);
+            color: #6c757d;
             margin-bottom: 10px;
             display: flex;
             align-items: center;
@@ -142,7 +114,7 @@
             content: '';
             display: inline-block;
             width: 16px; height: 2px;
-            background: var(--accent);
+            background: #f4791e;
         }
         .sig-canvas-wrap {
             border: 1.5px dashed #ced4da;
@@ -174,18 +146,18 @@
         }
         .btn-sig-clear {
             padding: 7px 16px;
-            border: 1.5px solid var(--border);
+            border: 1.5px solid #dee2e6;
             background: #fff;
             border-radius: 6px;
             font-size: 12px;
             cursor: pointer;
-            color: var(--muted);
+            color: #6c757d;
             transition: all .15s;
         }
-        .btn-sig-clear:hover { border-color: #adb5bd; color: var(--text); }
+        .btn-sig-clear:hover { border-color: #adb5bd; color: #212529; }
         .btn-sig-validate {
             padding: 7px 20px;
-            background: var(--primary);
+            background: #1a1a2e;
             color: #fff;
             border: none;
             border-radius: 6px;
@@ -195,7 +167,7 @@
             letter-spacing: .3px;
             transition: background .15s;
         }
-        .btn-sig-validate:hover { background: var(--accent); }
+        .btn-sig-validate:hover { background: #f4791e; }
         .btn-sig-validate:disabled { opacity: .6; cursor: not-allowed; }
         .sig-saved-wrap { text-align: center; }
         .sig-verified-badge {
@@ -213,7 +185,7 @@
         }
         .sig-saved-img {
             display: block;
-            border: 1.5px solid var(--border);
+            border: 1.5px solid #dee2e6;
             border-radius: 6px;
             max-width: 260px;
             max-height: 90px;
@@ -221,7 +193,7 @@
         }
         .sig-meta {
             font-size: 10px;
-            color: var(--muted);
+            color: #6c757d;
             margin-top: 5px;
         }
         #sigMsg {
@@ -236,13 +208,11 @@
         .status-bar {
             display: flex;
             justify-content: flex-end;
-            padding: 10px 40px;
-            background: #f1f3f8;
-            border-bottom: 1px solid var(--border);
+            padding: 8px 40px 0;
             gap: 8px;
             align-items: center;
             font-size: 12px;
-            color: var(--muted);
+            color: #6c757d;
         }
         .badge {
             display: inline-block;
@@ -258,146 +228,83 @@
         .badge-rejected  { background: #fee2e2; color: #991b1b; border: 1px solid #f87171; }
 
         /* ── BODY ── */
-        .invoice-body { padding: 36px 40px; }
+        .invoice-body { padding: 24px 40px 36px; }
 
-        /* ── Info row: client + location ── */
-        .info-row {
+        /* ── Client box: "Facture à l'attention de" ── */
+        .client-row {
             display: flex;
-            gap: 24px;
-            margin-bottom: 30px;
+            align-items: stretch;
+            gap: 0;
+            border-bottom: 2.5px solid #212529;
+            padding-bottom: 18px;
+            margin-bottom: 26px;
         }
-        .info-box {
-            flex: 1;
-            border: 1.5px solid var(--border);
-            border-radius: 6px;
-            padding: 16px 20px;
-            position: relative;
-        }
-        .info-box .box-label {
-            position: absolute;
-            top: -10px;
-            left: 14px;
-            background: var(--white);
-            padding: 0 6px;
-            font-size: 10px;
+        .client-box-left {
+            background: #f4efe4;
+            flex: 0 0 42%;
+            display: flex;
+            align-items: center;
+            padding: 18px 22px;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent);
+            font-size: 13px;
         }
-        .info-box .field-name { font-size: 11px; color: var(--muted); margin-bottom: 2px; }
-        .info-box .field-val  { font-size: 14px; font-weight: 600; color: var(--text); }
-        .info-box .field-block { margin-bottom: 10px; }
-        .info-box .field-block:last-child { margin-bottom: 0; }
+        .client-box-right {
+            flex: 1;
+            padding: 18px 0 18px 24px;
+            font-size: 13px;
+            line-height: 2;
+        }
+        .client-box-right strong { font-weight: 700; }
 
         /* ── Items table ── */
         .items-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 24px;
+            margin-bottom: 0;
             font-size: 13px;
         }
         .items-table thead tr {
-            background: var(--primary);
-            color: var(--white);
+            background: #f4791e;
+            color: #212529;
         }
         .items-table th {
-            padding: 11px 14px;
-            font-weight: 600;
-            font-size: 11px;
-            letter-spacing: .5px;
-            text-transform: uppercase;
-        }
-        .items-table th:first-child { border-radius: 0; }
-        .items-table td {
             padding: 12px 14px;
-            border-bottom: 1px solid #eef0f5;
-            vertical-align: middle;
-        }
-        .items-table tbody tr:last-child td { border-bottom: none; }
-        .items-table tbody tr:nth-child(even) { background: #fbfbfd; }
-        .items-table tbody tr:hover { background: #f0f2ff; }
-        .chassis-badge {
-            display: inline-block;
-            background: #e8f0fe;
-            color: #1a56db;
-            border: 1px solid #bfdbfe;
-            border-radius: 4px;
-            padding: 2px 8px;
-            font-size: 11px;
             font-weight: 700;
-            font-family: monospace;
-            letter-spacing: .5px;
+            font-size: 12px;
+            text-decoration: underline;
         }
-        .loc-badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 600;
+        .items-table td {
+            padding: 14px 14px;
+            border: 1px solid #212529;
+            vertical-align: top;
+            background: #f4efe4;
         }
-        .loc-showroom { background: #dcfce7; color: #15803d; }
-        .loc-depot    { background: #f3f4f6; color: #4b5563; }
+        .item-designation { font-weight: 700; font-size: 13px; }
+        .item-designation .sub-line { font-weight: 400; font-size: 13px; margin-top: 2px; }
+        .item-designation .sub-line strong { font-weight: 700; }
+        .chassis-badge { font-weight: 400; }
+        .loc-badge { display: none; }
 
         /* ── Totals section ── */
-        .bottom-section {
-            display: flex;
-            gap: 24px;
-            align-items: flex-start;
-        }
-        .amount-words {
-            flex: 1;
-            border: 1.5px dashed var(--border);
-            border-radius: 6px;
-            padding: 14px 18px;
-            background: #fafafa;
-        }
-        .amount-words .aw-label {
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--muted);
-            margin-bottom: 6px;
-        }
-        .amount-words .aw-text {
-            font-size: 13px;
-            font-style: italic;
-            color: var(--text);
-            font-weight: 500;
-        }
-        .totals-box {
-            min-width: 280px;
-        }
-        .totals-box table {
+        .totals-table {
             width: 100%;
             border-collapse: collapse;
-            border: 1.5px solid var(--border);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-        .totals-box td {
-            padding: 10px 16px;
             font-size: 13px;
-            border-bottom: 1px solid #eef0f5;
+            margin-top: 0;
         }
-        .totals-box tr:last-child td { border-bottom: none; }
-        .totals-box .label-col { color: var(--muted); }
-        .totals-box .val-col { text-align: right; font-weight: 600; font-size: 13px; }
-        .totals-box .total-ttc td {
-            background: var(--primary);
-            color: var(--white);
-            font-size: 15px;
-            font-weight: 700;
-            border-bottom: none;
-            padding: 13px 16px;
+        .totals-table td {
+            padding: 10px 16px;
+            border: 1px solid #212529;
+            border-top: none;
         }
-        .totals-box .total-ttc .val-col { color: var(--accent2); font-size: 16px; }
+        .totals-table .label-col { font-weight: 700; width: 70%; }
+        .totals-table .val-col { text-align: right; background: #f4efe4; }
+        .totals-table .total-ttc .label-col { font-weight: 700; text-decoration: underline; }
 
         /* ── Notes / Comment ── */
         .notes-section {
             margin-top: 24px;
-            border-left: 3px solid var(--accent);
+            border-left: 3px solid #f4791e;
             padding: 10px 16px;
             background: #fffbf5;
             border-radius: 0 6px 6px 0;
@@ -407,52 +314,33 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--accent);
+            color: #f4791e;
             margin-bottom: 4px;
         }
-        .notes-section p { font-size: 13px; color: var(--text); }
+        .notes-section p { font-size: 13px; color: #212529; }
+
+        /* ── Signature / validation zone (between totals and footer) ── */
+        .validation-zone {
+            margin-top: 34px;
+            display: flex;
+            justify-content: flex-end;
+        }
 
         /* ── Footer ── */
         .invoice-footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1.5px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-        .footer-stamp {
-            border: 2px solid var(--primary);
-            border-radius: 6px;
-            padding: 10px 20px;
+            margin-top: 60px;
+            padding: 16px 40px 26px;
             text-align: center;
-            min-width: 120px;
-        }
-        .footer-stamp .stamp-name {
-            font-size: 14px;
-            font-weight: 800;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .footer-stamp .stamp-name span { color: var(--accent); }
-        .footer-stamp .stamp-sub {
-            font-size: 9px;
-            color: var(--muted);
-            margin-top: 2px;
-        }
-        .footer-addr {
-            text-align: right;
             font-size: 11px;
-            color: var(--muted);
+            color: #212529;
             line-height: 1.8;
         }
-        .footer-addr strong { color: var(--text); }
+        .invoice-footer .footer-line2 { color: #6c757d; }
 
         /* ── Divider ── */
         .section-divider {
             height: 1px;
-            background: var(--border);
+            background: #dee2e6;
             margin: 28px 0;
         }
 
@@ -465,10 +353,22 @@
                 margin: 0;
                 box-shadow: none;
                 border-radius: 0;
+                position: relative;
+                min-height: 100vh;
+                padding-bottom: 70px;
             }
-            .top-band { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .status-bar { display: none !important; }
+            .client-box-left { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .items-table thead tr { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .totals-box .total-ttc td { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .items-table td { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .totals-table .val-col { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .invoice-footer {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin-top: 0;
+            }
         }
     </style>
 </head>
@@ -506,13 +406,23 @@
         }
     }
 
+    $logo        = \App\Models\Utility::get_file('uploads/logo');
+    $company_logo = \App\Models\Utility::GetLogo();
+
     $cur         = $store->currency ?? 'MAD';
     $storeName   = $store->name ?? 'MOBI-NARDO';
-    $storeAddr   = $store->address ?? '';
-    $storeCity   = $store->city ?? 'Casablanca';
-    $storePhone  = $store->whatsapp_number ?? '';
-    $storeEmail  = $store->email ?? '';
+    $storeAddr   = $store->address ?? 'RDC LOT N° 816 LOTISSEMENT MAYSSANE OULAD SALEH';
+    $storeCity   = $store->city ?? 'NOUACEUR - CASABLANCA';
+    $storePhone  = $store->whatsapp_number ?? '+212 664 35 13 12';
+    $storeEmail  = 'contact@mobi-nardo.com';
     $storeCountry= trim(($store->city ?? '') . ($store->state ? ', '.$store->state : '') . ($store->country ? ', '.$store->country : ''));
+
+    /* Legal / registration numbers shown in the footer (static company data) */
+    $storeIF       = '60220807';
+    $storePatente  = '72000550';
+    $storeRC       = '611061';
+    $storeICE      = '00340264500001';
+    $storeFooterTel= '0664.35.13.12';
 
     $subtotalHT  = $order->items->sum('price');
     $discount    = floatval($order->discount ?? 0);
@@ -523,28 +433,45 @@
     $amountWords = numberToFrench($totalTTC, $cur);
 ?>
 
-    <!-- Print button -->
-    <div class="no-print">
+    @if(empty($isPdf))
+    <!-- Print / PDF buttons -->
+    <div class="print-button-bar no-print">
+        <a class="btn-download" href="{{ route('chassis-orders.invoice-pdf', ['id' => $order->id, 'simple' => request('simple')]) }}">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Télécharger PDF
+        </a>
         <button class="btn-print" onclick="window.print()">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
             Imprimer la facture
         </button>
     </div>
+    @endif
 
     <div class="page">
 
         <!-- ── TOP HEADER ── -->
-        <div class="top-band">
-            <img src="{{ asset('images/mobinardo-logo.png') }}"
-                 alt="MOBINARDO"
-                 class="mobinardo-logo">
-            <div class="company-tagline">
-                {{ $storeCity }}@if($storeAddr) &nbsp;&bull;&nbsp; {{ $storeAddr }}@endif
+        <div class="inv-header">
+            <div class="inv-header-left">
+                <!-- ========   change your logo hear   ============ -->
+                <img src="{{ $logo . '/' . (isset($company_logo) && !empty($company_logo) ? $company_logo : 'logo-dark.png') . '?timestamp=' . time() }}"
+                     alt="{{ $storeName }}"
+                     class="mobinardo-logo">
+                <div class="company-block">
+                    <div class="company-name">{{ strtoupper($storeName) }}</div>
+                    @if($storeAddr)<div>{{ $storeAddr }}</div>@endif
+                    @if($storeCity)<div>{{ $storeCity }}</div>@endif
+                    @if($storePhone)<div>{{ $storePhone }}</div>@endif
+                    @if($storeEmail)<div>{{ $storeEmail }}</div>@endif
+                </div>
+            </div>
+            <div class="inv-header-right">
+                <div class="facture-title">Facture N° : <b>{{ $order->order_number }}</b></div>
             </div>
         </div>
 
-        <!-- ── STATUS bar ── -->
-        <div class="status-bar">
+        @if(!request('simple'))
+        <!-- ── STATUS bar (screen only) ── -->
+        <div class="status-bar no-print">
             <span>Statut :</span>
             @if($order->status == 'pending')
                 <span class="badge badge-pending">En attente</span>
@@ -554,47 +481,24 @@
                 <span class="badge badge-rejected">Rejetée</span>
             @endif
         </div>
+        @endif
 
         <!-- ── BODY ── -->
         <div class="invoice-body">
 
-            <!-- Info row: client -->
-            <div class="info-row">
-                <div class="info-box" style="flex:1.5;">
-                    <span class="box-label">Informations client</span>
-                    <div class="field-block">
-                        <div class="field-name">Nom / Raison sociale</div>
-                        <div class="field-val">{{ $order->customer_name ?: '—' }}</div>
-                    </div>
-                    <div class="field-block">
-                        <div class="field-name">Téléphone</div>
-                        <div class="field-val">{{ $order->customer_phone ?: '—' }}</div>
-                    </div>
+            <!-- Client box -->
+            <div class="client-row">
+                @if(!request('simple'))
+                <div class="client-box-left">Facture à l'attention de :</div>
+                @endif
+                <div class="client-box-right">
+                    <div><strong>Nom du client :</strong> {{ $order->customer_name ?: '—' }}</div>
                     @if($order->doc_type || $order->doc_number)
-                    <div class="field-block">
-                        <div class="field-name">{{ $order->doc_type ?: 'Document' }}</div>
-                        <div class="field-val" style="font-family:monospace;letter-spacing:.5px;">{{ $order->doc_number ?: '—' }}</div>
-                    </div>
+                    <div><strong>{{ $order->doc_type ?: 'CIN' }} :</strong> {{ $order->doc_number ?: '—' }}</div>
                     @endif
-                </div>
-                <div class="info-box" style="flex:1;">
-                    <span class="box-label">Vendeur</span>
-                    <div class="field-block">
-                        <div class="field-name">Commercial</div>
-                        <div class="field-val">{{ $order->user->name ?? '—' }}</div>
-                    </div>
-                    <div class="field-block">
-                        <div class="field-name">Statut</div>
-                        <div class="field-val">
-                            @if($order->status == 'pending')
-                                <span class="badge badge-pending">En attente</span>
-                            @elseif($order->status == 'validated')
-                                <span class="badge badge-validated">Validée</span>
-                            @else
-                                <span class="badge badge-rejected">Rejetée</span>
-                            @endif
-                        </div>
-                    </div>
+                    @if($order->customer_phone)
+                    <div><strong>Téléphone :</strong> {{ $order->customer_phone }}</div>
+                    @endif
                 </div>
             </div>
 
@@ -602,15 +506,10 @@
             <table class="items-table">
                 <thead>
                     <tr>
-                        <th style="width:32px;">#</th>
                         <th>Désignation</th>
-                        <th style="width:90px;">N° Châssis</th>
-                        <th style="width:80px;">Emplacement</th>
-                        <th style="width:50px;text-align:center;">Qté</th>
-                        @if($tvaRate > 0)
-                        <th style="width:60px;text-align:center;">TVA</th>
-                        @endif
-                        <th style="width:110px;text-align:right;">Prix H.T</th>
+                        <th style="width:60px;text-align:center;">Qté</th>
+                        <th style="width:70px;text-align:center;">TVA</th>
+                        <th style="width:110px;text-align:right;">Prix U.N</th>
                         <th style="width:120px;text-align:right;">Montant TTC</th>
                     </tr>
                 </thead>
@@ -621,70 +520,56 @@
                         $itemTTC    = $item->price + $itemTVA;
                     ?>
                     <tr>
-                        <td style="color:var(--muted);font-size:11px;">{{ $i + 1 }}</td>
                         <td>
-                            <div style="font-weight:600;font-size:13px;">{{ $item->brand_name }} {{ $item->model_name }}</div>
-                            <div style="font-size:11px;color:var(--muted);margin-top:2px;">{{ $item->family_name }}</div>
-                        </td>
-                        <td>
-                            <span class="chassis-badge">{{ $item->chassis_number }}</span>
-                        </td>
-                        <td>
-                            @if(strtoupper($item->location ?? '') === 'SHOW-ROOM')
-                                <span class="loc-badge loc-showroom">Show-Room</span>
-                            @else
-                                <span class="loc-badge loc-depot">{{ $item->location ?? 'Dépôt' }}</span>
+                            <div class="item-designation">{{ $item->brand_name }} {{ $item->model_name }}</div>
+                            <div class="sub-line"><strong>N°chassis :</strong> {{ $item->chassis_number }}</div>
+                            @if($item->family_name)
+                            <div class="sub-line"><strong>Couleur :</strong> {{ $item->family_name }}</div>
                             @endif
                         </td>
                         <td style="text-align:center;">1</td>
-                        @if($tvaRate > 0)
-                        <td style="text-align:center;color:var(--muted);">{{ number_format($tvaRate, 0) }}%</td>
-                        @endif
-                        <td style="text-align:right;">{{ number_format($item->price, 2, ',', ' ') }} {{ $cur }}</td>
-                        <td style="text-align:right;font-weight:600;">{{ number_format($itemTTC, 2, ',', ' ') }} {{ $cur }}</td>
+                        <td style="text-align:center;">{{ number_format($tvaRate, 0) }}%</td>
+                        <td style="text-align:right;">{{ number_format($item->price, 2, ',', ' ') }}</td>
+                        <td style="text-align:right;">{{ number_format($itemTTC, 2, ',', ' ') }}</td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
 
-            <!-- Bottom section: amount in words + totals -->
-            <div class="bottom-section">
-                <div class="amount-words">
-                    <div class="aw-label">Arrêtée la présente facture à la somme de :</div>
-                    <div class="aw-text">{{ $amountWords }}</div>
-                </div>
-                <div class="totals-box">
-                    <table>
-                        <tr>
-                            <td class="label-col">Sous-total H.T</td>
-                            <td class="val-col">{{ number_format($subtotalHT, 2, ',', ' ') }} {{ $cur }}</td>
-                        </tr>
-                        @if($discount > 0)
-                        <tr>
-                            <td class="label-col">Remise</td>
-                            <td class="val-col" style="color:#dc3545;">− {{ number_format($discount, 2, ',', ' ') }} {{ $cur }}</td>
-                        </tr>
-                        <tr>
-                            <td class="label-col">Total H.T net</td>
-                            <td class="val-col">{{ number_format($htNet, 2, ',', ' ') }} {{ $cur }}</td>
-                        </tr>
-                        @endif
-                        <tr>
-                            <td class="label-col">TVA ({{ number_format($tvaRate, 0) }}%)</td>
-                            <td class="val-col">{{ number_format($tvaAmount, 2, ',', ' ') }} {{ $cur }}</td>
-                        </tr>
-                        <tr class="total-ttc">
-                            <td class="label-col">TOTAL TTC</td>
-                            <td class="val-col">{{ number_format($totalTTC, 2, ',', ' ') }} {{ $cur }}</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+            <!-- Totals -->
+            <table class="totals-table">
+                <tr>
+                    <td class="label-col">TOTAL HT</td>
+                    <td class="val-col">{{ number_format($htNet, 2, ',', ' ') }}</td>
+                </tr>
+                @if($discount > 0)
+                <tr>
+                    <td class="label-col">Remise</td>
+                    <td class="val-col" style="color:#dc3545;">− {{ number_format($discount, 2, ',', ' ') }}</td>
+                </tr>
+                @endif
+                <tr>
+                    <td class="label-col">TVA</td>
+                    <td class="val-col">{{ number_format($tvaAmount, 2, ',', ' ') }}</td>
+                </tr>
+                <tr class="total-ttc">
+                    <td class="label-col">Montant TTC</td>
+                    <td class="val-col">{{ number_format($totalTTC, 2, ',', ' ') }}</td>
+                </tr>
+            </table>
 
+            @if(!request('simple'))
+            <!-- Amount in words -->
+            <div class="notes-section" style="margin-top:20px;">
+                <div class="notes-label">Arrêtée la présente facture à la somme de</div>
+                <p>{{ $amountWords }}</p>
+            </div>
+            @endif
+
+            @if(!request('simple'))
             @if($order->notes || ($order->comment ?? false))
-            <div class="section-divider"></div>
             @if($order->notes)
-            <div class="notes-section">
+            <div class="notes-section" style="margin-top:10px;">
                 <div class="notes-label">Notes</div>
                 <p>{{ $order->notes }}</p>
             </div>
@@ -696,82 +581,60 @@
             </div>
             @endif
             @endif
+            @endif
 
-            <!-- Footer: stamp + invoice-ref + signature -->
-            <div class="invoice-footer">
-                <div>
-                    <div class="footer-stamp">
-                        <?php
-                            $fp = explode('-', strtoupper($storeName));
-                            if (count($fp) >= 2) {
-                                echo '<div class="stamp-name">' . htmlspecialchars($fp[0]) . '<span>-</span>' . htmlspecialchars(implode('-', array_slice($fp, 1))) . '</div>';
-                            } else {
-                                echo '<div class="stamp-name">' . htmlspecialchars(strtoupper($storeName)) . '</div>';
-                            }
-                        ?>
-                        <div class="stamp-sub">Cachet officiel</div>
-                    </div>
-                    <div class="footer-addr" style="margin-top:12px;">
-                        @if($storeAddr)<div>{{ $storeAddr }}@if($storeCity), {{ $storeCity }}@endif</div>@endif
-                        @if($storePhone)<div><strong>Tél :</strong> {{ $storePhone }}</div>@endif
-                        @if($storeEmail)<div><strong>Email :</strong> {{ $storeEmail }}</div>@endif
-                        <div style="margin-top:4px;font-size:10px;color:#aaa;">Merci pour votre confiance</div>
-                    </div>
-                </div>
+            @if(!request('simple'))
+            <!-- Electronic signature -->
+            <div class="validation-zone">
+                <div class="sig-section" style="margin-top:0;text-align:right;">
+                    <div class="sig-section-title" style="justify-content:flex-end;">Signature électronique de validation</div>
 
-                <!-- Right: invoice ref + electronic signature -->
-                <div>
-                    <!-- Invoice N° + Date — bottom right, once -->
-                    <div class="invoice-ref-bottom">
-                        <div class="ref-label">Facture</div>
-                        <div class="ref-number">{{ $order->order_number }}</div>
-                        <div class="ref-date">{{ $storeCity }} le {{ $order->created_at->format('d/m/Y') }}</div>
-                    </div>
-
-                    <!-- Electronic signature -->
-                    <div class="sig-section">
-                        <div class="sig-section-title">Signature électronique de validation</div>
-
-                        @if($order->signature)
-                            {{-- Already signed: show saved signature --}}
-                            <div class="sig-saved-wrap">
-                                <div class="sig-verified-badge">
-                                    <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                                    Facture validée et signée
-                                </div>
-                                <img src="{{ $order->signature }}" alt="Signature" class="sig-saved-img">
-                                <div class="sig-meta">
-                                    Signé le {{ $order->signed_at ? $order->signed_at->format('d/m/Y \\\u00e0 H:i') : '' }}
-                                    @if($order->signer) &nbsp;&bull;&nbsp; {{ $order->signer->name }} @endif
-                                </div>
+                    @if($order->signature)
+                        {{-- Already signed: show saved signature --}}
+                        <div class="sig-saved-wrap">
+                            <div class="sig-verified-badge">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                Facture validée et signée
                             </div>
-                        @else
-                            @auth
-                                @if(Auth::user()->type === 'admin')
-                                    {{-- Canvas signature pad --}}
-                                <div class="sig-canvas-wrap" id="sigWrap">
-                                    <canvas id="sigCanvas" width="300" height="110"></canvas>
-                                    <div class="sig-canvas-placeholder" id="sigPlaceholder">Dessinez votre signature ici</div>
-                                </div>
-                                <div class="sig-actions">
-                                    <button class="btn-sig-clear" onclick="clearSig()">&#8635; Effacer</button>
-                                    <button class="btn-sig-validate" id="btnValidate" onclick="saveSig()">
-                                        &#10003; Valider &amp; Signer
-                                    </button>
-                                </div>
-                                <div id="sigMsg"></div>
-                                @else
-                                    <div style="color:var(--muted);font-size:12px;font-style:italic;text-align:right;">Seul un admin peut signer cette facture.</div>
-                                @endif
+                            <img src="{{ $order->signature }}" alt="Signature" class="sig-saved-img">
+                            <div class="sig-meta">
+                                Signé le {{ $order->signed_at ? $order->signed_at->format('d/m/Y \\u00e0 H:i') : '' }}
+                                @if($order->signer) &nbsp;&bull;&nbsp; {{ $order->signer->name }} @endif
+                            </div>
+                        </div>
+                    @else
+                        @auth
+                            @if(Auth::user()->type === 'admin')
+                                {{-- Canvas signature pad --}}
+                            <div class="sig-canvas-wrap no-print" id="sigWrap">
+                                <canvas id="sigCanvas" width="300" height="110"></canvas>
+                                <div class="sig-canvas-placeholder" id="sigPlaceholder">Dessinez votre signature ici</div>
+                            </div>
+                            <div class="sig-actions no-print">
+                                <button class="btn-sig-clear" onclick="clearSig()">&#8635; Effacer</button>
+                                <button class="btn-sig-validate" id="btnValidate" onclick="saveSig()">
+                                    &#10003; Valider &amp; Signer
+                                </button>
+                            </div>
+                            <div id="sigMsg"></div>
                             @else
-                                <div style="color:var(--muted);font-size:12px;font-style:italic;text-align:right;">Connectez-vous en tant qu'admin pour signer.</div>
-                            @endauth
-                        @endif
-                    </div>
+                                <div style="color:#6c757d;font-size:12px;font-style:italic;">Seul un admin peut signer cette facture.</div>
+                            @endif
+                        @else
+                            <div style="color:#6c757d;font-size:12px;font-style:italic;">Connectez-vous en tant qu'admin pour signer.</div>
+                        @endauth
+                    @endif
                 </div>
             </div>
+            @endif
 
         </div><!-- /invoice-body -->
+
+        <!-- ── FOOTER ── -->
+        <div class="invoice-footer">
+            <div>{{ $storeAddr }}@if($storeCity) {{ $storeCity }}@endif</div>
+            <div class="footer-line2">IF :{{ $storeIF }} Patente :{{ $storePatente }} RC :{{ $storeRC }} ICE :{{ $storeICE }} TEL :{{ $storeFooterTel }}</div>
+        </div>
     </div><!-- /page -->
 
 @auth
